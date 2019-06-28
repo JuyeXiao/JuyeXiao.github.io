@@ -1,11 +1,7 @@
 @import url(fontawesome-all.min.css);
 @import url("https://fonts.googleapis.com/css?family=Merriweather:300,700,300italic,700italic|Source+Sans+Pro:900");
 
-/*
-	Massively by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
-*/
+
 
 html, body, div, span, applet, object,
 iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
@@ -102,7 +98,7 @@ input, select, textarea {
 		background-color: #1e252d;
 	}
 
-		body.is-preload *, body.is-preload *:before, body.is-preload *:after {
+		body.body *, body.body *:before, body.body *:after {
 			-moz-animation: none !important;
 			-webkit-animation: none !important;
 			-ms-animation: none !important;
@@ -1535,7 +1531,7 @@ input, select, textarea {
 			width: 100%;
 		}
 
-		body.is-preload #wrapper.fade-in:before {
+		body.body #wrapper.fade-in:before {
 			opacity: 1;
 		}
 
@@ -1699,7 +1695,7 @@ input, select, textarea {
 				visibility: visible;
 			}
 
-		body.is-preload #intro {
+		body.body #intro {
 			-moz-transform: translateY(2rem);
 			-webkit-transform: translateY(2rem);
 			-ms-transform: translateY(2rem);
@@ -1707,7 +1703,7 @@ input, select, textarea {
 			opacity: 0;
 		}
 
-			body.is-preload #intro:not(.hidden) + #header + #nav {
+			body.body #intro:not(.hidden) + #header + #nav {
 				-moz-transform: translateY(4rem);
 				-webkit-transform: translateY(4rem);
 				-ms-transform: translateY(4rem);
@@ -2674,7 +2670,7 @@ input, select, textarea {
 				border-left: 0;
 				margin: 0 0 0 0;
 				padding-left: 0;
-				display: block;
+				display: inline-block;
 			}
 
 				#copyright ul li:first-child {
