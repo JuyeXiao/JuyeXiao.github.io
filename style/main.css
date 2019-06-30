@@ -2781,8 +2781,13 @@ input, select, textarea {
 		display: none;
 		-webkit-overflow-scrolling: touch;
 		background: #ffffff;
+		background-image: url("../../images/overlay.png"), linear-gradient(0deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url("../../images/bg-5.jpg");
+		background-size: 100%, auto;
+		background-position: top-center, top-center, top-center;
+		background-repeat: no-repeat,								no-repeat,													no-repeat;
+		background-attachment: scroll, scroll, scroll;
 		box-shadow: none;
-		color: #212931;
+
 		height: 100%;
 		max-width: 80%;
 		overflow-y: auto;
