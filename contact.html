@@ -11,7 +11,7 @@
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	<link rel="stylesheet" href="style/main.css" />
-	
+	<link rel="stylesheet" href="style/contact.css" />
 </head>
 <body class="body">
 
@@ -53,7 +53,7 @@
 			<!-- Footer -->
             <footer id="footer">
                 <section>
-                    <form id="contact" method="post" action="#">
+                    <form id="contact-form" method="post" action="mailer.php">
                         <div class="fields">
                             <div class="field">
                                 <label for="name">Name</label>
@@ -68,10 +68,9 @@
                                 <textarea name="message" id="message" rows="3"></textarea>
                             </div>
                         </div>
-                        <ul class="actions">
-                            <li><input type="submit" value="Send Message" /></li>
-                        </ul>
-                    </form>
+                        <input type="submit" value="Send Message" />
+					</form>
+					<div id = "form-messages"></div>
                 </section>
                 <section class="split contact">
                     <section class="alt">
@@ -81,7 +80,7 @@
                     </section>
                     <section>
                         <h3>Phone</h3>
-                        <p><a href="#">(814) 880-8602</a></p>
+                        <p><a href="tel:(814)880-8602">(814) 880-8602</a></p>
                     </section>
                     <section>
                         <h3>Email</h3>
@@ -127,6 +126,7 @@
 			<script src="src/breakpoints.min.js"></script>
 			<script src="src/util.js"></script>
 			<script src="src/main.js"></script>
+			<script src="src/contact.js"></script>
 
 
 </body>
