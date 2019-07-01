@@ -1,5 +1,6 @@
 
-
+//Github page not support php
+//use formspree for now
 (function() {
 
 	"use strict";
