@@ -80,7 +80,7 @@
                     var formData = $($form).serialize();
                     $.ajax({
                         type: 'POST',
-                        url: '//formspree.io/xjy1998@hotmail.com',
+                        url: 'https://formspree.io/xjy1998@hotmail.com',
                         data: formData
                     })
                     window.setTimeout(function() {
