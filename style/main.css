@@ -1087,7 +1087,10 @@ input, select, textarea {
 				border-radius: 100%;
 				font-size: 1.25rem;
 			}
-
+		ul.icons.alt {
+			position: absolute;
+			bottom:0.5rem;
+		}
 		ul.icons.alt li .icon:before {
 			-moz-transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 			-webkit-transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
@@ -2971,8 +2974,10 @@ input, select, textarea {
 		width: 20rem;
 		z-index: 10002;
 	}
-
+		
 		#navPanel .links {
+			position: absolute;
+			top:11rem;
 			list-style: none;
 			padding-left: 0;
 		}
