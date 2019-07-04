@@ -25,80 +25,13 @@
 			}, 100);
 		});
 
-	// contact
-		(function() {
+			var submitted=false;
+			
+			$('#contact-form').on('submit', function(e) {
+  			$('#contact-form *').fadeOut(2000);
+			$('#contact-form').prepend('Your submission has been processed...');
+  			});
+			
 
-			// Vars.
-				var $form = document.querySelectorAll('#contact-form')[0],
-                    $name = document.querySelectorAll('#name')[0],
-                    $email = document.querySelectorAll('#email')[0],
-                    $message = document.querySelectorAll('#message')[0],
-                    $submit = document.querySelectorAll('#contact-form input[type="submit"]')[0],
-					$messageSuccess;
-
-			// Bail if addEventListener isn't supported.
-				if (!('addEventListener' in $form))
-					return;
-
-			// Message.
-				$messageSuccess = document.createElement('span');
-					$messageSuccess.classList.add('messageSuccess');
-					$form.appendChild($messageSuccess);
-
-				$messageSuccess._show = function(type, text) {
-
-					$messageSuccess.innerHTML = text;
-					$messageSuccess.classList.add(type);
-					//$messageSuccess.classList.add('visible');
-
-					window.setTimeout(function() {
-						$messageSuccess._hide();
-					}, 5000);
-
-				};
-
-				$messageSuccess._hide = function() {
-                    //$messageSuccess.classList.add('invisible');
-                    $messageSuccess.innerHTML = null;
-				};
-
-			// Events.
-			// Note: If you're *not* using AJAX, get rid of this event listener.
-				$form.addEventListener('submit', function(event) {
-
-					event.stopPropagation();
-					event.preventDefault();
-
-					// Hide message.
-						$messageSuccess._hide();
-
-					// Disable submit.
-						$submit.disabled = true;
-
-					// Process form.
-					// Note: Doesn't actually do anything yet (other than report back with a "thank you"),
-					// but there's enough here to piece together a working AJAX submission call that does.
-                    var formData = $($form).serialize();
-                    $.ajax({
-                        type: 'POST',
-                        url: 'https://formspree.io/xjy1998@hotmail.com',
-                        data: formData
-                    })
-                    window.setTimeout(function() {
-                            
-							// Reset form.
-								$form.reset();
-
-							// Enable submit.
-								$submit.disabled = false;
-
-							// Show message.
-								$messageSuccess._show('success', 'Thank you!');
-								//$message._show('failure', 'Something went wrong. Please try again.')
-						}, 1000);
-                        
-				});
-
-		})();
 
 })();

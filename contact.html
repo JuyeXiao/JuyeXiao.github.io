@@ -57,24 +57,24 @@
 			<!-- Footer -->
             <footer id="footer">
                 <section>
-                    <form id="contact-form" method="POST" action='https://formspree.io/xjy1998@hotmail.com'>
+                    <form id="contact-form" enctype="text/plain" action='https://docs.google.com/forms/d/e/1FAIpQLScgFb7IrdGBX8eIcNgnUxrM0bOsmZF-vFTshJvHpNqWdZMHXQ/formResponse?' target="hidden_iframe" onsubmit="submitted=true;">
                         <div class="fields">
                             <div class="field">
                                 <label for="name">Name</label>
-                                <input type="text" name="name" id="name" />
+                                <input type="text" name="entry.1858642228" id="name" />
                             </div>
                             <div class="field">
                                 <label for="email">Email</label>
-                                <input type="text" name="email" id="email" />
+                                <input type="text" name="entry.1504179270" id="email" />
                             </div>
                             <div class="field">
                                 <label for="message">Message</label>
-                                <textarea name="message" id="message" rows="3"></textarea>
+                                <textarea name="entry.2067082653" id="message" rows="3"></textarea>
                             </div>
                         </div>
-                        <input type="submit" value="Send Message" />
+                        <input type="submit" value="Submit" />
 					</form>
-					<div id = "form-messages"></div>
+					<iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) {}"></iframe>
                 </section>
                 <section class="split contact">
                     <section class="alt">
