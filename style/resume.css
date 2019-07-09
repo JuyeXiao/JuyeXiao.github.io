@@ -12,13 +12,32 @@ display:block;
 }
 
 
+.awards{
+	position: relative;
+	font-style: italic;
+}
+.date{
+	position: relative;
+	float:right;
+	font-style:italic;
+}
 
+.ulDetail{
+	list-style-type:none; 
+	padding-bottom: 13px; 
+	font-size:0.8em
+}
+.jobDetail{
+	list-style-position:inside; 
+	padding-bottom: 13px; 
+	font-size:0.8em
+}
 .clear {clear: both;}
 
 p {
 	font-size: 1em;
 	line-height: 1.4em;
-	margin-bottom: 20px;
+	margin-bottom: 15px;
 	color: #444;
 }
 
@@ -30,8 +49,8 @@ p {
 }
 
 .mainDetails {
-	padding: 25px 35px;
-	border-bottom: 2px solid #cf8a05;
+	padding: 15px 5px;
+	border-bottom: 2px solid #7a7c7ad8;
 	background: #ededed;
 }
 
@@ -53,15 +72,15 @@ p {
 }
 
 #headshot {
-	width: 12.5%;
+	width: 15%;
 	float: left;
-	margin-right: 30px;
+	margin-right: 40px;
 }
 
 #headshot img {
 	width: 100%;
 	height: auto;
-	-webkit-border-radius: 50px;
+	-webkit-border-radius:40%;
 	border-radius: 50px;
 }
 
@@ -75,7 +94,7 @@ p {
 
 #contactDetails ul {
 	list-style-type: none;
-	font-size: 0.9em;
+	font-size: 0.8em;
 	margin-top: 2px;
 }
 
@@ -111,6 +130,10 @@ section:first-child {
 section:last-child {
 	padding: 20px 0 10px;
 }
+.foot{
+	font-size:0.6em;
+	text-align: center;
+}
 
 .sectionTitle {
 	float: left;
@@ -121,8 +144,14 @@ section:last-child {
 	float: right;
 	width: 65%;
 	font-size: 0.8em;
+	
 }
-
+.sectionContent .jobs:first-child{
+	padding:0;
+}
+.sectionContent .university:first-child{
+	padding:0;
+}
 .sectionTitle h1 {
 	font-family: 'Rokkitt', Helvetica, Arial, sans-serif;
 	font-style: italic;
@@ -139,16 +168,17 @@ section:last-child {
 }
 
 .subDetails {
+	text-align:left;
 	font-size: 1em;
 	font-style: italic;
 	margin-bottom: 3px;
 }
 
 .keySkills {
-	list-style-type: none;
+	list-style-position: inside;
 	-moz-column-count:3;
 	-webkit-column-count:3;
-	column-count:3;
+	column-count:1;
 	margin-bottom: 20px;
 	font-size: 0.8em;
 	color: #444;
