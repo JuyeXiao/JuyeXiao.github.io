@@ -62,7 +62,8 @@ p {
 }
 
 #name h2 {
-	font-size: 2em;
+	font-size: 1.3em;
+	font-style: italic;
 	margin-left: 2px;
 	font-family: 'Rokkitt', Helvetica, Arial, sans-serif;
 }
