@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Analyst & Developer</title>
+    <title>Projects - Juye Xiao</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -11,19 +11,17 @@
     <script defer src="js/particles.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script>
-        // 检查本地存储的主题和语言设置
         const savedTheme = localStorage.getItem('theme') || 'dark';
         const savedLang = localStorage.getItem('lang') || 'en';
         document.documentElement.setAttribute('data-theme', savedTheme);
         document.documentElement.setAttribute('data-lang', savedLang);
     </script>
 </head>
-<body class="home-page">
+<body class="projects-page">
     <div class="gradient-background"></div>
     <div class="glow-effect"></div>
     <main>
         <nav class="navbar">
-            <div class="nav-blur"></div>
             <div class="container">
                 <div class="logo">
                     <span class="logo-text">Juye Xiao</span>
@@ -35,7 +33,7 @@
                     <span></span>
                 </button>
                 <div class="nav-links">
-                    <a href="#home" class="nav-link">
+                    <a href="index.html" class="nav-link">
                         <span class="nav-text" data-en="Home" data-zh="首页">Home</span>
                         <span class="nav-dot"></span>
                     </a>
@@ -43,7 +41,7 @@
                         <span class="nav-text" data-en="About" data-zh="关于">About</span>
                         <span class="nav-dot"></span>
                     </a>
-                    <a href="projects.html" class="nav-link">
+                    <a href="projects.html" class="nav-link active">
                         <span class="nav-text" data-en="Projects" data-zh="项目">Projects</span>
                         <span class="nav-dot"></span>
                     </a>
@@ -79,91 +77,11 @@
                 </div>
             </div>
         </nav>
-        <section id="home" class="hero">
-            <div class="container">
-                <div class="hero-content">
-                    <h1 class="glitch" data-en="Data Explorer" data-zh="数据探索者">Data Explorer</h1>
-                    <p class="role" data-en="Data Analyst & Full Stack Developer" data-zh="数据分析师 & 全栈工程师">
-                        Data Analyst & Full Stack Developer
-                    </p>
-                    <p class="tagline" data-en="Transforming Data into Insights, Building the Future with Code" 
-                       data-zh="将数据转化为洞见，用代码构建未来">
-                        Transforming Data into Insights, Building the Future with Code
-                    </p>
-                    <div class="cta-buttons">
-                        <a href="projects.html" class="btn primary" data-en="View Projects" data-zh="查看项目">View Projects</a>
-                        <a href="contact.html" class="btn secondary" data-en="Contact Me" data-zh="联系我">Contact Me</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="about" id="about">
+
+        <section class="projects">
             <div class="container">
                 <div class="section-header">
-                    <h2 data-en="About Me" data-zh="关于我">About Me</h2>
-                    <div class="section-line"></div>
-                </div>
-                
-                <div class="about-content">
-                    <div class="about-text">
-                        <p class="highlight" data-en="I'm a Data Analyst and Full Stack Developer, focused on turning complex data into actionable insights." 
-                           data-zh="我是一名数据分析师和全栈开发者，专注于将复杂数据转化为可行的见解。">
-                        </p>
-                        <p data-en="By combining data science and software development skills, I build intelligent data solutions that drive results." 
-                           data-zh="通过结合数据科学和软件开发技能，我构建能够推动结果的智能数据解决方案。">
-                        </p>
-                        
-                        <div class="skills-grid">
-                            <div class="skill-box glass-effect">
-                                <h3 data-en="Machine Learning" data-zh="机器学习">
-                                    <span class="skill-emoji">🤖</span>
-                                    Machine Learning
-                                </h3>
-                                <div class="skill-tags">
-                                    <span class="skill-tag">Random Forest</span>
-                                    <span class="skill-tag">K-Means</span>
-                                    <span class="skill-tag">CNN</span>
-                                    <span class="skill-tag">RNN</span>
-                                    <span class="skill-tag">PCA</span>
-                                    <span class="skill-tag">Decision Trees</span>
-                                </div>
-                            </div>
-
-                            <div class="skill-box glass-effect">
-                                <h3 data-en="Data Science & Analytics" data-zh="数据科学与分析">
-                                    <span class="skill-emoji">📊</span>
-                                    Data Science & Analytics
-                                </h3>
-                                <div class="skill-tags">
-                                    <span class="skill-tag">Hypothesis Testing</span>
-                                    <span class="skill-tag">Time-Series Analysis</span>
-                                    <span class="skill-tag">Text Mining</span>
-                                    <span class="skill-tag">Regression Analysis</span>
-                                    <span class="skill-tag">Sklearn</span>
-                                    <span class="skill-tag">Pandas</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="stats-row glass-effect">
-                            <div class="stat-item">
-                                <span class="stat-number">4+</span>
-                                <span class="stat-label" data-en="Years Experience" data-zh="年工作经验">Years Experience</span>
-                            </div>
-                            <div class="stat-divider"></div>
-                            <div class="stat-item">
-                                <span class="stat-number">20+</span>
-                                <span class="stat-label" data-en="Projects Completed" data-zh="完成项目">Projects Completed</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="featured-projects">
-            <div class="container">
-                <div class="section-header">
-                    <h2 data-en="Featured Projects" data-zh="精选项目">Featured Projects</h2>
+                    <h2 data-en="Projects" data-zh="项目经验">Projects</h2>
                     <div class="section-line"></div>
                 </div>
 
@@ -188,6 +106,74 @@
                                 <span class="tech-tag">Matplotlib</span>
                                 <span class="tech-tag">Scikit-learn</span>
                                 <span class="tech-tag">NASA API</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Banking Analysis Project -->
+                    <div class="project-card glass-effect">
+                        <div class="project-header">
+                            <h3 data-en="Banking Customer Churn Prediction" data-zh="银行客户流失预测">
+                                <span class="project-emoji">🏦</span>
+                                Banking Customer Churn Prediction
+                            </h3>
+                        </div>
+                        <div class="project-content">
+                            <p class="project-summary" data-en="Built a machine learning model to predict customer churn in banking sector with high accuracy, achieving 86.35% prediction accuracy." 
+                               data-zh="构建机器学习模型，高精度预测银行业客户流失情况，预测准确率达86.35%。">
+                            </p>
+                            <div class="tech-stack">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">Random Forest</span>
+                                <span class="tech-tag">GridSearchCV</span>
+                                <span class="tech-tag">Pandas</span>
+                                <span class="tech-tag">NumPy</span>
+                                <span class="tech-tag">Feature Selection</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- LendingClub Project -->
+                    <div class="project-card glass-effect">
+                        <div class="project-header">
+                            <h3 data-en="LendingClub Loan Default Predictions" data-zh="LendingClub贷款违约预测">
+                                <span class="project-emoji">💰</span>
+                                LendingClub Loan Default Predictions
+                            </h3>
+                        </div>
+                        <div class="project-content">
+                            <p class="project-summary" data-en="Implemented multiple machine learning models to predict loan defaults with 83.52% accuracy, improving risk assessment efficiency." 
+                               data-zh="实现多个机器学习模型来预测贷款违约，准确率达83.52%，提高风险评估效率。">
+                            </p>
+                            <div class="tech-stack">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">Scikit-learn</span>
+                                <span class="tech-tag">SQL</span>
+                                <span class="tech-tag">XGBoost</span>
+                                <span class="tech-tag">Feature Engineering</span>
+                                <span class="tech-tag">Data Visualization</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- San Francisco Crime Data Analysis -->
+                    <div class="project-card glass-effect">
+                        <div class="project-header">
+                            <h3 data-en="San Francisco Crime Data Analysis" data-zh="旧金山犯罪数据分析">
+                                <span class="project-emoji">🚓</span>
+                                San Francisco Crime Data Analysis
+                            </h3>
+                        </div>
+                        <div class="project-content">
+                            <p class="project-summary" data-en="Analyzed crime patterns in San Francisco using time-series analysis and developed strategies for optimizing police patrol efficiency." 
+                               data-zh="使用时间序列分析研究旧金山犯罪模式，开发优化警力巡逻效率的策略。">
+                            </p>
+                            <div class="tech-stack">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">SARIMA</span>
+                                <span class="tech-tag">Databricks</span>
+                                <span class="tech-tag">Spark SQL</span>
+                                <span class="tech-tag">Matplotlib</span>
                             </div>
                         </div>
                     </div>
@@ -217,17 +203,34 @@
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="view-more">
-                    <a href="projects.html" class="btn glass-effect" data-en="View All Projects" data-zh="查看所有项目">
-                        <span data-en="View All Projects" data-zh="查看所有项目">View All Projects</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
+                    <!-- Amazon User Review Analysis -->
+                    <div class="project-card glass-effect">
+                        <div class="project-header">
+                            <h3 data-en="Amazon User Review Analysis & Topic Modeling" 
+                                data-zh="亚马逊用户评论分析与主题建模">
+                                <span class="project-emoji">📝</span>
+                                Amazon User Review Analysis & Topic Modeling
+                            </h3>
+                        </div>
+                        <div class="project-content">
+                            <p class="project-summary" data-en="Applied natural language processing techniques to analyze Amazon user reviews, extracting key themes and sentiment patterns to provide actionable business insights." 
+                               data-zh="应用自然语言处理技术分析亚马逊用户评论，提取关键主题和情感模式，提供可行的商业洞察。">
+                            </p>
+                            <div class="tech-stack">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">NLTK</span>
+                                <span class="tech-tag">LDA</span>
+                                <span class="tech-tag">TF-IDF</span>
+                                <span class="tech-tag">Sentiment Analysis</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
+
     <footer class="footer">
         <div class="container">
             <div class="footer-content">

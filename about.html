@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Data Analyst & Developer</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script defer src="js/main.js"></script>
+    <script defer src="js/particles.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script>
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        const savedLang = localStorage.getItem('lang') || 'en';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        document.documentElement.setAttribute('data-lang', savedLang);
+    </script>
+</head>
+<body class="about-page">
+    <div class="gradient-background"></div>
+    <div class="glow-effect"></div>
+    <main>
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <span class="logo-text">Juye Xiao</span>
+                    <div class="logo-dot"></div>
+                </div>
+                <button class="mobile-menu-btn" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <div class="nav-links">
+                    <a href="index.html" class="nav-link">
+                        <span class="nav-text" data-en="Home" data-zh="首页">Home</span>
+                        <span class="nav-dot"></span>
+                    </a>
+                    <a href="about.html" class="nav-link active">
+                        <span class="nav-text" data-en="About" data-zh="关于">About</span>
+                        <span class="nav-dot"></span>
+                    </a>
+                    <a href="projects.html" class="nav-link">
+                        <span class="nav-text" data-en="Projects" data-zh="项目">Projects</span>
+                        <span class="nav-dot"></span>
+                    </a>
+                    <a href="resume.html" class="nav-link">
+                        <span class="nav-text" data-en="Resume" data-zh="简历">Resume</span>
+                        <span class="nav-dot"></span>
+                    </a>
+                    <a href="contact.html" class="nav-link">
+                        <span class="nav-text" data-en="Contact" data-zh="联系">Contact</span>
+                        <span class="nav-dot"></span>
+                    </a>
+                </div>
+                <div class="nav-controls">
+                    <button class="theme-toggle glass-effect" aria-label="Toggle theme">
+                        <i class="fas fa-sun"></i>
+                    </button>
+                    <div class="lang-dropdown">
+                        <button class="lang-toggle glass-effect" aria-label="Select language">
+                            <span class="current-lang">EN</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <ul class="lang-options glass-effect">
+                            <li data-lang="en">
+                                <span class="lang-name">English</span>
+                                <span class="lang-code">EN</span>
+                            </li>
+                            <li data-lang="zh">
+                                <span class="lang-name">中文</span>
+                                <span class="lang-code">中</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- About页面的主要内容 -->
+        <section class="about">
+            <div class="container">
+                <div class="section-header">
+                    <h2 data-en="About Me" data-zh="关于我">About Me</h2>
+                    <div class="section-line"></div>
+                </div>
+                
+                <div class="about-content">
+                    <div class="about-text">
+                        <p class="highlight" data-en="Data Analyst & Full Stack Developer with expertise in machine learning and data science" 
+                           data-zh="专注于机器学习和数据科学的数据分析师和全栈开发者">
+                            Data Analyst & Full Stack Developer with expertise in machine learning and data science
+                        </p>
+                        <p data-en="With a Master's in Applied Analytics from Columbia University and dual Bachelor's degrees in Computer Science and Data Science from the University of Michigan, I specialize in transforming complex data into actionable insights. My experience spans from data analysis and machine learning to full-stack development, allowing me to bridge the gap between technical solutions and business needs." 
+                           data-zh="拥有哥伦比亚大学应用分析硕士学位和密歇根大学计算机科学与数据科学双学士学位，专注于将复杂数据转化为可行的见解。我的经验涵盖数据分析、机器学习到全栈开发，能够有效地将技术解决方案与业务需求相结合。">
+                        </p>
+
+                        <div class="stats-row">
+                            <div class="stat-item">
+                                <span class="stat-number">4+</span>
+                                <span class="stat-label" data-en="Years Experience" data-zh="年工作经验">Years Experience</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">5+</span>
+                                <span class="stat-label" data-en="Major Projects" data-zh="重要项目">Major Projects</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skills-grid">
+                        <!-- 编程语言 -->
+                        <div class="skill-box glass-effect">
+                            <h3>Programming Languages</h3>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Python</span>
+                                <span class="skill-tag">Java</span>
+                                <span class="skill-tag">C++</span>
+                                <span class="skill-tag">Swift</span>
+                                <span class="skill-tag">SQL</span>
+                                <span class="skill-tag">R</span>
+                                <span class="skill-tag">HTML</span>
+                                <span class="skill-tag">CSS</span>
+                                <span class="skill-tag">JavaScript</span>
+                                <span class="skill-tag">React</span>
+                                <span class="skill-tag">Node.js</span>
+                            </div>
+                        </div>
+
+                        <!-- 工具和框架 -->
+                        <div class="skill-box glass-effect">
+                            <h3>Tools & Frameworks</h3>
+                            <div class="skill-tags">
+                                <span class="skill-tag">AWS</span>
+                                <span class="skill-tag">PyTorch</span>
+                                <span class="skill-tag">Apache Spark</span>
+                                <span class="skill-tag">MongoDB</span>
+                                <span class="skill-tag">Tableau</span>
+                                <span class="skill-tag">Figma</span>
+                            </div>
+                        </div>
+
+                        <!-- 机器学习 -->
+                        <div class="skill-box glass-effect">
+                            <h3>Machine Learning</h3>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Random Forest</span>
+                                <span class="skill-tag">K-Means</span>
+                                <span class="skill-tag">CNN</span>
+                                <span class="skill-tag">RNN</span>
+                                <span class="skill-tag">PCA</span>
+                                <span class="skill-tag">Decision Trees</span>
+                            </div>
+                        </div>
+
+                        <!-- 数据科学 -->
+                        <div class="skill-box glass-effect">
+                            <h3>Data Science & Analytics</h3>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Hypothesis Testing</span>
+                                <span class="skill-tag">Time-Series Analysis</span>
+                                <span class="skill-tag">Text Mining</span>
+                                <span class="skill-tag">Regression Analysis</span>
+                                <span class="skill-tag">Sklearn</span>
+                                <span class="skill-tag">Pandas</span>
+                                <span class="skill-tag">NumPy</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="education">
+            <div class="container">
+                <div class="section-header">
+                    <h2 data-en="Education" data-zh="教育背景">Education</h2>
+                    <div class="section-line"></div>
+                </div>
+                
+                <div class="education-content">
+                    <div class="education-item glass-effect">
+                        <h3 data-en="Columbia University" data-zh="哥伦比亚大学">Columbia University</h3>
+                        <p class="degree" data-en="Master of Science in Applied Analysis" data-zh="应用分析硕士">Master of Science in Applied Analysis</p>
+                        <p class="period">2021.9 - 2023.2</p>
+                        <p class="location" data-en="New York, NY, USA" data-zh="纽约，美国">New York, NY, USA</p>
+                        <ul class="courses">
+                            <li data-en="Managing Data, Strategy and Analytic" data-zh="数据管理与分析策略">Managing Data, Strategy and Analytic</li>
+                            <li data-en="Applied Analysis Framework and Methods" data-zh="应用分析框架与方法">Applied Analysis Framework and Methods</li>
+                            <li data-en="Storytelling with Data" data-zh="数据叙事">Storytelling with Data</li>
+                            <li data-en="Applied analysis in organizational context" data-zh="组织环境中的应用分析">Applied analysis in organizational context</li>
+                            <li data-en="Cloud Computing" data-zh="云计算">Cloud Computing</li>
+                            <li data-en="Analytics and leading change" data-zh="分析与变革领导">Analytics and leading change</li>
+                            <li data-en="Solving Real World Problems with Analytics (Capstone sponsored by S&P Global)" 
+                                data-zh="基于分析解决实际问题（S&P Global赞助的毕业项目）">
+                                Solving Real World Problems with Analytics (Capstone sponsored by S&P Global)
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="education-item glass-effect">
+                        <h3 data-en="University of Michigan" data-zh="密歇根大学">University of Michigan</h3>
+                        <p class="degree" data-en="Bachelor of Science in Computer Science; Bachelor of Science in Data Science" 
+                           data-zh="计算机科学学士；数据科学学士">Bachelor of Science in Computer Science; Bachelor of Science in Data Science</p>
+                        <p class="period">2018.8 - 2020.12</p>
+                        <p class="location" data-en="Ann Arbor, MI, USA" data-zh="安娜堡，密歇根，美国">Ann Arbor, MI, USA</p>
+                        <ul class="courses">
+                            <li data-en="Programming and Data Structure" data-zh="编程与数据结构">Programming and Data Structure</li>
+                            <li data-en="Data Structure and Algorithm" data-zh="数据结构与算法">Data Structure and Algorithm</li>
+                            <li data-en="Introduction of Computer Organization" data-zh="计算机组成原理导论">Introduction of Computer Organization</li>
+                            <li data-en="Foundations of Computer Science" data-zh="计算机科学基础">Foundations of Computer Science</li>
+                            <li data-en="Mobile App Development for Entrepreneurs" data-zh="创业者移动应用开发">Mobile App Development for Entrepreneurs</li>
+                            <li data-en="Database Management Systems" data-zh="数据库管理系统">Database Management Systems</li>
+                            <li data-en="Web Systems" data-zh="Web系统">Web Systems</li>
+                            <li data-en="Introduction to Machine Learning" data-zh="机器学习导论">Introduction to Machine Learning</li>
+                            <li data-en="Human-Centered Software Design and Development" data-zh="以人为本的软件设计与开发">Human-Centered Software Design and Development</li>
+                            <li data-en="Computer Vision" data-zh="计算机视觉">Computer Vision</li>
+                            <li data-en="Data mining" data-zh="数据挖掘">Data mining</li>
+                            <li data-en="Applied Regression Analysis" data-zh="应用回归分析">Applied Regression Analysis</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="experience">
+            <div class="container">
+                <div class="section-header">
+                    <h2 data-en="Experience" data-zh="工作经历">Experience</h2>
+                    <div class="section-line"></div>
+                </div>
+                
+                <div class="experience-content">
+                    <div class="experience-item glass-effect">
+                        <h3>C.O.D.E-Automotive</h3>
+                        <p class="position" data-en="Data Analyst Specialist" data-zh="数据分析师">Data Analyst Specialist</p>
+                        <p class="period">2023.9 - Present</p>
+                        <p class="location">Camarillo, California</p>
+                        <ul class="responsibilities">
+                            <li data-en="Inventory & Logistics Management: Optimized procurement strategies and inventory management through data analysis" 
+                                data-zh="库存与物流管理：通过数据分析优化采购策略和库存管理">
+                                <i class="fas fa-chart-bar"></i>Inventory & Logistics Management: Optimized procurement strategies and inventory management through data analysis
+                            </li>
+                            <li data-en="Advertising Optimization: Evaluated and adjusted ad placements on eBay, Walmart, and Amazon to enhance ROI" 
+                                data-zh="广告优化：评估eBay、沃尔玛和亚马逊广告投放，提高投资回报率">
+                                <i class="fas fa-ad"></i>Advertising Optimization: Evaluated and adjusted ad placements on eBay, Walmart, and Amazon to enhance ROI
+                            </li>
+                            <li data-en="Budget Management: Managed advertising budgets to drive sales while maintaining market competitiveness" 
+                                data-zh="预算管理：调整广告预算，提高销售额并保持市场竞争力">
+                                <i class="fas fa-dollar-sign"></i>Budget Management: Managed advertising budgets to drive sales while maintaining market competitiveness
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="experience-item glass-effect">
+                        <h3>China United Transport</h3>
+                        <p class="position" data-en="Database Management & Data Entry Specialist" data-zh="数据库管理与数据录入专员">Database Management & Data Entry Specialist</p>
+                        <p class="period">2023.3</p>
+                        <p class="location">Walnut, California</p>
+                        <ul class="responsibilities">
+                            <li data-en="Database Management: Established a freight data repository, enhancing retrieval capabilities" 
+                                data-zh="数据库管理：建立货运数据库，提升数据检索能力">
+                                <i class="fas fa-database"></i>Database Management: Established a freight data repository, enhancing retrieval capabilities
+                            </li>
+                            <li data-en="Data Maintenance: Ensured accurate and up-to-date shipment records" 
+                                data-zh="数据维护：确保准确和及时的货运记录">
+                                <i class="fas fa-tasks"></i>Data Maintenance: Ensured accurate and up-to-date shipment records
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="experience-item glass-effect">
+                        <h3>DiDi</h3>
+                        <p class="position" data-en="Front-End Intern" data-zh="前端开发实习生">Front-End Intern</p>
+                        <p class="period">2019.6 - 2019.8</p>
+                        <p class="location" data-en="Beijing, China" data-zh="北京，中国">Beijing, China</p>
+                        <ul class="responsibilities">
+                            <li data-en="Developed a Performance Monitoring Platform using React & Node.js" 
+                                data-zh="使用React和Node.js开发性能监控平台">
+                                <i class="fas fa-laptop-code"></i>Developed a Performance Monitoring Platform using React & Node.js
+                            </li>
+                            <li data-en="Page Optimization: Improved loading speed by 15% through data-driven analysis" 
+                                data-zh="页面优化：通过数据驱动分析提升15%加载速度">
+                                <i class="fas fa-tachometer-alt"></i>Page Optimization: Improved loading speed by 15% through data-driven analysis
+                            </li>
+                            <li data-en="Global Deployment: Assisted in DiDi's internationalization efforts" 
+                                data-zh="全球部署：协助滴滴国际化工作">
+                                <i class="fas fa-globe"></i>Global Deployment: Assisted in DiDi's internationalization efforts
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="copyright">
+                    <span>© 2024 Juye Xiao</span>
+                    <span class="separator">|</span>
+                    <span>All Rights Reserved</span>
+                </div>
+                <div class="footer-links">
+                    <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html> 

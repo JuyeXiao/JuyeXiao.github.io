@@ -1,253 +1,408 @@
-<!DOCTYPE HTML>
-<html>
-<!--[if !IE]><!--><html lang="en"><!--<![endif]-->
-<!--[if gt IE 9]><html class="ie10" lang="en"><![endif]-->
-<!--[if IE 9]><html class="ie9 lte9" lang="en"><![endif]-->
-<!--[if IE 8]><html class="ie8 lte9 no-css3" lang="en"><![endif]-->
-<!--[if IE 7]><html class="ie7 lte9 lte7 no-css3" lang="en"><![endif]-->
-<!--[if lte IE 6]><html class="ie6 lte9 lte7 no-css3" lang="en"><![endif]-->
+<!DOCTYPE html>
+<html lang="en">
 <head>
-	<title>Juye Xiao</title>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-	<link rel="stylesheet" href="style/main.css"/>
-	<link rel="stylesheet" href="style/resume.css"/>
-	<link href='http://fonts.googleapis.com/css?family=Rokkitt:400,700|Lato:400,300' rel='stylesheet' type='text/css'> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume - Data Analyst & Developer</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script defer src="js/main.js"></script>
+    <script defer src="js/particles.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        const savedLang = localStorage.getItem('lang') || 'en';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        document.documentElement.setAttribute('data-lang', savedLang);
+    </script>
 </head>
-<body class="is-preload">
+<body>
+    <div class="gradient-background"></div>
+    <div class="glow-effect"></div>
+    <main>
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <span class="logo-text">Juye Xiao</span>
+                    <div class="logo-dot"></div>
+                </div>
+                <button class="mobile-menu-btn" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <div class="nav-links">
+                    <a href="index.html" class="nav-link">
+                        <span class="nav-text" data-en="Home" data-zh="首页">Home</span>
+                        <span class="nav-dot"></span>
+                    </a>
+                    <a href="about.html" class="nav-link">
+                        <span class="nav-text" data-en="About" data-zh="关于">About</span>
+                        <span class="nav-dot"></span>
+                    </a>
+                    <a href="projects.html" class="nav-link">
+                        <span class="nav-text" data-en="Projects" data-zh="项目">Projects</span>
+                        <span class="nav-dot"></span>
+                    </a>
+                    <a href="resume.html" class="nav-link active">
+                        <span class="nav-text" data-en="Resume" data-zh="简历">Resume</span>
+                        <span class="nav-dot"></span>
+                    </a>
+                    <a href="contact.html" class="nav-link">
+                        <span class="nav-text" data-en="Contact" data-zh="联系">Contact</span>
+                        <span class="nav-dot"></span>
+                    </a>
+                </div>
+                <div class="nav-controls">
+                    <button class="theme-toggle glass-effect" aria-label="Toggle theme">
+                        <i class="fas fa-sun"></i>
+                    </button>
+                    <div class="lang-dropdown">
+                        <button class="lang-toggle glass-effect" aria-label="Select language">
+                            <span class="current-lang">EN</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <ul class="lang-options glass-effect">
+                            <li data-lang="en">
+                                <span class="lang-name">English</span>
+                                <span class="lang-code">EN</span>
+                            </li>
+                            <li data-lang="zh">
+                                <span class="lang-name">中文</span>
+                                <span class="lang-code">中</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
 
-	<!-- Wrapper -->
-	<div id="wrapper" class="fade-in">
-
-		<!-- Intro -->
-			<div id="intro">
-				<h1>This is<br />
-					Juye Xiao</h1>
-				<ul class="actions">
-					<li><a href="#header" class="button icon solid solo fa-arrow-down scrolly">Juye Xiao</a></li>
-				</ul>
-			</div>
-
-			<!-- Header -->
-			<header id="header">
-				<a href="index.html" class="logo">Juye Xiao</a>
-			</header>
-
-			<!-- Nav -->
-			<nav id="nav">
-				<ul class="links">
-					<li ><a href="index.html">THIS IS JUYE XIAO</a></li>
-					<li class="active"><a href="resume.html">RESUME</a></li>
-					<li><a href="contact.html">CONTACT</a></li>
-				</ul>
-				<ul class="icons">
-					<li><a href="https://github.com/JuyeXiao" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
-					<li><a href="https://www.linkedin.com/in/juye-xiao-541417187/" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
-					<li><a href="https://twitter.com/xiao_juye" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-					<li><a href="https://www.facebook.com/juye.xiao.5" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-					<li><a href="https://www.instagram.com/juyexiao/" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-					<li><a href="images/Wechat.jpeg" id= "wechat" class="icon brands fa-weixin"><span class="label">Wechat</span></a></li>
-				</ul>
-			</nav>
-
-			<!-- Main -->
-			<div id="main">
-					<div id="cv" class="instaFade">
-							<div class="mainDetails">
-								<div id="headshot" class="quickFade">
-									<img src="./images/Juye Xiao.jpeg" alt="Juye Xiao" />
-								</div>
-								
-								<div id="name">
-									<h1 class="quickFade delayTwo">Juye Xiao</h1>
-									<h2 class="quickFade delayThree">SOFTWARE ENGINEER</h2>
-								</div>
-								
-								<div id="contactDetails" class="quickFade delayFour">
-									<ul>
-										<li><a href = "./Juye Xiao.pdf" class="icon fa-file-pdf"> Download PDF </a></li>
-										<li>email: <a href="mailto:juyexiao@umich.edu">juyexiao@umich.edu</a></li>
-										<li>website: <a href="http://juyexiao.github.io">juyexiao.github.io</a></li>
-										<li>mobile: <a href="tel:(814)880-8602">(814) 880-8602</a></li>
-									</ul>
-								</div>
-								<div class="clear"></div>
-							</div>
-							
-							<div id="mainArea" class="quickFade delayFive">
-								<section>
-									<article>
-										<div class="sectionTitle">
-											<h1>Personal Profile</h1>
-										</div>
-										
-										<div class="sectionContent">
-											<p>I am a junior at University of Michigan, majoring in Computer Science. Before I transferred to University of Michigan, I was a student at Pennsylvania State University, where I majored in Computer Science and Mathematics.</p>
-										</div>
-									</article>
-									<div class="clear"></div>
-								</section>
-								
-								<section>
-									<div class="sectionTitle">
-										<h1>Skills</h1>
-									</div>
-									
-									<div class="sectionContent">
-										<ul class="keySkills">
-											<li>C++, C, Java, JavaScript, Python, Unix, Verilog</li>
-											<li>HTML, CSS, Sass</li>
-											<li>React, Node.JS</li>
-											
-										</ul>
-									</div>
-									<div class="clear"></div>
-								</section>
-								<section>
-									<div class="sectionTitle">
-										<h1>Experience</h1>
-									</div>
-									
-									<div class="sectionContent">
-										<section class = "jobs">
-											<article>
-												<h2><a href = "https://www.didiglobal.com/">DIDI</a></h2>
-												<p class="subDetails">EFE Front-End Internship<br/>June.2019 – August.2019</p>
-												<ul class = "jobDetail">
-													<li>Building a website performance monitoring platform basing on lighthouse and puppeteer (React, Node.js)</li>
-													<li>Involving in DiDi Internationalization process, and learn deploying webpage using Three.js</li>
-													<li>Learning and utilizing Kafka to develop a collaborative tool for cooperative editing of documents in real-time.</li>
-												</ul>
-											</article>
-										</section>
-										
-										<section class = "jobs">
-											<article>
-												<h2><a href = "https://www.gcores.com/">GAMECORES</a></h2>
-												<p class="subDetails">Internship<br/>May.2018 – July.2018</p>
-												<ul class = "jobDetail">
-													<li>Web Design and collaborating with team members to compose and post articles on the website (HTML, CSS, Ruby on Rail)</li>
-													<li>Using Ruby on Rail to identify and reorganize the tags in database.</li>
-													<li>Utilizing ruby crawler to gather useful information from mainstream game website</li>
-												</ul>
-											</article>
-										</section>
-										
-										<section class="jobs">
-											<article>
-												<h2> ACES Dance Club </h2>
-												<p class="subDetails">Vice Minister of Treasure, Active member of Event Planning<br/>Sep.2017-Sep.2018</p>
-												<ul class = "jobDetail">
-													<li>Applied for UPAC funds, managed the ASA account</li>
-													<li>Gave performance in kinds of university-run activities, including THON Dance Marathon.</li>
-													<li>Organized banquet, showcase, Mid-Autumn Party, and the Voice of CUSA-PSU, etc.</li>
-													<li>In charge of Stage setting, garment management, and after-show banquets</li>
-												</ul>
-											</article>
-										</section>
-										
-									</div>
-									<div class="clear"></div>
-								</section>
-								
-								
-								
-								
-								
-								<section>
-									<div class="sectionTitle">
-										<h1>Education</h1>
-									</div>
-									
-									<div class="sectionContent">
-										<section class="university">
-											<article>
-												<h2>UNIVERSITY OF MICHIGAN</h2>
-											
-												<p class="subDetails" >Ann Arbor, MI<br/>Expected graduation time: May 2021</p>
-												
-												<ul class = " ulDetail" >
-													<label>Degree:</label>
-													<li>Bachelor of Science in Computer Science</li>
-													<li>Bachelor of Science in Data Science</li>
-												</ul>
-												
-												<p><span style = "font-weight: bold">Relevant Coursework:</span><br/> Programming and Data Structure, Data Structure and Algorithm, Introduction of Computer Organization</p>
-												<ul class = " ulDetail">
-													<label>Awards: </label>
-													<li><span class = "awards">University Honors</span> <span class = "date">May.2019</span></li>
-												</ul>
-											</article>
-										</section>
-										
-										<section class="university">
-												<article>
-													<h2>PENNSYLVINNA STATE UNIVERSITY</h2>
-													<p class="subDetails" >University Park, PA<br/>Aug.2017 – May.2018 </p>	
-													<ul class = " ulDetail" >
-														<label>Degree:</label>
-														<li>Bachelor of Science in Computer Science</li>
-														<li>Bachelor of Science in Mathematics</li>
-													</ul>
-														
-													<p><span style = "font-weight: bold">Relevant Coursework:</span><br/>  Linear Algebra, Discrete Math, Calculus, Differential Equation, Introduction of Digital System and Design, Introduction of Python, Introduction of Java, Elementary Statistics</p>
-													<ul class = " ulDetail">
-														<label>Awards: </label>
-														<li><span class = "awards">The President’s Freshman Award  </span> <span class = "date">April.2018</span></li>
-														<li><span class = "awards">Dean’s List </span> <span class = "date">FA 2017 &SP 2018</span></li>
-													</ul>
-												</article>
-										</section>
-										
-									</div>
-									<div class="clear"></div>
-								</section>
-								
-								<section >
-									<article>
-										<p class="foot">Juye Xiao —— <a herf = 'mailto:juyexiao@umich.edu'>juyexiao@umich.edu</a> —— (814)-880-8602</p>
-									</article>
-									
-								</section>
-							</div>
-						</div>
-    
+        <section class="resume">
+            <div class="container">
+                <div class="section-header">
+                    <h2 data-en="Resume" data-zh="简历">Resume</h2>
+                    <div class="section-line"></div>
+                </div>
                 
-    
-                   
-			</div>
+                <div class="resume-download">
+                    <a href="中文简历肖炬晔.pdf" class="download-btn" download>
+                        <i class="fas fa-download"></i>
+                        <span data-en="Download Chinese Resume" data-zh="下载中文简历">Download Chinese Resume</span>
+                    </a>
+                    <a href="Juye Xiao.pdf" class="download-btn" download>
+                        <i class="fas fa-download"></i>
+                        <span data-en="Download English Resume" data-zh="下载英文简历">Download English Resume</span>
+                    </a>
+                </div>
+                
+                <div class="resume-content">
+                    <div class="resume-header">
+                        <h1><span data-en="Juye Xiao" data-zh="肖炬晔">Juye Xiao</span></h1>
+                        <div class="contact-info">
+                            <span>jx2479@columbia.edu</span>
+                            <span>134-3682-6896</span>
+                        </div>
+                    </div>
 
+                    <div class="resume-section">
+                        <h2><span data-en="Education" data-zh="教育背景">Education</span></h2>
+                        <div class="education-item">
+                            <div class="edu-header">
+                                <h3 data-en="Columbia University" data-zh="哥伦比亚大学">Columbia University</h3>
+                                <span class="location" data-en="New York, USA" data-zh="纽约，美国">New York, USA</span>
+                            </div>
+                            <div class="edu-period">2021.9 - 2023.2</div>
+                            <div class="edu-degree" data-en="Master of Science in Applied Analytics" data-zh="应用分析理学硕士">
+                                Master of Science in Applied Analytics
+                            </div>
+                            <div class="edu-courses">
+                                <strong data-en="Relevant Coursework" data-zh="主修课程">Relevant Coursework:</strong>
+                                <span data-en="Managing Data, Strategy and Analytics, Applied Analysis Framework and Methods, Storytelling with Data, Cloud Computing, Analytics and Leading Change, Solving Real-World Problems with Analytics (Capstone sponsored by S&P Global)" 
+                                      data-zh="数据管理、策略与分析、应用分析框架与方法、数据叙事、云计算、分析与变革领导、实际问题解决（标普全球赞助项目）">
+                                    Managing Data, Strategy and Analytics, Applied Analysis Framework and Methods, Storytelling with Data, Cloud Computing, Analytics and Leading Change, Solving Real-World Problems with Analytics (Capstone sponsored by S&P Global)
+                                </span>
+                            </div>
+                        </div>
 
-						
+                        <div class="education-item">
+                            <div class="edu-header">
+                                <h3 data-en="University of Michigan" data-zh="密歇根大学">University of Michigan</h3>
+                                <span class="location" data-en="Ann Arbor, USA" data-zh="安娜堡，美国">Ann Arbor, USA</span>
+                            </div>
+                            <div class="edu-period">2018.8 - 2020.12</div>
+                            <div class="edu-degree" data-en="Bachelor of Science in Computer Science & Data Science" 
+                                 data-zh="计算机科学与数据科学理学学士">
+                                Bachelor of Science in Computer Science & Data Science
+                            </div>
+                            <div class="edu-courses">
+                                <strong data-en="Relevant Coursework" data-zh="主修课程">Relevant Coursework:</strong>
+                                <span data-en="Data Structures, Algorithms, Computer Vision, Machine Learning, Data Mining, Web Systems, Applied Regression Analysis" 
+                                      data-zh="数据结构、算法、计算机视觉、机器学习、数据挖掘、网络系统、应用回归分析">
+                                    Data Structures, Algorithms, Computer Vision, Machine Learning, Data Mining, Web Systems, Applied Regression Analysis
+                                </span>
+                            </div>
+                            <div class="edu-honors"><strong>Honors:</strong> University Honors (May 2019)</div>
+                        </div>
+                    </div>
 
-			<!-- Copyright -->
+                    <div class="resume-section">
+                        <h2><span data-en="Experience" data-zh="工作经历">Experience</span></h2>
+                        <div class="experience-item">
+                            <div class="exp-header">
+                                <h3 data-en="Data Analyst Specialist" data-zh="数据分析专员">Data Analyst Specialist</h3>
+                                <span class="company">C.O.D.E-Automotive, Camarillo, CA</span>
+                            </div>
+                            <div class="exp-period" data-en="2023.9 - Present" data-zh="2023.9 - 至今">2023.9 - Present</div>
+                            <ul class="exp-responsibilities">
+                                <li data-en="Inventory & Logistics Management: Optimized procurement strategies and inventory management through data analysis" 
+                                    data-zh="库存与物流管理：通过数据分析优化采购策略和库存管理">
+                                    <strong>库存与物流管理：</strong>通过数据分析优化采购策略和库存管理
+                                </li>
+                                <li data-en="Advertising Optimization: Evaluated and adjusted ad placements on eBay, Walmart, and Amazon to enhance ROI" 
+                                    data-zh="广告优化：评估和调整eBay、沃尔玛和亚马逊的广告投放以提高投资回报率">
+                                    <strong>广告优化：</strong>评估和调整eBay、沃尔玛和亚马逊的广告投放以提高投资回报率
+                                </li>
+                                <li data-en="Budget Management: Managed advertising budgets to drive sales while maintaining market competitiveness" 
+                                    data-zh="预算管理：管理广告预算以提高销售额并保持市场竞争力">
+                                    <strong>预算管理：</strong>管理广告预算以提高销售额并保持市场竞争力
+                                </li>
+                            </ul>
+                        </div>
 
-			<div id="copyright">
-				<ul class="icons social">
-						<li><a href="https://github.com/JuyeXiao" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
-						<li><a href="https://www.linkedin.com/in/juye-xiao-541417187/" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
-						<li><a href="https://twitter.com/xiao_juye" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-						<li><a href="https://www.facebook.com/juye.xiao.5" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-						<li><a href="https://www.instagram.com/juyexiao/" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-						<li><a href="images/Wechat.jpeg" id= "wechat" class="icon brands fa-weixin"><span class="label">Wechat</span></a></li>
-						
-				</ul>
-				<ul><li>&copy; </li><li>Design: <a href="index.html">Juye Xiao</a></li></ul>
-			</div>
+                        <div class="experience-item">
+                            <div class="exp-header">
+                                <h3 data-en="Database Management & Data Entry Specialist" data-zh="数据库管理与数据录入专员">Database Management & Data Entry Specialist</h3>
+                                <span class="company">China United Transport, Walnut, CA</span>
+                            </div>
+                            <div class="exp-period" data-en="2023.3 - Present" data-zh="2023.3 - 至今">2023.3 - Present</div>
+                            <ul class="exp-responsibilities">
+                                <li data-en="Database Management: Established a freight data repository, enhancing retrieval capabilities" 
+                                    data-zh="数据库管理：建立货运数据库，提升数据检索能力">
+                                    <strong>数据库管理：</strong>建立货运数据库，提升数据检索能力
+                                </li>
+                                <li data-en="Data Maintenance: Ensured accurate and up-to-date shipment records" 
+                                    data-zh="数据维护：确保准确和及时的货运记录">
+                                    <strong>数据维护：</strong>确保准确和及时的货运记录
+                                </li>
+                            </ul>
+                        </div>
 
-	</div>
+                        <div class="experience-item">
+                            <div class="exp-header">
+                                <h3 data-en="Front-End Intern" data-zh="前端开发实习生">Front-End Intern</h3>
+                                <span class="company" data-en="DiDi, Beijing, China" data-zh="滴滴，北京，中国">DiDi, Beijing, China</span>
+                            </div>
+                            <div class="exp-period">2019.6 - 2019.8</div>
+                            <ul class="exp-responsibilities">
+                                <li data-en="Development: Developed a Performance Monitoring Platform using React & Node.js" 
+                                    data-zh="开发：使用React和Node.js开发性能监控平台">
+                                    <strong>Development:</strong> Developed a Performance Monitoring Platform using React & Node.js
+                                </li>
+                                <li data-en="Page Optimization: Improved loading speed by 15% through data-driven analysis" 
+                                    data-zh="页面优化：通过数据驱动分析提升15%加载速度">
+                                    <strong>Page Optimization:</strong> Improved loading speed by 15% through data-driven analysis
+                                </li>
+                                <li data-en="Global Deployment: Assisted in DiDi's internationalization efforts" 
+                                    data-zh="全球部署：协助滴滴国际化工作">
+                                    <strong>Global Deployment:</strong> Assisted in DiDi's internationalization efforts
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
 
-		<!-- Scripts -->
-			<script src="src/jquery.min.js"></script>
-			<script src="src/jquery.scrollex.min.js"></script>
-			<script src="src/jquery.scrolly.min.js"></script>
-			<script src="src/jquery.poptrox.min.js"></script>
-			<script src="src/browser.min.js"></script>
-			<script src="src/breakpoints.min.js"></script>
-			<script src="src/util.js"></script>
-			<script src="src/main.js"></script>
-			<script src="src/contact.js"></script>
+                    <div class="resume-section">
+                        <h2><span data-en="Projects" data-zh="项目经验">Projects</span></h2>
+                        
+                        <div class="project-item">
+                            <div class="project-header">
+                                <h3 data-en="Climate Change Monitoring & Prediction (S&P Global Sponsored)" 
+                                    data-zh="气候变化监测与预测（标普全球赞助）">
+                                    Climate Change Monitoring & Prediction (S&P Global Sponsored)
+                                </h3>
+                            </div>
+                            <ul class="project-details">
+                                <li data-en="Data Collection: NASA's MODIS & NEX-GDDP datasets" 
+                                    data-zh="数据收集：NASA的MODIS和NEX-GDDP数据集">
+                                    <strong>Data Collection:</strong> NASA's MODIS & NEX-GDDP datasets.
+                                </li>
+                                <li><strong>Data Visualization:</strong> Heat Map analysis of temperature patterns.</li>
+                                <li><strong>Time-Series Analysis:</strong> Trained ARIMA models for temperature forecasting.</li>
+                            </ul>
+                        </div>
 
-			
+                        <div class="project-item">
+                            <div class="project-header">
+                                <h3 data-en="Banking Customer Churn Prediction" data-zh="银行客户流失预测">Banking Customer Churn Prediction</h3>
+                            </div>
+                            <ul class="project-details">
+                                <li data-en="Machine Learning Model: Random Forest, achieving 86.35% accuracy" 
+                                    data-zh="机器学习模型：随机森林，准确率达86.35%">
+                                    <strong>Machine Learning Model:</strong> Random Forest, achieving 86.35% accuracy.
+                                </li>
+                                <li data-en="Key Features: Age, Account Activity, Geographic Location" 
+                                    data-zh="关键特征：年龄、账户活动、地理位置">
+                                    <strong>Key Features:</strong> Age, Account Activity, Geographic Location.
+                                </li>
+                                <li data-en="Model Optimization: Used GridSearchCV for hyperparameter tuning" 
+                                    data-zh="模型优化：使用GridSearchCV进行超参数调优">
+                                    <strong>Model Optimization:</strong> Used GridSearchCV for hyperparameter tuning.
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="project-item">
+                            <div class="project-header">
+                                <h3 data-en="LendingClub Loan Default Predictions" data-zh="LendingClub贷款违约预测">LendingClub Loan Default Predictions</h3>
+                            </div>
+                            <ul class="project-details">
+                                <li data-en="Prediction Algorithms: Logistic Regression, KNN, Random Forest, SVM" 
+                                    data-zh="预测算法：逻辑回归、KNN、随机森林、SVM">
+                                    <strong>Prediction Algorithms:</strong> Logistic Regression, KNN, Random Forest, SVM.
+                                </li>
+                                <li data-en="Key Features: Income, Interest Rate, Credit Utilization" 
+                                    data-zh="关键特征：收入、利率、信用额度使用率">
+                                    <strong>Key Features:</strong> Income, Interest Rate, Credit Utilization.
+                                </li>
+                                <li data-en="Model Accuracy: 83.52%, improving risk assessment" 
+                                    data-zh="模型准确率：83.52%，提升风险评估">
+                                    <strong>Model Accuracy:</strong> 83.52%, improving risk assessment.
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="project-item">
+                            <div class="project-header">
+                                <h3 data-en="Amazon User Review Analysis & Topic Modeling" 
+                                    data-zh="亚马逊用户评论分析与主题建模">Amazon User Review Analysis & Topic Modeling</h3>
+                            </div>
+                            <ul class="project-details">
+                                <li data-en="LDA Topic Modeling: Identified 5 major themes in user reviews" 
+                                    data-zh="LDA主题建模：识别用户评论中的5个主要主题">
+                                    <strong>LDA Topic Modeling:</strong> Identified 5 major themes in user reviews.
+                                </li>
+                                <li data-en="Keyword Extraction: Used TF-IDF to analyze user sentiments" 
+                                    data-zh="关键词提取：使用TF-IDF分析用户情感">
+                                    <strong>Keyword Extraction:</strong> Used TF-IDF to analyze user sentiments.
+                                </li>
+                                <li data-en="Data-Driven Marketing: Provided recommendations for pricing, design, and ad targeting" 
+                                    data-zh="数据驱动营销：为定价、设计和广告定向提供建议">
+                                    <strong>Data-Driven Marketing:</strong> Provided recommendations for pricing, design, and ad targeting.
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="project-item">
+                            <div class="project-header">
+                                <h3 data-en="San Francisco Crime Data Analysis" 
+                                    data-zh="旧金山犯罪数据分析">San Francisco Crime Data Analysis</h3>
+                            </div>
+                            <ul class="project-details">
+                                <li data-en="High Crime Areas: Southern, Mission, and Northern districts" 
+                                    data-zh="高犯罪率地区：南区、教区和北区">
+                                    <strong>High Crime Areas:</strong> Southern, Mission, and Northern districts.
+                                </li>
+                                <li data-en="Time-Series Analysis: SARIMA model forecasted crime trends for 24 months" 
+                                    data-zh="时间序列分析：使用SARIMA模型预测24个月的犯罪趋势">
+                                    <strong>Time-Series Analysis:</strong> SARIMA model forecasted crime trends for 24 months.
+                                </li>
+                                <li data-en="Patrol Optimization: Suggested strategies for improving patrol efficiency" 
+                                    data-zh="巡逻优化：提出提高巡逻效率的策略">
+                                    <strong>Patrol Optimization:</strong> Suggested strategies for improving patrol efficiency.
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="project-item">
+                            <div class="project-header">
+                                <h3 data-en="Professional Photo Editing App (PicassoXS)" 
+                                    data-zh="专业照片编辑应用（PicassoXS）">Professional Photo Editing App (PicassoXS)</h3>
+                            </div>
+                            <ul class="project-details">
+                                <li data-en="User Research: Value Proposition Canvas for market evaluation" 
+                                    data-zh="用户研究：使用价值主张画布进行市场评估">
+                                    <strong>User Research:</strong> Value Proposition Canvas for market evaluation.
+                                </li>
+                                <li data-en="UI/UX Design: Created using Figma, implemented in Swift" 
+                                    data-zh="UI/UX设计：使用Figma创建，用Swift实现">
+                                    <strong>UI/UX Design:</strong> Created using Figma, implemented in Swift.
+                                </li>
+                                <li data-en="Front-End & Back-End Integration: Enhanced performance and user experience" 
+                                    data-zh="前后端集成：提升性能和用户体验">
+                                    <strong>Front-End & Back-End Integration:</strong> Enhanced performance and user experience.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="resume-section">
+                        <h2><span data-en="Technical Skills" data-zh="技术技能">Technical Skills</span></h2>
+                        <div class="skills-table">
+                            <table>
+                                <tr>
+                                    <td><strong data-en="Programming Languages" data-zh="编程语言">Programming Languages</strong></td>
+                                    <td data-en="Python (Sklearn, Pandas, NumPy), Java, C++, Swift, SQL, R, HTML, CSS, JavaScript (React, Node.js)" 
+                                        data-zh="Python（Sklearn、Pandas、NumPy）、Java、C++、Swift、SQL、R、HTML、CSS、JavaScript（React、Node.js）">
+                                        Python (Sklearn, Pandas, NumPy), Java, C++, Swift, SQL, R, HTML, CSS, JavaScript (React, Node.js)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong data-en="Tools & Frameworks" data-zh="工具与框架">Tools & Frameworks</strong></td>
+                                    <td data-en="AWS, PyTorch, Apache Spark, MongoDB, Tableau, Figma" 
+                                        data-zh="AWS、PyTorch、Apache Spark、MongoDB、Tableau、Figma">
+                                        AWS, PyTorch, Apache Spark, MongoDB, Tableau, Figma
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong data-en="Machine Learning" data-zh="机器学习">Machine Learning</strong></td>
+                                    <td data-en="Random Forest, K-Means Clustering, CNN, RNN, PCA, Decision Trees" 
+                                        data-zh="随机森林、K-均值聚类、CNN、RNN、PCA、决策树">
+                                        Random Forest, K-Means Clustering, CNN, RNN, PCA, Decision Trees
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong data-en="Data Science & Analytics" data-zh="数据科学与分析">Data Science & Analytics</strong></td>
+                                    <td data-en="Hypothesis Testing, Time-Series Analysis, Text Mining, Regression Analysis" 
+                                        data-zh="假设检验、时间序列分析、文本挖掘、回归分析">
+                                        Hypothesis Testing, Time-Series Analysis, Text Mining, Regression Analysis
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="resume-section">
+                        <h2><span data-en="Personal Statement" data-zh="个人评价">Personal Statement</span></h2>
+                        <div class="personal-statement glass-effect">
+                            <p data-en="Equipped with solid data analysis and statistical modeling capabilities, proficient in Python, SQL and other data processing tools, as well as machine learning algorithms. Skilled at extracting key insights from complex data to support business decisions. Possesses strong logical thinking and problem-solving abilities, capable of efficiently handling multi-task requirements with attention to detail. Passionate about e-commerce and financial industry data analysis, able to quickly adapt to new environments and drive team goal achievement. Values team collaboration and cross-departmental communication, with a strong sense of responsibility for data-driven decision making and business insights."
+                               data-zh="具备扎实的数据分析和统计建模能力，精通Python、SQL等数据处理工具，以及机器学习算法的应用。擅长从复杂数据中提取关键洞察，为业务决策提供支持。拥有良好的逻辑思维与问题解决能力，能够高效处理多任务需求并关注细节。熟悉电商、金融等行业的数据分析场景，能够快速适应新环境并推动团队目标实现。注重团队协作与跨部门沟通，具备数据驱动决策的强烈责任感和敏锐商业洞察力。">
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="copyright">
+                    <span>© 2024 Juye Xiao</span>
+                    <span class="separator">|</span>
+                    <span>All Rights Reserved</span>
+                </div>
+                <div class="footer-links">
+                    <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
-</html>
+</html> 

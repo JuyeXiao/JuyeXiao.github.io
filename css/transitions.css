@@ -1,0 +1,123 @@
+/* 页面过渡效果 */
+.page-transition {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    z-index: 1000;
+    pointer-events: none;
+}
+
+/* 页面容器 */
+.page-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
+    overflow-y: auto;
+}
+
+/* 页面进入动画 */
+.page-enter {
+    animation: pageEnter 0.6s ease-in-out forwards;
+}
+
+.page-content-enter {
+    animation: contentEnter 0.8s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+    animation-delay: 0.6s;
+}
+
+/* 页面离开动画 */
+.page-leave {
+    animation: pageLeave 0.6s ease-in-out forwards;
+}
+
+/* 方向控制 */
+.page-transition[data-direction="right"] {
+    transform-origin: left;
+}
+
+.page-transition[data-direction="left"] {
+    transform-origin: right;
+}
+
+.page-container[data-direction="right"] {
+    transform: translateX(100px);
+}
+
+.page-container[data-direction="left"] {
+    transform: translateX(-100px);
+}
+
+@keyframes pageEnter {
+    0% {
+        transform: scaleX(1);
+    }
+    100% {
+        transform: scaleX(0);
+    }
+}
+
+@keyframes pageLeave {
+    0% {
+        transform: scaleX(0);
+    }
+    100% {
+        transform: scaleX(1);
+    }
+}
+
+@keyframes contentEnter {
+    0% {
+        opacity: 0;
+        transform: translateX(var(--slide-direction, 100px));
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* 添加页面堆叠效果 */
+.page-stack {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    perspective: 1000px;
+}
+
+.page-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+}
+
+/* 确保所有页面内容都在容器内 */
+main {
+    min-height: 100vh;
+    position: relative;
+}
+
+/* 滚动条样式 */
+.page-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.page-container::-webkit-scrollbar-track {
+    background: var(--bg-primary);
+}
+
+.page-container::-webkit-scrollbar-thumb {
+    background: var(--accent);
+    border-radius: 4px;
+} 

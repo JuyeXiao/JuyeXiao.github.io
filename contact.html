@@ -1,137 +1,157 @@
-<!DOCTYPE HTML>
-<html>
-<!--[if !IE]><!--><html lang="en"><!--<![endif]-->
-<!--[if gt IE 9]><html class="ie10" lang="en"><![endif]-->
-<!--[if IE 9]><html class="ie9 lte9" lang="en"><![endif]-->
-<!--[if IE 8]><html class="ie8 lte9 no-css3" lang="en"><![endif]-->
-<!--[if IE 7]><html class="ie7 lte9 lte7 no-css3" lang="en"><![endif]-->
-<!--[if lte IE 6]><html class="ie6 lte9 lte7 no-css3" lang="en"><![endif]-->
+<!DOCTYPE html>
+<html lang="en">
 <head>
-	<title>Juye Xiao</title>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-	<link rel="stylesheet" href="style/main.css" />
-	<link rel="stylesheet" href="style/contact.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Data Analyst & Developer</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script defer src="js/main.js"></script>
+    <script defer src="js/particles.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script>
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        const savedLang = localStorage.getItem('lang') || 'en';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        document.documentElement.setAttribute('data-lang', savedLang);
+    </script>
 </head>
-<body class="is-preload">
-
-	<!-- Wrapper -->
-	<div id="wrapper" class="fade-in">
-
-		<!-- Intro -->
-			<div id="intro">
-				<h1>This is<br />
-					Juye Xiao</h1>
-				<ul class="actions">
-					<li><a href="#nav" class="button icon solid solo fa-arrow-down scrolly">Juye Xiao</a></li>
-				</ul>
-			</div>
-
-			<!-- Header -->
-			<header id="header">
-				<a href="index.html" class="logo">Juye Xiao</a>
-			</header>
-
-			<!-- Nav -->
-			<nav id="nav">
-				<ul class="links">
-					<li ><a href="index.html">THIS IS JUYE XIAO</a></li>
-					<li><a href="resume.html">RESUME</a></li>
-					<li class = "active"><a href="contact.html">CONTACT</a></li>
-				</ul>
-				<ul class="icons">
-					<li><a href="https://github.com/JuyeXiao" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
-					<li><a href="https://www.linkedin.com/in/juye-xiao-541417187/" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
-					<li><a href="https://twitter.com/xiao_juye" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-					<li><a href="https://www.facebook.com/juye.xiao.5" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-					<li><a href="https://www.instagram.com/juyexiao/" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-					<li><a href="images/Wechat.jpeg" id= "wechat " class="icon brands fa-weixin"><span class="label">Wechat</span></a></li>
-				</ul>
-			</nav>
-
-			<!-- Main -->
-			<div id="main">
-
-			</div>
-
-			<!-- Footer -->
-            <footer id="footer">
-                <section>
-                    <form id="contact-form" action='https://docs.google.com/forms/d/e/1FAIpQLScgFb7IrdGBX8eIcNgnUxrM0bOsmZF-vFTshJvHpNqWdZMHXQ/formResponse' method="post" target = "hidden_iframe" onsubmit="submitted=true;">
-                        <div class="fields">
-                            <div class="field">
-                                <label for="name">Name</label>
-                                <input type="text" name="entry.1858642228" id="name" required/>
-                            </div>
-                            <div class="field">
-                                <label for="email">Email</label>
-                                <input type="text" name="entry.1504179270" id="email" required/>
-                            </div>
-                            <div class="field">
-                                <label for="message">Message</label>
-                                <textarea name="entry.2067082653" id="message" rows="3" required></textarea>
-                            </div>
-                        </div>
-                        <input type="submit" value="Submit" />
-					</form>
-					<iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) {window.setTimeout(function(){ window.location='contact.html' }, 2500)}"></iframe>
-                </section>
-                <section class="split contact">
-                    <section class="alt">
-                        <h3>Address</h3>
-                        <p>615 South Main st, Unit # 430 <br />
-							Ann Arbor, MI, 48104</p>
-                    </section>
-                    <section>
-                        <h3>Phone</h3>
-                        <p><a href="tel:(814)880-8602">(814) 880-8602</a></p>
-                    </section>
-                    <section>
-                        <h3>Email</h3>
-                        <p><a href="mailto:juyexiao@umich.edu">juyexiao@umich.edu</a></p>
-                    </section>
-                    <section>
-                        <h3>Social</h3>
-                        <ul class="icons social">
-								<li><a href="https://www.linkedin.com/in/juye-xiao-541417187/" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
-								<li><a href="https://twitter.com/xiao_juye" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-								<li><a href="https://www.facebook.com/juye.xiao.5" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-								<li><a href="https://www.instagram.com/juyexiao/" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-								<li><a href="images/Wechat.jpeg" id= "wechat" class="icon brands fa-weixin"><span class="label">Wechat</span></a></li>
+<body>
+    <div class="gradient-background"></div>
+    <div class="glow-effect"></div>
+    <main>
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <span class="logo-text">Juye Xiao</span>
+                    <div class="logo-dot"></div>
+                </div>
+                <button class="mobile-menu-btn" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <div class="nav-links">
+                    <a href="index.html" class="nav-link">
+                        <span class="nav-text" data-en="Home" data-zh="首页">Home</span>
+                        <span class="nav-dot"></span>
+                    </a>
+                    <a href="about.html" class="nav-link">
+                        <span class="nav-text" data-en="About" data-zh="关于">About</span>
+                        <span class="nav-dot"></span>
+                    </a>
+                    <a href="projects.html" class="nav-link">
+                        <span class="nav-text" data-en="Projects" data-zh="项目">Projects</span>
+                        <span class="nav-dot"></span>
+                    </a>
+                    <a href="resume.html" class="nav-link">
+                        <span class="nav-text" data-en="Resume" data-zh="简历">Resume</span>
+                        <span class="nav-dot"></span>
+                    </a>
+                    <a href="contact.html" class="nav-link active">
+                        <span class="nav-text" data-en="Contact" data-zh="联系">Contact</span>
+                        <span class="nav-dot"></span>
+                    </a>
+                </div>
+                <div class="nav-controls">
+                    <button class="theme-toggle glass-effect" aria-label="Toggle theme">
+                        <i class="fas fa-sun"></i>
+                    </button>
+                    <div class="lang-dropdown">
+                        <button class="lang-toggle glass-effect" aria-label="Select language">
+                            <span class="current-lang">EN</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <ul class="lang-options glass-effect">
+                            <li data-lang="en">
+                                <span class="lang-name">English</span>
+                                <span class="lang-code">EN</span>
+                            </li>
+                            <li data-lang="zh">
+                                <span class="lang-name">中文</span>
+                                <span class="lang-code">中</span>
+                            </li>
                         </ul>
-                    </section>
-                </section>
-            </footer>
-        
-						
+                    </div>
+                </div>
+            </div>
+        </nav>
 
-			<!-- Copyright -->
-			<div id="copyright">
-				<ul class="icons social">
-					<li><a href="https://github.com/JuyeXiao" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
-						<li><a href="https://www.linkedin.com/in/juye-xiao-541417187/" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
-						<li><a href="https://twitter.com/xiao_juye" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-						<li><a href="https://www.facebook.com/juye.xiao.5" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-						<li><a href="https://www.instagram.com/juyexiao/" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-						<li><a href="images/Wechat.jpeg" id= "wechat" class="icon brands fa-weixin"><span class="label">Wechat</span></a></li>
-							
-				</ul>
-				<ul><li>&copy; </li><li>Design: <a href="index.html">Juye Xiao</a></li></ul>
-			</div>
+        <section class="contact">
+            <div class="container">
+                <div class="section-header">
+                    <h2 data-en="Get in Touch" data-zh="联系我">Get in Touch</h2>
+                    <div class="section-line"></div>
+                </div>
 
-	</div>
+                <div class="contact-content">
+                    <div class="contact-text">
+                        <p class="highlight" data-en="Let's work together on your next data project." 
+                           data-zh="让我们一起合作完成您的下一个数据项目。">
+                            Let's work together on your next data project.
+                        </p>
+                        <p data-en="Feel free to reach out for collaborations or just a friendly hello" 
+                           data-zh="无论是项目合作还是打个招呼，都欢迎联系我">
+                            Feel free to reach out for collaborations or just a friendly hello
+                        </p>
+                    </div>
 
-		<!-- Scripts -->
-			<script src="src/jquery.min.js"></script>
-			<script src="src/jquery.scrollex.min.js"></script>
-			<script src="src/jquery.scrolly.min.js"></script>
-			<script src="src/jquery.poptrox.min.js"></script>
-			<script src="src/browser.min.js"></script>
-			<script src="src/breakpoints.min.js"></script>
-			<script src="src/util.js"></script>
-			<script src="src/main.js"></script>
-			<script src="src/contact.js"></script>
+                    <form class="contact-form glass-effect">
+                        <div class="form-group">
+                            <label for="name" data-en="Name" data-zh="姓名">Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" data-en="Email" data-zh="邮箱">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message" data-en="Message" data-zh="消息">Message</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn primary" data-en="Send Message" data-zh="发送消息">
+                            Send Message
+                        </button>
+                    </form>
 
+                    <div class="contact-links">
+                        <a href="mailto:your.email@example.com" class="contact-link glass-effect">
+                            <i class="fas fa-envelope"></i>
+                            <span>your.email@example.com</span>
+                        </a>
+                        <a href="https://github.com/yourusername" target="_blank" class="contact-link glass-effect">
+                            <i class="fab fa-github"></i>
+                            <span>GitHub</span>
+                        </a>
+                        <a href="https://linkedin.com/in/yourusername" target="_blank" class="contact-link glass-effect">
+                            <i class="fab fa-linkedin"></i>
+                            <span>LinkedIn</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="copyright">
+                    <span>© 2024 Juye Xiao</span>
+                    <span class="separator">|</span>
+                    <span>All Rights Reserved</span>
+                </div>
+                <div class="footer-links">
+                    <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
-</html>
+</html> 
