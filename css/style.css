@@ -72,14 +72,22 @@ body {
 /* 玻璃效果 */
 .glass-effect {
     background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(4px);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.glass-effect:hover {
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
 }
 
 [data-theme="light"] .glass-effect {
-    background: rgba(0, 0, 0, 0.05);
-    border-color: rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 /* Logo样式 */
@@ -2327,4 +2335,100 @@ main {
     .about-page .skill-category {
         padding: 1.5rem;
     }
+} 
+
+/* 增强按钮悬停效果 */
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.btn:active {
+    transform: translateY(-1px);
+}
+
+/* 增强卡片悬停效果 */
+.project-card:hover,
+.skill-box:hover,
+.experience-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* 增强滚动动画 */
+@keyframes smoothScroll {
+    0% {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.scroll-reveal {
+    animation: smoothScroll 0.8s ease-out forwards;
+}
+
+/* 增强文本渐变效果 */
+.gradient-text {
+    background: linear-gradient(90deg, var(--accent), #ffffff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+}
+
+/* 增强移动端导航菜单 */
+.mobile-menu {
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+}
+
+/* 增强响应式设计 */
+@media (max-width: 768px) {
+    .hero-content {
+        padding: 0 1rem;
+    }
+    
+    .glitch {
+        font-size: 2.5rem;
+    }
+    
+    .stats-row {
+        flex-direction: column;
+        gap: 2rem;
+    }
+}
+
+/* 增强暗色/亮色主题切换 */
+[data-theme="light"] .glass-effect {
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .btn {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* 增强滚动条样式 */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--accent);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(var(--accent-rgb), 0.8);
 } 

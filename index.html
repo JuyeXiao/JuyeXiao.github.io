@@ -3,9 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Analyst & Developer</title>
+    <title>Juye Xiao | Data Analyst & Developer</title>
     <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        accent: 'var(--accent)',
+                        primary: 'var(--text-primary)',
+                        secondary: 'var(--text-secondary)',
+                        background: 'var(--bg-primary)',
+                        'background-secondary': 'var(--bg-secondary)'
+                    },
+                    fontFamily: {
+                        mono: ['JetBrains Mono', 'monospace'],
+                        sans: ['Inter', 'sans-serif']
+                    },
+                    backdropBlur: {
+                        xs: '2px',
+                    }
+                }
+            }
+        }
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script defer src="js/main.js"></script>
     <script defer src="js/particles.js"></script>
@@ -18,234 +41,259 @@
         document.documentElement.setAttribute('data-lang', savedLang);
     </script>
 </head>
-<body class="home-page">
-    <div class="gradient-background"></div>
-    <div class="glow-effect"></div>
-    <main>
-        <nav class="navbar">
-            <div class="nav-blur"></div>
-            <div class="container">
-                <div class="logo">
-                    <span class="logo-text">Juye Xiao</span>
-                    <div class="logo-dot"></div>
+<body class="home-page bg-background text-primary font-sans min-h-screen flex flex-col overflow-x-hidden">
+    <div class="gradient-background fixed inset-0 -z-10"></div>
+    <div class="glow-effect fixed inset-0 -z-10"></div>
+    <main class="flex-grow">
+        <nav class="navbar sticky top-0 z-50 backdrop-blur-md bg-background/30 border-b border-white/5">
+            <div class="container mx-auto px-4 md:px-6 max-w-6xl flex items-center justify-between h-20">
+                <div class="logo flex items-center gap-2">
+                    <span class="logo-text text-xl md:text-2xl font-bold font-mono bg-gradient-to-r from-accent to-white bg-clip-text text-transparent">Juye Xiao</span>
+                    <div class="logo-dot w-2 h-2 rounded-full bg-accent animate-pulse"></div>
                 </div>
-                <button class="mobile-menu-btn" aria-label="Toggle menu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
+                <button class="mobile-menu-btn md:hidden flex flex-col justify-center items-center w-10 h-10 rounded-md bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all" aria-label="Toggle menu">
+                    <span class="w-5 h-0.5 bg-primary mb-1.5 transition-all"></span>
+                    <span class="w-5 h-0.5 bg-primary mb-1.5 transition-all"></span>
+                    <span class="w-5 h-0.5 bg-primary transition-all"></span>
                 </button>
-                <div class="nav-links">
-                    <a href="#home" class="nav-link">
-                        <span class="nav-text" data-en="Home" data-zh="首页">Home</span>
-                        <span class="nav-dot"></span>
+                <div class="nav-links hidden md:flex items-center gap-6">
+                    <a href="#home" class="nav-link group relative py-2 px-1 active">
+                        <span class="nav-text relative z-10 text-sm font-medium text-accent transition-all duration-300" data-en="Home" data-zh="首页">首页</span>
+                        <span class="nav-dot absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-accent scale-100 transition-all duration-300"></span>
                     </a>
-                    <a href="about.html" class="nav-link">
-                        <span class="nav-text" data-en="About" data-zh="关于">About</span>
-                        <span class="nav-dot"></span>
+                    <a href="about.html" class="nav-link group relative py-2 px-1">
+                        <span class="nav-text relative z-10 text-sm font-medium transition-colors group-hover:text-accent" data-en="About" data-zh="关于">About</span>
+                        <span class="nav-dot absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-accent scale-0 transition-transform group-hover:scale-100"></span>
                     </a>
-                    <a href="projects.html" class="nav-link">
-                        <span class="nav-text" data-en="Projects" data-zh="项目">Projects</span>
-                        <span class="nav-dot"></span>
+                    <a href="projects.html" class="nav-link group relative py-2 px-1">
+                        <span class="nav-text relative z-10 text-sm font-medium transition-colors group-hover:text-accent" data-en="Projects" data-zh="项目">Projects</span>
+                        <span class="nav-dot absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-accent scale-0 transition-transform group-hover:scale-100"></span>
                     </a>
-                    <a href="resume.html" class="nav-link">
-                        <span class="nav-text" data-en="Resume" data-zh="简历">Resume</span>
-                        <span class="nav-dot"></span>
+                    <a href="resume.html" class="nav-link group relative py-2 px-1">
+                        <span class="nav-text relative z-10 text-sm font-medium transition-colors group-hover:text-accent" data-en="Resume" data-zh="简历">Resume</span>
+                        <span class="nav-dot absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-accent scale-0 transition-transform group-hover:scale-100"></span>
                     </a>
-                    <a href="contact.html" class="nav-link">
-                        <span class="nav-text" data-en="Contact" data-zh="联系">Contact</span>
-                        <span class="nav-dot"></span>
+                    <a href="contact.html" class="nav-link group relative py-2 px-1">
+                        <span class="nav-text relative z-10 text-sm font-medium transition-colors group-hover:text-accent" data-en="Contact" data-zh="联系">Contact</span>
+                        <span class="nav-dot absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-accent scale-0 transition-transform group-hover:scale-100"></span>
                     </a>
                 </div>
-                <div class="nav-controls">
-                    <button class="theme-toggle glass-effect" aria-label="Toggle theme">
-                        <i class="fas fa-sun"></i>
+                <div class="nav-controls flex items-center gap-3">
+                    <button class="theme-toggle flex items-center justify-center w-10 h-10 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all" aria-label="Toggle theme">
+                        <i class="fas fa-sun text-primary"></i>
                     </button>
-                    <div class="lang-dropdown">
-                        <button class="lang-toggle glass-effect" aria-label="Select language">
-                            <span class="current-lang">EN</span>
-                            <i class="fas fa-chevron-down"></i>
+                    <div class="lang-dropdown relative">
+                        <button class="lang-toggle flex items-center justify-between w-16 h-10 px-3 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all" aria-label="Select language">
+                            <span class="current-lang text-sm font-medium">EN</span>
+                            <i class="fas fa-chevron-down text-xs"></i>
                         </button>
-                        <ul class="lang-options glass-effect">
-                            <li data-lang="en">
-                                <span class="lang-name">English</span>
-                                <span class="lang-code">EN</span>
+                        <ul class="lang-options absolute right-0 top-full mt-2 w-32 py-2 rounded-xl bg-white/10 backdrop-blur-md border border-white/10 opacity-0 invisible transition-all">
+                            <li data-lang="en" class="px-4 py-2 flex items-center justify-between hover:bg-white/10 cursor-pointer transition-colors">
+                                <span class="lang-name text-sm">English</span>
+                                <span class="lang-code text-xs font-mono">EN</span>
                             </li>
-                            <li data-lang="zh">
-                                <span class="lang-name">中文</span>
-                                <span class="lang-code">中</span>
+                            <li data-lang="zh" class="px-4 py-2 flex items-center justify-between hover:bg-white/10 cursor-pointer transition-colors">
+                                <span class="lang-name text-sm">中文</span>
+                                <span class="lang-code text-xs font-mono">中</span>
                             </li>
                         </ul>
                     </div>
                 </div>
             </div>
         </nav>
-        <section id="home" class="hero">
-            <div class="container">
-                <div class="hero-content">
-                    <h1 class="glitch" data-en="Data Explorer" data-zh="数据探索者">Data Explorer</h1>
-                    <p class="role" data-en="Data Analyst & Full Stack Developer" data-zh="数据分析师 & 全栈工程师">
+        
+        <section id="home" class="hero min-h-[90vh] flex items-center py-16 md:py-24">
+            <div class="container mx-auto px-4 md:px-6 max-w-6xl">
+                <div class="hero-content max-w-3xl mx-auto text-center">
+                    <div class="relative inline-block mb-6 transform hover:scale-105 transition-transform duration-500">
+                        <h1 class="glitch text-4xl md:text-6xl lg:text-7xl font-bold font-mono mb-4 bg-gradient-to-r from-accent to-white bg-clip-text text-transparent" data-en="Data Explorer" data-zh="数据探索者">数据探索者</h1>
+                        <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-24 h-1 bg-accent/30 rounded-full blur-sm"></div>
+                    </div>
+                    <p class="role text-lg md:text-xl font-medium mb-6 text-secondary" data-en="Data Analyst & Full Stack Developer" data-zh="数据分析师 & 全栈工程师">
                         Data Analyst & Full Stack Developer
                     </p>
-                    <p class="tagline" data-en="Transforming Data into Insights, Building the Future with Code" 
+                    <p class="tagline text-base md:text-lg max-w-2xl mx-auto mb-10 text-secondary/80" data-en="Transforming Data into Insights, Building the Future with Code" 
                        data-zh="将数据转化为洞见，用代码构建未来">
                         Transforming Data into Insights, Building the Future with Code
                     </p>
-                    <div class="cta-buttons">
-                        <a href="projects.html" class="btn primary" data-en="View Projects" data-zh="查看项目">View Projects</a>
-                        <a href="contact.html" class="btn secondary" data-en="Contact Me" data-zh="联系我">Contact Me</a>
+                    <div class="cta-buttons flex flex-wrap justify-center gap-5">
+                        <a href="projects.html" class="btn primary relative overflow-hidden py-3.5 px-8 rounded-lg bg-accent/10 backdrop-filter backdrop-blur-sm border border-accent/30 text-accent font-medium hover:bg-accent/20 transition-all duration-300 shadow-lg shadow-accent/10 group">
+                            <span class="relative z-10 flex items-center gap-2" data-en="View Projects" data-zh="查看项目">
+                                <span>查看项目</span>
+                                <i class="fas fa-arrow-right text-sm transition-transform duration-300 group-hover:translate-x-1"></i>
+                            </span>
+                            <div class="absolute inset-0 bg-gradient-to-r from-accent/0 via-accent/20 to-accent/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 transform -translate-x-full group-hover:translate-x-0"></div>
+                        </a>
+                        <a href="contact.html" class="btn secondary relative overflow-hidden py-3.5 px-8 rounded-lg bg-white/5 backdrop-blur-sm border border-white/10 text-primary font-medium hover:bg-white/10 transition-all shadow-lg shadow-black/5 group">
+                            <span class="relative z-10 flex items-center gap-2" data-en="Contact Me" data-zh="联系我">
+                                <span>Contact Me</span>
+                                <i class="fas fa-envelope text-sm transition-transform group-hover:translate-y-[-2px]"></i>
+                            </span>
+                        </a>
+                    </div>
+                    
+                    <div class="scroll-indicator mt-16 flex flex-col items-center animate-bounce hover:animate-none hover:translate-y-1 transition-transform duration-300">
+                        <span class="text-xs text-secondary mb-2 opacity-70">向下滚动</span>
+                        <i class="fas fa-chevron-down text-accent opacity-70"></i>
                     </div>
                 </div>
             </div>
         </section>
-        <section class="about" id="about">
-            <div class="container">
-                <div class="section-header">
-                    <h2 data-en="About Me" data-zh="关于我">About Me</h2>
-                    <div class="section-line"></div>
+        
+        <section class="about py-20 md:py-28" id="about">
+            <div class="container mx-auto px-4 md:px-6 max-w-6xl">
+                <div class="section-header text-center mb-16">
+                    <h2 class="text-2xl md:text-3xl font-bold mb-3 relative inline-block" data-en="About Me" data-zh="关于我">
+                        About Me
+                        <div class="absolute -bottom-2 left-0 right-0 h-1 bg-accent/30 rounded-full blur-sm"></div>
+                    </h2>
+                    <div class="section-line w-16 h-1 bg-accent mx-auto rounded-full mt-4"></div>
                 </div>
                 
-                <div class="about-content">
-                    <div class="about-text">
-                        <p class="highlight" data-en="I'm a Data Analyst and Full Stack Developer, focused on turning complex data into actionable insights." 
+                <div class="about-content max-w-4xl mx-auto">
+                    <div class="about-text mb-16">
+                        <p class="highlight text-lg md:text-xl font-medium mb-8 text-center" data-en="I'm a Data Analyst and Full Stack Developer, focused on turning complex data into actionable insights." 
                            data-zh="我是一名数据分析师和全栈开发者，专注于将复杂数据转化为可行的见解。">
+                           I'm a Data Analyst and Full Stack Developer, focused on turning complex data into actionable insights.
                         </p>
-                        <p data-en="By combining data science and software development skills, I build intelligent data solutions that drive results." 
+                        <p class="text-center text-secondary mb-12" data-en="By combining data science and software development skills, I build intelligent data solutions that drive results." 
                            data-zh="通过结合数据科学和软件开发技能，我构建能够推动结果的智能数据解决方案。">
+                           By combining data science and software development skills, I build intelligent data solutions that drive results.
                         </p>
                         
-                        <div class="skills-grid">
-                            <div class="skill-box glass-effect">
-                                <h3 data-en="Machine Learning" data-zh="机器学习">
-                                    <span class="skill-emoji">🤖</span>
+                        <div class="skills-grid grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                            <div class="skill-box p-6 md:p-8 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/8 transition-all duration-300 shadow-xl hover:shadow-accent/5 transform hover:-translate-y-2">
+                                <h3 class="flex items-center gap-2 text-lg font-medium mb-4" data-en="Machine Learning" data-zh="机器学习">
+                                    <span class="skill-emoji inline-block">🤖</span>
                                     Machine Learning
                                 </h3>
-                                <div class="skill-tags">
-                                    <span class="skill-tag">Random Forest</span>
-                                    <span class="skill-tag">K-Means</span>
-                                    <span class="skill-tag">CNN</span>
-                                    <span class="skill-tag">RNN</span>
-                                    <span class="skill-tag">PCA</span>
-                                    <span class="skill-tag">Decision Trees</span>
+                                <div class="skill-tags flex flex-wrap gap-2">
+                                    <span class="skill-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Random Forest</span>
+                                    <span class="skill-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">K-Means</span>
+                                    <span class="skill-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">CNN</span>
+                                    <span class="skill-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">RNN</span>
+                                    <span class="skill-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">PCA</span>
+                                    <span class="skill-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Decision Trees</span>
                                 </div>
                             </div>
 
-                            <div class="skill-box glass-effect">
-                                <h3 data-en="Data Science & Analytics" data-zh="数据科学与分析">
-                                    <span class="skill-emoji">📊</span>
+                            <div class="skill-box p-6 md:p-8 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/8 transition-all duration-300 shadow-xl hover:shadow-accent/5 transform hover:-translate-y-2">
+                                <h3 class="flex items-center gap-2 text-lg font-medium mb-4" data-en="Data Science & Analytics" data-zh="数据科学与分析">
+                                    <span class="skill-emoji inline-block">📊</span>
                                     Data Science & Analytics
                                 </h3>
-                                <div class="skill-tags">
-                                    <span class="skill-tag">Hypothesis Testing</span>
-                                    <span class="skill-tag">Time-Series Analysis</span>
-                                    <span class="skill-tag">Text Mining</span>
-                                    <span class="skill-tag">Regression Analysis</span>
-                                    <span class="skill-tag">Sklearn</span>
-                                    <span class="skill-tag">Pandas</span>
+                                <div class="skill-tags flex flex-wrap gap-2">
+                                    <span class="skill-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Hypothesis Testing</span>
+                                    <span class="skill-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Time-Series Analysis</span>
+                                    <span class="skill-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Text Mining</span>
+                                    <span class="skill-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Regression Analysis</span>
+                                    <span class="skill-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Sklearn</span>
+                                    <span class="skill-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Pandas</span>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="stats-row glass-effect">
-                            <div class="stat-item">
-                                <span class="stat-number">4+</span>
-                                <span class="stat-label" data-en="Years Experience" data-zh="年工作经验">Years Experience</span>
+                        <div class="stats-row flex justify-center items-center p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/8 transition-all duration-300">
+                            <div class="stat-item text-center">
+                                <span class="stat-number block text-3xl md:text-4xl font-bold text-accent mb-1">4+</span>
+                                <span class="stat-label text-sm text-secondary" data-en="Years Experience" data-zh="年工作经验">Years Experience</span>
                             </div>
-                            <div class="stat-divider"></div>
-                            <div class="stat-item">
-                                <span class="stat-number">20+</span>
-                                <span class="stat-label" data-en="Projects Completed" data-zh="完成项目">Projects Completed</span>
+                            <div class="stat-divider h-12 w-px bg-white/10 mx-8"></div>
+                            <div class="stat-item text-center">
+                                <span class="stat-number block text-3xl md:text-4xl font-bold text-accent mb-1">20+</span>
+                                <span class="stat-label text-sm text-secondary" data-en="Projects Completed" data-zh="完成项目">Projects Completed</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <section class="featured-projects">
-            <div class="container">
-                <div class="section-header">
-                    <h2 data-en="Featured Projects" data-zh="精选项目">Featured Projects</h2>
-                    <div class="section-line"></div>
+        
+        <section class="featured-projects py-16 md:py-24 bg-white/[0.02]">
+            <div class="container mx-auto px-4 md:px-6 max-w-6xl">
+                <div class="section-header text-center mb-12">
+                    <h2 class="text-2xl md:text-3xl font-bold mb-3" data-en="Featured Projects" data-zh="精选项目">Featured Projects</h2>
+                    <div class="section-line w-16 h-1 bg-accent mx-auto rounded-full"></div>
                 </div>
 
-                <div class="projects-grid">
+                <div class="projects-grid grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto mb-12">
                     <!-- Climate Change Project -->
-                    <div class="project-card glass-effect">
-                        <div class="project-header">
-                            <h3 data-en="Climate Change Monitoring & Prediction" data-zh="气候变化监测与预测">
-                                <span class="project-emoji">🌎</span>
+                    <div class="project-card group p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2">
+                        <div class="project-header mb-4">
+                            <h3 class="flex items-center gap-2 text-lg font-medium mb-2" data-en="Climate Change Monitoring & Prediction" data-zh="气候变化监测与预测">
+                                <span class="project-emoji inline-block">🌎</span>
                                 Climate Change Monitoring & Prediction
                             </h3>
-                            <span class="project-sponsor" data-en="S&P Global Sponsored" data-zh="标普全球赞助">S&P Global Sponsored</span>
+                            <span class="project-sponsor inline-block px-3 py-1 text-xs rounded-full bg-accent/20 text-accent" data-en="S&P Global Sponsored" data-zh="标普全球赞助">S&P Global Sponsored</span>
                         </div>
                         <div class="project-content">
-                            <p class="project-summary" data-en="Developed a comprehensive climate change analysis system using NASA datasets to monitor and predict global temperature trends." 
+                            <p class="project-summary text-secondary mb-4" data-en="Developed a comprehensive climate change analysis system using NASA datasets to monitor and predict global temperature trends." 
                                data-zh="使用NASA数据集开发了全面的气候变化分析系统，用于监测和预测全球温度趋势。">
+                               Developed a comprehensive climate change analysis system using NASA datasets to monitor and predict global temperature trends.
                             </p>
-                            <div class="tech-stack">
-                                <span class="tech-tag">Python</span>
-                                <span class="tech-tag">ARIMA</span>
-                                <span class="tech-tag">Pandas</span>
-                                <span class="tech-tag">Matplotlib</span>
-                                <span class="tech-tag">Scikit-learn</span>
-                                <span class="tech-tag">NASA API</span>
+                            <div class="tech-stack flex flex-wrap gap-2">
+                                <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Python</span>
+                                <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">ARIMA</span>
+                                <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Pandas</span>
+                                <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Matplotlib</span>
+                                <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Scikit-learn</span>
+                                <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">NASA API</span>
                             </div>
                         </div>
                     </div>
 
                     <!-- Professional Photo Editing App -->
-                    <div class="project-card glass-effect">
-                        <div class="project-header">
-                            <h3 data-en="Professional Photo Editing App (PicassoXS)" data-zh="专业照片编辑应用（PicassoXS）">
-                                <span class="project-emoji">🎨</span>
+                    <div class="project-card group p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2">
+                        <div class="project-header mb-4">
+                            <h3 class="flex items-center gap-2 text-lg font-medium mb-2" data-en="Professional Photo Editing App (PicassoXS)" data-zh="专业照片编辑应用（PicassoXS）">
+                                <span class="project-emoji inline-block">🎨</span>
                                 Professional Photo Editing App (PicassoXS)
                             </h3>
                         </div>
                         <div class="project-content">
-                            <p class="project-summary" data-en="Developed a professional photo editing application with advanced features and intuitive user interface, focusing on performance and user experience." 
+                            <p class="project-summary text-secondary mb-4" data-en="Developed a professional photo editing application with advanced features and intuitive user interface, focusing on performance and user experience." 
                                data-zh="开发了一款具有高级功能和直观界面的专业照片编辑应用，注重性能和用户体验。">
+                               Developed a professional photo editing application with advanced features and intuitive user interface, focusing on performance and user experience.
                             </p>
-                            <div class="tech-stack">
-                                <span class="tech-tag">Swift</span>
-                                <span class="tech-tag">UI/UX Design</span>
-                                <span class="tech-tag">PyTorch</span>
-                                <span class="tech-tag">MVP</span>
-                                <span class="tech-tag">Unit Tests</span>
-                                <span class="tech-tag">Value Proposition Canvas</span>
-                                <span class="tech-tag">Affinity Map</span>
-                                <span class="tech-tag">User Personas</span>
-                                <span class="tech-tag">Competitor Analysis</span>
+                            <div class="tech-stack flex flex-wrap gap-2">
+                                <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Swift</span>
+                                <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">UI/UX Design</span>
+                                <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">PyTorch</span>
+                                <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">MVP</span>
+                                <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Unit Tests</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="view-more">
-                    <a href="projects.html" class="btn glass-effect" data-en="View All Projects" data-zh="查看所有项目">
-                        <span data-en="View All Projects" data-zh="查看所有项目">View All Projects</span>
-                        <i class="fas fa-arrow-right"></i>
+                <div class="view-more text-center">
+                    <a href="projects.html" class="btn inline-flex items-center gap-2 py-3 px-6 rounded-full bg-white/5 backdrop-blur-md border border-white/10 text-primary font-medium hover:bg-white/10 transition-all duration-300 group transform hover:-translate-y-1">
+                        <span data-en="View All Projects" data-zh="查看所有项目">查看所有项目</span>
+                        <i class="fas fa-arrow-right transition-transform duration-300 group-hover:translate-x-1"></i>
                     </a>
                 </div>
             </div>
         </section>
     </main>
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="copyright">
+    
+    <footer class="footer py-8 border-t border-white/5 bg-background/50 backdrop-blur-sm">
+        <div class="container mx-auto px-4 md:px-6 max-w-6xl">
+            <div class="footer-content flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="copyright text-sm text-secondary">
                     <span>© 2024 Juye Xiao</span>
-                    <span class="separator">|</span>
+                    <span class="separator mx-2">|</span>
                     <span>All Rights Reserved</span>
                 </div>
-                <div class="footer-links">
-                    <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer">
+                <div class="footer-links flex items-center gap-4">
+                    <a href="https://github.com/JuyeXiao" target="_blank" rel="noopener noreferrer" class="w-10 h-10 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 transition-colors">
                         <i class="fab fa-github"></i>
                     </a>
-                    <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer">
-                        <i class="fab fa-linkedin"></i>
+                    <a href="https://linkedin.com/in/juye-xiao" target="_blank" rel="noopener noreferrer" class="w-10 h-10 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 transition-colors">
+                        <i class="fab fa-linkedin-in"></i>
                     </a>
                 </div>
             </div>
         </div>
     </footer>
 </body>
-</html> 
+</html>

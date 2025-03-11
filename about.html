@@ -3,9 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About - Data Analyst & Developer</title>
+    <title>About - Juye Xiao | Data Analyst & Developer</title>
     <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        accent: 'var(--accent)',
+                        primary: 'var(--text-primary)',
+                        secondary: 'var(--text-secondary)',
+                        background: 'var(--bg-primary)',
+                        'background-secondary': 'var(--bg-secondary)'
+                    },
+                    fontFamily: {
+                        mono: ['JetBrains Mono', 'monospace'],
+                        sans: ['Inter', 'sans-serif']
+                    },
+                    backdropBlur: {
+                        xs: '2px',
+                    }
+                }
+            }
+        }
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script defer src="js/main.js"></script>
     <script defer src="js/particles.js"></script>
@@ -17,60 +40,60 @@
         document.documentElement.setAttribute('data-lang', savedLang);
     </script>
 </head>
-<body class="about-page">
-    <div class="gradient-background"></div>
-    <div class="glow-effect"></div>
-    <main>
-        <nav class="navbar">
-            <div class="container">
-                <div class="logo">
-                    <span class="logo-text">Juye Xiao</span>
-                    <div class="logo-dot"></div>
+<body class="about-page bg-background text-primary font-sans min-h-screen flex flex-col overflow-x-hidden">
+    <div class="gradient-background fixed inset-0 -z-10"></div>
+    <div class="glow-effect fixed inset-0 -z-10"></div>
+    <main class="flex-grow">
+        <nav class="navbar sticky top-0 z-50 backdrop-blur-md bg-background/30 border-b border-white/5">
+            <div class="container mx-auto px-4 md:px-6 max-w-6xl flex items-center justify-between h-20">
+                <div class="logo flex items-center gap-2">
+                    <span class="logo-text text-xl md:text-2xl font-bold font-mono bg-gradient-to-r from-accent to-white bg-clip-text text-transparent">Juye Xiao</span>
+                    <div class="logo-dot w-2 h-2 rounded-full bg-accent animate-pulse"></div>
                 </div>
-                <button class="mobile-menu-btn" aria-label="Toggle menu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
+                <button class="mobile-menu-btn md:hidden flex flex-col justify-center items-center w-10 h-10 rounded-md bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all" aria-label="Toggle menu">
+                    <span class="w-5 h-0.5 bg-primary mb-1.5 transition-all"></span>
+                    <span class="w-5 h-0.5 bg-primary mb-1.5 transition-all"></span>
+                    <span class="w-5 h-0.5 bg-primary transition-all"></span>
                 </button>
-                <div class="nav-links">
-                    <a href="index.html" class="nav-link">
-                        <span class="nav-text" data-en="Home" data-zh="首页">Home</span>
-                        <span class="nav-dot"></span>
+                <div class="nav-links hidden md:flex items-center gap-6">
+                    <a href="index.html" class="nav-link group relative py-2 px-1">
+                        <span class="nav-text relative z-10 text-sm font-medium transition-colors group-hover:text-accent" data-en="Home" data-zh="首页">Home</span>
+                        <span class="nav-dot absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-accent scale-0 transition-transform group-hover:scale-100"></span>
                     </a>
-                    <a href="about.html" class="nav-link active">
-                        <span class="nav-text" data-en="About" data-zh="关于">About</span>
-                        <span class="nav-dot"></span>
+                    <a href="about.html" class="nav-link group relative py-2 px-1">
+                        <span class="nav-text relative z-10 text-sm font-medium text-accent" data-en="About" data-zh="关于">About</span>
+                        <span class="nav-dot absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-accent scale-100"></span>
                     </a>
-                    <a href="projects.html" class="nav-link">
-                        <span class="nav-text" data-en="Projects" data-zh="项目">Projects</span>
-                        <span class="nav-dot"></span>
+                    <a href="projects.html" class="nav-link group relative py-2 px-1">
+                        <span class="nav-text relative z-10 text-sm font-medium transition-colors group-hover:text-accent" data-en="Projects" data-zh="项目">Projects</span>
+                        <span class="nav-dot absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-accent scale-0 transition-transform group-hover:scale-100"></span>
                     </a>
-                    <a href="resume.html" class="nav-link">
-                        <span class="nav-text" data-en="Resume" data-zh="简历">Resume</span>
-                        <span class="nav-dot"></span>
+                    <a href="resume.html" class="nav-link group relative py-2 px-1">
+                        <span class="nav-text relative z-10 text-sm font-medium transition-colors group-hover:text-accent" data-en="Resume" data-zh="简历">Resume</span>
+                        <span class="nav-dot absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-accent scale-0 transition-transform group-hover:scale-100"></span>
                     </a>
-                    <a href="contact.html" class="nav-link">
-                        <span class="nav-text" data-en="Contact" data-zh="联系">Contact</span>
-                        <span class="nav-dot"></span>
+                    <a href="contact.html" class="nav-link group relative py-2 px-1">
+                        <span class="nav-text relative z-10 text-sm font-medium transition-colors group-hover:text-accent" data-en="Contact" data-zh="联系">Contact</span>
+                        <span class="nav-dot absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-accent scale-0 transition-transform group-hover:scale-100"></span>
                     </a>
                 </div>
-                <div class="nav-controls">
-                    <button class="theme-toggle glass-effect" aria-label="Toggle theme">
-                        <i class="fas fa-sun"></i>
+                <div class="nav-controls flex items-center gap-3">
+                    <button class="theme-toggle flex items-center justify-center w-10 h-10 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all" aria-label="Toggle theme">
+                        <i class="fas fa-sun text-primary"></i>
                     </button>
-                    <div class="lang-dropdown">
-                        <button class="lang-toggle glass-effect" aria-label="Select language">
-                            <span class="current-lang">EN</span>
-                            <i class="fas fa-chevron-down"></i>
+                    <div class="lang-dropdown relative">
+                        <button class="lang-toggle flex items-center justify-between w-16 h-10 px-3 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all" aria-label="Select language">
+                            <span class="current-lang text-sm font-medium">EN</span>
+                            <i class="fas fa-chevron-down text-xs"></i>
                         </button>
-                        <ul class="lang-options glass-effect">
-                            <li data-lang="en">
-                                <span class="lang-name">English</span>
-                                <span class="lang-code">EN</span>
+                        <ul class="lang-options absolute right-0 top-full mt-2 w-32 py-2 rounded-xl bg-white/10 backdrop-blur-md border border-white/10 opacity-0 invisible transition-all">
+                            <li data-lang="en" class="px-4 py-2 flex items-center justify-between hover:bg-white/10 cursor-pointer transition-colors">
+                                <span class="lang-name text-sm">English</span>
+                                <span class="lang-code text-xs font-mono">EN</span>
                             </li>
-                            <li data-lang="zh">
-                                <span class="lang-name">中文</span>
-                                <span class="lang-code">中</span>
+                            <li data-lang="zh" class="px-4 py-2 flex items-center justify-between hover:bg-white/10 cursor-pointer transition-colors">
+                                <span class="lang-name text-sm">中文</span>
+                                <span class="lang-code text-xs font-mono">中</span>
                             </li>
                         </ul>
                     </div>
@@ -79,91 +102,108 @@
         </nav>
 
         <!-- About页面的主要内容 -->
-        <section class="about">
-            <div class="container">
-                <div class="section-header">
-                    <h2 data-en="About Me" data-zh="关于我">About Me</h2>
-                    <div class="section-line"></div>
+        <section class="about py-16 md:py-24">
+            <div class="container mx-auto px-4 md:px-6 max-w-6xl">
+                <div class="section-header text-center mb-12">
+                    <h2 class="text-2xl md:text-3xl font-bold mb-3 relative inline-block" data-en="About Me" data-zh="关于我">
+                        关于我
+                        <div class="absolute -bottom-2 left-0 right-0 h-1 bg-accent/30 rounded-full blur-sm"></div>
+                    </h2>
+                    <div class="section-line w-16 h-1 bg-accent mx-auto rounded-full mt-4"></div>
                 </div>
                 
-                <div class="about-content">
+                <div class="about-content max-w-4xl mx-auto">
                     <div class="about-text">
-                        <p class="highlight" data-en="Data Analyst & Full Stack Developer with expertise in machine learning and data science" 
+                        <p class="highlight text-lg md:text-xl font-medium mb-6 text-center relative" data-en="Data Analyst & Full Stack Developer with expertise in machine learning and data science" 
                            data-zh="专注于机器学习和数据科学的数据分析师和全栈开发者">
-                            Data Analyst & Full Stack Developer with expertise in machine learning and data science
+                            专注于机器学习和数据科学的数据分析师和全栈开发者
+                            <span class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-24 h-0.5 bg-accent/30 rounded-full blur-sm"></span>
                         </p>
-                        <p data-en="With a Master's in Applied Analytics from Columbia University and dual Bachelor's degrees in Computer Science and Data Science from the University of Michigan, I specialize in transforming complex data into actionable insights. My experience spans from data analysis and machine learning to full-stack development, allowing me to bridge the gap between technical solutions and business needs." 
+                        <p class="text-center text-secondary mb-10" data-en="With a Master's in Applied Analytics from Columbia University and dual Bachelor's degrees in Computer Science and Data Science from the University of Michigan, I specialize in transforming complex data into actionable insights. My experience spans from data analysis and machine learning to full-stack development, allowing me to bridge the gap between technical solutions and business needs." 
                            data-zh="拥有哥伦比亚大学应用分析硕士学位和密歇根大学计算机科学与数据科学双学士学位，专注于将复杂数据转化为可行的见解。我的经验涵盖数据分析、机器学习到全栈开发，能够有效地将技术解决方案与业务需求相结合。">
+                           With a Master's in Applied Analytics from Columbia University and dual Bachelor's degrees in Computer Science and Data Science from the University of Michigan, I specialize in transforming complex data into actionable insights. My experience spans from data analysis and machine learning to full-stack development, allowing me to bridge the gap between technical solutions and business needs.
                         </p>
 
-                        <div class="stats-row">
-                            <div class="stat-item">
+                        <div class="stats-row flex justify-center items-center p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 mb-10 hover:bg-white/8 transition-all duration-300 transform hover:-translate-y-1">
+                            <div class="stat-item text-center">
                                 <span class="stat-number">4+</span>
                                 <span class="stat-label" data-en="Years Experience" data-zh="年工作经验">Years Experience</span>
                             </div>
-                            <div class="stat-item">
+                            <div class="stat-item text-center">
                                 <span class="stat-number">5+</span>
                                 <span class="stat-label" data-en="Major Projects" data-zh="重要项目">Major Projects</span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="skills-grid">
+                    <div class="skills-grid grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
                         <!-- 编程语言 -->
-                        <div class="skill-box glass-effect">
-                            <h3>Programming Languages</h3>
-                            <div class="skill-tags">
-                                <span class="skill-tag">Python</span>
-                                <span class="skill-tag">Java</span>
-                                <span class="skill-tag">C++</span>
-                                <span class="skill-tag">Swift</span>
-                                <span class="skill-tag">SQL</span>
-                                <span class="skill-tag">R</span>
-                                <span class="skill-tag">HTML</span>
-                                <span class="skill-tag">CSS</span>
-                                <span class="skill-tag">JavaScript</span>
-                                <span class="skill-tag">React</span>
-                                <span class="skill-tag">Node.js</span>
+                        <div class="skill-box p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-xl hover:shadow-accent/5">
+                            <h3 class="flex items-center gap-2 text-lg font-medium mb-4">
+                                <span class="skill-emoji inline-block group-hover:rotate-12 transition-transform duration-300">💻</span>
+                                Programming Languages
+                            </h3>
+                            <div class="skill-tags flex flex-wrap gap-2">
+                                <span class="skill-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5 hover:bg-white/15 transition-colors duration-300">Python</span>
+                                <span class="skill-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5 hover:bg-white/15 transition-colors duration-300">Java</span>
+                                <span class="skill-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5 hover:bg-white/15 transition-colors duration-300">C++</span>
+                                <span class="skill-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5 hover:bg-white/15 transition-colors duration-300">Swift</span>
+                                <span class="skill-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5 hover:bg-white/15 transition-colors duration-300">SQL</span>
+                                <span class="skill-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5 hover:bg-white/15 transition-colors duration-300">R</span>
+                                <span class="skill-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5 hover:bg-white/15 transition-colors duration-300">HTML</span>
+                                <span class="skill-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5 hover:bg-white/15 transition-colors duration-300">CSS</span>
+                                <span class="skill-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5 hover:bg-white/15 transition-colors duration-300">JavaScript</span>
+                                <span class="skill-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5 hover:bg-white/15 transition-colors duration-300">React</span>
+                                <span class="skill-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5 hover:bg-white/15 transition-colors duration-300">Node.js</span>
                             </div>
                         </div>
 
                         <!-- 工具和框架 -->
-                        <div class="skill-box glass-effect">
-                            <h3>Tools & Frameworks</h3>
-                            <div class="skill-tags">
-                                <span class="skill-tag">AWS</span>
-                                <span class="skill-tag">PyTorch</span>
-                                <span class="skill-tag">Apache Spark</span>
-                                <span class="skill-tag">MongoDB</span>
-                                <span class="skill-tag">Tableau</span>
-                                <span class="skill-tag">Figma</span>
+                        <div class="skill-box p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-xl hover:shadow-accent/5">
+                            <h3 class="flex items-center gap-2 text-lg font-medium mb-4">
+                                <span class="skill-emoji inline-block group-hover:rotate-12 transition-transform duration-300">🛠️</span>
+                                Tools & Frameworks
+                            </h3>
+                            <div class="skill-tags flex flex-wrap gap-2">
+                                <span class="skill-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5 hover:bg-white/15 transition-colors duration-300">AWS</span>
+                                <span class="skill-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5 hover:bg-white/15 transition-colors duration-300">PyTorch</span>
+                                <span class="skill-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5 hover:bg-white/15 transition-colors duration-300">Apache Spark</span>
+                                <span class="skill-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5 hover:bg-white/15 transition-colors duration-300">MongoDB</span>
+                                <span class="skill-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5 hover:bg-white/15 transition-colors duration-300">Tableau</span>
+                                <span class="skill-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5 hover:bg-white/15 transition-colors duration-300">Figma</span>
                             </div>
                         </div>
 
                         <!-- 机器学习 -->
-                        <div class="skill-box glass-effect">
-                            <h3>Machine Learning</h3>
-                            <div class="skill-tags">
-                                <span class="skill-tag">Random Forest</span>
-                                <span class="skill-tag">K-Means</span>
-                                <span class="skill-tag">CNN</span>
-                                <span class="skill-tag">RNN</span>
-                                <span class="skill-tag">PCA</span>
-                                <span class="skill-tag">Decision Trees</span>
+                        <div class="skill-box p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-xl hover:shadow-accent/5">
+                            <h3 class="flex items-center gap-2 text-lg font-medium mb-4">
+                                <span class="skill-emoji inline-block group-hover:rotate-12 transition-transform duration-300">🤖</span>
+                                Machine Learning
+                            </h3>
+                            <div class="skill-tags flex flex-wrap gap-2">
+                                <span class="skill-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5 hover:bg-white/15 transition-colors duration-300">Random Forest</span>
+                                <span class="skill-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5 hover:bg-white/15 transition-colors duration-300">K-Means</span>
+                                <span class="skill-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5 hover:bg-white/15 transition-colors duration-300">CNN</span>
+                                <span class="skill-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5 hover:bg-white/15 transition-colors duration-300">RNN</span>
+                                <span class="skill-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5 hover:bg-white/15 transition-colors duration-300">PCA</span>
+                                <span class="skill-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5 hover:bg-white/15 transition-colors duration-300">Decision Trees</span>
                             </div>
                         </div>
 
                         <!-- 数据科学 -->
-                        <div class="skill-box glass-effect">
-                            <h3>Data Science & Analytics</h3>
-                            <div class="skill-tags">
-                                <span class="skill-tag">Hypothesis Testing</span>
-                                <span class="skill-tag">Time-Series Analysis</span>
-                                <span class="skill-tag">Text Mining</span>
-                                <span class="skill-tag">Regression Analysis</span>
-                                <span class="skill-tag">Sklearn</span>
-                                <span class="skill-tag">Pandas</span>
-                                <span class="skill-tag">NumPy</span>
+                        <div class="skill-box p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-xl hover:shadow-accent/5">
+                            <h3 class="flex items-center gap-2 text-lg font-medium mb-4">
+                                <span class="skill-emoji inline-block group-hover:rotate-12 transition-transform duration-300">📊</span>
+                                Data Science & Analytics
+                            </h3>
+                            <div class="skill-tags flex flex-wrap gap-2">
+                                <span class="skill-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5 hover:bg-white/15 transition-colors duration-300">Hypothesis Testing</span>
+                                <span class="skill-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5 hover:bg-white/15 transition-colors duration-300">Time-Series Analysis</span>
+                                <span class="skill-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5 hover:bg-white/15 transition-colors duration-300">Text Mining</span>
+                                <span class="skill-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5 hover:bg-white/15 transition-colors duration-300">Regression Analysis</span>
+                                <span class="skill-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5 hover:bg-white/15 transition-colors duration-300">Sklearn</span>
+                                <span class="skill-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5 hover:bg-white/15 transition-colors duration-300">Pandas</span>
+                                <span class="skill-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5 hover:bg-white/15 transition-colors duration-300">NumPy</span>
                             </div>
                         </div>
                     </div>
@@ -171,121 +211,242 @@
             </div>
         </section>
 
-        <section class="education">
-            <div class="container">
-                <div class="section-header">
-                    <h2 data-en="Education" data-zh="教育背景">Education</h2>
-                    <div class="section-line"></div>
+        <section class="education py-16 md:py-24 bg-white/[0.02]">
+            <div class="container mx-auto px-4 md:px-6 max-w-6xl">
+                <div class="section-header text-center mb-12">
+                    <h2 class="text-2xl md:text-3xl font-bold mb-3" data-en="Education" data-zh="教育背景">Education</h2>
+                    <div class="section-line w-16 h-1 bg-accent mx-auto rounded-full"></div>
                 </div>
                 
-                <div class="education-content">
-                    <div class="education-item glass-effect">
-                        <h3 data-en="Columbia University" data-zh="哥伦比亚大学">Columbia University</h3>
-                        <p class="degree" data-en="Master of Science in Applied Analysis" data-zh="应用分析硕士">Master of Science in Applied Analysis</p>
-                        <p class="period">2021.9 - 2023.2</p>
-                        <p class="location" data-en="New York, NY, USA" data-zh="纽约，美国">New York, NY, USA</p>
-                        <ul class="courses">
-                            <li data-en="Managing Data, Strategy and Analytic" data-zh="数据管理与分析策略">Managing Data, Strategy and Analytic</li>
-                            <li data-en="Applied Analysis Framework and Methods" data-zh="应用分析框架与方法">Applied Analysis Framework and Methods</li>
-                            <li data-en="Storytelling with Data" data-zh="数据叙事">Storytelling with Data</li>
-                            <li data-en="Applied analysis in organizational context" data-zh="组织环境中的应用分析">Applied analysis in organizational context</li>
-                            <li data-en="Cloud Computing" data-zh="云计算">Cloud Computing</li>
-                            <li data-en="Analytics and leading change" data-zh="分析与变革领导">Analytics and leading change</li>
-                            <li data-en="Solving Real World Problems with Analytics (Capstone sponsored by S&P Global)" 
+                <div class="education-content max-w-4xl mx-auto grid grid-cols-1 gap-8">
+                    <div class="education-item p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 transition-all">
+                        <h3 class="text-xl font-medium mb-2" data-en="Columbia University" data-zh="哥伦比亚大学">Columbia University</h3>
+                        <p class="degree text-accent font-medium mb-1" data-en="Master of Science in Applied Analysis" data-zh="应用分析硕士">Master of Science in Applied Analysis</p>
+                        <div class="flex items-center gap-4 mb-4 text-sm text-secondary">
+                            <p class="period flex items-center gap-1">
+                                <i class="far fa-calendar-alt"></i>
+                                2021.9 - 2023.2
+                            </p>
+                            <p class="location flex items-center gap-1" data-en="New York, NY, USA" data-zh="纽约，美国">
+                                <i class="fas fa-map-marker-alt"></i>
+                                New York, NY, USA
+                            </p>
+                        </div>
+                        <h4 class="text-sm font-medium mb-2 text-secondary">Relevant Coursework:</h4>
+                        <ul class="courses grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-2 text-sm">
+                            <li class="flex items-start gap-2" data-en="Managing Data, Strategy and Analytic" data-zh="数据管理与分析策略">
+                                <span class="text-accent mt-1">•</span>
+                                Managing Data, Strategy and Analytic
+                            </li>
+                            <li class="flex items-start gap-2" data-en="Applied Analysis Framework and Methods" data-zh="应用分析框架与方法">
+                                <span class="text-accent mt-1">•</span>
+                                Applied Analysis Framework and Methods
+                            </li>
+                            <li class="flex items-start gap-2" data-en="Storytelling with Data" data-zh="数据叙事">
+                                <span class="text-accent mt-1">•</span>
+                                Storytelling with Data
+                            </li>
+                            <li class="flex items-start gap-2" data-en="Applied analysis in organizational context" data-zh="组织环境中的应用分析">
+                                <span class="text-accent mt-1">•</span>
+                                Applied analysis in organizational context
+                            </li>
+                            <li class="flex items-start gap-2" data-en="Cloud Computing" data-zh="云计算">
+                                <span class="text-accent mt-1">•</span>
+                                Cloud Computing
+                            </li>
+                            <li class="flex items-start gap-2" data-en="Analytics and leading change" data-zh="分析与变革领导">
+                                <span class="text-accent mt-1">•</span>
+                                Analytics and leading change
+                            </li>
+                            <li class="flex items-start gap-2 md:col-span-2" data-en="Solving Real World Problems with Analytics (Capstone sponsored by S&P Global)" 
                                 data-zh="基于分析解决实际问题（S&P Global赞助的毕业项目）">
+                                <span class="text-accent mt-1">•</span>
                                 Solving Real World Problems with Analytics (Capstone sponsored by S&P Global)
                             </li>
                         </ul>
                     </div>
 
-                    <div class="education-item glass-effect">
-                        <h3 data-en="University of Michigan" data-zh="密歇根大学">University of Michigan</h3>
-                        <p class="degree" data-en="Bachelor of Science in Computer Science; Bachelor of Science in Data Science" 
+                    <div class="education-item p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 transition-all">
+                        <h3 class="text-xl font-medium mb-2" data-en="University of Michigan" data-zh="密歇根大学">University of Michigan</h3>
+                        <p class="degree text-accent font-medium mb-1" data-en="Bachelor of Science in Computer Science; Bachelor of Science in Data Science" 
                            data-zh="计算机科学学士；数据科学学士">Bachelor of Science in Computer Science; Bachelor of Science in Data Science</p>
-                        <p class="period">2018.8 - 2020.12</p>
-                        <p class="location" data-en="Ann Arbor, MI, USA" data-zh="安娜堡，密歇根，美国">Ann Arbor, MI, USA</p>
-                        <ul class="courses">
-                            <li data-en="Programming and Data Structure" data-zh="编程与数据结构">Programming and Data Structure</li>
-                            <li data-en="Data Structure and Algorithm" data-zh="数据结构与算法">Data Structure and Algorithm</li>
-                            <li data-en="Introduction of Computer Organization" data-zh="计算机组成原理导论">Introduction of Computer Organization</li>
-                            <li data-en="Foundations of Computer Science" data-zh="计算机科学基础">Foundations of Computer Science</li>
-                            <li data-en="Mobile App Development for Entrepreneurs" data-zh="创业者移动应用开发">Mobile App Development for Entrepreneurs</li>
-                            <li data-en="Database Management Systems" data-zh="数据库管理系统">Database Management Systems</li>
-                            <li data-en="Web Systems" data-zh="Web系统">Web Systems</li>
-                            <li data-en="Introduction to Machine Learning" data-zh="机器学习导论">Introduction to Machine Learning</li>
-                            <li data-en="Human-Centered Software Design and Development" data-zh="以人为本的软件设计与开发">Human-Centered Software Design and Development</li>
-                            <li data-en="Computer Vision" data-zh="计算机视觉">Computer Vision</li>
-                            <li data-en="Data mining" data-zh="数据挖掘">Data mining</li>
-                            <li data-en="Applied Regression Analysis" data-zh="应用回归分析">Applied Regression Analysis</li>
+                        <div class="flex items-center gap-4 mb-4 text-sm text-secondary">
+                            <p class="period flex items-center gap-1">
+                                <i class="far fa-calendar-alt"></i>
+                                2018.8 - 2020.12
+                            </p>
+                            <p class="location flex items-center gap-1" data-en="Ann Arbor, MI, USA" data-zh="安娜堡，密歇根，美国">
+                                <i class="fas fa-map-marker-alt"></i>
+                                Ann Arbor, MI, USA
+                            </p>
+                        </div>
+                        <h4 class="text-sm font-medium mb-2 text-secondary">Relevant Coursework:</h4>
+                        <ul class="courses grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-2 text-sm">
+                            <li class="flex items-start gap-2" data-en="Programming and Data Structure" data-zh="编程与数据结构">
+                                <span class="text-accent mt-1">•</span>
+                                Programming and Data Structure
+                            </li>
+                            <li class="flex items-start gap-2" data-en="Data Structure and Algorithm" data-zh="数据结构与算法">
+                                <span class="text-accent mt-1">•</span>
+                                Data Structure and Algorithm
+                            </li>
+                            <li class="flex items-start gap-2" data-en="Introduction of Computer Organization" data-zh="计算机组成原理导论">
+                                <span class="text-accent mt-1">•</span>
+                                Introduction of Computer Organization
+                            </li>
+                            <li class="flex items-start gap-2" data-en="Foundations of Computer Science" data-zh="计算机科学基础">
+                                <span class="text-accent mt-1">•</span>
+                                Foundations of Computer Science
+                            </li>
+                            <li class="flex items-start gap-2" data-en="Mobile App Development for Entrepreneurs" data-zh="创业者移动应用开发">
+                                <span class="text-accent mt-1">•</span>
+                                Mobile App Development for Entrepreneurs
+                            </li>
+                            <li class="flex items-start gap-2" data-en="Database Management Systems" data-zh="数据库管理系统">
+                                <span class="text-accent mt-1">•</span>
+                                Database Management Systems
+                            </li>
+                            <li class="flex items-start gap-2" data-en="Web Systems" data-zh="Web系统">
+                                <span class="text-accent mt-1">•</span>
+                                Web Systems
+                            </li>
+                            <li class="flex items-start gap-2" data-en="Introduction to Machine Learning" data-zh="机器学习导论">
+                                <span class="text-accent mt-1">•</span>
+                                Introduction to Machine Learning
+                            </li>
+                            <li class="flex items-start gap-2" data-en="Human-Centered Software Design and Development" data-zh="以人为本的软件设计与开发">
+                                <span class="text-accent mt-1">•</span>
+                                Human-Centered Software Design and Development
+                            </li>
+                            <li class="flex items-start gap-2" data-en="Computer Vision" data-zh="计算机视觉">
+                                <span class="text-accent mt-1">•</span>
+                                Computer Vision
+                            </li>
+                            <li class="flex items-start gap-2" data-en="Data mining" data-zh="数据挖掘">
+                                <span class="text-accent mt-1">•</span>
+                                Data mining
+                            </li>
+                            <li class="flex items-start gap-2" data-en="Applied Regression Analysis" data-zh="应用回归分析">
+                                <span class="text-accent mt-1">•</span>
+                                Applied Regression Analysis
+                            </li>
                         </ul>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="experience">
-            <div class="container">
-                <div class="section-header">
-                    <h2 data-en="Experience" data-zh="工作经历">Experience</h2>
-                    <div class="section-line"></div>
+        <section class="experience py-16 md:py-24">
+            <div class="container mx-auto px-4 md:px-6 max-w-6xl">
+                <div class="section-header text-center mb-12">
+                    <h2 class="text-2xl md:text-3xl font-bold mb-3" data-en="Experience" data-zh="工作经历">Experience</h2>
+                    <div class="section-line w-16 h-1 bg-accent mx-auto rounded-full"></div>
                 </div>
                 
-                <div class="experience-content">
-                    <div class="experience-item glass-effect">
-                        <h3>C.O.D.E-Automotive</h3>
-                        <p class="position" data-en="Data Analyst Specialist" data-zh="数据分析师">Data Analyst Specialist</p>
-                        <p class="period">2023.9 - Present</p>
-                        <p class="location">Camarillo, California</p>
-                        <ul class="responsibilities">
-                            <li data-en="Inventory & Logistics Management: Optimized procurement strategies and inventory management through data analysis" 
+                <div class="experience-content max-w-4xl mx-auto grid grid-cols-1 gap-8">
+                    <div class="experience-item p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-xl hover:shadow-accent/5">
+                        <h3 class="text-xl font-medium mb-2">C.O.D.E-Automotive</h3>
+                        <p class="position text-accent font-medium mb-1" data-en="Data Analyst Specialist" data-zh="数据分析师">Data Analyst Specialist</p>
+                        <div class="flex items-center gap-4 mb-4 text-sm text-secondary">
+                            <p class="period flex items-center gap-1">
+                                <i class="far fa-calendar-alt"></i>
+                                2023.9 - Present
+                            </p>
+                            <p class="location flex items-center gap-1">
+                                <i class="fas fa-map-marker-alt"></i>
+                                Camarillo, California
+                            </p>
+                        </div>
+                        <h4 class="text-sm font-medium mb-2 text-secondary">Key Responsibilities:</h4>
+                        <ul class="responsibilities space-y-3">
+                            <li class="flex items-start gap-3 group" data-en="Inventory & Logistics Management: Optimized procurement strategies and inventory management through data analysis" 
                                 data-zh="库存与物流管理：通过数据分析优化采购策略和库存管理">
-                                <i class="fas fa-chart-bar"></i>Inventory & Logistics Management: Optimized procurement strategies and inventory management through data analysis
+                                <span class="flex-shrink-0 w-6 h-6 flex items-center justify-center rounded-full bg-accent/20 text-accent group-hover:bg-accent/30 transition-colors duration-300">
+                                    <i class="fas fa-chart-bar text-xs"></i>
+                                </span>
+                                <span>库存与物流管理：通过数据分析优化采购策略和库存管理</span>
                             </li>
-                            <li data-en="Advertising Optimization: Evaluated and adjusted ad placements on eBay, Walmart, and Amazon to enhance ROI" 
+                            <li class="flex items-start gap-3 group" data-en="Advertising Optimization: Evaluated and adjusted ad placements on eBay, Walmart, and Amazon to enhance ROI" 
                                 data-zh="广告优化：评估eBay、沃尔玛和亚马逊广告投放，提高投资回报率">
-                                <i class="fas fa-ad"></i>Advertising Optimization: Evaluated and adjusted ad placements on eBay, Walmart, and Amazon to enhance ROI
+                                <span class="flex-shrink-0 w-6 h-6 flex items-center justify-center rounded-full bg-accent/20 text-accent group-hover:bg-accent/30 transition-colors duration-300">
+                                    <i class="fas fa-ad text-xs"></i>
+                                </span>
+                                <span>广告优化：评估eBay、沃尔玛和亚马逊广告投放，提高投资回报率</span>
                             </li>
-                            <li data-en="Budget Management: Managed advertising budgets to drive sales while maintaining market competitiveness" 
+                            <li class="flex items-start gap-3 group" data-en="Budget Management: Managed advertising budgets to drive sales while maintaining market competitiveness" 
                                 data-zh="预算管理：调整广告预算，提高销售额并保持市场竞争力">
-                                <i class="fas fa-dollar-sign"></i>Budget Management: Managed advertising budgets to drive sales while maintaining market competitiveness
+                                <span class="flex-shrink-0 w-6 h-6 flex items-center justify-center rounded-full bg-accent/20 text-accent group-hover:bg-accent/30 transition-colors duration-300">
+                                    <i class="fas fa-dollar-sign text-xs"></i>
+                                </span>
+                                <span>预算管理：调整广告预算，提高销售额并保持市场竞争力</span>
                             </li>
                         </ul>
                     </div>
 
-                    <div class="experience-item glass-effect">
-                        <h3>China United Transport</h3>
-                        <p class="position" data-en="Database Management & Data Entry Specialist" data-zh="数据库管理与数据录入专员">Database Management & Data Entry Specialist</p>
-                        <p class="period">2023.3</p>
-                        <p class="location">Walnut, California</p>
-                        <ul class="responsibilities">
-                            <li data-en="Database Management: Established a freight data repository, enhancing retrieval capabilities" 
+                    <div class="experience-item p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-xl hover:shadow-accent/5">
+                        <h3 class="text-xl font-medium mb-2">China United Transport</h3>
+                        <p class="position text-accent font-medium mb-1" data-en="Database Management & Data Entry Specialist" data-zh="数据库管理与数据录入专员">Database Management & Data Entry Specialist</p>
+                        <div class="flex items-center gap-4 mb-4 text-sm text-secondary">
+                            <p class="period flex items-center gap-1">
+                                <i class="far fa-calendar-alt"></i>
+                                2023.3
+                            </p>
+                            <p class="location flex items-center gap-1">
+                                <i class="fas fa-map-marker-alt"></i>
+                                Walnut, California
+                            </p>
+                        </div>
+                        <h4 class="text-sm font-medium mb-2 text-secondary">Key Responsibilities:</h4>
+                        <ul class="responsibilities space-y-3">
+                            <li class="flex items-start gap-3 group" data-en="Database Management: Established a freight data repository, enhancing retrieval capabilities" 
                                 data-zh="数据库管理：建立货运数据库，提升数据检索能力">
-                                <i class="fas fa-database"></i>Database Management: Established a freight data repository, enhancing retrieval capabilities
+                                <span class="flex-shrink-0 w-6 h-6 flex items-center justify-center rounded-full bg-accent/20 text-accent group-hover:bg-accent/30 transition-colors duration-300">
+                                    <i class="fas fa-database text-xs"></i>
+                                </span>
+                                <span>数据库管理：建立货运数据库，提升数据检索能力</span>
                             </li>
-                            <li data-en="Data Maintenance: Ensured accurate and up-to-date shipment records" 
+                            <li class="flex items-start gap-3 group" data-en="Data Maintenance: Ensured accurate and up-to-date shipment records" 
                                 data-zh="数据维护：确保准确和及时的货运记录">
-                                <i class="fas fa-tasks"></i>Data Maintenance: Ensured accurate and up-to-date shipment records
+                                <span class="flex-shrink-0 w-6 h-6 flex items-center justify-center rounded-full bg-accent/20 text-accent group-hover:bg-accent/30 transition-colors duration-300">
+                                    <i class="fas fa-tasks text-xs"></i>
+                                </span>
+                                <span>数据维护：确保准确和及时的货运记录</span>
                             </li>
                         </ul>
                     </div>
 
-                    <div class="experience-item glass-effect">
-                        <h3>DiDi</h3>
-                        <p class="position" data-en="Front-End Intern" data-zh="前端开发实习生">Front-End Intern</p>
-                        <p class="period">2019.6 - 2019.8</p>
-                        <p class="location" data-en="Beijing, China" data-zh="北京，中国">Beijing, China</p>
-                        <ul class="responsibilities">
-                            <li data-en="Developed a Performance Monitoring Platform using React & Node.js" 
+                    <div class="experience-item p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-xl hover:shadow-accent/5">
+                        <h3 class="text-xl font-medium mb-2">DiDi</h3>
+                        <p class="position text-accent font-medium mb-1" data-en="Front-End Intern" data-zh="前端开发实习生">Front-End Intern</p>
+                        <div class="flex items-center gap-4 mb-4 text-sm text-secondary">
+                            <p class="period flex items-center gap-1">
+                                <i class="far fa-calendar-alt"></i>
+                                2019.6 - 2019.8
+                            </p>
+                            <p class="location text-accent font-medium" data-en="Beijing, China" data-zh="北京，中国">Beijing, China</p>
+                        </div>
+                        <h4 class="text-sm font-medium mb-2 text-secondary">Key Responsibilities:</h4>
+                        <ul class="responsibilities space-y-3">
+                            <li class="flex items-start gap-3 group" data-en="Developed a Performance Monitoring Platform using React & Node.js" 
                                 data-zh="使用React和Node.js开发性能监控平台">
-                                <i class="fas fa-laptop-code"></i>Developed a Performance Monitoring Platform using React & Node.js
+                                <span class="flex-shrink-0 w-6 h-6 flex items-center justify-center rounded-full bg-accent/20 text-accent group-hover:bg-accent/30 transition-colors duration-300">
+                                    <i class="fas fa-laptop-code text-xs"></i>
+                                </span>
+                                <span>Developed a Performance Monitoring Platform using React & Node.js</span>
                             </li>
-                            <li data-en="Page Optimization: Improved loading speed by 15% through data-driven analysis" 
+                            <li class="flex items-start gap-3 group" data-en="Page Optimization: Improved loading speed by 15% through data-driven analysis" 
                                 data-zh="页面优化：通过数据驱动分析提升15%加载速度">
-                                <i class="fas fa-tachometer-alt"></i>Page Optimization: Improved loading speed by 15% through data-driven analysis
+                                <span class="flex-shrink-0 w-6 h-6 flex items-center justify-center rounded-full bg-accent/20 text-accent group-hover:bg-accent/30 transition-colors duration-300">
+                                    <i class="fas fa-tachometer-alt text-xs"></i>
+                                </span>
+                                <span>Page Optimization: Improved loading speed by 15% through data-driven analysis</span>
                             </li>
-                            <li data-en="Global Deployment: Assisted in DiDi's internationalization efforts" 
+                            <li class="flex items-start gap-3 group" data-en="Global Deployment: Assisted in DiDi's internationalization efforts" 
                                 data-zh="全球部署：协助滴滴国际化工作">
-                                <i class="fas fa-globe"></i>Global Deployment: Assisted in DiDi's internationalization efforts
+                                <span class="flex-shrink-0 w-6 h-6 flex items-center justify-center rounded-full bg-accent/20 text-accent group-hover:bg-accent/30 transition-colors duration-300">
+                                    <i class="fas fa-globe text-xs"></i>
+                                </span>
+                                <span>Global Deployment: Assisted in DiDi's internationalization efforts</span>
                             </li>
                         </ul>
                     </div>
@@ -294,20 +455,20 @@
         </section>
     </main>
 
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="copyright">
+    <footer class="footer py-8 border-t border-white/5 bg-background/50 backdrop-blur-sm">
+        <div class="container mx-auto px-4 md:px-6 max-w-6xl">
+            <div class="footer-content flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="copyright text-sm text-secondary">
                     <span>© 2024 Juye Xiao</span>
-                    <span class="separator">|</span>
+                    <span class="separator mx-2">|</span>
                     <span>All Rights Reserved</span>
                 </div>
-                <div class="footer-links">
-                    <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer">
+                <div class="footer-links flex items-center gap-4">
+                    <a href="https://github.com/JuyeXiao" target="_blank" rel="noopener noreferrer" class="w-10 h-10 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 transition-colors">
                         <i class="fab fa-github"></i>
                     </a>
-                    <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer">
-                        <i class="fab fa-linkedin"></i>
+                    <a href="https://linkedin.com/in/juye-xiao" target="_blank" rel="noopener noreferrer" class="w-10 h-10 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 transition-colors">
+                        <i class="fab fa-linkedin-in"></i>
                     </a>
                 </div>
             </div>

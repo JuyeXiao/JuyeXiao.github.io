@@ -3,9 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact - Data Analyst & Developer</title>
+    <title>Contact - Juye Xiao | Data Analyst & Developer</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        accent: 'var(--accent)',
+                        primary: 'var(--text-primary)',
+                        secondary: 'var(--text-secondary)',
+                        background: 'var(--bg-primary)',
+                        'background-secondary': 'var(--bg-secondary)'
+                    },
+                    fontFamily: {
+                        mono: ['JetBrains Mono', 'monospace'],
+                        sans: ['Inter', 'sans-serif']
+                    },
+                    backdropBlur: {
+                        xs: '2px',
+                    }
+                }
+            }
+        }
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script defer src="js/main.js"></script>
     <script defer src="js/particles.js"></script>
@@ -17,60 +40,60 @@
         document.documentElement.setAttribute('data-lang', savedLang);
     </script>
 </head>
-<body>
-    <div class="gradient-background"></div>
-    <div class="glow-effect"></div>
-    <main>
-        <nav class="navbar">
-            <div class="container">
-                <div class="logo">
-                    <span class="logo-text">Juye Xiao</span>
-                    <div class="logo-dot"></div>
+<body class="contact-page bg-background text-primary font-sans min-h-screen flex flex-col overflow-x-hidden">
+    <div class="gradient-background fixed inset-0 -z-10"></div>
+    <div class="glow-effect fixed inset-0 -z-10"></div>
+    <main class="flex-grow">
+        <nav class="navbar sticky top-0 z-50 backdrop-blur-md bg-background/30 border-b border-white/5">
+            <div class="container mx-auto px-4 md:px-6 max-w-6xl flex items-center justify-between h-20">
+                <div class="logo flex items-center gap-2">
+                    <span class="logo-text text-xl md:text-2xl font-bold font-mono bg-gradient-to-r from-accent to-white bg-clip-text text-transparent">Juye Xiao</span>
+                    <div class="logo-dot w-2 h-2 rounded-full bg-accent animate-pulse"></div>
                 </div>
-                <button class="mobile-menu-btn" aria-label="Toggle menu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
+                <button class="mobile-menu-btn md:hidden flex flex-col justify-center items-center w-10 h-10 rounded-md bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all" aria-label="Toggle menu">
+                    <span class="w-5 h-0.5 bg-primary mb-1.5 transition-all"></span>
+                    <span class="w-5 h-0.5 bg-primary mb-1.5 transition-all"></span>
+                    <span class="w-5 h-0.5 bg-primary transition-all"></span>
                 </button>
-                <div class="nav-links">
-                    <a href="index.html" class="nav-link">
-                        <span class="nav-text" data-en="Home" data-zh="首页">Home</span>
-                        <span class="nav-dot"></span>
+                <div class="nav-links hidden md:flex items-center gap-6">
+                    <a href="index.html" class="nav-link group relative py-2 px-1">
+                        <span class="nav-text relative z-10 text-sm font-medium transition-colors group-hover:text-accent" data-en="Home" data-zh="首页">Home</span>
+                        <span class="nav-dot absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-accent scale-0 transition-transform group-hover:scale-100"></span>
                     </a>
-                    <a href="about.html" class="nav-link">
-                        <span class="nav-text" data-en="About" data-zh="关于">About</span>
-                        <span class="nav-dot"></span>
+                    <a href="about.html" class="nav-link group relative py-2 px-1">
+                        <span class="nav-text relative z-10 text-sm font-medium transition-colors group-hover:text-accent" data-en="About" data-zh="关于">About</span>
+                        <span class="nav-dot absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-accent scale-0 transition-transform group-hover:scale-100"></span>
                     </a>
-                    <a href="projects.html" class="nav-link">
-                        <span class="nav-text" data-en="Projects" data-zh="项目">Projects</span>
-                        <span class="nav-dot"></span>
+                    <a href="projects.html" class="nav-link group relative py-2 px-1">
+                        <span class="nav-text relative z-10 text-sm font-medium transition-colors group-hover:text-accent" data-en="Projects" data-zh="项目">Projects</span>
+                        <span class="nav-dot absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-accent scale-0 transition-transform group-hover:scale-100"></span>
                     </a>
-                    <a href="resume.html" class="nav-link">
-                        <span class="nav-text" data-en="Resume" data-zh="简历">Resume</span>
-                        <span class="nav-dot"></span>
+                    <a href="resume.html" class="nav-link group relative py-2 px-1">
+                        <span class="nav-text relative z-10 text-sm font-medium transition-colors group-hover:text-accent" data-en="Resume" data-zh="简历">Resume</span>
+                        <span class="nav-dot absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-accent scale-0 transition-transform group-hover:scale-100"></span>
                     </a>
-                    <a href="contact.html" class="nav-link active">
-                        <span class="nav-text" data-en="Contact" data-zh="联系">Contact</span>
-                        <span class="nav-dot"></span>
+                    <a href="contact.html" class="nav-link group relative py-2 px-1 active">
+                        <span class="nav-text relative z-10 text-sm font-medium text-accent" data-en="Contact" data-zh="联系">Contact</span>
+                        <span class="nav-dot absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-accent scale-100"></span>
                     </a>
                 </div>
-                <div class="nav-controls">
-                    <button class="theme-toggle glass-effect" aria-label="Toggle theme">
-                        <i class="fas fa-sun"></i>
+                <div class="nav-controls flex items-center gap-3">
+                    <button class="theme-toggle flex items-center justify-center w-10 h-10 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all" aria-label="Toggle theme">
+                        <i class="fas fa-sun text-primary"></i>
                     </button>
-                    <div class="lang-dropdown">
-                        <button class="lang-toggle glass-effect" aria-label="Select language">
-                            <span class="current-lang">EN</span>
-                            <i class="fas fa-chevron-down"></i>
+                    <div class="lang-dropdown relative">
+                        <button class="lang-toggle flex items-center justify-between w-16 h-10 px-3 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all" aria-label="Select language">
+                            <span class="current-lang text-sm font-medium">EN</span>
+                            <i class="fas fa-chevron-down text-xs"></i>
                         </button>
-                        <ul class="lang-options glass-effect">
-                            <li data-lang="en">
-                                <span class="lang-name">English</span>
-                                <span class="lang-code">EN</span>
+                        <ul class="lang-options absolute right-0 top-full mt-2 w-32 py-2 rounded-xl bg-white/10 backdrop-blur-md border border-white/10 opacity-0 invisible transition-all">
+                            <li data-lang="en" class="px-4 py-2 flex items-center justify-between hover:bg-white/10 cursor-pointer transition-colors">
+                                <span class="lang-name text-sm">English</span>
+                                <span class="lang-code text-xs font-mono">EN</span>
                             </li>
-                            <li data-lang="zh">
-                                <span class="lang-name">中文</span>
-                                <span class="lang-code">中</span>
+                            <li data-lang="zh" class="px-4 py-2 flex items-center justify-between hover:bg-white/10 cursor-pointer transition-colors">
+                                <span class="lang-name text-sm">中文</span>
+                                <span class="lang-code text-xs font-mono">中</span>
                             </li>
                         </ul>
                     </div>
@@ -78,55 +101,76 @@
             </div>
         </nav>
 
-        <section class="contact">
-            <div class="container">
-                <div class="section-header">
-                    <h2 data-en="Get in Touch" data-zh="联系我">Get in Touch</h2>
-                    <div class="section-line"></div>
+        <section class="contact py-16 md:py-24">
+            <div class="container mx-auto px-4 md:px-6 max-w-6xl">
+                <div class="section-header text-center mb-12">
+                    <h2 class="text-2xl md:text-3xl font-bold mb-3 relative inline-block" data-en="Contact" data-zh="联系我">
+                        联系我
+                        <div class="absolute -bottom-2 left-0 right-0 h-1 bg-accent/30 rounded-full blur-sm"></div>
+                    </h2>
+                    <div class="section-line w-16 h-1 bg-accent mx-auto rounded-full mt-4"></div>
+                    <p class="text-secondary mt-4 max-w-2xl mx-auto" data-en="Let's connect! Feel free to reach out for collaborations or just to say hi." 
+                       data-zh="让我们建立联系！欢迎联系我进行合作或只是打个招呼。">
+                        让我们建立联系！欢迎联系我进行合作或只是打个招呼。
+                    </p>
                 </div>
 
-                <div class="contact-content">
-                    <div class="contact-text">
-                        <p class="highlight" data-en="Let's work together on your next data project." 
-                           data-zh="让我们一起合作完成您的下一个数据项目。">
-                            Let's work together on your next data project.
-                        </p>
-                        <p data-en="Feel free to reach out for collaborations or just a friendly hello" 
-                           data-zh="无论是项目合作还是打个招呼，都欢迎联系我">
-                            Feel free to reach out for collaborations or just a friendly hello
-                        </p>
-                    </div>
-
-                    <form class="contact-form glass-effect">
-                        <div class="form-group">
-                            <label for="name" data-en="Name" data-zh="姓名">Name</label>
-                            <input type="text" id="name" name="name" required>
+                <div class="contact-content max-w-4xl mx-auto">
+                    <form action="https://formspree.io/f/your-formspree-id" method="POST" class="contact-form p-6 md:p-8 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 shadow-xl mb-12 hover:bg-white/8 transition-all duration-300">
+                        <input type="hidden" name="_replyto" value="jx2479@columbia.edu">
+                        <input type="hidden" name="_next" value="https://juyexiao.github.io/thank-you.html">
+                        <input type="text" name="_gotcha" style="display:none">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="form-group">
+                                <label for="name" class="block text-sm font-mono mb-2" data-en="Name" data-zh="姓名">Name</label>
+                                <input type="text" id="name" name="name" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-primary focus:border-accent focus:ring-1 focus:ring-accent/30 transition-all duration-300 hover:bg-white/10" required autocomplete="name">
+                            </div>
+                            <div class="form-group">
+                                <label for="email" class="block text-sm font-mono mb-2" data-en="Email" data-zh="邮箱">Email</label>
+                                <input type="email" id="email" name="email" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-primary focus:border-accent focus:ring-1 focus:ring-accent/30 transition-all duration-300 hover:bg-white/10" required autocomplete="email">
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="email" data-en="Email" data-zh="邮箱">Email</label>
-                            <input type="email" id="email" name="email" required>
+                        <div class="form-group mt-6">
+                            <label for="subject" class="block text-sm font-mono mb-2" data-en="Subject" data-zh="主题">Subject</label>
+                            <input type="text" id="subject" name="subject" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-primary focus:border-accent focus:ring-1 focus:ring-accent/30 transition-all duration-300 hover:bg-white/10" required>
                         </div>
-                        <div class="form-group">
-                            <label for="message" data-en="Message" data-zh="消息">Message</label>
-                            <textarea id="message" name="message" rows="5" required></textarea>
+                        <div class="form-group mt-6">
+                            <label for="message" class="block text-sm font-mono mb-2" data-en="Message" data-zh="消息">Message</label>
+                            <textarea id="message" name="message" rows="5" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-primary focus:border-accent focus:ring-1 focus:ring-accent/30 transition-all duration-300 hover:bg-white/10 resize-none" required></textarea>
                         </div>
-                        <button type="submit" class="btn primary" data-en="Send Message" data-zh="发送消息">
-                            Send Message
+                        <button type="submit" class="btn primary w-full mt-8 py-3 px-6 rounded-lg bg-accent/10 backdrop-filter backdrop-blur-sm border border-accent/30 text-accent font-medium hover:bg-accent/20 transition-all duration-300 shadow-lg shadow-accent/10 flex items-center justify-center gap-2 group">
+                            <span data-en="Send Message" data-zh="发送消息">发送消息</span>
+                            <i class="fas fa-paper-plane text-sm transition-transform group-hover:translate-x-1"></i>
                         </button>
                     </form>
 
-                    <div class="contact-links">
-                        <a href="mailto:your.email@example.com" class="contact-link glass-effect">
-                            <i class="fas fa-envelope"></i>
-                            <span>your.email@example.com</span>
+                    <div class="contact-links grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <a href="mailto:jx2479@columbia.edu" class="contact-link flex items-center gap-3 p-4 rounded-xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-1 group">
+                            <div class="icon-wrapper flex items-center justify-center w-10 h-10 rounded-full bg-accent/10 text-accent group-hover:bg-accent/20 transition-all">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="flex-1 overflow-hidden">
+                                <span class="block text-sm font-medium mb-1">Email</span>
+                                <span class="block text-xs text-secondary truncate">jx2479@columbia.edu</span>
+                            </div>
                         </a>
-                        <a href="https://github.com/yourusername" target="_blank" class="contact-link glass-effect">
-                            <i class="fab fa-github"></i>
-                            <span>GitHub</span>
+                        <a href="https://github.com/JuyeXiao" target="_blank" class="contact-link flex items-center gap-3 p-4 rounded-xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-1 group">
+                            <div class="icon-wrapper flex items-center justify-center w-10 h-10 rounded-full bg-accent/10 text-accent group-hover:bg-accent/20 transition-all">
+                                <i class="fab fa-github"></i>
+                            </div>
+                            <div class="flex-1">
+                                <span class="block text-sm font-medium mb-1">GitHub</span>
+                                <span class="block text-xs text-secondary">github.com/JuyeXiao</span>
+                            </div>
                         </a>
-                        <a href="https://linkedin.com/in/yourusername" target="_blank" class="contact-link glass-effect">
-                            <i class="fab fa-linkedin"></i>
-                            <span>LinkedIn</span>
+                        <a href="https://linkedin.com/in/juye-xiao" target="_blank" class="contact-link flex items-center gap-3 p-4 rounded-xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-1 group">
+                            <div class="icon-wrapper flex items-center justify-center w-10 h-10 rounded-full bg-accent/10 text-accent group-hover:bg-accent/20 transition-all">
+                                <i class="fab fa-linkedin-in"></i>
+                            </div>
+                            <div class="flex-1">
+                                <span class="block text-sm font-medium mb-1">LinkedIn</span>
+                                <span class="block text-xs text-secondary">linkedin.com/in/juye-xiao</span>
+                            </div>
                         </a>
                     </div>
                 </div>
@@ -134,24 +178,63 @@
         </section>
     </main>
 
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="copyright">
+    <footer class="footer py-8 border-t border-white/5 bg-background/50 backdrop-blur-sm">
+        <div class="container mx-auto px-4 md:px-6 max-w-6xl">
+            <div class="footer-content flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="copyright text-sm text-secondary">
                     <span>© 2024 Juye Xiao</span>
-                    <span class="separator">|</span>
+                    <span class="separator mx-2">|</span>
                     <span>All Rights Reserved</span>
                 </div>
-                <div class="footer-links">
-                    <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer">
+                <div class="footer-links flex items-center gap-4">
+                    <a href="https://github.com/JuyeXiao" target="_blank" rel="noopener noreferrer" class="w-10 h-10 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 transition-colors">
                         <i class="fab fa-github"></i>
                     </a>
-                    <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer">
-                        <i class="fab fa-linkedin"></i>
+                    <a href="https://linkedin.com/in/juye-xiao" target="_blank" rel="noopener noreferrer" class="w-10 h-10 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 transition-colors">
+                        <i class="fab fa-linkedin-in"></i>
                     </a>
                 </div>
             </div>
         </div>
     </footer>
+
+    <script>
+    document.querySelector('.contact-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const submitBtn = this.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = `
+            <span class="inline-flex items-center gap-2">
+                <svg class="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                <span data-en="Sending..." data-zh="发送中...">发送中...</span>
+            </span>
+        `;
+
+        fetch(this.action, {
+            method: 'POST',
+            body: new FormData(this),
+            headers: {
+                'Accept': 'application/json'
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                window.location.href = this.querySelector('input[name="_next"]').value;
+            } else {
+                throw new Error('Network response was not ok');
+            }
+        })
+        .catch(error => {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalText;
+            alert('发送失败，请稍后重试 / Failed to send, please try again later');
+        });
+    });
+    </script>
 </body>
-</html> 
+</html>
