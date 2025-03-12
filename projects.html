@@ -404,25 +404,27 @@
                         </div>
                     </div>
 
-                    <!-- Amazon Prime Video Viewing Time Prediction -->
-                    <div class="project-card group p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 transition-all">
+                    <!-- Amazon Prime Video Data Analysis -->
+                    <div class="project-card group p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-xl hover:shadow-accent/5">
                         <div class="project-header mb-4">
-                            <h3 class="flex items-center gap-2 text-lg font-medium mb-2" data-en="Amazon Prime Video Viewing Time Prediction" data-zh="亚马逊Prime视频观看时长预测">
-                                <span class="project-emoji inline-block">📺</span>
-                                Amazon Prime Video Viewing Time Prediction
+                            <h3 class="flex items-center gap-2 text-lg font-medium mb-2" data-en="Amazon Prime Video Data Analysis" data-zh="亚马逊Prime视频数据分析">
+                                <span class="project-emoji inline-block group-hover:rotate-12 transition-transform duration-300">📺</span>
+                                亚马逊Prime视频数据分析
                             </h3>
                         </div>
                         <div class="project-content">
-                            <p class="project-summary text-secondary mb-4" data-en="Analyzed 4,226 films with 16-dimensional features, developed random forest regression model achieving 22% error reduction, and provided data-driven insights for content strategy optimization." 
-                               data-zh="分析了4,226部电影的16维特征，开发随机森林回归模型实现22%误差降低，为内容策略优化提供数据驱动的见解。">
-                                分析了4,226部电影的16维特征，开发随机森林回归模型实现22%误差降低，为内容策略优化提供数据驱动的见解。
+                            <p class="project-summary text-secondary mb-4" data-en="Built predictive models for daily viewing time using data from 4,226 films, identifying key factors influencing viewership to optimize content recommendations and homepage layout." 
+                               data-zh="使用4,226部电影的数据构建每日观看时间预测模型，识别影响观看量的关键因素，优化内容推荐和主页布局。">
+                               使用4,226部电影的数据构建每日观看时间预测模型，识别影响观看量的关键因素，优化内容推荐和主页布局。
                             </p>
                             <div class="tech-stack flex flex-wrap gap-2">
                                 <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Python</span>
+                                <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Pandas</span>
                                 <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Random Forest</span>
-                                <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Feature Engineering</span>
-                                <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">EDA</span>
-                                <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Data Analysis</span>
+                                <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Lasso/Ridge</span>
+                                <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">GridSearchCV</span>
+                                <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">特征工程</span>
+                                <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">数据可视化</span>
                             </div>
                             <div class="mt-4">
                                 <button class="view-details text-accent text-sm flex items-center gap-1 hover:underline open-modal" data-modal="prime-video-modal" data-en="View Details" data-zh="查看详情">
@@ -1835,14 +1837,14 @@
         </div>
     </div>
 
-    <!-- Amazon Prime Video Viewing Time Prediction -->
+    <!-- Amazon Prime Video Data Analysis -->
     <div id="prime-video-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
         <div class="modal-backdrop fixed inset-0 bg-black/70 backdrop-blur-sm"></div>
         <div class="modal-content bg-background/90 backdrop-blur-md border border-white/10 rounded-2xl w-full max-w-4xl max-h-[90vh] shadow-2xl transform scale-95 transition-all duration-300 flex flex-col overflow-hidden">
             <div class="modal-header p-6 border-b border-white/10 flex justify-between items-center bg-background/95 backdrop-blur-lg z-10 shadow-md">
                 <h3 class="text-xl md:text-2xl font-bold flex items-center gap-3">
                     <span class="text-2xl">📺</span>
-                    <span data-en="Amazon Prime Video Viewing Time Prediction" data-zh="亚马逊Prime视频观看时长预测">亚马逊Prime视频观看时长预测</span>
+                    <span data-en="Amazon Prime Video Data Analysis" data-zh="亚马逊Prime视频数据分析">亚马逊Prime视频数据分析</span>
                 </h3>
                 <button class="modal-close w-8 h-8 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 transition-colors">
                     <i class="fas fa-times"></i>
@@ -1851,161 +1853,86 @@
             <div class="modal-body p-6 pt-8 overflow-y-auto">
                 <div class="project-description space-y-6">
                     <h4 class="text-lg font-medium text-accent" data-en="Project Overview" data-zh="项目概述">项目概述</h4>
-                    <p class="text-secondary" data-en="Analyzed 4,226 films with 16-dimensional features, developed random forest regression model achieving 22% error reduction, and provided data-driven insights for content strategy optimization." 
-                       data-zh="分析了4,226部电影的16维特征，开发随机森林回归模型实现22%误差降低，为内容策略优化提供数据驱动的见解。">
-                        分析了4,226部电影的16维特征，开发随机森林回归模型实现22%误差降低，为内容策略优化提供数据驱动的见解。
+                    <p class="text-secondary" data-en="Built predictive models for daily viewing time using data from 4,226 films, identifying key factors influencing viewership to optimize content recommendations and homepage layout." 
+                       data-zh="使用4,226部电影的数据构建每日观看时间预测模型，识别影响观看量的关键因素，优化内容推荐和主页布局。">
+                       使用4,226部电影的数据构建每日观看时间预测模型，识别影响观看量的关键因素，优化内容推荐和主页布局。
                     </p>
                     
                     <h4 class="text-lg font-medium text-accent" data-en="Methodology" data-zh="方法论">方法论</h4>
                     <p class="text-secondary font-medium" data-en="Data Preparation:" data-zh="数据准备:">数据准备:</p>
                     <ul class="list-disc list-inside space-y-2 text-secondary">
-                        <li data-en="Dataset: 4,226 films with 16-dimensional features" 
-                            data-zh="数据集: 4,226部电影的16维特征">数据集: 4,226部电影的16维特征</li>
-                        <li data-en="Feature Engineering: Created new metrics including activity ratio and transaction frequency" 
-                            data-zh="特征工程：创建了新的指标，包括活动比率和交易频率">特征工程：创建了新的指标，包括活动比率和交易频率</li>
+                        <li data-en="Dataset: 4,226 films from Amazon Prime Video" 
+                            data-zh="数据集: 来自亚马逊Prime视频的4,226部电影">数据集: 来自亚马逊Prime视频的4,226部电影</li>
+                        <li data-en="Feature Engineering: Created new metrics including average viewing time, genre distribution, and user demographics" 
+                            data-zh="特征工程：创建了新的指标，包括平均观看时间、类型分布和用户人口统计数据">特征工程：创建了新的指标，包括平均观看时间、类型分布和用户人口统计数据</li>
                     </ul>
                     
                     <h4 class="text-lg font-medium text-accent" data-en="Key Findings" data-zh="主要发现">主要发现</h4>
-                    <p class="text-secondary font-medium" data-en="Random Forest Regression Model:" data-zh="随机森林回归模型:">随机森林回归模型:</p>
-                    <div class="overflow-x-auto">
-                        <table class="min-w-full bg-white/5 rounded-lg">
-                            <thead>
-                                <tr>
-                                    <th class="px-4 py-2 border-b border-white/10 text-left text-xs font-medium text-secondary" data-en="Feature" data-zh="特征">特征</th>
-                                    <th class="px-4 py-2 border-b border-white/10 text-left text-xs font-medium text-secondary" data-en="Importance" data-zh="重要性">重要性</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">Average Rating</td>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">22.4%</td>
-                                </tr>
-                                <tr>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">Number of Reviews</td>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">19.8%</td>
-                                </tr>
-                                <tr>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">Number of Genres</td>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">18.6%</td>
-                                </tr>
-                                <tr>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">Number of Directors</td>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">17.2%</td>
-                                </tr>
-                                <tr>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">Number of Cast Members</td>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">16.0%</td>
-                                </tr>
-                                <tr>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">Number of Genre-Director Pairs</td>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">14.8%</td>
-                                </tr>
-                                <tr>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">Number of Genre-Cast Pairs</td>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">13.6%</td>
-                                </tr>
-                                <tr>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">Number of Director-Cast Pairs</td>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">12.4%</td>
-                                </tr>
-                                <tr>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">Number of Genre-Genre Pairs</td>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">11.2%</td>
-                                </tr>
-                                <tr>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">Number of Director-Genre Pairs</td>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">10.0%</td>
-                                </tr>
-                                <tr>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">Number of Cast Member-Genre Pairs</td>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">8.8%</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                    <p class="text-secondary font-medium" data-en="Model Insights:" data-zh="模型洞察:">模型洞察:</p>
+                    <ul class="list-disc list-inside space-y-2 text-secondary">
+                        <li data-en="Average viewing time varies significantly by genre" data-zh="平均观看时间因类型而显著不同">平均观看时间因类型而显著不同</li>
+                        <li data-en="User demographics play a significant role in content preferences" data-zh="用户人口统计数据在内容偏好中起着重要作用">用户人口统计数据在内容偏好中起着重要作用</li>
+                    </ul>
                     
                     <h4 class="text-lg font-medium text-accent" data-en="Business Insights" data-zh="业务洞察">业务洞察</h4>
                     <ol class="list-decimal list-inside space-y-2 text-secondary">
-                        <li data-en="Design Focus: 22.4% of features are positively correlated with viewing time, suggesting that high-rated movies are more likely to be watched longer" 
-                            data-zh="设计重点: 22.4%的特征与观看时长正相关，表明高评分电影更有可能被观看更长时间">设计重点: 22.4%的特征与观看时长正相关，表明高评分电影更有可能被观看更长时间</li>
-                        <li data-en="Marketing Opportunities: 19.8% of features are positively correlated with viewing time, indicating that movies with more reviews are more likely to be watched longer" 
-                            data-zh="营销机会: 19.8%的特征与观看时长正相关，表明评论数量多的电影更有可能被观看更长时间">营销机会: 19.8%的特征与观看时长正相关，表明评论数量多的电影更有可能被观看更长时间</li>
-                        <li data-en="Quality Assurance: 18.6% of features are positively correlated with viewing time, suggesting that movies with more genres are more likely to be watched longer" 
-                            data-zh="质量保证: 18.6%的特征与观看时长正相关，表明电影类型越多越有可能被观看更长时间">质量保证: 18.6%的特征与观看时长正相关，表明电影类型越多越有可能被观看更长时间</li>
-                        <li data-en="Diversification: 17.2% of features are positively correlated with viewing time, indicating that movies with more cast members are more likely to be watched longer" 
-                            data-zh="多样化: 17.2%的特征与观看时长正相关，表明电影演员越多越有可能被观看更长时间">多样化: 17.2%的特征与观看时长正相关，表明电影演员越多越有可能被观看更长时间</li>
-                        <li data-en="Collaboration: 16.0% of features are positively correlated with viewing time, suggesting that movies with more genre-director pairs are more likely to be watched longer" 
-                            data-zh="合作: 16.0%的特征与观看时长正相关，表明电影类型和导演越多越有可能被观看更长时间">合作: 16.0%的特征与观看时长正相关，表明电影类型和导演越多越有可能被观看更长时间</li>
-                        <li data-en="Innovation: 14.8% of features are positively correlated with viewing time, indicating that movies with more genre-cast pairs are more likely to be watched longer" 
-                            data-zh="创新: 14.8%的特征与观看时长正相关，表明电影类型和演员越多越有可能被观看更长时间">创新: 14.8%的特征与观看时长正相关，表明电影类型和演员越多越有可能被观看更长时间</li>
-                        <li data-en="Consistency: 13.6% of features are positively correlated with viewing time, suggesting that movies with more genre-director-cast triads are more likely to be watched longer" 
-                            data-zh="一致性: 13.6%的特征与观看时长正相关，表明电影类型、导演和演员越多越有可能被观看更长时间">一致性: 13.6%的特征与观看时长正相关，表明电影类型、导演和演员越多越有可能被观看更长时间</li>
-                        <li data-en="Complexity: 12.4% of features are positively correlated with viewing time, indicating that movies with more genre-genre pairs are more likely to be watched longer" 
-                            data-zh="复杂性: 12.4%的特征与观看时长正相关，表明电影类型越多越有可能被观看更长时间">复杂性: 12.4%的特征与观看时长正相关，表明电影类型越多越有可能被观看更长时间</li>
-                        <li data-en="Risk Management: 11.2% of features are negatively correlated with viewing time, suggesting that movies with more genre-director pairs are less likely to be watched longer" 
-                            data-zh="风险管理: 11.2%的特征与观看时长负相关，表明电影类型和导演越多越有可能被观看更短时间">风险管理: 11.2%的特征与观看时长负相关，表明电影类型和导演越多越有可能被观看更短时间</li>
-                        <li data-en="Risk Diversification: 10.0% of features are negatively correlated with viewing time, indicating that movies with more genre-cast pairs are less likely to be watched longer" 
-                            data-zh="风险多样化: 10.0%的特征与观看时长负相关，表明电影类型和演员越多越有可能被观看更短时间">风险多样化: 10.0%的特征与观看时长负相关，表明电影类型和演员越多越有可能被观看更短时间</li>
-                        <li data-en="Risk Concentration: 8.8% of features are negatively correlated with viewing time, suggesting that movies with more director-cast pairs are less likely to be watched longer" 
-                            data-zh="风险集中: 8.8%的特征与观看时长负相关，表明电影导演和演员越多越有可能被观看更短时间">风险集中: 8.8%的特征与观看时长负相关，表明电影导演和演员越多越有可能被观看更短时间</li>
-                        <li data-en="Risk Innovation: 8.8% of features are negatively correlated with viewing time, indicating that movies with more director-genre pairs are less likely to be watched longer" 
-                            data-zh="风险创新: 8.8%的特征与观看时长负相关，表明电影导演和类型越多越有可能被观看更短时间">风险创新: 8.8%的特征与观看时长负相关，表明电影导演和类型越多越有可能被观看更短时间</li>
-                        <li data-en="Risk Complexity: 8.8% of features are negatively correlated with viewing time, suggesting that movies with more director-genre-cast triads are less likely to be watched longer" 
-                            data-zh="风险复杂性: 8.8%的特征与观看时长负相关，表明电影导演、类型和演员越多越有可能被观看更短时间">风险复杂性: 8.8%的特征与观看时长负相关，表明电影导演、类型和演员越多越有可能被观看更短时间</li>
+                        <li data-en="Targeting specific genres can increase engagement" data-zh="针对特定类型可以提高参与度">针对特定类型可以提高参与度</li>
+                        <li data-en="Tailoring content based on user demographics can improve retention" data-zh="根据用户人口统计数据调整内容可以提高留存率">根据用户人口统计数据调整内容可以提高留存率</li>
                     </ol>
                     
                     <h4 class="text-lg font-medium text-accent" data-en="Technical Observations" data-zh="技术观察">技术观察</h4>
                     <ol class="list-decimal list-inside space-y-2 text-secondary">
-                        <li data-en="Data Challenges: Normalization reduced 'comfortable' → 'comfort', preserving semantic meaning; TF-IDF effectively highlighted distinctive terms (e.g., 'band' in Cluster 4)" 
-                            data-zh="数据挑战: 归一化将'comfortable'简化为'comfort'，保留语义意义；TF-IDF有效突出显示了独特术语（例如，簇4中的'band'）">数据挑战: 归一化将'comfortable'简化为'comfort'，保留语义意义；TF-IDF有效突出显示了独特术语（例如，簇4中的'band'）</li>
-                        <li data-en="Model Performance: Random Forest showed clear feature importance for design-focused features; LDA revealed latent themes missed by clustering (e.g., gifting)" 
-                            data-zh="模型性能: 随机森林对设计重点特征显示出清晰的特征重要性；LDA揭示了聚类遗漏的潜在主题（例如，送礼）">模型性能: 随机森林对设计重点特征显示出清晰的特征重要性；LDA揭示了聚类遗漏的潜在主题（例如，送礼）</li>
+                        <li data-en="Data Challenges: Handling missing values and outliers" data-zh="数据挑战: 处理缺失值和异常值">数据挑战: 处理缺失值和异常值</li>
+                        <li data-en="Model Performance: Random Forest showed high accuracy and stability" data-zh="模型性能: Random Forest模型表现出高准确性和稳定性">模型性能: Random Forest模型表现出高准确性和稳定性</li>
                     </ol>
                     
                     <h4 class="text-lg font-medium text-accent" data-en="Recommendations" data-zh="建议">建议</h4>
                     <p class="text-secondary font-medium" data-en="Product Teams:" data-zh="产品团队:">产品团队:</p>
                     <ul class="list-disc list-inside space-y-2 text-secondary">
-                        <li data-en="Prioritize features that are positively correlated with viewing time" 
-                            data-zh="在下一代模型中优先考虑与观看时长正相关的特征">在下一代模型中优先考虑与观看时长正相关的特征</li>
-                        <li data-en="Introduce new features that are positively correlated with viewing time" 
-                            data-zh="引入新的特征，这些特征与观看时长正相关">引入新的特征，这些特征与观看时长正相关</li>
+                        <li data-en="Prioritize content personalization" 
+                            data-zh="在下一代模型中优先考虑内容个性化">在下一代模型中优先考虑内容个性化</li>
+                        <li data-en="Introduce dynamic content recommendations" 
+                            data-zh="引入动态内容推荐">引入动态内容推荐</li>
                     </ul>
                     
                     <p class="text-secondary font-medium" data-en="Marketing Teams:" data-zh="营销团队:">营销团队:</p>
                     <ul class="list-disc list-inside space-y-2 text-secondary">
-                        <li data-en="Create 'Perfect Watch' campaign leveraging positive features" 
-                            data-zh="利用正面特征创建"完美观看"活动">利用正面特征创建"完美观看"活动</li>
-                        <li data-en="Highlight features in visual marketing" 
-                            data-zh="在视觉营销中突出特征">在视觉营销中突出特征</li>
+                        <li data-en="Create 'Prime Video Insights' campaign leveraging genre-specific insights" 
+                            data-zh="利用类型特定见解创建"Prime Video Insights"活动">利用类型特定见解创建"Prime Video Insights"活动</li>
+                        <li data-en="Highlight personalized content in visual marketing" 
+                            data-zh="在视觉营销中突出个性化内容">在视觉营销中突出个性化内容</li>
                     </ul>
                     
                     <p class="text-secondary font-medium" data-en="Customer Service:" data-zh="客户服务:">客户服务:</p>
                     <ul class="list-disc list-inside space-y-2 text-secondary">
                         <li data-en="Develop FAQ addressing common viewing concerns" 
                             data-zh="开发解决常见观看问题的FAQ">开发解决常见观看问题的FAQ</li>
-                        <li data-en="Train reps on handling negative comments" 
-                            data-zh="培训代表处理负面评论">培训代表处理负面评论</li>
+                        <li data-en="Train reps on handling user feedback" 
+                            data-zh="培训代表处理用户反馈">培训代表处理用户反馈</li>
                     </ul>
                     
                     <h4 class="text-lg font-medium text-accent" data-en="Conclusion" data-zh="结论">结论</h4>
-                    <p class="text-secondary" data-en="This analysis demonstrates that unsupervised learning can effectively surface consumer priorities from unstructured data. The combination of feature importance analysis and topic modeling provides complementary perspectives, offering both broad category insights and nuanced thematic understanding. Future work could enhance results by incorporating sentiment analysis and expanding to larger datasets." 
-                       data-zh="这项分析表明，无监督学习可以有效地从非结构化数据中发现消费者优先事项。特征重要性分析和主题建模的组合提供了互补的视角，既提供了广泛的类别洞察，又提供了细微的主题理解。未来的工作可以通过整合情感分析并扩展到更大的数据集来增强结果。">
-                       这项分析表明，无监督学习可以有效地从非结构化数据中发现消费者优先事项。特征重要性分析和主题建模的组合提供了互补的视角，既提供了广泛的类别洞察，又提供了细微的主题理解。未来的工作可以通过整合情感分析并扩展到更大的数据集来增强结果。
+                    <p class="text-secondary" data-en="This analysis demonstrates that data-driven insights can effectively guide content recommendations and homepage layout optimization. The combination of predictive modeling and feature engineering provides a robust framework for understanding viewer behavior and optimizing content strategy." 
+                       data-zh="这项分析表明，数据驱动的见解可以有效地指导内容推荐和主页布局优化。通过预测建模和特征工程，我们提供了一个强大的框架来理解观众行为并优化内容策略。">
+                       这项分析表明，数据驱动的见解可以有效地指导内容推荐和主页布局优化。通过预测建模和特征工程，我们提供了一个强大的框架来理解观众行为并优化内容策略。
                     </p>
                     
                     <h4 class="text-lg font-medium text-accent" data-en="Technologies Used" data-zh="使用的技术">使用的技术</h4>
                     <div class="tech-stack flex flex-wrap gap-2 mt-2">
                         <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Python</span>
+                        <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Pandas</span>
                         <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Random Forest</span>
-                        <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Feature Engineering</span>
-                        <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">EDA</span>
-                        <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Data Analysis</span>
+                        <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Lasso/Ridge</span>
+                        <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">GridSearchCV</span>
+                        <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">特征工程</span>
+                        <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">数据可视化</span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+    
     <!-- 在 </body> 标签前添加模态框的 JavaScript -->
     <script>
         // 模态框功能

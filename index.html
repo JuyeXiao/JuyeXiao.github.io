@@ -193,15 +193,14 @@
                             </div>
                         </div>
 
-                        <div class="stats-row flex justify-center items-center p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/8 transition-all duration-300">
-                            <div class="stat-item text-center">
-                                <span class="stat-number block text-3xl md:text-4xl font-bold text-accent mb-1">4+</span>
-                                <span class="stat-label text-sm text-secondary" data-en="Years Experience" data-zh="年工作经验">Years Experience</span>
+                        <div class="stats-content grid grid-cols-2 gap-6 md:gap-12">
+                            <div class="stat-item text-center p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2">
+                                <div class="stat-value text-4xl md:text-5xl font-bold text-accent mb-2">4+</div>
+                                <div class="stat-label text-sm md:text-base text-secondary" data-en="Years Experience" data-zh="年工作经验">Years Experience</div>
                             </div>
-                            <div class="stat-divider h-12 w-px bg-white/10 mx-8"></div>
-                            <div class="stat-item text-center">
-                                <span class="stat-number block text-3xl md:text-4xl font-bold text-accent mb-1">20+</span>
-                                <span class="stat-label text-sm text-secondary" data-en="Projects Completed" data-zh="完成项目">Projects Completed</span>
+                            <div class="stat-item text-center p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2">
+                                <div class="stat-value text-4xl md:text-5xl font-bold text-accent mb-2">10+</div>
+                                <div class="stat-label text-sm md:text-base text-secondary" data-en="Major Projects" data-zh="主要项目">Major Projects</div>
                             </div>
                         </div>
                     </div>
@@ -239,28 +238,40 @@
                                 <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Scikit-learn</span>
                                 <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">NASA API</span>
                             </div>
+                            <div class="mt-4">
+                                <button class="view-details text-accent text-sm flex items-center gap-1 hover:underline open-modal" data-modal="climate-modal" data-en="View Details" data-zh="查看详情">
+                                    <span>View Details</span>
+                                    <i class="fas fa-arrow-right text-xs"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Professional Photo Editing App -->
+                    <!-- Spark Movie Recommendation System -->
                     <div class="project-card group p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2">
                         <div class="project-header mb-4">
-                            <h3 class="flex items-center gap-2 text-lg font-medium mb-2" data-en="Professional Photo Editing App (PicassoXS)" data-zh="专业照片编辑应用（PicassoXS）">
-                                <span class="project-emoji inline-block">🎨</span>
-                                Professional Photo Editing App (PicassoXS)
+                            <h3 class="flex items-center gap-2 text-lg font-medium mb-2" data-en="Spark Movie Recommendation System" data-zh="Spark电影推荐系统">
+                                <span class="project-emoji inline-block">🎬</span>
+                                Spark Movie Recommendation System
                             </h3>
                         </div>
                         <div class="project-content">
-                            <p class="project-summary text-secondary mb-4" data-en="Developed a professional photo editing application with advanced features and intuitive user interface, focusing on performance and user experience." 
-                               data-zh="开发了一款具有高级功能和直观界面的专业照片编辑应用，注重性能和用户体验。">
-                               Developed a professional photo editing application with advanced features and intuitive user interface, focusing on performance and user experience.
+                            <p class="project-summary text-secondary mb-4" data-en="Implemented ALS-based distributed recommendations on 100,836 ratings, achieved 2.9% RMSE improvement through grid search and 89% top-10 recommendation accuracy." 
+                               data-zh="在100,836个评分上实现基于ALS的分布式推荐，通过网格搜索实现2.9%的RMSE改进，前10名推荐准确率达89%。">
+                                Implemented ALS-based distributed recommendations on 100,836 ratings, achieved 2.9% RMSE improvement through grid search and 89% top-10 recommendation accuracy.
                             </p>
                             <div class="tech-stack flex flex-wrap gap-2">
-                                <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Swift</span>
-                                <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">UI/UX Design</span>
-                                <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">PyTorch</span>
-                                <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">MVP</span>
-                                <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Unit Tests</span>
+                                <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">PySpark</span>
+                                <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">MLlib</span>
+                                <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Spark SQL</span>
+                                <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">ALS</span>
+                                <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Collaborative Filtering</span>
+                            </div>
+                            <div class="mt-4">
+                                <button class="view-details text-accent text-sm flex items-center gap-1 hover:underline open-modal" data-modal="spark-movie-modal" data-en="View Details" data-zh="查看详情">
+                                    <span>View Details</span>
+                                    <i class="fas fa-arrow-right text-xs"></i>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -295,5 +306,365 @@
             </div>
         </div>
     </footer>
+
+    <!-- Climate Change Modal -->
+    <div id="climate-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="modal-backdrop fixed inset-0 bg-black/70 backdrop-blur-sm"></div>
+        <div class="modal-content bg-background/90 backdrop-blur-md border border-white/10 rounded-2xl w-full max-w-4xl max-h-[90vh] shadow-2xl transform scale-95 transition-all duration-300 flex flex-col overflow-hidden">
+            <div class="modal-header p-6 border-b border-white/10 flex justify-between items-center bg-background/95 backdrop-blur-lg z-10 shadow-md">
+                <h3 class="text-xl md:text-2xl font-bold flex items-center gap-3">
+                    <span class="text-2xl">🌎</span>
+                    <span data-en="Climate Change Monitoring & Prediction" data-zh="气候变化监测与预测">Climate Change Monitoring & Prediction</span>
+                </h3>
+                <button class="modal-close w-8 h-8 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 transition-colors">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body p-6 pt-8 overflow-y-auto">
+                <div class="project-description space-y-6">
+                    <h4 class="text-lg font-medium text-accent" data-en="Project Background & Objectives" data-zh="项目背景与目标">Project Background & Objectives</h4>
+                    <p class="text-secondary" data-en="This project aims to develop a comprehensive climate change analysis system using NASA datasets with the following core objectives:" 
+                       data-zh="该项目旨在使用NASA数据集开发全面的气候变化分析系统，主要目标包括：">
+                        This project aims to develop a comprehensive climate change analysis system using NASA datasets with the following core objectives:
+                    </p>
+                    <ul class="list-disc list-inside space-y-2 text-secondary">
+                        <li data-en="Monitor global temperature trends over time" data-zh="监测全球温度趋势随时间的变化">Monitor global temperature trends over time</li>
+                        <li data-en="Predict future climate patterns using time-series analysis" data-zh="使用时间序列分析预测未来气候模式">Predict future climate patterns using time-series analysis</li>
+                        <li data-en="Identify key factors contributing to climate change" data-zh="识别导致气候变化的关键因素">Identify key factors contributing to climate change</li>
+                        <li data-en="Visualize climate data for better understanding and communication" data-zh="可视化气候数据以便更好地理解和交流">Visualize climate data for better understanding and communication</li>
+                    </ul>
+
+                    <h4 class="text-lg font-medium text-accent" data-en="Data Analysis" data-zh="数据分析">Data Analysis</h4>
+                    <div class="space-y-4">
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full bg-white/5 rounded-lg">
+                                <thead>
+                                    <tr>
+                                        <th class="px-4 py-2 border-b border-white/10 text-left text-xs font-medium text-secondary">Data Source</th>
+                                        <th class="px-4 py-2 border-b border-white/10 text-left text-xs font-medium text-secondary">Description</th>
+                                        <th class="px-4 py-2 border-b border-white/10 text-left text-xs font-medium text-secondary">Time Range</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">NASA GISTEMP</td>
+                                        <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">Global surface temperature anomalies</td>
+                                        <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">1880-2023</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">NOAA</td>
+                                        <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">Atmospheric CO2 concentrations</td>
+                                        <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">1958-2023</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">NASA Satellite</td>
+                                        <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">Sea level measurements</td>
+                                        <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">1993-2023</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <h4 class="text-lg font-medium text-accent" data-en="Model Performance" data-zh="模型表现">Model Performance</h4>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full bg-white/5 rounded-lg">
+                            <thead>
+                                <tr>
+                                    <th class="px-4 py-2 border-b border-white/10 text-left text-xs font-medium text-secondary">Model</th>
+                                    <th class="px-4 py-2 border-b border-white/10 text-left text-xs font-medium text-secondary">RMSE</th>
+                                    <th class="px-4 py-2 border-b border-white/10 text-left text-xs font-medium text-secondary">MAE</th>
+                                    <th class="px-4 py-2 border-b border-white/10 text-left text-xs font-medium text-secondary">R²</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">ARIMA</td>
+                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">0.124</td>
+                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">0.098</td>
+                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">0.87</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">SARIMA</td>
+                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">0.118</td>
+                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">0.092</td>
+                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">0.89</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">Prophet</td>
+                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">0.115</td>
+                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">0.089</td>
+                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">0.91</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h4 class="text-lg font-medium text-accent" data-en="Key Findings" data-zh="主要发现">Key Findings</h4>
+                    <div class="space-y-4">
+                        <div>
+                            <p class="text-secondary font-medium mb-2" data-en="Temperature Trends:" data-zh="温度趋势：">Temperature Trends:</p>
+                            <ul class="list-disc list-inside space-y-2 text-secondary">
+                                <li data-en="Global temperatures have increased by 1.1°C since pre-industrial times" data-zh="自工业化前以来，全球温度已上升1.1°C">Global temperatures have increased by 1.1°C since pre-industrial times</li>
+                                <li data-en="Rate of warming has accelerated in recent decades" data-zh="近几十年来变暖速率加快">Rate of warming has accelerated in recent decades</li>
+                                <li data-en="Arctic regions warming at twice the global average rate" data-zh="北极地区变暖速率是全球平均水平的两倍">Arctic regions warming at twice the global average rate</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h4 class="text-lg font-medium text-accent" data-en="Predictive Analysis" data-zh="预测分析">Predictive Analysis</h4>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full bg-white/5 rounded-lg">
+                            <thead>
+                                <tr>
+                                    <th class="px-4 py-2 border-b border-white/10 text-left text-xs font-medium text-secondary">Scenario</th>
+                                    <th class="px-4 py-2 border-b border-white/10 text-left text-xs font-medium text-secondary">Projected Temperature Increase by 2050</th>
+                                    <th class="px-4 py-2 border-b border-white/10 text-left text-xs font-medium text-secondary">Confidence Interval</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">Low Emissions</td>
+                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">1.5°C</td>
+                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">1.3-1.7°C</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">Medium Emissions</td>
+                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">2.0°C</td>
+                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">1.8-2.2°C</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">High Emissions</td>
+                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">2.7°C</td>
+                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">2.4-3.0°C</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h4 class="text-lg font-medium text-accent" data-en="Technologies Used" data-zh="使用的技术">Technologies Used</h4>
+                    <div class="tech-stack flex flex-wrap gap-2 mt-2">
+                        <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Python</span>
+                        <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">ARIMA</span>
+                        <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">SARIMA</span>
+                        <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Prophet</span>
+                        <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Pandas</span>
+                        <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">NumPy</span>
+                        <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Matplotlib</span>
+                        <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Scikit-learn</span>
+                        <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">NASA API</span>
+                        <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Jupyter Notebook</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Spark Movie Recommendation Modal -->
+    <div id="spark-movie-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="modal-backdrop fixed inset-0 bg-black/70 backdrop-blur-sm"></div>
+        <div class="modal-content bg-background/90 backdrop-blur-md border border-white/10 rounded-2xl w-full max-w-4xl max-h-[90vh] shadow-2xl transform scale-95 transition-all duration-300 flex flex-col overflow-hidden">
+            <div class="modal-header p-6 border-b border-white/10 flex justify-between items-center bg-background/95 backdrop-blur-lg z-10 shadow-md">
+                <h3 class="text-xl md:text-2xl font-bold flex items-center gap-3">
+                    <span class="text-2xl">🎬</span>
+                    <span data-en="Spark Movie Recommendation System" data-zh="Spark电影推荐系统">Spark Movie Recommendation System</span>
+                </h3>
+                <button class="modal-close w-8 h-8 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 transition-colors">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body p-6 pt-8 overflow-y-auto">
+                <div class="project-description space-y-6">
+                    <h4 class="text-lg font-medium text-accent" data-en="Project Overview" data-zh="项目概述">Project Overview</h4>
+                    <p class="text-secondary" data-en="Implemented a distributed movie recommendation system using Apache Spark's MLlib to process over 100,000 movie ratings and provide personalized recommendations to users." 
+                       data-zh="使用Apache Spark的MLlib实现分布式电影推荐系统，处理超过100,000个电影评分，为用户提供个性化推荐。">
+                        Implemented a distributed movie recommendation system using Apache Spark's MLlib to process over 100,000 movie ratings and provide personalized recommendations to users.
+                    </p>
+                    
+                    <h4 class="text-lg font-medium text-accent" data-en="Dataset Information" data-zh="数据集信息">Dataset Information</h4>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full bg-white/5 rounded-lg">
+                            <thead>
+                                <tr>
+                                    <th class="px-4 py-2 border-b border-white/10 text-left text-xs font-medium text-secondary">Dataset</th>
+                                    <th class="px-4 py-2 border-b border-white/10 text-left text-xs font-medium text-secondary">Size</th>
+                                    <th class="px-4 py-2 border-b border-white/10 text-left text-xs font-medium text-secondary">Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">MovieLens 100K</td>
+                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">100,836 ratings</td>
+                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">943 users, 1,682 movies</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">User Demographics</td>
+                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">943 records</td>
+                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">Age, gender, occupation, zip code</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">Movie Metadata</td>
+                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">1,682 records</td>
+                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">Title, release date, genres</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <h4 class="text-lg font-medium text-accent" data-en="Methodology" data-zh="方法论">Methodology</h4>
+                    <ol class="list-decimal list-inside space-y-2 text-secondary">
+                        <li data-en="Data preprocessing and cleaning" data-zh="数据预处理和清洗">Data preprocessing and cleaning</li>
+                        <li data-en="Feature engineering to extract relevant user and movie attributes" data-zh="特征工程，提取相关的用户和电影属性">Feature engineering to extract relevant user and movie attributes</li>
+                        <li data-en="Implementation of Alternating Least Squares (ALS) algorithm for collaborative filtering" data-zh="实现用于协同过滤的交替最小二乘(ALS)算法">Implementation of Alternating Least Squares (ALS) algorithm for collaborative filtering</li>
+                        <li data-en="Hyperparameter tuning using grid search" data-zh="使用网格搜索进行超参数调优">Hyperparameter tuning using grid search</li>
+                        <li data-en="Model evaluation and validation" data-zh="模型评估和验证">Model evaluation and validation</li>
+                    </ol>
+                    
+                    <h4 class="text-lg font-medium text-accent" data-en="Model Performance" data-zh="模型表现">Model Performance</h4>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full bg-white/5 rounded-lg">
+                            <thead>
+                                <tr>
+                                    <th class="px-4 py-2 border-b border-white/10 text-left text-xs font-medium text-secondary">Model</th>
+                                    <th class="px-4 py-2 border-b border-white/10 text-left text-xs font-medium text-secondary">RMSE</th>
+                                    <th class="px-4 py-2 border-b border-white/10 text-left text-xs font-medium text-secondary">MAE</th>
+                                    <th class="px-4 py-2 border-b border-white/10 text-left text-xs font-medium text-secondary">Top-10 Accuracy</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">Baseline ALS</td>
+                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">0.96</td>
+                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">0.76</td>
+                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">82%</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">Tuned ALS</td>
+                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">0.93</td>
+                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">0.73</td>
+                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">89%</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">Improvement</td>
+                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">2.9%</td>
+                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">3.8%</td>
+                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">7%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <h4 class="text-lg font-medium text-accent" data-en="Optimized Parameters" data-zh="优化参数">Optimized Parameters</h4>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full bg-white/5 rounded-lg">
+                            <thead>
+                                <tr>
+                                    <th class="px-4 py-2 border-b border-white/10 text-left text-xs font-medium text-secondary">Parameter</th>
+                                    <th class="px-4 py-2 border-b border-white/10 text-left text-xs font-medium text-secondary">Value</th>
+                                    <th class="px-4 py-2 border-b border-white/10 text-left text-xs font-medium text-secondary">Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">rank</td>
+                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">15</td>
+                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">Number of latent factors</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">regParam</td>
+                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">0.1</td>
+                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">Regularization parameter</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">iterations</td>
+                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">20</td>
+                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">Number of iterations</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <h4 class="text-lg font-medium text-accent" data-en="Key Findings" data-zh="主要发现">Key Findings</h4>
+                    <ul class="list-disc list-inside space-y-2 text-secondary">
+                        <li data-en="Optimal rank (latent factors) was found to be 15, balancing model complexity and performance" 
+                            data-zh="最佳秩（潜在因子）为15，平衡了模型复杂性和性能">Optimal rank (latent factors) was found to be 15, balancing model complexity and performance</li>
+                        <li data-en="Regularization was crucial to prevent overfitting, with 0.1 providing the best results" 
+                            data-zh="正则化对防止过拟合至关重要，0.1提供了最佳结果">Regularization was crucial to prevent overfitting, with 0.1 providing the best results</li>
+                        <li data-en="User demographic features improved recommendation accuracy by 5%" 
+                            data-zh="用户人口统计特征将推荐准确率提高了5%">User demographic features improved recommendation accuracy by 5%</li>
+                        <li data-en="Genre-based filtering further enhanced personalization" 
+                            data-zh="基于类型的过滤进一步增强了个性化">Genre-based filtering further enhanced personalization</li>
+                    </ul>
+                    
+                    <h4 class="text-lg font-medium text-accent" data-en="Technologies Used" data-zh="使用的技术">Technologies Used</h4>
+                    <div class="tech-stack flex flex-wrap gap-2 mt-2">
+                        <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">PySpark</span>
+                        <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">MLlib</span>
+                        <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Spark SQL</span>
+                        <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">ALS</span>
+                        <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Collaborative Filtering</span>
+                        <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Pandas</span>
+                        <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">NumPy</span>
+                        <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Matplotlib</span>
+                        <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Jupyter Notebook</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 模态框的 JavaScript -->
+    <script>
+        // 模态框功能
+        document.addEventListener('DOMContentLoaded', function() {
+            const modalTriggers = document.querySelectorAll('.open-modal');
+            const modalCloses = document.querySelectorAll('.modal-close, .modal-backdrop');
+            
+            // 打开模态框
+            modalTriggers.forEach(trigger => {
+                trigger.addEventListener('click', function() {
+                    const modalId = this.getAttribute('data-modal');
+                    const modal = document.getElementById(modalId);
+                    
+                    // 显示模态框
+                    document.body.classList.add('overflow-hidden');
+                    modal.classList.remove('opacity-0', 'pointer-events-none');
+                    
+                    // 动画效果
+                    setTimeout(() => {
+                        modal.querySelector('.modal-content').classList.remove('scale-95');
+                        modal.querySelector('.modal-content').classList.add('scale-100');
+                    }, 10);
+                });
+            });
+            
+            // 关闭模态框
+            modalCloses.forEach(close => {
+                close.addEventListener('click', function() {
+                    const modal = this.closest('[id$="-modal"]');
+                    
+                    // 动画效果
+                    modal.querySelector('.modal-content').classList.remove('scale-100');
+                    modal.querySelector('.modal-content').classList.add('scale-95');
+                    
+                    // 隐藏模态框
+                    setTimeout(() => {
+                        modal.classList.add('opacity-0', 'pointer-events-none');
+                        document.body.classList.remove('overflow-hidden');
+                    }, 200);
+                });
+            });
+            
+            // ESC键关闭模态框
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    const openModals = document.querySelectorAll('[id$="-modal"]:not(.opacity-0)');
+                    openModals.forEach(modal => {
+                        modal.querySelector('.modal-close').click();
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
