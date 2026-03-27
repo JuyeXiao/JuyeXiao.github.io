@@ -1,0 +1,205 @@
+/* contact.css - 联系页面专用样式 */
+
+/* 联系页面特有锚点偏移 */
+#contact-hero { 
+  scroll-margin-top: 96px; 
+}
+
+/* 联系页面主布局 */
+.contact-main-layout {
+  display: grid;
+  gap: var(--space-xl);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.contact-form-section {
+  width: 100%;
+}
+
+.contact-info-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xl);
+}
+
+/* 联系表单样式 */
+.contact-card-simple {
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(200, 190, 170, 0.3);
+  border-radius: 16px;
+  padding: var(--space-lg);
+  width: 100%;
+  margin: 0 auto;
+  transition: all var(--duration-normal);
+}
+
+.contact-card-simple:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(44, 36, 22, 0.1);
+  border-color: var(--coral);
+}
+
+.contact-label {
+  display: block;
+  font-weight: 600;
+  color: var(--dark);
+  margin-bottom: var(--space-xs);
+  font-size: 1rem;
+}
+
+.contact-input {
+  width: 100%;
+  padding: 16px 20px;
+  border: 1px solid var(--tan);
+  border-radius: 12px;
+  background: var(--cream);
+  color: var(--dark);
+  font-size: 1rem;
+  transition: all var(--duration-normal);
+  resize: vertical;
+}
+
+.contact-input:focus {
+  outline: none;
+  border-color: var(--coral);
+  box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
+}
+
+.contact-input::placeholder {
+  color: var(--brown);
+  opacity: 0.7;
+}
+
+.btn-contact-primary {
+  background: var(--dark);
+  color: var(--cream);
+  padding: 16px 32px;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--duration-normal);
+  font-size: 1rem;
+}
+
+.btn-contact-primary:hover {
+  background: var(--charcoal);
+  transform: translateY(-2px);
+}
+
+.btn-contact-secondary {
+  background: transparent;
+  color: var(--dark);
+  padding: 16px 32px;
+  border: 2px solid var(--tan);
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--duration-normal);
+  font-size: 1rem;
+}
+
+.btn-contact-secondary:hover {
+  border-color: var(--dark);
+  background: rgba(44, 36, 22, 0.05);
+}
+
+/* 联系信息卡片 */
+.contact-info-card {
+  padding: var(--space-lg);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(200, 190, 170, 0.3);
+  transition: all var(--duration-normal);
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.contact-info-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(44, 36, 22, 0.1);
+  border-color: var(--coral);
+}
+
+html.dark .contact-info-card {
+  background: rgba(38, 38, 38, 0.8);
+  border-color: var(--tan);
+}
+
+html.dark .contact-info-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+html.dark .contact-card-simple {
+  background: rgba(38, 38, 38, 0.8);
+  border-color: var(--tan);
+}
+
+html.dark .contact-card-simple:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* 响应式布局调整 */
+@media (max-width: 1024px) {
+  /* 联系页面中等屏幕调整 */
+  .contact-main-layout {
+    max-width: 900px;
+    gap: var(--space-lg);
+  }
+  
+  .contact-info-layout {
+    gap: var(--space-lg);
+  }
+  
+  .contact-info-card {
+    min-height: 350px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* 联系页面布局响应式 */
+  .contact-main-layout {
+    max-width: 100%;
+    padding: 0 var(--space-sm);
+  }
+  
+  .contact-info-layout {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+  
+  /* 联系表单响应式 */
+  .contact-card-simple {
+    padding: var(--space-md);
+  }
+  
+  .contact-card-simple .grid > div {
+    grid-column: 1 / -1;
+  }
+  
+  .btn-contact-primary, .btn-contact-secondary {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  /* 联系信息卡片响应式 */
+  .contact-info-card {
+    padding: var(--space-md);
+    min-height: auto;
+  }
+  
+  .contact-info-card .flex {
+    flex-direction: column;
+    text-align: center;
+    gap: var(--space-sm);
+  }
+  
+  .contact-info-card .gap-6 {
+    gap: var(--space-sm);
+  }
+}

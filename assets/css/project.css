@@ -1,0 +1,211 @@
+/* project.css - 项目详情页专用样式 */
+
+/* 目录链接样式 */
+.toc-link {
+  display: block;
+  padding: 8px 12px;
+  color: var(--brown);
+  text-decoration: none;
+  border-radius: 6px;
+  transition: all var(--duration-normal);
+  font-size: 0.9rem;
+  position: relative;
+  opacity: 0.7;
+  background: transparent;
+}
+
+.toc-link:hover {
+  background: rgba(139, 115, 85, 0.1);
+  color: var(--dark);
+  transform: translateX(2px);
+  opacity: 0.9;
+}
+
+/* Active状态样式 - 使用更高优先级 */
+#project-toc .toc-link.active,
+.project-toc .toc-link.active,
+.toc-link.active {
+  background: linear-gradient(135deg, #FF6B6B, #ff8a80) !important;
+  color: white !important;
+  font-weight: 600 !important;
+  transform: translateX(6px) !important;
+  box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4) !important;
+  border-left: 4px solid #FF6B6B !important;
+  padding-left: 16px !important;
+  opacity: 1 !important;
+  animation: pulse-glow 2s ease-in-out infinite !important;
+}
+
+.toc-link.active::before,
+.project-toc .toc-link.active::before {
+  content: '';
+  position: absolute;
+  left: -12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 20px;
+  background: #FF6B6B;
+  border-radius: 2px;
+  box-shadow: 0 0 8px rgba(255, 107, 107, 0.6);
+}
+
+/* 暗色模式下的active状态 */
+html.dark .toc-link.active,
+html.dark .project-toc .toc-link.active {
+  background: linear-gradient(135deg, #FF6B6B, #ff6b6b) !important;
+  box-shadow: 0 4px 16px rgba(255, 107, 107, 0.5) !important;
+}
+
+/* 脉冲动画效果 */
+@keyframes pulse-glow {
+  0% {
+    box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4);
+  }
+  50% {
+    box-shadow: 0 4px 20px rgba(255, 107, 107, 0.6);
+  }
+  100% {
+    box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4);
+  }
+}
+
+/* 项目目录容器样式 */
+.project-toc {
+  position: sticky;
+  top: 100px;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: var(--space-md);
+  border: 1px solid var(--tan);
+}
+
+html.dark .project-toc {
+  background: rgba(38, 38, 38, 0.8);
+  border-color: var(--tan);
+}
+
+/* 执行摘要卡片样式 */
+.summary-card {
+  padding: var(--space-md);
+  border-radius: 12px;
+  background: var(--beige);
+  border: 1px solid var(--tan);
+  transition: all var(--duration-normal);
+  height: auto;
+  min-height: 160px;
+  display: flex;
+  flex-direction: column;
+}
+
+.summary-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  border-color: var(--coral);
+}
+
+.summary-card-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--charcoal);
+  margin-bottom: var(--space-sm);
+}
+
+.summary-card-content {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--dark);
+  flex-grow: 1;
+}
+
+html.dark .summary-card {
+  background: var(--beige);
+  border-color: var(--tan);
+}
+
+html.dark .summary-card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* 相关项目卡片样式 */
+.related-project-card {
+  padding: var(--space-md);
+  border-radius: 12px;
+  background: var(--cream);
+  border: 1px solid var(--tan);
+  transition: all var(--duration-normal);
+  height: auto;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.related-project-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  border-color: var(--coral);
+}
+
+.related-project-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--charcoal);
+  margin-bottom: var(--space-xs);
+  transition: color var(--duration-normal);
+}
+
+.group:hover .related-project-title {
+  color: var(--coral);
+}
+
+.related-project-description {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--brown);
+  margin-bottom: var(--space-sm);
+  flex-grow: 1;
+}
+
+.related-project-link {
+  display: flex;
+  align-items: center;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--coral);
+  transition: all var(--duration-normal);
+}
+
+.group:hover .related-project-link {
+  transform: translateX(4px);
+}
+
+html.dark .related-project-card {
+  background: var(--beige);
+  border-color: var(--tan);
+}
+
+html.dark .related-project-card:hover {
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+}
+
+/* 详情页内容区域中的信息卡片 - 紧凑布局
+   目的：避免标题与正文被强制分散到上下两端，造成过大留白 */
+.content-area .contact-info-card {
+  min-height: auto;
+  justify-content: flex-start;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .summary-card {
+    min-height: 140px;
+    padding: var(--space-sm);
+  }
+  
+  .related-project-card {
+    min-height: 100px;
+    padding: var(--space-sm);
+  }
+}

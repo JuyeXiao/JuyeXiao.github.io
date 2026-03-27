@@ -1,72 +1,72 @@
 <!DOCTYPE html>
-<html lang="zh-CN" class="light">
+<html lang="en" class="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>联系我 - 肖炬晔 - 数据分析师作品集</title>
+    <title>Contact - Juye Xiao - Data Analyst Portfolio</title>
     
-    <!-- 引入Tailwind CSS -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- 引入字体 -->
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     
-    <!-- 引入图标库 -->
+    <!-- Icon Library -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
-    <!-- 引用主页样式 -->
+    <!-- Page Styles -->
     <link rel="stylesheet" href="assets/css/index.css" />
     <link rel="stylesheet" href="assets/css/contact.css" />
 </head>
 <body class="transition-colors duration-300">
 
-    <!-- 背景装饰 -->
+    <!-- Background Decoration -->
     <div class="gradient-orb top-[-150px] left-[-150px]"></div>
     <div class="gradient-orb bottom-[-200px] right-[-200px]" style="background: radial-gradient(circle at center, var(--blue), transparent 60%);"></div>
 
-    <!-- 导航栏 -->
+    <!-- Navigation Bar -->
     <header id="navbar" class="navbar fixed top-0 left-0 right-0 z-50">
         <div class="container-main h-full flex items-center justify-between">
-            <!-- Logo部分 -->
-            <a href="index.html" class="navbar-logo" id="navbar-logo">
+            <!-- Logo Section -->
+            <a href="index-en.html" class="navbar-logo" id="navbar-logo">
                 <!-- SVG Logo -->
                 <svg class="logo-svg-nav" viewBox="0 0 40 40">
-                    <!-- 背景数据网格 -->
+                    <!-- Data Grid Background -->
                     <g class="grid-bg">
-                        <!-- 垂直线 -->
+                        <!-- Vertical Lines -->
                         <line class="grid-line-v" x1="8" y1="0" x2="8" y2="40" style="animation-delay: 0.1s, 0s" />
                         <line class="grid-line-v" x1="16" y1="0" x2="16" y2="40" style="animation-delay: 0.2s, 0.5s" />
                         <line class="grid-line-v" x1="24" y1="0" x2="24" y2="40" style="animation-delay: 0.3s, 1s" />
                         <line class="grid-line-v" x1="32" y1="0" x2="32" y2="40" style="animation-delay: 0.4s, 1.5s" />
                         
-                        <!-- 水平线 -->
+                        <!-- Horizontal Lines -->
                         <line class="grid-line-h" x1="0" y1="10" x2="40" y2="10" style="animation-delay: 0.5s, 0s" />
                         <line class="grid-line-h" x1="0" y1="20" x2="40" y2="20" style="animation-delay: 0.6s, 0.7s" />
                         <line class="grid-line-h" x1="0" y1="30" x2="40" y2="30" style="animation-delay: 0.7s, 1.4s" />
                     </g>
                     
-                    <!-- 织梭动画线 -->
+                    <!-- Weaver Animation Line -->
                     <line class="weaver-line" id="weaverLine" x1="0" y1="20" x2="40" y2="20" />
                     
-                    <!-- JX字母 -->
+                    <!-- JX Letters -->
                     <text class="logo-letters" id="logoLetters" x="20" y="26" text-anchor="middle">JX</text>
                 </svg>
                 
-                <!-- 名字签名（悬停显示） -->
+                <!-- Name Signature (Hover Display) -->
                 <div class="logo-name">
                     <div class="logo-name-text">Juye Xiao</div>
                     <div class="logo-name-subtitle">Data Analyst</div>
                 </div>
             </a>
             <nav class="hidden md:flex items-center space-x-8">
-                <a href="index.html#about" class="nav-link">关于</a>
-                <a href="index.html#experience" class="nav-link">经历</a>
-                <a href="index.html#education" class="nav-link">教育</a>
-                <a href="index.html#projects" class="nav-link">项目</a>
-                <a href="index.html#skills" class="nav-link">技能</a>
-                <a href="contact.html" class="nav-link active">联系</a>
+                <a href="index-en.html#about" class="nav-link">About</a>
+                <a href="index-en.html#experience" class="nav-link">Experience</a>
+                <a href="index-en.html#education" class="nav-link">Education</a>
+                <a href="index-en.html#projects" class="nav-link">Projects</a>
+                <a href="index-en.html#skills" class="nav-link">Skills</a>
+                <a href="contact-en.html" class="nav-link active">Contact</a>
             </nav>
             <div class="flex items-center space-x-4">
                 <button id="theme-toggle" class="btn-secondary !p-2 !rounded-full">
@@ -74,7 +74,7 @@
                     <i data-lucide="moon" class="hidden dark:block"></i>
                 </button>
                 <button id="lang-toggle" class="btn-secondary !p-2 !rounded-full">
-                    <span class="font-bold text-sm">EN</span>
+                    <span class="font-bold text-sm">中</span>
                 </button>
             </div>
         </div>
@@ -84,52 +84,52 @@
         <!-- Hero Section -->
         <section id="contact-hero" class="section-padding min-h-screen flex items-center" style="padding-top: calc(var(--space-xl) + 72px);">
             <div class="w-full max-w-6xl mx-auto">
-                <!-- 页面标题 -->
+                <!-- Page Title -->
                 <div class="text-center mb-20 reveal">
-                    <h1 class="text-4xl md:text-5xl font-bold">期待与你交流</h1>
-                    <p class="subtitle mt-4 max-w-2xl mx-auto">如果你对我的项目感兴趣，或有任何合作机会，请随时与我联系。我会尽快回复你的消息。</p>
+                    <h1 class="text-4xl md:text-5xl font-bold">Looking Forward to Connecting</h1>
+                    <p class="subtitle mt-4 max-w-2xl mx-auto">If you're interested in my projects or have any collaboration opportunities, please feel free to reach out. I'll respond to your message as soon as possible.</p>
                 </div>
 
-                <!-- 主要内容区域 -->
+                <!-- Main Content Area -->
                 <div class="contact-main-layout">
-                    <!-- 联系表单 -->
+                    <!-- Contact Form -->
                     <div class="contact-form-section reveal">
                         <div class="contact-card-simple">
                             <form class="space-y-6">
                                 <div class="grid md:grid-cols-2 gap-6">
                                     <div>
-                                        <label class="contact-label">姓名</label>
-                                        <input type="text" name="name" class="contact-input" placeholder="请输入您的姓名" required>
+                                        <label class="contact-label">Name</label>
+                                        <input type="text" name="name" class="contact-input" placeholder="Enter your name" required>
                                     </div>
                                     <div>
-                                        <label class="contact-label">邮箱</label>
+                                        <label class="contact-label">Email</label>
                                         <input type="email" name="email" class="contact-input" placeholder="name@example.com" required>
                                     </div>
                                 </div>
                                 <div>
-                                    <label class="contact-label">消息</label>
-                                    <textarea name="message" rows="8" class="contact-input" placeholder="请简单描述您的需求或想交流的话题" required></textarea>
+                                    <label class="contact-label">Message</label>
+                                    <textarea name="message" rows="8" class="contact-input" placeholder="Please briefly describe your needs or topics you'd like to discuss" required></textarea>
                                 </div>
                                 <div class="flex gap-4">
-                                    <button type="submit" class="btn-contact-primary">发送消息</button>
-                                    <button type="button" class="btn-contact-secondary" onclick="window.location.href='mailto:jx2479@columbia.edu'">直接邮件</button>
+                                    <button type="submit" class="btn-contact-primary">Send Message</button>
+                                    <button type="button" class="btn-contact-secondary" onclick="window.location.href='mailto:jx2479@columbia.edu'">Email Directly</button>
                                 </div>
                             </form>
                         </div>
                     </div>
 
-                    <!-- 信息展示区域 -->
+                    <!-- Information Display Area -->
                     <div class="contact-info-layout reveal">
-                        <!-- 联系信息 -->
+                        <!-- Contact Information -->
                         <div class="contact-info-card">
-                            <h2 class="text-2xl font-semibold mb-8" style="color: var(--charcoal);">联系信息</h2>
+                            <h2 class="text-2xl font-semibold mb-8" style="color: var(--charcoal);">Contact Information</h2>
                             <div class="space-y-8">
                                 <div class="flex items-center gap-6">
                                     <div class="w-16 h-16 rounded-full flex items-center justify-center" style="background-color: var(--beige);">
                                         <i data-lucide="mail" style="color: var(--coral);" class="w-6 h-6"></i>
                                     </div>
                                     <div>
-                                        <h3 class="font-semibold text-lg" style="color: var(--dark);">邮箱</h3>
+                                        <h3 class="font-semibold text-lg" style="color: var(--dark);">Email</h3>
                                         <p class="text-lg" style="color: var(--brown);">jx2479@columbia.edu</p>
                                     </div>
                                 </div>
@@ -138,7 +138,7 @@
                                         <i data-lucide="phone" style="color: var(--coral);" class="w-6 h-6"></i>
                                     </div>
                                     <div>
-                                        <h3 class="font-semibold text-lg" style="color: var(--dark);">手机</h3>
+                                        <h3 class="font-semibold text-lg" style="color: var(--dark);">Phone</h3>
                                         <p class="text-lg" style="color: var(--brown);">13436826896</p>
                                     </div>
                                 </div>
@@ -147,24 +147,24 @@
                                         <i data-lucide="map-pin" style="color: var(--coral);" class="w-6 h-6"></i>
                                     </div>
                                     <div>
-                                        <h3 class="font-semibold text-lg" style="color: var(--dark);">位置</h3>
-                                        <p class="text-lg" style="color: var(--brown);">美国洛杉矶</p>
+                                        <h3 class="font-semibold text-lg" style="color: var(--dark);">Location</h3>
+                                        <p class="text-lg" style="color: var(--brown);">Los Angeles, US</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- 回复时间和社交媒体 -->
+                        <!-- Response Time and Social Media -->
                         <div class="contact-info-card">
                             <div class="mb-8">
-                                <h2 class="text-2xl font-semibold mb-6" style="color: var(--charcoal);">回复时间</h2>
+                                <h2 class="text-2xl font-semibold mb-6" style="color: var(--charcoal);">Response Time</h2>
                                 <div class="p-6 rounded-lg" style="background-color: var(--beige);">
-                                    <p class="text-lg" style="color: var(--brown);">我通常在24小时内回复邮件。如果有紧急事务，请直接致电。</p>
+                                    <p class="text-lg" style="color: var(--brown);">I typically respond to emails within 24 hours. For urgent matters, please call directly.</p>
                                 </div>
                             </div>
                             
                             <div>
-                                <h3 class="text-xl font-semibold mb-6" style="color: var(--charcoal);">社交媒体</h3>
+                                <h3 class="text-xl font-semibold mb-6" style="color: var(--charcoal);">Social Media</h3>
                                 <div class="flex gap-4">
                                     <a href="#" class="w-16 h-16 rounded-full flex items-center justify-center border-2 border-tan hover:border-coral transition-all duration-300 hover:transform hover:scale-110" style="border-color: var(--tan);">
                                         <i data-lucide="github" style="color: var(--dark);" class="w-6 h-6"></i>
@@ -184,18 +184,18 @@
         </section>
     </main>
 
-    <!-- 页脚 -->
+    <!-- Footer -->
     <footer class="container-main py-8 mt-12 border-t border-beige text-center text-sm" style="color: var(--brown);">
-        <p>&copy; 2025 肖炬晔. All Rights Reserved.</p>
+        <p>&copy; 2025 Juye Xiao. All Rights Reserved.</p>
     </footer>
 
-    <!-- 引入Logo动画JavaScript -->
+    <!-- Logo Animation JavaScript -->
     <script src="assets/js/logo.js"></script>
-    <!-- 引入公共模块 -->
+    <!-- Common Module -->
     <script src="assets/js/common.js"></script>
-    <!-- 引入联系页面专用JavaScript -->
+    <!-- Contact Page JavaScript -->
     <script src="assets/js/contact.js"></script>
-    <!-- 语言切换模块 -->
+    <!-- Language Switcher -->
     <script src="assets/js/language-switcher.js"></script>
 </body>
 </html>

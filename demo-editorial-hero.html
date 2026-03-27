@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>High Contrast Editorial Hero - 数据分析师</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- 引入衬线体(Playfair Display)、等宽字体(JetBrains Mono)与无衬线体(Inter)以完美匹配不同参考图中的排版细节 -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;500;600;800&family=Noto+Serif+SC:wght@400;600;900&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            /* 底色保持与原先的米色一致体系，但更为整体融合，突出前景文字与黑白图片的冲击力 */
+            --bg-color: #E6E1D1;
+            /* 提取自参考图 3 "Ghosts" 的有机色块色盘 */
+            --blob-blue: #A9BDBA;
+            --blob-pink: #DFA9AA;
+
+            --text-dark: #111111;
+            /* 提取自图 4 Navbar 中被选中的那抹亮红色 */
+            --text-accent: #FF5A5F;
+
+            --line-color: rgba(17, 17, 17, 0.2);
+            --font-serif: 'Playfair Display', 'Noto Serif SC', serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --font-sans: 'Inter', sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            overflow: hidden;
+            /* 防止巨大文字产生的页面横向滚动条 */
+        }
+
+        /* ----- 1: 导航栏 (完美还原图 4 Index.html) ----- */
+        .nav-editorial {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 85px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 4vw;
+            z-index: 100;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: baseline;
+            gap: 1.5rem;
+        }
+
+        .logo-jx {
+            font-family: var(--font-sans);
+            font-size: 1.3rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: var(--text-dark);
+        }
+
+        .logo-lang {
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            cursor: pointer;
+        }
+
+        .nav-center {
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        .nav-center a {
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 400;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-center a.active {
+            color: var(--text-accent);
+        }
+
+        .nav-center a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--text-accent);
+        }
+
+        .nav-center a:hover {
+            opacity: 0.6;
+        }
+
+        .nav-right {
+            cursor: pointer;
+            color: var(--text-dark);
+            stroke-width: 1.5px;
+        }
+
+
+        /* ----- 2: 流动的几何背景 (提取自图 3 Ghosts) ----- */
+        .blobs {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .blob {
+            position: absolute;
+            mix-blend-mode: multiply;
+            filter: blur(2px);
+        }
+
+        .blob-1 {
+            width: 55vw;
+            height: 55vw;
+            background-color: var(--blob-blue);
+            top: -20%;
+            right: -15%;
+            border-radius: 50%;
+            opacity: 0.8;
+        }
+
+        .blob-2 {
+            width: 45vw;
+            height: 45vw;
+            background-color: var(--blob-pink);
+            bottom: -10%;
+            left: 5%;
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+            /* 利用不规则圆角模拟手绘形状感 */
+            opacity: 0.85;
+        }
+
+
+        /* ----- 3: 左右内容布局结构 ----- */
+        .hero-split {
+            display: flex;
+            min-height: 100vh;
+            width: 100vw;
+            position: relative;
+            z-index: 10;
+        }
+
+
+        /* ----- 4: 左侧列表区 (完美还原图 5 Data Analyst List) ----- */
+        .pane-left {
+            flex: 1;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-left: 10vw;
+            z-index: 20;
+        }
+
+        .category-label {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: rgba(17, 17, 17, 0.5);
+            margin-bottom: 2.5rem;
+            display: block;
+        }
+
+        /* 列表容器：强制限制宽度并描边 */
+        .list-container {
+            width: 75%;
+        }
+
+        .list-group {
+            border-top: 1px solid var(--line-color);
+        }
+
+        .list-item {
+            border-bottom: 1px solid var(--line-color);
+            padding: 2.5rem 0 3.5rem 0;
+            position: relative;
+            transition: padding-left 0.4s ease;
+        }
+
+        .list-item:hover {
+            padding-left: 15px;
+        }
+
+        /* 带点的小标题：. Insights: */
+        .item-title {
+            font-family: var(--font-serif);
+            font-size: 3rem;
+            font-weight: 400;
+            margin: 0 0 1.2rem -0.5rem;
+            color: var(--text-dark);
+            letter-spacing: -0.02em;
+        }
+
+        /* 等宽的描述文字，强制换行并缩进 */
+        .item-desc {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: rgba(17, 17, 17, 0.7);
+            line-height: 2;
+            margin-left: 1rem;
+            letter-spacing: 0.05em;
+            max-width: 90%;
+        }
+
+
+        /* ----- 5: 右侧主视觉图及贯穿底部的大字 (还原图 1/2/3) ----- */
+        .pane-right {
+            flex: 1;
+            position: relative;
+            display: flex;
+            justify-content: flex-end; /* 靠右对齐 */
+            align-items: center;
+            z-index: 15;
+            padding-right: 2vw; /* 给右侧边缘留一点呼吸空间 */
+        }
+
+        /* 一张透明底（高色阶去白）的植物相片代表强烈的艺术感 */
+        .hero-image {
+            height: 95vh;
+            max-width: 45vw; /* 限制宽度防止占满 */
+            object-fit: contain;
+            object-position: right center; /* 确保图片内容贴紧右侧 */
+            mix-blend-mode: multiply;
+            filter: grayscale(100%) contrast(1.2) drop-shadow(0 0 10px rgba(0, 0, 0, 0.1));
+            pointer-events: none;
+            z-index: 15;
+            transform: translateY(-2vh); /* 稍微上移一点平衡视觉 */
+        }
+
+        /* 底部巨大的穿越级字体 (参考图1、2、3) */
+        .huge-overlap-text {
+            position: absolute;
+            bottom: -5vh;
+            /* 故意底边被安全区截断一部分 */
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: var(--font-serif);
+            font-size: clamp(6rem, 18vw, 20rem);
+            /* 调整大小适应两个单词 */
+            font-weight: 400;
+            line-height: 0.75;
+            /* 极度压紧行高，呈现堆叠感 */
+            letter-spacing: -0.05em;
+            color: var(--text-dark);
+            z-index: 25;
+            pointer-events: none;
+            white-space: nowrap;
+            text-align: center;
+        }
+
+
+
+        /* 左下角很小的说明性文字 */
+        .footer-note {
+            position: absolute;
+            bottom: 8vh;
+            left: 10vw;
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: rgba(17, 17, 17, 0.6);
+            z-index: 20;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 有机背景色块 (参考图3) -->
+    <div class="blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <!-- 极简主导航 (精准还原图4) -->
+    <header class="nav-editorial">
+        <div class="nav-left">
+            <span class="logo-jx">JX</span>
+            <span class="logo-lang">中</span>
+        </div>
+        <nav class="nav-center">
+            <a href="#about" class="active">About</a>
+            <a href="#experience">Experience</a>
+            <a href="#education">Education</a>
+            <a href="#projects">Projects</a>
+            <a href="#skills">Skills</a>
+            <a href="#contact">Contact</a>
+        </nav>
+        <div class="nav-right">
+            <!-- 替换为 Lucid 的细体太阳图标 -->
+            <i data-lucide="sun"></i>
+        </div>
+    </header>
+
+    <div class="hero-split">
+
+        <!-- 左侧面板：完美还原图5的清单样式 -->
+        <div class="pane-left">
+            <div class="list-container">
+                <span class="category-label">Data Analyst</span>
+
+                <div class="list-group">
+                    <div class="list-item">
+                        <h2 class="item-title">. Insights:</h2>
+                        <div class="item-desc">
+                            Turning raw signals into clear,<br>
+                            actionable business intelligence.
+                        </div>
+                    </div>
+                    <div class="list-item">
+                        <h2 class="item-title">. Modelling:</h2>
+                        <div class="item-desc">
+                            Predictive algorithms built to<br>
+                            scale and reduce operation costs.
+                        </div>
+                    </div>
+                    <div class="list-item">
+                        <h2 class="item-title">. Testing:</h2>
+                        <div class="item-desc">
+                            Designing strict methodologies<br>
+                            for confident decision making.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-note">LIVING IN THE DATA.</div>
+        </div>
+
+        <!-- 右侧面板：带有花卉枝叶黑白照片 -->
+        <div class="pane-right">
+            <!-- 替换为带有优美枝叶/花卉形态的白底照片，配合 multiply 实现剪影般的艺术效果 -->
+            <img src="https://images.unsplash.com/photo-1457089328109-e5d9f170afaa?q=80&w=1500&auto=format&fit=crop"
+                class="hero-image" alt="Abstract Botanical Art">
+        </div>
+
+    </div>
+
+    <!-- 底部巨大的穿越级字体名字重排版 -->
+    <h1 class="huge-overlap-text">
+        <span style="display: block; margin-left: -5vw;">Juye</span>
+        <span style="display: block; margin-left: 10vw; text-indent: 5vw;">Xiao</span>
+    </h1>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>

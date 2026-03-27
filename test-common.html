@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>公共模块功能测试</title>
+    
+    <!-- 样式和库 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="assets/css/index.css" />
+    
+    <style>
+        .test-section {
+            padding: 2rem;
+            margin: 1rem 0;
+            border: 2px solid var(--tan);
+            border-radius: 8px;
+            background: var(--cream);
+        }
+        .test-button {
+            background: var(--coral);
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            margin: 4px;
+            cursor: pointer;
+        }
+        .test-result {
+            margin: 8px 0;
+            padding: 8px;
+            border-radius: 4px;
+            background: var(--beige);
+        }
+    </style>
+</head>
+<body class="transition-colors duration-300">
+
+    <!-- 测试导航栏 -->
+    <header id="navbar" class="navbar fixed top-0 left-0 right-0 z-50">
+        <div class="container-main h-full flex items-center justify-between">
+            <a href="index.html" class="navbar-logo" id="navbar-logo">
+                <svg class="logo-svg-nav" viewBox="0 0 40 40">
+                    <g class="grid-bg">
+                        <line class="grid-line-v" x1="8" y1="0" x2="8" y2="40" />
+                        <line class="grid-line-v" x1="16" y1="0" x2="16" y2="40" />
+                        <line class="grid-line-v" x1="24" y1="0" x2="24" y2="40" />
+                        <line class="grid-line-v" x1="32" y1="0" x2="32" y2="40" />
+                        <line class="grid-line-h" x1="0" y1="10" x2="40" y2="10" />
+                        <line class="grid-line-h" x1="0" y1="20" x2="40" y2="20" />
+                        <line class="grid-line-h" x1="0" y1="30" x2="40" y2="30" />
+                    </g>
+                    <line class="weaver-line" id="weaverLine" x1="0" y1="20" x2="40" y2="20" />
+                    <text class="logo-letters" id="logoLetters" x="20" y="26" text-anchor="middle">JX</text>
+                </svg>
+                <div class="logo-name">
+                    <div class="logo-name-text">Test Page</div>
+                    <div class="logo-name-subtitle">Common Module</div>
+                </div>
+            </a>
+            <div class="flex items-center space-x-4">
+                <button id="theme-toggle" class="btn-secondary !p-2 !rounded-full">
+                    <i data-lucide="sun" class="block dark:hidden"></i>
+                    <i data-lucide="moon" class="hidden dark:block"></i>
+                </button>
+                <button id="lang-toggle" class="btn-secondary !p-2 !rounded-full">
+                    <span class="font-bold text-sm">EN</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container-main" style="margin-top: 120px;">
+        <h1 class="text-4xl font-bold text-center mb-8">公共模块功能测试</h1>
+
+        <!-- 主题切换测试 -->
+        <div class="test-section reveal">
+            <h2 class="text-2xl font-semibold mb-4">🎨 主题切换测试</h2>
+            <p>点击右上角的主题切换按钮测试深色/浅色模式切换。</p>
+            <button class="test-button" onclick="testTheme()">检查当前主题</button>
+            <div id="theme-result" class="test-result">当前主题: <span id="current-theme">检测中...</span></div>
+        </div>
+
+        <!-- 通知系统测试 -->
+        <div class="test-section reveal">
+            <h2 class="text-2xl font-semibold mb-4">📢 通知系统测试</h2>
+            <button class="test-button" onclick="testNotifications('success')">成功通知</button>
+            <button class="test-button" onclick="testNotifications('error')">错误通知</button>
+            <button class="test-button" onclick="testNotifications('info')">信息通知</button>
+            <button class="test-button" onclick="testNotifications('warning')">警告通知</button>
+        </div>
+
+        <!-- 滚动测试 -->
+        <div class="test-section reveal">
+            <h2 class="text-2xl font-semibold mb-4">📜 滚动功能测试</h2>
+            <p>观察页面滚动时导航栏的变化，以及元素的渐现动画。</p>
+            <button class="test-button" onclick="testScrollTo()">滚动到底部</button>
+        </div>
+
+        <!-- 数字动画测试 -->
+        <div class="test-section reveal">
+            <h2 class="text-2xl font-semibold mb-4">🔢 数字动画测试</h2>
+            <div class="grid grid-cols-3 gap-4 mt-4">
+                <div class="data-verse left">
+                    <div class="number" data-count="95">0</div>
+                    <div class="label">成功率</div>
+                </div>
+                <div class="data-verse left">
+                    <div class="number" data-count="1250">0</div>
+                    <div class="label">用户数</div>
+                </div>
+                <div class="data-verse left">
+                    <div class="number" data-count="42">0</div>
+                    <div class="label">项目数</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 功能状态检查 -->
+        <div class="test-section reveal">
+            <h2 class="text-2xl font-semibold mb-4">✅ 功能状态检查</h2>
+            <button class="test-button" onclick="checkCommonFeatures()">检查公共模块状态</button>
+            <div id="features-result" class="test-result">
+                <pre id="features-status">点击按钮检查状态...</pre>
+            </div>
+        </div>
+
+        <!-- 填充内容用于测试滚动 -->
+        <div style="height: 800px;" class="reveal">
+            <h3 class="text-xl font-semibold mb-4">测试滚动区域</h3>
+            <p>这是一个用于测试滚动功能的区域。当你滚动页面时，应该能看到导航栏的样式变化。</p>
+        </div>
+
+        <div id="bottom" class="test-section reveal">
+            <h2 class="text-2xl font-semibold mb-4">🎯 页面底部</h2>
+            <p>你成功滚动到了页面底部！现在可以测试返回顶部功能。</p>
+            <button class="test-button" onclick="window.commonFeatures.scrollToElement('body', 0)">返回顶部</button>
+        </div>
+    </main>
+
+    <footer class="container-main py-8 mt-12 border-t border-beige text-center text-sm" style="color: var(--brown);">
+        <p>&copy; 2025 公共模块测试页面</p>
+    </footer>
+
+    <!-- 引入脚本 -->
+    <script src="assets/js/logo.js"></script>
+    <script src="assets/js/common.js"></script>
+    
+    <script>
+        // 测试脚本
+        function testTheme() {
+            const theme = window.commonFeatures.getCurrentTheme();
+            document.getElementById('current-theme').textContent = theme;
+        }
+
+        function testNotifications(type) {
+            const messages = {
+                success: '这是一个成功消息！',
+                error: '这是一个错误消息！',
+                info: '这是一个信息消息！',
+                warning: '这是一个警告消息！'
+            };
+            window.commonFeatures.showNotification(messages[type], type);
+        }
+
+        function testScrollTo() {
+            window.commonFeatures.scrollToElement('#bottom');
+        }
+
+        function checkCommonFeatures() {
+            const features = window.commonFeatures;
+            const status = {
+                initialized: features.isInitialized,
+                observersCount: features.observers.size,
+                currentTheme: features.getCurrentTheme(),
+                hasNavbar: !!features.navbar,
+                hasThemeToggle: !!features.themeToggle,
+                hasLangToggle: !!features.langToggle
+            };
+            
+            document.getElementById('features-status').textContent = JSON.stringify(status, null, 2);
+        }
+
+        // 页面加载完成后初始化数字动画
+        document.addEventListener('DOMContentLoaded', () => {
+            // 等待公共模块初始化
+            setTimeout(() => {
+                const countElements = document.querySelectorAll('[data-count]');
+                window.commonFeatures.initCountUp(countElements);
+                
+                // 初始化主题检查
+                testTheme();
+                
+                // 设置定时更新主题状态
+                setInterval(testTheme, 1000);
+            }, 100);
+        });
+    </script>
+</body>
+</html>

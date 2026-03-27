@@ -1,0 +1,39 @@
+# OS Specific
+.DS_Store
+Thumbs.db
+
+# IDE and Editor
+.vscode/
+.idea/
+.settings/
+.project
+.claude/
+*.swp
+*.swo
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+logs/
+*.log
+
+# Build and Distribution
+dist/
+build/
+.cache/
+.parcel-cache/
+
+# Environment Variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Web Server stuff
+.htaccess
+
+CLAUDE.md

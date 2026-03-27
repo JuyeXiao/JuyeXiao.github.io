@@ -1,670 +1,464 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN" class="light">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Juye Xiao | Data Analyst & Developer</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>数据分析师作品集</title>
+
+    <!-- 配置 CSP 以允许 Tailwind CSS 运行 -->
+    <meta http-equiv="Content-Security-Policy"
+        content="script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://unpkg.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com;">
+
+    <!-- 引入Tailwind CSS for rapid prototyping -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        accent: 'var(--accent)',
-                        primary: 'var(--text-primary)',
-                        secondary: 'var(--text-secondary)',
-                        background: 'var(--bg-primary)',
-                        'background-secondary': 'var(--bg-secondary)'
-                    },
-                    fontFamily: {
-                        mono: ['JetBrains Mono', 'monospace'],
-                        sans: ['Inter', 'sans-serif']
-                    },
-                    backdropBlur: {
-                        xs: '2px',
-                    }
-                }
-            }
-        }
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script defer src="js/main.js"></script>
-    <script defer src="js/particles.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <script>
-        // 检查本地存储的主题和语言设置
-        const savedTheme = localStorage.getItem('theme') || 'dark';
-        const savedLang = localStorage.getItem('lang') || 'en';
-        document.documentElement.setAttribute('data-theme', savedTheme);
-        document.documentElement.setAttribute('data-lang', savedLang);
-    </script>
+
+    <!-- 引入字体 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <!-- 引入图标库 -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- 抽离的页面样式 -->
+    <link rel="stylesheet" href="assets/css/index.css" />
 </head>
-<body class="home-page bg-background text-primary font-sans min-h-screen flex flex-col overflow-x-hidden">
-    <div class="gradient-background fixed inset-0 -z-10"></div>
-    <div class="glow-effect fixed inset-0 -z-10"></div>
-    <main class="flex-grow">
-        <nav class="navbar sticky top-0 z-50 backdrop-blur-md bg-background/30 border-b border-white/5">
-            <div class="container mx-auto px-4 md:px-6 max-w-6xl flex items-center justify-between h-20">
-                <div class="logo flex items-center gap-2">
-                    <span class="logo-text text-xl md:text-2xl font-bold font-mono bg-gradient-to-r from-accent to-white bg-clip-text text-transparent">Juye Xiao</span>
-                    <div class="logo-dot w-2 h-2 rounded-full bg-accent animate-pulse"></div>
+
+<body class="transition-colors duration-300">
+
+    <!-- 背景装饰 -->
+    <div class="gradient-orb top-[-150px] left-[-150px]"></div>
+    <div class="gradient-orb bottom-[-200px] right-[-200px]"
+        style="background: radial-gradient(circle at center, var(--blue), transparent 60%);"></div>
+
+    <!-- 1. 导航栏 -->
+    <header id="navbar" class="navbar fixed top-0 left-0 right-0 z-50">
+        <div class="container-main h-full flex items-center justify-between">
+            <!-- Logo部分 -->
+            <a href="#hero" class="navbar-logo" id="navbar-logo">
+                <!-- SVG Logo -->
+                <svg class="logo-svg-nav" viewBox="0 0 40 40">
+                    <!-- 背景数据网格 -->
+                    <g class="grid-bg">
+                        <!-- 垂直线 -->
+                        <line class="grid-line-v" x1="8" y1="0" x2="8" y2="40" style="animation-delay: 0.1s, 0s" />
+                        <line class="grid-line-v" x1="16" y1="0" x2="16" y2="40" style="animation-delay: 0.2s, 0.5s" />
+                        <line class="grid-line-v" x1="24" y1="0" x2="24" y2="40" style="animation-delay: 0.3s, 1s" />
+                        <line class="grid-line-v" x1="32" y1="0" x2="32" y2="40" style="animation-delay: 0.4s, 1.5s" />
+
+                        <!-- 水平线 -->
+                        <line class="grid-line-h" x1="0" y1="10" x2="40" y2="10" style="animation-delay: 0.5s, 0s" />
+                        <line class="grid-line-h" x1="0" y1="20" x2="40" y2="20" style="animation-delay: 0.6s, 0.7s" />
+                        <line class="grid-line-h" x1="0" y1="30" x2="40" y2="30" style="animation-delay: 0.7s, 1.4s" />
+                    </g>
+
+                    <!-- 织梭动画线 -->
+                    <line class="weaver-line" id="weaverLine" x1="0" y1="20" x2="40" y2="20" />
+
+                    <!-- JX字母 -->
+                    <text class="logo-letters" id="logoLetters" x="20" y="26" text-anchor="middle">JX</text>
+                </svg>
+
+                <!-- 名字签名（悬停显示） -->
+                <div class="logo-name">
+                    <div class="logo-name-text">Juye Xiao</div>
+                    <div class="logo-name-subtitle">Data Analyst</div>
                 </div>
-                <button class="mobile-menu-btn md:hidden flex flex-col justify-center items-center w-10 h-10 rounded-md bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all" aria-label="Toggle menu">
-                    <span class="w-5 h-0.5 bg-primary mb-1.5 transition-all"></span>
-                    <span class="w-5 h-0.5 bg-primary mb-1.5 transition-all"></span>
-                    <span class="w-5 h-0.5 bg-primary transition-all"></span>
+            </a>
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#about" class="nav-link">关于</a>
+                <a href="#experience" class="nav-link">经历</a>
+                <a href="#education" class="nav-link">教育</a>
+                <a href="#projects" class="nav-link">项目</a>
+                <a href="#skills" class="nav-link">技能</a>
+                <a href="#contact" class="nav-link">联系</a>
+            </nav>
+            <div class="flex items-center space-x-4">
+                <button id="theme-toggle" class="btn-secondary !p-2 !rounded-full">
+                    <i data-lucide="sun" class="block dark:hidden"></i>
+                    <i data-lucide="moon" class="hidden dark:block"></i>
                 </button>
-                <div class="nav-links hidden md:flex items-center gap-6">
-                    <a href="#home" class="nav-link group relative py-2 px-1 active">
-                        <span class="nav-text relative z-10 text-sm font-medium text-accent transition-all duration-300" data-en="Home" data-zh="首页">首页</span>
-                        <span class="nav-dot absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-accent scale-100 transition-all duration-300"></span>
-                    </a>
-                    <a href="about.html" class="nav-link group relative py-2 px-1">
-                        <span class="nav-text relative z-10 text-sm font-medium transition-colors group-hover:text-accent" data-en="About" data-zh="关于">About</span>
-                        <span class="nav-dot absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-accent scale-0 transition-transform group-hover:scale-100"></span>
-                    </a>
-                    <a href="projects.html" class="nav-link group relative py-2 px-1">
-                        <span class="nav-text relative z-10 text-sm font-medium transition-colors group-hover:text-accent" data-en="Projects" data-zh="项目">Projects</span>
-                        <span class="nav-dot absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-accent scale-0 transition-transform group-hover:scale-100"></span>
-                    </a>
-                    <a href="resume.html" class="nav-link group relative py-2 px-1">
-                        <span class="nav-text relative z-10 text-sm font-medium transition-colors group-hover:text-accent" data-en="Resume" data-zh="简历">Resume</span>
-                        <span class="nav-dot absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-accent scale-0 transition-transform group-hover:scale-100"></span>
-                    </a>
-                    <a href="contact.html" class="nav-link group relative py-2 px-1">
-                        <span class="nav-text relative z-10 text-sm font-medium transition-colors group-hover:text-accent" data-en="Contact" data-zh="联系">Contact</span>
-                        <span class="nav-dot absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-accent scale-0 transition-transform group-hover:scale-100"></span>
-                    </a>
-                </div>
-                <div class="nav-controls flex items-center gap-3">
-                    <button class="theme-toggle flex items-center justify-center w-10 h-10 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all" aria-label="Toggle theme">
-                        <i class="fas fa-sun text-primary"></i>
-                    </button>
-                    <div class="lang-dropdown relative">
-                        <button class="lang-toggle flex items-center justify-between w-16 h-10 px-3 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all" aria-label="Select language">
-                            <span class="current-lang text-sm font-medium">EN</span>
-                            <i class="fas fa-chevron-down text-xs"></i>
-                        </button>
-                        <ul class="lang-options absolute right-0 top-full mt-2 w-32 py-2 rounded-xl bg-white/10 backdrop-blur-md border border-white/10 opacity-0 invisible transition-all">
-                            <li data-lang="en" class="px-4 py-2 flex items-center justify-between hover:bg-white/10 cursor-pointer transition-colors">
-                                <span class="lang-name text-sm">English</span>
-                                <span class="lang-code text-xs font-mono">EN</span>
-                            </li>
-                            <li data-lang="zh" class="px-4 py-2 flex items-center justify-between hover:bg-white/10 cursor-pointer transition-colors">
-                                <span class="lang-name text-sm">中文</span>
-                                <span class="lang-code text-xs font-mono">中</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                <button id="lang-toggle" class="btn-secondary !p-2 !rounded-full">
+                    <span class="font-bold text-sm">EN</span>
+                </button>
             </div>
-        </nav>
-        
-        <section id="home" class="hero min-h-[90vh] flex items-center py-16 md:py-24">
-            <div class="container mx-auto px-4 md:px-6 max-w-6xl">
-                <div class="hero-content max-w-3xl mx-auto text-center">
-                    <div class="relative inline-block mb-6 transform hover:scale-105 transition-transform duration-500">
-                        <h1 class="glitch text-4xl md:text-6xl lg:text-7xl font-bold font-mono mb-4 bg-gradient-to-r from-accent to-white bg-clip-text text-transparent" data-en="Data Explorer" data-zh="数据探索者">数据探索者</h1>
-                        <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-24 h-1 bg-accent/30 rounded-full blur-sm"></div>
+        </div>
+    </header>
+
+    <main class="container-main">
+        <!-- 2. Hero Section (分屏式布局) -->
+        <section id="hero" class="section-padding min-h-screen flex items-center">
+            <div class="grid gap-16 items-center hero-grid w-full">
+                <div class="reveal">
+                    <span class="font-semibold text-lg" style="color: var(--coral);">高级数据分析师</span>
+                    <h1 class="mt-2" style="font-size: var(--text-5xl);">你好，我是肖炬晔</h1>
+                    <p class="subtitle mt-4 max-w-lg">哥伦比亚大学应用分析硕士，拥有近4年数据分析及数据库管理经验，专注于运用SQL、Python及Apache
+                        Spark进行深度数据洞察与价值创造。在库存与销售分析、A/B测试优化、气候风险分析等项目中积累丰富经验，致力于通过数据驱动的商业洞见创造实际价值。</p>
+
+                    <!-- 指标组件（与上方文字宽度对齐，横向排列） -->
+                    <div class="mt-8 max-w-lg">
+                        <div class="grid grid-cols-3 gap-8">
+                            <div class="data-verse left">
+                                <div class="number" data-count="94">0</div>
+                                <div class="label">预测准确率</div>
+                            </div>
+                            <div class="data-verse left">
+                                <div class="number" data-count="500">0</div>
+                                <div class="label">万级数据处理</div>
+                            </div>
+                            <div class="data-verse left">
+                                <div class="number" data-count="23">0</div>
+                                <div class="label">成本降低百分比</div>
+                            </div>
+                        </div>
                     </div>
-                    <p class="role text-lg md:text-xl font-medium mb-6 text-secondary" data-en="Data Analyst & Full Stack Developer" data-zh="数据分析师 & 全栈工程师">
-                        Data Analyst & Full Stack Developer
-                    </p>
-                    <p class="tagline text-base md:text-lg max-w-2xl mx-auto mb-10 text-secondary/80" data-en="Transforming Data into Insights, Building the Future with Code" 
-                       data-zh="将数据转化为洞见，用代码构建未来">
-                        Transforming Data into Insights, Building the Future with Code
-                    </p>
-                    <div class="cta-buttons flex flex-wrap justify-center gap-5">
-                        <a href="projects.html" class="btn primary relative overflow-hidden py-3.5 px-8 rounded-lg bg-accent/10 backdrop-filter backdrop-blur-sm border border-accent/30 text-accent font-medium hover:bg-accent/20 transition-all duration-300 shadow-lg shadow-accent/10 group">
-                            <span class="relative z-10 flex items-center gap-2" data-en="View Projects" data-zh="查看项目">
-                                <span>查看项目</span>
-                                <i class="fas fa-arrow-right text-sm transition-transform duration-300 group-hover:translate-x-1"></i>
-                            </span>
-                            <div class="absolute inset-0 bg-gradient-to-r from-accent/0 via-accent/20 to-accent/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 transform -translate-x-full group-hover:translate-x-0"></div>
-                        </a>
-                        <a href="contact.html" class="btn secondary relative overflow-hidden py-3.5 px-8 rounded-lg bg-white/5 backdrop-blur-sm border border-white/10 text-primary font-medium hover:bg-white/10 transition-all shadow-lg shadow-black/5 group">
-                            <span class="relative z-10 flex items-center gap-2" data-en="Contact Me" data-zh="联系我">
-                                <span>Contact Me</span>
-                                <i class="fas fa-envelope text-sm transition-transform group-hover:translate-y-[-2px]"></i>
-                            </span>
-                        </a>
-                    </div>
-                    
-                    <div class="scroll-indicator mt-16 flex flex-col items-center animate-bounce hover:animate-none hover:translate-y-1 transition-transform duration-300">
-                        <span class="text-xs text-secondary mb-2 opacity-70">向下滚动</span>
-                        <i class="fas fa-chevron-down text-accent opacity-70"></i>
+                    <div class="mt-8 max-w-lg flex items-center gap-4">
+                        <a href="#contact" class="btn btn-primary">联系我</a>
+                        <a href="#" class="btn btn-secondary">下载简历</a>
                     </div>
                 </div>
             </div>
         </section>
-        
-        <section class="about py-20 md:py-28" id="about">
-            <div class="container mx-auto px-4 md:px-6 max-w-6xl">
-                <div class="section-header text-center mb-16">
-                    <h2 class="text-2xl md:text-3xl font-bold mb-3 relative inline-block" data-en="About Me" data-zh="关于我">
-                        About Me
-                        <div class="absolute -bottom-2 left-0 right-0 h-1 bg-accent/30 rounded-full blur-sm"></div>
-                    </h2>
-                    <div class="section-line w-16 h-1 bg-accent mx-auto rounded-full mt-4"></div>
-                </div>
-                
-                <div class="about-content max-w-4xl mx-auto">
-                    <div class="about-text mb-16">
-                        <p class="highlight text-lg md:text-xl font-medium mb-8 text-center" data-en="I'm a Data Analyst and Full Stack Developer, focused on turning complex data into actionable insights." 
-                           data-zh="我是一名数据分析师和全栈开发者，专注于将复杂数据转化为可行的见解。">
-                           I'm a Data Analyst and Full Stack Developer, focused on turning complex data into actionable insights.
-                        </p>
-                        <p class="text-center text-secondary mb-12" data-en="By combining data science and software development skills, I build intelligent data solutions that drive results." 
-                           data-zh="通过结合数据科学和软件开发技能，我构建能够推动结果的智能数据解决方案。">
-                           By combining data science and software development skills, I build intelligent data solutions that drive results.
-                        </p>
-                        
-                        <div class="skills-grid grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-                            <div class="skill-box p-6 md:p-8 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/8 transition-all duration-300 shadow-xl hover:shadow-accent/5 transform hover:-translate-y-2">
-                                <h3 class="flex items-center gap-2 text-lg font-medium mb-4" data-en="Machine Learning" data-zh="机器学习">
-                                    <span class="skill-emoji inline-block">🤖</span>
-                                    Machine Learning
-                                </h3>
-                                <div class="skill-tags flex flex-wrap gap-2">
-                                    <span class="skill-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Random Forest</span>
-                                    <span class="skill-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">K-Means</span>
-                                    <span class="skill-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">CNN</span>
-                                    <span class="skill-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">RNN</span>
-                                    <span class="skill-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">PCA</span>
-                                    <span class="skill-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Decision Trees</span>
-                                </div>
-                            </div>
 
-                            <div class="skill-box p-6 md:p-8 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/8 transition-all duration-300 shadow-xl hover:shadow-accent/5 transform hover:-translate-y-2">
-                                <h3 class="flex items-center gap-2 text-lg font-medium mb-4" data-en="Data Science & Analytics" data-zh="数据科学与分析">
-                                    <span class="skill-emoji inline-block">📊</span>
-                                    Data Science & Analytics
-                                </h3>
-                                <div class="skill-tags flex flex-wrap gap-2">
-                                    <span class="skill-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Hypothesis Testing</span>
-                                    <span class="skill-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Time-Series Analysis</span>
-                                    <span class="skill-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Text Mining</span>
-                                    <span class="skill-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Regression Analysis</span>
-                                    <span class="skill-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Sklearn</span>
-                                    <span class="skill-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Pandas</span>
-                                </div>
+        <!-- 分隔线 -->
+        <div class="section-divider-container reveal">
+            <div class="section-divider"></div>
+        </div>
+
+        <!-- 3. 关于我 -->
+        <section id="about" class="section-padding">
+            <div class="grid md:grid-cols-3 gap-16 items-center reveal">
+                <div class="hidden md:flex justify-center items-center">
+                    <span class="decorative-background-text">数据</span>
+                </div>
+                <div class="md:col-span-2">
+                    <h2 class="text-3xl font-bold">理性与感性的融合</h2>
+                    <div class="mt-6 space-y-4 text-lg" style="color: var(--brown);">
+                        <p>近4年数据分析经验，专注于将复杂的数据转化为可执行的商业洞见。</p>
+                        <p>我坚信，数据不仅是冰冷的数字，更是蕴含商业故事的诗篇。我的工作就是成为一名优秀的"翻译官"。</p>
+                        <p>好的数据分析不仅是技术的展示，更是对业务深刻理解的体现。通过统计学、机器学习和可视化技术的结合，帮助企业在数据的海洋中找到方向。</p>
+                        <p>曾服务于电商、金融、运输等多个行业，主导过销售预测、用户画像、A/B测试等核心项目，累计为企业优化成本降低10-12%，提升ROI达15%。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 分隔线 -->
+        <div class="section-divider-container reveal">
+            <div class="section-divider"></div>
+        </div>
+
+        <!-- 工作经历 -->
+        <section id="experience" class="section-padding">
+            <div class="section-header reveal">
+                <h2 class="text-3xl font-bold">工作经历</h2>
+                <p class="subtitle mt-2">在实践中成长，用数据创造价值。</p>
+            </div>
+            <div class="max-w-4xl reveal">
+                <div class="timeline-container">
+                    <div class="timeline-item">
+                        <div class="grid md:grid-cols-4 gap-x-8">
+                            <div class="md:text-right mb-4 md:mb-0">
+                                <h3 class="text-xl font-semibold">数据分析师</h3>
+                                <p class="text-md" style="color: var(--brown);">Code Auto Tools</p>
+                                <p class="text-sm" style="color: var(--tan);">美国·洛杉矶</p>
+                                <p class="text-sm" style="color: var(--tan);">2023.09 - 至今</p>
+                            </div>
+                            <div class="timeline-details md:col-span-3">
+                                <div class="job-category">库存与销售数据分析：</div>
+                                <ul>
+                                    <li>负责多维度销售及库存数据的ETL流程(SQL)，运用Python进行深度数据清洗与探索性分析(EDA)，识别核心产品销售趋势、季节性波动及库存周转情况。
+                                    </li>
+                                    <li>基于ARIMA模型主导构建关键零部件销量预测模型，结合模型预测与历史数据分析，优化库存管理策略与安全库存阈值，成功将特定高价值产品线的积压库存成本降低约10-12%，有效提升库存周转效率。
+                                    </li>
+                                    <li>执行销售订单与实际库存记录的数据校验与校准(SQL)，确保运营数据准确性；基于销量预测及分析结果，为采购部门提供数据驱动的库存预警与补货建议，促进跨部门协作。
+                                    </li>
+                                </ul>
+                                <div class="job-category">电商运营与广告效果分析：</div>
+                                <ul>
+                                    <li>整合并分析来自eBay、Amazon、Walmart等主流电商平台的广告投放数据和用户行为数据(SQL、Python)。</li>
+                                    <li>设计并执行A/B测试方案，应用假设检验方法对比不同广告文案、关键词组合和目标受众细分策略在实际投放中的表现，优化广告方案，测试周期内重点活动区域ROI整体提升15%。
+                                    </li>
+                                    <li>对客户邮件反馈及退货数据进行系统性分析(Python)，识别产品设计、物流或描述准确性等常见问题，形成数据洞察报告，为运营流程改进和产品信息优化提供支持。
+                                    </li>
+                                </ul>
+                                <div class="job-category">市场竞争与物流成本分析：</div>
+                                <ul>
+                                    <li>定期追踪并分析主要竞品在电商平台的产品定价、促销及用户评价(SQL、Python)，撰写竞品分析报告，为制定差异化竞争策略与动态竞价调整提供数据洞察。</li>
+                                    <li>通过分析不同产品在各区域的物流运输数据(运输成本、配送时效、快递公司表现等)，识别并建议更具成本效益的物流组合方案，采纳后特定线路平均运输成本降低约5-8%。
+                                    </li>
+                                </ul>
                             </div>
                         </div>
-
-                        <div class="stats-content grid grid-cols-2 gap-6 md:gap-12">
-                            <div class="stat-item text-center p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2">
-                                <div class="stat-value text-4xl md:text-5xl font-bold text-accent mb-2">4+</div>
-                                <div class="stat-label text-sm md:text-base text-secondary" data-en="Years Experience" data-zh="年工作经验">Years Experience</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="grid md:grid-cols-4 gap-x-8">
+                            <div class="md:text-right mb-4 md:mb-0">
+                                <h3 class="text-xl font-semibold">数据库管理与运营分析专员</h3>
+                                <p class="text-md" style="color: var(--brown);">China United Transportation Corp</p>
+                                <p class="text-sm" style="color: var(--tan);">美国·洛杉矶</p>
+                                <p class="text-sm" style="color: var(--tan);">2021.02 - 2023.08</p>
                             </div>
-                            <div class="stat-item text-center p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2">
-                                <div class="stat-value text-4xl md:text-5xl font-bold text-accent mb-2">10+</div>
-                                <div class="stat-label text-sm md:text-base text-secondary" data-en="Major Projects" data-zh="主要项目">Major Projects</div>
+                            <div class="timeline-details md:col-span-3">
+                                <div class="job-category">运输运营数据分析与效率提升：</div>
+                                <ul>
+                                    <li>负责LA码头至多客户仓库的集装箱运输调度与初步路线规划；通过收集和分析历史运输数据(提柜时间、运输时长、客户区域分布、还柜时限等)，识别调度瓶颈与优化机会。
+                                    </li>
+                                    <li>运用SQL和Python识别运输过程中的异常数据，并基于数据分析结果对集装箱分配、提柜顺序及多点配送路径方案进行优化，在保障客户时效的前提下，有效减少约8%的无效等待时间，为降低综合运输成本提供数据支持。
+                                    </li>
+                                </ul>
+                                <div class="job-category">业务数据管理与信息化：</div>
+                                <ul>
+                                    <li>主导历史纸质运输订单的数字化转换项目，建立标准化的电子档案及分类检索系统，将历史订单的平均查询与调取时间缩短约70%。</li>
+                                    <li>针对运营部门在时效分析、成本控制等方面的需求，进行专项数据分析(SQL)，参与运输业务数据库系统的日常维护与优化，将关键业务查询的平均响应时间提升约25%。
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="grid md:grid-cols-4 gap-x-8">
+                            <div class="md:text-right mb-4 md:mb-0">
+                                <h3 class="text-xl font-semibold">前端开发实习生</h3>
+                                <p class="text-md" style="color: var(--brown);">滴滴出行</p>
+                                <p class="text-sm" style="color: var(--tan);">中国·北京</p>
+                                <p class="text-sm" style="color: var(--tan);">2019.06 - 2019.08</p>
+                            </div>
+                            <div class="timeline-details md:col-span-3">
+                                <div class="job-category">自动化网站性能监控平台开发与数据分析：</div>
+                                <ul>
+                                    <li>使用React和Node.js，并结合Lighthouse及Puppeteer等技术，开发自动化网站性能监控平台，使网站性能问题的平均检测与定位时间缩短40%。
+                                    </li>
+                                    <li>对平台收集的性能数据(加载时间、首次内容绘制FCP、可交互时间TTI等)深度挖掘，运用数据可视化技术，识别性能瓶颈，并基于数据分析结果向开发团队提出前端优化方案，使核心页面平均加载速度提高约25%，间接提升用户满意度。
+                                    </li>
+                                </ul>
+                                <div class="job-category">国际化项目支持与跨文化协作：</div>
+                                <ul>
+                                    <li>积极参与滴滴国际化扩张项目，协助进行全球多语言网站的适配与部署工作。</li>
+                                    <li>在跨文化技术团队中展现良好的沟通与协作能力，为多个国家与地区网站的按时上线与顺利交付贡献力量。</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        
-        <section class="featured-projects py-16 md:py-24 bg-white/[0.02]">
-            <div class="container mx-auto px-4 md:px-6 max-w-6xl">
-                <div class="section-header text-center mb-12">
-                    <h2 class="text-2xl md:text-3xl font-bold mb-3" data-en="Featured Projects" data-zh="精选项目">Featured Projects</h2>
-                    <div class="section-line w-16 h-1 bg-accent mx-auto rounded-full"></div>
-                </div>
 
-                <div class="projects-grid grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto mb-12">
-                    <!-- Climate Change Project -->
-                    <div class="project-card group p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2">
-                        <div class="project-header mb-4">
-                            <h3 class="flex items-center gap-2 text-lg font-medium mb-2" data-en="Climate Change Monitoring & Prediction" data-zh="气候变化监测与预测">
-                                <span class="project-emoji inline-block">🌎</span>
-                                Climate Change Monitoring & Prediction
-                            </h3>
-                            <span class="project-sponsor inline-block px-3 py-1 text-xs rounded-full bg-accent/20 text-accent" data-en="S&P Global Sponsored" data-zh="标普全球赞助">S&P Global Sponsored</span>
-                        </div>
-                        <div class="project-content">
-                            <p class="project-summary text-secondary mb-4" data-en="Developed a comprehensive climate change analysis system using NASA datasets to monitor and predict global temperature trends." 
-                               data-zh="使用NASA数据集开发了全面的气候变化分析系统，用于监测和预测全球温度趋势。">
-                               Developed a comprehensive climate change analysis system using NASA datasets to monitor and predict global temperature trends.
-                            </p>
-                            <div class="tech-stack flex flex-wrap gap-2">
-                                <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Python</span>
-                                <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">ARIMA</span>
-                                <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Pandas</span>
-                                <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Matplotlib</span>
-                                <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Scikit-learn</span>
-                                <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">NASA API</span>
+        <!-- 分隔线 -->
+        <div class="section-divider-container reveal">
+            <div class="section-divider"></div>
+        </div>
+
+        <!-- 教育背景 -->
+        <section id="education" class="section-padding">
+            <div class="section-header reveal">
+                <h2 class="text-3xl font-bold">教育背景</h2>
+                <p class="subtitle mt-2">扎实的学术基础，为实践奠定理论根基。</p>
+            </div>
+            <div class="max-w-4xl reveal">
+                <div class="timeline-container">
+                    <div class="timeline-item">
+                        <div class="education-entry">
+                            <div class="education-header">
+                                <h3 class="education-school">哥伦比亚大学 (Columbia University)</h3>
+                                <span class="education-date">2021.09 - 2023.02</span>
                             </div>
-                            <div class="mt-4">
-                                <button class="view-details text-accent text-sm flex items-center gap-1 hover:underline open-modal" data-modal="climate-modal" data-en="View Details" data-zh="查看详情">
-                                    <span>View Details</span>
-                                    <i class="fas fa-arrow-right text-xs"></i>
-                                </button>
+                            <div class="education-degree">应用分析硕士 (M.S. in Applied Analytics)</div>
+                            <div class="education-location">美国·纽约</div>
+                            <div class="education-courses">
+                                <span class="courses-label">课程：</span>数据管理与分析策略、数据可视化、组织决策中的应用分析、Capstone 实战项目 (S&P
+                                Global 资助)。
                             </div>
                         </div>
                     </div>
-
-                    <!-- Spark Movie Recommendation System -->
-                    <div class="project-card group p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2">
-                        <div class="project-header mb-4">
-                            <h3 class="flex items-center gap-2 text-lg font-medium mb-2" data-en="Spark Movie Recommendation System" data-zh="Spark电影推荐系统">
-                                <span class="project-emoji inline-block">🎬</span>
-                                Spark Movie Recommendation System
-                            </h3>
-                        </div>
-                        <div class="project-content">
-                            <p class="project-summary text-secondary mb-4" data-en="Implemented ALS-based distributed recommendations on 100,836 ratings, achieved 2.9% RMSE improvement through grid search and 89% top-10 recommendation accuracy." 
-                               data-zh="在100,836个评分上实现基于ALS的分布式推荐，通过网格搜索实现2.9%的RMSE改进，前10名推荐准确率达89%。">
-                                Implemented ALS-based distributed recommendations on 100,836 ratings, achieved 2.9% RMSE improvement through grid search and 89% top-10 recommendation accuracy.
-                            </p>
-                            <div class="tech-stack flex flex-wrap gap-2">
-                                <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">PySpark</span>
-                                <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">MLlib</span>
-                                <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Spark SQL</span>
-                                <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">ALS</span>
-                                <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Collaborative Filtering</span>
+                    <div class="timeline-item">
+                        <div class="education-entry">
+                            <div class="education-header">
+                                <h3 class="education-school">密歇根大学 (University of Michigan)</h3>
+                                <span class="education-date">2018.08 - 2020.12</span>
                             </div>
-                            <div class="mt-4">
-                                <button class="view-details text-accent text-sm flex items-center gap-1 hover:underline open-modal" data-modal="spark-movie-modal" data-en="View Details" data-zh="查看详情">
-                                    <span>View Details</span>
-                                    <i class="fas fa-arrow-right text-xs"></i>
-                                </button>
+                            <div class="education-degree">计算机科学学士 (B.S. in Computer Science) & 数据科学学士 (B.S. in Data
+                                Science)</div>
+                            <div class="education-location">美国·安娜堡</div>
+                            <div class="education-courses">
+                                <span
+                                    class="courses-label">课程：</span>数据结构与算法、面向企业的移动应用开发、数据库管理系统、机器学习理论、计算机视觉、数据挖掘、应用回归分析。
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </section>
 
-                <div class="view-more text-center">
-                    <a href="projects.html" class="btn inline-flex items-center gap-2 py-3 px-6 rounded-full bg-white/5 backdrop-blur-md border border-white/10 text-primary font-medium hover:bg-white/10 transition-all duration-300 group transform hover:-translate-y-1">
-                        <span data-en="View All Projects" data-zh="查看所有项目">查看所有项目</span>
-                        <i class="fas fa-arrow-right transition-transform duration-300 group-hover:translate-x-1"></i>
-                    </a>
+        <!-- 分隔线 -->
+        <div class="section-divider-container reveal">
+            <div class="section-divider"></div>
+        </div>
+
+        <!-- 4. 项目展示 (Bento Box布局) -->
+        <section id="projects" class="section-padding">
+            <div class="section-header reveal">
+                <h2 class="text-3xl font-bold">精选项目</h2>
+                <p class="subtitle mt-2">每个项目都是一次探索与发现之旅。</p>
+            </div>
+            <div class="bento-grid">
+                <!-- 大项目 -->
+                <a href="#" class="bento-item reveal" data-grid-col="8" data-grid-row="2">
+                    <div class="bento-content">
+                        <div class="flex-grow">
+                            <div class="flex justify-between items-start">
+                                <span class="bento-tag">气候风险分析</span>
+                            </div>
+                            <h3 class="mt-4 text-2xl">气候变化监测与预测系统优化</h3>
+                            <p class="mt-2 text-sm" style="color: var(--brown);">S&P Global资助项目，团队项目(tech lead)。为提升S&P
+                                Global气候风险评估精度，分析2015-2020年间MODIS卫星地表温度(LST)与NEX-GDDP模型近地面气温(TAS)的系统性差异(Delta)，覆盖SSP126及SSP585两种情景下的四个代表区域。
+                            </p>
+                        </div>
+                        <div class="mt-4 text-right">
+                            <span class="text-link">查看详情</span>
+                        </div>
+                    </div>
+                    <div class="number-decoration">01</div>
+                </a>
+                <!-- 中项目 -->
+                <a href="#" class="bento-item reveal" data-grid-col="4" data-grid-row="2">
+                    <div class="bento-content">
+                        <div class="flex-grow">
+                            <span class="bento-tag">机器学习</span>
+                            <h3 class="mt-4 text-xl">YouTube评论用户偏向分析与KOL识别</h3>
+                            <p class="mt-2 text-sm" style="color: var(--brown);">
+                                针对动物/宠物相关视频评论数据，精准识别潜在猫/狗饲养者，洞察其论热点，并定位高质量合作KOL，为广告精准投放和KOL选择提供数据驱动决策，预计可提升目标用户互动率达10%。
+                            </p>
+                        </div>
+                        <div class="mt-4 text-right">
+                            <span class="text-link">查看详情</span>
+                        </div>
+                    </div>
+                    <div class="number-decoration">02</div>
+                </a>
+                <!-- 小项目 -->
+                <a href="projects/Bank Customer Churn Prediction/Bank Customer Churn Prediction.html"
+                    class="bento-item reveal" data-grid-col="4">
+                    <div class="bento-content">
+                        <div class="flex-grow">
+                            <div class="flex justify-between items-start">
+                                <span class="bento-tag">客户分析</span>
+                            </div>
+                            <h3 class="mt-4 text-xl">银行客户流失预测与关键驱动因素分析</h3>
+                            <p class="mt-2 text-sm" style="color: var(--brown);">
+                                基于XGBoost+SMOTE的机器学习模型，准确率84.8%。通过SHAP技术解释预测结果，发现客户流失的具体驱动因素。</p>
+                        </div>
+                        <div class="mt-4 text-right">
+                            <span class="text-link">查看详情</span>
+                        </div>
+                    </div>
+                    <div class="number-decoration">03</div>
+                </a>
+                <a href="projects/e-commerce fraud detection/e-commerce fraud detection.html" class="bento-item reveal"
+                    data-grid-col="4">
+                    <div class="bento-content">
+                        <div class="flex-grow">
+                            <div class="flex justify-between items-start">
+                                <span class="bento-tag">风险控制</span>
+                            </div>
+                            <h3 class="mt-4 text-xl">电商首次交易欺诈检测系统</h3>
+                            <p class="mt-2 text-sm" style="color: var(--brown);">
+                                基于LightGBM的欺诈检测系统，实现51.2%欺诈识别率，同时保持98.6%精确度，有效保护用户体验。</p>
+                        </div>
+                        <div class="mt-4 text-right">
+                            <span class="text-link">查看详情</span>
+                        </div>
+                    </div>
+                    <div class="number-decoration">04</div>
+                </a>
+                <a href="projects/lending hub loan prediction/lending hub loan prediction.html"
+                    class="bento-item reveal" data-grid-col="4">
+                    <div class="bento-content">
+                        <div class="flex-grow">
+                            <div class="flex justify-between items-start">
+                                <span class="bento-tag">金融分析</span>
+                            </div>
+                            <h3 class="mt-4 text-xl">Lending Hub 贷款违约预测系统</h3>
+                            <p class="mt-2 text-sm" style="color: var(--brown);">
+                                成本优化的随机森林模型，实现80.7%违约检测率，同时将信贷损失降低44.7%，预计每年节省230万美元。</p>
+                        </div>
+                        <div class="mt-4 text-right">
+                            <span class="text-link">查看详情</span>
+                        </div>
+                    </div>
+                    <div class="number-decoration">05</div>
+                </a>
+            </div>
+        </section>
+
+        <!-- 分隔线 -->
+        <div class="section-divider-container reveal">
+            <div class="section-divider"></div>
+        </div>
+
+        <!-- 5. 技能矩阵 (卡片网格布局) -->
+        <section id="skills" class="section-padding">
+            <div class="section-header reveal">
+                <h2 class="text-3xl font-bold">我的工具箱</h2>
+                <p class="subtitle mt-2">不断打磨的技能，是我解决问题的利器。</p>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 reveal">
+                <div class="skill-card"><i data-lucide="database" class="mx-auto mb-2"></i> SQL</div>
+                <div class="skill-card"><i data-lucide="code" class="mx-auto mb-2"></i> Python</div>
+                <div class="skill-card"><i data-lucide="code" class="mx-auto mb-2"></i> R</div>
+                <div class="skill-card"><i data-lucide="server" class="mx-auto mb-2"></i> Apache Spark</div>
+                <div class="skill-card"><i data-lucide="bar-chart-3" class="mx-auto mb-2"></i> Tableau</div>
+                <div class="skill-card"><i data-lucide="scatter-chart" class="mx-auto mb-2"></i> Power BI</div>
+                <div class="skill-card"><i data-lucide="brain-circuit" class="mx-auto mb-2"></i> Scikit-learn</div>
+                <div class="skill-card"><i data-lucide="test-tubes" class="mx-auto mb-2"></i> A/B Testing</div>
+                <div class="skill-card"><i data-lucide="area-chart" class="mx-auto mb-2"></i> Pandas</div>
+                <div class="skill-card"><i data-lucide="cpu" class="mx-auto mb-2"></i> NumPy</div>
+                <div class="skill-card"><i data-lucide="trending-up" class="mx-auto mb-2"></i> Matplotlib/Seaborn</div>
+                <div class="skill-card"><i data-lucide="network" class="mx-auto mb-2"></i> TensorFlow</div>
+                <div class="skill-card"><i data-lucide="git-branch" class="mx-auto mb-2"></i> Git</div>
+                <div class="skill-card"><i data-lucide="activity" class="mx-auto mb-2"></i> ARIMA</div>
+                <div class="skill-card"><i data-lucide="search" class="mx-auto mb-2"></i> 机器学习</div>
+            </div>
+        </section>
+
+        <!-- 分隔线 -->
+        <div class="section-divider-container reveal">
+            <div class="section-divider"></div>
+        </div>
+
+        <!-- 6. 联系方式 -->
+        <section id="contact" class="section-padding text-center">
+            <div class="reveal">
+                <h2 class="text-3xl font-bold">期待与你交流</h2>
+                <p class="subtitle mt-2 max-w-xl mx-auto">如果你对我的项目感兴趣，或有任何合作机会，请随时与我联系。</p>
+                <div class="mt-8">
+                    <a href="contact.html" class="btn btn-primary">联系我</a>
+                </div>
+                <div class="mt-12 flex justify-center space-x-6">
+                    <a href="#" class="text-link">GitHub</a>
+                    <a href="#" class="text-link">LinkedIn</a>
+                    <a href="#" class="text-link">博客</a>
                 </div>
             </div>
         </section>
     </main>
-    
-    <footer class="footer py-8 border-t border-white/5 bg-background/50 backdrop-blur-sm">
-        <div class="container mx-auto px-4 md:px-6 max-w-6xl">
-            <div class="footer-content flex flex-col md:flex-row justify-between items-center gap-4">
-                <div class="copyright text-sm text-secondary">
-                    <span>© 2024 Juye Xiao</span>
-                    <span class="separator mx-2">|</span>
-                    <span>All Rights Reserved</span>
-                </div>
-                <div class="footer-links flex items-center gap-4">
-                    <a href="https://github.com/JuyeXiao" target="_blank" rel="noopener noreferrer" class="w-10 h-10 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 transition-colors">
-                        <i class="fab fa-github"></i>
-                    </a>
-                    <a href="https://linkedin.com/in/juye-xiao" target="_blank" rel="noopener noreferrer" class="w-10 h-10 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 transition-colors">
-                        <i class="fab fa-linkedin-in"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
+
+    <!-- 7. 页脚 -->
+    <footer class="container-main py-8 mt-12 border-t border-beige text-center text-sm" style="color: var(--brown);">
+        <p>&copy; 2025 肖炬晔. All Rights Reserved.</p>
     </footer>
 
-    <!-- Climate Change Modal -->
-    <div id="climate-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
-        <div class="modal-backdrop fixed inset-0 bg-black/70 backdrop-blur-sm"></div>
-        <div class="modal-content bg-background/90 backdrop-blur-md border border-white/10 rounded-2xl w-full max-w-4xl max-h-[90vh] shadow-2xl transform scale-95 transition-all duration-300 flex flex-col overflow-hidden">
-            <div class="modal-header p-6 border-b border-white/10 flex justify-between items-center bg-background/95 backdrop-blur-lg z-10 shadow-md">
-                <h3 class="text-xl md:text-2xl font-bold flex items-center gap-3">
-                    <span class="text-2xl">🌎</span>
-                    <span data-en="Climate Change Monitoring & Prediction" data-zh="气候变化监测与预测">Climate Change Monitoring & Prediction</span>
-                </h3>
-                <button class="modal-close w-8 h-8 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 transition-colors">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="modal-body p-6 pt-8 overflow-y-auto">
-                <div class="project-description space-y-6">
-                    <h4 class="text-lg font-medium text-accent" data-en="Project Background & Objectives" data-zh="项目背景与目标">Project Background & Objectives</h4>
-                    <p class="text-secondary" data-en="This project aims to develop a comprehensive climate change analysis system using NASA datasets with the following core objectives:" 
-                       data-zh="该项目旨在使用NASA数据集开发全面的气候变化分析系统，主要目标包括：">
-                        This project aims to develop a comprehensive climate change analysis system using NASA datasets with the following core objectives:
-                    </p>
-                    <ul class="list-disc list-inside space-y-2 text-secondary">
-                        <li data-en="Monitor global temperature trends over time" data-zh="监测全球温度趋势随时间的变化">Monitor global temperature trends over time</li>
-                        <li data-en="Predict future climate patterns using time-series analysis" data-zh="使用时间序列分析预测未来气候模式">Predict future climate patterns using time-series analysis</li>
-                        <li data-en="Identify key factors contributing to climate change" data-zh="识别导致气候变化的关键因素">Identify key factors contributing to climate change</li>
-                        <li data-en="Visualize climate data for better understanding and communication" data-zh="可视化气候数据以便更好地理解和交流">Visualize climate data for better understanding and communication</li>
-                    </ul>
-
-                    <h4 class="text-lg font-medium text-accent" data-en="Data Analysis" data-zh="数据分析">Data Analysis</h4>
-                    <div class="space-y-4">
-                        <div class="overflow-x-auto">
-                            <table class="min-w-full bg-white/5 rounded-lg">
-                                <thead>
-                                    <tr>
-                                        <th class="px-4 py-2 border-b border-white/10 text-left text-xs font-medium text-secondary">Data Source</th>
-                                        <th class="px-4 py-2 border-b border-white/10 text-left text-xs font-medium text-secondary">Description</th>
-                                        <th class="px-4 py-2 border-b border-white/10 text-left text-xs font-medium text-secondary">Time Range</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">NASA GISTEMP</td>
-                                        <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">Global surface temperature anomalies</td>
-                                        <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">1880-2023</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">NOAA</td>
-                                        <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">Atmospheric CO2 concentrations</td>
-                                        <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">1958-2023</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">NASA Satellite</td>
-                                        <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">Sea level measurements</td>
-                                        <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">1993-2023</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <h4 class="text-lg font-medium text-accent" data-en="Model Performance" data-zh="模型表现">Model Performance</h4>
-                    <div class="overflow-x-auto">
-                        <table class="min-w-full bg-white/5 rounded-lg">
-                            <thead>
-                                <tr>
-                                    <th class="px-4 py-2 border-b border-white/10 text-left text-xs font-medium text-secondary">Model</th>
-                                    <th class="px-4 py-2 border-b border-white/10 text-left text-xs font-medium text-secondary">RMSE</th>
-                                    <th class="px-4 py-2 border-b border-white/10 text-left text-xs font-medium text-secondary">MAE</th>
-                                    <th class="px-4 py-2 border-b border-white/10 text-left text-xs font-medium text-secondary">R²</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">ARIMA</td>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">0.124</td>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">0.098</td>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">0.87</td>
-                                </tr>
-                                <tr>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">SARIMA</td>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">0.118</td>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">0.092</td>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">0.89</td>
-                                </tr>
-                                <tr>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">Prophet</td>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">0.115</td>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">0.089</td>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">0.91</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <h4 class="text-lg font-medium text-accent" data-en="Key Findings" data-zh="主要发现">Key Findings</h4>
-                    <div class="space-y-4">
-                        <div>
-                            <p class="text-secondary font-medium mb-2" data-en="Temperature Trends:" data-zh="温度趋势：">Temperature Trends:</p>
-                            <ul class="list-disc list-inside space-y-2 text-secondary">
-                                <li data-en="Global temperatures have increased by 1.1°C since pre-industrial times" data-zh="自工业化前以来，全球温度已上升1.1°C">Global temperatures have increased by 1.1°C since pre-industrial times</li>
-                                <li data-en="Rate of warming has accelerated in recent decades" data-zh="近几十年来变暖速率加快">Rate of warming has accelerated in recent decades</li>
-                                <li data-en="Arctic regions warming at twice the global average rate" data-zh="北极地区变暖速率是全球平均水平的两倍">Arctic regions warming at twice the global average rate</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <h4 class="text-lg font-medium text-accent" data-en="Predictive Analysis" data-zh="预测分析">Predictive Analysis</h4>
-                    <div class="overflow-x-auto">
-                        <table class="min-w-full bg-white/5 rounded-lg">
-                            <thead>
-                                <tr>
-                                    <th class="px-4 py-2 border-b border-white/10 text-left text-xs font-medium text-secondary">Scenario</th>
-                                    <th class="px-4 py-2 border-b border-white/10 text-left text-xs font-medium text-secondary">Projected Temperature Increase by 2050</th>
-                                    <th class="px-4 py-2 border-b border-white/10 text-left text-xs font-medium text-secondary">Confidence Interval</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">Low Emissions</td>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">1.5°C</td>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">1.3-1.7°C</td>
-                                </tr>
-                                <tr>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">Medium Emissions</td>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">2.0°C</td>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">1.8-2.2°C</td>
-                                </tr>
-                                <tr>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">High Emissions</td>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">2.7°C</td>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">2.4-3.0°C</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <h4 class="text-lg font-medium text-accent" data-en="Technologies Used" data-zh="使用的技术">Technologies Used</h4>
-                    <div class="tech-stack flex flex-wrap gap-2 mt-2">
-                        <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Python</span>
-                        <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">ARIMA</span>
-                        <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">SARIMA</span>
-                        <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Prophet</span>
-                        <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Pandas</span>
-                        <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">NumPy</span>
-                        <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Matplotlib</span>
-                        <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Scikit-learn</span>
-                        <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">NASA API</span>
-                        <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Jupyter Notebook</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Spark Movie Recommendation Modal -->
-    <div id="spark-movie-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
-        <div class="modal-backdrop fixed inset-0 bg-black/70 backdrop-blur-sm"></div>
-        <div class="modal-content bg-background/90 backdrop-blur-md border border-white/10 rounded-2xl w-full max-w-4xl max-h-[90vh] shadow-2xl transform scale-95 transition-all duration-300 flex flex-col overflow-hidden">
-            <div class="modal-header p-6 border-b border-white/10 flex justify-between items-center bg-background/95 backdrop-blur-lg z-10 shadow-md">
-                <h3 class="text-xl md:text-2xl font-bold flex items-center gap-3">
-                    <span class="text-2xl">🎬</span>
-                    <span data-en="Spark Movie Recommendation System" data-zh="Spark电影推荐系统">Spark Movie Recommendation System</span>
-                </h3>
-                <button class="modal-close w-8 h-8 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 transition-colors">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="modal-body p-6 pt-8 overflow-y-auto">
-                <div class="project-description space-y-6">
-                    <h4 class="text-lg font-medium text-accent" data-en="Project Overview" data-zh="项目概述">Project Overview</h4>
-                    <p class="text-secondary" data-en="Implemented a distributed movie recommendation system using Apache Spark's MLlib to process over 100,000 movie ratings and provide personalized recommendations to users." 
-                       data-zh="使用Apache Spark的MLlib实现分布式电影推荐系统，处理超过100,000个电影评分，为用户提供个性化推荐。">
-                        Implemented a distributed movie recommendation system using Apache Spark's MLlib to process over 100,000 movie ratings and provide personalized recommendations to users.
-                    </p>
-                    
-                    <h4 class="text-lg font-medium text-accent" data-en="Dataset Information" data-zh="数据集信息">Dataset Information</h4>
-                    <div class="overflow-x-auto">
-                        <table class="min-w-full bg-white/5 rounded-lg">
-                            <thead>
-                                <tr>
-                                    <th class="px-4 py-2 border-b border-white/10 text-left text-xs font-medium text-secondary">Dataset</th>
-                                    <th class="px-4 py-2 border-b border-white/10 text-left text-xs font-medium text-secondary">Size</th>
-                                    <th class="px-4 py-2 border-b border-white/10 text-left text-xs font-medium text-secondary">Description</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">MovieLens 100K</td>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">100,836 ratings</td>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">943 users, 1,682 movies</td>
-                                </tr>
-                                <tr>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">User Demographics</td>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">943 records</td>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">Age, gender, occupation, zip code</td>
-                                </tr>
-                                <tr>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">Movie Metadata</td>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">1,682 records</td>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">Title, release date, genres</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    
-                    <h4 class="text-lg font-medium text-accent" data-en="Methodology" data-zh="方法论">Methodology</h4>
-                    <ol class="list-decimal list-inside space-y-2 text-secondary">
-                        <li data-en="Data preprocessing and cleaning" data-zh="数据预处理和清洗">Data preprocessing and cleaning</li>
-                        <li data-en="Feature engineering to extract relevant user and movie attributes" data-zh="特征工程，提取相关的用户和电影属性">Feature engineering to extract relevant user and movie attributes</li>
-                        <li data-en="Implementation of Alternating Least Squares (ALS) algorithm for collaborative filtering" data-zh="实现用于协同过滤的交替最小二乘(ALS)算法">Implementation of Alternating Least Squares (ALS) algorithm for collaborative filtering</li>
-                        <li data-en="Hyperparameter tuning using grid search" data-zh="使用网格搜索进行超参数调优">Hyperparameter tuning using grid search</li>
-                        <li data-en="Model evaluation and validation" data-zh="模型评估和验证">Model evaluation and validation</li>
-                    </ol>
-                    
-                    <h4 class="text-lg font-medium text-accent" data-en="Model Performance" data-zh="模型表现">Model Performance</h4>
-                    <div class="overflow-x-auto">
-                        <table class="min-w-full bg-white/5 rounded-lg">
-                            <thead>
-                                <tr>
-                                    <th class="px-4 py-2 border-b border-white/10 text-left text-xs font-medium text-secondary">Model</th>
-                                    <th class="px-4 py-2 border-b border-white/10 text-left text-xs font-medium text-secondary">RMSE</th>
-                                    <th class="px-4 py-2 border-b border-white/10 text-left text-xs font-medium text-secondary">MAE</th>
-                                    <th class="px-4 py-2 border-b border-white/10 text-left text-xs font-medium text-secondary">Top-10 Accuracy</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">Baseline ALS</td>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">0.96</td>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">0.76</td>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">82%</td>
-                                </tr>
-                                <tr>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">Tuned ALS</td>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">0.93</td>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">0.73</td>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">89%</td>
-                                </tr>
-                                <tr>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">Improvement</td>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">2.9%</td>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">3.8%</td>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">7%</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    
-                    <h4 class="text-lg font-medium text-accent" data-en="Optimized Parameters" data-zh="优化参数">Optimized Parameters</h4>
-                    <div class="overflow-x-auto">
-                        <table class="min-w-full bg-white/5 rounded-lg">
-                            <thead>
-                                <tr>
-                                    <th class="px-4 py-2 border-b border-white/10 text-left text-xs font-medium text-secondary">Parameter</th>
-                                    <th class="px-4 py-2 border-b border-white/10 text-left text-xs font-medium text-secondary">Value</th>
-                                    <th class="px-4 py-2 border-b border-white/10 text-left text-xs font-medium text-secondary">Description</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">rank</td>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">15</td>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">Number of latent factors</td>
-                                </tr>
-                                <tr>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">regParam</td>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">0.1</td>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">Regularization parameter</td>
-                                </tr>
-                                <tr>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">iterations</td>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">20</td>
-                                    <td class="px-4 py-2 border-b border-white/10 text-xs text-secondary">Number of iterations</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    
-                    <h4 class="text-lg font-medium text-accent" data-en="Key Findings" data-zh="主要发现">Key Findings</h4>
-                    <ul class="list-disc list-inside space-y-2 text-secondary">
-                        <li data-en="Optimal rank (latent factors) was found to be 15, balancing model complexity and performance" 
-                            data-zh="最佳秩（潜在因子）为15，平衡了模型复杂性和性能">Optimal rank (latent factors) was found to be 15, balancing model complexity and performance</li>
-                        <li data-en="Regularization was crucial to prevent overfitting, with 0.1 providing the best results" 
-                            data-zh="正则化对防止过拟合至关重要，0.1提供了最佳结果">Regularization was crucial to prevent overfitting, with 0.1 providing the best results</li>
-                        <li data-en="User demographic features improved recommendation accuracy by 5%" 
-                            data-zh="用户人口统计特征将推荐准确率提高了5%">User demographic features improved recommendation accuracy by 5%</li>
-                        <li data-en="Genre-based filtering further enhanced personalization" 
-                            data-zh="基于类型的过滤进一步增强了个性化">Genre-based filtering further enhanced personalization</li>
-                    </ul>
-                    
-                    <h4 class="text-lg font-medium text-accent" data-en="Technologies Used" data-zh="使用的技术">Technologies Used</h4>
-                    <div class="tech-stack flex flex-wrap gap-2 mt-2">
-                        <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">PySpark</span>
-                        <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">MLlib</span>
-                        <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Spark SQL</span>
-                        <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">ALS</span>
-                        <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Collaborative Filtering</span>
-                        <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Pandas</span>
-                        <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">NumPy</span>
-                        <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Matplotlib</span>
-                        <span class="tech-tag px-3 py-1 text-xs rounded-full bg-white/10 border border-white/5">Jupyter Notebook</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 模态框的 JavaScript -->
-    <script>
-        // 模态框功能
-        document.addEventListener('DOMContentLoaded', function() {
-            const modalTriggers = document.querySelectorAll('.open-modal');
-            const modalCloses = document.querySelectorAll('.modal-close, .modal-backdrop');
-            
-            // 打开模态框
-            modalTriggers.forEach(trigger => {
-                trigger.addEventListener('click', function() {
-                    const modalId = this.getAttribute('data-modal');
-                    const modal = document.getElementById(modalId);
-                    
-                    // 显示模态框
-                    document.body.classList.add('overflow-hidden');
-                    modal.classList.remove('opacity-0', 'pointer-events-none');
-                    
-                    // 动画效果
-                    setTimeout(() => {
-                        modal.querySelector('.modal-content').classList.remove('scale-95');
-                        modal.querySelector('.modal-content').classList.add('scale-100');
-                    }, 10);
-                });
-            });
-            
-            // 关闭模态框
-            modalCloses.forEach(close => {
-                close.addEventListener('click', function() {
-                    const modal = this.closest('[id$="-modal"]');
-                    
-                    // 动画效果
-                    modal.querySelector('.modal-content').classList.remove('scale-100');
-                    modal.querySelector('.modal-content').classList.add('scale-95');
-                    
-                    // 隐藏模态框
-                    setTimeout(() => {
-                        modal.classList.add('opacity-0', 'pointer-events-none');
-                        document.body.classList.remove('overflow-hidden');
-                    }, 200);
-                });
-            });
-            
-            // ESC键关闭模态框
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape') {
-                    const openModals = document.querySelectorAll('[id$="-modal"]:not(.opacity-0)');
-                    openModals.forEach(modal => {
-                        modal.querySelector('.modal-close').click();
-                    });
-                }
-            });
-        });
-    </script>
+    <!-- 引入Logo动画JavaScript -->
+    <script src="assets/js/logo.js"></script>
+    <!-- 引入公共模块 -->
+    <script src="assets/js/common.js"></script>
+    <!-- 抽离的页面脚本 -->
+    <script src="assets/js/index.js"></script>
+    <!-- 语言切换模块 -->
+    <script src="assets/js/language-switcher.js"></script>
 </body>
+
 </html>

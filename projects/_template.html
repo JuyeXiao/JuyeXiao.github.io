@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>项目详情 - 数据诗学</title>
+  <meta name="description" content="项目详情标准模板" />
+
+  <!-- 与首页一致：Tailwind / 字体 / 图标 / 站点样式 -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="../assets/css/index.css" />
+  <link rel="stylesheet" href="../assets/css/project.css" />
+
+  <!-- 代码高亮 + 图表库（详情页常用） -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body class="transition-colors duration-300">
+  <!-- 背景装饰（与首页一致） -->
+  <div class="gradient-orb top-[-150px] left-[-150px]"></div>
+  <div class="gradient-orb bottom-[-200px] right-[-200px]" style="background: radial-gradient(circle at center, var(--blue), transparent 60%)"></div>
+
+  <!-- 顶部导航（完全复用首页结构与样式） -->
+  <header id="navbar" class="navbar fixed top-0 left-0 right-0 z-50">
+    <div class="container-main h-full flex items-center justify-between">
+      <a href="../index.html#hero" class="navbar-logo" id="navbar-logo">
+        <svg class="logo-svg-nav" viewBox="0 0 40 40">
+          <g class="grid-bg">
+            <line class="grid-line-v" x1="8" y1="0" x2="8" y2="40" style="animation-delay: 0.1s, 0s" />
+            <line class="grid-line-v" x1="16" y1="0" x2="16" y2="40" style="animation-delay: 0.2s, 0.5s" />
+            <line class="grid-line-v" x1="24" y1="0" x2="24" y2="40" style="animation-delay: 0.3s, 1s" />
+            <line class="grid-line-v" x1="32" y1="0" x2="32" y2="40" style="animation-delay: 0.4s, 1.5s" />
+            <line class="grid-line-h" x1="0" y1="10" x2="40" y2="10" style="animation-delay: 0.5s, 0s" />
+            <line class="grid-line-h" x1="0" y1="20" x2="40" y2="20" style="animation-delay: 0.6s, 0.7s" />
+            <line class="grid-line-h" x1="0" y1="30" x2="40" y2="30" style="animation-delay: 0.7s, 1.4s" />
+          </g>
+          <line class="weaver-line" id="weaverLine" x1="0" y1="20" x2="40" y2="20" />
+          <text class="logo-letters" id="logoLetters" x="20" y="26" text-anchor="middle">JX</text>
+        </svg>
+        <div class="logo-name">
+          <div class="logo-name-text">Juye Xiao</div>
+          <div class="logo-name-subtitle">Data Analyst</div>
+        </div>
+      </a>
+
+      <nav class="hidden md:flex items-center space-x-8">
+        <a href="../index.html#about" class="nav-link">关于</a>
+        <a href="../index.html#experience" class="nav-link">经历</a>
+        <a href="../index.html#education" class="nav-link">教育</a>
+        <a href="../index.html#projects" class="nav-link">项目</a>
+        <a href="../index.html#skills" class="nav-link">技能</a>
+        <a href="../index.html#contact" class="nav-link">联系</a>
+      </nav>
+
+      <div class="flex items-center space-x-4">
+        <button id="theme-toggle" class="btn-secondary !p-2 !rounded-full" title="切换主题">
+          <i data-lucide="sun" class="block dark:hidden"></i>
+          <i data-lucide="moon" class="hidden dark:block"></i>
+        </button>
+        <button id="lang-toggle" class="btn-secondary !p-2 !rounded-full"><span class="font-bold text-sm">EN</span></button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container-main">
+    <!-- Hero -->
+    <section id="project-hero" class="section-padding" style="padding-top: calc(var(--space-xl) + 72px)">
+      <div class="grid md:grid-cols-2 gap-16 items-start w-full">
+        <div class="reveal">
+          <span class="font-semibold text-lg" style="color: var(--coral);">数据分析项目</span>
+          <h1 class="mt-2" style="font-size: var(--text-4xl);">项目标题占位</h1>
+          <p class="subtitle mt-4 max-w-xl">一句话介绍占位（简要说明项目价值）</p>
+
+          <!-- 指标卡片（与银行项目页一致：描述下、按钮上） -->
+          <div class="mt-8">
+            <div class="grid grid-cols-3 gap-4">
+              <div class="contact-info-card" style="min-height: 120px; padding: var(--space-md);">
+                <div class="text-sm font-medium" style="color: var(--brown);">数据量</div>
+                <div class="text-2xl font-bold mt-2" style="color: var(--charcoal);">—</div>
+              </div>
+              <div class="contact-info-card" style="min-height: 120px; padding: var(--space-md);">
+                <div class="text-sm font-medium" style="color: var(--brown);">预测准确率</div>
+                <div class="text-2xl font-bold mt-2" style="color: var(--charcoal);">—</div>
+              </div>
+              <div class="contact-info-card" style="min-height: 120px; padding: var(--space-md);">
+                <div class="text-sm font-medium" style="color: var(--brown);">AUC分数</div>
+                <div class="text-2xl font-bold mt-2" style="color: var(--charcoal);">—</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-8 flex items-center gap-4">
+            <a href="#content" class="btn btn-primary">开始阅读</a>
+            <a href="../index.html#projects" class="btn btn-secondary">返回项目概览</a>
+          </div>
+        </div>
+        <div class="reveal">
+          <!-- 右侧预留：可放项目配图或关键可视化 -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 执行摘要 -->
+    <section id="executive-summary" class="section-padding">
+      <div class="section-header reveal">
+        <h2 class="text-3xl font-bold">📊 执行摘要</h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="summary-card">
+          <h3 class="summary-card-title">业务背景</h3>
+          <p class="summary-card-content">（占位）简要描述业务问题与挑战。</p>
+        </div>
+        <div class="summary-card">
+          <h3 class="summary-card-title">解决方案</h3>
+          <p class="summary-card-content">（占位）概述所采用的方法与整体方案。</p>
+        </div>
+        <div class="summary-card">
+          <h3 class="summary-card-title">业务影响</h3>
+          <p class="summary-card-content">（占位）总结关键指标提升与业务价值。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 主体内容：左侧目录 + 右侧正文 -->
+    <section id="content" class="section-padding">
+      <div class="grid md:grid-cols-12 gap-12">
+        <aside class="md:col-span-3">
+          <nav class="project-toc sticky top-24" id="project-toc">
+            <h3 class="text-xl font-semibold" style="color: var(--dark);">目录</h3>
+            <ul class="mt-4 space-y-2" id="toc-list">
+              <li><a href="#findings" class="toc-link" data-section="findings">主要发现与建议</a></li>
+              <li><a href="#methodology" class="toc-link" data-section="methodology">数据分析方法论</a></li>
+              <li><a href="#evaluation" class="toc-link" data-section="evaluation">模型评估对比</a></li>
+              <li><a href="#shap-analysis" class="toc-link" data-section="shap-analysis">SHAP深度解析</a></li>
+              <li><a href="#conclusion" class="toc-link" data-section="conclusion">结论与行动计划</a></li>
+            </ul>
+          </nav>
+        </aside>
+
+        <div class="md:col-span-9 content-area">
+          <!-- 主要发现与建议 -->
+          <section id="findings" class="section-padding">
+            <div class="section-header">
+              <h2 class="text-3xl font-bold">🔍 主要发现与行动建议</h2>
+            </div>
+            <div class="space-y-4 subtitle mt-4">
+              <p>（占位）在此处总结最重要的结论与可操作建议。</p>
+            </div>
+          </section>
+
+          <!-- 数据分析与方法论 -->
+          <section id="methodology" class="section-padding">
+            <div class="section-header">
+              <h2 class="text-3xl font-bold">📊 数据分析与方法论</h2>
+            </div>
+            <div class="space-y-4 subtitle mt-4">
+              <p>（占位）描述数据、特征工程、建模流程与可视化示例。</p>
+            </div>
+          </section>
+
+          <!-- 模型评估与比较 -->
+          <section id="evaluation" class="section-padding">
+            <div class="section-header">
+              <h2 class="text-3xl font-bold">📈 模型评估与比较</h2>
+            </div>
+            <div class="space-y-4 subtitle mt-4">
+              <p>（占位）使用表格/图表呈现不同模型的指标对比。</p>
+            </div>
+          </section>
+
+          <!-- SHAP深度解析 -->
+          <section id="shap-analysis" class="section-padding">
+            <div class="section-header">
+              <h2 class="text-3xl font-bold">🎯 深度解析：解释模型预测（SHAP分析）</h2>
+            </div>
+            <div class="space-y-4 subtitle mt-4">
+              <p>（占位）放置全局/局部解释图与文字说明。</p>
+            </div>
+          </section>
+
+          <!-- 结论与行动计划 -->
+          <section id="conclusion" class="section-padding">
+            <div class="section-header">
+              <h2 class="text-3xl font-bold">🚀 最终结论与战略行动计划</h2>
+            </div>
+            <div class="space-y-4 subtitle mt-4">
+              <p>（占位）总结项目收获、落地建议与后续工作方向。</p>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <!-- 相关项目（可选） -->
+    <section id="related" class="section-padding">
+      <div class="section-header reveal">
+        <h2 class="text-3xl font-bold">相关项目</h2>
+      </div>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="related-project-card group cursor-pointer">
+          <h3 class="related-project-title">（占位）相关项目 A</h3>
+          <p class="related-project-description">（占位）一句话描述</p>
+          <div class="related-project-link"><span>查看详情</span><i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i></div>
+        </div>
+        <div class="related-project-card group cursor-pointer">
+          <h3 class="related-project-title">（占位）相关项目 B</h3>
+          <p class="related-project-description">（占位）一句话描述</p>
+          <div class="related-project-link"><span>查看详情</span><i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 底部脚本：Prism / 本地脚本 / Logo动画 / 详情页逻辑 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="../assets/js/logo.js"></script>
+  <!-- 引入公共模块 -->
+  <script src="../assets/js/common.js"></script>
+  <script src="../assets/js/charts.js"></script>
+  <script src="../assets/js/project.js"></script>
+</body>
+</html>

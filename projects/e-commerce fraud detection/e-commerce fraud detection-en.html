@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Proactive Fraud Detection for First-Time E-commerce Transactions - Data Poetics</title>
+  <meta name="description" content="Machine learning-based proactive fraud detection system for first-time e-commerce transactions using tuned LightGBM and SHAP technology" />
+
+  <!-- Consistent with homepage: Tailwind / Fonts / Icons / Site styles -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/lucide-react/dist/umd/lucide-react.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="../../assets/css/index.css" />
+  <link rel="stylesheet" href="../../assets/css/project.css" />
+
+  <!-- Code highlighting + Chart libraries (commonly used in detail pages) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body class="transition-colors duration-300">
+  <!-- Background decoration (consistent with homepage) -->
+  <div class="gradient-orb top-[-150px] left-[-150px]"></div>
+  <div class="gradient-orb bottom-[-200px] right-[-200px]" style="background: radial-gradient(circle at center, var(--blue), transparent 60%)"></div>
+
+  <!-- Top navigation (fully reusing homepage structure and style) -->
+  <header id="navbar" class="navbar fixed top-0 left-0 right-0 z-50">
+    <div class="container-main h-full flex items-center justify-between">
+      <!-- Logo (jumps back to homepage Hero with animation) -->
+      <a href="../../index.html#hero" class="navbar-logo" id="navbar-logo">
+        <svg class="logo-svg-nav" viewBox="0 0 40 40">
+          <g class="grid-bg">
+            <line class="grid-line-v" x1="8" y1="0" x2="8" y2="40" style="animation-delay: 0.1s, 0s" />
+            <line class="grid-line-v" x1="16" y1="0" x2="16" y2="40" style="animation-delay: 0.2s, 0.5s" />
+            <line class="grid-line-v" x1="24" y1="0" x2="24" y2="40" style="animation-delay: 0.3s, 1s" />
+            <line class="grid-line-v" x1="32" y1="0" x2="32" y2="40" style="animation-delay: 0.4s, 1.5s" />
+            <line class="grid-line-h" x1="0" y1="10" x2="40" y2="10" style="animation-delay: 0.5s, 0s" />
+            <line class="grid-line-h" x1="0" y1="20" x2="40" y2="20" style="animation-delay: 0.6s, 0.7s" />
+            <line class="grid-line-h" x1="0" y1="30" x2="40" y2="30" style="animation-delay: 0.7s, 1.4s" />
+          </g>
+          <line class="weaver-line" id="weaverLine" x1="0" y1="20" x2="40" y2="20" />
+          <text class="logo-letters" id="logoLetters" x="20" y="26" text-anchor="middle">JX</text>
+        </svg>
+        <div class="logo-name">
+          <div class="logo-name-text">Juye Xiao</div>
+          <div class="logo-name-subtitle">Data Analyst</div>
+        </div>
+      </a>
+
+      <!-- In-page navigation (jumping to corresponding anchors on homepage) -->
+      <nav class="hidden md:flex items-center space-x-8">
+        <a href="../../index.html#about" class="nav-link">About</a>
+        <a href="../../index.html#experience" class="nav-link">Experience</a>
+        <a href="../../index.html#education" class="nav-link">Education</a>
+        <a href="../../index.html#projects" class="nav-link">Projects</a>
+        <a href="../../index.html#skills" class="nav-link">Skills</a>
+        <a href="../../index.html#contact" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="flex items-center space-x-4">
+        <button id="theme-toggle" class="btn-secondary !p-2 !rounded-full" title="Toggle theme">
+          <i data-lucide="sun" class="block dark:hidden"></i>
+          <i data-lucide="moon" class="hidden dark:block"></i>
+        </button>
+        <button id="lang-toggle" class="btn-secondary !p-2 !rounded-full"><span class="font-bold text-sm">中</span></button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container-main">
+    <!-- Project header (Hero-style detail page header) -->
+    <section id="project-hero" class="section-padding" style="padding-top: calc(var(--space-xl) + 72px)">
+      <div class="grid md:grid-cols-2 gap-16 items-start w-full">
+        <div class="reveal">
+          <span class="font-semibold text-lg" style="color: var(--coral);">Data Analysis Project</span>
+          <h1 class="mt-2" style="font-size: var(--text-4xl);">Proactive Fraud Detection for First-Time E-commerce Transactions</h1>
+          <p class="subtitle mt-4 max-w-xl">Machine learning-based proactive fraud detection system achieving 51.2% fraud detection rate while maintaining 98.6% precision, effectively protecting user experience</p>
+          
+          <!-- Data metrics cards -->
+          <div class="mt-8">
+            <div class="grid grid-cols-3 gap-4">
+              <div class="contact-info-card" style="min-height: 120px; padding: var(--space-md);">
+                <div class="text-sm font-medium" style="color: var(--brown);">Dataset Size</div>
+                <div class="text-2xl font-bold mt-2" style="color: var(--charcoal);">138K</div>
+              </div>
+              <div class="contact-info-card" style="min-height: 120px; padding: var(--space-md);">
+                <div class="text-sm font-medium" style="color: var(--brown);">Detection Rate</div>
+                <div class="text-2xl font-bold mt-2" style="color: var(--charcoal);">51.2%</div>
+              </div>
+              <div class="contact-info-card" style="min-height: 120px; padding: var(--space-md);">
+                <div class="text-sm font-medium" style="color: var(--brown);">Precision</div>
+                <div class="text-2xl font-bold mt-2" style="color: var(--charcoal);">98.6%</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="mt-8 flex items-center gap-4">
+            <a href="#content" class="btn btn-primary">Start Reading</a>
+            <a href="../../index.html#projects" class="btn btn-secondary">Back to Projects</a>
+          </div>
+        </div>
+        <div class="reveal">
+          <!-- Space for additional content like project images or charts -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Executive Summary (three-column info cards, redesigned) -->
+    <section id="executive-summary" class="section-padding">
+      <div class="section-header reveal">
+        <h2 class="text-3xl font-bold">📊 Executive Summary</h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="summary-card">
+          <h3 class="summary-card-title">Business Challenge</h3>
+          <p class="summary-card-content">Company XYZ faces significant financial and reputational risk from fraudulent activities during new users' first transactions. The core challenge is effectively blocking fraud without introducing friction that could alienate legitimate new customers - a critical group for business growth. The severe data imbalance (only 1.02% fraud rate) makes traditional detection methods unreliable.</p>
+        </div>
+        <div class="summary-card">
+          <h3 class="summary-card-title">Solution</h3>
+          <p class="summary-card-content">We developed a robust machine learning system leveraging a tuned LightGBM model to predict fraud probability for each new user's first transaction in real-time. The model was trained on user behavioral and technical data, interpreted using SHAP to ensure transparent and business-aligned decision-making. A three-tiered product integration strategy translates risk scores into concrete automated actions.</p>
+        </div>
+        <div class="summary-card">
+          <h3 class="summary-card-title">Business Value</h3>
+          <p class="summary-card-content">Reduce fraud losses by 51.2%: Automatically identify and stop over half of all fraudulent first-time transactions; Protect customer experience & trust: Achieve 98.6% precision with only 0.01% false alarm rate (about 2 per 27,400 legitimate users); Increase operational efficiency: Automate detection process, allowing manual review teams to focus only on highest-risk cases.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main content: Left sidebar + Right content (consistent with documentation standards) -->
+    <section id="content" class="section-padding">
+      <div class="grid md:grid-cols-12 gap-12">
+        <!-- Table of Contents (auto-generated) -->
+        <aside class="md:col-span-3">
+          <nav class="project-toc sticky top-24" id="project-toc">
+            <h3 class="text-xl font-semibold" style="color: var(--dark);">Table of Contents</h3>
+            <ul class="mt-4 space-y-2" id="toc-list">
+              <li><a href="#findings" class="toc-link" data-section="findings">Key Findings & Recommendations</a></li>
+              <li><a href="#methodology" class="toc-link" data-section="methodology">Data Analysis & Methodology</a></li>
+              <li><a href="#evaluation" class="toc-link" data-section="evaluation">Model Evaluation & Comparison</a></li>
+              <li><a href="#shap-analysis" class="toc-link" data-section="shap-analysis">Deep Dive: SHAP Analysis</a></li>
+              <li><a href="#conclusion" class="toc-link" data-section="conclusion">Conclusion & Action Plan</a></li>
+            </ul>
+          </nav>
+        </aside>
+
+        <!-- Content area -->
+        <div class="md:col-span-9 content-area">
+          <!-- Key Findings & Recommended Actions -->
+          <section id="findings" class="section-padding">
+            <div class="section-header">
+              <h2 class="text-3xl font-bold">🔍 Key Findings & Recommended Actions</h2>
+            </div>
+            
+            <div class="space-y-8">
+              <!-- Finding 1: Behavioral Pattern Recognition -->
+              <div class="contact-info-card">
+                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">1. Insight: Behavior, Not Demographics, Predicts Fraud</h3>
+                <div class="space-y-4">
+                  <div>
+                    <strong style="color: var(--coral);">Data Insight</strong>: The strongest fraud indicators are behavioral patterns, specifically <code class="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded text-gray-900 dark:text-gray-100 font-mono text-sm">instantaneous purchases</code> (sub-minute signup-to-purchase time) and <code class="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded text-gray-900 dark:text-gray-100 font-mono text-sm">shared devices</code> (multiple accounts on one device).
+                  </div>
+                  <div>
+                    <strong style="color: var(--sage);">Business Implication</strong>: Fraudsters successfully mimic legitimate users in demographics (age, gender) and purchase value, but their <em>actions</em> give them away. The key to detection lies in analyzing <em>how</em> they transact, not <em>who</em> they are.
+                  </div>
+                  <div>
+                    <strong style="color: var(--blue);">Recommended Action</strong>:
+                    <ul class="list-disc list-inside mt-2 space-y-1 subtitle">
+                      <li>Focus future fraud prevention efforts on capturing more behavioral and technical signals (e.g., advanced device fingerprinting, behavioral biometrics).</li>
+                      <li>Reduce reliance on demographic rules and establish real-time risk control systems based on behavioral analysis.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Finding 2: High Precision Model -->
+              <div class="contact-info-card">
+                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">2. Insight: Near-Perfect Precision Model is Achievable</h3>
+                <div class="space-y-4">
+                  <div>
+                    <strong style="color: var(--coral);">Data Insight</strong>: The final model achieves 98.6% precision and 0.01% false alarm rate, meaning when the model flags a transaction, it is almost certainly fraudulent.
+                  </div>
+                  <div>
+                    <strong style="color: var(--sage);">Business Implication</strong>: We can operate with extremely high confidence. This directly addresses the primary business goal of protecting the new customer experience, avoiding potential customer loss due to false positives.
+                  </div>
+                  <div>
+                    <strong style="color: var(--blue);">Recommended Action</strong>:
+                    <ul class="list-disc list-inside mt-2 space-y-1 subtitle">
+                      <li>Deploy the model using the proposed three-tiered system, automatically trusting and approving the vast majority of transactions.</li>
+                      <li>Apply friction verification only to the small, accurately identified high-risk segment.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Finding 3: Acquisition Channel Risk -->
+              <div class="contact-info-card">
+                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">3. Insight: Acquisition Channel is a Risk Indicator</h3>
+                <div class="space-y-4">
+                  <div>
+                    <strong style="color: var(--coral);">Data Insight</strong>: Users arriving via <strong>Direct traffic</strong> pose a higher fraud risk than those acquired through <strong>SEO</strong> or <strong>Ads</strong>.
+                  </div>
+                  <div>
+                    <strong style="color: var(--sage);">Business Implication</strong>: Fraudsters, especially those using automated scripts, often bypass standard marketing funnels. Organic discovery channels appear to be a signal of legitimacy.
+                  </div>
+                  <div>
+                    <strong style="color: var(--blue);">Recommended Action</strong>: Collaborate with marketing and security teams to apply nuanced monitoring to direct traffic. Consider this feature in future iterations of the risk assessment model.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Finding 4: Time Pattern Analysis -->
+              <div class="contact-info-card">
+                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">4. Insight: Time Patterns Reveal Automated Fraud</h3>
+                <div class="space-y-4">
+                  <div>
+                    <strong style="color: var(--coral);">Data Insight</strong>: Instant purchases (<1 second) have nearly 100% fraud rate, very fast purchases (<60 seconds) have 85% fraud rate, while normal purchases (>1 day) have <0.5% fraud rate.
+                  </div>
+                  <div>
+                    <strong style="color: var(--sage);">Business Implication</strong>: The speed characteristics of automated scripts and bots are distinctly different from normal human behavior, providing a powerful detection signal.
+                  </div>
+                  <div>
+                    <strong style="color: var(--blue);">Recommended Action</strong>:
+                    <ul class="list-disc list-inside mt-2 space-y-1 subtitle">
+                      <li>Implement stricter verification processes for ultra-fast transactions (<1 minute).</li>
+                      <li>Establish time behavior baselines to monitor abnormally fast user operation patterns.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Data Analysis & Methodology -->
+          <section id="methodology" class="section-padding">
+            <div class="section-header">
+              <h2 class="text-3xl font-bold">📊 Data Analysis & Methodology</h2>
+            </div>
+            
+            <div class="space-y-8">
+              <!-- Data Overview -->
+              <div class="contact-info-card">
+                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">Dataset Overview & Quality Assessment</h3>
+                <div class="space-y-4">
+                  <p class="subtitle">The analysis includes 138,376 first-time transaction records, covering 11 core dimensions including user behavior, device information, and geographic location.</p>
+                  
+                  <div class="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-4">
+                    <h4 class="font-semibold text-green-800 dark:text-green-200 mb-3">Data Quality Characteristics</h4>
+                    <ul class="space-y-2 text-green-700 dark:text-green-300">
+                      <li><strong>Excellent Completeness</strong>: Zero missing values, all 138,376 records complete</li>
+                      <li><strong>Severe Class Imbalance</strong>: Only 1,415 fraudulent transactions (1.02%), requiring special handling</li>
+                      <li><strong>Reasonable Time Span</strong>: Covers sufficient business cycles for pattern recognition</li>
+                      <li><strong>Feature-Rich</strong>: Contains behavioral, technical, and geographic multi-dimensional information</li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <strong>Data Import & Environment Setup:</strong>
+                    <pre class="bg-gray-900 text-gray-100 p-4 rounded-lg mt-2 overflow-x-auto"><code class="language-python">import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.model_selection import train_test_split, GridSearchCV
+from sklearn.metrics import precision_score, recall_score, f1_score, roc_auc_score
+from imblearn.over_sampling import SMOTE
+import lightgbm as lgb
+import shap
+
+# Load datasets
+fraud_data = pd.read_csv('Fraud_Data.csv')
+ip_country = pd.read_csv('IpAddress_to_Country.csv')
+
+print(f"Data shape: {fraud_data.shape}")
+print(f"Fraud rate: {fraud_data['class'].mean():.3%}")</code></pre>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Feature Engineering -->
+              <div class="contact-info-card">
+                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">Feature Engineering: Translating Behavior into Risk Signals</h3>
+                <div class="space-y-4">
+                  <p class="subtitle">Raw data doesn't directly reveal user intent. The purpose of feature engineering is to transform raw data points into meaningful <strong>behavioral and contextual features</strong> that act as powerful signals for fraud detection.</p>
+                  
+                  <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+                    <h4 class="font-semibold text-blue-800 dark:text-blue-200 mb-3">Key Feature Categories</h4>
+                    <ul class="space-y-2 text-blue-700 dark:text-blue-300">
+                      <li><strong>Time Behavior Features</strong>: Signup-to-purchase interval, same-hour operations, business hours activity</li>
+                      <li><strong>Device Sharing Features</strong>: Single-device multi-account count, IP address reuse</li>
+                      <li><strong>Geographic Features</strong>: IP-to-country mapping (97.3% success rate)</li>
+                      <li><strong>Channel Features</strong>: Traffic source encoding (Direct, SEO, Ads)</li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <strong>Core Feature Engineering Code:</strong>
+                    <pre class="bg-gray-900 text-gray-100 p-4 rounded-lg mt-2 overflow-x-auto"><code class="language-python"># Time feature engineering
+fraud_data['interval_after_signup'] = (
+    pd.to_datetime(fraud_data['purchase_time']) - 
+    pd.to_datetime(fraud_data['signup_time'])
+).dt.total_seconds()
+
+# Create behavioral speed features
+fraud_data['is_instant_purchase'] = (fraud_data['interval_after_signup'] <= 1).astype(int)
+fraud_data['is_very_fast'] = (fraud_data['interval_after_signup'] <= 60).astype(int)
+fraud_data['is_same_day'] = (fraud_data['interval_after_signup'] <= 86400).astype(int)
+
+# Device sharing features
+device_counts = fraud_data['device_id'].value_counts()
+fraud_data['n_dev_shared'] = fraud_data['device_id'].map(device_counts)
+
+# IP geolocation mapping
+merged_df = pd.merge_asof(
+    fraud_df_sorted, ip_country_sorted,
+    left_on='ip_address', right_on='lower_bound_ip_address',
+    direction='backward'
+)</code></pre>
+                  </div>
+
+                  <h4 class="font-semibold mb-3 mt-6" style="color: var(--dark);">📊 Key Time-Based Insights</h4>
+
+                  <div class="text-center p-6 bg-gray-50 dark:bg-gray-800 rounded-lg mb-6">
+                    <img src="figures/interval_after_signup_log_speed_category_sighup_hour.png" alt="Time Interval Distribution" class="w-full rounded-lg shadow-lg" />
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Visualization 1: Time Interval Distribution - Critical finding: Instant purchases have nearly 100% fraud rate</p>
+                  </div>
+
+                  <div class="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg p-4 mb-6">
+                    <h4 class="font-semibold text-amber-800 dark:text-amber-200 mb-3">Critical Findings:</h4>
+                    <ul class="space-y-1 text-amber-700 dark:text-amber-300">
+                      <li><strong>Instant purchases (<1 second)</strong>: Nearly 100% fraud rate</li>
+                      <li><strong>Very fast purchases (<60 seconds)</strong>: 85% fraud rate</li>
+                      <li><strong>Normal purchases (>1 day)</strong>: <0.5% fraud rate</li>
+                      <li><strong>Overall fraud rate</strong>: 1.02%</li>
+                    </ul>
+                  </div>
+
+                  <div class="text-center p-6 bg-gray-50 dark:bg-gray-800 rounded-lg mb-6">
+                    <img src="figures/sighup_business_hours_sighup_weekend_same_hour.png" alt="Fraud Rate by Hour Patterns" class="w-full rounded-lg shadow-lg" />
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Visualization 2: Fraud Rate by Hour Patterns - Business hours and same-hour purchases are strong fraud indicators</p>
+                  </div>
+
+                  <p class="subtitle mb-4"><strong>Business Implications:</strong></p>
+                  <ul class="list-disc list-inside space-y-1 subtitle mb-6">
+                    <li>Instant purchases are almost certainly automated/fraudulent</li>
+                    <li>Fraudsters operate during business hours to blend with legitimate traffic</li>
+                    <li>Same-hour signup and purchase is the strongest temporal fraud indicator</li>
+                  </ul>
+
+                  <div class="text-center p-6 bg-gray-50 dark:bg-gray-800 rounded-lg mb-6">
+                    <img src="figures/purchase_value.png" alt="Purchase Value Distribution" class="w-full rounded-lg shadow-lg" />
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Visualization 3: Purchase Value Distribution - Fraudsters intentionally mimic normal purchase values</p>
+                  </div>
+
+                  <div class="text-center p-6 bg-gray-50 dark:bg-gray-800 rounded-lg mb-6">
+                    <img src="figures/age_distribution.png" alt="Age Distribution" class="w-full rounded-lg shadow-lg" />
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Visualization 4: Age Distribution - No clear age profile for fraudsters - likely using stolen identities</p>
+                  </div>
+
+                  <div class="text-center p-6 bg-gray-50 dark:bg-gray-800 rounded-lg mb-6">
+                    <img src="figures/market_source_browser.png" alt="Channel and Browser Analysis" class="w-full rounded-lg shadow-lg" />
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Visualization 5: Channel and Browser Analysis - Direct traffic and Chrome browser show elevated fraud risk</p>
+                  </div>
+
+                  <h4 class="font-semibold mb-3" style="color: var(--dark);">Pattern Summary</h4>
+                  <ul class="list-disc list-inside space-y-1 subtitle mb-6">
+                    <li><strong>Price Camouflage</strong>: Fraudsters mimic normal purchase values</li>
+                    <li><strong>No Age Profile</strong>: Fraud spans all demographics (identity theft)</li>
+                    <li><strong>Channel Risk</strong>: Direct > SEO > Ads</li>
+                    <li><strong>Browser Preference</strong>: Chrome most targeted due to market share</li>
+                  </ul>
+
+                  <div class="text-center p-6 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                    <img src="figures/keyfeature_correlation.png" alt="Feature Correlation Heatmap" class="w-full rounded-lg shadow-lg" />
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Visualization 6: Feature Correlation Heatmap - Behavioral features show strongest correlation with fraud</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Model Architecture -->
+              <div class="contact-info-card">
+                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">Model Architecture: LightGBM + SMOTE Pipeline</h3>
+                <div class="space-y-4">
+                  <p class="subtitle">Given the extreme class imbalance (1.02% fraud rate), we employ SMOTE (Synthetic Minority Over-sampling Technique) to balance training data while keeping the test set's original distribution to reflect real-world scenarios.</p>
+                  
+                  <pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto"><code class="language-python">from imblearn.pipeline import Pipeline
+from imblearn.over_sampling import SMOTE
+import lightgbm as lgb
+
+# Create SMOTE + LightGBM Pipeline
+pipeline = Pipeline([
+    ('smote', SMOTE(random_state=42)),
+    ('lgb', lgb.LGBMClassifier(
+        objective='binary',
+        metric='binary_logloss',
+        random_state=42,
+        class_weight='balanced'
+    ))
+])
+
+# Hyperparameter grid
+param_grid = {
+    'lgb__learning_rate': [0.1],
+    'lgb__max_depth': [15],
+    'lgb__n_estimators': [300],
+    'lgb__num_leaves': [100]
+}
+
+# Grid search optimization
+grid_search = GridSearchCV(
+    estimator=pipeline,
+    param_grid=param_grid,
+    scoring='f1',
+    cv=3,
+    n_jobs=-1
+)
+
+grid_search.fit(X_train, y_train)
+best_model = grid_search.best_estimator_</code></pre>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Model Evaluation & Comparison -->
+          <section id="evaluation" class="section-padding">
+            <div class="section-header">
+              <h2 class="text-3xl font-bold">📈 Model Evaluation & Comparison</h2>
+            </div>
+            
+            <div class="space-y-8">
+              <!-- Performance Overview -->
+              <div class="contact-info-card">
+                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">Comprehensive Model Performance Comparison</h3>
+                <div class="overflow-x-auto">
+                  <table class="w-full border-collapse border border-gray-300 dark:border-gray-600">
+                    <thead>
+                      <tr class="bg-gray-100 dark:bg-gray-700">
+                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left text-gray-900 dark:text-gray-100 font-semibold">Model</th>
+                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left text-gray-900 dark:text-gray-100 font-semibold">Accuracy</th>
+                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left text-gray-900 dark:text-gray-100 font-semibold">Precision</th>
+                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left text-gray-900 dark:text-gray-100 font-semibold">Recall</th>
+                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left text-gray-900 dark:text-gray-100 font-semibold">F1-Score</th>
+                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left text-gray-900 dark:text-gray-100 font-semibold">ROC-AUC</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="bg-green-50 dark:bg-green-900/30">
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-bold text-gray-900 dark:text-gray-100">LightGBM (Tuned)</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">0.9949</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-bold text-gray-900 dark:text-gray-100">0.9864</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-bold text-gray-900 dark:text-gray-100">0.5124</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-bold text-gray-900 dark:text-gray-100">0.6744</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-bold text-gray-900 dark:text-gray-100">0.7786</td>
+                      </tr>
+                      <tr class="bg-white dark:bg-gray-800">
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">Random Forest</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">0.9948</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">0.9861</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">0.5018</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">0.6651</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">0.7532</td>
+                      </tr>
+                      <tr class="bg-gray-50 dark:bg-gray-800">
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">Logistic Regression</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">0.9937</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">0.8056</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">0.5124</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">0.6263</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">0.7589</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <!-- Model Selection Rationale -->
+              <div class="contact-info-card">
+                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">Final Model Selection: Advantages of Tuned LightGBM</h3>
+                <div class="space-y-4">
+                  <p class="subtitle">LightGBM was selected as the production deployment model, excelling in three key dimensions: business-aligned precision, fraud detection capability, and overall discriminative power.</p>
+                  
+                  <div class="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-4">
+                    <h4 class="font-semibold text-green-800 dark:text-green-200 mb-3">Key Advantages of LightGBM</h4>
+                    <ul class="space-y-2 text-green-700 dark:text-green-300">
+                      <li><strong>Highest Discriminative Power</strong>: ROC-AUC of 0.7786 indicates best overall predictive performance</li>
+                      <li><strong>Business-Friendly Precision</strong>: 98.64% precision effectively protects customer experience</li>
+                      <li><strong>Balanced F1-Score</strong>: 0.6744 F1-score is highest among all models</li>
+                      <li><strong>Production-Ready</strong>: Robust performance with minimal false positives</li>
+                    </ul>
+                  </div>
+
+                  <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+                    <h4 class="font-semibold text-blue-800 dark:text-blue-200 mb-3">Real Business Impact</h4>
+                    <div class="grid md:grid-cols-2 gap-4 text-blue-700 dark:text-blue-300">
+                      <div>
+                        <strong>Fraud Prevention Effect:</strong>
+                        <ul class="list-disc list-inside mt-1">
+                          <li>51.2% fraud detection rate</li>
+                          <li>~$1.25M annual savings</li>
+                          <li>Significantly reduced chargeback risk</li>
+                        </ul>
+                      </div>
+                      <div>
+                        <strong>User Experience Protection:</strong>
+                        <ul class="list-disc list-inside mt-1">
+                          <li>Only 0.01% false positive rate</li>
+                          <li>1 false alarm per 13,700 users</li>
+                          <li>Protected new customer conversion rate</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- SHAP Deep Analysis -->
+          <section id="shap-analysis" class="section-padding">
+            <div class="section-header">
+              <h2 class="text-3xl font-bold">🎯 Deep Dive: Explaining Model Predictions (SHAP Analysis)</h2>
+            </div>
+            
+            <div class="space-y-8">
+              <div class="contact-info-card">
+                <p class="subtitle mb-6">To understand <em>why</em> the LightGBM model makes its predictions, we conducted SHAP (SHapley Additive exPlanations) analysis. This reveals the impact of each feature on individual predictions and contributions.</p>
+                
+                <!-- Global Insights -->
+                <div class="space-y-6">
+                  <h3 class="text-xl font-semibold" style="color: var(--dark);">Global Insights: Key Drivers of Fraud Detection</h3>
+                  
+                  <div class="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg p-4">
+                    <h4 class="font-semibold text-amber-800 dark:text-amber-200 mb-3">SHAP Feature Importance Ranking</h4>
+                    <ol class="space-y-1 text-amber-700 dark:text-amber-300">
+                      <li><strong>1. is_instant_purchase</strong> - Instant purchases (correlation: 0.45)</li>
+                      <li><strong>2. n_dev_shared</strong> - Device sharing count (correlation: 0.38)</li>
+                      <li><strong>3. same_hour</strong> - Same-hour operations (correlation: 0.31)</li>
+                      <li><strong>4. signup_business_hours</strong> - Business hours signup (correlation: 0.12)</li>
+                      <li><strong>5. source_Direct</strong> - Direct traffic source (correlation: 0.08)</li>
+                    </ol>
+                  </div>
+
+                  <h3 class="text-xl font-semibold" style="color: var(--dark);">Typical Characteristics of High-Risk Transactions</h3>
+                  <p class="subtitle">SHAP analysis reveals clear characteristics of what the model considers high-risk transactions:</p>
+                  
+                  <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4">
+                      <h4 class="font-semibold text-red-800 dark:text-red-200 mb-3">🚨 High-Risk Behavior Patterns</h4>
+                      <ul class="space-y-2 text-red-700 dark:text-red-300">
+                        <li><strong>Instant Purchase</strong>: Signup-to-purchase time <1 minute</li>
+                        <li><strong>Device Sharing</strong>: Multiple user accounts on single device</li>
+                        <li><strong>Direct Access</strong>: Bypassing normal marketing channels</li>
+                        <li><strong>Simultaneous Operations</strong>: Signup and purchase in same hour</li>
+                      </ul>
+                    </div>
+                    <div class="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-4">
+                      <h4 class="font-semibold text-green-800 dark:text-green-200 mb-3">✅ Low-Risk Behavior Patterns</h4>
+                      <ul class="space-y-2 text-green-700 dark:text-green-300">
+                        <li><strong>Delayed Purchase</strong>: Purchase hours or days after signup</li>
+                        <li><strong>Device Exclusivity</strong>: Single user per device pattern</li>
+                        <li><strong>Organic Sources</strong>: Arriving through SEO or Ads</li>
+                        <li><strong>Distributed Operations</strong>: User behavior across different time periods</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <h3 class="text-xl font-semibold" style="color: var(--dark);">Model Intelligence: Behavior Over Demographics</h3>
+                  <div class="text-center p-6 bg-gray-50 dark:bg-gray-800 rounded-lg mb-6">
+                    <img src="figures/SHAP_bar.png" alt="SHAP Feature Importance Plot" class="w-full rounded-lg shadow-lg" />
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">SHAP Feature Importance Plot - Behavioral features dominate the model's decision-making process</p>
+                  </div>
+
+                  <div class="text-center p-6 bg-gray-50 dark:bg-gray-800 rounded-lg mb-6">
+                    <img src="figures/SHAP_feature_importance_beeswarm.png" alt="SHAP Summary Plot" class="w-full rounded-lg shadow-lg" />
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">SHAP Summary Plot - Higher values for instant purchases and device sharing strongly increase fraud probability</p>
+                  </div>
+
+                  <div class="bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800 rounded-lg p-4">
+                    <p class="text-purple-700 dark:text-purple-300">
+                      SHAP analysis confirms that the model intelligently <strong>ignores non-predictive demographic features</strong> like <code class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-gray-900 dark:text-gray-100 font-mono text-sm">age</code>, <code class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-gray-900 dark:text-gray-100 font-mono text-sm">sex</code>, and <code class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-gray-900 dark:text-gray-100 font-mono text-sm">purchase_value</code>.
+                      The true indicators of fraud are not <em>who</em> the users are, but <em>how</em> they behave.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Conclusion & Strategic Action Plan -->
+          <section id="conclusion" class="section-padding">
+            <div class="section-header">
+              <h2 class="text-3xl font-bold">🚀 Final Conclusion & Strategic Action Plan</h2>
+            </div>
+            
+            <div class="space-y-8">
+              <!-- Three-Tiered Risk Response System -->
+              <div class="contact-info-card">
+                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">Product Integration Strategy: Three-Tiered Risk Response System</h3>
+                <p class="subtitle mb-6">Based on the model's predicted fraud probability scores, implement a layered risk response strategy that balances security protection with user experience.</p>
+                
+                <div class="space-y-4">
+                  <div class="border border-green-300 dark:border-green-600 bg-green-50 dark:bg-green-900/20 rounded-lg p-4">
+                    <h4 class="font-semibold text-green-800 dark:text-green-200 mb-2">🟢 Tier 1: Low Risk (Score < 0.5) - "Trust Lane"</h4>
+                    <div class="text-green-700 dark:text-green-300">
+                      <p><strong>Action</strong>: Automatically approve transactions instantly</p>
+                      <p><strong>User Experience</strong>: Completely frictionless, maximizing conversion rates and building customer trust</p>
+                    </div>
+                  </div>
+                  
+                  <div class="border border-yellow-300 dark:border-yellow-600 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg p-4">
+                    <h4 class="font-semibold text-yellow-800 dark:text-yellow-200 mb-2">🟡 Tier 2: Medium Risk (Score 0.5-0.9) - "Verification Step"</h4>
+                    <div class="text-yellow-700 dark:text-yellow-300">
+                      <p><strong>Action</strong>: Temporarily hold transaction and request low-friction verification (e.g., email or SMS code)</p>
+                      <p><strong>User Experience</strong>: Minor automated challenge acting as a smart filter</p>
+                    </div>
+                  </div>
+                  
+                  <div class="border border-red-300 dark:border-red-600 bg-red-50 dark:bg-red-900/20 rounded-lg p-4">
+                    <h4 class="font-semibold text-red-800 dark:text-red-200 mb-2">🔴 Tier 3: High Risk (Score > 0.9) - "Block & Review"</h4>
+                    <div class="text-red-700 dark:text-red-300">
+                      <p><strong>Action</strong>: Automatically decline transaction and flag for manual review queue</p>
+                      <p><strong>User Experience</strong>: Generic error message displayed, manual review process creates critical feedback loop</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Continuous Improvement Plan -->
+              <div class="contact-info-card">
+                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">Continuous Improvement & Monitoring Mechanisms</h3>
+                <div class="space-y-4">
+                  <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                      <h4 class="font-semibold mb-3" style="color: var(--dark);">Monitoring Metrics</h4>
+                      <ul class="space-y-2 subtitle">
+                        <li><strong>Precision Maintenance</strong>: >95% precision threshold</li>
+                        <li><strong>Recall Stability</strong>: 45-55% detection rate range</li>
+                        <li><strong>False Positive Monitoring</strong>: <0.02% false positive rate ceiling</li>
+                        <li><strong>User Experience Impact</strong>: <1% additional verification rate</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <h4 class="font-semibold mb-3" style="color: var(--dark);">Update Mechanisms</h4>
+                      <ul class="space-y-2 subtitle">
+                        <li><strong>A/B Testing</strong>: Small traffic validation of new strategies</li>
+                        <li><strong>Regular Retraining</strong>: Quarterly model update cycles</li>
+                        <li><strong>Feature Monitoring</strong>: Track feature distribution changes</li>
+                        <li><strong>Feedback Loop</strong>: Manual review results flow back to training</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <!-- Related Projects -->
+    <section id="related" class="section-padding">
+      <div class="section-header reveal">
+        <h2 class="text-3xl font-bold">Related Projects</h2>
+      </div>
+      <div class="grid md:grid-cols-2 gap-6">
+        <a href="../Bank Customer Churn Prediction/Bank Customer Churn Prediction-en.html" class="related-project-card group cursor-pointer" style="text-decoration: none;">
+          <h3 class="related-project-title">Bank Customer Churn Prediction</h3>
+          <p class="related-project-description">XGBoost and SHAP-based customer churn prediction and retention strategy</p>
+          <div class="related-project-link">
+            <span>View Details</span>
+            <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>
+          </div>
+        </a>
+        <a href="../lending hub loan prediction/lending hub loan prediction-en.html" class="related-project-card group cursor-pointer" style="text-decoration: none;">
+          <h3 class="related-project-title">Lending Hub Loan Default Prediction</h3>
+          <p class="related-project-description">Multi-model comparison-based loan risk prediction system</p>
+          <div class="related-project-link">
+            <span>View Details</span>
+            <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>
+          </div>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Bottom scripts: Prism / Local scripts / Logo animation / Detail page logic -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="../../assets/js/logo.js"></script>
+  <!-- Include common modules -->
+  <script src="../../assets/js/common.js"></script>
+  <script src="../../assets/js/charts.js"></script>
+  <script src="../../assets/js/project.js"></script>
+  
+  <!-- Language toggle script -->
+  <script>
+    // Language toggle functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const langToggle = document.getElementById('lang-toggle');
+      if (langToggle) {
+        langToggle.addEventListener('click', function() {
+          // Save preference and redirect to Chinese version
+          localStorage.setItem('language', 'zh');
+          window.location.href = 'e-commerce fraud detection.html';
+        });
+      }
+    });
+  </script>
+</body>
+</html>

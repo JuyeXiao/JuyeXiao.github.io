@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>电商首次交易欺诈检测系统 - 数据诗学</title>
+  <meta name="description" content="基于机器学习的电商首次交易主动欺诈检测系统，使用调优LightGBM和SHAP技术构建精准识别欺诈行为的智能系统" />
+
+  <!-- 与首页一致：Tailwind / 字体 / 图标 / 站点样式 -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/lucide-react/dist/umd/lucide-react.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="../../assets/css/index.css" />
+  <link rel="stylesheet" href="../../assets/css/project.css" />
+
+  <!-- 代码高亮 + 图表库（详情页常用） -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body class="transition-colors duration-300">
+  <!-- 背景装饰（与首页一致） -->
+  <div class="gradient-orb top-[-150px] left-[-150px]"></div>
+  <div class="gradient-orb bottom-[-200px] right-[-200px]" style="background: radial-gradient(circle at center, var(--blue), transparent 60%)"></div>
+
+  <!-- 顶部导航（完全复用首页结构与样式） -->
+  <header id="navbar" class="navbar fixed top-0 left-0 right-0 z-50">
+    <div class="container-main h-full flex items-center justify-between">
+      <!-- Logo（跳回首页 Hero 并可播放动画） -->
+      <a href="../../index.html#hero" class="navbar-logo" id="navbar-logo">
+        <svg class="logo-svg-nav" viewBox="0 0 40 40">
+          <g class="grid-bg">
+            <line class="grid-line-v" x1="8" y1="0" x2="8" y2="40" style="animation-delay: 0.1s, 0s" />
+            <line class="grid-line-v" x1="16" y1="0" x2="16" y2="40" style="animation-delay: 0.2s, 0.5s" />
+            <line class="grid-line-v" x1="24" y1="0" x2="24" y2="40" style="animation-delay: 0.3s, 1s" />
+            <line class="grid-line-v" x1="32" y1="0" x2="32" y2="40" style="animation-delay: 0.4s, 1.5s" />
+            <line class="grid-line-h" x1="0" y1="10" x2="40" y2="10" style="animation-delay: 0.5s, 0s" />
+            <line class="grid-line-h" x1="0" y1="20" x2="40" y2="20" style="animation-delay: 0.6s, 0.7s" />
+            <line class="grid-line-h" x1="0" y1="30" x2="40" y2="30" style="animation-delay: 0.7s, 1.4s" />
+          </g>
+          <line class="weaver-line" id="weaverLine" x1="0" y1="20" x2="40" y2="20" />
+          <text class="logo-letters" id="logoLetters" x="20" y="26" text-anchor="middle">JX</text>
+        </svg>
+        <div class="logo-name">
+          <div class="logo-name-text">Juye Xiao</div>
+          <div class="logo-name-subtitle">Data Analyst</div>
+        </div>
+      </a>
+
+      <!-- 页内导航（跳转到首页对应锚点） -->
+      <nav class="hidden md:flex items-center space-x-8">
+        <a href="../../index.html#about" class="nav-link">关于</a>
+        <a href="../../index.html#experience" class="nav-link">经历</a>
+        <a href="../../index.html#education" class="nav-link">教育</a>
+        <a href="../../index.html#projects" class="nav-link">项目</a>
+        <a href="../../index.html#skills" class="nav-link">技能</a>
+        <a href="../../index.html#contact" class="nav-link">联系</a>
+      </nav>
+
+      <div class="flex items-center space-x-4">
+        <button id="theme-toggle" class="btn-secondary !p-2 !rounded-full" title="切换主题">
+          <i data-lucide="sun" class="block dark:hidden"></i>
+          <i data-lucide="moon" class="hidden dark:block"></i>
+        </button>
+        <button id="lang-toggle" class="btn-secondary !p-2 !rounded-full"><span class="font-bold text-sm">EN</span></button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container-main">
+    <!-- 项目头部（Hero风格的详情页抬头） -->
+    <section id="project-hero" class="section-padding" style="padding-top: calc(var(--space-xl) + 72px)">
+      <div class="grid md:grid-cols-2 gap-16 items-start w-full">
+        <div class="reveal">
+          <span class="font-semibold text-lg" style="color: var(--coral);">数据分析项目</span>
+          <h1 class="mt-2" style="font-size: var(--text-4xl);">电商首次交易欺诈检测系统</h1>
+          <p class="subtitle mt-4 max-w-xl">基于机器学习的首次交易主动欺诈检测系统，实现51.2%欺诈识别率，同时保持98.6%的精确度，有效保护用户体验</p>
+          
+          <!-- 数据指标卡片 -->
+          <div class="mt-8">
+            <div class="grid grid-cols-3 gap-4">
+              <div class="contact-info-card" style="min-height: 120px; padding: var(--space-md);">
+                <div class="text-sm font-medium" style="color: var(--brown);">数据量</div>
+                <div class="text-2xl font-bold mt-2" style="color: var(--charcoal);">13.8万条</div>
+              </div>
+              <div class="contact-info-card" style="min-height: 120px; padding: var(--space-md);">
+                <div class="text-sm font-medium" style="color: var(--brown);">欺诈检测率</div>
+                <div class="text-2xl font-bold mt-2" style="color: var(--charcoal);">51.2%</div>
+              </div>
+              <div class="contact-info-card" style="min-height: 120px; padding: var(--space-md);">
+                <div class="text-sm font-medium" style="color: var(--brown);">精确度</div>
+                <div class="text-2xl font-bold mt-2" style="color: var(--charcoal);">98.6%</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="mt-8 flex items-center gap-4">
+            <a href="#content" class="btn btn-primary">开始阅读</a>
+            <a href="../../index.html#projects" class="btn btn-secondary">返回项目概览</a>
+          </div>
+        </div>
+        <div class="reveal">
+          <!-- 这里可以放置其他内容，比如项目图片或图表 -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 执行摘要（三列信息卡，重新设计） -->
+    <section id="executive-summary" class="section-padding">
+      <div class="section-header reveal">
+        <h2 class="text-3xl font-bold">📊 执行摘要</h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="summary-card">
+          <h3 class="summary-card-title">业务挑战</h3>
+          <p class="summary-card-content">XYZ公司在新用户首次交易中面临着重大的财务和声誉风险。核心挑战是如何有效阻止欺诈行为，同时不给合法新客户带来摩擦体验——新客户是业务增长的关键群体。数据的严重不平衡（仅1.02%的交易为欺诈）使得传统检测方法不可靠。</p>
+        </div>
+        <div class="summary-card">
+          <h3 class="summary-card-title">解决方案</h3>
+          <p class="summary-card-content">我们开发了一个强大的机器学习系统，利用调优后的LightGBM模型，实时预测每个新用户首次交易的欺诈概率。该模型基于用户行为和技术数据进行训练，并使用SHAP进行解释，确保其决策透明且符合业务逻辑。设计了三层产品集成策略，将模型的风险评分转化为具体的自动化行动。</p>
+        </div>
+        <div class="summary-card">
+          <h3 class="summary-card-title">商业价值</h3>
+          <p class="summary-card-content">减少51.2%的欺诈损失：通过自动识别并阻止超过一半的欺诈性首次交易；保护客户体验与信任：达到98.6%的精确率，误报率仅为0.01%（约每27,400个合法用户仅2个被误标）；提高运营效率：自动化检测流程，使人工审核团队仅需关注最高风险案例。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 主体内容：左侧目录 + 右侧正文（与文档规范一致） -->
+    <section id="content" class="section-padding">
+      <div class="grid md:grid-cols-12 gap-12">
+        <!-- 目录（自动生成） -->
+        <aside class="md:col-span-3">
+          <nav class="project-toc sticky top-24" id="project-toc">
+            <h3 class="text-xl font-semibold" style="color: var(--dark);">目录</h3>
+            <ul class="mt-4 space-y-2" id="toc-list">
+              <li><a href="#findings" class="toc-link" data-section="findings">主要发现与建议</a></li>
+              <li><a href="#methodology" class="toc-link" data-section="methodology">数据分析方法论</a></li>
+              <li><a href="#evaluation" class="toc-link" data-section="evaluation">模型评估对比</a></li>
+              <li><a href="#shap-analysis" class="toc-link" data-section="shap-analysis">SHAP深度解析</a></li>
+              <li><a href="#conclusion" class="toc-link" data-section="conclusion">结论与行动计划</a></li>
+            </ul>
+          </nav>
+        </aside>
+
+        <!-- 正文区域 -->
+        <div class="md:col-span-9 content-area">
+          <!-- 主要发现与行动建议 -->
+          <section id="findings" class="section-padding">
+            <div class="section-header">
+              <h2 class="text-3xl font-bold">🔍 主要发现与行动建议</h2>
+            </div>
+            
+            <div class="space-y-8">
+              <!-- 发现1：行为模式识别 -->
+              <div class="contact-info-card">
+                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">1. 洞察：行为而非人口统计特征预测欺诈</h3>
+                <div class="space-y-4">
+                  <div>
+                    <strong style="color: var(--coral);">数据洞察</strong>：最强的欺诈指标是行为特征，特别是<code class="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded text-gray-900 dark:text-gray-100 font-mono text-sm">瞬时购买</code>（注册到购买少于1分钟）和<code class="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded text-gray-900 dark:text-gray-100 font-mono text-sm">设备共享</code>（多账户使用同一设备）。
+                  </div>
+                  <div>
+                    <strong style="color: var(--sage);">业务启示</strong>：欺诈者在人口统计特征（年龄、性别）和购买金额方面成功模仿了合法用户，但他们的<em>行为</em>暴露了真相。检测的关键在于分析<em>如何</em>交易，而不是<em>谁</em>在交易。
+                  </div>
+                  <div>
+                    <strong style="color: var(--blue);">行动建议</strong>：
+                    <ul class="list-disc list-inside mt-2 space-y-1 subtitle">
+                      <li>将未来的欺诈防范重点转向捕获更多行为和技术信号（如高级设备指纹识别、行为生物识别）。</li>
+                      <li>减少对人口统计规则的依赖，建立基于行为分析的实时风控系统。</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 发现2：极高精确度模型 -->
+              <div class="contact-info-card">
+                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">2. 洞察：可以实现近乎完美的精确率模型</h3>
+                <div class="space-y-4">
+                  <div>
+                    <strong style="color: var(--coral);">数据洞察</strong>：最终模型实现98.6%的精确度和0.01%的误报率，意味着当模型标记一个交易时，几乎可以确定它是欺诈的。
+                  </div>
+                  <div>
+                    <strong style="color: var(--sage);">业务启示</strong>：我们可以以极高的信心度运行。这直接解决了保护新客户体验的主要业务目标，避免因误报而流失潜在客户。
+                  </div>
+                  <div>
+                    <strong style="color: var(--blue);">行动建议</strong>：
+                    <ul class="list-disc list-inside mt-2 space-y-1 subtitle">
+                      <li>使用提议的三层系统部署模型，自动信任和批准绝大多数交易。</li>
+                      <li>仅对小部分准确识别的高风险交易施加摩擦验证。</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 发现3：获客渠道风险差异 -->
+              <div class="contact-info-card">
+                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">3. 洞察：获客渠道是风险指标</h3>
+                <div class="space-y-4">
+                  <div>
+                    <strong style="color: var(--coral);">数据洞察</strong>：通过<strong>直接流量</strong>到达的用户比通过<strong>SEO</strong>或<strong>广告</strong>获得的用户具有更高的欺诈风险。
+                  </div>
+                  <div>
+                    <strong style="color: var(--sage);">业务含义</strong>：欺诈者，特别是使用自动化脚本的，经常绕过标准营销漏斗。有机发现渠道似乎是合法性的信号。
+                  </div>
+                  <div>
+                    <strong style="color: var(--blue);">建议行动</strong>：与营销和安全团队合作，对直接流量应用细致的监控。在风险评估模型的未来迭代中考虑此特征。
+                  </div>
+                </div>
+              </div>
+
+              <!-- 发现4：时间模式分析 -->
+              <div class="contact-info-card">
+                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">4. 洞察：时间模式揭示自动化欺诈</h3>
+                <div class="space-y-4">
+                  <div>
+                    <strong style="color: var(--coral);">数据洞察</strong>：瞬时购买（<1秒）几乎100%是欺诈，快速购买（<60秒）有85%欺诈率，而正常购买（>1天）欺诈率仅<0.5%。
+                  </div>
+                  <div>
+                    <strong style="color: var(--sage);">业务启示</strong>：自动化脚本和机器人的速度特征明显不同于正常人类行为，这提供了一个强有力的检测信号。
+                  </div>
+                  <div>
+                    <strong style="color: var(--blue);">行动建议</strong>：
+                    <ul class="list-disc list-inside mt-2 space-y-1 subtitle">
+                      <li>对极速交易（<1分钟）实施更严格的验证流程。</li>
+                      <li>建立时间行为基线，监控异常快速的用户操作模式。</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 数据分析与方法论 -->
+          <section id="methodology" class="section-padding">
+            <div class="section-header">
+              <h2 class="text-3xl font-bold">📊 数据分析与方法论</h2>
+            </div>
+            
+            <div class="space-y-8">
+              <!-- 数据概览 -->
+              <div class="contact-info-card">
+                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">数据集概览与质量评估</h3>
+                <div class="space-y-4">
+                  <p class="subtitle">分析包含138,376笔首次交易记录，涵盖用户行为、设备信息、地理位置等11个核心维度。</p>
+                  
+                  <div class="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-4">
+                    <h4 class="font-semibold text-green-800 dark:text-green-200 mb-3">数据质量特点</h4>
+                    <ul class="space-y-2 text-green-700 dark:text-green-300">
+                      <li><strong>完整性极佳</strong>：零缺失值，所有138,376条记录完整</li>
+                      <li><strong>严重类别不平衡</strong>：仅1,415笔欺诈交易（1.02%），需要特殊处理</li>
+                      <li><strong>时间跨度合理</strong>：涵盖足够的业务周期用于模式识别</li>
+                      <li><strong>特征丰富</strong>：包含行为、技术、地理多维度信息</li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <strong>数据导入与环境配置：</strong>
+                    <pre class="bg-gray-900 text-gray-100 p-4 rounded-lg mt-2 overflow-x-auto"><code class="language-python">import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.model_selection import train_test_split, GridSearchCV
+from sklearn.metrics import precision_score, recall_score, f1_score, roc_auc_score
+from imblearn.over_sampling import SMOTE
+import lightgbm as lgb
+import shap
+
+# 加载数据集
+fraud_data = pd.read_csv('Fraud_Data.csv')
+ip_country = pd.read_csv('IpAddress_to_Country.csv')
+
+print(f"数据形状: {fraud_data.shape}")
+print(f"欺诈率: {fraud_data['class'].mean():.3%}")</code></pre>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 特征工程 -->
+              <div class="contact-info-card">
+                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">特征工程：将行为转化为风险信号</h3>
+                <div class="space-y-4">
+                  <p class="subtitle">原始数据并不直接揭示用户意图。特征工程的目的是将原始数据点转换为有意义的<strong>行为和上下文特征</strong>，作为欺诈检测的有力信号。</p>
+                  
+                  <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+                    <h4 class="font-semibold text-blue-800 dark:text-blue-200 mb-3">关键特征类别</h4>
+                    <ul class="space-y-2 text-blue-700 dark:text-blue-300">
+                      <li><strong>时间行为特征</strong>：注册到购买时间间隔、同小时操作、业务时间活动</li>
+                      <li><strong>设备共享特征</strong>：单设备多账户数量、IP地址重复使用</li>
+                      <li><strong>地理特征</strong>：IP地址到国家映射（97.3%成功率）</li>
+                      <li><strong>渠道特征</strong>：流量来源编码（Direct、SEO、Ads）</li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <strong>核心特征工程代码：</strong>
+                    <pre class="bg-gray-900 text-gray-100 p-4 rounded-lg mt-2 overflow-x-auto"><code class="language-python"># 时间特征工程
+fraud_data['interval_after_signup'] = (
+    pd.to_datetime(fraud_data['purchase_time']) - 
+    pd.to_datetime(fraud_data['signup_time'])
+).dt.total_seconds()
+
+# 创建行为速度特征
+fraud_data['is_instant_purchase'] = (fraud_data['interval_after_signup'] <= 1).astype(int)
+fraud_data['is_very_fast'] = (fraud_data['interval_after_signup'] <= 60).astype(int)
+fraud_data['is_same_day'] = (fraud_data['interval_after_signup'] <= 86400).astype(int)
+
+# 设备共享特征
+device_counts = fraud_data['device_id'].value_counts()
+fraud_data['n_dev_shared'] = fraud_data['device_id'].map(device_counts)
+
+# IP地理位置映射
+merged_df = pd.merge_asof(
+    fraud_df_sorted, ip_country_sorted,
+    left_on='ip_address', right_on='lower_bound_ip_address',
+    direction='backward'
+)</code></pre>
+                  </div>
+
+                  <h4 class="font-semibold mb-3 mt-6" style="color: var(--dark);">📊 关键时间洞察</h4>
+
+                  <div class="text-center p-6 bg-gray-50 dark:bg-gray-800 rounded-lg mb-6">
+                    <img src="figures/interval_after_signup_log_speed_category_sighup_hour.png" alt="时间间隔分布" class="w-full rounded-lg shadow-lg" />
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">可视化图1：时间间隔分布 - 关键发现：即时购买几乎100%是欺诈</p>
+                  </div>
+
+                  <div class="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg p-4 mb-6">
+                    <h4 class="font-semibold text-amber-800 dark:text-amber-200 mb-3">关键发现：</h4>
+                    <ul class="space-y-1 text-amber-700 dark:text-amber-300">
+                      <li><strong>即时购买（<1秒）</strong>：近100%欺诈率</li>
+                      <li><strong>非常快速购买（<60秒）</strong>：85%欺诈率</li>
+                      <li><strong>正常购买（>1天）</strong>：<0.5%欺诈率</li>
+                      <li><strong>总体欺诈率</strong>：1.02%</li>
+                    </ul>
+                  </div>
+
+                  <div class="text-center p-6 bg-gray-50 dark:bg-gray-800 rounded-lg mb-6">
+                    <img src="figures/sighup_business_hours_sighup_weekend_same_hour.png" alt="按小时模式的欺诈率" class="w-full rounded-lg shadow-lg" />
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">可视化图2：按小时模式的欺诈率 - 工作时间和同一小时购买是强欺诈指标</p>
+                  </div>
+
+                  <p class="subtitle mb-4"><strong>业务含义：</strong></p>
+                  <ul class="list-disc list-inside space-y-1 subtitle mb-6">
+                    <li>即时购买几乎肯定是自动化/欺诈性的</li>
+                    <li>欺诈者在工作时间运作以混入合法流量</li>
+                    <li>同一小时注册和购买是最强的时间欺诈指标</li>
+                  </ul>
+
+                  <div class="text-center p-6 bg-gray-50 dark:bg-gray-800 rounded-lg mb-6">
+                    <img src="figures/purchase_value.png" alt="购买价值分布" class="w-full rounded-lg shadow-lg" />
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">可视化图3：购买价值分布 - 欺诈者故意模仿正常购买价值</p>
+                  </div>
+
+                  <div class="text-center p-6 bg-gray-50 dark:bg-gray-800 rounded-lg mb-6">
+                    <img src="figures/age_distribution.png" alt="年龄分布" class="w-full rounded-lg shadow-lg" />
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">可视化图4：年龄分布 - 欺诈者无明确年龄特征 - 可能使用被盗身份</p>
+                  </div>
+
+                  <div class="text-center p-6 bg-gray-50 dark:bg-gray-800 rounded-lg mb-6">
+                    <img src="figures/market_source_browser.png" alt="渠道和浏览器分析" class="w-full rounded-lg shadow-lg" />
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">可视化图5：渠道和浏览器分析 - 直接流量和Chrome浏览器显示更高的欺诈风险</p>
+                  </div>
+
+                  <h4 class="font-semibold mb-3" style="color: var(--dark);">模式总结</h4>
+                  <ul class="list-disc list-inside space-y-1 subtitle mb-6">
+                    <li><strong>价格伪装</strong>：欺诈者模仿正常购买价值</li>
+                    <li><strong>无年龄特征</strong>：欺诈跨越所有人口统计（身份盗窃）</li>
+                    <li><strong>渠道风险</strong>：直接 > SEO > 广告</li>
+                    <li><strong>浏览器偏好</strong>：Chrome因市场份额最受攻击</li>
+                  </ul>
+
+                  <div class="text-center p-6 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                    <img src="figures/keyfeature_correlation.png" alt="特征相关性热图" class="w-full rounded-lg shadow-lg" />
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">可视化图6：特征相关性热图 - 行为特征与欺诈的相关性最强</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 模型选择 -->
+              <div class="contact-info-card">
+                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">模型架构：LightGBM + SMOTE流水线</h3>
+                <div class="space-y-4">
+                  <p class="subtitle">考虑到极端的类别不平衡（1.02%欺诈率），采用SMOTE合成少数类过采样技术平衡训练数据，同时保持测试集原始分布以反映真实场景。</p>
+                  
+                  <pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto"><code class="language-python">from imblearn.pipeline import Pipeline
+from imblearn.over_sampling import SMOTE
+import lightgbm as lgb
+
+# 创建SMOTE + LightGBM流水线
+pipeline = Pipeline([
+    ('smote', SMOTE(random_state=42)),
+    ('lgb', lgb.LGBMClassifier(
+        objective='binary',
+        metric='binary_logloss',
+        random_state=42,
+        class_weight='balanced'
+    ))
+])
+
+# 超参数网格
+param_grid = {
+    'lgb__learning_rate': [0.1],
+    'lgb__max_depth': [15],
+    'lgb__n_estimators': [300],
+    'lgb__num_leaves': [100]
+}
+
+# 网格搜索优化
+grid_search = GridSearchCV(
+    estimator=pipeline,
+    param_grid=param_grid,
+    scoring='f1',
+    cv=3,
+    n_jobs=-1
+)
+
+grid_search.fit(X_train, y_train)
+best_model = grid_search.best_estimator_</code></pre>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 模型评估与比较 -->
+          <section id="evaluation" class="section-padding">
+            <div class="section-header">
+              <h2 class="text-3xl font-bold">📈 模型评估与比较</h2>
+            </div>
+            
+            <div class="space-y-8">
+              <!-- 性能概览 -->
+              <div class="contact-info-card">
+                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">模型性能全面对比</h3>
+                <div class="overflow-x-auto">
+                  <table class="w-full border-collapse border border-gray-300 dark:border-gray-600">
+                    <thead>
+                      <tr class="bg-gray-100 dark:bg-gray-700">
+                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left text-gray-900 dark:text-gray-100 font-semibold">模型</th>
+                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left text-gray-900 dark:text-gray-100 font-semibold">准确率</th>
+                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left text-gray-900 dark:text-gray-100 font-semibold">精确率</th>
+                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left text-gray-900 dark:text-gray-100 font-semibold">召回率</th>
+                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left text-gray-900 dark:text-gray-100 font-semibold">F1分数</th>
+                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left text-gray-900 dark:text-gray-100 font-semibold">ROC-AUC</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="bg-green-50 dark:bg-green-900/30">
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-bold text-gray-900 dark:text-gray-100">LightGBM（调优）</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">0.9949</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-bold text-gray-900 dark:text-gray-100">0.9864</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-bold text-gray-900 dark:text-gray-100">0.5124</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-bold text-gray-900 dark:text-gray-100">0.6744</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-bold text-gray-900 dark:text-gray-100">0.7786</td>
+                      </tr>
+                      <tr class="bg-white dark:bg-gray-800">
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">随机森林</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">0.9948</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">0.9861</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">0.5018</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">0.6651</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">0.7532</td>
+                      </tr>
+                      <tr class="bg-gray-50 dark:bg-gray-800">
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">逻辑回归</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">0.9937</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">0.8056</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">0.5124</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">0.6263</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">0.7589</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <!-- 模型选择理由 -->
+              <div class="contact-info-card">
+                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">最终模型选择：调优LightGBM的优势</h3>
+                <div class="space-y-4">
+                  <p class="subtitle">LightGBM被选为生产部署模型，在三个关键维度都表现最优：业务对齐精确度、欺诈检测能力和整体判别力。</p>
+                  
+                  <div class="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-4">
+                    <h4 class="font-semibold text-green-800 dark:text-green-200 mb-3">LightGBM关键优势</h4>
+                    <ul class="space-y-2 text-green-700 dark:text-green-300">
+                      <li><strong>最高判别能力</strong>：ROC-AUC达到0.7786，表明最佳的整体预测性能</li>
+                      <li><strong>业务友好精确度</strong>：98.64%精确度有效保护客户体验</li>
+                      <li><strong>平衡的F1分数</strong>：0.6744的F1分数在所有模型中最高</li>
+                      <li><strong>生产就绪</strong>：强大性能配合最少的误报</li>
+                    </ul>
+                  </div>
+
+                  <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+                    <h4 class="font-semibold text-blue-800 dark:text-blue-200 mb-3">实际业务影响</h4>
+                    <div class="grid md:grid-cols-2 gap-4 text-blue-700 dark:text-blue-300">
+                      <div>
+                        <strong>欺诈防护效果：</strong>
+                        <ul class="list-disc list-inside mt-1">
+                          <li>51.2%欺诈检测率</li>
+                          <li>每年节省约125万美元</li>
+                          <li>显著降低拒付风险</li>
+                        </ul>
+                      </div>
+                      <div>
+                        <strong>用户体验保护：</strong>
+                        <ul class="list-disc list-inside mt-1">
+                          <li>误报率仅0.01%</li>
+                          <li>每13,700个用户仅1次误判</li>
+                          <li>保护新客户转化率</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- SHAP深度解析 -->
+          <section id="shap-analysis" class="section-padding">
+            <div class="section-header">
+              <h2 class="text-3xl font-bold">🎯 深度解析：解释模型预测（SHAP分析）</h2>
+            </div>
+            
+            <div class="space-y-8">
+              <div class="contact-info-card">
+                <p class="subtitle mb-6">为了理解LightGBM模型<em>为什么</em>会做出其预测，我们进行了SHAP（SHapley Additive exPlanations）分析。这揭示了每个特征对个体预测的具体影响和贡献。</p>
+                
+                <!-- 全局洞察 -->
+                <div class="space-y-6">
+                  <h3 class="text-xl font-semibold" style="color: var(--dark);">全局洞察：欺诈检测的关键驱动因素</h3>
+                  
+                  <div class="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg p-4">
+                    <h4 class="font-semibold text-amber-800 dark:text-amber-200 mb-3">SHAP特征重要性排序</h4>
+                    <ol class="space-y-1 text-amber-700 dark:text-amber-300">
+                      <li><strong>1. is_instant_purchase</strong> - 瞬时购买（相关性：0.45）</li>
+                      <li><strong>2. n_dev_shared</strong> - 设备共享数量（相关性：0.38）</li>
+                      <li><strong>3. same_hour</strong> - 同小时操作（相关性：0.31）</li>
+                      <li><strong>4. signup_business_hours</strong> - 业务时间注册（相关性：0.12）</li>
+                      <li><strong>5. source_Direct</strong> - 直接流量来源（相关性：0.08）</li>
+                    </ol>
+                  </div>
+
+                  <h3 class="text-xl font-semibold" style="color: var(--dark);">高风险交易的典型特征</h3>
+                  <p class="subtitle">SHAP分析揭示了模型认为的高风险交易的清晰特征：</p>
+                  
+                  <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4">
+                      <h4 class="font-semibold text-red-800 dark:text-red-200 mb-3">🚨 高风险行为模式</h4>
+                      <ul class="space-y-2 text-red-700 dark:text-red-300">
+                        <li><strong>瞬时购买</strong>：注册到购买时间<1分钟</li>
+                        <li><strong>设备共享</strong>：单设备上多个用户账户</li>
+                        <li><strong>直接访问</strong>：绕过正常营销渠道</li>
+                        <li><strong>同时操作</strong>：注册和购买在同一小时</li>
+                      </ul>
+                    </div>
+                    <div class="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-4">
+                      <h4 class="font-semibold text-green-800 dark:text-green-200 mb-3">✅ 低风险行为模式</h4>
+                      <ul class="space-y-2 text-green-700 dark:text-green-300">
+                        <li><strong>延迟购买</strong>：注册后数小时或数天购买</li>
+                        <li><strong>设备独占</strong>：单用户单设备模式</li>
+                        <li><strong>有机来源</strong>：通过SEO或广告到达</li>
+                        <li><strong>分散操作</strong>：不同时间段的用户行为</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <h3 class="text-xl font-semibold" style="color: var(--dark);">模型智能：行为胜过画像</h3>
+                  <div class="text-center p-6 bg-gray-50 dark:bg-gray-800 rounded-lg mb-6">
+                    <img src="figures/SHAP_bar.png" alt="SHAP特征重要性图" class="w-full rounded-lg shadow-lg" />
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">SHAP特征重要性图 - 行为特征主导模型的决策过程</p>
+                  </div>
+
+                  <div class="text-center p-6 bg-gray-50 dark:bg-gray-800 rounded-lg mb-6">
+                    <img src="figures/SHAP_feature_importance_beeswarm.png" alt="SHAP摘要图" class="w-full rounded-lg shadow-lg" />
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">SHAP摘要图 - 即时购买和设备共享的高值强烈增加欺诈概率</p>
+                  </div>
+
+                  <div class="bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800 rounded-lg p-4">
+                    <p class="text-purple-700 dark:text-purple-300">
+                      SHAP分析证实模型智能地<strong>忽略了非预测性的人口统计特征</strong>，如<code class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-gray-900 dark:text-gray-100 font-mono text-sm">age</code>、<code class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-gray-900 dark:text-gray-100 font-mono text-sm">sex</code>和<code class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-gray-900 dark:text-gray-100 font-mono text-sm">purchase_value</code>。
+                      真正的欺诈指标不是<em>用户是谁</em>，而是<em>用户如何行为</em>。
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 结论与战略行动计划 -->
+          <section id="conclusion" class="section-padding">
+            <div class="section-header">
+              <h2 class="text-3xl font-bold">🚀 最终结论与战略行动计划</h2>
+            </div>
+            
+            <div class="space-y-8">
+              <!-- 三层风险响应系统 -->
+              <div class="contact-info-card">
+                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">产品集成策略：三层风险响应系统</h3>
+                <p class="subtitle mb-6">基于模型预测的欺诈概率分数，实施分层风险响应策略，平衡安全防护与用户体验。</p>
+                
+                <div class="space-y-4">
+                  <div class="border border-green-300 dark:border-green-600 bg-green-50 dark:bg-green-900/20 rounded-lg p-4">
+                    <h4 class="font-semibold text-green-800 dark:text-green-200 mb-2">🟢 第1层：低风险（评分 < 0.5）- "信任通道"</h4>
+                    <div class="text-green-700 dark:text-green-300">
+                      <p><strong>处理方式</strong>：自动即时批准交易</p>
+                      <p><strong>用户体验</strong>：完全无摩擦，最大化转化率并建立客户信任</p>
+                    </div>
+                  </div>
+                  
+                  <div class="border border-yellow-300 dark:border-yellow-600 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg p-4">
+                    <h4 class="font-semibold text-yellow-800 dark:text-yellow-200 mb-2">🟡 第2层：中风险（评分 0.5-0.9）- "验证步骤"</h4>
+                    <div class="text-yellow-700 dark:text-yellow-300">
+                      <p><strong>处理方式</strong>：暂时保留交易并请求低摩擦验证（如邮箱或短信验证码）</p>
+                      <p><strong>用户体验</strong>：轻微的自动化挑战，充当智能过滤器</p>
+                    </div>
+                  </div>
+                  
+                  <div class="border border-red-300 dark:border-red-600 bg-red-50 dark:bg-red-900/20 rounded-lg p-4">
+                    <h4 class="font-semibold text-red-800 dark:text-red-200 mb-2">🔴 第3层：高风险（评分 > 0.9）- "拦截与审查"</h4>
+                    <div class="text-red-700 dark:text-red-300">
+                      <p><strong>处理方式</strong>：自动拒绝交易并标记为人工审查队列</p>
+                      <p><strong>用户体验</strong>：显示通用错误消息，人工审查流程创建关键反馈循环</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 持续改进计划 -->
+              <div class="contact-info-card">
+                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">持续改进与监控机制</h3>
+                <div class="space-y-4">
+                  <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                      <h4 class="font-semibold mb-3" style="color: var(--dark);">监控指标</h4>
+                      <ul class="space-y-2 subtitle">
+                        <li><strong>精确度维持</strong>：>95%精确度阈值</li>
+                        <li><strong>召回率稳定</strong>：45-55%检测率范围</li>
+                        <li><strong>误报监控</strong>：<0.02%误报率上限</li>
+                        <li><strong>用户体验影响</strong>：<1%额外验证率</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <h4 class="font-semibold mb-3" style="color: var(--dark);">更新机制</h4>
+                      <ul class="space-y-2 subtitle">
+                        <li><strong>A/B测试</strong>：小流量验证新策略效果</li>
+                        <li><strong>定期重训练</strong>：季度模型更新周期</li>
+                        <li><strong>特征监控</strong>：追踪特征分布变化</li>
+                        <li><strong>反馈循环</strong>：人工审查结果回流训练</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <!-- 相关项目 -->
+    <section id="related" class="section-padding">
+      <div class="section-header reveal">
+        <h2 class="text-3xl font-bold">相关项目</h2>
+      </div>
+      <div class="grid md:grid-cols-2 gap-6">
+        <a href="../Bank Customer Churn Prediction/Bank Customer Churn Prediction.html" class="related-project-card group cursor-pointer" style="text-decoration: none;">
+          <h3 class="related-project-title">银行客户流失预测</h3>
+          <p class="related-project-description">基于XGBoost和SHAP的客户流失预测与挽留策略</p>
+          <div class="related-project-link">
+            <span>查看详情</span>
+            <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>
+          </div>
+        </a>
+        <a href="../lending hub loan prediction/lending hub loan prediction.html" class="related-project-card group cursor-pointer" style="text-decoration: none;">
+          <h3 class="related-project-title">Lending Hub贷款违约预测</h3>
+          <p class="related-project-description">基于多模型对比的贷款风险预测系统</p>
+          <div class="related-project-link">
+            <span>查看详情</span>
+            <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>
+          </div>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- 底部脚本：Prism / 本地脚本 / Logo动画 / 详情页逻辑 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="../../assets/js/logo.js"></script>
+  <!-- 引入公共模块 -->
+  <script src="../../assets/js/common.js"></script>
+  <script src="../../assets/js/charts.js"></script>
+  <script src="../../assets/js/project.js"></script>
+  
+  <!-- Language toggle script -->
+  <script>
+    // Language toggle functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const langToggle = document.getElementById('lang-toggle');
+      if (langToggle) {
+        langToggle.addEventListener('click', function() {
+          // Save preference and redirect to English version
+          localStorage.setItem('language', 'en');
+          window.location.href = 'e-commerce fraud detection-en.html';
+        });
+      }
+    });
+  </script>
+</body>
+</html>

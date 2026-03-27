@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Analyst Portfolio</title>
+
+    <!-- Configure CSP to allow Tailwind CSS -->
+    <meta http-equiv="Content-Security-Policy"
+        content="script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://unpkg.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com;">
+
+    <!-- Tailwind CSS for rapid prototyping -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Icon Library -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Page Styles -->
+    <link rel="stylesheet" href="assets/css/index.css" />
+</head>
+
+<body class="transition-colors duration-300">
+
+    <!-- Background Decoration -->
+    <div class="gradient-orb top-[-150px] left-[-150px]"></div>
+    <div class="gradient-orb bottom-[-200px] right-[-200px]"
+        style="background: radial-gradient(circle at center, var(--blue), transparent 60%);"></div>
+
+    <!-- 1. Navigation Bar -->
+    <header id="navbar" class="navbar fixed top-0 left-0 right-0 z-50">
+        <div class="container-main h-full flex items-center justify-between">
+            <!-- Logo Section -->
+            <a href="#hero" class="navbar-logo" id="navbar-logo">
+                <!-- SVG Logo -->
+                <svg class="logo-svg-nav" viewBox="0 0 40 40">
+                    <!-- Data Grid Background -->
+                    <g class="grid-bg">
+                        <!-- Vertical Lines -->
+                        <line class="grid-line-v" x1="8" y1="0" x2="8" y2="40" style="animation-delay: 0.1s, 0s" />
+                        <line class="grid-line-v" x1="16" y1="0" x2="16" y2="40" style="animation-delay: 0.2s, 0.5s" />
+                        <line class="grid-line-v" x1="24" y1="0" x2="24" y2="40" style="animation-delay: 0.3s, 1s" />
+                        <line class="grid-line-v" x1="32" y1="0" x2="32" y2="40" style="animation-delay: 0.4s, 1.5s" />
+
+                        <!-- Horizontal Lines -->
+                        <line class="grid-line-h" x1="0" y1="10" x2="40" y2="10" style="animation-delay: 0.5s, 0s" />
+                        <line class="grid-line-h" x1="0" y1="20" x2="40" y2="20" style="animation-delay: 0.6s, 0.7s" />
+                        <line class="grid-line-h" x1="0" y1="30" x2="40" y2="30" style="animation-delay: 0.7s, 1.4s" />
+                    </g>
+
+                    <!-- Weaver Animation Line -->
+                    <line class="weaver-line" id="weaverLine" x1="0" y1="20" x2="40" y2="20" />
+
+                    <!-- JX Letters -->
+                    <text class="logo-letters" id="logoLetters" x="20" y="26" text-anchor="middle">JX</text>
+                </svg>
+
+                <!-- Name Signature (Hover Display) -->
+                <div class="logo-name">
+                    <div class="logo-name-text">Juye Xiao</div>
+                    <div class="logo-name-subtitle">Data Analyst</div>
+                </div>
+            </a>
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#about" class="nav-link">About</a>
+                <a href="#experience" class="nav-link">Experience</a>
+                <a href="#education" class="nav-link">Education</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </nav>
+            <div class="flex items-center space-x-4">
+                <button id="theme-toggle" class="btn-secondary !p-2 !rounded-full">
+                    <i data-lucide="sun" class="block dark:hidden"></i>
+                    <i data-lucide="moon" class="hidden dark:block"></i>
+                </button>
+                <button id="lang-toggle" class="btn-secondary !p-2 !rounded-full">
+                    <span class="font-bold text-sm">中</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container-main">
+        <!-- 2. Hero Section (Split Screen Layout) -->
+        <section id="hero" class="section-padding min-h-screen flex items-center">
+            <div class="grid gap-16 items-center hero-grid w-full">
+                <div class="reveal">
+                    <span class="font-semibold text-lg" style="color: var(--coral);">Senior Data Analyst</span>
+                    <h1 class="mt-2" style="font-size: var(--text-5xl);">Hello, I'm Juye Xiao</h1>
+                    <p class="subtitle mt-4 max-w-lg">M.S. in Applied Analytics from Columbia University with nearly 4
+                        years of experience in data analysis and database management, specializing in leveraging SQL,
+                        Python, and Apache Spark for deep data insights and value creation. Extensive experience in
+                        inventory and sales analysis, A/B testing optimization, and climate risk analysis projects,
+                        committed to creating tangible business value through data-driven insights.</p>
+
+                    <!-- Metrics Component (Aligned with text width above, horizontal layout) -->
+                    <div class="mt-8 max-w-lg">
+                        <div class="grid grid-cols-3 gap-8">
+                            <div class="data-verse left">
+                                <div class="number" data-count="94">0</div>
+                                <div class="label">Prediction Accuracy</div>
+                            </div>
+                            <div class="data-verse left">
+                                <div class="number" data-count="500">0</div>
+                                <div class="label">Million-Scale Data</div>
+                            </div>
+                            <div class="data-verse left">
+                                <div class="number" data-count="23">0</div>
+                                <div class="label">Cost Reduction %</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-8 max-w-lg flex items-center gap-4">
+                        <a href="#contact" class="btn btn-primary">Contact Me</a>
+                        <a href="#" class="btn btn-secondary">Download Resume</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Divider -->
+        <div class="section-divider-container reveal">
+            <div class="section-divider"></div>
+        </div>
+
+        <!-- 3. About Me -->
+        <section id="about" class="section-padding">
+            <div class="grid md:grid-cols-3 gap-16 items-center reveal">
+                <div class="hidden md:flex justify-center items-center">
+                    <span class="decorative-background-text">Data</span>
+                </div>
+                <div class="md:col-span-2">
+                    <h2 class="text-3xl font-bold">The Fusion of Logic and Insight</h2>
+                    <div class="mt-6 space-y-4 text-lg" style="color: var(--brown);">
+                        <p>Nearly 4 years of data analysis experience, specializing in transforming complex data into
+                            actionable business insights.</p>
+                        <p>I believe data is not just cold numbers, but poetry containing business stories. My role is
+                            to be an excellent "translator" between data and business value.</p>
+                        <p>Good data analysis is not just a display of technical skills, but a manifestation of deep
+                            business understanding. Through combining statistics, machine learning, and visualization
+                            techniques, I help businesses navigate the ocean of data.</p>
+                        <p>Having served industries including e-commerce, finance, and transportation, I've led core
+                            projects in sales forecasting, user profiling, and A/B testing, achieving cumulative cost
+                            optimization of 10-12% and ROI improvements of up to 15%.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Divider -->
+        <div class="section-divider-container reveal">
+            <div class="section-divider"></div>
+        </div>
+
+        <!-- Work Experience -->
+        <section id="experience" class="section-padding">
+            <div class="section-header reveal">
+                <h2 class="text-3xl font-bold">Professional Experience</h2>
+                <p class="subtitle mt-2">Growing through practice, creating value with data.</p>
+            </div>
+            <div class="max-w-4xl reveal">
+                <div class="timeline-container">
+                    <div class="timeline-item">
+                        <div class="grid md:grid-cols-4 gap-x-8">
+                            <div class="md:text-right mb-4 md:mb-0">
+                                <h3 class="text-xl font-semibold">Data Analyst</h3>
+                                <p class="text-md" style="color: var(--brown);">Code Auto Tools</p>
+                                <p class="text-sm" style="color: var(--tan);">Los Angeles, US</p>
+                                <p class="text-sm" style="color: var(--tan);">Sep 2023 - Present</p>
+                            </div>
+                            <div class="timeline-details md:col-span-3">
+                                <div class="job-category">Inventory & Sales Data Analysis:</div>
+                                <ul>
+                                    <li>Managed multi-dimensional sales and inventory data ETL processes (SQL),
+                                        leveraging Python for deep data cleansing and exploratory data analysis (EDA),
+                                        identifying core product sales trends, seasonal fluctuations, and inventory
+                                        turnover patterns.</li>
+                                    <li>Led development of ARIMA-based predictive models for critical component sales
+                                        forecasting, combining model predictions with historical data analysis to
+                                        optimize inventory management strategies and safety stock thresholds,
+                                        successfully reducing stagnant inventory costs by approximately 10-12% for
+                                        specific high-value product lines while effectively improving inventory turnover
+                                        efficiency.</li>
+                                    <li>Executed data validation and reconciliation between sales orders and actual
+                                        inventory records (SQL), ensuring operational data accuracy; provided
+                                        data-driven inventory alerts and replenishment recommendations to procurement
+                                        department based on sales forecasts and analysis results, facilitating
+                                        cross-departmental collaboration.</li>
+                                </ul>
+                                <div class="job-category">E-commerce Operations & Advertising Analytics:</div>
+                                <ul>
+                                    <li>Integrated and analyzed advertising performance data and user behavior data from
+                                        major e-commerce platforms including eBay, Amazon, and Walmart (SQL, Python).
+                                    </li>
+                                    <li>Designed and executed A/B testing frameworks, applying hypothesis testing
+                                        methods to compare performance of different ad copy, keyword combinations, and
+                                        target audience segmentation strategies in actual campaigns, optimizing
+                                        advertising solutions and achieving 15% overall ROI improvement in key activity
+                                        regions during testing periods.</li>
+                                    <li>Conducted systematic analysis of customer email feedback and return data
+                                        (Python), identifying common issues in product design, logistics, or description
+                                        accuracy, generating data insight reports to support operational process
+                                        improvements and product information optimization.</li>
+                                </ul>
+                                <div class="job-category">Market Competition & Logistics Cost Analysis:</div>
+                                <ul>
+                                    <li>Regularly tracked and analyzed competitor product pricing, promotions, and user
+                                        reviews on e-commerce platforms (SQL, Python), producing competitive analysis
+                                        reports to provide data insights for differentiated competitive strategies and
+                                        dynamic pricing adjustments.</li>
+                                    <li>Through analyzing logistics transportation data across different products and
+                                        regions (transportation costs, delivery times, carrier performance), identified
+                                        and recommended more cost-effective logistics combinations, resulting in
+                                        approximately 5-8% reduction in average transportation costs on specific routes
+                                        after adoption.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="grid md:grid-cols-4 gap-x-8">
+                            <div class="md:text-right mb-4 md:mb-0">
+                                <h3 class="text-xl font-semibold">Database Administrator and Operations Analyst</h3>
+                                <p class="text-md" style="color: var(--brown);">China United Transportation Corp</p>
+                                <p class="text-sm" style="color: var(--tan);">Los Angeles, US</p>
+                                <p class="text-sm" style="color: var(--tan);">Feb 2021 - Aug 2023</p>
+                            </div>
+                            <div class="timeline-details md:col-span-3">
+                                <div class="job-category">Transportation Operations Analysis & Efficiency Optimization:
+                                </div>
+                                <ul>
+                                    <li>Managed container transportation scheduling and preliminary route planning from
+                                        LA ports to multiple customer warehouses; identified scheduling bottlenecks and
+                                        optimization opportunities through collecting and analyzing historical
+                                        transportation data (pickup times, transit durations, customer regional
+                                        distribution, return deadlines).</li>
+                                    <li>Utilized SQL and Python to identify anomalies in transportation processes,
+                                        optimizing container allocation, pickup sequences, and multi-point delivery
+                                        route solutions based on data analysis results, effectively reducing inefficient
+                                        waiting time by approximately 8% while ensuring customer delivery requirements,
+                                        providing data support for comprehensive transportation cost reduction.</li>
+                                </ul>
+                                <div class="job-category">Business Data Management & Digital Transformation:</div>
+                                <ul>
+                                    <li>Led the digital transformation project of historical paper transportation
+                                        orders, establishing standardized electronic filing and categorized retrieval
+                                        systems, reducing average query and retrieval time for historical orders by
+                                        approximately 70%.</li>
+                                    <li>Conducted specialized data analysis (SQL) for operational department needs in
+                                        time efficiency analysis and cost control, participated in daily maintenance and
+                                        optimization of transportation business database systems, improving average
+                                        response time for critical business queries by approximately 25%.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="grid md:grid-cols-4 gap-x-8">
+                            <div class="md:text-right mb-4 md:mb-0">
+                                <h3 class="text-xl font-semibold">Frontend Development Intern</h3>
+                                <p class="text-md" style="color: var(--brown);">DiDi Global Inc.</p>
+                                <p class="text-sm" style="color: var(--tan);">Beijing, China</p>
+                                <p class="text-sm" style="color: var(--tan);">Jun 2019 - Aug 2019</p>
+                            </div>
+                            <div class="timeline-details md:col-span-3">
+                                <div class="job-category">Automated Website Performance Monitoring Platform Development
+                                    & Data Analysis:</div>
+                                <ul>
+                                    <li>Developed automated website performance monitoring platform using React and
+                                        Node.js, combined with technologies including Lighthouse and Puppeteer, reducing
+                                        average detection and localization time for website performance issues by 40%.
+                                    </li>
+                                    <li>Conducted deep analysis of performance data collected by the platform (load
+                                        times, First Contentful Paint FCP, Time to Interactive TTI), utilizing data
+                                        visualization techniques to identify performance bottlenecks and propose
+                                        frontend optimization solutions to the development team based on data analysis
+                                        results, improving average loading speed of core pages by approximately 25%,
+                                        indirectly enhancing user satisfaction.</li>
+                                </ul>
+                                <div class="job-category">Internationalization Project Support & Cross-Cultural
+                                    Collaboration:</div>
+                                <ul>
+                                    <li>Actively participated in DiDi's international expansion project, assisting with
+                                        global multi-language website adaptation and deployment work.</li>
+                                    <li>Demonstrated excellent communication and collaboration skills in cross-cultural
+                                        technical teams, contributing to the timely launch and successful delivery of
+                                        websites for multiple countries and regions.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Divider -->
+        <div class="section-divider-container reveal">
+            <div class="section-divider"></div>
+        </div>
+
+        <!-- Education Background -->
+        <section id="education" class="section-padding">
+            <div class="section-header reveal">
+                <h2 class="text-3xl font-bold">Education</h2>
+                <p class="subtitle mt-2">Solid academic foundation, laying theoretical groundwork for practice.</p>
+            </div>
+            <div class="max-w-4xl reveal">
+                <div class="timeline-container">
+                    <div class="timeline-item">
+                        <div class="education-entry">
+                            <div class="education-header">
+                                <h3 class="education-school">Columbia University</h3>
+                                <span class="education-date">Sep 2021 - Feb 2023</span>
+                            </div>
+                            <div class="education-degree">M.S. in Applied Analytics</div>
+                            <div class="education-location">New York, US</div>
+                            <div class="education-courses">
+                                <span class="courses-label">Courses:</span> Data Management and Analytics Strategy, Data
+                                Visualization, Applied Analytics in Organizational Decision-Making, Capstone Project
+                                (S&P Global Sponsored).
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="education-entry">
+                            <div class="education-header">
+                                <h3 class="education-school">University of Michigan</h3>
+                                <span class="education-date">Aug 2018 - Dec 2020</span>
+                            </div>
+                            <div class="education-degree">B.S. in Computer Science & B.S. in Data Science</div>
+                            <div class="education-location">Ann Arbor, US</div>
+                            <div class="education-courses">
+                                <span class="courses-label">Courses:</span> Data Structures and Algorithms, Enterprise
+                                Mobile Application Development, Database Management Systems, Machine Learning Theory,
+                                Computer Vision, Data Mining, Applied Regression Analysis.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Divider -->
+        <div class="section-divider-container reveal">
+            <div class="section-divider"></div>
+        </div>
+
+        <!-- 4. Project Showcase (Bento Box Layout) -->
+        <section id="projects" class="section-padding">
+            <div class="section-header reveal">
+                <h2 class="text-3xl font-bold">Featured Projects</h2>
+                <p class="subtitle mt-2">Each project is a journey of exploration and discovery.</p>
+            </div>
+            <div class="bento-grid">
+                <!-- Large Project -->
+                <a href="#" class="bento-item reveal" data-grid-col="8" data-grid-row="2">
+                    <div class="bento-content">
+                        <div class="flex-grow">
+                            <div class="flex justify-between items-start">
+                                <span class="bento-tag">Climate Risk Analysis</span>
+                            </div>
+                            <h3 class="mt-4 text-2xl">Climate Change Monitoring and Prediction System Optimization</h3>
+                            <p class="mt-2 text-sm" style="color: var(--brown);">S&P Global sponsored project, team
+                                project (tech lead). To enhance S&P Global's climate risk assessment accuracy, analyzed
+                                systematic differences (Delta) between MODIS satellite Land Surface Temperature (LST)
+                                and NEX-GDDP model near-surface air temperature (TAS) from 2015-2020, covering four
+                                representative regions under both SSP126 and SSP585 scenarios.</p>
+                        </div>
+                        <div class="mt-4 text-right">
+                            <span class="text-link">View Details</span>
+                        </div>
+                    </div>
+                    <div class="number-decoration">01</div>
+                </a>
+                <!-- Medium Project -->
+                <a href="#" class="bento-item reveal" data-grid-col="4" data-grid-row="2">
+                    <div class="bento-content">
+                        <div class="flex-grow">
+                            <span class="bento-tag">Machine Learning</span>
+                            <h3 class="mt-4 text-xl">YouTube Comment User Bias Analysis & KOL Identification</h3>
+                            <p class="mt-2 text-sm" style="color: var(--brown);">Targeting animal/pet-related video
+                                comment data, precisely identifying potential cat/dog owners, discovering trending
+                                discussion topics, and locating high-quality collaborative KOLs to provide data-driven
+                                decisions for targeted advertising and KOL selection, expected to increase target user
+                                engagement rate by 10%.</p>
+                        </div>
+                        <div class="mt-4 text-right">
+                            <span class="text-link">View Details</span>
+                        </div>
+                    </div>
+                    <div class="number-decoration">02</div>
+                </a>
+                <!-- Small Projects -->
+                <a href="projects/Bank Customer Churn Prediction/Bank Customer Churn Prediction-en.html"
+                    class="bento-item reveal" data-grid-col="4">
+                    <div class="bento-content">
+                        <div class="flex-grow">
+                            <div class="flex justify-between items-start">
+                                <span class="bento-tag">Customer Analytics</span>
+                            </div>
+                            <h3 class="mt-4 text-xl">Bank Customer Churn Prediction & Key Driver Analysis</h3>
+                            <p class="mt-2 text-sm" style="color: var(--brown);">XGBoost+SMOTE based ML model achieving
+                                84.8% accuracy. Using SHAP technology to explain predictions and uncover specific churn
+                                drivers.</p>
+                        </div>
+                        <div class="mt-4 text-right">
+                            <span class="text-link">View Details</span>
+                        </div>
+                    </div>
+                    <div class="number-decoration">03</div>
+                </a>
+                <a href="projects/e-commerce fraud detection/e-commerce fraud detection-en.html"
+                    class="bento-item reveal" data-grid-col="4">
+                    <div class="bento-content">
+                        <div class="flex-grow">
+                            <div class="flex justify-between items-start">
+                                <span class="bento-tag">Risk Control</span>
+                            </div>
+                            <h3 class="mt-4 text-xl">E-commerce First Transaction Fraud Detection</h3>
+                            <p class="mt-2 text-sm" style="color: var(--brown);">LightGBM-based fraud detection system
+                                achieving 51.2% detection rate while maintaining 98.6% precision, effectively protecting
+                                user experience.</p>
+                        </div>
+                        <div class="mt-4 text-right">
+                            <span class="text-link">View Details</span>
+                        </div>
+                    </div>
+                    <div class="number-decoration">04</div>
+                </a>
+                <a href="projects/lending hub loan prediction/lending hub loan prediction-en.html"
+                    class="bento-item reveal" data-grid-col="4">
+                    <div class="bento-content">
+                        <div class="flex-grow">
+                            <div class="flex justify-between items-start">
+                                <span class="bento-tag">Financial Analytics</span>
+                            </div>
+                            <h3 class="mt-4 text-xl">Lending Hub Loan Default Prediction System</h3>
+                            <p class="mt-2 text-sm" style="color: var(--brown);">Cost-optimized Random Forest model
+                                achieving 80.7% default detection while reducing credit losses by 44.7%, expected to
+                                save $2.3M annually.</p>
+                        </div>
+                        <div class="mt-4 text-right">
+                            <span class="text-link">View Details</span>
+                        </div>
+                    </div>
+                    <div class="number-decoration">05</div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Divider -->
+        <div class="section-divider-container reveal">
+            <div class="section-divider"></div>
+        </div>
+
+        <!-- 5. Skills Matrix (Card Grid Layout) -->
+        <section id="skills" class="section-padding">
+            <div class="section-header reveal">
+                <h2 class="text-3xl font-bold">My Toolkit</h2>
+                <p class="subtitle mt-2">Continuously refined skills are my tools for solving problems.</p>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 reveal">
+                <div class="skill-card"><i data-lucide="database" class="mx-auto mb-2"></i> SQL</div>
+                <div class="skill-card"><i data-lucide="code" class="mx-auto mb-2"></i> Python</div>
+                <div class="skill-card"><i data-lucide="code" class="mx-auto mb-2"></i> R</div>
+                <div class="skill-card"><i data-lucide="server" class="mx-auto mb-2"></i> Apache Spark</div>
+                <div class="skill-card"><i data-lucide="bar-chart-3" class="mx-auto mb-2"></i> Tableau</div>
+                <div class="skill-card"><i data-lucide="scatter-chart" class="mx-auto mb-2"></i> Power BI</div>
+                <div class="skill-card"><i data-lucide="brain-circuit" class="mx-auto mb-2"></i> Scikit-learn</div>
+                <div class="skill-card"><i data-lucide="test-tubes" class="mx-auto mb-2"></i> A/B Testing</div>
+                <div class="skill-card"><i data-lucide="area-chart" class="mx-auto mb-2"></i> Pandas</div>
+                <div class="skill-card"><i data-lucide="cpu" class="mx-auto mb-2"></i> NumPy</div>
+                <div class="skill-card"><i data-lucide="trending-up" class="mx-auto mb-2"></i> Matplotlib/Seaborn</div>
+                <div class="skill-card"><i data-lucide="network" class="mx-auto mb-2"></i> TensorFlow</div>
+                <div class="skill-card"><i data-lucide="git-branch" class="mx-auto mb-2"></i> Git</div>
+                <div class="skill-card"><i data-lucide="activity" class="mx-auto mb-2"></i> ARIMA</div>
+                <div class="skill-card"><i data-lucide="search" class="mx-auto mb-2"></i> Machine Learning</div>
+            </div>
+        </section>
+
+        <!-- Divider -->
+        <div class="section-divider-container reveal">
+            <div class="section-divider"></div>
+        </div>
+
+        <!-- 6. Contact -->
+        <section id="contact" class="section-padding text-center">
+            <div class="reveal">
+                <h2 class="text-3xl font-bold">Looking Forward to Connecting</h2>
+                <p class="subtitle mt-2 max-w-xl mx-auto">If you're interested in my projects or have any collaboration
+                    opportunities, please feel free to reach out.</p>
+                <div class="mt-8">
+                    <a href="contact-en.html" class="btn btn-primary">Contact Me</a>
+                </div>
+                <div class="mt-12 flex justify-center space-x-6">
+                    <a href="#" class="text-link">GitHub</a>
+                    <a href="#" class="text-link">LinkedIn</a>
+                    <a href="#" class="text-link">Blog</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 7. Footer -->
+    <footer class="container-main py-8 mt-12 border-t border-beige text-center text-sm" style="color: var(--brown);">
+        <p>&copy; 2025 Juye Xiao. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Logo Animation JavaScript -->
+    <script src="assets/js/logo.js"></script>
+    <!-- Common Module -->
+    <script src="assets/js/common.js"></script>
+    <!-- Page Script -->
+    <script src="assets/js/index.js"></script>
+    <!-- Language Switcher -->
+    <script src="assets/js/language-switcher.js"></script>
+</body>
+
+</html>
