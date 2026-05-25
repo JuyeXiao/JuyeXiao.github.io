@@ -89,37 +89,88 @@
     </header>
 
     <main class="container-main">
-        <!-- 2. Hero Section (分屏式布局) -->
+        <!-- 2. Hero Section (B 信息卡 + 通栏氛围背景) -->
         <section id="hero" class="section-padding min-h-screen flex items-center">
+
+            <!-- 通栏背景:暖色远景氛围图 -->
+            <div class="hero-backdrop" aria-hidden="true">
+                <img class="hero-backdrop-img"
+                     src="assets/img/hero/atmosphere-bg.jpg"
+                     alt=""
+                     loading="eager"
+                     fetchpriority="high"
+                     onerror="this.remove();">
+                <div class="hero-backdrop-veil"></div>
+            </div>
+
+            <div class="hero-inner">
             <div class="grid gap-16 items-center hero-grid w-full">
+                <!-- 左栏:文字 + CTA -->
                 <div class="reveal">
                     <span class="font-semibold text-lg" style="color: var(--coral);">高级数据分析师</span>
                     <h1 class="mt-2" style="font-size: var(--text-5xl);">你好，我是肖炬晔</h1>
                     <p class="subtitle mt-4 max-w-lg">哥伦比亚大学应用分析硕士，拥有近4年数据分析及数据库管理经验，专注于运用SQL、Python及Apache
                         Spark进行深度数据洞察与价值创造。在库存与销售分析、A/B测试优化、气候风险分析等项目中积累丰富经验，致力于通过数据驱动的商业洞见创造实际价值。</p>
 
-                    <!-- 指标组件（与上方文字宽度对齐，横向排列） -->
-                    <div class="mt-8 max-w-lg">
-                        <div class="grid grid-cols-3 gap-8">
-                            <div class="data-verse left">
-                                <div class="number" data-count="94">0</div>
-                                <div class="label">预测准确率</div>
-                            </div>
-                            <div class="data-verse left">
-                                <div class="number" data-count="500">0</div>
-                                <div class="label">万级数据处理</div>
-                            </div>
-                            <div class="data-verse left">
-                                <div class="number" data-count="23">0</div>
-                                <div class="label">成本降低百分比</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mt-8 max-w-lg flex items-center gap-4">
+                    <div class="mt-6 max-w-lg flex items-center gap-4">
                         <a href="#contact" class="btn btn-primary">联系我</a>
                         <a href="#" class="btn btn-secondary">下载简历</a>
                     </div>
                 </div>
+
+                <!-- 右栏:Now 信息卡 -->
+                <div class="hero-visual reveal">
+                    <article class="now-card" aria-label="当前状态">
+                        <header class="now-header">
+                            <span class="now-eyebrow">Now</span>
+                            <span class="now-meta">2026 · 5月</span>
+                        </header>
+
+                        <div class="now-body">
+                            <p class="now-row now-row-primary">
+                                <span class="now-status-dot" aria-hidden="true"></span>
+                                <span class="now-text">
+                                    <strong>开放高级分析师 &amp; 数据科学职位</strong>
+                                    <span class="now-sub">远程 · 驻美 · 2026 Q3 可入职</span>
+                                </span>
+                            </p>
+
+                            <hr class="now-divider">
+
+                            <p class="now-row now-row-detail">
+                                <span class="now-icon" aria-hidden="true">◆</span>
+                                <span class="now-text">现居 <strong>洛杉矶, CA</strong></span>
+                            </p>
+                            <p class="now-row now-row-detail">
+                                <span class="now-icon" aria-hidden="true">◇</span>
+                                <span class="now-text">现任 <strong>Code Auto Tools</strong> 数据分析师</span>
+                            </p>
+                            <p class="now-row now-row-detail">
+                                <span class="now-icon" aria-hidden="true">◐</span>
+                                <span class="now-text">
+                                    正在搭建本作品集
+                                    <span class="now-text-sub">+ 客户流失预测案例 v2</span>
+                                </span>
+                            </p>
+                            <p class="now-row now-row-detail">
+                                <span class="now-icon" aria-hidden="true">☷</span>
+                                <span class="now-text">
+                                    正在读 <em>Storytelling with Data</em>
+                                    <span class="now-text-sub">Cole Nussbaumer Knaflic 著</span>
+                                </span>
+                            </p>
+                        </div>
+
+                        <footer class="now-footer">
+                            <hr class="now-divider">
+                            <a class="now-email" href="mailto:vincentxiao1998@gmail.com">
+                                <span>vincentxiao1998@gmail.com</span>
+                                <span class="now-email-arrow" aria-hidden="true">→</span>
+                            </a>
+                        </footer>
+                    </article>
+                </div>
+            </div>
             </div>
         </section>
 

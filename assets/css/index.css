@@ -809,3 +809,289 @@ html.dark .contact-info-card:hover {
         font-size: 0.8rem;
     }
 }
+
+/* ==================================================== */
+/* === Hero v2 (B + full-bleed atmospheric backdrop) === */
+/* ==================================================== */
+
+/* --- 1. Full-bleed section: #hero breaks out of .container-main --- */
+
+#hero {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+}
+
+/* Inner container restores 1400px centered layout for the content */
+.hero-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 var(--space-md);
+    width: 100%;
+}
+
+/* Safety against horizontal scrollbar that 100vw can trigger */
+body { overflow-x: hidden; }
+
+/* --- 2. Atmospheric backdrop layers --- */
+
+.hero-backdrop {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    /* Fallback warm radial gradient if image is missing */
+    background:
+        radial-gradient(ellipse 110% 80% at 72% 45%,
+            color-mix(in oklab, var(--gold), transparent 84%) 0%,
+            color-mix(in oklab, var(--tan), transparent 92%) 55%,
+            var(--cream) 100%);
+}
+
+.hero-backdrop-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 38%;
+    filter: saturate(0.55) brightness(1.06) contrast(0.88) sepia(0.08);
+}
+html.dark .hero-backdrop-img {
+    filter: saturate(0.5) brightness(0.55) contrast(1.0) sepia(0.05);
+}
+
+.hero-backdrop-veil {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+        radial-gradient(ellipse 55% 65% at 25% 52%,
+            color-mix(in oklab, var(--cream), transparent 8%) 0%,
+            color-mix(in oklab, var(--cream), transparent 38%) 70%,
+            transparent 100%),
+        linear-gradient(180deg,
+            transparent 0%,
+            transparent 94%,
+            color-mix(in oklab, var(--cream), transparent 15%) 100%),
+        linear-gradient(0deg,
+            color-mix(in oklab, var(--cream), transparent 30%),
+            color-mix(in oklab, var(--cream), transparent 30%));
+}
+html.dark .hero-backdrop-veil {
+    background:
+        radial-gradient(ellipse 55% 65% at 25% 52%,
+            color-mix(in oklab, var(--cream), transparent 18%) 0%,
+            color-mix(in oklab, var(--cream), transparent 45%) 70%,
+            transparent 100%),
+        linear-gradient(180deg,
+            transparent 0%,
+            transparent 94%,
+            color-mix(in oklab, var(--cream), transparent 20%) 100%),
+        linear-gradient(0deg,
+            color-mix(in oklab, var(--cream), transparent 38%),
+            color-mix(in oklab, var(--cream), transparent 38%));
+}
+
+/* --- 3. Desktop asymmetric two-column grid (7fr text / 5fr Now card) --- */
+
+@media (min-width: 1025px) {
+    .hero-grid {
+        display: grid !important;
+        grid-template-columns: minmax(0, 7fr) minmax(0, 5fr) !important;
+        gap: var(--space-xl);
+        align-items: center;
+    }
+}
+
+/* --- 4. Now card right-column wrapper --- */
+
+.hero-visual {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    justify-self: end;
+    margin-left: auto;
+}
+
+/* Decorative offset coral square behind the Now card */
+.hero-visual::before {
+    content: "";
+    position: absolute;
+    inset: -22px -22px auto auto;
+    width: 100%;
+    height: 100%;
+    background: var(--coral);
+    opacity: 0.06;
+    border-radius: 4px;
+    z-index: -1;
+    transition: opacity var(--duration-normal) var(--ease-out);
+}
+html.dark .hero-visual::before {
+    opacity: 0.10;
+}
+
+/* --- 5. Now Panel card --- */
+
+.now-card {
+    background: var(--cream);
+    border: 1px solid var(--tan);
+    border-radius: 4px;
+    padding: 30px 28px 24px;
+    box-shadow:
+        0 1px 0 var(--tan),
+        0 28px 60px -30px rgba(44, 36, 22, 0.18);
+    transition: background-color var(--duration-normal), border-color var(--duration-normal);
+}
+html.dark .now-card {
+    background: var(--beige);
+    border-color: var(--tan);
+    box-shadow:
+        0 1px 0 rgba(0, 0, 0, 0.4),
+        0 28px 60px -30px rgba(0, 0, 0, 0.6);
+}
+
+.now-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 22px;
+}
+.now-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--brown);
+}
+.now-meta {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--tan);
+}
+.now-divider {
+    border: none;
+    border-top: 1px solid var(--tan);
+    margin: 18px 0 16px;
+    opacity: 0.6;
+}
+
+.now-body {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+.now-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    line-height: 1.55;
+    font-family: var(--font-primary);
+}
+
+.now-row-primary {
+    align-items: center;
+    padding-bottom: 4px;
+    font-size: 1.05rem;
+}
+.now-row-primary .now-text { color: var(--dark); }
+.now-row-primary strong { font-weight: 600; display: block; }
+.now-row-primary .now-sub {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: var(--brown);
+    margin-top: 2px;
+}
+
+.now-status-dot {
+    position: relative;
+    display: inline-block;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--coral);
+    flex-shrink: 0;
+    margin-top: 6px;
+}
+.now-status-dot::after {
+    content: "";
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    background: var(--coral);
+    opacity: 0.4;
+    animation: pulse-ring 2.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes pulse-ring {
+    0%   { transform: scale(0.7); opacity: 0.5; }
+    70%  { transform: scale(1.9); opacity: 0; }
+    100% { transform: scale(1.9); opacity: 0; }
+}
+
+.now-row-detail {
+    font-size: 0.95rem;
+    color: var(--brown);
+}
+.now-row-detail .now-text { color: var(--dark); }
+.now-row-detail .now-text-sub {
+    color: var(--brown);
+    font-size: 0.85rem;
+    display: block;
+    margin-top: 2px;
+}
+.now-icon {
+    color: var(--brown);
+    font-size: 14px;
+    line-height: 1.6;
+    width: 16px;
+    text-align: center;
+    flex-shrink: 0;
+    opacity: 0.75;
+}
+
+.now-footer { margin-top: 8px; }
+.now-email {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--dark);
+    text-decoration: none;
+    padding: 8px 0 0;
+    transition: color var(--duration-fast) var(--ease-out);
+}
+.now-email:hover { color: var(--coral); }
+.now-email-arrow {
+    font-size: 14px;
+    transition: transform var(--duration-fast) var(--ease-out);
+}
+.now-email:hover .now-email-arrow { transform: translateX(3px); }
+
+/* --- 6. Tablet / mobile fallbacks --- */
+
+@media (max-width: 1024px) {
+    .hero-visual {
+        margin: 3rem auto 0;
+        max-width: 380px;
+        justify-self: center;
+    }
+    .hero-visual::before { display: none; }
+}
+@media (max-width: 640px) {
+    .now-card { padding: 26px 22px 20px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .now-status-dot::after {
+        animation: none !important;
+        opacity: 0 !important;
+    }
+}

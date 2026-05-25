@@ -89,9 +89,23 @@
     </header>
 
     <main class="container-main">
-        <!-- 2. Hero Section (Split Screen Layout) -->
+        <!-- 2. Hero Section (Now Panel + Full-bleed Atmospheric Backdrop) -->
         <section id="hero" class="section-padding min-h-screen flex items-center">
+
+            <!-- Full-bleed atmospheric backdrop -->
+            <div class="hero-backdrop" aria-hidden="true">
+                <img class="hero-backdrop-img"
+                     src="assets/img/hero/atmosphere-bg.jpg"
+                     alt=""
+                     loading="eager"
+                     fetchpriority="high"
+                     onerror="this.remove();">
+                <div class="hero-backdrop-veil"></div>
+            </div>
+
+            <div class="hero-inner">
             <div class="grid gap-16 items-center hero-grid w-full">
+                <!-- LEFT: Text + CTAs -->
                 <div class="reveal">
                     <span class="font-semibold text-lg" style="color: var(--coral);">Senior Data Analyst</span>
                     <h1 class="mt-2" style="font-size: var(--text-5xl);">Hello, I'm Juye Xiao</h1>
@@ -101,28 +115,65 @@
                         inventory and sales analysis, A/B testing optimization, and climate risk analysis projects,
                         committed to creating tangible business value through data-driven insights.</p>
 
-                    <!-- Metrics Component (Aligned with text width above, horizontal layout) -->
-                    <div class="mt-8 max-w-lg">
-                        <div class="grid grid-cols-3 gap-8">
-                            <div class="data-verse left">
-                                <div class="number" data-count="94">0</div>
-                                <div class="label">Prediction Accuracy</div>
-                            </div>
-                            <div class="data-verse left">
-                                <div class="number" data-count="500">0</div>
-                                <div class="label">Million-Scale Data</div>
-                            </div>
-                            <div class="data-verse left">
-                                <div class="number" data-count="23">0</div>
-                                <div class="label">Cost Reduction %</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mt-8 max-w-lg flex items-center gap-4">
+                    <div class="mt-6 max-w-lg flex items-center gap-4">
                         <a href="#contact" class="btn btn-primary">Contact Me</a>
                         <a href="#" class="btn btn-secondary">Download Resume</a>
                     </div>
                 </div>
+
+                <!-- RIGHT: Now Panel card -->
+                <div class="hero-visual reveal">
+                    <article class="now-card" aria-label="Current status">
+                        <header class="now-header">
+                            <span class="now-eyebrow">Now</span>
+                            <span class="now-meta">2026 · MAY</span>
+                        </header>
+
+                        <div class="now-body">
+                            <p class="now-row now-row-primary">
+                                <span class="now-status-dot" aria-hidden="true"></span>
+                                <span class="now-text">
+                                    <strong>Open to Senior Analyst &amp; Data Science roles</strong>
+                                    <span class="now-sub">Remote · US-based · Available Q3 2026</span>
+                                </span>
+                            </p>
+
+                            <hr class="now-divider">
+
+                            <p class="now-row now-row-detail">
+                                <span class="now-icon" aria-hidden="true">◆</span>
+                                <span class="now-text">Based in <strong>Los Angeles, CA</strong></span>
+                            </p>
+                            <p class="now-row now-row-detail">
+                                <span class="now-icon" aria-hidden="true">◇</span>
+                                <span class="now-text">Working as Data Analyst at <strong>Code Auto Tools</strong></span>
+                            </p>
+                            <p class="now-row now-row-detail">
+                                <span class="now-icon" aria-hidden="true">◐</span>
+                                <span class="now-text">
+                                    Building this portfolio site
+                                    <span class="now-text-sub">+ a churn-prediction case study v2</span>
+                                </span>
+                            </p>
+                            <p class="now-row now-row-detail">
+                                <span class="now-icon" aria-hidden="true">☷</span>
+                                <span class="now-text">
+                                    Reading <em>Storytelling with Data</em>
+                                    <span class="now-text-sub">by Cole Nussbaumer Knaflic</span>
+                                </span>
+                            </p>
+                        </div>
+
+                        <footer class="now-footer">
+                            <hr class="now-divider">
+                            <a class="now-email" href="mailto:vincentxiao1998@gmail.com">
+                                <span>vincentxiao1998@gmail.com</span>
+                                <span class="now-email-arrow" aria-hidden="true">→</span>
+                            </a>
+                        </footer>
+                    </article>
+                </div>
+            </div>
             </div>
         </section>
 
