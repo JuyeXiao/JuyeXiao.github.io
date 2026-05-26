@@ -10,7 +10,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <script src="https://unpkg.com/lucide-react/dist/umd/lucide-react.js"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <link rel="stylesheet" href="../../assets/css/index.css" />
@@ -21,44 +21,18 @@
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   
   <style>
-    /* 第一个和第二个表格的暗色模式样式优化 */
-    .dark table.performance-table th {
-      color: var(--gold) !important; /* 使用金色 #E4B584 */
-    }
-    .dark table.performance-table td strong {
-      color: var(--coral) !important; /* 使用珊瑚色 #FF8080 */
-    }
+    /* 表格主体规则现由 project.css 全局兜底；此处仅保留两条非 table 修饰 */
     .dark table.performance-table thead tr {
-      background-color: rgba(64, 64, 64, 0.3) !important; /* var(--tan) 的半透明版本 */
+      background-color: rgba(64, 64, 64, 0.25) !important;
     }
-    /* 第二个表格加粗行的暗色模式样式 */
-    .dark tr.bg-green-50 {
-      background-color: transparent !important; /* 移除背景色 */
-    }
-    .dark tr.bg-green-50 td.font-bold {
-      color: var(--coral) !important; /* 加粗文字使用珊瑚色 */
-    }
-    /* 基线行的暗色模式样式 */
-    .dark tr.bg-gray-100 {
-      background-color: transparent !important; /* 移除背景色 */
-    }
-    .dark tr.bg-gray-100 td {
-      color: var(--coral) !important; /* 文字使用珊瑚色 */
-    }
-    /* 第三个表格（SHAP表格）保持浅色模式样式 */
-    .dark table:not(.performance-table) tbody td {
-      color: inherit !important;
-    }
-    /* SHAP分析相关文字暗色模式使用brown色 */
+    /* 非表格段落中的 dark:text-gray-300 提亮一档（避免叙述文字过暗） */
     .dark .dark\:text-gray-300 {
-      color: var(--brown) !important; /* #737373 */
+      color: var(--dark) !important;
     }
   </style>
 </head>
 <body class="transition-colors duration-300">
-  <!-- 背景装饰（与首页一致） -->
-  <div class="gradient-orb top-[-150px] left-[-150px]"></div>
-  <div class="gradient-orb bottom-[-200px] right-[-200px]" style="background: radial-gradient(circle at center, var(--blue), transparent 60%)"></div>
+  <div class="scroll-progress" id="scroll-progress"></div>
 
   <!-- 顶部导航（完全复用首页结构与样式） -->
   <header id="navbar" class="navbar fixed top-0 left-0 right-0 z-50">
@@ -107,38 +81,66 @@
   <main class="container-main">
     <!-- 项目头部（Hero风格的详情页抬头） -->
     <section id="project-hero" class="section-padding" style="padding-top: calc(var(--space-xl) + 72px)">
-      <div class="grid md:grid-cols-2 gap-16 items-start w-full">
+      <div class="grid md:grid-cols-2 gap-16 items-center w-full">
         <div class="reveal">
-          <span class="font-semibold text-lg" style="color: var(--coral);">数据分析项目</span>
-          <h1 class="mt-2" style="font-size: var(--text-4xl);">Lending Hub 贷款违约预测系统</h1>
-          <p class="subtitle mt-4 max-w-xl">基于成本优化的机器学习系统，实现80.7%违约检测率，同时将信贷损失降低44.7%，为贷款业务建立智能风险管理体系</p>
-          
-          <!-- 数据指标卡片 -->
-          <div class="mt-8">
-            <div class="grid grid-cols-3 gap-4">
-              <div class="contact-info-card" style="min-height: 120px; padding: var(--space-md);">
-                <div class="text-sm font-medium" style="color: var(--brown);">数据量</div>
-                <div class="text-2xl font-bold mt-2" style="color: var(--charcoal);">9,004笔</div>
-              </div>
-              <div class="contact-info-card" style="min-height: 120px; padding: var(--space-md);">
-                <div class="text-sm font-medium" style="color: var(--brown);">违约检测率</div>
-                <div class="text-2xl font-bold mt-2" style="color: var(--charcoal);">80.7%</div>
-              </div>
-              <div class="contact-info-card" style="min-height: 120px; padding: var(--space-md);">
-                <div class="text-sm font-medium" style="color: var(--brown);">成本降低</div>
-                <div class="text-2xl font-bold mt-2" style="color: var(--charcoal);">44.7%</div>
-              </div>
+          <div class="section-eyebrow">
+            <span class="section-kicker">Case Study · 信贷风险与策略</span>
+          </div>
+          <h1 class="hero-title mt-2">Lending Hub 贷款违约预测系统</h1>
+          <p class="subtitle mt-4 max-w-xl">用成本优化代替准确率优化——把决策阈值从 0.5 调到 0.19，让模型为业务而非排行榜服务。</p>
+          <div class="reading-time">约 14 分钟阅读<span class="sep">·</span>14 张图表</div>
+
+          <div class="hero-stats">
+            <div class="hero-stat">
+              <div class="hero-stat__num">9K</div>
+              <div class="hero-stat__label">贷款样本</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat__num">80.7%</div>
+              <div class="hero-stat__label">违约召回率</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat__num">$2.3M</div>
+              <div class="hero-stat__label">年节省损失</div>
             </div>
           </div>
-          
+
           <div class="mt-8 flex items-center gap-4">
             <a href="#content" class="btn btn-primary">开始阅读</a>
             <a href="../../index.html#projects" class="btn btn-secondary">返回项目概览</a>
           </div>
         </div>
-        <div class="reveal">
-          <!-- 这里可以放置其他内容，比如项目图片或图表 -->
-        </div>
+        <aside class="reveal hero-stack">
+          <div class="hero-stack__label">Methods · 技术栈</div>
+          <ol class="hero-stack__list">
+            <li>
+              <span class="hero-stack__num">01</span>
+              <span class="hero-stack__name">Random Forest</span>
+              <span class="hero-stack__desc">生产部署模型，平衡精确率与召回率</span>
+            </li>
+            <li>
+              <span class="hero-stack__num">02</span>
+              <span class="hero-stack__name">LightGBM</span>
+              <span class="hero-stack__desc">配合 SHAP 解读特征非线性影响</span>
+            </li>
+            <li>
+              <span class="hero-stack__num">03</span>
+              <span class="hero-stack__name">Cost-Sensitive Threshold</span>
+              <span class="hero-stack__desc">最优阈值 0.19——最小化期望财务损失</span>
+            </li>
+            <li>
+              <span class="hero-stack__num">04</span>
+              <span class="hero-stack__name">Composite Index</span>
+              <span class="hero-stack__desc">工程化的金融压力指数 + 风险调整利率</span>
+            </li>
+            <li>
+              <span class="hero-stack__num">05</span>
+              <span class="hero-stack__name">SHAP</span>
+              <span class="hero-stack__desc">揭示信贷利用率与年收入的 U 型 / 反线性</span>
+            </li>
+          </ol>
+          <div class="hero-stack__foot">Python · pandas · scikit-learn · lightgbm · shap</div>
+        </aside>
       </div>
     </section>
 
@@ -182,9 +184,13 @@
         <!-- 正文区域 -->
         <div class="md:col-span-9 content-area">
           <!-- 执行摘要 -->
-          <section id="summary" class="section-padding">
+          <section id="summary" class="section-padding section--editorial" data-section-num="00">
             <div class="section-header">
-              <h2 class="text-3xl font-bold">📊 执行摘要</h2>
+              <div class="section-eyebrow">
+                <span class="section-num">00</span>
+                <span class="section-kicker">Executive Summary</span>
+              </div>
+              <h2 class="section-title">执行摘要</h2>
             </div>
             
             <div class="space-y-6">
@@ -194,7 +200,7 @@
                 <p class="subtitle mb-4"><strong>解决方案：</strong>我们开发了一个强大的端到端机器学习系统，核心是成本优化的随机森林模型。通过将决策阈值从默认的0.5调整到最优的0.19，该模型被精确调优以最小化预测错误的总财务成本。这个预测模型配合LightGBM模型的深度SHAP分析，将复杂的"黑箱"决策转化为透明、可操作的业务规则和详细的风险画像。</p>
 
                 <!-- 模型性能一览 -->
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">📊 模型性能一览</h3>
+                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">模型性能一览</h3>
                 <div class="overflow-x-auto">
                   <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
                     <thead>
@@ -245,9 +251,13 @@
           </section>
 
           <!-- 数据探索 -->
-          <section id="exploration" class="section-padding">
+          <section id="exploration" class="section-padding section--editorial" data-section-num="01">
             <div class="section-header">
-              <h2 class="text-3xl font-bold">第1部分：数据探索</h2>
+              <div class="section-eyebrow">
+                <span class="section-num">01</span>
+                <span class="section-kicker">Data Exploration</span>
+              </div>
+              <h2 class="section-title">数据探索</h2>
             </div>
             
             <div class="space-y-8">
@@ -270,8 +280,8 @@
                   <li>关键风险指标的分布是什么？</li>
                 </ol>
 
-                <div class="text-center p-6 bg-gray-50 dark:bg-gray-800 rounded-lg mt-6">
-                  <img src="figures/target variable analysis.png" alt="目标变量分析" class="w-full rounded-lg shadow-lg" />
+                <div class="figure-editorial mt-6">
+                  <img src="figures/target variable analysis.png" alt="目标变量分析" class="w-full" />
                   <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">数据集概览和目标变量分布 - 分析显示16.8%违约率，存在显著类别不平衡（7,487笔全额支付 vs 1,517笔冲销）</p>
                 </div>
               </div>
@@ -292,7 +302,7 @@
               </div>
 
               <div class="contact-info-card">
-                <h4 class="text-xl font-semibold mb-3" style="color: var(--dark);">📊 数据质量</h4>
+                <h4 class="text-xl font-semibold mb-3" style="color: var(--dark);">数据质量</h4>
                 <ul class="list-disc list-inside space-y-2 subtitle">
                   <li><strong>最小数据问题</strong>：仅319个缺失值（占总数据点的0.12%）</li>
                   <li><strong>无重复</strong>：干净的数据集，无冗余记录</li>
@@ -300,7 +310,7 @@
                   <li><strong>平衡特征</strong>：数值型和分类变量的混合（共29个）</li>
                 </ul>
 
-                <h4 class="text-xl font-semibold mb-3 mt-6" style="color: var(--dark);">💰 财务影响</h4>
+                <h4 class="text-xl font-semibold mb-3 mt-6" style="color: var(--dark);">财务影响</h4>
                 <ul class="list-disc list-inside space-y-2 subtitle">
                   <li><strong>违约率</strong>：16.8%的贷款导致冲销</li>
                   <li><strong>组合损失</strong>：1.094亿美元资金中1840万美元违约</li>
@@ -309,7 +319,7 @@
                 </ul>
 
                 <div class="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg p-4 mt-6">
-                  <h4 class="font-semibold text-amber-800 dark:text-amber-200 mb-3">⚠️ 建模挑战</h4>
+                  <h4 class="font-semibold text-amber-800 dark:text-amber-200 mb-3">建模挑战</h4>
                   <ol class="list-decimal list-inside space-y-2 text-amber-700 dark:text-amber-300">
                     <li><strong>类别不平衡</strong>：4.9:1比例（全额支付对冲销）
                       <ul class="list-disc list-inside ml-6 mt-1">
@@ -333,7 +343,7 @@
                   </ol>
                 </div>
 
-                <h4 class="text-xl font-semibold mb-3 mt-6" style="color: var(--dark);">🎯 战略意义</h4>
+                <h4 class="text-xl font-semibold mb-3 mt-6" style="color: var(--dark);">战略意义</h4>
                 <ul class="list-disc list-inside space-y-2 subtitle">
                   <li><strong>快速胜利</strong>：仅提高10%的违约检测率就能每年节省约180万美元</li>
                   <li><strong>风险分层</strong>：需要将借款人分成风险类别进行定价</li>
@@ -344,9 +354,13 @@
           </section>
 
           <!-- EDA分析 -->
-          <section id="eda" class="section-padding">
+          <section id="eda" class="section-padding section--editorial" data-section-num="02">
             <div class="section-header">
-              <h2 class="text-3xl font-bold">1.2 探索性数据分析（EDA）</h2>
+              <div class="section-eyebrow">
+                <span class="section-num">02</span>
+                <span class="section-kicker">Exploratory Data Analysis</span>
+              </div>
+              <h2 class="section-title">探索性数据分析（EDA）</h2>
             </div>
             
             <div class="space-y-8">
@@ -359,15 +373,15 @@
                   <li><strong>特征选择指导</strong>：确定建模中优先考虑的变量</li>
                 </ul>
 
-                <div class="text-center p-6 bg-gray-50 dark:bg-gray-800 rounded-lg mt-6">
-                  <img src="figures/default rate analysis across key risk factors.png" alt="风险因素违约率" class="w-full rounded-lg shadow-lg" />
+                <div class="figure-editorial mt-6">
+                  <img src="figures/default rate analysis across key risk factors.png" alt="风险因素违约率" class="w-full" />
                   <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">关键风险因素的违约率分析 - G级显示52%违约率 vs A级7%，60个月期隄32%违约 vs 36个月期隄11%</p>
                 </div>
               </div>
 
               <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">风险因素分析洞察</h3>
 
-              <h4 class="text-lg font-semibold mb-3" style="color: var(--dark);">🎯 关键风险指标</h4>
+              <h4 class="text-lg font-semibold mb-3" style="color: var(--dark);">关键风险指标</h4>
 
               <div class="contact-info-card mb-4">
                 <h5 class="font-semibold mb-3" style="color: var(--dark);">1. 信用等级 - 指数级风险增长</h5>
@@ -393,46 +407,54 @@
                 </div>
               </div>
 
-              <h4 class="text-lg font-semibold mb-3" style="color: var(--dark);">📊 风险分层框架</h4>
+              <h4 class="text-lg font-semibold mb-3" style="color: var(--dark);">风险分层框架</h4>
               <p class="subtitle mb-4">基于分析，实施四层风险系统：</p>
 
               <div class="grid md:grid-cols-2 gap-4 mb-6">
-                <div class="border-l-4 border-green-500 bg-green-50 dark:bg-green-900/20 p-4 rounded-r-lg">
-                  <h5 class="font-semibold text-green-800 dark:text-green-200 mb-2">优质层级</h5>
-                  <ul class="text-sm space-y-1 text-green-700 dark:text-green-300">
-                    <li><strong>特征</strong>：A-B级，36个月，有房产/自有</li>
-                    <li><strong>违约率</strong>：<10%</li>
-                    <li><strong>行动</strong>：自动批准，最优利率</li>
-                  </ul>
+                <div class="note note--evidence">
+                  <div class="note__label">Prime Tier</div>
+                  <div class="note__body">
+                    <ul class="list-disc list-inside space-y-1">
+                      <li><strong>特征</strong>：A-B 级，36 个月，有房产 / 自有</li>
+                      <li><strong>违约率</strong>：&lt;10%</li>
+                      <li><strong>行动</strong>：自动批准，最优利率</li>
+                    </ul>
+                  </div>
                 </div>
-                <div class="border-l-4 border-blue-500 bg-blue-50 dark:bg-blue-900/20 p-4 rounded-r-lg">
-                  <h5 class="font-semibold text-blue-800 dark:text-blue-200 mb-2">标准层级</h5>
-                  <ul class="text-sm space-y-1 text-blue-700 dark:text-blue-300">
-                    <li><strong>特征</strong>：C-D级，任何期限，已验证</li>
-                    <li><strong>违约率</strong>：15-20%</li>
-                    <li><strong>行动</strong>：标准流程，市场利率</li>
-                  </ul>
+                <div class="note note--process">
+                  <div class="note__label">Standard Tier</div>
+                  <div class="note__body">
+                    <ul class="list-disc list-inside space-y-1">
+                      <li><strong>特征</strong>：C-D 级，任何期限，已验证</li>
+                      <li><strong>违约率</strong>：15–20%</li>
+                      <li><strong>行动</strong>：标准流程，市场利率</li>
+                    </ul>
+                  </div>
                 </div>
-                <div class="border-l-4 border-yellow-500 bg-yellow-50 dark:bg-yellow-900/20 p-4 rounded-r-lg">
-                  <h5 class="font-semibold text-yellow-800 dark:text-yellow-200 mb-2">次级层级</h5>
-                  <ul class="text-sm space-y-1 text-yellow-700 dark:text-yellow-300">
-                    <li><strong>特征</strong>：E级，60个月，租房</li>
-                    <li><strong>违约率</strong>：25-35%</li>
-                    <li><strong>行动</strong>：增强审查，溢价利率</li>
-                  </ul>
+                <div class="note note--caveat">
+                  <div class="note__label">Sub-Prime Tier</div>
+                  <div class="note__body">
+                    <ul class="list-disc list-inside space-y-1">
+                      <li><strong>特征</strong>：E 级，60 个月，租房</li>
+                      <li><strong>违约率</strong>：25–35%</li>
+                      <li><strong>行动</strong>：增强审查，溢价利率</li>
+                    </ul>
+                  </div>
                 </div>
-                <div class="border-l-4 border-red-500 bg-red-50 dark:bg-red-900/20 p-4 rounded-r-lg">
-                  <h5 class="font-semibold text-red-800 dark:text-red-200 mb-2">高风险层级</h5>
-                  <ul class="text-sm space-y-1 text-red-700 dark:text-red-300">
-                    <li><strong>特征</strong>：F-G级，小企业贷款</li>
-                    <li><strong>违约率</strong>：>40%</li>
-                    <li><strong>行动</strong>：人工审查或拒绝</li>
-                  </ul>
+                <div class="note note--insight">
+                  <div class="note__label">High Risk Tier</div>
+                  <div class="note__body">
+                    <ul class="list-disc list-inside space-y-1">
+                      <li><strong>特征</strong>：F-G 级，小企业贷款</li>
+                      <li><strong>违约率</strong>：&gt;40%</li>
+                      <li><strong>行动</strong>：人工审查或拒绝</li>
+                    </ul>
+                  </div>
                 </div>
               </div>
 
               <div class="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4">
-                <h4 class="font-semibold text-red-800 dark:text-red-200 mb-3">🚨 红旗组合</h4>
+                <h4 class="font-semibold text-red-800 dark:text-red-200 mb-3">红旗组合</h4>
                 <p class="text-red-700 dark:text-red-300 mb-2">最高风险画像（>40%违约概率）：</p>
                 <ol class="list-decimal list-inside space-y-1 text-red-700 dark:text-red-300">
                   <li>F-G级 + 60个月期限</li>
@@ -441,28 +463,28 @@
                 </ol>
               </div>
 
-              <div class="text-center p-6 bg-gray-50 dark:bg-gray-800 rounded-lg mt-6">
-                <img src="figures/distribution comparision fully paid vs charged off loans.png" alt="分布比较" class="w-full rounded-lg shadow-lg" />
+              <div class="figure-editorial mt-6">
+                <img src="figures/distribution comparision fully paid vs charged off loans.png" alt="分布比较" class="w-full" />
                 <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">分布比较：全额支付vs冲销贷款 - 关键特征清晰分离</p>
               </div>
 
-              <div class="text-center p-6 bg-gray-50 dark:bg-gray-800 rounded-lg mt-6">
-                <img src="figures/feature correlation matrix & top 15 features correlated with default.png" alt="相关性分析" class="w-full rounded-lg shadow-lg" />
+              <div class="figure-editorial mt-6">
+                <img src="figures/feature correlation matrix & top 15 features correlated with default.png" alt="相关性分析" class="w-full" />
                 <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">特征相关矩阵及与违约相关的前15个特征</p>
               </div>
 
-              <div class="text-center p-6 bg-gray-50 dark:bg-gray-800 rounded-lg mt-6">
-                <img src="figures/Geographic risk analysis.png" alt="地理风险分布" class="w-full rounded-lg shadow-lg" />
+              <div class="figure-editorial mt-6">
+                <img src="figures/Geographic risk analysis.png" alt="地理风险分布" class="w-full" />
                 <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">地理风险分析 - 阵拉斯加州、南达科他州和内华达州风险较高</p>
               </div>
 
-              <div class="text-center p-6 bg-gray-50 dark:bg-gray-800 rounded-lg mt-6">
-                <img src="figures/Customer segmentation analysis.png" alt="客户细分" class="w-full rounded-lg shadow-lg" />
+              <div class="figure-editorial mt-6">
+                <img src="figures/Customer segmentation analysis.png" alt="客户细分" class="w-full" />
                 <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">客户细分分析 - 优质客户群vs深度次级客户</p>
               </div>
 
               <div class="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-4 mt-6">
-                <h4 class="font-semibold text-green-800 dark:text-green-200 mb-3">💡 反直觉的发现</h4>
+                <h4 class="font-semibold text-green-800 dark:text-green-200 mb-3">反直觉的发现</h4>
                 <ol class="list-decimal list-inside space-y-2 text-green-700 dark:text-green-300">
                   <li><strong>收入悖论</strong>：验证收入显示更高的违约率
                     <ul class="list-disc list-inside ml-6 mt-1">
@@ -489,9 +511,13 @@
           </section>
 
           <!-- 特征工程 -->
-          <section id="preprocessing" class="section-padding">
+          <section id="preprocessing" class="section-padding section--editorial" data-section-num="03">
             <div class="section-header">
-              <h2 class="text-3xl font-bold">第2部分：数据清洗和特征工程</h2>
+              <div class="section-eyebrow">
+                <span class="section-num">03</span>
+                <span class="section-kicker">Cleaning &amp; Feature Engineering</span>
+              </div>
+              <h2 class="section-title">数据清洗与特征工程</h2>
             </div>
             
             <div class="space-y-8">
@@ -618,17 +644,21 @@ X_test_scaled = scaler.transform(X_test)</code></pre>
           </section>
 
           <!-- 模型训练 -->
-          <section id="training" class="section-padding">
+          <section id="training" class="section-padding section--editorial" data-section-num="04">
             <div class="section-header">
-              <h2 class="text-3xl font-bold">第3部分：模型训练和评估</h2>
+              <div class="section-eyebrow">
+                <span class="section-num">04</span>
+                <span class="section-kicker">Model Training &amp; Evaluation</span>
+              </div>
+              <h2 class="section-title">模型训练与评估</h2>
             </div>
             
             <div class="space-y-8">
               <!-- 初始模型性能 -->
               <div class="contact-info-card">
                 <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">初始模型性能（默认阈值 = 0.5）</h3>
-                <div class="text-center p-6 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                  <img src="figures/models cost benefit analysis.png" alt="初始模型比较" class="w-full rounded-lg shadow-lg" />
+                <div class="figure-editorial">
+                  <img src="figures/models cost benefit analysis.png" alt="初始模型比较" class="w-full" />
                   <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">所有模型在默认阈值下都显示较低的召回率（5-48%），突出了阈值优化的必要性</p>
                 </div>
               </div>
@@ -768,8 +798,8 @@ def find_optimal_threshold(y_true, y_proba, min_recall=0.75):
               <!-- 模型性能分析 -->
               <div class="contact-info-card">
                 <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">模型性能分析</h3>
-                <div class="text-center p-6 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                  <img src="figures/ROC and precision-recall curves.png" alt="ROC和PR曲线" class="w-full rounded-lg shadow-lg" />
+                <div class="figure-editorial">
+                  <img src="figures/ROC and precision-recall curves.png" alt="ROC和PR曲线" class="w-full" />
                   <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">随机森林实现AUC 0.739，具有优越的精确率-召回率性能，尤其在阈值优化后</p>
                 </div>
               </div>
@@ -838,13 +868,13 @@ def find_optimal_threshold(y_true, y_proba, min_recall=0.75):
                     </ul>
                   </div>
 
-                  <div class="text-center p-6 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                    <img src="figures/confusion matrix visualization.png" alt="混淆矩阵对比" class="w-full rounded-lg shadow-lg" />
+                  <div class="figure-editorial">
+                    <img src="figures/confusion matrix visualization.png" alt="混淆矩阵对比" class="w-full" />
                     <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">阈值优化前后的混淆矩阵对比：显著提升违约检测能力</p>
                   </div>
 
-                  <div class="text-center p-6 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                    <img src="figures/threshold optimization.png" alt="阈值优化曲线" class="w-full rounded-lg shadow-lg" />
+                  <div class="figure-editorial">
+                    <img src="figures/threshold optimization.png" alt="阈值优化曲线" class="w-full" />
                     <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">阈值与成本关系：0.19为最优平衡点</p>
                   </div>
                 </div>
@@ -867,8 +897,8 @@ def find_optimal_threshold(y_true, y_proba, min_recall=0.75):
                     </ul>
                   </div>
 
-                  <div class="text-center p-6 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                    <img src="figures/rf feature importance analysis.png" alt="特征重要性分析" class="w-full rounded-lg shadow-lg" />
+                  <div class="figure-editorial">
+                    <img src="figures/rf feature importance analysis.png" alt="特征重要性分析" class="w-full" />
                     <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">随机森林<span style="color: var(--coral);">特征重要性</span>：年收入、利率和工程特征主导决策</p>
                   </div>
                 </div>
@@ -877,9 +907,13 @@ def find_optimal_threshold(y_true, y_proba, min_recall=0.75):
           </section>
 
           <!-- SHAP分析 -->
-          <section id="shap" class="section-padding">
+          <section id="shap" class="section-padding section--editorial" data-section-num="05">
             <div class="section-header">
-              <h2 class="text-3xl font-bold">第4部分：LightGBM SHAP分析 - 解释和业务洞察</h2>
+              <div class="section-eyebrow">
+                <span class="section-num">05</span>
+                <span class="section-kicker">LightGBM SHAP Deep Dive</span>
+              </div>
+              <h2 class="section-title">LightGBM SHAP 分析 — 解释与业务洞察</h2>
             </div>
             
             <div class="space-y-8">
@@ -951,8 +985,8 @@ plt.title('SHAP摘要图')
 plt.tight_layout()
 plt.show()</code></pre>
 
-                  <div class="text-center p-6 bg-gray-50 dark:bg-gray-800 rounded-lg mt-4">
-                    <img src="figures/lightgbm shap summary plot.png" alt="SHAP摘要图" class="w-full rounded-lg shadow-lg" />
+                  <div class="figure-editorial mt-4">
+                    <img src="figures/lightgbm shap summary plot.png" alt="SHAP摘要图" class="w-full" />
                     <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">SHAP摘要图：显示<span style="color: var(--coral);">特征重要性</span>和影响方向</p>
                   </div>
                 </div>
@@ -1026,16 +1060,16 @@ plt.show()</code></pre>
               <div class="contact-info-card">
                 <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">2. 特征行为模式 - 深入分析</h3>
                 <div class="space-y-4">
-                  <div class="text-center p-6 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                  <div class="figure-editorial">
                     <h4 class="font-semibold mb-3" style="color: var(--dark);">关键特征的SHAP依赖图</h4>
-                    <img src="figures/lightgbm how key features influence default probability.png" alt="SHAP依赖图" class="w-full rounded-lg shadow-lg" />
+                    <img src="figures/lightgbm how key features influence default probability.png" alt="SHAP依赖图" class="w-full" />
                     <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">显示信贷利用率的U形关系和收入在4万和8万美元的阈值效应</p>
                   </div>
 
                   <h4 class="font-semibold mt-6 mb-3" style="color: var(--brown);">线性关系（相关性 > 0.8）</h4>
                   
                   <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-4 mb-3">
-                    <h5 class="font-semibold text-lg mb-2">📈 利率 (r=0.896)</h5>
+                    <h5 class="font-semibold text-lg mb-2">利率 (r = 0.896)</h5>
                     <ul class="space-y-1 text-gray-700 dark:text-gray-300">
                       <li><strong>模式</strong>：与SHAP值强正相关</li>
                       <li><strong>解释</strong>：模型学习到利率是风险的<strong>结果，而非原因</strong></li>
@@ -1045,7 +1079,7 @@ plt.show()</code></pre>
                   </div>
 
                   <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-4 mb-3">
-                    <h5 class="font-semibold text-lg mb-2">📉 年收入 (r=-0.811)</h5>
+                    <h5 class="font-semibold text-lg mb-2">年收入 (r = −0.811)</h5>
                     <ul class="space-y-1 text-gray-700 dark:text-gray-300">
                       <li><strong>模式</strong>：明显负相关 - 更高收入 = 更低风险</li>
                       <li><strong>阈值效应</strong>：风险在4万美元以上显著下降，8万美元后趋于平稳</li>
@@ -1056,7 +1090,7 @@ plt.show()</code></pre>
                   <h4 class="font-semibold mt-6 mb-3" style="color: var(--brown);">非线性关系</h4>
                   
                   <div class="bg-amber-50 dark:bg-amber-900/20 border-l-4 border-amber-500 p-4">
-                    <h5 class="font-semibold text-amber-800 dark:text-amber-200 mb-2">🔄 信贷利用率 - U型曲线发现</h5>
+                    <h5 class="font-semibold text-amber-800 dark:text-amber-200 mb-2">信贷利用率 — U 型曲线发现</h5>
                     <ul class="space-y-1 text-amber-700 dark:text-amber-300">
                       <li><strong>低利用率（&lt;30%）</strong>：轻微风险增加 - 可能是不活跃卡片或信贷经验不足</li>
                       <li><strong>适度利用率（30-70%）</strong>：<strong>最佳区间</strong> - 活跃但负责任的信贷使用</li>
@@ -1071,15 +1105,15 @@ plt.show()</code></pre>
               <div class="contact-info-card">
                 <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">3. 模型比较洞察</h3>
                 <div class="space-y-4">
-                  <div class="text-center p-6 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                  <div class="figure-editorial">
                     <h4 class="font-semibold mb-3" style="color: var(--coral);">模型比较：随机森林 vs LightGBM特征重要性</h4>
-                    <img src="figures/rf vs lightgbm.png" alt="RF vs LightGBM比较" class="w-full rounded-lg shadow-lg" />
+                    <img src="figures/rf vs lightgbm.png" alt="RF vs LightGBM比较" class="w-full" />
                     <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">两个模型在核心特征（annual_inc, int_rate, revol_util）上达成一致，但LightGBM揭示了额外的交互模式</p>
                   </div>
 
                   <h4 class="font-semibold mt-6 mb-3" style="color: var(--brown);">共识特征（两个模型都同意）</h4>
                   <div class="bg-green-50 dark:bg-green-900/20 border-l-4 border-green-500 p-4">
-                    <p class="font-semibold text-green-800 dark:text-green-200">✅ 高置信度风险因素：</p>
+                    <p class="content-kicker">高置信度风险因素</p>
                     <ul class="mt-2 space-y-1 text-green-700 dark:text-green-300">
                       <li><code class="bg-green-100 dark:bg-green-800 px-1 rounded">annual_inc</code> - 基本支付能力</li>
                       <li><code class="bg-green-100 dark:bg-green-800 px-1 rounded">int_rate</code> - 市场风险评估</li>
@@ -1099,7 +1133,7 @@ plt.show()</code></pre>
                   <!-- 高风险借款人画像 -->
                   <div class="border-2 border-red-500 rounded-lg overflow-hidden">
                     <div class="bg-red-500 text-white p-3">
-                      <h5 class="font-semibold text-lg">高风险借款人画像 🔴</h5>
+                      <h5 class="font-semibold text-lg">高风险借款人画像<span class="risk-tag risk-tag--high">High Risk</span></h5>
                     </div>
                     <div class="p-4 bg-white dark:bg-gray-900">
                       <h6 class="font-semibold text-red-600 dark:text-red-400 mb-2">信贷压力信号</h6>
@@ -1133,7 +1167,7 @@ plt.show()</code></pre>
                   <!-- 低风险借款人画像 -->
                   <div class="border-2 border-green-500 rounded-lg overflow-hidden">
                     <div class="bg-green-500 text-white p-3">
-                      <h5 class="font-semibold text-lg">低风险借款人画像 🟢</h5>
+                      <h5 class="font-semibold text-lg">低风险借款人画像<span class="risk-tag risk-tag--low">Low Risk</span></h5>
                     </div>
                     <div class="p-4 bg-white dark:bg-gray-900">
                       <h6 class="font-semibold text-green-600 dark:text-green-400 mb-2">财务实力</h6>
@@ -1210,7 +1244,7 @@ plt.show()</code></pre>
                 </div>
 
                 <div class="bg-green-50 dark:bg-green-900/20 border-l-4 border-green-500 p-4 mt-6">
-                  <h4 class="font-semibold text-green-800 dark:text-green-200 mb-3">🎯 战略洞察：</h4>
+                  <h4 class="font-semibold text-green-800 dark:text-green-200 mb-3">战略洞察</h4>
                   <ol class="space-y-1 text-green-700 dark:text-green-300 list-decimal list-inside">
                     <li><strong>信贷利用率是非线性的</strong> - 适度使用是健康的</li>
                     <li><strong>利率反映而非预测风险</strong> - 它已经定价</li>
@@ -1218,7 +1252,7 @@ plt.show()</code></pre>
                     <li><strong>特征工程有效</strong> - 我们的复合特征排名很高</li>
                   </ol>
 
-                  <h4 class="font-semibold text-green-800 dark:text-green-200 mb-3 mt-4">📊 运营建议：</h4>
+                  <h4 class="font-semibold text-green-800 dark:text-green-200 mb-3 mt-4">运营建议</h4>
                   <ol class="space-y-1 text-green-700 dark:text-green-300 list-decimal list-inside">
                     <li>实施三层利用率评估</li>
                     <li>自动拒绝有毒的等级-期限组合</li>
@@ -1226,7 +1260,7 @@ plt.show()</code></pre>
                     <li>使用模型一致性作为置信度指标</li>
                   </ol>
 
-                  <h4 class="font-semibold text-green-800 dark:text-green-200 mb-3 mt-4">🚀 下一步：</h4>
+                  <h4 class="font-semibold text-green-800 dark:text-green-200 mb-3 mt-4">下一步</h4>
                   <ol class="space-y-1 text-green-700 dark:text-green-300 list-decimal list-inside">
                     <li>A/B测试适度利用率假设</li>
                     <li>制定州特定策略</li>
@@ -1252,9 +1286,13 @@ plt.show()</code></pre>
           </section>
 
           <!-- 结论与战略行动计划 -->
-          <section id="conclusion" class="section-padding">
+          <section id="conclusion" class="section-padding section--editorial" data-section-num="06">
             <div class="section-header">
-              <h2 class="text-3xl font-bold">🚀 最终结论与战略行动计划</h2>
+              <div class="section-eyebrow">
+                <span class="section-num">06</span>
+                <span class="section-kicker">Conclusion &amp; Roadmap</span>
+              </div>
+              <h2 class="section-title">最终结论与战略行动计划</h2>
             </div>
             
             <div class="space-y-8">
@@ -1264,32 +1302,32 @@ plt.show()</code></pre>
                 <p class="subtitle mb-6">基于模型预测的风险评分，实施分层管理策略，平衡风险控制与客户体验。</p>
                 
                 <div class="space-y-4">
-                  <div class="border border-green-300 dark:border-green-600 bg-green-50 dark:bg-green-900/20 rounded-lg p-4">
-                    <h4 class="font-semibold text-green-800 dark:text-green-200 mb-2">🟢 第1层：自动批准（评分 < 0.15）</h4>
-                    <div class="text-green-700 dark:text-green-300">
-                      <p><strong>覆盖范围</strong>：约60%的申请</p>
+                  <div class="note note--evidence">
+                    <div class="note__label">Tier 1 · Auto Approve（评分 &lt; 0.15）</div>
+                    <div class="note__body">
+                      <p><strong>覆盖范围</strong>：约 60% 的申请</p>
                       <p><strong>处理方式</strong>：立即批准，给予最优利率</p>
-                      <p><strong>违约风险</strong>：<5%</p>
+                      <p><strong>违约风险</strong>：&lt;5%</p>
                       <p><strong>业务影响</strong>：最大化转化率，建立客户忠诚度</p>
                     </div>
                   </div>
-                  
-                  <div class="border border-yellow-300 dark:border-yellow-600 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg p-4">
-                    <h4 class="font-semibold text-yellow-800 dark:text-yellow-200 mb-2">🟡 第2层：标准审查（评分 0.15-0.30）</h4>
-                    <div class="text-yellow-700 dark:text-yellow-300">
-                      <p><strong>覆盖范围</strong>：约25%的申请</p>
+
+                  <div class="note note--caveat">
+                    <div class="note__label">Tier 2 · Standard Review（评分 0.15–0.30）</div>
+                    <div class="note__body">
+                      <p><strong>覆盖范围</strong>：约 25% 的申请</p>
                       <p><strong>处理方式</strong>：快速自动验证检查</p>
-                      <p><strong>违约风险</strong>：10-20%</p>
+                      <p><strong>违约风险</strong>：10–20%</p>
                       <p><strong>业务影响</strong>：平衡风险管理与增长</p>
                     </div>
                   </div>
-                  
-                  <div class="border border-red-300 dark:border-red-600 bg-red-50 dark:bg-red-900/20 rounded-lg p-4">
-                    <h4 class="font-semibold text-red-800 dark:text-red-200 mb-2">🔴 第3层：人工审查（评分 > 0.30）</h4>
-                    <div class="text-red-700 dark:text-red-300">
-                      <p><strong>覆盖范围</strong>：约15%的申请</p>
+
+                  <div class="note note--insight">
+                    <div class="note__label">Tier 3 · Manual Review（评分 &gt; 0.30）</div>
+                    <div class="note__body">
+                      <p><strong>覆盖范围</strong>：约 15% 的申请</p>
                       <p><strong>处理方式</strong>：人工承保或自动拒绝</p>
-                      <p><strong>违约风险</strong>：>30%</p>
+                      <p><strong>违约风险</strong>：&gt;30%</p>
                       <p><strong>业务影响</strong>：防止重大损失，保护组合健康</p>
                     </div>
                   </div>
@@ -1352,7 +1390,7 @@ plt.show()</code></pre>
 
                   <div class="mt-6 p-4 bg-gradient-to-r from-red-50 to-yellow-50 dark:from-red-900/20 dark:to-yellow-900/20 rounded-lg">
                     <p class="text-lg font-semibold" style="color: var(--coral);">
-                      💡 核心价值：该系统不仅减少了财务损失，更重要的是建立了数据驱动的风险管理文化，为业务的可持续增长奠定基础。
+                      核心价值——该系统不仅减少了财务损失，更重要的是建立了数据驱动的风险管理文化，为业务的可持续增长奠定基础。
                     </p>
                   </div>
                 </div>
@@ -1366,7 +1404,10 @@ plt.show()</code></pre>
     <!-- 相关项目 -->
     <section id="related" class="section-padding">
       <div class="section-header reveal">
-        <h2 class="text-3xl font-bold">相关项目</h2>
+        <div class="section-eyebrow">
+          <span class="section-kicker">Continue Reading</span>
+        </div>
+        <h2 class="section-title">相关项目</h2>
       </div>
       <div class="grid md:grid-cols-2 gap-6">
         <a href="#" class="related-project-card group cursor-pointer" style="text-decoration: none;" onclick="

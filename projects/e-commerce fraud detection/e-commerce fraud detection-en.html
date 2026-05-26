@@ -10,7 +10,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <script src="https://unpkg.com/lucide-react/dist/umd/lucide-react.js"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <link rel="stylesheet" href="../../assets/css/index.css" />
@@ -21,9 +21,7 @@
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 <body class="transition-colors duration-300">
-  <!-- Background decoration (consistent with homepage) -->
-  <div class="gradient-orb top-[-150px] left-[-150px]"></div>
-  <div class="gradient-orb bottom-[-200px] right-[-200px]" style="background: radial-gradient(circle at center, var(--blue), transparent 60%)"></div>
+  <div class="scroll-progress" id="scroll-progress"></div>
 
   <!-- Top navigation (fully reusing homepage structure and style) -->
   <header id="navbar" class="navbar fixed top-0 left-0 right-0 z-50">
@@ -72,45 +70,77 @@
   <main class="container-main">
     <!-- Project header (Hero-style detail page header) -->
     <section id="project-hero" class="section-padding" style="padding-top: calc(var(--space-xl) + 72px)">
-      <div class="grid md:grid-cols-2 gap-16 items-start w-full">
+      <div class="grid md:grid-cols-2 gap-16 items-center w-full">
         <div class="reveal">
-          <span class="font-semibold text-lg" style="color: var(--coral);">Data Analysis Project</span>
-          <h1 class="mt-2" style="font-size: var(--text-4xl);">Proactive Fraud Detection for First-Time E-commerce Transactions</h1>
-          <p class="subtitle mt-4 max-w-xl">Machine learning-based proactive fraud detection system achieving 51.2% fraud detection rate while maintaining 98.6% precision, effectively protecting user experience</p>
-          
-          <!-- Data metrics cards -->
-          <div class="mt-8">
-            <div class="grid grid-cols-3 gap-4">
-              <div class="contact-info-card" style="min-height: 120px; padding: var(--space-md);">
-                <div class="text-sm font-medium" style="color: var(--brown);">Dataset Size</div>
-                <div class="text-2xl font-bold mt-2" style="color: var(--charcoal);">138K</div>
-              </div>
-              <div class="contact-info-card" style="min-height: 120px; padding: var(--space-md);">
-                <div class="text-sm font-medium" style="color: var(--brown);">Detection Rate</div>
-                <div class="text-2xl font-bold mt-2" style="color: var(--charcoal);">51.2%</div>
-              </div>
-              <div class="contact-info-card" style="min-height: 120px; padding: var(--space-md);">
-                <div class="text-sm font-medium" style="color: var(--brown);">Precision</div>
-                <div class="text-2xl font-bold mt-2" style="color: var(--charcoal);">98.6%</div>
-              </div>
+          <div class="section-eyebrow">
+            <span class="section-kicker">Case Study · Risk &amp; Fraud Detection</span>
+          </div>
+          <h1 class="hero-title mt-2">Catching First-Purchase Fraud by Behavior</h1>
+          <p class="subtitle mt-4 max-w-xl">A LightGBM + SHAP system that gives the business a verdict it can defend.</p>
+          <div class="reading-time">~10 min read<span class="sep">·</span>9 figures</div>
+
+          <div class="hero-stats">
+            <div class="hero-stat">
+              <div class="hero-stat__num">138K</div>
+              <div class="hero-stat__label">First Purchases</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat__num">98.6%</div>
+              <div class="hero-stat__label">Precision</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat__num">51.2%</div>
+              <div class="hero-stat__label">Fraud Recall</div>
             </div>
           </div>
-          
+
           <div class="mt-8 flex items-center gap-4">
             <a href="#content" class="btn btn-primary">Start Reading</a>
             <a href="../../index.html#projects" class="btn btn-secondary">Back to Projects</a>
           </div>
         </div>
-        <div class="reveal">
-          <!-- Space for additional content like project images or charts -->
-        </div>
+        <aside class="reveal hero-stack">
+          <div class="hero-stack__label">Methods · Tech Stack</div>
+          <ol class="hero-stack__list">
+            <li>
+              <span class="hero-stack__num">01</span>
+              <span class="hero-stack__name">LightGBM</span>
+              <span class="hero-stack__desc">Primary model, leaf-wise growth + sparse-friendly</span>
+            </li>
+            <li>
+              <span class="hero-stack__num">02</span>
+              <span class="hero-stack__name">SMOTE</span>
+              <span class="hero-stack__desc">Synthetic minority sampling for the 1.02% fraud rate</span>
+            </li>
+            <li>
+              <span class="hero-stack__num">03</span>
+              <span class="hero-stack__name">Behavioral Features</span>
+              <span class="hero-stack__desc">Signup interval, device sharing, same-hour ops</span>
+            </li>
+            <li>
+              <span class="hero-stack__num">04</span>
+              <span class="hero-stack__name">IP → Country</span>
+              <span class="hero-stack__desc">pandas merge_asof maps 97.3% of IP ranges</span>
+            </li>
+            <li>
+              <span class="hero-stack__num">05</span>
+              <span class="hero-stack__name">SHAP</span>
+              <span class="hero-stack__desc">Explains why instant purchases are flagged fraud</span>
+            </li>
+          </ol>
+          <div class="hero-stack__foot">Python · pandas · scikit-learn · imblearn · lightgbm</div>
+        </aside>
       </div>
     </section>
 
     <!-- Executive Summary (three-column info cards, redesigned) -->
-    <section id="executive-summary" class="section-padding">
+    <section id="executive-summary" class="section-padding section--editorial" data-section-num="00">
       <div class="section-header reveal">
-        <h2 class="text-3xl font-bold">📊 Executive Summary</h2>
+        <div class="section-eyebrow">
+          <span class="section-num">00</span>
+          <span class="section-kicker">Executive Summary</span>
+        </div>
+        <h2 class="section-title">Executive Summary</h2>
       </div>
       <div class="grid md:grid-cols-3 gap-6">
         <div class="summary-card">
@@ -148,9 +178,13 @@
         <!-- Content area -->
         <div class="md:col-span-9 content-area">
           <!-- Key Findings & Recommended Actions -->
-          <section id="findings" class="section-padding">
+          <section id="findings" class="section-padding section--editorial" data-section-num="01">
             <div class="section-header">
-              <h2 class="text-3xl font-bold">🔍 Key Findings & Recommended Actions</h2>
+              <div class="section-eyebrow">
+                <span class="section-num">01</span>
+                <span class="section-kicker">Findings &amp; Recommendations</span>
+              </div>
+              <h2 class="section-title">Key Findings &amp; Recommended Actions</h2>
             </div>
             
             <div class="space-y-8">
@@ -233,9 +267,13 @@
           </section>
 
           <!-- Data Analysis & Methodology -->
-          <section id="methodology" class="section-padding">
+          <section id="methodology" class="section-padding section--editorial" data-section-num="02">
             <div class="section-header">
-              <h2 class="text-3xl font-bold">📊 Data Analysis & Methodology</h2>
+              <div class="section-eyebrow">
+                <span class="section-num">02</span>
+                <span class="section-kicker">Data Analysis &amp; Methodology</span>
+              </div>
+              <h2 class="section-title">Data Analysis &amp; Methodology</h2>
             </div>
             
             <div class="space-y-8">
@@ -245,14 +283,16 @@
                 <div class="space-y-4">
                   <p class="subtitle">The analysis includes 138,376 first-time transaction records, covering 11 core dimensions including user behavior, device information, and geographic location.</p>
                   
-                  <div class="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-4">
-                    <h4 class="font-semibold text-green-800 dark:text-green-200 mb-3">Data Quality Characteristics</h4>
-                    <ul class="space-y-2 text-green-700 dark:text-green-300">
-                      <li><strong>Excellent Completeness</strong>: Zero missing values, all 138,376 records complete</li>
-                      <li><strong>Severe Class Imbalance</strong>: Only 1,415 fraudulent transactions (1.02%), requiring special handling</li>
-                      <li><strong>Reasonable Time Span</strong>: Covers sufficient business cycles for pattern recognition</li>
-                      <li><strong>Feature-Rich</strong>: Contains behavioral, technical, and geographic multi-dimensional information</li>
-                    </ul>
+                  <div class="note note--evidence">
+                    <div class="note__label">Data Quality</div>
+                    <div class="note__body">
+                      <ul class="list-disc list-inside space-y-2">
+                        <li><strong>Excellent completeness</strong>: zero missing values across all 138,376 records.</li>
+                        <li><strong>Severe class imbalance</strong>: only 1,415 fraudulent transactions (1.02%), requiring special handling.</li>
+                        <li><strong>Reasonable time span</strong>: covers sufficient business cycles for pattern recognition.</li>
+                        <li><strong>Feature-rich</strong>: contains behavioral, technical, and geographic dimensions.</li>
+                      </ul>
+                    </div>
                   </div>
 
                   <div>
@@ -283,14 +323,16 @@ print(f"Fraud rate: {fraud_data['class'].mean():.3%}")</code></pre>
                 <div class="space-y-4">
                   <p class="subtitle">Raw data doesn't directly reveal user intent. The purpose of feature engineering is to transform raw data points into meaningful <strong>behavioral and contextual features</strong> that act as powerful signals for fraud detection.</p>
                   
-                  <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
-                    <h4 class="font-semibold text-blue-800 dark:text-blue-200 mb-3">Key Feature Categories</h4>
-                    <ul class="space-y-2 text-blue-700 dark:text-blue-300">
-                      <li><strong>Time Behavior Features</strong>: Signup-to-purchase interval, same-hour operations, business hours activity</li>
-                      <li><strong>Device Sharing Features</strong>: Single-device multi-account count, IP address reuse</li>
-                      <li><strong>Geographic Features</strong>: IP-to-country mapping (97.3% success rate)</li>
-                      <li><strong>Channel Features</strong>: Traffic source encoding (Direct, SEO, Ads)</li>
-                    </ul>
+                  <div class="note note--process">
+                    <div class="note__label">Feature Buckets</div>
+                    <div class="note__body">
+                      <ul class="list-disc list-inside space-y-2">
+                        <li><strong>Time-behavior features</strong>: signup-to-purchase interval, same-hour ops, business hours activity.</li>
+                        <li><strong>Device-sharing features</strong>: single-device multi-account count, IP reuse.</li>
+                        <li><strong>Geographic features</strong>: IP-to-country mapping (97.3% success rate).</li>
+                        <li><strong>Channel features</strong>: traffic source encoding (Direct, SEO, Ads).</li>
+                      </ul>
+                    </div>
                   </div>
 
                   <div>
@@ -318,27 +360,29 @@ merged_df = pd.merge_asof(
 )</code></pre>
                   </div>
 
-                  <h4 class="font-semibold mb-3 mt-6" style="color: var(--dark);">📊 Key Time-Based Insights</h4>
+                  <h4 class="font-semibold mb-3 mt-6" style="color: var(--dark);">Key Time-Based Insights</h4>
 
-                  <div class="text-center p-6 bg-gray-50 dark:bg-gray-800 rounded-lg mb-6">
-                    <img src="figures/interval_after_signup_log_speed_category_sighup_hour.png" alt="Time Interval Distribution" class="w-full rounded-lg shadow-lg" />
-                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Visualization 1: Time Interval Distribution - Critical finding: Instant purchases have nearly 100% fraud rate</p>
+                  <figure class="figure-editorial">
+                    <img src="figures/interval_after_signup_log_speed_category_sighup_hour.png" alt="Time Interval Distribution" loading="lazy" decoding="async" />
+                    <figcaption>Signup-to-purchase interval distribution — instant purchases have nearly 100% fraud rate.</figcaption>
+                  </figure>
+
+                  <div class="note note--caveat">
+                    <div class="note__label">Key Pattern</div>
+                    <div class="note__body">
+                      <ul class="list-disc list-inside space-y-1">
+                        <li><strong>Instant purchases (&lt;1 second)</strong>: nearly 100% fraud rate</li>
+                        <li><strong>Very fast purchases (&lt;60 seconds)</strong>: 85% fraud rate</li>
+                        <li><strong>Normal purchases (&gt;1 day)</strong>: &lt;0.5% fraud rate</li>
+                        <li><strong>Overall fraud rate</strong>: 1.02%</li>
+                      </ul>
+                    </div>
                   </div>
 
-                  <div class="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg p-4 mb-6">
-                    <h4 class="font-semibold text-amber-800 dark:text-amber-200 mb-3">Critical Findings:</h4>
-                    <ul class="space-y-1 text-amber-700 dark:text-amber-300">
-                      <li><strong>Instant purchases (<1 second)</strong>: Nearly 100% fraud rate</li>
-                      <li><strong>Very fast purchases (<60 seconds)</strong>: 85% fraud rate</li>
-                      <li><strong>Normal purchases (>1 day)</strong>: <0.5% fraud rate</li>
-                      <li><strong>Overall fraud rate</strong>: 1.02%</li>
-                    </ul>
-                  </div>
-
-                  <div class="text-center p-6 bg-gray-50 dark:bg-gray-800 rounded-lg mb-6">
-                    <img src="figures/sighup_business_hours_sighup_weekend_same_hour.png" alt="Fraud Rate by Hour Patterns" class="w-full rounded-lg shadow-lg" />
-                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Visualization 2: Fraud Rate by Hour Patterns - Business hours and same-hour purchases are strong fraud indicators</p>
-                  </div>
+                  <figure class="figure-editorial">
+                    <img src="figures/sighup_business_hours_sighup_weekend_same_hour.png" alt="Fraud Rate by Hour Patterns" loading="lazy" decoding="async" />
+                    <figcaption>Fraud rate by hour patterns — business-hour and same-hour purchases are strong fraud indicators.</figcaption>
+                  </figure>
 
                   <p class="subtitle mb-4"><strong>Business Implications:</strong></p>
                   <ul class="list-disc list-inside space-y-1 subtitle mb-6">
@@ -347,20 +391,20 @@ merged_df = pd.merge_asof(
                     <li>Same-hour signup and purchase is the strongest temporal fraud indicator</li>
                   </ul>
 
-                  <div class="text-center p-6 bg-gray-50 dark:bg-gray-800 rounded-lg mb-6">
-                    <img src="figures/purchase_value.png" alt="Purchase Value Distribution" class="w-full rounded-lg shadow-lg" />
-                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Visualization 3: Purchase Value Distribution - Fraudsters intentionally mimic normal purchase values</p>
-                  </div>
+                  <figure class="figure-editorial">
+                    <img src="figures/purchase_value.png" alt="Purchase Value Distribution" loading="lazy" decoding="async" />
+                    <figcaption>Purchase value distribution — fraudsters intentionally mimic normal purchase values.</figcaption>
+                  </figure>
 
-                  <div class="text-center p-6 bg-gray-50 dark:bg-gray-800 rounded-lg mb-6">
-                    <img src="figures/age_distribution.png" alt="Age Distribution" class="w-full rounded-lg shadow-lg" />
-                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Visualization 4: Age Distribution - No clear age profile for fraudsters - likely using stolen identities</p>
-                  </div>
+                  <figure class="figure-editorial">
+                    <img src="figures/age_distribution.png" alt="Age Distribution" loading="lazy" decoding="async" />
+                    <figcaption>Age distribution — fraud spans all demographics, likely using stolen identities.</figcaption>
+                  </figure>
 
-                  <div class="text-center p-6 bg-gray-50 dark:bg-gray-800 rounded-lg mb-6">
-                    <img src="figures/market_source_browser.png" alt="Channel and Browser Analysis" class="w-full rounded-lg shadow-lg" />
-                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Visualization 5: Channel and Browser Analysis - Direct traffic and Chrome browser show elevated fraud risk</p>
-                  </div>
+                  <figure class="figure-editorial">
+                    <img src="figures/market_source_browser.png" alt="Channel and Browser Analysis" loading="lazy" decoding="async" />
+                    <figcaption>Channel and browser analysis — direct traffic and Chrome show elevated fraud risk.</figcaption>
+                  </figure>
 
                   <h4 class="font-semibold mb-3" style="color: var(--dark);">Pattern Summary</h4>
                   <ul class="list-disc list-inside space-y-1 subtitle mb-6">
@@ -370,10 +414,10 @@ merged_df = pd.merge_asof(
                     <li><strong>Browser Preference</strong>: Chrome most targeted due to market share</li>
                   </ul>
 
-                  <div class="text-center p-6 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                    <img src="figures/keyfeature_correlation.png" alt="Feature Correlation Heatmap" class="w-full rounded-lg shadow-lg" />
-                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Visualization 6: Feature Correlation Heatmap - Behavioral features show strongest correlation with fraud</p>
-                  </div>
+                  <figure class="figure-editorial">
+                    <img src="figures/keyfeature_correlation.png" alt="Feature Correlation Heatmap" loading="lazy" decoding="async" />
+                    <figcaption>Feature correlation heatmap — behavioral features show the strongest correlation with fraud.</figcaption>
+                  </figure>
                 </div>
               </div>
 
@@ -423,9 +467,13 @@ best_model = grid_search.best_estimator_</code></pre>
           </section>
 
           <!-- Model Evaluation & Comparison -->
-          <section id="evaluation" class="section-padding">
+          <section id="evaluation" class="section-padding section--editorial" data-section-num="03">
             <div class="section-header">
-              <h2 class="text-3xl font-bold">📈 Model Evaluation & Comparison</h2>
+              <div class="section-eyebrow">
+                <span class="section-num">03</span>
+                <span class="section-kicker">Model Evaluation</span>
+              </div>
+              <h2 class="section-title">Model Evaluation &amp; Comparison</h2>
             </div>
             
             <div class="space-y-8">
@@ -480,28 +528,31 @@ best_model = grid_search.best_estimator_</code></pre>
                 <div class="space-y-4">
                   <p class="subtitle">LightGBM was selected as the production deployment model, excelling in three key dimensions: business-aligned precision, fraud detection capability, and overall discriminative power.</p>
                   
-                  <div class="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-4">
-                    <h4 class="font-semibold text-green-800 dark:text-green-200 mb-3">Key Advantages of LightGBM</h4>
-                    <ul class="space-y-2 text-green-700 dark:text-green-300">
-                      <li><strong>Highest Discriminative Power</strong>: ROC-AUC of 0.7786 indicates best overall predictive performance</li>
-                      <li><strong>Business-Friendly Precision</strong>: 98.64% precision effectively protects customer experience</li>
-                      <li><strong>Balanced F1-Score</strong>: 0.6744 F1-score is highest among all models</li>
-                      <li><strong>Production-Ready</strong>: Robust performance with minimal false positives</li>
-                    </ul>
+                  <div class="note note--insight">
+                    <div class="note__label">Why LightGBM</div>
+                    <div class="note__body">
+                      <ul class="list-disc list-inside space-y-2">
+                        <li><strong>Highest discriminative power</strong>: ROC-AUC of 0.7786, best overall predictive performance.</li>
+                        <li><strong>Business-friendly precision</strong>: 98.64% precision effectively protects customer experience.</li>
+                        <li><strong>Balanced F1</strong>: 0.6744 — highest among all models.</li>
+                        <li><strong>Production-ready</strong>: robust performance with minimal false positives.</li>
+                      </ul>
+                    </div>
                   </div>
 
-                  <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
-                    <h4 class="font-semibold text-blue-800 dark:text-blue-200 mb-3">Real Business Impact</h4>
-                    <div class="grid md:grid-cols-2 gap-4 text-blue-700 dark:text-blue-300">
-                      <div>
-                        <strong>Fraud Prevention Effect:</strong>
-                        <ul class="list-disc list-inside mt-1">
-                          <li>51.2% fraud detection rate</li>
-                          <li>~$1.25M annual savings</li>
-                          <li>Significantly reduced chargeback risk</li>
-                        </ul>
-                      </div>
-                      <div>
+                  <div class="note note--process">
+                    <div class="note__label">Business Impact</div>
+                    <div class="note__body">
+                      <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                          <strong>Fraud prevention:</strong>
+                          <ul class="list-disc list-inside mt-1">
+                            <li>51.2% fraud detection rate</li>
+                            <li>~$1.25M annual savings</li>
+                            <li>Significantly reduced chargeback risk</li>
+                          </ul>
+                        </div>
+                        <div>
                         <strong>User Experience Protection:</strong>
                         <ul class="list-disc list-inside mt-1">
                           <li>Only 0.01% false positive rate</li>
@@ -517,9 +568,13 @@ best_model = grid_search.best_estimator_</code></pre>
           </section>
 
           <!-- SHAP Deep Analysis -->
-          <section id="shap-analysis" class="section-padding">
+          <section id="shap-analysis" class="section-padding section--editorial" data-section-num="04">
             <div class="section-header">
-              <h2 class="text-3xl font-bold">🎯 Deep Dive: Explaining Model Predictions (SHAP Analysis)</h2>
+              <div class="section-eyebrow">
+                <span class="section-num">04</span>
+                <span class="section-kicker">SHAP Deep Dive</span>
+              </div>
+              <h2 class="section-title">Explaining Model Predictions (SHAP)</h2>
             </div>
             
             <div class="space-y-8">
@@ -530,57 +585,62 @@ best_model = grid_search.best_estimator_</code></pre>
                 <div class="space-y-6">
                   <h3 class="text-xl font-semibold" style="color: var(--dark);">Global Insights: Key Drivers of Fraud Detection</h3>
                   
-                  <div class="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg p-4">
-                    <h4 class="font-semibold text-amber-800 dark:text-amber-200 mb-3">SHAP Feature Importance Ranking</h4>
-                    <ol class="space-y-1 text-amber-700 dark:text-amber-300">
-                      <li><strong>1. is_instant_purchase</strong> - Instant purchases (correlation: 0.45)</li>
-                      <li><strong>2. n_dev_shared</strong> - Device sharing count (correlation: 0.38)</li>
-                      <li><strong>3. same_hour</strong> - Same-hour operations (correlation: 0.31)</li>
-                      <li><strong>4. signup_business_hours</strong> - Business hours signup (correlation: 0.12)</li>
-                      <li><strong>5. source_Direct</strong> - Direct traffic source (correlation: 0.08)</li>
-                    </ol>
+                  <div class="note note--insight">
+                    <div class="note__label">SHAP Top 5</div>
+                    <div class="note__body">
+                      <ol class="list-decimal list-inside space-y-1">
+                        <li><strong>is_instant_purchase</strong> · instant purchases (0.45)</li>
+                        <li><strong>n_dev_shared</strong> · device sharing count (0.38)</li>
+                        <li><strong>same_hour</strong> · same-hour operations (0.31)</li>
+                        <li><strong>signup_business_hours</strong> · business-hours signup (0.12)</li>
+                        <li><strong>source_Direct</strong> · direct traffic source (0.08)</li>
+                      </ol>
+                    </div>
                   </div>
 
                   <h3 class="text-xl font-semibold" style="color: var(--dark);">Typical Characteristics of High-Risk Transactions</h3>
                   <p class="subtitle">SHAP analysis reveals clear characteristics of what the model considers high-risk transactions:</p>
                   
                   <div class="grid md:grid-cols-2 gap-6">
-                    <div class="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4">
-                      <h4 class="font-semibold text-red-800 dark:text-red-200 mb-3">🚨 High-Risk Behavior Patterns</h4>
-                      <ul class="space-y-2 text-red-700 dark:text-red-300">
-                        <li><strong>Instant Purchase</strong>: Signup-to-purchase time <1 minute</li>
-                        <li><strong>Device Sharing</strong>: Multiple user accounts on single device</li>
-                        <li><strong>Direct Access</strong>: Bypassing normal marketing channels</li>
-                        <li><strong>Simultaneous Operations</strong>: Signup and purchase in same hour</li>
-                      </ul>
+                    <div class="note note--caveat">
+                      <div class="note__label">High Risk Pattern</div>
+                      <div class="note__body">
+                        <ul class="list-disc list-inside space-y-1">
+                          <li><strong>Instant purchase</strong>: signup-to-purchase &lt;1 minute</li>
+                          <li><strong>Device sharing</strong>: multiple accounts on a single device</li>
+                          <li><strong>Direct access</strong>: bypassing normal marketing channels</li>
+                          <li><strong>Simultaneous ops</strong>: signup and purchase in the same hour</li>
+                        </ul>
+                      </div>
                     </div>
-                    <div class="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-4">
-                      <h4 class="font-semibold text-green-800 dark:text-green-200 mb-3">✅ Low-Risk Behavior Patterns</h4>
-                      <ul class="space-y-2 text-green-700 dark:text-green-300">
-                        <li><strong>Delayed Purchase</strong>: Purchase hours or days after signup</li>
-                        <li><strong>Device Exclusivity</strong>: Single user per device pattern</li>
-                        <li><strong>Organic Sources</strong>: Arriving through SEO or Ads</li>
-                        <li><strong>Distributed Operations</strong>: User behavior across different time periods</li>
-                      </ul>
+                    <div class="note note--evidence">
+                      <div class="note__label">Low Risk Pattern</div>
+                      <div class="note__body">
+                        <ul class="list-disc list-inside space-y-1">
+                          <li><strong>Delayed purchase</strong>: hours or days after signup</li>
+                          <li><strong>Device exclusivity</strong>: single user per device</li>
+                          <li><strong>Organic sources</strong>: arriving through SEO or Ads</li>
+                          <li><strong>Distributed ops</strong>: behavior across different time periods</li>
+                        </ul>
+                      </div>
                     </div>
                   </div>
 
                   <h3 class="text-xl font-semibold" style="color: var(--dark);">Model Intelligence: Behavior Over Demographics</h3>
-                  <div class="text-center p-6 bg-gray-50 dark:bg-gray-800 rounded-lg mb-6">
-                    <img src="figures/SHAP_bar.png" alt="SHAP Feature Importance Plot" class="w-full rounded-lg shadow-lg" />
-                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">SHAP Feature Importance Plot - Behavioral features dominate the model's decision-making process</p>
-                  </div>
+                  <figure class="figure-editorial">
+                    <img src="figures/SHAP_bar.png" alt="SHAP Feature Importance Plot" loading="lazy" decoding="async" />
+                    <figcaption>SHAP feature importance — behavioral features dominate the model's decisions.</figcaption>
+                  </figure>
+                  <figure class="figure-editorial">
+                    <img src="figures/SHAP_feature_importance_beeswarm.png" alt="SHAP Summary Plot" loading="lazy" decoding="async" />
+                    <figcaption>SHAP summary — higher values for instant purchases and device sharing strongly increase fraud probability.</figcaption>
+                  </figure>
 
-                  <div class="text-center p-6 bg-gray-50 dark:bg-gray-800 rounded-lg mb-6">
-                    <img src="figures/SHAP_feature_importance_beeswarm.png" alt="SHAP Summary Plot" class="w-full rounded-lg shadow-lg" />
-                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">SHAP Summary Plot - Higher values for instant purchases and device sharing strongly increase fraud probability</p>
-                  </div>
-
-                  <div class="bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800 rounded-lg p-4">
-                    <p class="text-purple-700 dark:text-purple-300">
-                      SHAP analysis confirms that the model intelligently <strong>ignores non-predictive demographic features</strong> like <code class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-gray-900 dark:text-gray-100 font-mono text-sm">age</code>, <code class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-gray-900 dark:text-gray-100 font-mono text-sm">sex</code>, and <code class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-gray-900 dark:text-gray-100 font-mono text-sm">purchase_value</code>.
-                      The true indicators of fraud are not <em>who</em> the users are, but <em>how</em> they behave.
-                    </p>
+                  <div class="note note--insight">
+                    <div class="note__label">Takeaway</div>
+                    <div class="note__body">
+                      SHAP analysis confirms that the model intelligently <strong>ignores non-predictive demographic features</strong> like <code class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-gray-900 dark:text-gray-100 font-mono text-sm">age</code>, <code class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-gray-900 dark:text-gray-100 font-mono text-sm">sex</code>, and <code class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-gray-900 dark:text-gray-100 font-mono text-sm">purchase_value</code>. The true indicators of fraud are not <em>who</em> the users are, but <em>how</em> they behave.
+                    </div>
                   </div>
                 </div>
               </div>
@@ -588,9 +648,13 @@ best_model = grid_search.best_estimator_</code></pre>
           </section>
 
           <!-- Conclusion & Strategic Action Plan -->
-          <section id="conclusion" class="section-padding">
+          <section id="conclusion" class="section-padding section--editorial" data-section-num="05">
             <div class="section-header">
-              <h2 class="text-3xl font-bold">🚀 Final Conclusion & Strategic Action Plan</h2>
+              <div class="section-eyebrow">
+                <span class="section-num">05</span>
+                <span class="section-kicker">Conclusion &amp; Roadmap</span>
+              </div>
+              <h2 class="section-title">Final Conclusion &amp; Strategic Action Plan</h2>
             </div>
             
             <div class="space-y-8">
@@ -600,27 +664,27 @@ best_model = grid_search.best_estimator_</code></pre>
                 <p class="subtitle mb-6">Based on the model's predicted fraud probability scores, implement a layered risk response strategy that balances security protection with user experience.</p>
                 
                 <div class="space-y-4">
-                  <div class="border border-green-300 dark:border-green-600 bg-green-50 dark:bg-green-900/20 rounded-lg p-4">
-                    <h4 class="font-semibold text-green-800 dark:text-green-200 mb-2">🟢 Tier 1: Low Risk (Score < 0.5) - "Trust Lane"</h4>
-                    <div class="text-green-700 dark:text-green-300">
-                      <p><strong>Action</strong>: Automatically approve transactions instantly</p>
-                      <p><strong>User Experience</strong>: Completely frictionless, maximizing conversion rates and building customer trust</p>
+                  <div class="note note--evidence">
+                    <div class="note__label">Tier 1 · Trust Lane (Score &lt; 0.5)</div>
+                    <div class="note__body">
+                      <p><strong>Action</strong>: automatically approve transactions instantly</p>
+                      <p><strong>User experience</strong>: completely frictionless, maximizing conversion and building trust</p>
                     </div>
                   </div>
-                  
-                  <div class="border border-yellow-300 dark:border-yellow-600 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg p-4">
-                    <h4 class="font-semibold text-yellow-800 dark:text-yellow-200 mb-2">🟡 Tier 2: Medium Risk (Score 0.5-0.9) - "Verification Step"</h4>
-                    <div class="text-yellow-700 dark:text-yellow-300">
-                      <p><strong>Action</strong>: Temporarily hold transaction and request low-friction verification (e.g., email or SMS code)</p>
-                      <p><strong>User Experience</strong>: Minor automated challenge acting as a smart filter</p>
+
+                  <div class="note note--caveat">
+                    <div class="note__label">Tier 2 · Verify (Score 0.5–0.9)</div>
+                    <div class="note__body">
+                      <p><strong>Action</strong>: temporarily hold and request low-friction verification (email or SMS code)</p>
+                      <p><strong>User experience</strong>: minor automated challenge acting as a smart filter</p>
                     </div>
                   </div>
-                  
-                  <div class="border border-red-300 dark:border-red-600 bg-red-50 dark:bg-red-900/20 rounded-lg p-4">
-                    <h4 class="font-semibold text-red-800 dark:text-red-200 mb-2">🔴 Tier 3: High Risk (Score > 0.9) - "Block & Review"</h4>
-                    <div class="text-red-700 dark:text-red-300">
-                      <p><strong>Action</strong>: Automatically decline transaction and flag for manual review queue</p>
-                      <p><strong>User Experience</strong>: Generic error message displayed, manual review process creates critical feedback loop</p>
+
+                  <div class="note note--insight">
+                    <div class="note__label">Tier 3 · Block &amp; Review (Score &gt; 0.9)</div>
+                    <div class="note__body">
+                      <p><strong>Action</strong>: automatically decline and flag for the manual review queue</p>
+                      <p><strong>User experience</strong>: generic error message displayed; manual review creates a critical feedback loop</p>
                     </div>
                   </div>
                 </div>
@@ -662,7 +726,10 @@ best_model = grid_search.best_estimator_</code></pre>
     <!-- Related Projects -->
     <section id="related" class="section-padding">
       <div class="section-header reveal">
-        <h2 class="text-3xl font-bold">Related Projects</h2>
+        <div class="section-eyebrow">
+          <span class="section-kicker">Continue Reading</span>
+        </div>
+        <h2 class="section-title">Related Projects</h2>
       </div>
       <div class="grid md:grid-cols-2 gap-6">
         <a href="../Bank Customer Churn Prediction/Bank Customer Churn Prediction-en.html" class="related-project-card group cursor-pointer" style="text-decoration: none;">

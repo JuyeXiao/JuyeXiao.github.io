@@ -1,98 +1,462 @@
-/* project.css - 项目详情页专用样式 */
+/* project.css - 项目详情页专用样式（编辑级精修版） */
 
-/* 目录链接样式 */
-.toc-link {
-  display: block;
-  padding: 8px 12px;
-  color: var(--brown);
-  text-decoration: none;
-  border-radius: 6px;
-  transition: all var(--duration-normal);
-  font-size: 0.9rem;
-  position: relative;
-  opacity: 0.7;
-  background: transparent;
-}
-
-.toc-link:hover {
-  background: rgba(139, 115, 85, 0.1);
-  color: var(--dark);
-  transform: translateX(2px);
-  opacity: 0.9;
-}
-
-/* Active状态样式 - 使用更高优先级 */
-#project-toc .toc-link.active,
-.project-toc .toc-link.active,
-.toc-link.active {
-  background: linear-gradient(135deg, #FF6B6B, #ff8a80) !important;
-  color: white !important;
-  font-weight: 600 !important;
-  transform: translateX(6px) !important;
-  box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4) !important;
-  border-left: 4px solid #FF6B6B !important;
-  padding-left: 16px !important;
-  opacity: 1 !important;
-  animation: pulse-glow 2s ease-in-out infinite !important;
-}
-
-.toc-link.active::before,
-.project-toc .toc-link.active::before {
-  content: '';
-  position: absolute;
-  left: -12px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 4px;
-  height: 20px;
-  background: #FF6B6B;
-  border-radius: 2px;
-  box-shadow: 0 0 8px rgba(255, 107, 107, 0.6);
-}
-
-/* 暗色模式下的active状态 */
-html.dark .toc-link.active,
-html.dark .project-toc .toc-link.active {
-  background: linear-gradient(135deg, #FF6B6B, #ff6b6b) !important;
-  box-shadow: 0 4px 16px rgba(255, 107, 107, 0.5) !important;
-}
-
-/* 脉冲动画效果 */
-@keyframes pulse-glow {
-  0% {
-    box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4);
-  }
-  50% {
-    box-shadow: 0 4px 20px rgba(255, 107, 107, 0.6);
-  }
-  100% {
-    box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4);
-  }
-}
-
-/* 项目目录容器样式 */
+/* ========== 目录（TOC） ========== */
 .project-toc {
   position: sticky;
   top: 100px;
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.55);
   backdrop-filter: blur(10px);
-  border-radius: 12px;
-  padding: var(--space-md);
-  border: 1px solid var(--tan);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 4px;
+  padding: var(--space-md) var(--space-sm);
+  border-left: 1px solid var(--tan);
 }
-
 html.dark .project-toc {
-  background: rgba(38, 38, 38, 0.8);
-  border-color: var(--tan);
+  background: rgba(38, 38, 38, 0.55);
+  border-left-color: var(--tan);
 }
 
-/* 执行摘要卡片样式 */
+.project-toc h3 {
+  font-family: var(--font-primary);
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--brown);
+  margin-bottom: var(--space-sm);
+}
+
+.toc-link {
+  display: block;
+  padding: 6px 0 6px 14px;
+  margin-left: -1px;
+  color: var(--brown);
+  text-decoration: none;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  border-left: 2px solid transparent;
+  transition: color var(--duration-normal), border-color var(--duration-normal);
+}
+
+.toc-link:hover {
+  color: var(--dark);
+  border-left-color: var(--tan);
+}
+
+/* Active：编辑标尺，不再发光脉冲 */
+#project-toc .toc-link.active,
+.project-toc .toc-link.active,
+.toc-link.active {
+  color: var(--charcoal);
+  font-weight: 600;
+  border-left: 2px solid var(--coral);
+  background: transparent;
+}
+
+/* ========== 编辑式章节标题 ========== */
+.section-header {
+  margin-bottom: var(--space-md);
+  position: relative;
+}
+
+.section-eyebrow {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 12px;
+  color: var(--brown);
+}
+
+.section-num {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: 1.5rem;
+  color: var(--tan);
+  letter-spacing: 0.02em;
+  line-height: 1;
+}
+
+.section-kicker {
+  font-family: var(--font-primary);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--brown);
+  font-weight: 500;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 2.25rem;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--charcoal);
+}
+
+/* 章节水印编号——大号浅色装饰 */
+.section--editorial {
+  position: relative;
+  padding-top: var(--space-lg);
+}
+
+.section--editorial::before {
+  content: attr(data-section-num);
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-family: var(--font-display);
+  font-weight: 200;
+  font-size: 9rem;
+  line-height: 1;
+  color: var(--tan);
+  opacity: 0.18;
+  pointer-events: none;
+  user-select: none;
+  letter-spacing: -0.04em;
+}
+
+html.dark .section--editorial::before {
+  opacity: 0.12;
+}
+
+.section--editorial::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 1px;
+  background: var(--tan);
+  margin-top: var(--space-xl);
+}
+
+@media (max-width: 768px) {
+  .section-title { font-size: 1.7rem; }
+  .section--editorial::before { font-size: 5rem; opacity: 0.1; }
+}
+
+/* ========== Hero 区：数字诗 + Pull-quote ========== */
+.hero-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 3rem;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  color: var(--charcoal);
+}
+
+@media (max-width: 768px) {
+  .hero-title { font-size: 2.1rem; }
+}
+
+.reading-time {
+  display: inline-block;
+  margin-top: var(--space-sm);
+  font-size: 0.78rem;
+  color: var(--brown);
+  letter-spacing: 0.04em;
+}
+
+.reading-time .sep {
+  display: inline-block;
+  margin: 0 8px;
+  color: var(--tan);
+}
+
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  margin-top: var(--space-lg);
+  border-top: 1px solid var(--tan);
+  border-bottom: 1px solid var(--tan);
+}
+
+.hero-stat {
+  padding: var(--space-md) var(--space-sm);
+  border-right: 1px solid var(--tan);
+}
+
+.hero-stat:last-child {
+  border-right: none;
+}
+
+.hero-stat__num {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: 2.75rem;
+  line-height: 1;
+  color: var(--charcoal);
+  letter-spacing: -0.02em;
+}
+
+.hero-stat__label {
+  margin-top: 10px;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--brown);
+}
+
+@media (max-width: 640px) {
+  .hero-stat__num { font-size: 1.8rem; }
+  .hero-stat { padding: var(--space-sm); }
+}
+
+/* Hero pull-quote（右栏） */
+.hero-quote {
+  position: relative;
+  padding: var(--space-md) var(--space-md) var(--space-md) var(--space-lg);
+}
+
+.hero-quote::before {
+  content: '"';
+  position: absolute;
+  top: -8px;
+  left: 0;
+  font-family: var(--font-display);
+  font-size: 5rem;
+  line-height: 1;
+  color: var(--coral);
+  opacity: 0.85;
+}
+
+.hero-quote__body {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.4rem;
+  line-height: 1.5;
+  color: var(--dark);
+  margin: 0;
+}
+
+.hero-quote__source {
+  margin-top: var(--space-sm);
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--brown);
+}
+
+@media (max-width: 768px) {
+  .hero-quote { padding-left: var(--space-md); margin-top: var(--space-md); }
+  .hero-quote__body { font-size: 1.15rem; }
+}
+
+/* ========== Hero Methods Stack（右栏，替代 hero-quote） ========== */
+.hero-stack {
+  padding: var(--space-sm) 0 var(--space-sm) var(--space-lg);
+  border-left: 1px solid var(--tan);
+}
+
+.hero-stack__label {
+  font-family: var(--font-primary);
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--brown);
+  margin-bottom: var(--space-md);
+}
+
+.hero-stack__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.hero-stack__list li {
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  column-gap: 16px;
+  row-gap: 4px;
+  align-items: baseline;
+}
+
+.hero-stack__num {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: 1.25rem;
+  color: var(--tan);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.hero-stack__name {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--charcoal);
+  letter-spacing: -0.01em;
+}
+
+.hero-stack__desc {
+  grid-column: 2;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--brown);
+}
+
+.hero-stack__foot {
+  margin-top: var(--space-md);
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--tan);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  color: var(--brown);
+}
+
+@media (max-width: 768px) {
+  .hero-stack {
+    padding: var(--space-md) 0 0 var(--space-md);
+    margin-top: var(--space-md);
+  }
+}
+
+/* ========== 正文 kicker 与 risk-tag（替代 ✅/🔴/🟢 状态标识） ========== */
+.content-kicker {
+  font-family: var(--font-primary);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--brown);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.risk-tag {
+  display: inline-block;
+  margin-left: 10px;
+  padding: 2px 10px;
+  font-family: var(--font-primary);
+  font-size: 0.65rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 600;
+  border: 1px solid var(--tan);
+  border-radius: 999px;
+  vertical-align: middle;
+  background: transparent;
+}
+.risk-tag--high { color: var(--coral); border-color: var(--coral); }
+.risk-tag--low  { color: var(--sage);  border-color: var(--sage); }
+
+/* ========== 中性 Note 组件（替代四色 callout） ========== */
+.note {
+  border-left: 2px solid var(--tan);
+  background: rgba(212, 196, 176, 0.08);
+  padding: var(--space-md);
+  border-radius: 0 6px 6px 0;
+  margin: var(--space-md) 0;
+}
+
+html.dark .note {
+  background: rgba(212, 196, 176, 0.05);
+}
+
+.note__label {
+  font-family: var(--font-primary);
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--brown);
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.note__body {
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--dark);
+}
+
+.note__body > * + * { margin-top: var(--space-sm); }
+
+.note--insight   { border-left-color: var(--coral); }
+.note--insight   .note__label { color: var(--coral); }
+.note--caveat    { border-left-color: var(--gold); }
+.note--caveat    .note__label { color: var(--gold); }
+.note--evidence  { border-left-color: var(--sage); }
+.note--evidence  .note__label { color: var(--sage); }
+.note--process   { border-left-color: var(--blue); }
+.note--process   .note__label { color: var(--blue); }
+
+/* ========== 编辑式图版 ========== */
+.content-area { counter-reset: fig-counter; }
+
+.figure-editorial {
+  margin: var(--space-lg) 0;
+  padding: var(--space-md) 0;
+  border-top: 1px solid var(--tan);
+  border-bottom: 1px solid var(--tan);
+}
+
+.figure-editorial img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 0;
+  box-shadow: none;
+  cursor: zoom-in;
+}
+
+.figure-editorial figcaption,
+.figure-editorial > p {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: var(--brown);
+  margin-top: var(--space-sm);
+  max-width: 60ch;
+  text-align: left;
+}
+
+.figure-editorial > p {
+  font-size: 0.88rem;
+}
+
+.figure-editorial figcaption::before {
+  counter-increment: fig-counter;
+  content: 'Fig. ' counter(fig-counter) ' · ';
+  font-family: var(--font-primary);
+  font-style: normal;
+  letter-spacing: 0.14em;
+  font-size: 0.7rem;
+  color: var(--tan);
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-right: 6px;
+}
+
+/* 并排双图布局 */
+.figure-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-sm);
+  margin: var(--space-md) 0;
+}
+
+.figure-grid .figure-editorial {
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .figure-grid { grid-template-columns: 1fr; }
+}
+
+/* ========== 摘要卡片 ========== */
 .summary-card {
   padding: var(--space-md);
-  border-radius: 12px;
-  background: var(--beige);
-  border: 1px solid var(--tan);
-  transition: all var(--duration-normal);
+  background: transparent;
+  border-top: 1px solid var(--tan);
+  border-radius: 0;
+  transition: border-color var(--duration-normal);
   height: auto;
   min-height: 160px;
   display: flex;
@@ -100,39 +464,29 @@ html.dark .project-toc {
 }
 
 .summary-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  border-color: var(--coral);
+  border-top-color: var(--charcoal);
 }
 
 .summary-card-title {
-  font-size: 1.125rem;
-  font-weight: 600;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 500;
   color: var(--charcoal);
   margin-bottom: var(--space-sm);
 }
 
 .summary-card-content {
   font-size: 0.95rem;
-  line-height: 1.6;
+  line-height: 1.7;
   color: var(--dark);
   flex-grow: 1;
 }
 
-html.dark .summary-card {
-  background: var(--beige);
-  border-color: var(--tan);
-}
-
-html.dark .summary-card:hover {
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-}
-
-/* 相关项目卡片样式 */
+/* ========== 相关项目 ========== */
 .related-project-card {
   padding: var(--space-md);
-  border-radius: 12px;
-  background: var(--cream);
+  border-radius: 6px;
+  background: transparent;
   border: 1px solid var(--tan);
   transition: all var(--duration-normal);
   height: auto;
@@ -143,26 +497,22 @@ html.dark .summary-card:hover {
 }
 
 .related-project-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-  border-color: var(--coral);
+  border-color: var(--charcoal);
+  background: rgba(212, 196, 176, 0.08);
 }
 
 .related-project-title {
-  font-size: 1.125rem;
-  font-weight: 600;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 500;
   color: var(--charcoal);
   margin-bottom: var(--space-xs);
   transition: color var(--duration-normal);
 }
 
-.group:hover .related-project-title {
-  color: var(--coral);
-}
-
 .related-project-description {
   font-size: 0.9rem;
-  line-height: 1.5;
+  line-height: 1.55;
   color: var(--brown);
   margin-bottom: var(--space-sm);
   flex-grow: 1;
@@ -171,39 +521,206 @@ html.dark .summary-card:hover {
 .related-project-link {
   display: flex;
   align-items: center;
-  font-size: 0.875rem;
+  font-size: 0.78rem;
   font-weight: 500;
-  color: var(--coral);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--brown);
   transition: all var(--duration-normal);
 }
 
 .group:hover .related-project-link {
+  color: var(--charcoal);
   transform: translateX(4px);
 }
 
-html.dark .related-project-card {
-  background: var(--beige);
-  border-color: var(--tan);
+/* ========== 阅读进度条（顶部细线） ========== */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 0%;
+  background: var(--coral);
+  z-index: 60;
+  transition: width 80ms linear;
+  pointer-events: none;
 }
 
-html.dark .related-project-card:hover {
-  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
-}
-
-/* 详情页内容区域中的信息卡片 - 紧凑布局
-   目的：避免标题与正文被强制分散到上下两端，造成过大留白 */
+/* ========== 内容区微调 ========== */
 .content-area .contact-info-card {
   min-height: auto;
   justify-content: flex-start;
 }
 
-/* 响应式调整 */
+/* 兜底：剩余的 Tailwind bg-*-50 callout 仍存在时，
+   在项目页内统一退化为淡米色背景 + 细 tan 边框，避免色彩噪声 */
+.content-area [class*="bg-green-50"],
+.content-area [class*="bg-blue-50"],
+.content-area [class*="bg-amber-50"],
+.content-area [class*="bg-yellow-50"],
+.content-area [class*="bg-red-50"],
+.content-area [class*="bg-purple-50"],
+.content-area [class*="bg-orange-50"] {
+  background: rgba(212, 196, 176, 0.10) !important;
+  border-color: var(--tan) !important;
+}
+
+/* 兜底：剩余的彩色 text-X-700/800 在项目页中退到 brown 中性色，
+   保留语义但去除饱和色 */
+.content-area [class*="text-green-700"],
+.content-area [class*="text-green-800"],
+.content-area [class*="text-blue-700"],
+.content-area [class*="text-blue-800"],
+.content-area [class*="text-amber-700"],
+.content-area [class*="text-amber-800"],
+.content-area [class*="text-yellow-700"],
+.content-area [class*="text-yellow-800"],
+.content-area [class*="text-red-700"],
+.content-area [class*="text-red-800"],
+.content-area [class*="text-purple-700"],
+.content-area [class*="text-purple-800"] {
+  color: var(--dark) !important;
+}
+html.dark .content-area [class*="text-green-700"],
+html.dark .content-area [class*="text-green-800"],
+html.dark .content-area [class*="text-blue-700"],
+html.dark .content-area [class*="text-blue-800"],
+html.dark .content-area [class*="text-amber-700"],
+html.dark .content-area [class*="text-amber-800"],
+html.dark .content-area [class*="text-yellow-700"],
+html.dark .content-area [class*="text-yellow-800"],
+html.dark .content-area [class*="text-red-700"],
+html.dark .content-area [class*="text-red-800"],
+html.dark .content-area [class*="text-purple-700"],
+html.dark .content-area [class*="text-purple-800"] {
+  color: var(--dark) !important;
+}
+
+/* 但保留 hero-stat 的彩色数字（不在 .content-area 内） */
+
+/* 兜底：渐变背景退化为细 tan 边框 */
+.content-area [class*="bg-gradient-to-br"] {
+  background: transparent !important;
+  border: 1px solid var(--tan) !important;
+}
+
+/* 表格里被 inline-class 标的获胜行（tr.bg-green-50）保留为细 coral 标尺 */
+.content-area tr.bg-green-50,
+.content-area tr.bg-green-50\/30,
+.content-area tr[class*="bg-green-"] {
+  background: rgba(255, 107, 107, 0.05) !important;
+  box-shadow: inset 3px 0 0 var(--coral);
+}
+html.dark .content-area tr.bg-green-50,
+html.dark .content-area tr.bg-green-50\/30,
+html.dark .content-area tr[class*="bg-green-"] {
+  background: rgba(255, 128, 128, 0.06) !important;
+  box-shadow: inset 3px 0 0 var(--coral);
+}
+
+/* 兜底：项目页内的 Tailwind 彩色 code 徽章 (<code class="bg-green-100 dark:bg-green-800">)
+   在亮 / 暗两态都退化为中性 chip，避免"绿底绿字"等对比塌陷 */
+.content-area code[class*="bg-"][class*="-100"],
+.content-area code[class*="bg-"][class*="-50"],
+.content-area code[class*="bg-"][class*="-700"],
+.content-area code[class*="bg-"][class*="-800"],
+.content-area code[class*="bg-"][class*="-900"] {
+  background: rgba(212, 196, 176, 0.16) !important;
+  color: var(--dark) !important;
+  border: 1px solid var(--tan);
+  border-radius: 4px;
+  padding: 1px 6px !important;
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+}
+html.dark .content-area code[class*="bg-"][class*="-100"],
+html.dark .content-area code[class*="bg-"][class*="-50"],
+html.dark .content-area code[class*="bg-"][class*="-700"],
+html.dark .content-area code[class*="bg-"][class*="-800"],
+html.dark .content-area code[class*="bg-"][class*="-900"] {
+  background: rgba(212, 196, 176, 0.18) !important;
+  color: var(--charcoal) !important;
+  border-color: var(--tan);
+}
+
+/* 兜底：暗色下表格 / 表头行内的 inline 染色文字一律退化为 charcoal/cream，
+   避免 coral/sage/blue 落在已被着色的表格行背景上 */
+html.dark .content-area table [style*="color: var(--coral)"],
+html.dark .content-area table [style*="color: var(--blue)"],
+html.dark .content-area table [style*="color: var(--sage)"],
+html.dark .content-area table [style*="color: var(--gold)"],
+html.dark .content-area table [style*="color:var(--coral)"],
+html.dark .content-area table [style*="color:var(--blue)"],
+html.dark .content-area table [style*="color:var(--sage)"],
+html.dark .content-area table [style*="color:var(--gold)"] {
+  color: var(--charcoal) !important;
+}
+
+/* 暗色模式：清掉表格里 Tailwind 硬编码的 bg-white / bg-gray-50 等浅色背景
+   （它们没有 dark: 变体，否则会在暗色页面里出现"白底大块"导致文字塌陷） */
+html.dark .content-area table,
+html.dark .content-area table thead,
+html.dark .content-area table tbody,
+html.dark .content-area table tfoot,
+html.dark .content-area table tr,
+html.dark .content-area table th,
+html.dark .content-area table td {
+  background-color: transparent !important;
+}
+/* 表头单独给一点 tan 提示色，保留视觉层次 */
+html.dark .content-area table thead,
+html.dark .content-area table thead tr,
+html.dark .content-area table thead th {
+  background-color: rgba(64, 64, 64, 0.30) !important;
+}
+/* 胜出行：3px coral 标尺已在 .bg-green-* 块设置，这里只确保背景不被覆盖 */
+html.dark .content-area tr.bg-green-50,
+html.dark .content-area tr[class*="bg-green-"] {
+  background-color: rgba(255, 128, 128, 0.08) !important;
+}
+
+/* 暗色模式：所有 .content-area 表格单元格升到 --charcoal，
+   覆盖 Tailwind 的 text-gray-{300,400,500} 与 dark:text-gray-{300,400,500} */
+html.dark .content-area table th,
+html.dark .content-area table td {
+  color: var(--charcoal) !important;    /* #FAFAFA — 最高对比 */
+  font-weight: 400;
+}
+html.dark .content-area table td.font-bold,
+html.dark .content-area table th.font-bold,
+html.dark .content-area table td strong,
+html.dark .content-area table th strong {
+  color: var(--charcoal) !important;
+  font-weight: 700;
+}
+/* 表头保留 brown 提示色，比正文略低一档但仍清晰 */
+html.dark .content-area table thead th {
+  color: var(--brown) !important;
+  font-weight: 600;
+}
+/* 胜出行：文字升级 + 保留 3px coral 标尺（标尺已在 .bg-green-* 规则中设置） */
+html.dark .content-area tr.bg-green-50 td,
+html.dark .content-area tr[class*="bg-green-"] td {
+  color: var(--dark) !important;
+}
+html.dark .content-area tr.bg-green-50 td.font-bold,
+html.dark .content-area tr[class*="bg-green-"] td.font-bold {
+  color: var(--charcoal) !important;
+}
+
+/* Project 详情页让段落主体使用编辑级行高 */
+.content-area p {
+  line-height: 1.75;
+}
+
+/* 响应式 */
 @media (max-width: 768px) {
   .summary-card {
     min-height: 140px;
     padding: var(--space-sm);
   }
-  
+
   .related-project-card {
     min-height: 100px;
     padding: var(--space-sm);

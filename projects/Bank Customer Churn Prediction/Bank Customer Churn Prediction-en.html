@@ -10,7 +10,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <script src="https://unpkg.com/lucide-react/dist/umd/lucide-react.js"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <link rel="stylesheet" href="../../assets/css/index.css" />
@@ -21,9 +21,7 @@
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 <body class="transition-colors duration-300">
-  <!-- Background decoration (consistent with homepage) -->
-  <div class="gradient-orb top-[-150px] left-[-150px]"></div>
-  <div class="gradient-orb bottom-[-200px] right-[-200px]" style="background: radial-gradient(circle at center, var(--blue), transparent 60%)"></div>
+  <div class="scroll-progress" id="scroll-progress"></div>
 
   <!-- Top navigation (fully reusing homepage structure and style) -->
   <header id="navbar" class="navbar fixed top-0 left-0 right-0 z-50">
@@ -72,45 +70,77 @@
   <main class="container-main">
     <!-- Project header (Hero-style detail page header) -->
     <section id="project-hero" class="section-padding" style="padding-top: calc(var(--space-xl) + 72px)">
-      <div class="grid md:grid-cols-2 gap-16 items-start w-full">
+      <div class="grid md:grid-cols-2 gap-16 items-center w-full">
         <div class="reveal">
-          <span class="font-semibold text-lg" style="color: var(--coral);">Data Analysis Project</span>
-          <h1 class="mt-2" style="font-size: var(--text-4xl);">Bank Customer Churn Prediction & Key Driver Analysis</h1>
-          <p class="subtitle mt-4 max-w-xl">ML-powered intelligent prediction system providing deep insights into churn drivers, enabling proactive retention strategies</p>
-          
-          <!-- Data metrics cards -->
-          <div class="mt-8">
-            <div class="grid grid-cols-3 gap-4">
-              <div class="contact-info-card" style="min-height: 120px; padding: var(--space-md);">
-                <div class="text-sm font-medium" style="color: var(--brown);">Dataset Size</div>
-                <div class="text-2xl font-bold mt-2" style="color: var(--charcoal);">10,000</div>
-              </div>
-              <div class="contact-info-card" style="min-height: 120px; padding: var(--space-md);">
-                <div class="text-sm font-medium" style="color: var(--brown);">Accuracy</div>
-                <div class="text-2xl font-bold mt-2" style="color: var(--charcoal);">84.8%</div>
-              </div>
-              <div class="contact-info-card" style="min-height: 120px; padding: var(--space-md);">
-                <div class="text-sm font-medium" style="color: var(--brown);">AUC Score</div>
-                <div class="text-2xl font-bold mt-2" style="color: var(--charcoal);">0.848</div>
-              </div>
+          <div class="section-eyebrow">
+            <span class="section-kicker">Case Study · Financial Customer Analytics</span>
+          </div>
+          <h1 class="hero-title mt-2">Bank Customer Churn &amp; the Drivers Behind It</h1>
+          <p class="subtitle mt-4 max-w-xl">An XGBoost + SHAP study that hands the "why" of attrition back to business teams.</p>
+          <div class="reading-time">~7 min read<span class="sep">·</span>5 figures</div>
+
+          <div class="hero-stats">
+            <div class="hero-stat">
+              <div class="hero-stat__num">10K</div>
+              <div class="hero-stat__label">Customers</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat__num">0.848</div>
+              <div class="hero-stat__label">AUC</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat__num">55%</div>
+              <div class="hero-stat__label">Churn Recall</div>
             </div>
           </div>
-          
+
           <div class="mt-8 flex items-center gap-4">
             <a href="#content" class="btn btn-primary">Start Reading</a>
             <a href="../../index.html#projects" class="btn btn-secondary">Back to Projects</a>
           </div>
         </div>
-        <div class="reveal">
-          <!-- Space for additional content like project images or charts -->
-        </div>
+        <aside class="reveal hero-stack">
+          <div class="hero-stack__label">Methods · Tech Stack</div>
+          <ol class="hero-stack__list">
+            <li>
+              <span class="hero-stack__num">01</span>
+              <span class="hero-stack__name">XGBoost</span>
+              <span class="hero-stack__desc">Gradient-boosted classifier, primary predictor</span>
+            </li>
+            <li>
+              <span class="hero-stack__num">02</span>
+              <span class="hero-stack__name">SMOTE</span>
+              <span class="hero-stack__desc">Synthetic over-sampling to balance the 20/80 churn skew</span>
+            </li>
+            <li>
+              <span class="hero-stack__num">03</span>
+              <span class="hero-stack__name">SHAP</span>
+              <span class="hero-stack__desc">Global + local attribution for explainable decisions</span>
+            </li>
+            <li>
+              <span class="hero-stack__num">04</span>
+              <span class="hero-stack__name">Stratified Split</span>
+              <span class="hero-stack__desc">Stratified sampling preserves class balance across splits</span>
+            </li>
+            <li>
+              <span class="hero-stack__num">05</span>
+              <span class="hero-stack__name">GridSearchCV</span>
+              <span class="hero-stack__desc">Hyperparameter grid with 3-fold cross-validation</span>
+            </li>
+          </ol>
+          <div class="hero-stack__foot">Python · pandas · scikit-learn · imblearn · matplotlib</div>
+        </aside>
       </div>
     </section>
 
     <!-- Executive Summary (three-column info cards, redesigned) -->
-    <section id="executive-summary" class="section-padding">
+    <section id="executive-summary" class="section-padding section--editorial" data-section-num="00">
       <div class="section-header reveal">
-        <h2 class="text-3xl font-bold">📊 Executive Summary</h2>
+        <div class="section-eyebrow">
+          <span class="section-num">00</span>
+          <span class="section-kicker">Executive Summary</span>
+        </div>
+        <h2 class="section-title">Executive Summary</h2>
       </div>
       <div class="grid md:grid-cols-3 gap-6">
         <div class="summary-card">
@@ -148,9 +178,13 @@
         <!-- Content area -->
         <div class="md:col-span-9 content-area">
           <!-- Key Findings & Recommended Actions -->
-          <section id="findings" class="section-padding">
+          <section id="findings" class="section-padding section--editorial" data-section-num="01">
             <div class="section-header">
-              <h2 class="text-3xl font-bold">🔍 Key Findings & Recommendations</h2>
+              <div class="section-eyebrow">
+                <span class="section-num">01</span>
+                <span class="section-kicker">Findings &amp; Recommendations</span>
+              </div>
+              <h2 class="section-title">Key Findings &amp; Recommendations</h2>
             </div>
             
             <div class="space-y-8">
@@ -237,9 +271,13 @@
           </section>
 
           <!-- Data Analysis & Methodology -->
-          <section id="methodology" class="section-padding">
+          <section id="methodology" class="section-padding section--editorial" data-section-num="02">
             <div class="section-header">
-              <h2 class="text-3xl font-bold">📊 Data Analysis & Methodology</h2>
+              <div class="section-eyebrow">
+                <span class="section-num">02</span>
+                <span class="section-kicker">Data Analysis &amp; Methodology</span>
+              </div>
+              <h2 class="section-title">Data Analysis &amp; Methodology</h2>
             </div>
             
             <div class="space-y-8">
@@ -256,21 +294,22 @@ df = pd.read_csv('bank_churn.csv')
 df.info()</code></pre>
                   </div>
 
-                  <div class="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-4">
-                    <p class="text-green-800 dark:text-green-200">The dataset was found to be complete, with <strong>no missing values</strong>.</p>
+                  <div class="note note--evidence">
+                    <div class="note__label">Evidence</div>
+                    <div class="note__body">The dataset was found to be complete, with <strong>no missing values</strong>.</div>
                   </div>
 
                   <div>
                     <strong>Visual Feature Exploration:</strong>
-                    <div class="grid md:grid-cols-2 gap-6 mt-4">
-                      <div class="text-center p-6 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                        <img src="figures/boxplot_numerical_vs_exited.png" alt="Boxplots of Numerical Features vs. Exited Status" class="w-full rounded-lg shadow-lg" />
-                        <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Figure 1: Numerical Features vs. Churn Status - Revealed significant differences in Age and Balance between churned and retained customers</p>
-                      </div>
-                      <div class="text-center p-6 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                        <img src="figures/boxplot_categorical_vs_exited.png" alt="Countplots of Categorical Features vs. Exited Status" class="w-full rounded-lg shadow-lg" />
-                        <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Figure 2: Categorical Features vs. Churn Status - Shows disproportionately high churn rates for German customers and non-active members</p>
-                      </div>
+                    <div class="figure-grid">
+                      <figure class="figure-editorial">
+                        <img src="figures/boxplot_numerical_vs_exited.png" alt="Boxplots of Numerical Features vs. Exited Status" loading="lazy" decoding="async" />
+                        <figcaption>Numerical features vs. churn status — significant differences in age and balance between churned and retained customers.</figcaption>
+                      </figure>
+                      <figure class="figure-editorial">
+                        <img src="figures/boxplot_categorical_vs_exited.png" alt="Countplots of Categorical Features vs. Exited Status" loading="lazy" decoding="async" />
+                        <figcaption>Categorical features vs. churn status — disproportionately high churn for German customers and inactive members.</figcaption>
+                      </figure>
                     </div>
                   </div>
                 </div>
@@ -282,14 +321,16 @@ df.info()</code></pre>
                 <div class="space-y-4">
                   <p class="subtitle">To prepare the data for modeling, we performed a series of preprocessing steps:</p>
                   
-                  <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
-                    <h4 class="font-semibold text-blue-800 dark:text-blue-200 mb-3">Preprocessing Steps</h4>
-                    <ul class="space-y-2 text-blue-700 dark:text-blue-300">
-                      <li><strong>Feature Selection</strong>: Removed irrelevant columns like <code class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-gray-900 dark:text-gray-100 font-mono text-sm">RowNumber</code>, <code class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-gray-900 dark:text-gray-100 font-mono text-sm">CustomerId</code>, and <code class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-gray-900 dark:text-gray-100 font-mono text-sm">Surname</code>.</li>
-                      <li><strong>Data Splitting</strong>: Split dataset into training (75%) and testing (25%) sets using stratified sampling.</li>
-                      <li><strong>Data Encoding</strong>: Converted categorical features (<code class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-gray-900 dark:text-gray-100 font-mono text-sm">Geography</code>, <code class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-gray-900 dark:text-gray-100 font-mono text-sm">Gender</code>) to numerical format using One-Hot and Ordinal Encoding.</li>
-                      <li><strong>Data Standardization</strong>: Scaled numerical features using <code class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-gray-900 dark:text-gray-100 font-mono text-sm">StandardScaler</code>.</li>
-                    </ul>
+                  <div class="note note--process">
+                    <div class="note__label">Pipeline</div>
+                    <div class="note__body">
+                      <ul class="list-disc list-inside space-y-2">
+                        <li><strong>Feature Selection</strong>: Removed irrelevant columns like <code class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-gray-900 dark:text-gray-100 font-mono text-sm">RowNumber</code>, <code class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-gray-900 dark:text-gray-100 font-mono text-sm">CustomerId</code>, and <code class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-gray-900 dark:text-gray-100 font-mono text-sm">Surname</code>.</li>
+                        <li><strong>Data Splitting</strong>: Split dataset into training (75%) and testing (25%) sets using stratified sampling.</li>
+                        <li><strong>Data Encoding</strong>: Converted categorical features (<code class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-gray-900 dark:text-gray-100 font-mono text-sm">Geography</code>, <code class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-gray-900 dark:text-gray-100 font-mono text-sm">Gender</code>) to numerical format using One-Hot and Ordinal Encoding.</li>
+                        <li><strong>Data Standardization</strong>: Scaled numerical features using <code class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-gray-900 dark:text-gray-100 font-mono text-sm">StandardScaler</code>.</li>
+                      </ul>
+                    </div>
                   </div>
 
                   <pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto"><code class="language-python">from sklearn.model_selection import train_test_split
@@ -337,9 +378,13 @@ best_xgb_model_smote = grid_search.best_estimator_</code></pre>
           </section>
 
           <!-- Model Evaluation & Comparison -->
-          <section id="evaluation" class="section-padding">
+          <section id="evaluation" class="section-padding section--editorial" data-section-num="03">
             <div class="section-header">
-              <h2 class="text-3xl font-bold">📈 Model Evaluation & Comparison</h2>
+              <div class="section-eyebrow">
+                <span class="section-num">03</span>
+                <span class="section-kicker">Model Evaluation</span>
+              </div>
+              <h2 class="section-title">Model Evaluation &amp; Comparison</h2>
             </div>
             
             <div class="space-y-8">
@@ -397,8 +442,9 @@ best_xgb_model_smote = grid_search.best_estimator_</code></pre>
                 <div class="space-y-4">
                   <p class="subtitle">For most churn prediction scenarios, the primary goal is to <strong>maximize identification of at-risk customers</strong> (high recall) to minimize revenue loss, while maintaining strong overall ability to distinguish between churners and non-churners (high AUC).</p>
                   
-                  <div class="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-4">
-                    <p class="text-green-800 dark:text-green-200">Given this, the <strong>XGBoost with SMOTE model is the definitive recommended choice</strong>. It offers the best combination of finding the highest number of actual churners (<strong>highest Recall</strong>) and the best overall predictive power (<strong>highest AUC</strong>).</p>
+                  <div class="note note--insight">
+                    <div class="note__label">Decision</div>
+                    <div class="note__body">Given this, the <strong>XGBoost with SMOTE model is the definitive recommended choice</strong>. It offers the best combination of finding the highest number of actual churners (<strong>highest Recall</strong>) and the best overall predictive power (<strong>highest AUC</strong>).</div>
                   </div>
 
                   <div>
@@ -421,9 +467,13 @@ AUC Score: 0.8484</code></pre>
           </section>
 
           <!-- SHAP Deep Analysis -->
-          <section id="shap-analysis" class="section-padding">
+          <section id="shap-analysis" class="section-padding section--editorial" data-section-num="04">
             <div class="section-header">
-              <h2 class="text-3xl font-bold">🎯 Deep Dive: Explaining Model Predictions (SHAP Analysis)</h2>
+              <div class="section-eyebrow">
+                <span class="section-num">04</span>
+                <span class="section-kicker">SHAP Deep Dive</span>
+              </div>
+              <h2 class="section-title">Explaining Model Predictions (SHAP)</h2>
             </div>
             
             <div class="space-y-8">
@@ -433,34 +483,36 @@ AUC Score: 0.8484</code></pre>
                 <!-- Global Insights -->
                 <div class="space-y-6">
                   <h3 class="text-xl font-semibold" style="color: var(--dark);">Global Insights: Key Drivers of Customer Churn</h3>
-                  <div class="text-center p-6 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                    <img src="figures/SHAP_Global_Feature_Insights.png" alt="SHAP Global Feature Insights" class="w-full max-w-2xl mx-auto rounded-lg shadow-lg" />
-                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-4">Figure 3: SHAP Global Feature Insights - Confirms that Age, NumOfProducts, IsActiveMember, and Geography (Germany) are the most influential factors driving churn predictions</p>
-                  </div>
+                  <figure class="figure-editorial">
+                    <img src="figures/SHAP_Global_Feature_Insights.png" alt="SHAP Global Feature Insights" loading="lazy" decoding="async" />
+                    <figcaption>SHAP global feature insights — Age, NumOfProducts, IsActiveMember and Geography (Germany) drive churn predictions most.</figcaption>
+                  </figure>
 
                   <!-- Individual Customer Attribution -->
                   <h3 class="text-xl font-semibold" style="color: var(--dark);">Individual Customer Attribution</h3>
                   <p class="subtitle">We used SHAP force plots to dissect predictions for individual customers.</p>
                   
-                  <div class="grid grid-cols-1 gap-6">
-                    <div class="text-center p-6 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                      <img src="figures/SHAP_Local_Explanation_for_a_High-Risk_Customer.png" alt="SHAP Local Explanation for a High-Risk Customer" class="w-full rounded-lg shadow-lg" />
-                      <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Figure 4: SHAP Local Explanation for a High-Risk Customer - Shows a customer driven towards churn primarily by their higher age and having 3+ products</p>
-                    </div>
-                    <div class="text-center p-6 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                      <img src="figures/SHAP_Local_Explanation_for_a_Low-Risk_Customer.png" alt="SHAP Local Explanation for a Low-Risk Customer" class="w-full rounded-lg shadow-lg" />
-                      <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Figure 5: SHAP Local Explanation for a Low-Risk Customer - Shows a customer anchored towards retention primarily by their low age, despite being a non-active member</p>
-                    </div>
-                  </div>
+                  <figure class="figure-editorial">
+                    <img src="figures/SHAP_Local_Explanation_for_a_High-Risk_Customer.png" alt="SHAP Local Explanation for a High-Risk Customer" loading="lazy" decoding="async" />
+                    <figcaption>SHAP local explanation, high-risk customer — primarily driven toward churn by higher age and holding 3+ products.</figcaption>
+                  </figure>
+                  <figure class="figure-editorial">
+                    <img src="figures/SHAP_Local_Explanation_for_a_Low-Risk_Customer.png" alt="SHAP Local Explanation for a Low-Risk Customer" loading="lazy" decoding="async" />
+                    <figcaption>SHAP local explanation, low-risk customer — anchored toward retention by low age, even though inactive.</figcaption>
+                  </figure>
                 </div>
               </div>
             </div>
           </section>
 
           <!-- Conclusion & Strategic Action Plan -->
-          <section id="conclusion" class="section-padding">
+          <section id="conclusion" class="section-padding section--editorial" data-section-num="05">
             <div class="section-header">
-              <h2 class="text-3xl font-bold">🚀 Final Conclusion & Strategic Action Plan</h2>
+              <div class="section-eyebrow">
+                <span class="section-num">05</span>
+                <span class="section-kicker">Conclusion &amp; Roadmap</span>
+              </div>
+              <h2 class="section-title">Final Conclusion &amp; Strategic Action Plan</h2>
             </div>
             
             <div class="space-y-8">
@@ -522,7 +574,10 @@ AUC Score: 0.8484</code></pre>
     <!-- Related Projects (redesigned) -->
     <section id="related" class="section-padding">
       <div class="section-header reveal">
-        <h2 class="text-3xl font-bold">Related Projects</h2>
+        <div class="section-eyebrow">
+          <span class="section-kicker">Continue Reading</span>
+        </div>
+        <h2 class="section-title">Related Projects</h2>
       </div>
       <div class="grid md:grid-cols-2 gap-6">
         <a href="../e-commerce fraud detection/e-commerce fraud detection-en.html" class="related-project-card group cursor-pointer" style="text-decoration: none;">

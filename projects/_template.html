@@ -10,7 +10,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <script src="https://unpkg.com/lucide@latest"></script>
   <link rel="stylesheet" href="../assets/css/index.css" />
   <link rel="stylesheet" href="../assets/css/project.css" />
@@ -20,9 +20,8 @@
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 <body class="transition-colors duration-300">
-  <!-- 背景装饰（与首页一致） -->
-  <div class="gradient-orb top-[-150px] left-[-150px]"></div>
-  <div class="gradient-orb bottom-[-200px] right-[-200px]" style="background: radial-gradient(circle at center, var(--blue), transparent 60%)"></div>
+  <!-- 顶部阅读进度条 -->
+  <div class="scroll-progress" id="scroll-progress"></div>
 
   <!-- 顶部导航（完全复用首页结构与样式） -->
   <header id="navbar" class="navbar fixed top-0 left-0 right-0 z-50">
@@ -69,27 +68,28 @@
   <main class="container-main">
     <!-- Hero -->
     <section id="project-hero" class="section-padding" style="padding-top: calc(var(--space-xl) + 72px)">
-      <div class="grid md:grid-cols-2 gap-16 items-start w-full">
+      <div class="grid md:grid-cols-2 gap-16 items-center w-full">
         <div class="reveal">
-          <span class="font-semibold text-lg" style="color: var(--coral);">数据分析项目</span>
-          <h1 class="mt-2" style="font-size: var(--text-4xl);">项目标题占位</h1>
+          <div class="section-eyebrow">
+            <span class="section-kicker">Case Study · 数据分析项目</span>
+          </div>
+          <h1 class="hero-title mt-2">项目标题占位</h1>
           <p class="subtitle mt-4 max-w-xl">一句话介绍占位（简要说明项目价值）</p>
+          <div class="reading-time">约 8 分钟阅读<span class="sep">·</span>包含图表与代码<span class="sep">·</span>Updated 2026·05</div>
 
-          <!-- 指标卡片（与银行项目页一致：描述下、按钮上） -->
-          <div class="mt-8">
-            <div class="grid grid-cols-3 gap-4">
-              <div class="contact-info-card" style="min-height: 120px; padding: var(--space-md);">
-                <div class="text-sm font-medium" style="color: var(--brown);">数据量</div>
-                <div class="text-2xl font-bold mt-2" style="color: var(--charcoal);">—</div>
-              </div>
-              <div class="contact-info-card" style="min-height: 120px; padding: var(--space-md);">
-                <div class="text-sm font-medium" style="color: var(--brown);">预测准确率</div>
-                <div class="text-2xl font-bold mt-2" style="color: var(--charcoal);">—</div>
-              </div>
-              <div class="contact-info-card" style="min-height: 120px; padding: var(--space-md);">
-                <div class="text-sm font-medium" style="color: var(--brown);">AUC分数</div>
-                <div class="text-2xl font-bold mt-2" style="color: var(--charcoal);">—</div>
-              </div>
+          <!-- 数字诗：无边框三栏指标 -->
+          <div class="hero-stats">
+            <div class="hero-stat">
+              <div class="hero-stat__num" data-target="0">—</div>
+              <div class="hero-stat__label">数据量</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat__num" data-target="0">—</div>
+              <div class="hero-stat__label">预测准确率</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat__num" data-target="0">—</div>
+              <div class="hero-stat__label">AUC 分数</div>
             </div>
           </div>
 
@@ -98,16 +98,21 @@
             <a href="../index.html#projects" class="btn btn-secondary">返回项目概览</a>
           </div>
         </div>
-        <div class="reveal">
-          <!-- 右侧预留：可放项目配图或关键可视化 -->
-        </div>
+        <aside class="reveal hero-quote">
+          <p class="hero-quote__body">一句最具代表性的洞察占位——例如：黏性而非财富决定留存。</p>
+          <p class="hero-quote__source">— 主要发现 · 占位</p>
+        </aside>
       </div>
     </section>
 
     <!-- 执行摘要 -->
-    <section id="executive-summary" class="section-padding">
+    <section id="executive-summary" class="section-padding section--editorial" data-section-num="00">
       <div class="section-header reveal">
-        <h2 class="text-3xl font-bold">📊 执行摘要</h2>
+        <div class="section-eyebrow">
+          <span class="section-num">00</span>
+          <span class="section-kicker">Executive Summary</span>
+        </div>
+        <h2 class="section-title">执行摘要</h2>
       </div>
       <div class="grid md:grid-cols-3 gap-6">
         <div class="summary-card">
@@ -143,9 +148,13 @@
 
         <div class="md:col-span-9 content-area">
           <!-- 主要发现与建议 -->
-          <section id="findings" class="section-padding">
+          <section id="findings" class="section-padding section--editorial" data-section-num="01">
             <div class="section-header">
-              <h2 class="text-3xl font-bold">🔍 主要发现与行动建议</h2>
+              <div class="section-eyebrow">
+                <span class="section-num">01</span>
+                <span class="section-kicker">Findings &amp; Recommendations</span>
+              </div>
+              <h2 class="section-title">主要发现与行动建议</h2>
             </div>
             <div class="space-y-4 subtitle mt-4">
               <p>（占位）在此处总结最重要的结论与可操作建议。</p>
@@ -153,9 +162,13 @@
           </section>
 
           <!-- 数据分析与方法论 -->
-          <section id="methodology" class="section-padding">
+          <section id="methodology" class="section-padding section--editorial" data-section-num="02">
             <div class="section-header">
-              <h2 class="text-3xl font-bold">📊 数据分析与方法论</h2>
+              <div class="section-eyebrow">
+                <span class="section-num">02</span>
+                <span class="section-kicker">Data Analysis &amp; Methodology</span>
+              </div>
+              <h2 class="section-title">数据分析与方法论</h2>
             </div>
             <div class="space-y-4 subtitle mt-4">
               <p>（占位）描述数据、特征工程、建模流程与可视化示例。</p>
@@ -163,9 +176,13 @@
           </section>
 
           <!-- 模型评估与比较 -->
-          <section id="evaluation" class="section-padding">
+          <section id="evaluation" class="section-padding section--editorial" data-section-num="03">
             <div class="section-header">
-              <h2 class="text-3xl font-bold">📈 模型评估与比较</h2>
+              <div class="section-eyebrow">
+                <span class="section-num">03</span>
+                <span class="section-kicker">Model Evaluation</span>
+              </div>
+              <h2 class="section-title">模型评估与比较</h2>
             </div>
             <div class="space-y-4 subtitle mt-4">
               <p>（占位）使用表格/图表呈现不同模型的指标对比。</p>
@@ -173,9 +190,13 @@
           </section>
 
           <!-- SHAP深度解析 -->
-          <section id="shap-analysis" class="section-padding">
+          <section id="shap-analysis" class="section-padding section--editorial" data-section-num="04">
             <div class="section-header">
-              <h2 class="text-3xl font-bold">🎯 深度解析：解释模型预测（SHAP分析）</h2>
+              <div class="section-eyebrow">
+                <span class="section-num">04</span>
+                <span class="section-kicker">SHAP Deep Dive</span>
+              </div>
+              <h2 class="section-title">解释模型预测（SHAP 分析）</h2>
             </div>
             <div class="space-y-4 subtitle mt-4">
               <p>（占位）放置全局/局部解释图与文字说明。</p>
@@ -183,9 +204,13 @@
           </section>
 
           <!-- 结论与行动计划 -->
-          <section id="conclusion" class="section-padding">
+          <section id="conclusion" class="section-padding section--editorial" data-section-num="05">
             <div class="section-header">
-              <h2 class="text-3xl font-bold">🚀 最终结论与战略行动计划</h2>
+              <div class="section-eyebrow">
+                <span class="section-num">05</span>
+                <span class="section-kicker">Conclusion &amp; Roadmap</span>
+              </div>
+              <h2 class="section-title">最终结论与战略行动计划</h2>
             </div>
             <div class="space-y-4 subtitle mt-4">
               <p>（占位）总结项目收获、落地建议与后续工作方向。</p>
@@ -198,7 +223,10 @@
     <!-- 相关项目（可选） -->
     <section id="related" class="section-padding">
       <div class="section-header reveal">
-        <h2 class="text-3xl font-bold">相关项目</h2>
+        <div class="section-eyebrow">
+          <span class="section-kicker">Continue Reading</span>
+        </div>
+        <h2 class="section-title">相关项目</h2>
       </div>
       <div class="grid md:grid-cols-2 gap-6">
         <div class="related-project-card group cursor-pointer">
