@@ -36,4 +36,8 @@ build/
 # Web Server stuff
 .htaccess
 
+# 本地专用，不入库
 CLAUDE.md
+
+# MCP/工具运行时产物
+.playwright-mcp/

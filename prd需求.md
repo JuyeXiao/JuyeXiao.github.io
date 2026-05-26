@@ -1,34 +1,36 @@
-# 数据分析师个人作品集网站 PRD文档 v2.0
+# 数据分析师个人作品集网站 PRD文档 v3.0
 
-**版本：** v2.0（混合架构版）  
-**日期：** 2025年1月  
-**产品负责人：** [待填写]  
-**目标上线日期：** 2025年8月11日
+**版本：** v3.0（与 2026-05 实际实现对齐版）
+**最初日期：** 2025年1月
+**重写日期：** 2026年5月
+**作者：** Juye Xiao + Claude Code
+**说明：** 本版本删除了 v2.x 中虚构的运行时数据层（`data.js` / `ContentRenderer` / `Plotly` 动态渲染），并按当前已部署的真实静态站点结构重写 §3 信息架构、§4 功能需求、§6 技术架构、§8 开发计划、§9 测试、§12 成功标准。
 
 ---
 
 ## 1. 产品概述
 
 ### 1.1 产品背景
-作为数据分析师，需要一个专业的在线作品集网站来展示个人的专业能力、项目经验和技术实力。基于用户调研发现，HR需要快速浏览候选人概况，而技术面试官需要深入了解项目细节。因此采用混合架构，既满足快速浏览需求，又能展示项目深度。
+作为数据分析师，需要一个专业的在线作品集网站来展示个人的专业能力、项目经验和技术实力。HR 需要快速浏览候选人概况，技术面试官需要深入了解项目细节。因此采用混合架构，既满足快速浏览需求，又能展示项目深度。
 
 ### 1.2 产品定位
-一个采用"主页概览+项目详情"混合架构的数据分析师作品集网站，主页展示个人全貌，独立页面深度展示数据分析项目，支持数据可视化、代码展示、多语言切换等特色功能。
+一个采用"主页概览 + 项目详情"混合架构的数据分析师作品集网站。主页是一份单页滚动式简历＋作品集概览，项目独立成详情页深度展示分析过程、可视化与代码。
 
 ### 1.3 目标用户
 
 | 用户类型 | 需求特点 | 使用场景 |
 |---------|---------|---------|
-| **HR/招聘者** | 快速了解候选人背景 | 30秒-2分钟快速浏览 |
-| **技术面试官** | 深入评估技术能力 | 5-15分钟详细查看项目 |
-| **部门主管** | 了解业务影响力 | 3-5分钟查看项目成果 |
-| **猎头** | 获取基本信息和联系方式 | 1-2分钟获取关键信息 |
+| **HR / 招聘者** | 快速了解候选人背景 | 30 秒 - 2 分钟快速浏览 |
+| **技术面试官** | 深入评估技术能力 | 5 - 15 分钟详细查看项目 |
+| **部门主管** | 了解业务影响力 | 3 - 5 分钟查看项目成果 |
+| **猎头** | 获取基本信息和联系方式 | 1 - 2 分钟获取关键信息 |
 
 ### 1.4 核心价值
-- **双层展示体系：** 主页快速概览 + 详情页深度展示
-- **专业数据展示：** 交互式可视化 + 代码能力展示
-- **灵活访问路径：** 支持快速浏览和深度探索两种模式
-- **项目可分享性：** 每个项目有独立URL，便于定向分享
+- **双层展示体系**：主页快速概览 + 详情页深度展示
+- **专业数据展示**：分析图表 + 代码能力展示
+- **灵活访问路径**：支持快速浏览和深度探索两种模式
+- **项目可分享性**：每个项目有独立 URL，便于定向分享
+- **米色设计系统**：温暖、克制、有人文感的视觉语言（Data Poetics）
 
 ---
 
@@ -38,20 +40,22 @@
 
 | 阶段 | 目标 | 关键结果 |
 |------|------|---------|
-| **短期（1个月）** | 网站上线 | - 完成5个核心页面开发<br>- 展示3个完整项目<br>- 部署到GitHub Pages |
-| **中期（3个月）** | 获得认可 | - 获得20次有效查看<br>- 至少5次面试邀请<br>- 收集用户反馈优化 |
-| **长期（6个月）** | 建立影响力 | - 月均访问100+<br>- 添加博客功能<br>- 迁移到独立域名 |
+| **短期** | 网站上线、对外可分享 | - 5 个核心页面（主页 + 3 个项目详情页 + 联系页）<br>- GitHub Pages 部署 |
+| **中期** | 在求职 / Networking 场景中产生价值 | - 至少 5 次面试邀请<br>- 项目页平均停留时间 > 3 分钟 |
+| **长期** | 建立个人品牌沉淀 | - 月均访问 100+<br>- 持续更新机制<br>- 形成可复用的作品集模板 |
 
 ### 2.2 成功指标
 
 | 指标类型 | 具体指标 | 目标值 |
 |---------|---------|--------|
-| **性能指标** | 主页加载时间 | < 2秒 |
-| | 项目详情页加载时间 | < 3秒 |
-| **用户体验** | 主页停留时间 | > 1分钟 |
-| | 项目详情页停留时间 | > 3分钟 |
+| **性能** | 主页加载时间 | < 2s |
+| | 项目详情页加载时间 | < 3s |
+| | 交互响应 | < 100ms |
+| | Lighthouse 综合分 | > 90 |
+| **用户体验** | 主页停留时间 | > 1 分钟 |
+| | 项目详情页停留时间 | > 3 分钟 |
 | | 跳出率 | < 40% |
-| **转化指标** | 简历下载率 | > 15% |
+| **转化** | 简历下载率 | > 15% |
 | | 项目详情点击率 | > 30% |
 | | 联系转化率 | > 5% |
 
@@ -59,95 +63,83 @@
 
 ## 3. 信息架构
 
-### 3.1 网站结构图
+### 3.1 站点结构（2026-05 实际实现）
 
 ```
 portfolio/
 │
-├── 主页 (index.html) - 单页滚动式
-│   ├── 导航栏（固定）
-│   │   ├── Logo/名字
-│   │   ├── 页内导航（关于/经历/项目/技能/联系）
-│   │   ├── 语言切换（中/英）
-│   │   └── 主题切换（深色/浅色）
+├── 主页 index.html / index-en.html  ── 单页滚动式
+│   ├── 导航栏（固定，半透明背景 + backdrop-filter 模糊）
+│   │   ├── Logo（"Data Weaver" SVG 动画）
+│   │   ├── 页内锚点（关于 / 经历 / 教育 / 项目 / 技能 / 联系）
+│   │   ├── 语言切换按钮（#lang-toggle，中⇄EN）
+│   │   └── 主题切换按钮（深 / 浅）
 │   │
-│   ├── Hero区域
-│   │   ├── 个人照片/头像
-│   │   ├── 姓名 + 职位
-│   │   ├── 一句话介绍
-│   │   ├── 简历下载按钮
-│   │   └── 社交媒体链接
+│   ├── #hero ── 通栏氛围 Hero
+│   │   ├── 背景：assets/img/hero/atmosphere-bg.jpg + 双层 veil
+│   │   ├── 左栏（~7/12）：姓名、职位、一句话介绍、主 CTA（简历 / 联系）
+│   │   └── 右栏（~5/12）：.now-card "当前状态"
+│   │        现居 / 在做 / 在读 / 邮箱
 │   │
-│   ├── 关于我（#about）
-│   │   ├── 个人简介
-│   │   ├── 核心竞争力
-│   │   └── 职业目标
+│   ├── #about ── 杂志式 About（5/7 分栏）
+│   │   ├── 左栏（5/12，桌面端）：assets/img/about-portrait.jpg
+│   │   └── 右栏（7/12）：个人简介 + 核心定位文案
 │   │
-│   ├── 工作经历（#experience）
-│   │   └── 时间轴展示
-│   │       ├── 公司信息
-│   │       ├── 职位 + 时间
-│   │       └── 关键成就
+│   ├── #experience ── 工作经历（3/9 分栏）
+│   │   └── 时间标签（3/12）+ 公司/职位/成就（9/12），多条堆叠
 │   │
-│   ├── 教育背景（#education）
-│   │   ├── 学历信息
-│   │   └── 专业认证
+│   ├── #education ── 教育背景（3/9 分栏）
+│   │   └── 同上结构：学校时间 + 学位/方向/奖项
 │   │
-│   ├── 项目展示（#projects）
-│   │   └── 项目卡片网格
-│   │       ├── 项目标题
-│   │       ├── 简短描述
-│   │       ├── 技术标签
-│   │       ├── 关键指标
-│   │       ├── 预览图表
-│   │       └── "查看详情"链接
+│   ├── #projects ── 项目展示（Bento Grid）
+│   │   └── 项目卡片：标题、一句话摘要、技术标签、关键指标、"查看详情"链接
+│   │       链接指向 projects/<name>/<name>.html
 │   │
-│   ├── 技能矩阵（#skills）
-│   │   ├── 技术技能
-│   │   ├── 工具熟练度
-│   │   └── 软技能
+│   ├── #skills ── 技能矩阵
+│   │   └── 技术 / 工具 / 软技能分组卡片
 │   │
-│   └── 联系方式（#contact）
-│       ├── 联系表单
-│       └── 其他联系方式
+│   └── 页脚 ── 联系入口（跳转 contact.html）
 │
-└── 项目详情页 (/projects/)
-    ├── 销售预测模型 (sales-forecasting.html)
-    ├── 客户细分分析 (customer-segmentation.html)
-    ├── A/B测试分析 (ab-testing.html)
-    └── [更多项目页面]
-        │
-        └── 每个项目详情页包含：
-            ├── 返回导航
-            ├── 项目标题
-            ├── 执行摘要
-            ├── 业务背景
-            ├── 数据概览
-            ├── 方法论
-            ├── 详细分析过程
-            ├── 代码展示
-            ├── 交互式可视化
-            ├── 结果与影响
-            ├── 关键学习
-            └── 相关项目推荐
+├── 联系页 contact.html / contact-en.html
+│   ├── 联系方式（邮箱 / LinkedIn / GitHub）
+│   └── 联系表单（mailto 集成）
+│
+└── 项目详情页 projects/<name>/<name>.html / <name>-en.html
+    ├── 返回主页导航
+    ├── 项目标题 + 一句话价值主张
+    ├── 执行摘要（背景 / 方案 / 影响）
+    ├── 数据概览
+    ├── 方法论 / 建模流程
+    ├── 关键代码片段（Prism.js 高亮）
+    ├── 静态可视化图表（PNG 序列，存于 figures/）
+    ├── 结果与业务影响
+    └── 阅读进度条 + 滚动渐现
 ```
 
-### 3.2 页面流程图
+### 3.2 当前三个项目页
+
+| 项目名 | 文件夹 | 图表数 |
+|---|---|---|
+| 银行客户流失预测 | `projects/Bank Customer Churn Prediction/` | 5 |
+| 电商欺诈检测 | `projects/e-commerce fraud detection/` | 8 |
+| 贷款违约预测 | `projects/lending hub loan prediction/` | 15 |
+
+### 3.3 页面流程
 
 ```mermaid
 graph TD
     A[访问主页] --> B{用户类型}
-    B -->|HR快速浏览| C[滚动浏览全页]
-    B -->|技术面试官| D[查看项目概览]
-    
-    C --> E[下载简历]
-    C --> F[查看联系方式]
-    
-    D --> G[点击项目详情]
+    B -->|HR 快速浏览| C[滚动看完主页]
+    B -->|技术面试官| D[关注 #projects]
+
+    C --> E[下载简历 PDF]
+    C --> F[跳转 contact.html]
+
+    D --> G[点击具体项目卡片]
     G --> H[项目详情页]
-    H --> I[深入了解技术细节]
-    H --> J[查看代码和可视化]
-    H --> K[返回主页/查看其他项目]
+    H --> I[读执行摘要 + 看图表]
+    H --> J[查看代码片段]
+    H --> K[返回主页 / 切换其他项目]
 ```
 
 ---
@@ -156,205 +148,84 @@ graph TD
 
 ### 4.1 主页功能模块
 
-#### P0 - 核心功能（必须实现）
+#### P0 - 核心功能（已实现）
 
-| 功能模块 | 功能描述 | 交互说明 | 验收标准 |
-|---------|---------|---------|---------|
-| **固定导航栏** | 页面滚动时保持可见 | 点击导航项平滑滚动到对应区域 | 导航准确，滚动流畅 |
-| **Hero区域** | 第一印象展示 | 简历下载、社交链接可点击 | 信息完整，视觉吸引 |
-| **个人简介** | 展示背景和价值主张 | 支持展开/收起长文本 | 内容清晰，重点突出 |
-| **工作经历时间轴** | 可视化职业发展 | 悬停显示详细信息 | 时间线清晰，交互自然 |
-| **项目卡片网格** | 3-5个核心项目概览 | 卡片悬停效果，点击进入详情 | 布局整齐，信息层次清晰 |
-| **简历下载** | PDF格式简历 | 一键下载，支持中英文版本 | 下载成功率100% |
-| **响应式布局** | 适配各种设备 | 断点：768px, 1024px, 1440px | 各设备显示正常 |
+| 功能模块 | 描述 | 验收标准 |
+|---|---|---|
+| **固定导航栏** | 滚动时保持可见，半透明 + 模糊 | 各分辨率正常吸顶 |
+| **Hero 区** | 左栏自我介绍 + 右栏 Now 信息卡 + 通栏氛围背景图 | 信息完整，深浅模式下都有视觉冲击 |
+| **About 区** | 杂志式 5/7 分栏（左肖像 + 右文案） | 移动端单列堆叠，桌面端 portrait 显示 |
+| **工作经历时间轴** | 3/9 分栏 + 多条目堆叠 | 时间线清晰、可滚动阅读 |
+| **教育背景** | 3/9 分栏 | 与经历区视觉对齐 |
+| **项目 Bento 网格** | 主页展示 3 个核心项目 | 卡片悬停效果，点击跳转详情页 |
+| **技能矩阵** | 技术 / 工具 / 软技能分组卡片 | 清晰展示熟练度 |
+| **简历下载入口** | 中英文 PDF | ⚠ 当前 Hero CTA `href="#"` 仍未连线，待修复 |
+| **响应式布局** | 适配手机 / 平板 / 桌面 | 各设备显示正常，无横向滚动 |
 
-#### P1 - 重要功能（优先实现）
+#### P1 - 增强功能
 
-| 功能模块 | 功能描述 | 交互说明 | 验收标准 |
-|---------|---------|---------|---------|
-| **深色/浅色模式** | 主题切换 | 点击切换，状态保存到localStorage | 切换流畅，颜色协调 |
-| **中英文切换** | 双语支持（URL路径区分） | 独立HTML文件，localStorage记录偏好 | 翻译准确，切换流畅 |
-| **项目预览图表** | 简单数据可视化 | 主页展示静态或简单交互图表 | 图表清晰，加载快速 |
-| **技能可视化** | 技能熟练度展示 | 使用雷达图或进度条 | 直观展示技能水平 |
-| **滚动动画** | 元素渐入效果 | 滚动到可视区域时触发 | 动画流畅，不影响性能 |
+| 功能模块 | 描述 | 状态 |
+|---|---|---|
+| **深 / 浅主题切换** | 点击 toggle，写入 `localStorage.theme`，类切换 `html.dark` | ✅ 已实现 |
+| **中英语言切换** | URL 路由式（`-en.html` 镜像），偏好持久化到 `localStorage.language`，自动重写内部链接 | ✅ 已实现 |
+| **Logo "Data Weaver" 动画** | 网格线 → 织梭 → JX 字母三段式 | ✅ 已实现 |
+| **滚动渐现** | `.reveal` 类 + IntersectionObserver | ✅ 已实现 |
+| **数字计数动画** | Hero 区指标进入视口后从 0 计数到目标值 | ⚠ 当前 Hero 已改为 Now 信息卡，数字计数功能仍保留但未在主 Hero 使用 |
+| **导航 Scroll Spy** | 滚动到对应区块时高亮对应导航项 | ✅ 已实现 |
 
-#### P0 - 核心功能（必须实现）- 语言切换系统
+### 4.2 语言切换系统（当前实现）
 
-| 功能模块 | 功能描述 | 技术实现 | 验收标准 |
-|---------|---------|---------|----------|
-| **URL路径语言区分** | 为每种语言创建独立HTML | 中文默认，英文添加-en后缀 | 所有页面有对应语言版本 |
-| **语言偏好存储** | 记住用户语言选择 | localStorage持久化存储 | 刷新后保持语言选择 |
-| **智能页面跳转** | 切换语言时自动跳转 | JS检测当前页面并跳转对应版本 | 切换流畅无404错误 |
-| **链接自动适配** | 页面内链接语言一致 | 动态更新所有href属性 | 导航语言统一 |
-| **内容动态渲染** | 从data.js读取对应语言内容 | ContentRenderer类处理 | 内容完整准确 |
-| **浏览器语言检测** | 首次访问自动选择语言 | navigator.language检测 | 智能默认语言 |
+**实现方式：URL 路由 + localStorage，无运行时 i18n。**
 
-### 4.2 项目详情页功能模块
+| 功能点 | 实现 |
+|---|---|
+| 语言版本区分 | 每个页面提供 `foo.html`（默认 zh-CN）和 `foo-en.html`（en）两份手写副本 |
+| 切换按钮 | `#lang-toggle` 显示对面语种文案（中文页显示 `EN`，英文页显示 `中`） |
+| 偏好存储 | 点击切换时写入 `localStorage.language`，值为 `'zh'` 或 `'en'` |
+| 自动重定向 | 页面加载时如果 `localStorage.language` 与当前 URL 不一致，跳转到对应语种页面 |
+| 链接重写 | `language-switcher.js` 自动重写导航链接、项目卡片链接、Logo 链接、联系按钮 `href`，使内部跳转保持当前语种 |
+| 浏览器语言检测 | **不实现**。首次访问默认中文，由用户主动切换 |
+| 翻译数据 | **不存在统一翻译表**。中英内容分别硬编码在两份 HTML 文件中，需要同步手动维护 |
 
-#### P0 - 核心功能（必须实现）
+> v2.x PRD 中描述的 `data.js` / `ContentRenderer` / `i18n.js` 运行时翻译方案**未采用**，已从架构中删除。
 
-| 功能模块 | 功能描述 | 技术实现 | 验收标准 |
-|---------|---------|---------|---------|
-| **项目导航** | 返回主页和项目间切换 | 固定头部导航条 | 导航清晰便捷 |
-| **执行摘要** | 项目核心价值一览 | 突出显示关键成果 | 1分钟内理解项目价值 |
-| **业务背景** | 详细问题描述 | 结构化文本展示 | 背景交代清楚 |
-| **数据概览** | 数据集描述和统计 | 表格+可视化结合 | 数据特征清晰 |
-| **方法论展示** | 分析方法和流程 | 流程图+文字说明 | 方法论清晰可复现 |
-| **交互式图表** | 深度数据可视化 | Plotly.js实现 | 交互流畅，信息丰富 |
-| **代码展示** | 关键代码片段 | Prism.js语法高亮 | 代码清晰，可复制 |
-| **结果影响** | 业务影响量化展示 | 数据对比图表 | 成果量化明确 |
+### 4.3 项目详情页功能模块
 
-#### P1 - 重要功能（优先实现）
+#### P0 - 核心功能（已实现）
 
-| 功能模块 | 功能描述 | 技术实现 | 验收标准 |
-|---------|---------|---------|---------|
-| **目录导航** | 页内章节快速跳转 | 侧边栏或浮动目录 | 长页面导航便利 |
-| **代码运行结果** | 展示代码输出 | 预渲染的输出展示 | 代码和结果对应 |
-| **图表下载** | 导出图表图片 | Plotly内置功能 | 支持PNG/SVG下载 |
-| **相关项目推荐** | 引导查看其他项目 | 底部推荐卡片 | 增加项目浏览深度 |
-| **分享功能** | 社交媒体分享 | 分享按钮+元数据 | 分享预览正确 |
+| 功能模块 | 描述 | 实现 |
+|---|---|---|
+| **返回导航** | 顶部固定，回到主页对应锚点 | ✅ |
+| **项目封面 + 摘要** | 标题、一句话价值、关键指标 | ✅ |
+| **业务背景** | 结构化文本 | ✅ |
+| **数据概览** | 表格 + 静态图 | ✅ |
+| **方法论展示** | 流程文字 + 静态流程图 PNG | ✅ |
+| **静态可视化图表** | 项目目录 `figures/` 下的 PNG 序列 | ✅ |
+| **代码展示** | Prism.js 高亮 | ✅ |
+| **结果与影响** | 量化数据 | ✅ |
+| **阅读进度条** | `initScrollProgress()` 顶部细条 | ✅ |
+| **预估阅读时间** | `initReadingTime()` 头部展示 | ✅ |
+| **图片点击放大** | `.figure-editorial img` 缩放预览 | ✅ |
 
-### 4.3 数据结构设计
+#### P1 - 增强功能
 
-```javascript
-// 主页数据结构 (data.js)
-const portfolioData = {
-    personal: {
-        zh: {
-            name: "姓名",
-            title: "高级数据分析师",
-            bio: "7年数据分析经验，专注于...",
-            email: "email@example.com",
-            linkedin: "linkedin.com/in/username",
-            github: "github.com/username"
-        },
-        en: {
-            name: "Name",
-            title: "Senior Data Analyst",
-            bio: "7 years of experience in...",
-            // ...
-        }
-    },
-    
-    projects: [
-        {
-            id: "sales-forecasting",
-            zh: {
-                title: "销售预测模型",
-                summary: "使用LSTM和ARIMA混合模型预测销售趋势",
-                description: "为零售企业构建销售预测系统...",
-                techStack: ["Python", "TensorFlow", "PostgreSQL"],
-                metrics: {
-                    accuracy: "94%",
-                    improvement: "+23%",
-                    dataVolume: "500万条"
-                }
-            },
-            en: {
-                title: "Sales Forecasting Model",
-                // ...
-            },
-            previewChart: {
-                type: "line",
-                data: {} // 简化的图表数据
-            },
-            detailUrl: "projects/sales-forecasting.html",
-            thumbnail: "assets/img/sales-forecast-thumb.png"
-        }
-    ],
-    
-    experience: [
-        {
-            zh: {
-                company: "科技公司A",
-                position: "高级数据分析师",
-                period: "2022.01 - 至今",
-                location: "上海",
-                achievements: [
-                    "建立公司数据分析体系，提升决策效率30%",
-                    "主导营销效果归因模型，ROI提升25%"
-                ]
-            },
-            en: {
-                company: "Tech Company A",
-                // ...
-            }
-        }
-    ]
-};
+| 功能模块 | 描述 | 状态 |
+|---|---|---|
+| **侧边目录导航** | 长页面快速跳转 | ⚠ 部分实现 |
+| **代码可复制** | 一键复制按钮 | ⚠ 待实现 |
+| **图表交互化（Plotly.js）** | 替换部分静态 PNG 为交互图 | ❌ 未实现，`charts.js` 仅为脚手架 |
+| **相关项目推荐** | 底部跳转其他项目 | ❌ 未实现 |
 
-// 项目详情页数据结构
-const projectDetail = {
-    id: "sales-forecasting",
-    zh: {
-        title: "销售预测模型",
-        subtitle: "基于深度学习的多维度销售预测系统",
-        executiveSummary: {
-            background: "公司面临库存管理和供应链优化挑战",
-            solution: "构建LSTM+ARIMA混合预测模型",
-            impact: "库存成本降低23%，缺货率降低45%"
-        },
-        sections: [
-            {
-                title: "业务背景",
-                content: "详细的业务背景描述...",
-                type: "text"
-            },
-            {
-                title: "数据探索",
-                content: {
-                    description: "数据集包含3年的销售记录...",
-                    stats: {
-                        records: "500万条",
-                        features: "45个",
-                        timeRange: "2021-2024"
-                    }
-                },
-                type: "data-overview"
-            },
-            {
-                title: "建模过程",
-                content: {
-                    code: `
-import pandas as pd
-import numpy as np
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import LSTM, Dense
+### 4.4 数据策略
 
-# 数据预处理
-def prepare_data(df):
-    # 特征工程
-    df['rolling_mean'] = df['sales'].rolling(7).mean()
-    df['rolling_std'] = df['sales'].rolling(7).std()
-    return df
+**当前方案：所有页面内容直接硬编码在 HTML 中**，无运行时数据层。
 
-# LSTM模型构建
-model = Sequential([
-    LSTM(50, activation='relu', input_shape=(n_steps, n_features)),
-    Dense(1)
-])
-                    `,
-                    language: "python"
-                },
-                type: "code"
-            },
-            {
-                title: "结果可视化",
-                content: {
-                    chartId: "forecast-results",
-                    chartConfig: {
-                        // Plotly配置
-                    }
-                },
-                type: "visualization"
-            }
-        ]
-    },
-    en: {
-        // 英文版本
-    }
-};
-```
+- 中文内容写在 `foo.html`，英文写在 `foo-en.html`，两份手动同步
+- 没有 `data.js`，没有 `ContentRenderer`，没有 `assets/data/` 数据目录
+- 修改个人信息 / 工作经历 / 项目卡片时，按 §3 列出的页面位置直接改 HTML
+- 这种"双副本静态"方案的代价是翻译需手动同步；收益是零运行时依赖、SEO 友好、GitHub Pages 直接托管
+
+未来若引入 CMS 或多语言扩展，可考虑迁移到 11ty / Astro 等静态生成器，但这不是当前 v3.0 范围。
 
 ---
 
@@ -364,28 +235,28 @@ model = Sequential([
 
 | 页面类型 | 性能指标 | 目标值 | 优化策略 |
 |---------|---------|--------|---------|
-| **主页** | 首屏加载时间 | < 2s | 图片懒加载、CDN加速 |
-| | 完整加载时间 | < 4s | 代码分割、压缩 |
-| **项目详情页** | 首屏加载时间 | < 2.5s | 按需加载图表库 |
-| | 交互响应时间 | < 100ms | 防抖、节流优化 |
-| **通用** | Lighthouse分数 | > 90 | 持续性能监控 |
+| **主页** | 首屏加载 | < 2s | 图片懒加载、Google Fonts preconnect |
+| | 完整加载 | < 4s | 资源压缩、CDN |
+| **项目详情页** | 首屏加载 | < 2.5s | PNG 图表懒加载 |
+| | 交互响应 | < 100ms | 节流 / 防抖 |
+| **通用** | Lighthouse 综合分 | > 90 | 持续监控 |
 
 ### 5.2 兼容性需求
 
-| 类型 | 要求 | 测试范围 |
-|------|------|---------|
-| **浏览器** | 最近2个版本 | Chrome, Firefox, Safari, Edge |
-| **设备** | 响应式适配 | Desktop (1920/1440/1366)<br>Tablet (768/1024)<br>Mobile (375/414) |
-| **网络** | 弱网可用 | 3G网络下可访问 |
+| 类型 | 要求 |
+|------|------|
+| **浏览器** | 最近 2 个版本：Chrome / Firefox / Safari / Edge |
+| **设备** | Desktop（1920 / 1440 / 1366）、Tablet（768 / 1024）、Mobile（375 / 414） |
+| **网络** | 4G 可用，3G 降级可访问 |
 
-### 5.3 SEO需求
+### 5.3 SEO 需求
 
-| 页面 | SEO要求 | 实现方式 |
-|------|---------|---------|
-| **主页** | 完整的meta信息 | title, description, keywords |
-| **项目详情页** | 独立的SEO信息 | 每个项目独立的meta标签 |
-| **通用** | 结构化数据 | JSON-LD格式的个人信息 |
-| | 社交分享优化 | Open Graph和Twitter Card |
+| 页面 | 要求 | 实现 |
+|------|------|------|
+| **主页** | 完整 meta（title / description / keywords） | ✅ |
+| **项目详情页** | 独立 SEO 信息 | ✅ |
+| **通用** | JSON-LD 结构化数据（Person） | ✅ |
+| | Open Graph + Twitter Card | ✅ |
 
 ---
 
@@ -393,789 +264,229 @@ model = Sequential([
 
 ### 6.1 技术栈
 
-| 层级 | 技术选择 | 说明 |
+| 层级 | 选择 | 说明 |
 |------|---------|------|
-| **前端框架** | 纯静态 HTML/CSS/JS | 简单可靠，易于维护 |
-| **CSS方案** | CSS Grid + Flexbox + 变量 | 现代布局，主题支持 |
-| **数据可视化** | Plotly.js (主) + Chart.js (辅) | Plotly用于复杂交互，Chart.js用于简单图表 |
-| **代码高亮** | Prism.js | 轻量级，多语言支持 |
-| **动画** | CSS Animation + Intersection Observer | 原生实现，性能最优 |
-| **构建工具** | 无（开发）/ 简单压缩（生产） | 降低复杂度 |
-| **部署** | GitHub Pages + GitHub Actions | 自动化部署 |
+| **前端** | 纯静态 HTML5 / CSS3 / ES6+ JS | 无构建步骤 |
+| **CSS 工具** | CSS Grid + Flexbox + 自定义属性 | 12 列网格、米色变量系统 |
+| **Tailwind** | CDN 运行时版本 `cdn.tailwindcss.com` | ⚠ 开发期方案，生产应换静态构建 |
+| **图标** | Lucide Icons（CDN） | — |
+| **字体** | Google Fonts：Inter + JetBrains Mono | `--font-display: Fraunces` 已声明但未在 `<link>` 中加载（回退到 Songti SC / Georgia） |
+| **代码高亮** | Prism.js（按需引入） | 项目详情页使用 |
+| **图表** | 静态 PNG（项目 `figures/` 下） | `charts.js` 是 Plotly.js 集成脚手架，**未启用** |
+| **动画** | CSS Animation + IntersectionObserver | 原生实现 |
+| **部署** | GitHub Pages，从 `master` 分支静态托管 | 无 CI/CD 流水线 |
 
-### 6.2 实际文件结构（语言切换更新版）
+### 6.2 实际文件结构
 
 ```
-portfolio/                                    # 项目根目录
-├── index.html                               # ✅ 中文主页（已实现）
-├── index-en.html                            # 🆕 英文主页（待实现）
-├── contact.html                             # ✅ 中文联系页（已实现）
-├── contact-en.html                          # 🆕 英文联系页（待实现）
-├── projects/                                # 项目详情页目录
-│   ├── _template.html                       # ✅ 项目页模板（已实现）
-│   ├── Bank Customer Churn Prediction/     # 银行客户流失预测项目
-│   │   ├── Bank Customer Churn Prediction.html       # ✅ 中文版
-│   │   ├── Bank Customer Churn Prediction-en.html    # 🆕 英文版（待实现）
-│   │   └── figures/                         # 项目图表资源（5张图）
-│   ├── e-commerce fraud detection/         # 电商欺诈检测项目
-│   │   ├── e-commerce fraud detection.html          # ✅ 中文版
-│   │   ├── e-commerce fraud detection-en.html       # 🆕 英文版（待实现）
-│   │   └── figures/                         # 项目图表资源（8张图）
-│   └── lending hub loan prediction/        # 贷款违约预测项目
-│       ├── lending hub loan prediction.html          # ✅ 中文版
-│       ├── lending hub loan prediction-en.html       # 🆕 英文版（待实现）
-│       └── figures/                         # 项目图表资源（15张图）
+portfolio/
+├── index.html / index-en.html              # 主页（中文 + 英文镜像）
+├── contact.html / contact-en.html          # 联系页
+├── projects/
+│   ├── _template.html                      # 项目页模板
+│   ├── Bank Customer Churn Prediction/
+│   │   ├── *.html / *-en.html
+│   │   └── figures/                        # 5 张 PNG
+│   ├── e-commerce fraud detection/
+│   │   ├── *.html / *-en.html
+│   │   └── figures/                        # 8 张 PNG
+│   └── lending hub loan prediction/
+│       ├── *.html / *-en.html
+│       └── figures/                        # 15 张 PNG
 ├── assets/
-│   ├── css/                                 # CSS模块化架构
-│   │   ├── README.md                        # ✅ CSS架构说明文档
-│   │   ├── index.css                        # ✅ 主样式（全局变量+通用组件）
-│   │   ├── project.css                      # ✅ 项目详情页专用样式
-│   │   └── contact.css                      # ✅ 联系页面专用样式
-│   ├── js/                                  # JavaScript模块化架构
-│   │   ├── index.js                         # ✅ 主页核心逻辑（已实现）
-│   │   ├── data.js                          # ✅ 作品集数据配置（双语数据）
-│   │   ├── logo.js                          # ✅ Logo动画系统（已实现）
-│   │   ├── contact.js                       # ✅ 联系页面功能（已实现）
-│   │   ├── common.js                        # ✅ 通用工具和主题系统（已实现）
-│   │   ├── project.js                       # ✅ 项目页面通用逻辑（已实现）
-│   │   ├── charts.js                        # ✅ 图表管理器（已实现）
-│   │   ├── language-switcher.js             # 🆕 语言切换核心模块（待实现）
-│   │   └── content-renderer.js              # 🆕 内容渲染器（待实现）
-│   ├── data/                                # 数据目录结构
-│   │   └── projects/                        # 项目数据文件（空目录）
-│   └── img/                                 # 图片资源
-│       ├── profile/                         # 个人照片
-│       │   └── avatar.jpg                   # ✅ 头像（已有）
-│       └── projects/                        # 项目缩略图
-│           ├── sales-forecast-thumb.png     # ✅ 预留缩略图（已有）
-│           ├── customer-seg-thumb.png       # ✅ 预留缩略图（已有）
-│           └── ab-test-thumb.png            # ✅ 预留缩略图（已有）
-├── 肖炬晔简历.pdf                           # ✅ 中文简历（已有）
-├── README.md                                # ✅ 项目说明（已有）
-├── CLAUDE.md                                # ✅ Claude Code指导文档（已创建）
-├── prd需求.md                               # ✅ 本PRD文档（当前文件）
-└── 设计风格文档米色.md                      # ✅ 设计系统文档（已有）
+│   ├── css/
+│   │   ├── index.css                       # 主样式 + 全局变量
+│   │   ├── project.css                     # 项目详情页样式
+│   │   ├── contact.css                     # 联系页样式
+│   │   └── README.md                       # CSS 架构说明
+│   ├── js/
+│   │   ├── common.js                       # 主题 / 滚动渐现 / 导航（自动初始化）
+│   │   ├── index.js                        # 主页 Scroll Spy + 平滑滚动 + 数字计数
+│   │   ├── contact.js                      # 联系表单
+│   │   ├── project.js                      # 项目页：滚动进度、阅读时间、图片放大
+│   │   ├── logo.js                         # Data Weaver Logo 动画
+│   │   ├── language-switcher.js            # URL 路由式中英切换
+│   │   └── charts.js                       # Plotly 脚手架（未启用）
+│   └── img/
+│       ├── about-portrait.jpg              # About 区肖像
+│       └── hero/atmosphere-bg.jpg          # Hero 通栏氛围背景
+├── test-common.html                         # common.js 手动测试页
+├── demo-editorial-hero.html                 # Hero 设计探索 demo
+├── 肖炬晔简历.pdf                          # 中文简历
+├── Juye Xiao Resume.pdf                    # 英文简历
+├── README.md
+├── prd需求.md                              # 本文档
+└── 设计风格文档米色.md                      # 设计系统文档
 ```
 
-### 6.3 数据架构实现状态
+> **不存在的文件**：v2.x PRD 列出的 `assets/js/data.js`、`content-renderer.js`、`i18n.js`、`assets/data/projects/` 目录均**未实现也不会实现**——内容直接硬编码在 HTML。
 
-#### ✅ 已实现的数据结构
+### 6.3 JavaScript 模块职责
 
-**主数据配置 (assets/js/data.js):**
+| 模块 | 职责 |
+|---|---|
+| `common.js` | 基础设施：主题切换、导航滚动、Lucide 图标初始化、`.reveal` 滚动渐现 IntersectionObserver。`DOMContentLoaded` 时自动实例化 `window.commonFeatures`。每个页面都加载。 |
+| `language-switcher.js` | URL 路由式中英切换。读取当前 URL 判断语种，写入 `localStorage.language`，自动重写内部链接 `href`。**不读 navigator.language**。 |
+| `index.js` | 主页专属：Scroll Spy 高亮、锚点平滑滚动、数字计数动画。基于 `commonFeatures`。 |
+| `contact.js` | 联系页表单：mailto 链接构建 + 客户端打开。 |
+| `project.js` | 项目页专属：`initScrollReveals()` 渐现、`initScrollProgress()` 顶部进度条、`initReadingTime()` 阅读时间估算、`.figure-editorial img` 点击放大。 |
+| `logo.js` | "Data Weaver" SVG 三段式动画（0-0.7s 网格 → 0.8-2.3s 织梭 → 1.8-2.8s JX）。 |
+| `charts.js` | Plotly.js 集成的脚手架，**当前未启用**，所有项目页图表为静态 PNG。 |
+
+**页面脚本加载顺序：** `logo.js` → `common.js` → 页面专属 JS → `language-switcher.js`。
+
+### 6.4 主题系统
+
 ```javascript
-const portfolioData = {
-    // 个人信息（中英双语结构已搭建）
-    personal: { zh: {...}, en: {...} },
-    
-    // 关于我页面数据
-    about: { zh: {...}, en: {...} },
-    
-    // 工作经历数据（时间轴格式）
-    experience: [
-        { zh: {...}, en: {...} },  // 支持多个工作经历
-    ],
-    
-    // 教育背景数据
-    education: [
-        { zh: {...}, en: {...} },  // 支持多个教育经历
-    ],
-    
-    // 项目展示数据（主页卡片）
-    projects: [
-        {
-            id: "unique-project-id",
-            zh: { title, summary, description, techStack, metrics },
-            en: { title, summary, description, techStack, metrics },
-            previewChart: { type, data },  // 预览图表配置
-            detailUrl: "projects/project-name.html",
-            thumbnail: "assets/img/projects/thumb.png"
-        }
-    ],
-    
-    // 技能矩阵数据
-    skills: {
-        technical: [{ name, level }],  // 技术技能
-        tools: [{ name, level }],      // 工具熟练度  
-        soft: [{ name, level }]        // 软技能
-    },
-    
-    // 联系方式数据
-    contact: { zh: {...}, en: {...} },
-    
-    // 导航菜单数据
-    navigation: { zh: {...}, en: {...} }
-};
+// 主题检测与初始化（common.js）
+if (localStorage.getItem('theme') === 'dark' ||
+    (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+  document.documentElement.classList.add('dark');
+}
 ```
 
-#### ✅ 已实现的功能模块
+- 用类 `html.dark` 而非 `[data-theme="dark"]` 属性选择器
+- 切换时写入 `localStorage.theme`，并 dispatch `themechange` 事件到 `window`，其他模块可监听响应
 
-**主题系统:**
-- ✅ 深色/浅色模式切换
-- ✅ localStorage状态持久化
-- ✅ 系统主题检测
-- ✅ 完整的CSS变量系统（米色设计系统）
+### 6.5 Logo 动画系统
 
-**动画系统:**
-- ✅ Logo"数据织者"动画（网格+织梭+字母显现）
-- ✅ 滚动渐现动画（Intersection Observer）
-- ✅ 数字计数动画
-- ✅ 导航滚动监听（Scroll Spy）
-
-**国际化系统:**
-- ✅ i18n类实现（完整的翻译键值对）
-- ✅ 双语数据结构支持
-- ⚠️ 前端语言切换功能（部分实现）
-
-**图表系统:**
-- ✅ ChartManager类（支持Chart.js和Plotly.js）
-- ✅ 主题适配（图表颜色随主题变化）
-- ✅ 响应式图表支持
-
-#### ❌ 尚未实现的数据结构
-
-**项目详情页独立数据文件:**
 ```javascript
-// 计划：assets/data/projects/{project-id}.js
-// 实际：目前项目详情直接写在HTML中，未实现动态数据加载
-const projectDetailData = {
-    id: "project-id",
-    zh: {
-        title: "",
-        subtitle: "",
-        executiveSummary: { background, solution, impact },
-        sections: [
-            { title, content, type },  // 支持text, data-overview, code, visualization等类型
-        ],
-        charts: [
-            { elementId, type, data, layout }  // Plotly图表配置
-        ]
-    },
-    en: { /* 英文版本 */ }
-};
+// logo.js 核心时序
+setTimeout(() => this.weaverLine.classList.add('animate'), 800);   // 织梭穿梭
+setTimeout(() => this.logoLetters.classList.add('animate'), 1800); // JX 显现
 ```
 
-#### ⚠️ 部分实现的功能
-
-**联系表单:**
-- ✅ 表单UI和验证
-- ✅ mailto邮件客户端集成  
-- ❌ 后端表单处理（计划中）
-
-**简历下载:**
-- ✅ 中文简历文件存在
-- ❌ 英文简历文件
-- ❌ 下载按钮功能集成
-
-### 6.3 核心代码示例
-
-**路由和导航管理：**
-```javascript
-// main.js - 主页导航管理
-class Navigation {
-    constructor() {
-        this.initSmoothScroll();
-        this.initScrollSpy();
-        this.initMobileMenu();
-    }
-    
-    initSmoothScroll() {
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', (e) => {
-                e.preventDefault();
-                const target = document.querySelector(anchor.getAttribute('href'));
-                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            });
-        });
-    }
-    
-    initScrollSpy() {
-        const sections = document.querySelectorAll('section[id]');
-        const navLinks = document.querySelectorAll('.nav-link');
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    navLinks.forEach(link => {
-                        link.classList.toggle('active', 
-                            link.getAttribute('href') === `#${entry.target.id}`
-                        );
-                    });
-                }
-            });
-        }, { threshold: 0.5 });
-        
-        sections.forEach(section => observer.observe(section));
-    }
-}
-```
-
-**项目详情页数据加载：**
-```javascript
-// project-common.js - 项目详情页通用逻辑
-class ProjectDetail {
-    constructor(projectId) {
-        this.projectId = projectId;
-        this.lang = localStorage.getItem('language') || 'zh';
-        this.loadProjectData();
-    }
-    
-    async loadProjectData() {
-        try {
-            // 动态加载项目数据
-            const script = document.createElement('script');
-            script.src = `../assets/data/projects/${this.projectId}.js`;
-            document.head.appendChild(script);
-            
-            script.onload = () => {
-                this.renderProject(window[`${this.projectId}Data`]);
-            };
-        } catch (error) {
-            console.error('Failed to load project data:', error);
-        }
-    }
-    
-    renderProject(data) {
-        const content = data[this.lang];
-        
-        // 渲染标题
-        document.getElementById('project-title').textContent = content.title;
-        
-        // 渲染各个部分
-        content.sections.forEach(section => {
-            this.renderSection(section);
-        });
-        
-        // 初始化图表
-        this.initCharts(content.charts);
-        
-        // 代码高亮
-        Prism.highlightAll();
-    }
-    
-    initCharts(charts) {
-        charts.forEach(chart => {
-            if (chart.type === 'plotly') {
-                Plotly.newPlot(chart.elementId, chart.data, chart.layout, {responsive: true});
-            }
-        });
-    }
-}
-```
-
-**联系页面功能实现：**
-```javascript
-// contact.js - 联系页面专用JavaScript文件
-// 主要功能包括：
-// 1. Lucide图标激活
-// 2. 导航栏滚动效果
-// 3. 滚动渐现动画
-// 4. 主题切换功能
-// 5. 语言切换功能（待实现）
-// 6. 联系表单处理
-
-// 联系表单处理核心逻辑
-const contactCardForm = document.querySelector('.contact-card-simple form');
-if (contactCardForm) {
-    contactCardForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        
-        // 获取表单数据
-        const formData = new FormData(contactCardForm);
-        const name = formData.get('name');
-        const email = formData.get('email');
-        const message = formData.get('message');
-        
-        // 构建邮件链接
-        const subject = '来自作品集网站的消息';
-        const emailBody = `姓名: ${name}\n邮箱: ${email}\n\n消息内容:\n${message}`;
-        const mailtoLink = `mailto:jx2479@columbia.edu?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBody)}`;
-        
-        // 打开邮件客户端
-        window.location.href = mailtoLink;
-        
-        // 显示成功消息
-        alert('邮件客户端已打开，请发送邮件。');
-    });
-}
-```
-
-**动画Logo实现：**
-```javascript
-// logo.js - 动画Logo专用JavaScript文件
-// 实现"数据织者"概念的品牌Logo动画
-
-class LogoAnimation {
-    constructor() {
-        this.weaverLine = null;
-        this.logoLetters = null;
-        this.isAnimating = false;
-        this.init();
-    }
-
-    // 播放完整动画序列
-    playAnimation() {
-        if (this.isAnimating) return;
-        this.isAnimating = true;
-
-        // 重置动画状态
-        this.weaverLine.classList.remove('animate');
-        this.logoLetters.classList.remove('animate');
-        
-        // 经线入绪（0-0.7秒）：数据网格线依次淡入并开始流动
-        this.showStatus('1. 经线入绪 - 数据网格构建中...');
-        
-        // 纬线穿梭（0.8-2.3秒）：珊瑚色织梭线穿过
-        setTimeout(() => {
-            this.showStatus('2. 纬线穿梭 - 数据编织中...');
-            this.weaverLine.classList.add('animate');
-        }, 800);
-        
-        // 图样显现（1.8-2.8秒）：JX字母旋转缩放显现
-        setTimeout(() => {
-            this.showStatus('3. 图样显现 - JX浮现...');
-            this.logoLetters.classList.add('animate');
-        }, 1800);
-        
-        setTimeout(() => {
-            this.showStatus('✨ 动画完成！悬停查看签名');
-            this.isAnimating = false;
-        }, 2800);
-    }
-}
-
-// Logo设计理念：
-// - 数据网格：代表数据结构和分析框架
-// - 织梭穿梭：象征数据编织和模式识别  
-// - JX显现：最终形成个人标识
-// - 悬停展开：提供更多个人信息
-```
-
-**Logo动画样式实现：**
-```css
-/* Logo容器和基础样式 */
-.navbar-logo {
-    display: inline-flex;
-    align-items: center;
-    height: 40px;
-    cursor: pointer;
-    position: relative;
-    padding: 0 12px;
-    border-radius: 8px;
-    transition: all var(--duration-normal);
-}
-
-/* 数据网格动画 */
-.grid-line-v, .grid-line-h {
-    stroke: var(--tan);
-    stroke-width: 1;
-    stroke-dasharray: 2 4;
-    opacity: 0;
-    animation: gridLineAppear 0.5s ease-out forwards, 
-               gridFlow 8s linear infinite;
-}
-
-/* 织梭动画 */
-.weaver-line {
-    stroke: var(--coral);
-    stroke-width: 2;
-    stroke-linecap: round;
-    opacity: 0;
-    stroke-dasharray: 60;
-    stroke-dashoffset: 60;
-}
-
-.weaver-line.animate {
-    animation: weaveAnimation 2.5s ease-in-out forwards;
-}
-
-/* JX字母动画 */
-.logo-letters {
-    fill: var(--dark);
-    font-family: var(--font-primary);
-    font-weight: 700;
-    font-size: 24px;
-    opacity: 0;
-    transform: scale(0.8);
-}
-
-.logo-letters.animate {
-    animation: letterReveal 1s ease-out forwards;
-    animation-delay: 0.8s;
-}
-
-/* 悬停签名效果 */
-.logo-name {
-    margin-left: 12px;
-    overflow: hidden;
-    width: 0;
-    opacity: 0;
-    white-space: nowrap;
-    transition: width var(--duration-slow) var(--ease-out), 
-                opacity var(--duration-slow) var(--ease-out);
-}
-
-.navbar-logo:hover .logo-name {
-    width: 120px;
-    opacity: 1;
-}
-```
+设计概念：
+- **网格线**（0-0.7s）：数据结构、分析框架
+- **织梭穿梭**（0.8-2.3s）：数据编织、模式识别（珊瑚色，stroke-dasharray 动画）
+- **JX 显现**（1.8-2.8s）：最终形成个人标识
+- 悬停时展开"Juye Xiao"全名
 
 ---
 
 ## 7. 设计规范
-根据设计风格文档
+
+参见 `设计风格文档米色.md`（Design System 2.0 - 米色版）。要点：
+- 95% 中性色 + 5% 强调色（Coral / Sage / Blue / Gold）
+- 12 列网格 + 8px 间距音阶
+- 字体：Inter（正文）/ JetBrains Mono（代码）/ Fraunces（展示，回退中）
+- 暗色模式映射到墨色系（`html.dark` 类）
 
 ---
 
-## 8. 开发计划
+## 8. 开发计划与完成度
 
-### 8.1 开发阶段划分
+### 8.1 当前完成度（2026-05）
 
-```mermaid
-gantt
-    title 开发时间线
-    dateFormat  YYYY-MM-DD
-    section Phase 1 基础架构
-    项目搭建和配置    :a1, 2025-08-11, 2d
-    主页HTML结构      :a2, after a1, 2d
-    基础CSS样式       :a3, after a2, 2d
-    
-    section Phase 2 主页开发
-    个人信息模块      :b1, after a3, 2d
-    经历教育模块      :b2, after b1, 2d
-    项目概览模块      :b3, after b2, 3d
-    
-    section Phase 3 项目详情页
-    详情页模板        :c1, after b3, 2d
-    第一个项目页      :c2, after c1, 3d
-    其他项目页        :c3, after c2, 4d
-    
-    section Phase 4 功能增强
-    多语言支持        :d1, after c3, 2d
-    主题切换          :d2, after d1, 1d
-    图表集成          :d3, after d2, 3d
-    
-    section Phase 5 优化部署
-    性能优化          :e1, after d3, 2d
-    测试修复          :e2, after e1, 2d
-    部署上线          :e3, after e2, 1d
-```
+**整体完成度约 85%。剩余 15% 主要是简历下载联动、Plotly 交互图表、生产构建优化。**
 
-### 8.2 详细任务分解
+#### Phase 1: 基础架构 — ✅ 已完成
+- [X] 项目目录结构
+- [X] 基础 HTML 模板
+- [X] CSS 变量系统（米色 + 暗色）
+- [X] 响应式布局框架
+- [X] 主题切换基础
+- [X] 联系页面
+- [X] Logo "Data Weaver" 动画
+- [X] CSS 模块化（index / project / contact）
+- [X] JS 模块化（common / index / contact / project / logo / language-switcher）
 
-#### Phase 1: 基础架构（第1周）- ✅ 已完成
-- [X] 创建项目目录结构
-- [X] 搭建基础HTML模板
-- [X] 实现CSS变量系统（米色设计系统）
-- [X] 配置响应式布局框架
-- [X] 实现主题切换基础功能
-- [X] 创建contact联系页面
-- [X] 实现动画Logo系统（数据织者动画）
-- [X] 创建CSS模块化架构（index.css + project.css + contact.css）
-- [X] 建立JavaScript模块化结构
-
-#### Phase 2: 主页开发（第2周）- ✅ 已完成
-- [X] Hero区域实现（个人介绍+数据指标）
-- [X] 导航栏和滚动监听（Scroll Spy）
-- [X] 个人简介区域（关于我）
-- [X] 工作经历时间轴（Code Auto Tools + China United Transportation）
-- [X] 教育背景展示（哥伦比亚大学+密歇根大学）
-- [X] 项目卡片网格布局（Bento Box设计）
-- [X] 技能矩阵可视化（技能卡片）
-- [X] 联系方式导航（跳转到contact.html）
-- [X] 滚动渐现动画（Intersection Observer）
+#### Phase 2: 主页 — ✅ 已完成
+- [X] Hero 区（Now 信息卡 + 通栏氛围背景，ad3bcfe 重新设计）
+- [X] 导航栏 + Scroll Spy
+- [X] About 区（杂志式 5/7 分栏 + portrait）
+- [X] 工作经历（3/9 分栏）
+- [X] 教育背景（3/9 分栏）
+- [X] 项目 Bento Grid
+- [X] 技能矩阵
+- [X] 联系入口
+- [X] 滚动渐现（IntersectionObserver）
 - [X] 数字计数动画
 
-#### Phase 3: 项目详情页（第3周）- ✅ 已完成
-- [X] 创建项目详情页模板（_template.html）
-- [X] 第一个完整项目页面（银行客户流失预测）
-- [X] 第二个完整项目页面（电商欺诈检测）
-- [X] 第三个完整项目页面（贷款违约预测）
-- [X] 代码展示和高亮（Prism.js集成）
-- [X] 项目页面导航和目录系统
-- [X] 项目页面样式系统（project.css）
-- [X] 项目图表展示（28张专业数据可视化图表）
-- [⚠️] 项目数据加载机制（计划中的动态加载未实现）
-- [⚠️] 交互式图表集成（Plotly.js已引入但交互功能待实现）
+#### Phase 3: 项目详情页 — ✅ 已完成
+- [X] `_template.html` 模板
+- [X] 银行客户流失预测（5 图）
+- [X] 电商欺诈检测（8 图）
+- [X] 贷款违约预测（15 图）
+- [X] Prism.js 代码高亮
+- [X] 阅读进度条 + 阅读时间估算
+- [X] 项目目录系统 + 图片点击放大
+- [X] 项目页样式系统（`project.css`）
+- [⚠] 项目数据动态加载 — **不实现**（已确认走静态 HTML 路线）
+- [❌] 交互式 Plotly 图表 — 未实现，仍用静态 PNG
 
-#### Phase 4: 功能增强（第4周）- 语言切换重新实现
-- [X] 完善主题切换（深色模式支持）
-- [X] 集成图表库（Plotly.js + Chart.js支持）
-- [X] 动画效果完善（Logo+滚动+数字计数）
-- [X] 联系表单功能（mailto集成）
-- [X] SEO基础优化（meta标签）
-- [ ] 创建语言切换模块（language-switcher.js）
-- [ ] 实现内容渲染器（content-renderer.js）
-- [ ] 创建所有页面的英文版本
-- [ ] 实现智能链接适配
-- [ ] 测试语言切换功能
-- [ ] 优化切换体验
-- [❌] 简历下载功能（按钮未连接）
+#### Phase 4: 功能增强 — ✅ 多数完成
+- [X] 主题切换 + 暗色模式
+- [X] 滚动 / Logo / 数字计数动画
+- [X] 联系表单（mailto 集成）
+- [X] SEO 基础（meta + Open Graph + JSON-LD）
+- [X] 中英语言切换（`language-switcher.js`，URL 路由式）
+- [X] 中英两套页面镜像（主页 + 联系页 + 3 个项目页）
+- [X] 智能链接重写
+- [❌] 简历下载 CTA 联动 — Hero 按钮 `href="#"` 仍未连线对应语种 PDF
 
-#### Phase 5: 优化部署（第5周）- ❌ 待实现
-- [ ] 性能优化（压缩、懒加载）
-- [ ] 跨浏览器测试
+#### Phase 5: 部署与优化 — ⚠ 部分完成
+- [X] GitHub Pages 部署（从 master 分支静态托管）
+- [ ] 性能优化（WebP 转换、图片懒加载、资源压缩）
+- [ ] Tailwind 生产构建（替换 CDN 运行时）
+- [ ] GitHub Actions 自动化部署
+- [ ] 跨浏览器深度测试
 - [ ] 移动端深度优化
-- [ ] 配置GitHub Actions自动部署
-- [ ] 部署到GitHub Pages
-- [ ] 完善使用文档
 
-### 8.3 当前开发状态总结
+### 8.2 已知技术债
 
-**✅ 已完成的核心功能（约80%）:**
-1. **基础架构**: 完整的设计系统、模块化CSS/JS、响应式布局
-2. **主页功能**: 所有区块已实现，包括Hero、关于、经历、教育、项目展示、技能
-3. **动画系统**: Logo动画、滚动效果、主题切换动画
-4. **联系页面**: 完整的联系表单和信息展示
-5. **项目展示**: 3个完整的项目详情页（银行客户流失、电商欺诈检测、贷款违约预测）
-6. **数据可视化**: 28张专业的数据分析图表展示
-7. **代码展示**: 完整的代码高亮和展示系统
-
-**⚠️ 部分完成的功能（约15%）:**
-1. **国际化**: 数据结构支持双语，但前端切换功能未完整实现
-2. **项目数据**: 主页展示已实现，但详情页动态数据加载未实现
-3. **图表系统**: 静态图表展示完成，交互式图表待实现
-
-**❌ 待实现的功能（约5%）:**
-1. **简历下载**: 下载按钮功能集成
-2. **语言切换**: 前端UI实现
-3. **部署优化**: GitHub Actions、性能优化
-4. **交互式图表**: 项目详情页的Plotly.js动态图表
+1. **Tailwind CDN 运行时** — `cdn.tailwindcss.com` 不适合生产，应换为预编译产出
+2. **Fraunces 字体未加载** — `--font-display` 声明了 Fraunces，但 `index.html` 的 Google Fonts URL 未包含，实际回退到系统衬线字
+3. **`charts.js` 脚手架** — 引入了但未使用，可保留供未来集成
+4. **Hero 简历下载 CTA** — `href="#"` 占位，应根据当前语种指向 `肖炬晔简历.pdf` 或 `Juye Xiao Resume.pdf`
+5. **`test-common.html` / `demo-editorial-hero.html`** — 开发期手动测试与设计探索页面，可考虑移到 `dev/` 子目录或在生产构建中排除
 
 ---
 
-## 9. 测试计划
+## 9. 测试
 
-### 9.1 测试清单
+### 9.1 测试策略
 
-| 测试类型 | 测试项 | 验收标准 |
-|---------|--------|---------|
-| **功能测试** | | |
-| 导航功能 | 所有导航链接 | 跳转正确，滚动平滑 |
-| 项目详情 | 项目页面加载 | 数据完整，图表正常 |
-| 下载功能 | 简历下载 | 中英文版本都可下载 |
-| 语言切换 | 全站语言切换 | 所有文本正确切换 |
-| 主题切换 | 深浅色切换 | 颜色方案正确，状态保存 |
-| 联系表单 | 表单提交和邮件功能 | 表单验证正确，邮件客户端正常打开 |
-| **性能测试** | | |
-| 加载速度 | 主页加载 | < 2秒 |
-| | 项目页加载 | < 3秒 |
-| 交互响应 | 用户操作响应 | < 100ms |
-| **兼容性测试** | | |
-| 浏览器 | Chrome/Firefox/Safari/Edge | 显示和功能正常 |
-| 设备 | Desktop/Tablet/Mobile | 响应式布局正确 |
-| **可用性测试** | | |
-| 信息架构 | 内容查找 | 3次点击内找到 |
-| 可读性 | 文字内容 | 清晰易读 |
-| 交互反馈 | 操作反馈 | 有明确的视觉反馈 |
+**当前站点没有自动化测试基础设施**（无 Jest、无 Playwright 套件、无 CI 运行测试）。验证依赖人工浏览器测试 + Lighthouse 评分。
 
-### 9.2 测试用例示例
+未来若引入测试，优先级建议：
+1. Playwright e2e 测试核心用户路径（首页 → 项目页 → 联系页 + 中英切换）
+2. 视觉回归（Percy / Chromatic）锁定关键页面
+3. Lighthouse CI 作为性能门禁
 
-#### 9.2.1 语言切换功能测试
+### 9.2 手动测试清单
 
-```javascript
-// 测试用例：语言切换功能
-describe('语言切换功能测试', () => {
-    test('语言切换按钮功能', async () => {
-        // 1. 访问中文主页
-        await page.goto('/index.html');
-        
-        // 2. 点击语言切换按钮
-        await page.click('#lang-toggle');
-        
-        // 3. 验证跳转到英文版
-        expect(page.url()).toBe('/index-en.html');
-        
-        // 4. 验证localStorage保存
-        const lang = await page.evaluate(() => localStorage.getItem('language'));
-        expect(lang).toBe('en');
-    });
-    
-    test('语言偏好持久化', async () => {
-        // 1. 设置英文偏好
-        await page.evaluate(() => localStorage.setItem('language', 'en'));
-        
-        // 2. 访问中文页面
-        await page.goto('/index.html');
-        
-        // 3. 验证自动重定向到英文版
-        expect(page.url()).toBe('/index-en.html');
-    });
-    
-    test('跨页面语言一致性', async () => {
-        // 1. 在英文主页点击项目
-        await page.goto('/index-en.html');
-        await page.click('.project-card[data-project="bank-churn"]');
-        
-        // 2. 验证跳转到英文项目页
-        expect(page.url()).toContain('Bank Customer Churn Prediction-en.html');
-        
-        // 3. 点击导航返回主页
-        await page.click('a[href="../index-en.html"]');
-        
-        // 4. 验证保持英文版本
-        expect(page.url()).toBe('/index-en.html');
-    });
-});
-```
+#### 9.2.1 语言切换
+- [ ] 清空 `localStorage` 后访问 `index.html` → 显示中文
+- [ ] 点击 `#lang-toggle` → 跳转 `index-en.html` → 显示英文
+- [ ] `localStorage.language` 等于 `'en'`
+- [ ] 刷新英文页面 → 保持英文
+- [ ] 在英文主页点击项目卡片 → 进入对应项目的 `-en.html` 版本
+- [ ] 项目详情页点击"返回主页" → 回到 `index-en.html` 而非 `index.html`
 
-#### 9.2.2 内容渲染测试
+#### 9.2.2 主题切换
+- [ ] 点击主题按钮 → `html` 元素加 / 去 `.dark` 类
+- [ ] `localStorage.theme` 写入 `'dark'` 或 `'light'`
+- [ ] 刷新后保留偏好
+- [ ] 切换主题时其他组件（如 Lucide 图标、project 阅读进度条）颜色同步更新（通过 `themechange` 事件）
 
-```javascript
-// 测试用例：动态内容渲染
-describe('内容渲染测试', () => {
-    test('中文内容完整性', async () => {
-        await page.goto('/index.html');
-        
-        // 验证个人信息
-        const name = await page.$eval('.hero-name', el => el.textContent);
-        expect(name).toBe('肖炬晔');
-        
-        // 验证工作经历
-        const jobTitle = await page.$eval('.job-title', el => el.textContent);
-        expect(jobTitle).toContain('数据分析师');
-        
-        // 验证项目标题
-        const projectTitle = await page.$eval('.project-title', el => el.textContent);
-        expect(projectTitle).toContain('银行客户流失预测');
-    });
-    
-    test('英文内容完整性', async () => {
-        await page.goto('/index-en.html');
-        
-        // 验证个人信息
-        const name = await page.$eval('.hero-name', el => el.textContent);
-        expect(name).toBe('Juye Xiao');
-        
-        // 验证工作经历
-        const jobTitle = await page.$eval('.job-title', el => el.textContent);
-        expect(jobTitle).toContain('Data Analyst');
-        
-        // 验证项目标题
-        const projectTitle = await page.$eval('.project-title', el => el.textContent);
-        expect(projectTitle).toContain('Bank Customer Churn Prediction');
-    });
-});
-```
+#### 9.2.3 响应式
+- [ ] 桌面 1920 / 1440 / 1366：12 列网格、Hero 7/5 分栏正常
+- [ ] 平板 1024 / 768：项目 Bento 切换为 2 列，导航栏正常
+- [ ] 手机 414 / 375：单列堆叠、About portrait 隐藏、字号可读
 
-#### 9.2.3 项目详情页测试
+#### 9.2.4 性能
+- [ ] `lighthouse http://localhost:8000 --view` → 综合分 > 90
+- [ ] 首次内容绘制 < 1.5s
+- [ ] 可交互时间 < 3s
+- [ ] 无明显布局偏移（CLS < 0.1）
 
-```javascript
-// 测试用例：项目详情页加载
-describe('项目详情页功能测试', () => {
-    test('页面加载完整性', async () => {
-        // 1. 访问项目详情页
-        await page.goto('/projects/sales-forecasting.html');
-        
-        // 2. 检查核心元素存在
-        expect(await page.$('#project-title')).toBeTruthy();
-        expect(await page.$('.executive-summary')).toBeTruthy();
-        expect(await page.$('.project-content')).toBeTruthy();
-        
-        // 3. 检查图表加载
-        const charts = await page.$$('.plotly-chart');
-        expect(charts.length).toBeGreaterThan(0);
-        
-        // 4. 检查目录导航
-        const tocLinks = await page.$$('.toc-link');
-        expect(tocLinks.length).toBeGreaterThan(0);
-    });
-});
-```
-
-### 9.3 手动测试流程
-
-#### 9.3.1 语言切换手动测试
-
-1. **初始访问测试**
-   - 清空浏览器缓存和localStorage
-   - 访问 index.html
-   - 验证显示中文内容
-   - 点击语言切换按钮
-   - 验证跳转到 index-en.html
-   - 验证显示英文内容
-
-2. **语言偏好记忆测试**
-   - 在英文页面刷新浏览器
-   - 验证仍保持英文版本
-   - 访问其他页面（如联系页）
-   - 验证自动显示英文版本
-
-3. **跨页面一致性测试**
-   - 在英文主页点击项目卡片
-   - 验证打开英文项目详情页
-   - 点击导航栏链接
-   - 验证所有链接指向英文页面
-
-#### 9.3.2 响应式布局测试
-
-1. **桌面端测试** (1920px, 1440px, 1366px)
-   - 验证12列网格布局正确
-   - 验证导航栏固定显示
-   - 验证项目卡片3列显示
-
-2. **平板端测试** (768px, 1024px)
-   - 验证导航栏折叠菜单
-   - 验证项目卡片2列显示
-   - 验证字体大小适配
-
-3. **移动端测试** (375px, 414px)
-   - 验证单列布局
-   - 验证触摸交互正常
-   - 验证文字可读性
-
-#### 9.3.3 性能测试
-
-1. **加载性能**
-   ```bash
-   # 使用Lighthouse测试
-   lighthouse http://localhost:8000 --view
-   ```
-   - 目标：性能分数 > 90
-   - 目标：首次内容绘制 < 1.5s
-   - 目标：可交互时间 < 3s
-
-2. **运行时性能**
-   - 打开Chrome DevTools Performance面板
-   - 记录页面滚动和交互
-   - 验证帧率 > 30fps
-   - 验证无内存泄漏
-
-### 9.4 测试数据准备
-
-```javascript
-// 测试数据配置
-const testData = {
-    // 中文测试数据
-    zh: {
-        personal: {
-            name: "肖炬晔",
-            title: "数据分析师",
-            email: "jx2479@columbia.edu"
-        },
-        projects: [
-            {
-                title: "银行客户流失预测",
-                description: "使用机器学习预测客户流失"
-            }
-        ]
-    },
-    // 英文测试数据
-    en: {
-        personal: {
-            name: "Juye Xiao",
-            title: "Data Analyst",
-            email: "jx2479@columbia.edu"
-        },
-        projects: [
-            {
-                title: "Bank Customer Churn Prediction",
-                description: "Predict customer churn using machine learning"
-            }
-        ]
-    }
-};
-```
+#### 9.2.5 项目详情页
+- [ ] 滚动顶部进度条平滑增长
+- [ ] 阅读时间估算合理
+- [ ] 点击图表 → 放大预览
+- [ ] 代码块 Prism 高亮正常
+- [ ] 中英两版内容对应一致
 
 ---
 
@@ -1183,30 +494,30 @@ const testData = {
 
 ### 10.1 风险评估矩阵
 
-| 风险项 | 概率 | 影响 | 风险等级 | 缓解措施 |
-|--------|------|------|---------|---------|
+| 风险项 | 概率 | 影响 | 等级 | 缓解措施 |
+|--------|------|------|------|---------|
 | **技术风险** | | | | |
-| Plotly.js文件过大影响加载 | 高 | 中 | 高 | CDN加载 + 按需引入 |
-| 项目页面数据管理混乱 | 中 | 高 | 高 | 统一数据格式和加载机制 |
-| 浏览器兼容性问题 | 中 | 中 | 中 | 充分测试 + Polyfill |
+| Tailwind CDN 运行时性能 | 高 | 中 | 高 | 切换到预编译构建 |
+| 双副本翻译漂移（中英内容不同步） | 中 | 中 | 中 | 修改时强制两份一起改，建立 review checklist |
+| 浏览器兼容性 | 中 | 中 | 中 | 充分测试 + 必要 Polyfill |
 | **内容风险** | | | | |
-| 项目数据准备不足 | 高 | 高 | 高 | 提前准备，分阶段完善 |
-| 翻译质量问题 | 中 | 低 | 低 | 专业校对 |
+| 项目内容陈旧 | 中 | 高 | 中 | 每季度回顾，至少更新一个 |
+| 简历 PDF 未联动 CTA | 高 | 中 | 中 | 修复 Hero `href="#"` 占位 |
 | **运维风险** | | | | |
-| GitHub Pages限制 | 低 | 高 | 中 | 准备备选部署方案 |
-| 更新维护困难 | 中 | 中 | 中 | 良好的文档和代码结构 |
+| GitHub Pages 限制（仓库大小 / 流量） | 低 | 高 | 中 | 备选 Netlify / Vercel |
+| 资源体积膨胀（atmosphere-bg.jpg 4.2MB） | 中 | 中 | 中 | WebP 转换、图片优化 |
 
 ### 10.2 应急预案
 
-1. **性能问题应急**
-   - 方案A：关闭部分动画效果
-   - 方案B：减少图表复杂度
-   - 方案C：启用更激进的缓存策略
+1. **性能急剧下降**
+   - 方案 A：关闭部分动画（`.reveal`、Logo 动画）
+   - 方案 B：替换大图为 WebP 或更小 JPG
+   - 方案 C：启用更激进缓存
 
-2. **部署问题应急**
-   - 方案A：Netlify免费托管
-   - 方案B：Vercel部署
-   - 方案C：传统虚拟主机
+2. **GitHub Pages 出问题**
+   - 方案 A：Netlify（拖拽部署即可）
+   - 方案 B：Vercel
+   - 方案 C：Cloudflare Pages
 
 ---
 
@@ -1216,76 +527,82 @@ const testData = {
 
 | 维护项 | 频率 | 具体内容 |
 |--------|------|---------|
-| **内容更新** | 按需 | 添加新项目、更新经历 |
-| **数据备份** | 每月 | 备份所有数据文件 |
-| **性能监控** | 每月 | 检查加载速度和错误 |
-| **依赖更新** | 每季度 | 更新CDN链接版本 |
-| **安全检查** | 每季度 | 检查潜在安全问题 |
+| **内容更新** | 按需 | 添加新项目、更新工作经历，中英两份同步 |
+| **简历更新** | 求职季按需 | 同时替换 `肖炬晔简历.pdf` 和 `Juye Xiao Resume.pdf` |
+| **性能监控** | 每月 | Lighthouse 抽查；检查 console 报错 |
+| **依赖更新** | 每季度 | CDN 链接版本（Tailwind / Lucide / Prism / Plotly） |
+| **安全检查** | 每季度 | CSP 头是否仍有效，是否引入新外部资源 |
 
-### 11.2 更新流程
+### 11.2 添加新项目的流程
 
 ```bash
-# 1. 更新项目内容
-## 编辑 assets/data/projects/new-project.js
-## 创建 projects/new-project.html
+# 1. 准备资源
+#    创建 projects/<新项目名>/figures/，放入 PNG 图表
+#    复制 projects/_template.html 到 projects/<新项目名>/<新项目名>.html
 
-# 2. 更新主页
-## 编辑 assets/js/data.js 添加项目卡片
+# 2. 翻译镜像
+#    创建 projects/<新项目名>/<新项目名>-en.html，逐段翻译
 
-# 3. 测试
-## 本地测试所有功能
-## 检查响应式布局
+# 3. 主页项目卡片
+#    在 index.html 和 index-en.html 的 .bento-grid 区域各加一张卡片
 
-# 4. 部署
-git add .
-git commit -m "Add new project: [项目名称]"
-git push origin main
-## GitHub Actions 自动部署
+# 4. 可选：language-switcher 路由
+#    若希望显式路由，在 assets/js/language-switcher.js 的
+#    LANGUAGES.<lang>.pages.projects 注册（一般情况下通用 -en 规则就够了）
+
+# 5. 本地测试
+python -m http.server 8000
+#    访问 http://localhost:8000/，验证：响应式、深浅模式、语言切换、卡片跳转、详情页阅读
+
+# 6. 提交
+git add projects/<新项目名>/ index.html index-en.html
+git commit -m "新增项目：<项目名>"
+git push origin master
+#    GitHub Pages 自动同步
 ```
 
 ### 11.3 版本迭代规划
 
 | 版本 | 时间 | 主要特性 |
 |------|------|---------|
-| v1.0 | 当前 | 基础版本，混合架构 |
-| v1.1 | +2月 | 添加博客功能 |
-| v1.2 | +4月 | 项目筛选和搜索 |
-| v2.0 | +6月 | React重构（可选） |
-| v2.1 | +8月 | CMS后台管理 |
+| v3.0 | 2026.05 | 当前版本，对齐真实实现 |
+| v3.1 | +1~2 月 | 修复简历 CTA + WebP 图片优化 + Tailwind 生产构建 |
+| v3.2 | +3 月 | 至少 1 个 Plotly 交互图集成；GitHub Actions 自动部署 |
+| v4.0 | +6 月 | 新增"博客 / 学习笔记"区，或迁移到 Astro 静态生成器 |
 
 ---
 
 ## 12. 成功标准
 
-### 12.1 短期成功标准（1个月：2025年8月11日 - 2025年9月11日）
-- ✅ 网站成功上线并可访问
-- ✅ 展示至少3个完整的数据分析项目
-- ✅ 移动端和桌面端都能正常访问
-- ✅ 页面加载时间符合性能要求
-- ✅ 获得至少5个同行的正面反馈
+> 时间锚点：以 2026-05 v3.0 重写为基线。
 
-### 12.2 中期成功标准（3个月：2025年8月11日 - 2025年11月11日）
-- ✅ 累计获得50+独立访问者
-- ✅ 收到至少3次面试邀请
-- ✅ 项目详情页平均停留时间>3分钟
-- ✅ 至少1个项目被分享到社交媒体
-- ✅ 建立个人品牌识别度
+### 12.1 短期（1 个月内）
+- ✅ 网站已上线 GitHub Pages 并对外可访问
+- ✅ 主页 + 3 个项目详情页 + 联系页全部上线
+- ✅ 移动端和桌面端均正常显示
+- [ ] 简历下载 CTA 修复并真正可用
+- [ ] Lighthouse 综合分 ≥ 90
 
-### 12.3 长期成功标准（6个月：2025年8月11日 - 2026年2月11日）
-- ✅ 成为行业内认可的作品集范例
-- ✅ 通过网站获得理想工作机会
-- ✅ 月均访问量稳定在100+
-- ✅ 激励其他数据分析师建立类似网站
-- ✅ 形成持续更新和改进的机制
+### 12.2 中期（3 个月内）
+- [ ] 累计 50+ 独立访问者
+- [ ] 收到至少 3 次面试 / Networking 邀请
+- [ ] 项目详情页平均停留时间 > 3 分钟
+- [ ] 至少 1 个项目集成 Plotly 交互图
+
+### 12.3 长期（6 个月内）
+- [ ] 月均访问量稳定 100+
+- [ ] 通过网站获得目标工作机会或合作
+- [ ] 形成季度更新节奏（新增项目 / 内容刷新）
+- [ ] 沉淀可复用的作品集模板供参考
 
 ---
 
 ## 附录
 
 ### A. 参考资源
-- [GitHub Pages文档](https://docs.github.com/pages)
-- [Plotly.js官方文档](https://plotly.com/javascript/)
-- [Web性能优化最佳实践](https://web.dev/performance/)
+- [GitHub Pages 文档](https://docs.github.com/pages)
+- [Plotly.js 官方文档](https://plotly.com/javascript/)
+- [Web 性能最佳实践](https://web.dev/performance/)
 - [数据可视化设计原则](https://www.tableau.com/learn/articles/data-visualization)
 
 ### B. 术语表
@@ -1296,42 +613,21 @@ git push origin main
 | CDN | Content Delivery Network，内容分发网络 |
 | SEO | Search Engine Optimization，搜索引擎优化 |
 | i18n | Internationalization，国际化 |
-
-### C. 联系信息
-- 产品负责人：[待填写]
-- 技术支持：[待填写]
-- 设计支持：[待填写]
+| Bento Grid | "便当盒"式不等分网格布局，用于项目展示 |
 
 ---
 
-**文档版本历史**
+## 文档版本历史
 
 | 版本 | 日期 | 修改内容 | 作者 |
 |------|------|---------|------|
-| v1.0 | 2025.01 | 初始版本（单页架构） | - |
-| v2.0 | 2025.01 | 改为混合架构方案 | - |
-| v2.1 | 2025.01 | 更新实际实现状态和数据结构 | Claude Code |
+| v1.0 | 2025.01 | 初始版本（单页架构） | — |
+| v2.0 | 2025.01 | 改为混合架构方案 | — |
+| v2.1 | 2025.01 | 添加实际实现状态标记 | Claude Code |
+| v2.2 | 2025.01 | 三个项目页完成、28 张图表上线 | Claude Code |
+| v3.0 | 2026.05 | 与实际实现全面对齐重写：删除虚构的 `data.js` / `ContentRenderer` / `Plotly 动态渲染` 架构；按真实 Hero/About/Experience 12 列布局重写 §3；语言切换改为 URL 路由式实事描述；删除假项目名（sales-forecasting 等）；测试章节简化为手动清单；更新时间锚点 | Juye Xiao + Claude Code |
 
-**v2.1 更新说明:**
-- ✅ 添加了实际文件结构和实现状态标记
-- ✅ 详细说明了已实现vs计划的数据架构差异
-- ✅ 更新了开发阶段完成情况（约70%完成度）
-- ✅ 明确了当前项目的技术栈和功能模块状态
-- ✅ 指出了待实现的核心功能和优化项
-
-**v2.2 更新说明（2025.01）:**
-- ✅ 更新项目完成度从70%到80%
-- ✅ 添加了2个新完成的项目页面（电商欺诈检测、贷款违约预测）
-- ✅ 更新了文件结构，反映3个完整的项目页面
-- ✅ 记录了28张数据可视化图表的实现
-- ✅ 调整了功能完成比例（80%/15%/5%）
-
----
-
-**文档批准**
-
-| 角色 | 姓名 | 签字 | 日期 |
-|------|------|------|------|
-| 产品负责人 | | | |
-| 技术负责人 | | | |
-| 项目发起人 | | | |
+**v3.0 重写要点：**
+- 删除：§4.3 fictional `portfolioData` schema、§6.3 `class ProjectDetail` 动态加载示例、§9 Jest 风格 e2e 测试用例、§6 文件结构中的 `data.js` / `content-renderer.js` / `assets/data/projects/` / `CLAUDE.md`
+- 重写：§3 信息架构（按 Hero Now 卡 + About portrait + Bento Grid 实际结构）、§4 功能需求（语言切换实事求是）、§6 技术架构（真实 JS 模块职责）、§8 完成度（85%）、§12 成功标准（时间锚点更新）
+- 新增：§4.4 数据策略说明（明确"双副本静态"路线）、§8.2 已知技术债清单

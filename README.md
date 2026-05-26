@@ -48,12 +48,13 @@ portfolio/
 │   │   ├── language-switcher.js           # 中英双语 URL 切换 ✅
 │   │   └── charts.js                      # 图表工具（脚手架）
 │   └── img/                               # 图片资源
+│       ├── about-portrait.jpg             # About 区肖像
+│       └── hero/atmosphere-bg.jpg         # Hero 通栏氛围背景
 ├── test-common.html                         # common.js 手动测试页
 ├── demo-editorial-hero.html                 # Hero 设计探索 demo
 ├── 肖炬晔简历.pdf                          # 中文简历 ✅
 ├── Juye Xiao Resume.pdf                    # 英文简历 ✅
 ├── README.md                               # 项目说明 ✅
-├── CLAUDE.md                               # Claude Code 指导 ✅
 ├── prd需求.md                              # 产品需求文档 ✅
 └── 设计风格文档米色.md                      # 设计系统文档 ✅
 ```
@@ -94,10 +95,12 @@ portfolio/
 - 大屏：> 1536px
 
 ### 字体系统
-- 标题字体：Merriweather (衬线体)
-- 正文字体：Inter (无衬线体)
-- 中文字体：思源黑体
-- 代码字体：Fira Code, Consolas
+- 正文 / UI：Inter（从 Google Fonts 加载）
+- 代码：JetBrains Mono（从 Google Fonts 加载，回退 Fira Code / Consolas）
+- 展示字体（标题装饰）：`--font-display` 声明为 `Fraunces, Noto Serif SC, Songti SC, Georgia`，但 Fraunces 当前**未引入**到 Google Fonts `<link>` 中，实际渲染会回退到 Songti SC / Georgia
+- 中文回退：PingFang SC / Noto Sans SC
+
+> 实际生效的字体以 `index.html` 的 `<link rel="stylesheet" href="https://fonts.googleapis.com/css2?...">` 为准。如需启用 Fraunces，需把它追加到该 URL 的 `family=` 参数里。
 
 ## 📊 项目展示
 
