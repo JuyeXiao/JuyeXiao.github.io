@@ -25,11 +25,11 @@ class CommonFeatures {
         try {
             this.initLucideIcons();
             this.initNavbarScroll();
+            this.initMobileMenu();
             this.initThemeToggle();
             this.initLanguageToggle();
             this.initScrollReveal();
             this.isInitialized = true;
-            console.log('CommonFeatures initialized successfully');
         } catch (error) {
             console.error('Failed to initialize CommonFeatures:', error);
         }
@@ -68,6 +68,41 @@ class CommonFeatures {
         
         // 存储引用以便后续清理
         this.observers.set('navbar-scroll', handleScroll);
+    }
+
+    /**
+     * 移动端菜单（所有页面通用；页面没有菜单标记时静默跳过）
+     */
+    initMobileMenu() {
+        const toggle = document.getElementById('menu-toggle');
+        const menu = document.getElementById('mobile-menu');
+        if (!toggle || !menu || !this.navbar) {
+            return;
+        }
+
+        const setOpen = (open) => {
+            this.navbar.classList.toggle('menu-open', open);
+            toggle.setAttribute('aria-expanded', String(open));
+        };
+
+        toggle.addEventListener('click', () => {
+            setOpen(!this.navbar.classList.contains('menu-open'));
+        });
+
+        // 点击菜单项后收起
+        menu.addEventListener('click', (e) => {
+            if (e.target.closest('.nav-link')) {
+                setOpen(false);
+            }
+        });
+
+        // Escape 关闭并把焦点还给按钮
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && this.navbar.classList.contains('menu-open')) {
+                setOpen(false);
+                toggle.focus();
+            }
+        });
     }
 
     /**
@@ -124,7 +159,6 @@ class CommonFeatures {
 
         // The language-switcher.js module will handle the actual functionality
         // We just ensure the button is ready here
-        console.log('Language toggle button found, delegating to language-switcher.js');
     }
 
     /**
@@ -133,7 +167,6 @@ class CommonFeatures {
      */
     updateLanguageButton(lang) {
         // This method is now handled by language-switcher.js
-        console.log('updateLanguageButton called, but handled by language-switcher.js');
     }
 
     /**
@@ -142,7 +175,6 @@ class CommonFeatures {
      */
     updatePageLanguage(lang) {
         // This method is now handled by language-switcher.js
-        console.log('updatePageLanguage called, but handled by language-switcher.js');
     }
 
     /**
@@ -172,32 +204,56 @@ class CommonFeatures {
     }
 
     /**
-     * 导航链接滚动监听（首页专用）
-     * @param {NodeList} sections - 要监听的页面区段
-     * @param {NodeList} navLinks - 导航链接
+     * 导航链接滚动监听（首页专用）— 基于顶部锚线判定当前区段
+     * @param {NodeList} sections - 要监听的页面区段（文档顺序）
+     * @param {NodeList} navLinks - 导航链接（含桌面与移动端）
      */
     initScrollSpy(sections, navLinks) {
         if (!sections.length || !navLinks.length) {
             return;
         }
 
-        const scrollSpyObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    navLinks.forEach(link => {
-                        link.classList.toggle('active', 
-                            link.getAttribute('href') === `#${entry.target.id}`
-                        );
-                    });
-                }
-            });
-        }, { 
-            rootMargin: '-50% 0px -50% 0px' 
-        });
+        const OFFSET = 96; // 72px 导航栏 + 呼吸空间，与 scroll-margin-top: 88px 协调
+        const sectionList = Array.from(sections);
+        const linkList = Array.from(navLinks);
+        let ticking = false;
 
-        sections.forEach(section => scrollSpyObserver.observe(section));
-        this.observers.set('scroll-spy', scrollSpyObserver);
-        return scrollSpyObserver;
+        const update = () => {
+            ticking = false;
+            let currentId = null;
+
+            const atBottom = window.innerHeight + window.scrollY
+                >= document.documentElement.scrollHeight - 2;
+            if (atBottom) {
+                // 页底强制点亮最后一节（联系），否则短区段永远无法激活
+                currentId = sectionList[sectionList.length - 1].id;
+            } else {
+                for (const section of sectionList) {
+                    if (section.getBoundingClientRect().top <= OFFSET) {
+                        currentId = section.id;
+                    }
+                }
+            }
+
+            linkList.forEach(link => {
+                const href = link.getAttribute('href') || '';
+                link.classList.toggle('active', !!currentId && href.endsWith(`#${currentId}`));
+            });
+        };
+
+        const onScroll = () => {
+            if (!ticking) {
+                ticking = true;
+                requestAnimationFrame(update);
+            }
+        };
+
+        window.addEventListener('scroll', onScroll, { passive: true });
+        update();
+
+        const handle = { disconnect: () => window.removeEventListener('scroll', onScroll) };
+        this.observers.set('scroll-spy', handle);
+        return handle;
     }
 
     /**
@@ -251,7 +307,8 @@ class CommonFeatures {
         }
 
         const y = targetEl.getBoundingClientRect().top + window.pageYOffset - offset;
-        window.scrollTo({ top: y, behavior: 'smooth' });
+        const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+        window.scrollTo({ top: y, behavior });
     }
 
     /**
@@ -280,6 +337,10 @@ class CommonFeatures {
         // 创建通知元素
         const notification = document.createElement('div');
         notification.className = `notification notification-${type}`;
+        // 可访问性：错误用 assertive 立即播报，其它用 polite
+        notification.setAttribute('role', type === 'error' ? 'alert' : 'status');
+        notification.setAttribute('aria-live', type === 'error' ? 'assertive' : 'polite');
+        notification.setAttribute('aria-atomic', 'true');
         notification.style.cssText = `
             position: fixed;
             top: 100px;

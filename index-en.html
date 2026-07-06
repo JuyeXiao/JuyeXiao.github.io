@@ -2,6 +2,7 @@
 <html lang="en" class="light">
 
 <head>
+    <script>document.documentElement.classList.add('js');</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Data Analyst Portfolio</title>
@@ -17,7 +18,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+SC:wght@400;500;600&family=Noto+Serif+SC:wght@500&display=swap"
         rel="stylesheet">
 
     <!-- Icon Library -->
@@ -77,15 +78,28 @@
                 <a href="#contact" class="nav-link">Contact</a>
             </nav>
             <div class="flex items-center space-x-4">
-                <button id="theme-toggle" class="btn-secondary !p-2 !rounded-full">
+                <button id="theme-toggle" class="btn-secondary !p-2 !rounded-full" aria-label="Toggle theme">
                     <i data-lucide="sun" class="block dark:hidden"></i>
                     <i data-lucide="moon" class="hidden dark:block"></i>
                 </button>
                 <button id="lang-toggle" class="btn-secondary !p-2 !rounded-full">
                     <span class="font-bold text-sm">中</span>
                 </button>
+                <button id="menu-toggle" class="btn-secondary !p-2 !rounded-full md:hidden"
+                    aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+                    <i data-lucide="menu" class="menu-icon-open"></i>
+                    <i data-lucide="x" class="menu-icon-close"></i>
+                </button>
             </div>
         </div>
+        <nav id="mobile-menu" class="mobile-menu md:hidden" aria-label="Mobile navigation">
+            <a href="#about" class="nav-link">About</a>
+            <a href="#experience" class="nav-link">Experience</a>
+            <a href="#education" class="nav-link">Education</a>
+            <a href="#projects" class="nav-link">Projects</a>
+            <a href="#skills" class="nav-link">Skills</a>
+            <a href="#contact" class="nav-link">Contact</a>
+        </nav>
     </header>
 
     <main class="container-main">
@@ -106,27 +120,27 @@
             <div class="hero-inner">
             <div class="grid gap-16 items-center hero-grid w-full">
                 <!-- LEFT: Text + CTAs -->
-                <div class="reveal">
-                    <span class="font-semibold text-lg" style="color: var(--coral);">Senior Data Analyst</span>
-                    <h1 class="mt-2" style="font-size: var(--text-5xl);">Hello, I'm Juye Xiao</h1>
-                    <p class="subtitle mt-4 max-w-lg">M.S. in Applied Analytics from Columbia University with nearly 4
+                <div>
+                    <span class="font-semibold text-lg hero-enter" style="color: var(--coral);">Senior Data Analyst</span>
+                    <h1 class="hero-title mt-2 hero-enter hero-enter-d1">Hello, I'm <span class="whitespace-nowrap">Juye Xiao</span></h1>
+                    <p class="subtitle mt-4 max-w-lg hero-enter hero-enter-d2">M.S. in Applied Analytics from Columbia University with nearly 4
                         years of experience in data analysis and database management, specializing in leveraging SQL,
                         Python, and Apache Spark for deep data insights and value creation. Extensive experience in
                         inventory and sales analysis, A/B testing optimization, and climate risk analysis projects,
                         committed to creating tangible business value through data-driven insights.</p>
 
-                    <div class="mt-6 max-w-lg flex items-center gap-4">
+                    <div class="mt-6 max-w-lg flex items-center gap-4 hero-enter hero-enter-d3">
                         <a href="#contact" class="btn btn-primary">Contact Me</a>
-                        <a href="#" class="btn btn-secondary">Download Resume</a>
+                        <a href="Juye%20Xiao%20Resume.pdf" target="_blank" rel="noopener" class="btn btn-secondary">Download Resume</a>
                     </div>
                 </div>
 
                 <!-- RIGHT: Now Panel card -->
-                <div class="hero-visual reveal">
+                <div class="hero-visual hero-enter hero-enter-d4">
                     <article class="now-card" aria-label="Current status">
                         <header class="now-header">
                             <span class="now-eyebrow">Now</span>
-                            <span class="now-meta">2026 · MAY</span>
+                            <span class="now-meta">2026 · JUL</span>
                         </header>
 
                         <div class="now-body">
@@ -166,8 +180,8 @@
 
                         <footer class="now-footer">
                             <hr class="now-divider">
-                            <a class="now-email" href="mailto:vincentxiao1998@gmail.com">
-                                <span>vincentxiao1998@gmail.com</span>
+                            <a class="now-email" href="mailto:jx2479@columbia.edu">
+                                <span>jx2479@columbia.edu</span>
                                 <span class="now-email-arrow" aria-hidden="true">→</span>
                             </a>
                         </footer>
@@ -181,7 +195,7 @@
         <section id="about" class="section-padding about-after-hero">
             <div class="grid md:grid-cols-12 gap-12 items-stretch max-w-6xl mx-auto reveal">
                 <figure class="about-portrait hidden md:block md:col-span-5">
-                    <img src="assets/img/about-portrait.jpg" alt="" loading="lazy">
+                    <img src="assets/img/about-portrait.jpg" alt="Portrait of Juye Xiao" loading="lazy">
                 </figure>
                 <div class="md:col-span-7 about-copy">
                     <h2 class="text-3xl font-bold">The Fusion of Logic and Insight</h2>
@@ -212,15 +226,15 @@
                 <h2 class="text-3xl font-bold">Professional Experience</h2>
                 <p class="subtitle mt-2">Growing through practice, creating value with data.</p>
             </div>
-            <div class="max-w-6xl mx-auto reveal">
-                <div class="timeline-container">
+            <div class="max-w-6xl mx-auto">
+                <div class="timeline-container reveal stagger-children">
                     <div class="timeline-item">
                         <div class="grid md:grid-cols-12 gap-x-8">
                             <div class="md:text-right md:col-span-3 mb-4 md:mb-0">
                                 <h3 class="text-xl font-semibold">Data Analyst</h3>
                                 <p class="text-md" style="color: var(--brown);">Code Auto Tools</p>
-                                <p class="text-sm" style="color: var(--tan);">Los Angeles, US</p>
-                                <p class="text-sm" style="color: var(--tan);">Sep 2023 - Present</p>
+                                <p class="text-sm" style="color: var(--brown);">Los Angeles, US</p>
+                                <p class="text-sm" style="color: var(--brown);">Sep 2023 - Present</p>
                             </div>
                             <div class="timeline-details md:col-span-9">
                                 <div class="job-category">Inventory & Sales Data Analysis:</div>
@@ -276,8 +290,8 @@
                             <div class="md:text-right md:col-span-3 mb-4 md:mb-0">
                                 <h3 class="text-xl font-semibold">Database Administrator and Operations Analyst</h3>
                                 <p class="text-md" style="color: var(--brown);">China United Transportation Corp</p>
-                                <p class="text-sm" style="color: var(--tan);">Los Angeles, US</p>
-                                <p class="text-sm" style="color: var(--tan);">Feb 2021 - Aug 2023</p>
+                                <p class="text-sm" style="color: var(--brown);">Los Angeles, US</p>
+                                <p class="text-sm" style="color: var(--brown);">Feb 2021 - Aug 2023</p>
                             </div>
                             <div class="timeline-details md:col-span-9">
                                 <div class="job-category">Transportation Operations Analysis & Efficiency Optimization:
@@ -313,8 +327,8 @@
                             <div class="md:text-right md:col-span-3 mb-4 md:mb-0">
                                 <h3 class="text-xl font-semibold">Frontend Development Intern</h3>
                                 <p class="text-md" style="color: var(--brown);">DiDi Global Inc.</p>
-                                <p class="text-sm" style="color: var(--tan);">Beijing, China</p>
-                                <p class="text-sm" style="color: var(--tan);">Jun 2019 - Aug 2019</p>
+                                <p class="text-sm" style="color: var(--brown);">Beijing, China</p>
+                                <p class="text-sm" style="color: var(--brown);">Jun 2019 - Aug 2019</p>
                             </div>
                             <div class="timeline-details md:col-span-9">
                                 <div class="job-category">Automated Website Performance Monitoring Platform Development
@@ -358,8 +372,8 @@
                 <h2 class="text-3xl font-bold">Education</h2>
                 <p class="subtitle mt-2">Solid academic foundation, laying theoretical groundwork for practice.</p>
             </div>
-            <div class="max-w-6xl mx-auto reveal">
-                <div class="timeline-container">
+            <div class="max-w-6xl mx-auto">
+                <div class="timeline-container reveal stagger-children">
                     <div class="timeline-item">
                         <div class="education-entry">
                             <div class="education-header">
@@ -405,9 +419,9 @@
                 <h2 class="text-3xl font-bold">Featured Projects</h2>
                 <p class="subtitle mt-2">Each project is a journey of exploration and discovery.</p>
             </div>
-            <div class="bento-grid">
+            <div class="bento-grid reveal stagger-children">
                 <!-- Large Project -->
-                <a href="#" class="bento-item reveal" data-grid-col="8" data-grid-row="2">
+                <a href="#" class="bento-item" data-grid-col="8" data-grid-row="2">
                     <div class="bento-content">
                         <div class="flex-grow">
                             <div class="flex justify-between items-start">
@@ -427,7 +441,7 @@
                     <div class="number-decoration">01</div>
                 </a>
                 <!-- Medium Project -->
-                <a href="#" class="bento-item reveal" data-grid-col="4" data-grid-row="2">
+                <a href="#" class="bento-item" data-grid-col="4" data-grid-row="2">
                     <div class="bento-content">
                         <div class="flex-grow">
                             <span class="bento-tag">Machine Learning</span>
@@ -446,7 +460,7 @@
                 </a>
                 <!-- Small Projects -->
                 <a href="projects/Bank Customer Churn Prediction/Bank Customer Churn Prediction-en.html"
-                    class="bento-item reveal" data-grid-col="4">
+                    class="bento-item" data-grid-col="4">
                     <div class="bento-content">
                         <div class="flex-grow">
                             <div class="flex justify-between items-start">
@@ -464,7 +478,7 @@
                     <div class="number-decoration">03</div>
                 </a>
                 <a href="projects/e-commerce fraud detection/e-commerce fraud detection-en.html"
-                    class="bento-item reveal" data-grid-col="4">
+                    class="bento-item" data-grid-col="4">
                     <div class="bento-content">
                         <div class="flex-grow">
                             <div class="flex justify-between items-start">
@@ -482,7 +496,7 @@
                     <div class="number-decoration">04</div>
                 </a>
                 <a href="projects/lending hub loan prediction/lending hub loan prediction-en.html"
-                    class="bento-item reveal" data-grid-col="4">
+                    class="bento-item" data-grid-col="4">
                     <div class="bento-content">
                         <div class="flex-grow">
                             <div class="flex justify-between items-start">
@@ -513,22 +527,37 @@
                 <h2 class="text-3xl font-bold">My Toolkit</h2>
                 <p class="subtitle mt-2">Continuously refined skills are my tools for solving problems.</p>
             </div>
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 reveal">
-                <div class="skill-card"><i data-lucide="database" class="mx-auto mb-2"></i> SQL</div>
-                <div class="skill-card"><i data-lucide="code" class="mx-auto mb-2"></i> Python</div>
-                <div class="skill-card"><i data-lucide="code" class="mx-auto mb-2"></i> R</div>
-                <div class="skill-card"><i data-lucide="server" class="mx-auto mb-2"></i> Apache Spark</div>
-                <div class="skill-card"><i data-lucide="bar-chart-3" class="mx-auto mb-2"></i> Tableau</div>
-                <div class="skill-card"><i data-lucide="scatter-chart" class="mx-auto mb-2"></i> Power BI</div>
-                <div class="skill-card"><i data-lucide="brain-circuit" class="mx-auto mb-2"></i> Scikit-learn</div>
-                <div class="skill-card"><i data-lucide="test-tubes" class="mx-auto mb-2"></i> A/B Testing</div>
-                <div class="skill-card"><i data-lucide="area-chart" class="mx-auto mb-2"></i> Pandas</div>
-                <div class="skill-card"><i data-lucide="cpu" class="mx-auto mb-2"></i> NumPy</div>
-                <div class="skill-card"><i data-lucide="trending-up" class="mx-auto mb-2"></i> Matplotlib/Seaborn</div>
-                <div class="skill-card"><i data-lucide="network" class="mx-auto mb-2"></i> TensorFlow</div>
-                <div class="skill-card"><i data-lucide="git-branch" class="mx-auto mb-2"></i> Git</div>
-                <div class="skill-card"><i data-lucide="activity" class="mx-auto mb-2"></i> ARIMA</div>
-                <div class="skill-card"><i data-lucide="search" class="mx-auto mb-2"></i> Machine Learning</div>
+            <div class="skills-groups reveal stagger-children">
+                <div class="skill-group">
+                    <h3 class="skill-group-title">Analysis Methods</h3>
+                    <ul class="skill-chips" role="list">
+                        <li class="skill-chip">A/B Testing</li>
+                        <li class="skill-chip">ARIMA</li>
+                        <li class="skill-chip">Machine Learning</li>
+                        <li class="skill-chip">Scikit-learn</li>
+                        <li class="skill-chip">TensorFlow</li>
+                    </ul>
+                </div>
+                <div class="skill-group">
+                    <h3 class="skill-group-title">Data & Engineering</h3>
+                    <ul class="skill-chips" role="list">
+                        <li class="skill-chip">SQL</li>
+                        <li class="skill-chip">Python</li>
+                        <li class="skill-chip">R</li>
+                        <li class="skill-chip">Apache Spark</li>
+                        <li class="skill-chip">Pandas</li>
+                        <li class="skill-chip">NumPy</li>
+                        <li class="skill-chip">Git</li>
+                    </ul>
+                </div>
+                <div class="skill-group">
+                    <h3 class="skill-group-title">Visualization & BI</h3>
+                    <ul class="skill-chips" role="list">
+                        <li class="skill-chip">Tableau</li>
+                        <li class="skill-chip">Power BI</li>
+                        <li class="skill-chip">Matplotlib / Seaborn</li>
+                    </ul>
+                </div>
             </div>
         </section>
 
@@ -549,7 +578,6 @@
                 <div class="mt-12 flex justify-center space-x-6">
                     <a href="#" class="text-link">GitHub</a>
                     <a href="#" class="text-link">LinkedIn</a>
-                    <a href="#" class="text-link">Blog</a>
                 </div>
             </div>
         </section>
@@ -557,7 +585,7 @@
 
     <!-- 7. Footer -->
     <footer class="container-main py-8 mt-12 border-t border-beige text-center text-sm" style="color: var(--brown);">
-        <p>&copy; 2025 Juye Xiao. All Rights Reserved.</p>
+        <p>&copy; 2026 Juye Xiao. All Rights Reserved.</p>
     </footer>
 
     <!-- Logo Animation JavaScript -->

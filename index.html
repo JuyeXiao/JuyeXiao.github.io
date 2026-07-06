@@ -2,6 +2,7 @@
 <html lang="zh-CN" class="light">
 
 <head>
+    <script>document.documentElement.classList.add('js');</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>数据分析师作品集</title>
@@ -17,7 +18,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+SC:wght@400;500;600&family=Noto+Serif+SC:wght@500&display=swap"
         rel="stylesheet">
 
     <!-- 引入图标库 -->
@@ -77,15 +78,28 @@
                 <a href="#contact" class="nav-link">联系</a>
             </nav>
             <div class="flex items-center space-x-4">
-                <button id="theme-toggle" class="btn-secondary !p-2 !rounded-full">
+                <button id="theme-toggle" class="btn-secondary !p-2 !rounded-full" aria-label="切换主题">
                     <i data-lucide="sun" class="block dark:hidden"></i>
                     <i data-lucide="moon" class="hidden dark:block"></i>
                 </button>
                 <button id="lang-toggle" class="btn-secondary !p-2 !rounded-full">
                     <span class="font-bold text-sm">EN</span>
                 </button>
+                <button id="menu-toggle" class="btn-secondary !p-2 !rounded-full md:hidden"
+                    aria-label="打开菜单" aria-expanded="false" aria-controls="mobile-menu">
+                    <i data-lucide="menu" class="menu-icon-open"></i>
+                    <i data-lucide="x" class="menu-icon-close"></i>
+                </button>
             </div>
         </div>
+        <nav id="mobile-menu" class="mobile-menu md:hidden" aria-label="移动端导航">
+            <a href="#about" class="nav-link">关于</a>
+            <a href="#experience" class="nav-link">经历</a>
+            <a href="#education" class="nav-link">教育</a>
+            <a href="#projects" class="nav-link">项目</a>
+            <a href="#skills" class="nav-link">技能</a>
+            <a href="#contact" class="nav-link">联系</a>
+        </nav>
     </header>
 
     <main class="container-main">
@@ -106,24 +120,24 @@
             <div class="hero-inner">
             <div class="grid gap-16 items-center hero-grid w-full">
                 <!-- 左栏:文字 + CTA -->
-                <div class="reveal">
-                    <span class="font-semibold text-lg" style="color: var(--coral);">高级数据分析师</span>
-                    <h1 class="mt-2" style="font-size: var(--text-5xl);">你好，我是肖炬晔</h1>
-                    <p class="subtitle mt-4 max-w-lg">哥伦比亚大学应用分析硕士，拥有近4年数据分析及数据库管理经验，专注于运用SQL、Python及Apache
+                <div>
+                    <span class="font-semibold text-lg hero-enter" style="color: var(--coral);">高级数据分析师</span>
+                    <h1 class="hero-title mt-2 hero-enter hero-enter-d1">你好，我是<span class="whitespace-nowrap">肖炬晔</span></h1>
+                    <p class="subtitle mt-4 max-w-lg hero-enter hero-enter-d2">哥伦比亚大学应用分析硕士，拥有近4年数据分析及数据库管理经验，专注于运用SQL、Python及Apache
                         Spark进行深度数据洞察与价值创造。在库存与销售分析、A/B测试优化、气候风险分析等项目中积累丰富经验，致力于通过数据驱动的商业洞见创造实际价值。</p>
 
-                    <div class="mt-6 max-w-lg flex items-center gap-4">
+                    <div class="mt-6 max-w-lg flex items-center gap-4 hero-enter hero-enter-d3">
                         <a href="#contact" class="btn btn-primary">联系我</a>
-                        <a href="#" class="btn btn-secondary">下载简历</a>
+                        <a href="肖炬晔简历.pdf" target="_blank" rel="noopener" class="btn btn-secondary">下载简历</a>
                     </div>
                 </div>
 
                 <!-- 右栏:Now 信息卡 -->
-                <div class="hero-visual reveal">
+                <div class="hero-visual hero-enter hero-enter-d4">
                     <article class="now-card" aria-label="当前状态">
                         <header class="now-header">
                             <span class="now-eyebrow">Now</span>
-                            <span class="now-meta">2026 · 5月</span>
+                            <span class="now-meta">2026 · 7月</span>
                         </header>
 
                         <div class="now-body">
@@ -163,8 +177,8 @@
 
                         <footer class="now-footer">
                             <hr class="now-divider">
-                            <a class="now-email" href="mailto:vincentxiao1998@gmail.com">
-                                <span>vincentxiao1998@gmail.com</span>
+                            <a class="now-email" href="mailto:jx2479@columbia.edu">
+                                <span>jx2479@columbia.edu</span>
                                 <span class="now-email-arrow" aria-hidden="true">→</span>
                             </a>
                         </footer>
@@ -178,7 +192,7 @@
         <section id="about" class="section-padding about-after-hero">
             <div class="grid md:grid-cols-12 gap-12 items-stretch max-w-6xl mx-auto reveal">
                 <figure class="about-portrait hidden md:block md:col-span-5">
-                    <img src="assets/img/about-portrait.jpg" alt="" loading="lazy">
+                    <img src="assets/img/about-portrait.jpg" alt="肖炬晔个人照片" loading="lazy">
                 </figure>
                 <div class="md:col-span-7 about-copy">
                     <h2 class="text-3xl font-bold">理性与感性的融合</h2>
@@ -203,15 +217,15 @@
                 <h2 class="text-3xl font-bold">工作经历</h2>
                 <p class="subtitle mt-2">在实践中成长，用数据创造价值。</p>
             </div>
-            <div class="max-w-6xl mx-auto reveal">
-                <div class="timeline-container">
+            <div class="max-w-6xl mx-auto">
+                <div class="timeline-container reveal stagger-children">
                     <div class="timeline-item">
                         <div class="grid md:grid-cols-12 gap-x-8">
                             <div class="md:text-right md:col-span-3 mb-4 md:mb-0">
                                 <h3 class="text-xl font-semibold">数据分析师</h3>
                                 <p class="text-md" style="color: var(--brown);">Code Auto Tools</p>
-                                <p class="text-sm" style="color: var(--tan);">美国·洛杉矶</p>
-                                <p class="text-sm" style="color: var(--tan);">2023.09 - 至今</p>
+                                <p class="text-sm" style="color: var(--brown);">美国·洛杉矶</p>
+                                <p class="text-sm" style="color: var(--brown);">2023.09 - 至今</p>
                             </div>
                             <div class="timeline-details md:col-span-9">
                                 <div class="job-category">库存与销售数据分析：</div>
@@ -245,8 +259,8 @@
                             <div class="md:text-right md:col-span-3 mb-4 md:mb-0">
                                 <h3 class="text-xl font-semibold">数据库管理与运营分析专员</h3>
                                 <p class="text-md" style="color: var(--brown);">China United Transportation Corp</p>
-                                <p class="text-sm" style="color: var(--tan);">美国·洛杉矶</p>
-                                <p class="text-sm" style="color: var(--tan);">2021.02 - 2023.08</p>
+                                <p class="text-sm" style="color: var(--brown);">美国·洛杉矶</p>
+                                <p class="text-sm" style="color: var(--brown);">2021.02 - 2023.08</p>
                             </div>
                             <div class="timeline-details md:col-span-9">
                                 <div class="job-category">运输运营数据分析与效率提升：</div>
@@ -270,8 +284,8 @@
                             <div class="md:text-right md:col-span-3 mb-4 md:mb-0">
                                 <h3 class="text-xl font-semibold">前端开发实习生</h3>
                                 <p class="text-md" style="color: var(--brown);">滴滴出行</p>
-                                <p class="text-sm" style="color: var(--tan);">中国·北京</p>
-                                <p class="text-sm" style="color: var(--tan);">2019.06 - 2019.08</p>
+                                <p class="text-sm" style="color: var(--brown);">中国·北京</p>
+                                <p class="text-sm" style="color: var(--brown);">2019.06 - 2019.08</p>
                             </div>
                             <div class="timeline-details md:col-span-9">
                                 <div class="job-category">自动化网站性能监控平台开发与数据分析：</div>
@@ -304,8 +318,8 @@
                 <h2 class="text-3xl font-bold">教育背景</h2>
                 <p class="subtitle mt-2">扎实的学术基础，为实践奠定理论根基。</p>
             </div>
-            <div class="max-w-6xl mx-auto reveal">
-                <div class="timeline-container">
+            <div class="max-w-6xl mx-auto">
+                <div class="timeline-container reveal stagger-children">
                     <div class="timeline-item">
                         <div class="education-entry">
                             <div class="education-header">
@@ -350,9 +364,9 @@
                 <h2 class="text-3xl font-bold">精选项目</h2>
                 <p class="subtitle mt-2">每个项目都是一次探索与发现之旅。</p>
             </div>
-            <div class="bento-grid">
+            <div class="bento-grid reveal stagger-children">
                 <!-- 大项目 -->
-                <a href="#" class="bento-item reveal" data-grid-col="8" data-grid-row="2">
+                <a href="#" class="bento-item" data-grid-col="8" data-grid-row="2">
                     <div class="bento-content">
                         <div class="flex-grow">
                             <div class="flex justify-between items-start">
@@ -370,7 +384,7 @@
                     <div class="number-decoration">01</div>
                 </a>
                 <!-- 中项目 -->
-                <a href="#" class="bento-item reveal" data-grid-col="4" data-grid-row="2">
+                <a href="#" class="bento-item" data-grid-col="4" data-grid-row="2">
                     <div class="bento-content">
                         <div class="flex-grow">
                             <span class="bento-tag">机器学习</span>
@@ -387,7 +401,7 @@
                 </a>
                 <!-- 小项目 -->
                 <a href="projects/Bank Customer Churn Prediction/Bank Customer Churn Prediction.html"
-                    class="bento-item reveal" data-grid-col="4">
+                    class="bento-item" data-grid-col="4">
                     <div class="bento-content">
                         <div class="flex-grow">
                             <div class="flex justify-between items-start">
@@ -403,7 +417,7 @@
                     </div>
                     <div class="number-decoration">03</div>
                 </a>
-                <a href="projects/e-commerce fraud detection/e-commerce fraud detection.html" class="bento-item reveal"
+                <a href="projects/e-commerce fraud detection/e-commerce fraud detection.html" class="bento-item"
                     data-grid-col="4">
                     <div class="bento-content">
                         <div class="flex-grow">
@@ -421,7 +435,7 @@
                     <div class="number-decoration">04</div>
                 </a>
                 <a href="projects/lending hub loan prediction/lending hub loan prediction.html"
-                    class="bento-item reveal" data-grid-col="4">
+                    class="bento-item" data-grid-col="4">
                     <div class="bento-content">
                         <div class="flex-grow">
                             <div class="flex justify-between items-start">
@@ -451,22 +465,37 @@
                 <h2 class="text-3xl font-bold">我的工具箱</h2>
                 <p class="subtitle mt-2">不断打磨的技能，是我解决问题的利器。</p>
             </div>
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 reveal">
-                <div class="skill-card"><i data-lucide="database" class="mx-auto mb-2"></i> SQL</div>
-                <div class="skill-card"><i data-lucide="code" class="mx-auto mb-2"></i> Python</div>
-                <div class="skill-card"><i data-lucide="code" class="mx-auto mb-2"></i> R</div>
-                <div class="skill-card"><i data-lucide="server" class="mx-auto mb-2"></i> Apache Spark</div>
-                <div class="skill-card"><i data-lucide="bar-chart-3" class="mx-auto mb-2"></i> Tableau</div>
-                <div class="skill-card"><i data-lucide="scatter-chart" class="mx-auto mb-2"></i> Power BI</div>
-                <div class="skill-card"><i data-lucide="brain-circuit" class="mx-auto mb-2"></i> Scikit-learn</div>
-                <div class="skill-card"><i data-lucide="test-tubes" class="mx-auto mb-2"></i> A/B Testing</div>
-                <div class="skill-card"><i data-lucide="area-chart" class="mx-auto mb-2"></i> Pandas</div>
-                <div class="skill-card"><i data-lucide="cpu" class="mx-auto mb-2"></i> NumPy</div>
-                <div class="skill-card"><i data-lucide="trending-up" class="mx-auto mb-2"></i> Matplotlib/Seaborn</div>
-                <div class="skill-card"><i data-lucide="network" class="mx-auto mb-2"></i> TensorFlow</div>
-                <div class="skill-card"><i data-lucide="git-branch" class="mx-auto mb-2"></i> Git</div>
-                <div class="skill-card"><i data-lucide="activity" class="mx-auto mb-2"></i> ARIMA</div>
-                <div class="skill-card"><i data-lucide="search" class="mx-auto mb-2"></i> 机器学习</div>
+            <div class="skills-groups reveal stagger-children">
+                <div class="skill-group">
+                    <h3 class="skill-group-title">分析方法</h3>
+                    <ul class="skill-chips" role="list">
+                        <li class="skill-chip">A/B Testing</li>
+                        <li class="skill-chip">ARIMA</li>
+                        <li class="skill-chip">机器学习</li>
+                        <li class="skill-chip">Scikit-learn</li>
+                        <li class="skill-chip">TensorFlow</li>
+                    </ul>
+                </div>
+                <div class="skill-group">
+                    <h3 class="skill-group-title">数据与工程</h3>
+                    <ul class="skill-chips" role="list">
+                        <li class="skill-chip">SQL</li>
+                        <li class="skill-chip">Python</li>
+                        <li class="skill-chip">R</li>
+                        <li class="skill-chip">Apache Spark</li>
+                        <li class="skill-chip">Pandas</li>
+                        <li class="skill-chip">NumPy</li>
+                        <li class="skill-chip">Git</li>
+                    </ul>
+                </div>
+                <div class="skill-group">
+                    <h3 class="skill-group-title">可视化与 BI</h3>
+                    <ul class="skill-chips" role="list">
+                        <li class="skill-chip">Tableau</li>
+                        <li class="skill-chip">Power BI</li>
+                        <li class="skill-chip">Matplotlib / Seaborn</li>
+                    </ul>
+                </div>
             </div>
         </section>
 
@@ -486,7 +515,6 @@
                 <div class="mt-12 flex justify-center space-x-6">
                     <a href="#" class="text-link">GitHub</a>
                     <a href="#" class="text-link">LinkedIn</a>
-                    <a href="#" class="text-link">博客</a>
                 </div>
             </div>
         </section>
@@ -494,7 +522,7 @@
 
     <!-- 7. 页脚 -->
     <footer class="container-main py-8 mt-12 border-t border-beige text-center text-sm" style="color: var(--brown);">
-        <p>&copy; 2025 肖炬晔. All Rights Reserved.</p>
+        <p>&copy; 2026 肖炬晔. All Rights Reserved.</p>
     </footer>
 
     <!-- 引入Logo动画JavaScript -->

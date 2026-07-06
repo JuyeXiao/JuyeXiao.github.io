@@ -69,7 +69,7 @@
 
 .contact-input::placeholder {
   color: var(--brown);
-  opacity: 0.7;
+  opacity: 1;
 }
 
 .btn-contact-primary {
@@ -104,6 +104,39 @@
 .btn-contact-secondary:hover {
   border-color: var(--dark);
   background: rgba(44, 36, 22, 0.05);
+}
+
+/* 按压反馈（禁用/加载态除外） */
+.btn-contact-primary:active:not(:disabled):not(.is-loading),
+.btn-contact-secondary:active {
+  transform: translateY(0) scale(0.97);
+  transition-duration: var(--duration-fast);
+}
+
+/* 提交按钮加载/禁用状态 */
+.btn-contact-primary:disabled,
+.btn-contact-primary.is-loading {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+.btn-contact-primary:disabled:hover,
+.btn-contact-primary.is-loading:hover {
+  background: var(--dark);
+  transform: none;
+}
+
+/* 蜜罐字段：视觉隐藏但仍随表单提交 */
+.hp-field {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 /* 联系信息卡片 */

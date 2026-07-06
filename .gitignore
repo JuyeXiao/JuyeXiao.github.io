@@ -41,3 +41,5 @@ CLAUDE.md
 
 # MCP/工具运行时产物
 .playwright-mcp/
+# impeccable 设计工具产物（审计快照/live 配置），非站点内容
+.impeccable/

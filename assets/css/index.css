@@ -3,8 +3,8 @@
     /* 1. 色彩系统 - 浅色模式 (温暖米色系) */
     --cream:    #FAF7F2;  /* 奶油白 - 主背景 */
     --beige:    #E8DFD3;  /* 米色 - 次要背景 */
-    --tan:      #D4C4B0;  /* 浅棕 - 边框、分隔线 */
-    --brown:    #8B7355;  /* 棕色 - 次要文字 */
+    --tan:      #D4C4B0;  /* 浅棕 - 边框、分隔线（仅装饰，不作文字色） */
+    --brown:    #6B5942;  /* 棕色 - 次要文字（cream 上 6.27:1 / beige 上 5.08:1，过 WCAG AA） */
     --dark:     #2C2416;  /* 深棕 - 主要文字 */
     --charcoal: #1A1612;  /* 炭色 - 特殊强调 */
 
@@ -15,8 +15,8 @@
     --gold:     #D4A574;
     
     /* 2. 字体系统 */
-    --font-primary: 'Inter', -apple-system, sans-serif;
-    --font-chinese: 'PingFang SC', 'Noto Sans SC', sans-serif;
+    --font-primary: 'Inter', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', -apple-system, sans-serif;
+    --font-chinese: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif; /* 兼容保留 */
     --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
     --font-display: 'Fraunces', 'Noto Serif SC', 'Songti SC', Georgia, serif;
 
@@ -54,7 +54,7 @@ html.dark {
     --cream:    #171717;
     --beige:    #262626;
     --tan:      #404040;
-    --brown:    #737373;
+    --brown:    #9A9A9A;  /* #171717 上 6.37:1，过 WCAG AA */
     --dark:     #E5E5E5;
     --charcoal: #FAFAFA;
     
@@ -69,7 +69,7 @@ html.dark {
 body {
     background-color: var(--cream);
     color: var(--dark);
-    font-family: var(--font-primary), var(--font-chinese);
+    font-family: var(--font-primary);
     font-size: 1rem;
     line-height: 1.7;
     -webkit-font-smoothing: antialiased;
@@ -81,15 +81,30 @@ body {
 html { scroll-behavior: smooth; }
 section[id] { scroll-margin-top: 88px; }
 
+/* 键盘焦点环（跟随导航强调色） */
+:focus-visible {
+    outline: 2px solid var(--coral);
+    outline-offset: 2px;
+}
+html.dark :focus-visible { outline-color: var(--gold); }
+
 
 h1, h2, h3 {
-    font-weight: 600;
     line-height: 1.2;
     color: var(--charcoal);
 }
+/* body 前缀提升特异性：Tailwind CDN 的 preflight（h1{font-weight:inherit}）注入在 link 之后 */
+body h1, body h2 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: -0.005em;
+}
+h3 { font-weight: 600; }
 h1 { font-size: 3.052rem; }
 h2 { font-size: 2.441rem; }
 h3 { font-size: 1.953rem; }
+/* 页面 h2 多带 Tailwind .font-bold(700)，衬线 700 未加载：元素+类特异性压回 500 */
+h1.font-bold, h2.font-bold { font-weight: 500; }
 .subtitle { font-size: 1.25rem; color: var(--brown); }
 .section-header {
     margin-bottom: var(--space-lg);
@@ -368,6 +383,39 @@ html.dark .nav-link:hover,
 html.dark .nav-link.active { color: var(--gold); }
 html.dark .nav-link::after { background-color: var(--gold); }
 
+/* --- 移动端菜单 --- */
+.mobile-menu {
+    display: none;
+    position: absolute; /* header 为 fixed，面板贴在 72px 导航栏下缘 */
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    padding: 8px var(--space-md) 16px;
+    background: var(--cream);
+    border-bottom: 1px solid var(--beige);
+    box-shadow: 0 16px 32px rgba(44, 36, 22, 0.08);
+}
+.navbar.menu-open .mobile-menu {
+    display: flex;
+    animation: menu-down 200ms var(--ease-out);
+}
+@keyframes menu-down {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+.mobile-menu .nav-link {
+    padding: 12px 4px;
+    font-size: 1.05rem;
+    border-bottom: 1px solid var(--beige);
+}
+.mobile-menu .nav-link:last-child { border-bottom: none; }
+.mobile-menu .nav-link::after { display: none; } /* 居中下划线在列表里不适用 */
+
+#menu-toggle .menu-icon-close { display: none; }
+.navbar.menu-open #menu-toggle .menu-icon-open  { display: none; }
+.navbar.menu-open #menu-toggle .menu-icon-close { display: block; }
+
 /* 按钮系统 */
 .btn {
     display: inline-flex;
@@ -398,9 +446,16 @@ html.dark .nav-link::after { background-color: var(--gold); }
     background: rgba(0,0,0,0.02);
 }
 
+/* 按压反馈：快速缩小，松手回弹（覆盖 .btn 和导航圆形小按钮） */
+.btn:active,
+.btn-secondary:active {
+    transform: translateY(0) scale(0.97);
+    transition-duration: var(--duration-fast);
+}
+
 /* 语言切换按钮文字悬停效果 */
 #lang-toggle span {
-    transition: color var(--transition);
+    transition: color var(--duration-normal) var(--ease-out);
 }
 
 #lang-toggle:hover span {
@@ -473,6 +528,11 @@ html.dark #theme-toggle.spinning { color: var(--coral); }
     box-shadow: 0 16px 32px rgba(44, 36, 22, 0.1);
     border-color: var(--coral);
 }
+/* 触屏点按也有反馈（hover 不适用时） */
+.bento-item:active {
+    transform: translateY(-2px) scale(0.995);
+    transition-duration: var(--duration-fast);
+}
 html.dark .bento-item {
     background-color: var(--beige);
     border-color: var(--tan);
@@ -516,7 +576,7 @@ html.dark .bento-item .number-decoration {
 }
 .bento-tag {
     background-color: rgba(44, 36, 22, 0.1);
-    color: var(--brown);
+    color: var(--dark);
     padding: 4px 12px;
     border-radius: 99px;
     font-size: 0.75rem;
@@ -526,19 +586,52 @@ html.dark .bento-tag {
     background-color: rgba(255, 255, 255, 0.1);
 }
 
-/* 技能卡片 */
-.skill-card {
-    background-color: var(--cream);
-    border: 2px solid var(--beige);
-    padding: var(--space-sm);
-    border-radius: 12px;
-    transition: var(--transition);
-    text-align: center;
+/* 技能分组（分组标签式排版） */
+.skills-groups {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
 }
-.skill-card:hover {
-    transform: scale(1.05);
-    background-color: var(--beige);
+@media (min-width: 768px) {
+    .skills-groups {
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--space-lg);
+    }
+}
+.skill-group {
+    border-top: 1px solid var(--tan);
+    padding-top: var(--space-sm);
+}
+.skill-group-title {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--brown);
+    margin-bottom: var(--space-sm);
+}
+.skill-chips {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.skill-chip {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--dark);
+    background: var(--cream);
+    border: 1px solid var(--beige);
+    border-radius: 999px;
+    padding: 6px 14px;
+    transition: var(--transition);
+}
+.skill-chip:hover {
     border-color: var(--tan);
+    background: var(--beige);
 }
 
 /* 数据诗句 */
@@ -558,7 +651,9 @@ html.dark .bento-tag {
 
 /* 渐变装饰球 */
 .gradient-orb {
-    position: absolute;
+    /* fixed：氛围光晕锚定视口，且不计入文档 scrollWidth，
+       避免右下角负偏移的 orb 在真机上撑出横向溢出（把导航推出屏幕） */
+    position: fixed;
     pointer-events: none;
     width: 500px;
     height: 500px;
@@ -611,7 +706,7 @@ html.dark .gradient-orb { opacity: 0.15; }
 
 .education-date {
     font-size: 0.9rem;
-    color: var(--tan);
+    color: var(--brown);
     font-weight: 500;
     white-space: nowrap;
 }
@@ -625,7 +720,7 @@ html.dark .gradient-orb { opacity: 0.15; }
 
 .education-location {
     font-size: 0.875rem;
-    color: var(--tan);
+    color: var(--brown);
     margin-bottom: 12px;
 }
 
@@ -657,11 +752,13 @@ html.dark .gradient-orb { opacity: 0.15; }
     border-color: var(--coral);
     transform: scale(1.1);
 }
+.timeline-details { max-width: 72ch; } /* 控制行宽在可读范围（约 36 个汉字） */
 .timeline-details ul {
     list-style-type: disc;
     padding-left: var(--space-sm);
     color: var(--brown);
 }
+.timeline-details li + li { margin-top: 0.4rem; }
 
 /* 工作经历小标题样式 */
 .job-category {
@@ -677,7 +774,7 @@ html.dark .gradient-orb { opacity: 0.15; }
 }
 
 .timeline-details ul + .job-category {
-    margin-top: 1.5rem;
+    margin-top: 2rem;
 }
 
 /* 关于我 左侧人像图 */
@@ -718,15 +815,35 @@ html.dark .about-portrait img {
 }
 
 /* --- 动画 --- */
-.reveal {
+/* 基态隐藏仅在 JS 就绪（html.js）时生效：无 JS 环境内容保持可见 */
+html.js .reveal {
     opacity: 0;
     transform: translateY(30px);
     transition: opacity var(--duration-slow) var(--ease-out), transform var(--duration-slow) var(--ease-out);
 }
-.reveal.visible {
+html.js .reveal.visible {
     opacity: 1;
     transform: translateY(0);
 }
+
+/* 父级触发、子项级联出现 */
+html.js .reveal.stagger-children {
+    opacity: 1;
+    transform: none;
+}
+html.js .reveal.stagger-children > * {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity var(--duration-slow) var(--ease-out), transform var(--duration-slow) var(--ease-out);
+}
+html.js .reveal.stagger-children.visible > * {
+    opacity: 1;
+    transform: translateY(0);
+}
+.reveal.stagger-children.visible > *:nth-child(2) { transition-delay: 90ms; }
+.reveal.stagger-children.visible > *:nth-child(3) { transition-delay: 180ms; }
+.reveal.stagger-children.visible > *:nth-child(4) { transition-delay: 270ms; }
+.reveal.stagger-children.visible > *:nth-child(n+5) { transition-delay: 360ms; }
 
 /* 章节分隔线 */
 .section-divider {
@@ -939,6 +1056,26 @@ html.dark .hero-backdrop-veil {
     }
 }
 
+/* --- 3.5 Hero 标题流式缩放 + 入场编排 --- */
+/* 作用域限定 #hero：project.css 已占用 .hero-title 裸类名 */
+#hero .hero-title {
+    font-size: clamp(2.4rem, 5vw + 1rem, var(--text-5xl));
+    text-wrap: balance;
+}
+
+@keyframes hero-rise {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+html.js .hero-enter {
+    opacity: 0;
+    animation: hero-rise 560ms var(--ease-out) both; /* both：延迟期间保持隐藏态 */
+}
+html.js .hero-enter-d1 { animation-delay: 90ms; }
+html.js .hero-enter-d2 { animation-delay: 180ms; }
+html.js .hero-enter-d3 { animation-delay: 270ms; }
+html.js .hero-enter-d4 { animation-delay: 380ms; }
+
 /* --- 4. Now card right-column wrapper --- */
 
 .hero-visual {
@@ -1004,7 +1141,7 @@ html.dark .now-card {
     font-family: var(--font-mono);
     font-size: 10px;
     letter-spacing: 0.1em;
-    color: var(--tan);
+    color: var(--brown);
 }
 .now-divider {
     border: none;
@@ -1121,9 +1258,15 @@ html.dark .now-card {
     .now-card { padding: 26px 22px 20px; }
 }
 
+/* --- 全局减动效降级 --- */
 @media (prefers-reduced-motion: reduce) {
-    .now-status-dot::after {
-        animation: none !important;
-        opacity: 0 !important;
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-delay: 0s !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        transition-delay: 0s !important;
     }
+    .now-status-dot::after { opacity: 0 !important; }
 }

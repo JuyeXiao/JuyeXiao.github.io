@@ -714,6 +714,15 @@ html.dark .content-area tr[class*="bg-green-"] td.font-bold {
   line-height: 1.75;
 }
 
+/* 收紧「摘要区 → 正文区」的过渡带（三层 section padding 叠加过松） */
+#quick-summary.section-padding,
+#executive-summary.section-padding {
+  padding-bottom: var(--space-md);
+}
+#content.section-padding {
+  padding-top: var(--space-md);
+}
+
 /* 响应式 */
 @media (max-width: 768px) {
   .summary-card {

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" class="light">
 <head>
+  <script>document.documentElement.classList.add('js');</script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Proactive Fraud Detection for First-Time E-commerce Transactions - Data Poetics</title>
@@ -10,7 +11,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+SC:wght@400;500;600&family=Noto+Serif+SC:wght@500&display=swap" rel="stylesheet" />
   <script src="https://unpkg.com/lucide-react/dist/umd/lucide-react.js"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <link rel="stylesheet" href="../../assets/css/index.css" />
@@ -27,7 +28,7 @@
   <header id="navbar" class="navbar fixed top-0 left-0 right-0 z-50">
     <div class="container-main h-full flex items-center justify-between">
       <!-- Logo (jumps back to homepage Hero with animation) -->
-      <a href="../../index.html#hero" class="navbar-logo" id="navbar-logo">
+      <a href="../../index-en.html#hero" class="navbar-logo" id="navbar-logo">
         <svg class="logo-svg-nav" viewBox="0 0 40 40">
           <g class="grid-bg">
             <line class="grid-line-v" x1="8" y1="0" x2="8" y2="40" style="animation-delay: 0.1s, 0s" />
@@ -49,12 +50,12 @@
 
       <!-- In-page navigation (jumping to corresponding anchors on homepage) -->
       <nav class="hidden md:flex items-center space-x-8">
-        <a href="../../index.html#about" class="nav-link">About</a>
-        <a href="../../index.html#experience" class="nav-link">Experience</a>
-        <a href="../../index.html#education" class="nav-link">Education</a>
-        <a href="../../index.html#projects" class="nav-link">Projects</a>
-        <a href="../../index.html#skills" class="nav-link">Skills</a>
-        <a href="../../index.html#contact" class="nav-link">Contact</a>
+        <a href="../../index-en.html#about" class="nav-link">About</a>
+        <a href="../../index-en.html#experience" class="nav-link">Experience</a>
+        <a href="../../index-en.html#education" class="nav-link">Education</a>
+        <a href="../../index-en.html#projects" class="nav-link">Projects</a>
+        <a href="../../index-en.html#skills" class="nav-link">Skills</a>
+        <a href="../../index-en.html#contact" class="nav-link">Contact</a>
       </nav>
 
       <div class="flex items-center space-x-4">
@@ -63,8 +64,21 @@
           <i data-lucide="moon" class="hidden dark:block"></i>
         </button>
         <button id="lang-toggle" class="btn-secondary !p-2 !rounded-full"><span class="font-bold text-sm">中</span></button>
+        <button id="menu-toggle" class="btn-secondary !p-2 !rounded-full md:hidden"
+          aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+          <i data-lucide="menu" class="menu-icon-open"></i>
+          <i data-lucide="x" class="menu-icon-close"></i>
+        </button>
       </div>
     </div>
+    <nav id="mobile-menu" class="mobile-menu md:hidden" aria-label="Mobile navigation">
+      <a href="../../index-en.html#about" class="nav-link">About</a>
+      <a href="../../index-en.html#experience" class="nav-link">Experience</a>
+      <a href="../../index-en.html#education" class="nav-link">Education</a>
+      <a href="../../index-en.html#projects" class="nav-link">Projects</a>
+      <a href="../../index-en.html#skills" class="nav-link">Skills</a>
+      <a href="../../index-en.html#contact" class="nav-link">Contact</a>
+    </nav>
   </header>
 
   <main class="container-main">
@@ -96,7 +110,7 @@
 
           <div class="mt-8 flex items-center gap-4">
             <a href="#content" class="btn btn-primary">Start Reading</a>
-            <a href="../../index.html#projects" class="btn btn-secondary">Back to Projects</a>
+            <a href="../../index-en.html#projects" class="btn btn-secondary">Back to Projects</a>
           </div>
         </div>
         <aside class="reveal hero-stack">
