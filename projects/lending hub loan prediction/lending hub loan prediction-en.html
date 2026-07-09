@@ -4,10 +4,10 @@
   <script>document.documentElement.classList.add('js');</script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lending Hub Loan Default Prediction System - Data Poetics</title>
-  <meta name="description" content="Cost-optimized machine learning system achieving 80.7% default detection rate while reducing credit losses by 44.7%, expected to save $2.3M annually" />
+  <title>Lending Hub Loan Default: Prediction under Asymmetric Cost - Data Poetics</title>
+  <meta name="description" content="A machine learning analysis of 9,004 completed LendingClub loans: LightGBM catches 74.9% of defaults at the cost-optimal threshold 0.16, lowering expected loss 26.5% below approving everyone. A missed default costs $9,437, a wrongly rejected good loan $2,243 — a 4.2:1 ratio." />
 
-  <!-- Consistent with homepage: Tailwind / Fonts / Icons / Site styles -->
+  <!-- Same as homepage: Tailwind / fonts / icons / site styles -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -17,12 +17,11 @@
   <link rel="stylesheet" href="../../assets/css/index.css" />
   <link rel="stylesheet" href="../../assets/css/project.css" />
 
-  <!-- Code highlighting + Chart libraries (commonly used in detail pages) -->
+  <!-- Code highlighting + charts (common on detail pages) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-  
+
   <style>
-    /* Table rules now handled globally in project.css; keep only non-table tweaks */
     .dark table.performance-table thead tr {
       background-color: rgba(64, 64, 64, 0.25) !important;
     }
@@ -34,10 +33,9 @@
 <body class="transition-colors duration-300">
   <div class="scroll-progress" id="scroll-progress"></div>
 
-  <!-- Top navigation (fully reusing homepage structure and style) -->
+  <!-- Top navigation (reuses homepage structure and styles) -->
   <header id="navbar" class="navbar fixed top-0 left-0 right-0 z-50">
     <div class="container-main h-full flex items-center justify-between">
-      <!-- Logo (jumps back to homepage Hero with animation) -->
       <a href="../../index-en.html#hero" class="navbar-logo" id="navbar-logo">
         <svg class="logo-svg-nav" viewBox="0 0 40 40">
           <g class="grid-bg">
@@ -58,7 +56,6 @@
         </div>
       </a>
 
-      <!-- In-page navigation (jumping to corresponding anchors on homepage) -->
       <nav class="hidden md:flex items-center space-x-8">
         <a href="../../index-en.html#about" class="nav-link">About</a>
         <a href="../../index-en.html#experience" class="nav-link">Experience</a>
@@ -92,109 +89,108 @@
   </header>
 
   <main class="container-main">
-    <!-- Project header (Hero-style detail page header) -->
+    <!-- Project hero -->
     <section id="project-hero" class="section-padding" style="padding-top: calc(var(--space-xl) + 72px)">
       <div class="grid md:grid-cols-2 gap-16 items-center w-full">
         <div class="reveal">
           <div class="section-eyebrow">
-            <span class="section-kicker">Case Study · Credit Risk &amp; Policy</span>
+            <span class="section-kicker">Case Study · Credit Risk &amp; Cost-Sensitive Decisions</span>
           </div>
-          <h1 class="hero-title mt-2">Lending Hub Loan Default Prediction</h1>
-          <p class="subtitle mt-4 max-w-xl">Optimising for expected loss, not accuracy — moving the decision threshold from 0.5 to 0.19 so the model serves the business, not the leaderboard.</p>
-          <div class="reading-time">~14 min read<span class="sep">·</span>14 figures</div>
+          <h1 class="hero-title mt-2">Lending Hub Loan Default: Prediction under Asymmetric Cost</h1>
+          <p class="subtitle mt-4 max-w-xl">How well can default be predicted from application-time data alone? When a missed default costs 4.2 times a wrongly rejected good loan, 0.5 was never the right threshold.</p>
+          <div class="reading-time">~12 min read<span class="sep">·</span>11 charts</div>
 
           <div class="hero-stats">
             <div class="hero-stat">
-              <div class="hero-stat__num">9K</div>
-              <div class="hero-stat__label">Loans</div>
+              <div class="hero-stat__num">9,004</div>
+              <div class="hero-stat__label">loans analyzed (16.8% default)</div>
             </div>
             <div class="hero-stat">
-              <div class="hero-stat__num">80.7%</div>
-              <div class="hero-stat__label">Default Recall</div>
+              <div class="hero-stat__num">74.9%</div>
+              <div class="hero-stat__label">defaults caught @ threshold 0.16</div>
             </div>
             <div class="hero-stat">
-              <div class="hero-stat__num">$2.3M</div>
-              <div class="hero-stat__label">Annual Savings</div>
+              <div class="hero-stat__num">−26.5%</div>
+              <div class="hero-stat__label">expected loss vs approving all</div>
             </div>
           </div>
 
           <div class="mt-8 flex items-center gap-4">
-            <a href="#content" class="btn btn-primary">Start Reading</a>
-            <a href="../../index-en.html#projects" class="btn btn-secondary">Back to Projects</a>
+            <a href="#content" class="btn btn-primary">Start reading</a>
+            <a href="../../index-en.html#projects" class="btn btn-secondary">Back to projects</a>
           </div>
         </div>
         <aside class="reveal hero-stack">
-          <div class="hero-stack__label">Methods · Tech Stack</div>
+          <div class="hero-stack__label">Methods · Stack</div>
           <ol class="hero-stack__list">
             <li>
               <span class="hero-stack__num">01</span>
-              <span class="hero-stack__name">Random Forest</span>
-              <span class="hero-stack__desc">Production model, balances precision and recall</span>
+              <span class="hero-stack__name">LightGBM</span>
+              <span class="hero-stack__desc">Selected on lowest OOF cost; ROC-AUC 0.733 / PR-AUC 0.372</span>
             </li>
             <li>
               <span class="hero-stack__num">02</span>
-              <span class="hero-stack__name">LightGBM</span>
-              <span class="hero-stack__desc">Paired with SHAP to read non-linear feature effects</span>
+              <span class="hero-stack__name">Leakage-free protocol</span>
+              <span class="hero-stack__desc">Outcome columns removed, cross-fitted target encoder, SMOTE inside folds</span>
             </li>
             <li>
               <span class="hero-stack__num">03</span>
-              <span class="hero-stack__name">Cost-Sensitive Threshold</span>
-              <span class="hero-stack__desc">Optimal 0.19 — minimises expected financial loss</span>
+              <span class="hero-stack__name">Cost calibration</span>
+              <span class="hero-stack__desc">FN $9,437 / FP $2,243, computed from repayment data, not guessed</span>
             </li>
             <li>
               <span class="hero-stack__num">04</span>
-              <span class="hero-stack__name">Composite Index</span>
-              <span class="hero-stack__desc">Engineered financial-stress index + risk-adjusted rate</span>
+              <span class="hero-stack__name">OOF threshold tuning</span>
+              <span class="hero-stack__desc">τ=0.16 found on out-of-fold probabilities; test set touched once</span>
             </li>
             <li>
               <span class="hero-stack__num">05</span>
-              <span class="hero-stack__name">SHAP</span>
-              <span class="hero-stack__desc">Reveals U-shaped utilisation and inverse income effects</span>
+              <span class="hero-stack__name">SHAP attribution</span>
+              <span class="hero-stack__desc">Dependence direction check corrects the mean-signed-SHAP reading</span>
             </li>
           </ol>
-          <div class="hero-stack__foot">Python · pandas · scikit-learn · lightgbm · shap</div>
+          <div class="hero-stack__foot">Python · pandas · scikit-learn · lightgbm · imbalanced-learn · shap</div>
         </aside>
       </div>
     </section>
 
-    <!-- Quick summary cards (compact version) -->
+    <!-- Quick summary cards -->
     <section id="quick-summary" class="section-padding">
       <div class="grid md:grid-cols-3 gap-6">
         <div class="summary-card">
-          <h3 class="summary-card-title">Business Challenge</h3>
-          <p class="summary-card-content">Loan portfolio facing severe 16.8% default rate, resulting in $18.4M losses on a $110M portfolio.</p>
+          <h3 class="summary-card-title">The Challenge</h3>
+          <p class="summary-card-content">16.8% of loans charge off, and the two errors cost wildly different amounts: a missed default loses 4.2 times what a wrongly rejected good loan does. A model tuned only for accuracy answers the wrong question.</p>
         </div>
         <div class="summary-card">
-          <h3 class="summary-card-title">Solution</h3>
-          <p class="summary-card-content">Cost-optimized Random Forest model with decision threshold adjusted from 0.5 to 0.19 to minimize total financial cost of prediction errors.</p>
+          <h3 class="summary-card-title">The Solution</h3>
+          <p class="summary-card-content">Three models compete under one leakage-free protocol; LightGBM is selected on lowest out-of-fold cost, and the decision threshold is tuned to 0.16 rather than the default 0.5 to match the cost asymmetry.</p>
         </div>
         <div class="summary-card">
-          <h3 class="summary-card-title">Business Value</h3>
-          <p class="summary-card-content">44.7% reduction in credit losses, estimated annual savings of $2.3M, establishing data-driven underwriting policies.</p>
+          <h3 class="summary-card-title">The Value</h3>
+          <p class="summary-card-content">Catches 74.9% of defaults at a total error cost of $2.63M, 26.5% below the $3.58M of approving everyone; losses concentrate in term and the low-grade tail, giving concrete tightening points.</p>
         </div>
       </div>
     </section>
 
-    <!-- Main content: Left sidebar + Right content (consistent with documentation standards) -->
+    <!-- Main content: TOC + body -->
     <section id="content" class="section-padding">
       <div class="grid md:grid-cols-12 gap-12">
-        <!-- Table of Contents (auto-generated) -->
         <aside class="md:col-span-3">
           <nav class="project-toc sticky top-24" id="project-toc">
-            <h3 class="text-xl font-semibold" style="color: var(--dark);">Table of Contents</h3>
+            <h3 class="text-xl font-semibold" style="color: var(--dark);">Contents</h3>
             <ul class="mt-4 space-y-2" id="toc-list">
               <li><a href="#summary" class="toc-link" data-section="summary">Executive Summary</a></li>
-              <li><a href="#exploration" class="toc-link" data-section="exploration">Data Exploration</a></li>
-              <li><a href="#eda" class="toc-link" data-section="eda">EDA Analysis</a></li>
-              <li><a href="#preprocessing" class="toc-link" data-section="preprocessing">Feature Engineering</a></li>
-              <li><a href="#training" class="toc-link" data-section="training">Model Training</a></li>
-              <li><a href="#shap" class="toc-link" data-section="shap">SHAP Analysis</a></li>
-              <li><a href="#conclusion" class="toc-link" data-section="conclusion">Conclusions & Action Plan</a></li>
+              <li><a href="#data" class="toc-link" data-section="data">Data &amp; Cost Calibration</a></li>
+              <li><a href="#risk" class="toc-link" data-section="risk">Risk Factors</a></li>
+              <li><a href="#concentration" class="toc-link" data-section="concentration">Where Losses Concentrate</a></li>
+              <li><a href="#models" class="toc-link" data-section="models">Model Bake-off</a></li>
+              <li><a href="#threshold" class="toc-link" data-section="threshold">Threshold as a Decision</a></li>
+              <li><a href="#shap" class="toc-link" data-section="shap">SHAP Attribution</a></li>
+              <li><a href="#recommendations" class="toc-link" data-section="recommendations">Actions &amp; Limits</a></li>
             </ul>
           </nav>
         </aside>
 
-        <!-- Content area -->
         <div class="md:col-span-9 content-area">
           <!-- Executive Summary -->
           <section id="summary" class="section-padding section--editorial" data-section-num="00">
@@ -205,1208 +201,415 @@
               </div>
               <h2 class="section-title">Executive Summary</h2>
             </div>
-            
+
             <div class="space-y-6">
               <div class="contact-info-card">
-                <p class="subtitle mb-4"><strong>Business Challenge:</strong> The loan portfolio faces a severe 16.8% default rate, resulting in $18.4M losses on a $110M portfolio. The core challenge is significantly reducing these credit losses without rejecting too many creditworthy applicants, which would hamper business growth. The high financial cost of missed defaults (false negatives, averaging $13,663) far exceeds the opportunity cost of rejecting good loans (false positives, approximately $2,160), necessitating a model optimized for cost rather than just accuracy.</p>
-                
-                <p class="subtitle mb-4"><strong>Solution:</strong> We developed a robust end-to-end machine learning system centered on a cost-optimized Random Forest model. By adjusting the decision threshold from the default 0.5 to an optimal 0.19, the model is precisely tuned to minimize the total financial cost of prediction errors. This predictive model, coupled with deep SHAP analysis from a LightGBM model, transforms complex "black-box" decisions into transparent, actionable business rules and detailed risk profiles.</p>
+                <p class="subtitle mb-4">This analysis of 9,004 completed LendingClub loans answers three questions: how well default can be predicted from application-time data alone, where to set the decision threshold when the two error types cost different amounts, and what actually drives default. The final model is LightGBM on application-time features, tuned for cost — its value is not a leaderboard score but the lowest expected loss.</p>
 
-                <!-- Model Performance Overview -->
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">Model Performance Overview</h3>
+                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">Four findings</h3>
+                <ul class="list-disc list-inside space-y-3 subtitle mb-6">
+                  <li><strong>Loan term is the single biggest lever.</strong> 60-month loans default at 32.4% against 11.3% for 36-month loans, and term tops the SHAP ranking by a wide margin.</li>
+                  <li><strong>Default is steeply graded and concentrated.</strong> It climbs from 7.4% at grade A to 52.9% at grade G; grades E–G are only 9.4% of loans but account for 22.0% of all defaults.</li>
+                  <li><strong>The cost-optimal threshold is 0.16, not 0.5.</strong> A missed default costs $9,437 against $2,243 for a wrongly rejected good loan — a 4.2:1 ratio that catches three-quarters of defaults.</li>
+                  <li><strong>Interest rate and utilization both raise risk, monotonically.</strong> Utilization has no protective middle band, reaching 23.7% default in its top band; higher income pulls risk down.</li>
+                </ul>
+
+                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">At a glance</h3>
                 <div class="overflow-x-auto">
                   <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
                     <thead>
                       <tr class="bg-gray-100 dark:bg-gray-700/30">
-                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Metric</th>
-                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Value</th>
-                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Business Impact</th>
+                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Item</th>
+                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Result</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Default Detection Rate (Recall)</strong></td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">80.7%</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Proactively identifies and flags 8 out of 10 potential defaulters</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Loans analyzed</strong></td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">9,004 (1,517 charged off, 16.8%)</td>
                       </tr>
                       <tr>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Cost Reduction vs. No Model</strong></td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">44.7%</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Nearly halves total financial losses from defaults</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Final model</strong></td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">LightGBM on application-time features, tuned for cost</td>
                       </tr>
                       <tr>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Optimized Cost per Loan</strong></td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">$1,272</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Lowest possible cost achieved through strategic optimization</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Ranking quality (test set)</strong></td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">ROC-AUC 0.733, PR-AUC 0.372 (~2.2× baseline)</td>
                       </tr>
                       <tr>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Precision</strong></td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">26.2%</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Acceptable trade-off to maximize default capture</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Defaults caught</strong></td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">74.9% at the cost-optimal threshold 0.16</td>
+                      </tr>
+                      <tr>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Expected loss</strong></td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">26.5% below approving every applicant</td>
                       </tr>
                     </tbody>
                   </table>
                 </div>
-
-                <p class="subtitle mt-6"><strong>Business Value:</strong> The deployed system is expected to:</p>
-                <ul class="list-disc list-inside space-y-2 subtitle">
-                  <li><strong>Reduce credit losses by 44.7%:</strong> By accurately identifying high-risk applicants, the model is expected to save approximately $2.3M annually for a portfolio of this size.</li>
-                  <li><strong>Create data-driven underwriting policies:</strong> SHAP analysis provides transparent, interpretable insights that challenge traditional assumptions:
-                    <ul class="list-disc list-inside ml-6 mt-2">
-                      <li><strong>Non-linear credit risk:</strong> Moderate credit utilization (30-70%) signals financial health</li>
-                      <li><strong>Toxic combinations:</strong> Automatically identified high-risk combinations (e.g., F/G grade + 60-month term)</li>
-                    </ul>
-                  </li>
-                  <li><strong>Enable sustainable growth:</strong> Establish a cost-sensitive decision framework that balances portfolio health with growth objectives.</li>
-                </ul>
               </div>
             </div>
           </section>
 
-          <!-- Data Exploration -->
-          <section id="exploration" class="section-padding section--editorial" data-section-num="01">
+          <!-- Data & Cost Calibration -->
+          <section id="data" class="section-padding section--editorial" data-section-num="01">
             <div class="section-header">
               <div class="section-eyebrow">
                 <span class="section-num">01</span>
-                <span class="section-kicker">Data Exploration</span>
+                <span class="section-kicker">Data &amp; Cost Calibration</span>
               </div>
-              <h2 class="section-title">Data Exploration</h2>
+              <h2 class="section-title">Data &amp; Cost Calibration</h2>
             </div>
-            
+
             <div class="space-y-8">
-              <h3 class="text-2xl font-semibold mb-4" style="color: var(--dark);">1.1 Data Loading and Initial Exploration</h3>
-              
               <div class="contact-info-card">
-                <h4 class="text-xl font-semibold mb-3" style="color: var(--dark);">Dataset Background</h4>
-                <p class="subtitle mb-3">The dataset contains <strong>9,004 loans</strong> originated between 2012-2015, totaling over <strong>$110 million</strong> in funding. Each loan includes:</p>
-                <ul class="list-disc list-inside space-y-1 subtitle">
-                  <li>Borrower demographics and financial history</li>
-                  <li>Loan characteristics (amount, term, interest rate)</li>
-                  <li>Credit bureau data (FICO scores, credit lines, inquiries)</li>
-                  <li>Repayment outcomes (fully paid vs. charged off)</li>
-                </ul>
+                <p class="subtitle mb-3">Each loan carries loan attributes (amount, term, interest rate, installment, grade), borrower attributes (income, employment length, home ownership, state) and credit-file attributes (utilization, account counts, inquiries), plus the Fully Paid or Charged Off label. Quality is high: no duplicate rows and 319 missing cells out of 261,000 (0.1%), confined to <code>emp_length</code> and <code>revol_util</code>.</p>
+                <p class="subtitle">The dataset also contains repayment-outcome columns (<code>total_pymnt</code>, <code>total_rec_prncp</code>, <code>total_rec_int</code>, <code>out_prncp</code>). These are recorded during or after repayment and are unknown at underwriting — so they are excluded from the features and used only to estimate the cost of each error type.</p>
+              </div>
 
-                <h4 class="text-xl font-semibold mb-3 mt-6" style="color: var(--dark);">Business Questions to Address</h4>
-                <ol class="list-decimal list-inside space-y-1 subtitle">
-                  <li>What is the current default rate and its financial impact?</li>
-                  <li>Are there data quality issues that might affect model reliability?</li>
-                  <li>What are the distributions of key risk indicators?</li>
-                </ol>
-
-                <div class="figure-editorial mt-6">
-                  <img src="figures/target variable analysis.png" alt="Target Variable Analysis" class="w-full" />
-                  <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Dataset overview and target variable distribution - Analysis reveals 16.8% default rate with significant class imbalance (7,487 fully paid vs 1,517 charged off)</p>
+              <div class="note note--process">
+                <div class="note__label">Cost Calibration · Costs from data, not assumptions</div>
+                <div class="note__body">
+                  <p><strong>Missed default (false negative)</strong> costs the mean unrecovered principal on charged-off loans, <code>funded_amnt − total_rec_prncp</code>, which is <strong>$9,437</strong>. The full funded amount ($13,663) would overstate the loss by $4,227, because borrowers repay part of the principal before charging off.</p>
+                  <p><strong>Rejected good loan (false positive)</strong> costs the mean interest income on fully-paid loans, <code>total_rec_int</code>, which is <strong>$2,243</strong>.</p>
+                  <p>The resulting <strong>4.2:1</strong> cost ratio is what pulls the optimal threshold well below 0.5.</p>
                 </div>
               </div>
 
-              <h3 class="text-2xl font-semibold mb-4 mt-8" style="color: var(--dark);">Key Insights from Initial Exploration</h3>
-
-              <div class="grid md:grid-cols-2 gap-6 mb-6">
-                <div class="text-center p-4 bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 rounded-lg">
-                  <div class="text-3xl font-bold" style="color: var(--blue);">99.88%</div>
-                  <div class="text-sm mt-2" style="color: var(--brown);">Data Quality Score</div>
-                  <div class="text-xs mt-1" style="color: var(--brown);">Only 0.12% missing values</div>
-                </div>
-                <div class="text-center p-4 bg-gradient-to-br from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg">
-                  <div class="text-3xl font-bold" style="color: var(--coral);">16.8%</div>
-                  <div class="text-sm mt-2" style="color: var(--brown);">Portfolio Loss Rate</div>
-                  <div class="text-xs mt-1" style="color: var(--brown);">$18.4M losses on $109.4M funded</div>
-                </div>
-              </div>
-
-              <div class="contact-info-card">
-                <h4 class="text-xl font-semibold mb-3" style="color: var(--dark);">Data Quality</h4>
-                <ul class="list-disc list-inside space-y-2 subtitle">
-                  <li><strong>Minimal data issues</strong>: Only 319 missing values (0.12% of total data points)</li>
-                  <li><strong>No duplicates</strong>: Clean dataset with no redundant records</li>
-                  <li><strong>Adequate sample size</strong>: 9,004 loans provide robust statistical significance</li>
-                  <li><strong>Balanced features</strong>: Mix of numerical and categorical variables (29 total)</li>
-                </ul>
-
-                <h4 class="text-xl font-semibold mb-3 mt-6" style="color: var(--dark);">Financial Impact</h4>
-                <ul class="list-disc list-inside space-y-2 subtitle">
-                  <li><strong>Default rate</strong>: 16.8% of loans result in charge-offs</li>
-                  <li><strong>Portfolio losses</strong>: $18.4M defaulted on $109.4M funded</li>
-                  <li><strong>Average default loss</strong>: $13,663 per charged-off loan</li>
-                  <li><strong>Risk concentration</strong>: Small proportion of loans drive significant losses</li>
-                </ul>
-
-                <div class="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg p-4 mt-6">
-                  <h4 class="font-semibold text-amber-800 dark:text-amber-200 mb-3">Modeling Challenges</h4>
-                  <ol class="list-decimal list-inside space-y-2 text-amber-700 dark:text-amber-300">
-                    <li><strong>Class imbalance</strong>: 4.9:1 ratio (fully paid to charged off)
-                      <ul class="list-disc list-inside ml-6 mt-1">
-                        <li>Requires careful handling to avoid bias toward majority class</li>
-                        <li>Consider SMOTE, class weights, or ensemble methods</li>
-                      </ul>
-                    </li>
-                    <li><strong>Cost asymmetry</strong>:
-                      <ul class="list-disc list-inside ml-6 mt-1">
-                        <li>False negative cost: ~$13,663 (missed default)</li>
-                        <li>False positive cost: ~$2,000 (missed interest opportunity)</li>
-                        <li>Optimization should prioritize recall over precision</li>
-                      </ul>
-                    </li>
-                    <li><strong>Business constraints</strong>:
-                      <ul class="list-disc list-inside ml-6 mt-1">
-                        <li>Must maintain minimum 60% approval rate for business viability</li>
-                        <li>Cannot reject all risky loans without destroying growth</li>
-                      </ul>
-                    </li>
-                  </ol>
-                </div>
-
-                <h4 class="text-xl font-semibold mb-3 mt-6" style="color: var(--dark);">Strategic Implications</h4>
-                <ul class="list-disc list-inside space-y-2 subtitle">
-                  <li><strong>Quick wins</strong>: Just 10% improvement in default detection could save ~$1.8M annually</li>
-                  <li><strong>Risk tiering</strong>: Need to segment borrowers into risk categories for pricing</li>
-                  <li><strong>Focus areas</strong>: Identify top 3-5 features most predictive of default</li>
-                </ul>
-              </div>
+              <figure class="figure-editorial">
+                <img src="figures/target_distribution.png" alt="Loan status distribution" loading="lazy" decoding="async" />
+                <figcaption>Loan status distribution — 7,487 fully paid vs 1,517 charged off, a 16.8% default rate that makes a 4.9:1 class imbalance.</figcaption>
+              </figure>
             </div>
           </section>
 
-          <!-- EDA Analysis -->
-          <section id="eda" class="section-padding section--editorial" data-section-num="02">
+          <!-- Risk Factors -->
+          <section id="risk" class="section-padding section--editorial" data-section-num="02">
             <div class="section-header">
               <div class="section-eyebrow">
                 <span class="section-num">02</span>
-                <span class="section-kicker">Exploratory Data Analysis</span>
+                <span class="section-kicker">Risk Factors</span>
               </div>
-              <h2 class="section-title">Exploratory Data Analysis (EDA)</h2>
+              <h2 class="section-title">Risk Factors</h2>
             </div>
-            
+
             <div class="space-y-8">
               <div class="contact-info-card">
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">Analysis Objectives</h3>
-                <ul class="list-disc list-inside space-y-2 subtitle">
-                  <li><strong>Risk factor identification</strong>: Discover features most correlated with default</li>
-                  <li><strong>Customer segmentation</strong>: Understand risk profiles of different borrower groups</li>
-                  <li><strong>Business patterns</strong>: Identify geographic and categorical trends</li>
-                  <li><strong>Feature selection guidance</strong>: Determine variables to prioritize in modeling</li>
-                </ul>
-
-                <div class="figure-editorial mt-6">
-                  <img src="figures/default rate analysis across key risk factors.png" alt="Default Rate by Risk Factors" class="w-full" />
-                  <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Default rate analysis across key risk factors - Grade G shows 52% default rate vs Grade A's 7%, 60-month terms show 32% default vs 36-month terms' 11%</p>
-                </div>
-              </div>
-
-              <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">Risk Factor Analysis Insights</h3>
-
-              <h4 class="text-lg font-semibold mb-3" style="color: var(--dark);">Key Risk Indicators</h4>
-
-              <div class="contact-info-card mb-4">
-                <h5 class="font-semibold mb-3" style="color: var(--dark);">1. Credit Grade - Exponential Risk Growth</h5>
-                <ul class="list-disc list-inside space-y-2 subtitle">
-                  <li>Grade G shows catastrophic default rates (52%) - over 7x higher than Grade A (7%)</li>
-                  <li>Clear exponential pattern: each grade downgrade increases risk by ~40%</li>
-                  <li>Grades E-G represent only 10% of loans but drive 25% of defaults</li>
-                </ul>
-                <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-3 mt-3">
-                  <p class="text-blue-700 dark:text-blue-300"><strong>Business Action</strong>: Implement hard cutoff at Grade E or apply 3x pricing premium for Grades F-G</p>
-                </div>
-              </div>
-
-              <div class="contact-info-card mb-4">
-                <h5 class="font-semibold mb-3" style="color: var(--dark);">2. Loan Term - Duration Risk Premium</h5>
-                <ul class="list-disc list-inside space-y-2 subtitle">
-                  <li>60-month loans default rate (32%) is nearly 3x higher than 36-month (11%)</li>
-                  <li>Extended term adds 21 percentage points to default probability</li>
-                  <li>Longer terms = higher uncertainty + payment fatigue</li>
-                </ul>
-                <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-3 mt-3">
-                  <p class="text-blue-700 dark:text-blue-300"><strong>Business Action</strong>: Add 5-7% interest premium for 60-month terms or restrict to Grades A-B only</p>
-                </div>
-              </div>
-
-              <h4 class="text-lg font-semibold mb-3" style="color: var(--dark);">Risk Stratification Framework</h4>
-              <p class="subtitle mb-4">Based on analysis, implement a four-tier risk system:</p>
-
-              <div class="grid md:grid-cols-2 gap-4 mb-6">
-                <div class="note note--evidence">
-                  <div class="note__label">Prime Tier</div>
-                  <div class="note__body">
-                    <ul class="list-disc list-inside space-y-1">
-                      <li><strong>Profile</strong>: Grades A-B, 36-month, homeowners</li>
-                      <li><strong>Default rate</strong>: &lt;10%</li>
-                      <li><strong>Action</strong>: auto-approve, best rates</li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="note note--process">
-                  <div class="note__label">Standard Tier</div>
-                  <div class="note__body">
-                    <ul class="list-disc list-inside space-y-1">
-                      <li><strong>Profile</strong>: Grades C-D, any term, verified</li>
-                      <li><strong>Default rate</strong>: 15–20%</li>
-                      <li><strong>Action</strong>: standard process, market rates</li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="note note--caveat">
-                  <div class="note__label">Subprime Tier</div>
-                  <div class="note__body">
-                    <ul class="list-disc list-inside space-y-1">
-                      <li><strong>Profile</strong>: Grade E, 60-month, renters</li>
-                      <li><strong>Default rate</strong>: 25–35%</li>
-                      <li><strong>Action</strong>: enhanced review, premium rates</li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="note note--insight">
-                  <div class="note__label">High Risk Tier</div>
-                  <div class="note__body">
-                    <ul class="list-disc list-inside space-y-1">
-                      <li><strong>Profile</strong>: Grades F-G, small business loans</li>
-                      <li><strong>Default rate</strong>: &gt;40%</li>
-                      <li><strong>Action</strong>: manual review or decline</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-
-              <div class="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4">
-                <h4 class="font-semibold text-red-800 dark:text-red-200 mb-3">Red Flag Combinations</h4>
-                <p class="text-red-700 dark:text-red-300 mb-2">Highest risk profiles (>40% default probability):</p>
-                <ol class="list-decimal list-inside space-y-1 text-red-700 dark:text-red-300">
-                  <li>Grades F-G + 60-month term</li>
-                  <li>Grade E + small business purpose</li>
-                  <li><1 year employment + high DTI + Grade D or worse</li>
-                </ol>
-              </div>
-
-              <div class="figure-editorial mt-6">
-                <img src="figures/distribution comparision fully paid vs charged off loans.png" alt="Distribution Comparison" class="w-full" />
-                <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Distribution comparison: Fully paid vs charged-off loans - Clear separation in key features</p>
-              </div>
-
-              <div class="figure-editorial mt-6">
-                <img src="figures/feature correlation matrix & top 15 features correlated with default.png" alt="Correlation Analysis" class="w-full" />
-                <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Feature correlation matrix & top 15 features correlated with default</p>
-              </div>
-
-              <div class="figure-editorial mt-6">
-                <img src="figures/Geographic risk analysis.png" alt="Geographic Risk Distribution" class="w-full" />
-                <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Geographic risk analysis - Alaska, South Dakota and Nevada show elevated risk</p>
-              </div>
-
-              <div class="figure-editorial mt-6">
-                <img src="figures/Customer segmentation analysis.png" alt="Customer Segmentation" class="w-full" />
-                <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Customer segmentation analysis - Prime customers vs deep subprime segments</p>
-              </div>
-
-              <div class="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-4 mt-6">
-                <h4 class="font-semibold text-green-800 dark:text-green-200 mb-3">Counterintuitive Findings</h4>
-                <ol class="list-decimal list-inside space-y-2 text-green-700 dark:text-green-300">
-                  <li><strong>Income verification paradox</strong>: Verified income shows higher default rates
-                    <ul class="list-disc list-inside ml-6 mt-1">
-                      <li>Hypothesis: Marginal applicants require verification</li>
-                      <li>Action: Use verification reason as additional feature</li>
-                    </ul>
-                  </li>
-                  <li><strong>Small loan myth</strong>: Larger loans default more frequently
-                    <ul class="list-disc list-inside ml-6 mt-1">
-                      <li>Traditional assumption: Small loans = desperate borrowers</li>
-                      <li>Reality: Large loans = overconfident borrowers</li>
-                      <li>Action: Enhanced controls for loans >$25,000</li>
-                    </ul>
-                  </li>
-                  <li><strong>Geographic surprises</strong>: Nevada (27% default) vs Utah (12%)
-                    <ul class="list-disc list-inside ml-6 mt-1">
-                      <li>Cultural and economic factors matter</li>
-                      <li>Action: Incorporate state economic indicators</li>
-                    </ul>
-                  </li>
-                </ol>
-              </div>
-            </div>
-          </section>
-
-          <!-- Feature Engineering -->
-          <section id="preprocessing" class="section-padding section--editorial" data-section-num="03">
-            <div class="section-header">
-              <div class="section-eyebrow">
-                <span class="section-num">03</span>
-                <span class="section-kicker">Cleaning &amp; Feature Engineering</span>
-              </div>
-              <h2 class="section-title">Data Cleaning &amp; Feature Engineering</h2>
-            </div>
-            
-            <div class="space-y-8">
-              <div class="contact-info-card">
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">Data Cleaning Strategy</h3>
-
-                <h4 class="font-semibold mb-3" style="color: var(--dark);">Current Data Issues:</h4>
-                <ul class="list-disc list-inside space-y-2 subtitle mb-4">
-                  <li><strong>Missing values</strong>: <code class="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded text-sm">emp_length</code> (316), <code class="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded text-sm">revol_util</code> (3)</li>
-                  <li><strong>Type conversions</strong>: Multiple object columns need encoding</li>
-                  <li><strong>Date features</strong>: <code class="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded text-sm">earliest_cr_line</code> needs proper handling</li>
-                  <li><strong>Target variable</strong>: <code class="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded text-sm">loan_status</code> needs binary encoding</li>
-                </ul>
-
-                <h4 class="font-semibold mb-3" style="color: var(--dark);">Step 1: Handling Missing Values</h4>
-                <p class="subtitle mb-3">Business logic for imputation:</p>
-                <ul class="list-disc list-inside space-y-2 subtitle mb-4">
-                  <li><code class="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded text-sm">emp_length</code>: 316 missing → Use 0 (new employees or self-employed)</li>
-                  <li><code class="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded text-sm">revol_util</code>: 3 missing → Use median (typical utilization)</li>
-                </ul>
-
-                <pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto"><code class="language-python"># Handle missing values with proper imputation
-LC_df_fe['emp_length'] = LC_df_fe['emp_length'].fillna('< 1 year')
-LC_df_fe['revol_util'] = LC_df_fe['revol_util'].fillna(LC_df_fe['revol_util'].median())
-
-# Convert earliest_cr_line to credit history years
-def calculate_credit_history(excel_date):
-    try:
-        # Excel date: days since 1900-01-01
-        base = datetime(1900, 1, 1)
-        date = base + timedelta(days=float(excel_date)-2)
-        return (datetime.now() - date).days / 365.25
-    except:
-        return LC_df_fe['credit_history'].median()
-
-LC_df_fe['credit_history'] = LC_df_fe['earliest_cr_line'].apply(calculate_credit_history)</code></pre>
-              </div>
-
-              <div class="contact-info-card">
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">Feature Engineering Strategy</h3>
-                <div class="space-y-4">
-                  <p class="subtitle">Based on business understanding and EDA insights, we created multiple composite risk features to capture complex patterns of loan default.</p>
-                  
-                  <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
-                    <h4 class="font-semibold text-blue-800 dark:text-blue-200 mb-3">Core Engineered Features</h4>
-                    <ul class="space-y-2 text-blue-700 dark:text-blue-300">
-                      <li><strong>Financial Stress Index</strong>: Combines DTI, credit utilization, and inquiries</li>
-                      <li><strong>Risk-Adjusted Rate</strong>: Deviation from average rate for same grade</li>
-                      <li><strong>Loan Burden Ratio</strong>: Annual payments as percentage of income</li>
-                      <li><strong>Grade-Term Risk</strong>: Captures interaction between grade and term</li>
-                      <li><strong>Credit Utilization Tiers</strong>: Low (<30%), Moderate (30-70%), High (>70%)</li>
-                    </ul>
-                  </div>
-
-                  <div>
-                    <strong>Feature Engineering Implementation:</strong>
-                    <pre class="bg-gray-900 text-gray-100 p-4 rounded-lg mt-2 overflow-x-auto"><code class="language-python"># Create composite risk features
-LC_df['financial_stress_index'] = (
-    (LC_df['dti'] / 100) * 
-    (LC_df['revol_util'] / 100) * 
-    LC_df['inq_last_6mths']
-) / LC_df['annual_inc']
-
-# Risk-adjusted rate
-LC_df['risk_adjusted_rate'] = (
-    LC_df['int_rate'] - 
-    LC_df.groupby('grade')['int_rate'].transform('mean')
-)
-
-# Loan burden ratio
-LC_df['loan_burden_ratio'] = (
-    (LC_df['installment'] * 12) / LC_df['annual_inc']
-)
-
-# Credit utilization tiers
-LC_df['moderate_credit_util'] = (
-    (LC_df['revol_util'] >= 30) & 
-    (LC_df['revol_util'] <= 70)
-).astype(int)</code></pre>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Class Imbalance Handling -->
-              <div class="contact-info-card">
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">Class Imbalance Handling: SMOTE Strategy</h3>
-                <div class="space-y-4">
-                  <p class="subtitle">With only 15.8% default loans in the original dataset, we applied SMOTE technique to enhance minority class samples, improving the model's ability to identify defaults.</p>
-                  
-                  <div class="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg p-4">
-                    <h4 class="font-semibold text-amber-800 dark:text-amber-200 mb-3">SMOTE Configuration</h4>
-                    <ul class="space-y-2 text-amber-700 dark:text-amber-300">
-                      <li><strong>Original</strong>: 15.8% default rate (1:5.3 ratio)</li>
-                      <li><strong>Target</strong>: 33% after SMOTE (1:2 ratio)</li>
-                      <li><strong>Rationale</strong>: Balance recall with overfitting risk</li>
-                    </ul>
-                  </div>
-
-                  <pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto mt-4"><code class="language-python"># Handle class imbalance with SMOTE
-from sklearn.model_selection import train_test_split
-from imblearn.over_sampling import SMOTE
-from sklearn.preprocessing import RobustScaler
-
-# Stratified train-test split
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.25, random_state=42, stratify=y
-)
-
-# Apply SMOTE for balanced training
-smote = SMOTE(sampling_strategy=0.33, random_state=42)
-X_train_balanced, y_train_balanced = smote.fit_resample(X_train, y_train)
-
-print(f"Original training set: {y_train.value_counts()}")
-print(f"After SMOTE: {pd.Series(y_train_balanced).value_counts()}")
-
-# Use RobustScaler for outlier resistance
-scaler = RobustScaler()
-X_train_scaled = scaler.fit_transform(X_train)
-X_train_balanced_scaled = scaler.transform(X_train_balanced)
-X_test_scaled = scaler.transform(X_test)</code></pre>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <!-- Model Training -->
-          <section id="training" class="section-padding section--editorial" data-section-num="04">
-            <div class="section-header">
-              <div class="section-eyebrow">
-                <span class="section-num">04</span>
-                <span class="section-kicker">Model Training &amp; Evaluation</span>
-              </div>
-              <h2 class="section-title">Model Training &amp; Evaluation</h2>
-            </div>
-            
-            <div class="space-y-8">
-              <!-- Initial Model Performance -->
-              <div class="contact-info-card">
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">Initial Model Performance (Default Threshold = 0.5)</h3>
-                <div class="figure-editorial">
-                  <img src="figures/models cost benefit analysis.png" alt="Initial Model Comparison" class="w-full" />
-                  <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">All models show low recall rates (5-48%) at default threshold, highlighting the need for threshold optimization</p>
-                </div>
-              </div>
-
-              <!-- Model Development Pipeline -->
-              <div class="contact-info-card">
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">Model Development and Optimization Strategy</h3>
-                <div class="space-y-4">
-                  <h4 class="font-semibold mb-3" style="color: var(--dark);">1. Model Development Pipeline</h4>
-                  <p class="subtitle">We implemented a systematic approach to address the loan default prediction challenge:</p>
-
-                  <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
-                    <h4 class="font-semibold text-blue-800 dark:text-blue-200 mb-3">Three Model Architectures</h4>
-                    <ul class="space-y-2 text-blue-700 dark:text-blue-300">
-                      <li><strong>Logistic Regression</strong>: Baseline model for interpretability and regulatory compliance</li>
-                      <li><strong>Random Forest</strong>: Ensemble method to capture non-linear patterns</li>
-                      <li><strong>LightGBM</strong>: Gradient boosting for maximum performance potential</li>
-                    </ul>
-                  </div>
-
-                  <div class="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-4 mt-4">
-                    <h4 class="font-semibold text-green-800 dark:text-green-200 mb-3">Hyperparameter Optimization</h4>
-                    <ul class="space-y-2 text-green-700 dark:text-green-300">
-                      <li>Grid search with F2 score optimization (recall-weighted)</li>
-                      <li>Total optimization time: ~270 seconds for all models</li>
-                      <li>Key finding: Simpler configurations (RF with 50 trees) outperform complex alternatives</li>
-                    </ul>
-                  </div>
-
-                  <div class="bg-coral-50 dark:bg-coral-900/20 border border-coral-200 dark:border-coral-800 rounded-lg p-4 mt-4">
-                    <h4 class="font-semibold text-coral-800 dark:text-coral-200 mb-3">Threshold Optimization Strategy</h4>
-                    <ul class="space-y-2 text-coral-700 dark:text-coral-300">
-                      <li>Move beyond default 0.5 threshold</li>
-                      <li>Systematically test thresholds from 0.05 to 0.95</li>
-                      <li>Optimize for minimum cost while maintaining 75%+ recall</li>
-                      <li>Achieved dramatic improvement: RF recall from 11.9% to 80.7%</li>
-                    </ul>
-                  </div>
-
-                  <pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto mt-4"><code class="language-python"># Model training and hyperparameter optimization
-from sklearn.linear_model import LogisticRegression
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import GridSearchCV
-import lightgbm as lgb
-
-# Define parameter grids for each model
-param_grids = {
-    'Logistic Regression': {
-        'C': [0.1, 1.0, 10.0],
-        'penalty': ['l1', 'l2'],
-        'solver': ['liblinear']
-    },
-    'Random Forest': {
-        'n_estimators': [50, 100],
-        'max_depth': [None, 10, 20],
-        'min_samples_leaf': [1, 5, 20],
-        'min_samples_split': [2, 10]
-    },
-    'LightGBM': {
-        'n_estimators': [100, 150],
-        'max_depth': [10, 15],
-        'learning_rate': [0.03, 0.1],
-        'num_leaves': [31, 50],
-        'min_child_samples': [20, 50],
-        'scale_pos_weight': [3, 5]
-    }
-}
-
-# Optimize using GridSearchCV
-models = {
-    'Logistic Regression': LogisticRegression(max_iter=1000),
-    'Random Forest': RandomForestClassifier(random_state=42),
-    'LightGBM': lgb.LGBMClassifier(random_state=42, verbose=-1)
-}
-
-# Train and optimize each model
-best_models = {}
-for name, model in models.items():
-    grid_search = GridSearchCV(
-        model, param_grids[name], 
-        scoring='f2', cv=5, n_jobs=-1
-    )
-    grid_search.fit(X_train_balanced_scaled, y_train_balanced)
-    best_models[name] = grid_search.best_estimator_
-    print(f"{name} best parameters: {grid_search.best_params_}")</code></pre>
-                </div>
-              </div>
-
-              <!-- Model Architecture: Three-Layer Optimization Strategy -->
-              <div class="contact-info-card">
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">Model Architecture: Three-Layer Optimization Strategy</h3>
-                <div class="space-y-4">
-                  <p class="subtitle">We implemented a systematic approach to address the complex challenges of loan default prediction, including class imbalance handling, hyperparameter optimization, and threshold tuning.</p>
-                  
-                  <pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto"><code class="language-python">from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import GridSearchCV
-
-# Random Forest hyperparameter optimization
-param_grid = {
-    'n_estimators': [50, 100],
-    'max_depth': [None, 10, 20],
-    'min_samples_leaf': [1, 5, 20]
-}
-
-grid_search = GridSearchCV(
-    RandomForestClassifier(random_state=42),
-    param_grid,
-    scoring='f2',  # Recall-weighted
-    cv=3
-)
-
-# Cost-sensitive threshold optimization
-def find_optimal_threshold(y_true, y_proba, min_recall=0.75):
-    thresholds = np.arange(0.05, 0.95, 0.01)
-    best_threshold = 0.5
-    min_cost = float('inf')
-    
-    for threshold in thresholds:
-        y_pred = (y_proba >= threshold).astype(int)
-        cm = confusion_matrix(y_true, y_pred)
-        tn, fp, fn, tp = cm.ravel()
-        
-        # Business cost calculation
-        fn_cost = fn * 13663  # Missed defaults
-        fp_cost = fp * 2160   # Missed opportunities
-        total_cost = fn_cost + fp_cost
-        
-        recall = tp / (tp + fn) if (tp + fn) > 0 else 0
-        if recall >= min_recall and total_cost < min_cost:
-            min_cost = total_cost
-            best_threshold = threshold
-    
-    return best_threshold</code></pre>
-                </div>
-              </div>
-
-              <!-- Model Performance Analysis -->
-              <div class="contact-info-card">
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">Model Performance Analysis</h3>
-                <div class="figure-editorial">
-                  <img src="figures/ROC and precision-recall curves.png" alt="ROC and PR Curves" class="w-full" />
-                  <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Random Forest achieves AUC 0.739 with superior precision-recall performance, especially after threshold optimization</p>
-                </div>
-              </div>
-
-              <!-- Model Evaluation and Comparison -->
-              <div class="contact-info-card">
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">Comprehensive Model Performance Comparison</h3>
+                <p class="subtitle mb-4">Every numeric feature except <code>open_acc</code> separates defaulters from repayers at high significance (p &lt; 0.001), but on 9,000 rows significance is cheap, so effect size is the useful filter. By Cohen's d, interest rate is the one large effect, revolving utilization is moderate, and the rest are small.</p>
                 <div class="overflow-x-auto">
                   <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
                     <thead>
                       <tr class="bg-gray-100 dark:bg-gray-700/30">
-                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Model</th>
-                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Recall</th>
-                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Precision</th>
-                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">F2 Score</th>
-                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Total Cost</th>
+                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Feature</th>
+                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">Mean (paid)</th>
+                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">Mean (default)</th>
+                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">Cohen's d</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr class="bg-green-50 dark:bg-green-900/30">
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-bold">Random Forest (Optimized)</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-bold">80.7%</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">26.2%</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-bold">0.570</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-bold">$2,863,639</td>
+                      <tr class="bg-green-50 dark:bg-green-900/20">
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Interest rate</strong></td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">11.63</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">14.59</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.73</td>
                       </tr>
                       <tr>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">LightGBM</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">77.8%</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">22.7%</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">0.562</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">$2,975,052</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Revolving utilization</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">50.94</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">59.44</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.31</td>
                       </tr>
                       <tr>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Logistic Regression</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">86.8%</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">18.3%</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">0.325</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">$2,981,390</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Loan amount</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">11,967</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">13,895</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.23</td>
                       </tr>
-                      <tr class="bg-gray-100 dark:bg-gray-800">
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Baseline (No Model)</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">0%</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">-</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">-</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">$5,176,370</td>
+                      <tr>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Annual income</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">71,110</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">62,012</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">−0.19</td>
+                      </tr>
+                      <tr>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Inquiries (6 mo)</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.82</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">1.02</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.19</td>
+                      </tr>
+                      <tr>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">DTI</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">13.73</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">14.70</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.15</td>
                       </tr>
                     </tbody>
                   </table>
                 </div>
               </div>
 
-              <!-- Threshold Optimization Impact -->
-              <div class="contact-info-card">
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">The Dramatic Impact of Threshold Optimization</h3>
-                <div class="space-y-4">
-                  <p class="subtitle">Through systematic threshold optimization, the Random Forest model's performance improved dramatically, demonstrating the importance of cost-sensitive optimization.</p>
-                  
-                  <div class="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg p-4">
-                    <h4 class="font-semibold text-amber-800 dark:text-amber-200 mb-3">Before vs After Optimization</h4>
-                    <ul class="space-y-2 text-amber-700 dark:text-amber-300">
-                      <li><strong>Recall improvement</strong>: From 11.9% to 80.7% (+68.8 percentage points)</li>
-                      <li><strong>Cost reduction</strong>: From $4,680,082 to $2,863,639 (-38.8%)</li>
-                      <li><strong>Optimal threshold</strong>: 0.19 (much lower than default 0.5)</li>
-                      <li><strong>Precision trade-off</strong>: 26.2% (acceptable false positive rate)</li>
-                    </ul>
-                  </div>
+              <p class="subtitle">The categorical breakdown is sharper than any single number. Default climbs monotonically from grade A (7.4%) to grade G (52.9%), and 60-month loans default at nearly three times the 36-month rate.</p>
 
-                  <div class="figure-editorial">
-                    <img src="figures/confusion matrix visualization.png" alt="Confusion Matrix Comparison" class="w-full" />
-                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Confusion matrix comparison before and after threshold optimization: Significant improvement in default detection capability</p>
-                  </div>
+              <figure class="figure-editorial">
+                <img src="figures/default_rate_by_categorical.png" alt="Default rate across categorical attributes" loading="lazy" decoding="async" />
+                <figcaption>Default rate across categorical attributes — term, grade, purpose and verification status. The 60-month term and the low-grade tail are the two widest gaps.</figcaption>
+              </figure>
 
-                  <div class="figure-editorial">
-                    <img src="figures/threshold optimization.png" alt="Threshold Optimization Curve" class="w-full" />
-                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Threshold vs cost relationship: 0.19 represents the optimal balance point</p>
-                  </div>
+              <div class="note note--insight">
+                <div class="note__label">Counterintuitive · Verified income defaults more</div>
+                <div class="note__body">
+                  <p>Verified-income loans default <strong>more</strong> (19.4%) than not-verified ones (14.4%). This counterintuitive result reflects who gets asked to verify rather than any causal effect — verification status should not be read as a safety signal. It is a textbook selection effect.</p>
                 </div>
               </div>
 
-              <!-- Final Model Selection -->
-              <div class="contact-info-card">
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">Final Model Selection: Random Forest Advantages</h3>
-                <div class="space-y-4">
-                  <p class="subtitle">Random Forest was selected as the production deployment model, performing best in cost control, stability, and interpretability.</p>
-                  
-                  <div class="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-4">
-                    <h4 class="font-semibold text-green-800 dark:text-green-200 mb-3">Random Forest Key Advantages</h4>
-                    <ul class="space-y-2 text-green-700 dark:text-green-300">
-                      <li><strong>Lowest total cost</strong>: $2,863,639, best among all models</li>
-                      <li><strong>Balanced performance</strong>: 80.7% recall meets business requirements</li>
-                      <li><strong>Best stability</strong>: Smallest train-test gap (17.9%)</li>
-                      <li><strong style="color: var(--coral);">Feature importance</strong>: Provides clear feature contribution rankings</li>
-                      <li><strong>Production-ready</strong>: Simple configuration (50 trees) easy to deploy and maintain</li>
-                    </ul>
-                  </div>
+              <p class="subtitle">Banding the continuous drivers shows the relationships are monotonic, not threshold-like. Default rises steadily with revolving utilization, from 10.5% below 20% to 23.7% above 80%, with no dip in the middle, so there is no protective "moderate" band. Income runs the other way, from 20.5% under $40K to 11.1% above $100K.</p>
 
-                  <div class="figure-editorial">
-                    <img src="figures/rf feature importance analysis.png" alt="Feature Importance Analysis" class="w-full" />
-                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Random Forest <span style="color: var(--coral);">feature importance</span>: Annual income, interest rate, and engineered features dominate decisions</p>
-                  </div>
+              <figure class="figure-editorial">
+                <img src="figures/default_rate_by_band.png" alt="Default rate across risk-factor bands" loading="lazy" decoding="async" />
+                <figcaption>Default rate across risk-factor bands — utilization rises monotonically with default (no protective middle band); income falls monotonically.</figcaption>
+              </figure>
+
+              <div class="figure-grid">
+                <figure class="figure-editorial">
+                  <img src="figures/numeric_distributions_by_status.png" alt="Numeric feature distributions by status" loading="lazy" decoding="async" />
+                  <figcaption>Numeric feature distributions by repayment status — interest rate shows the clearest shift, matching its large Cohen's d.</figcaption>
+                </figure>
+                <figure class="figure-editorial">
+                  <img src="figures/correlation_heatmap.png" alt="Feature correlation heatmap" loading="lazy" decoding="async" />
+                  <figcaption>Feature correlation heatmap — no severe multicollinearity; rate and grade are highly correlated (platform pricing embeds grade).</figcaption>
+                </figure>
+              </div>
+            </div>
+          </section>
+
+          <!-- Where Losses Concentrate -->
+          <section id="concentration" class="section-padding section--editorial" data-section-num="03">
+            <div class="section-header">
+              <div class="section-eyebrow">
+                <span class="section-num">03</span>
+                <span class="section-kicker">Where Losses Concentrate</span>
+              </div>
+              <h2 class="section-title">Where Losses Concentrate</h2>
+            </div>
+
+            <div class="space-y-8">
+              <p class="subtitle">Where losses concentrate is clearer from share than from rate: grades E through G are only 9.4% of loans but account for 22.0% of all defaults. Tightening policy on that thin, high-rate tail removes a disproportionate share of losses.</p>
+
+              <figure class="figure-editorial">
+                <img src="figures/grade_and_state_concentration.png" alt="Grade contribution and geographic concentration" loading="lazy" decoding="async" />
+                <figcaption>Grade contribution and geographic concentration — low grades (E–G) contribute 22.0% of defaults from 9.4% of volume; a state risk score adds an incremental geographic signal.</figcaption>
+              </figure>
+
+              <div class="grid md:grid-cols-2 gap-6">
+                <div class="text-center p-4 bg-gradient-to-br from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg">
+                  <div class="text-3xl font-bold" style="color: var(--coral);">9.4%</div>
+                  <div class="text-sm mt-2" style="color: var(--brown);">E–G grades share of all loans</div>
+                </div>
+                <div class="text-center p-4 bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 rounded-lg">
+                  <div class="text-3xl font-bold" style="color: var(--blue);">22.0%</div>
+                  <div class="text-sm mt-2" style="color: var(--brown);">their share of all defaults</div>
                 </div>
               </div>
             </div>
           </section>
 
-          <!-- SHAP Analysis -->
-          <section id="shap" class="section-padding section--editorial" data-section-num="05">
+          <!-- Model Bake-off -->
+          <section id="models" class="section-padding section--editorial" data-section-num="04">
+            <div class="section-header">
+              <div class="section-eyebrow">
+                <span class="section-num">04</span>
+                <span class="section-kicker">Model Bake-off</span>
+              </div>
+              <h2 class="section-title">Models on Equal Terms</h2>
+            </div>
+
+            <div class="space-y-8">
+              <div class="contact-info-card">
+                <p class="subtitle">Logistic regression, random forest and LightGBM went through one protocol: outcome columns removed; a 75/25 stratified split; high-cardinality categoricals (<code>addr_state</code>, <code>purpose</code>) encoded with a cross-fitted target encoder that learns from training folds only; SMOTE applied inside the pipeline so synthetic rows never leak into validation; and hyperparameters tuned by 5-fold grid search scoring average precision. Every step that learns from data is fit inside cross-validation, and the threshold is tuned on out-of-fold predictions, so the test set stays an untouched final estimate.</p>
+              </div>
+
+              <div class="overflow-x-auto">
+                <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
+                  <thead>
+                    <tr class="bg-gray-100 dark:bg-gray-700/30">
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Model</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">Threshold</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">Recall</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">Precision</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">F2</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">ROC-AUC</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">PR-AUC</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">Total cost</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="bg-green-50 dark:bg-green-900/20">
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>LightGBM</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.16</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">74.9%</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">26.9%</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.552</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.733</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.372</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">$2,627,872</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Logistic regression</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.27</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">77.0%</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">26.4%</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.557</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.744</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.387</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">$2,648,817</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Random forest</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.19</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">79.9%</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">25.4%</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.559</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.733</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.372</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">$2,715,463</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <p class="subtitle">Recall, precision and F2 are computed at each model's cost-optimal threshold; ROC-AUC and PR-AUC are threshold-free. PR-AUC near 0.37 against a 0.168 no-skill baseline is a lift of roughly 2.2×, a realistic level for application-only underwriting.</p>
+
+              <figure class="figure-editorial">
+                <img src="figures/pr_curves.png" alt="Precision-recall curves" loading="lazy" decoding="async" />
+                <figcaption>Precision-recall curves for the three models — nearly overlapping, with PR-AUC near 0.37 versus a 0.168 no-skill baseline.</figcaption>
+              </figure>
+
+              <div class="note note--evidence">
+                <div class="note__label">Model Selection · No model dominates</div>
+                <div class="note__body">
+                  <p>Logistic regression has the best ranking metrics, random forest the highest recall, LightGBM the lowest cost and best precision. The three finish within 1% of each other on cost, so the choice comes down to the business objective: LightGBM was selected on lowest out-of-fold cost, and logistic regression is a defensible interpretable alternative.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Threshold as a Decision -->
+          <section id="threshold" class="section-padding section--editorial" data-section-num="05">
             <div class="section-header">
               <div class="section-eyebrow">
                 <span class="section-num">05</span>
-                <span class="section-kicker">LightGBM SHAP Deep Dive</span>
+                <span class="section-kicker">Threshold as a Business Decision</span>
               </div>
-              <h2 class="section-title">LightGBM SHAP Analysis — Explanations &amp; Business Insights</h2>
+              <h2 class="section-title">Threshold as a Business Decision</h2>
             </div>
-            
+
             <div class="space-y-8">
-              <!-- Executive Summary of SHAP Findings -->
+              <p class="subtitle">The default 0.5 threshold minimizes classification error, but the errors are not equally expensive. With a missed default costing 4.2 times a false alarm, the cost-minimizing cut-off is well below 0.5. The threshold is found on out-of-fold probabilities, subject to catching at least 75% of defaults, and then applied to the test set exactly once.</p>
+
+              <figure class="figure-editorial">
+                <img src="figures/threshold_tuning.png" alt="Threshold tuning curve" loading="lazy" decoding="async" />
+                <figcaption>Threshold tuning — total expected cost as a function of the threshold bottoms out near 0.16, the cost-optimal cut-off.</figcaption>
+              </figure>
+
+              <figure class="figure-editorial">
+                <img src="figures/threshold_confusion_roc.png" alt="Threshold tuning, confusion matrix and ROC" loading="lazy" decoding="async" />
+                <figcaption>Threshold tuning, confusion matrix and ROC — at 0.16 the model catches 74.9% of defaults at the cost of accepting more false positives.</figcaption>
+              </figure>
+
               <div class="contact-info-card">
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">Executive Summary of SHAP Findings</h3>
-                <div class="space-y-4">
-                  <pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto"><code class="language-python"># SHAP Analysis for Model Interpretability
-import shap
-import lightgbm as lgb
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-
-# Train LightGBM model specifically for SHAP analysis
-lgb_model = lgb.LGBMClassifier(
-    n_estimators=150,
-    max_depth=15, 
-    min_child_samples=50,
-    learning_rate=0.03,
-    num_leaves=31,
-    scale_pos_weight=3,
-    random_state=42,
-    verbose=-1
-)
-
-# Fit the model
-lgb_model.fit(X_train_balanced_scaled, y_train_balanced)
-
-# Create DataFrames for SHAP analysis (with feature names)
-feature_names = X.columns.tolist()
-X_test_scaled_df = pd.DataFrame(X_test_scaled, columns=feature_names)
-X_train_balanced_scaled_df = pd.DataFrame(X_train_balanced_scaled, columns=feature_names)
-
-# Create SHAP explainer
-explainer = shap.TreeExplainer(
-    lgb_model,
-    X_train_balanced_scaled_df,
-    feature_perturbation='interventional',
-    model_output='raw'
-)
-
-# Calculate SHAP values
-shap_values = explainer.shap_values(X_test_scaled_df, check_additivity=False)
-
-# Calculate feature importance (mean absolute SHAP values)
-mean_abs_shap = np.abs(shap_values).mean(axis=0)
-shap_importance = pd.DataFrame({
-    'feature': feature_names,
-    'mean_abs_shap': mean_abs_shap,
-    'mean_shap': shap_values.mean(axis=0),  # Direction of impact
-    'std_shap': shap_values.std(axis=0)
-}).sort_values('mean_abs_shap', ascending=False)
-
-print("Top 10 most important features:")
-print(shap_importance.head(10))
-
-# Generate SHAP visualizations
-# 1. Feature importance plot
-shap.summary_plot(shap_values, X_test_scaled_df, feature_names=feature_names, 
-                  plot_type="bar", show=False)
-plt.title('SHAP Feature Importance')
-plt.tight_layout()
-plt.show()
-
-# 2. Summary plot (beeswarm plot)
-shap.summary_plot(shap_values, X_test_scaled_df, feature_names=feature_names, show=False)
-plt.title('SHAP Summary Plot')
-plt.tight_layout()
-plt.show()</code></pre>
-
-                  <div class="figure-editorial mt-4">
-                    <img src="figures/lightgbm shap summary plot.png" alt="SHAP Summary Plot" class="w-full" />
-                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">SHAP summary plot: Shows <span style="color: var(--coral);">feature importance</span> and direction of impact</p>
-                  </div>
-                </div>
-              </div>
-
-              <!-- 1. Top Feature Insights - Business Interpretation -->
-              <div class="contact-info-card">
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">1. Top Feature Insights - Business Interpretation</h3>
-                <div class="space-y-4">
-                  <h4 class="font-semibold mb-3" style="color: var(--brown);">Top 5 Features Explain 80%+ of Model Decisions</h4>
-                  
-                  <div class="overflow-x-auto">
-                    <table class="w-full border-collapse border border-gray-300 dark:border-gray-300">
-                      <thead class="bg-gray-50 dark:bg-gray-50">
-                        <tr>
-                          <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Rank</th>
-                          <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Feature</th>
-                          <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Mean SHAP</th>
-                          <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Direction</th>
-                          <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Business Interpretation</th>
-                        </tr>
-                      </thead>
-                      <tbody class="bg-white divide-y divide-gray-200">
-                        <tr>
-                          <td class="px-4 py-3 whitespace-nowrap text-sm">1</td>
-                          <td class="px-4 py-3 whitespace-nowrap text-sm font-medium">int_rate</td>
-                          <td class="px-4 py-3 whitespace-nowrap text-sm">0.376</td>
-                          <td class="px-4 py-3 whitespace-nowrap text-sm">Negative (-0.063)</td>
-                          <td class="px-4 py-3 text-sm">Higher rates = lower risk (reflects risk-based pricing)</td>
-                        </tr>
-                        <tr>
-                          <td class="px-4 py-3 whitespace-nowrap text-sm">2</td>
-                          <td class="px-4 py-3 whitespace-nowrap text-sm font-medium">moderate_credit_util</td>
-                          <td class="px-4 py-3 whitespace-nowrap text-sm">0.353</td>
-                          <td class="px-4 py-3 whitespace-nowrap text-sm">Negative (-0.024)</td>
-                          <td class="px-4 py-3 text-sm">Moderate utilization (30-70%) actually reduces risk</td>
-                        </tr>
-                        <tr>
-                          <td class="px-4 py-3 whitespace-nowrap text-sm">3</td>
-                          <td class="px-4 py-3 whitespace-nowrap text-sm font-medium">grade_term_risk</td>
-                          <td class="px-4 py-3 whitespace-nowrap text-sm">0.344</td>
-                          <td class="px-4 py-3 whitespace-nowrap text-sm">Negative (-0.034)</td>
-                          <td class="px-4 py-3 text-sm">Our engineered feature successfully captures composite risk</td>
-                        </tr>
-                        <tr>
-                          <td class="px-4 py-3 whitespace-nowrap text-sm">4</td>
-                          <td class="px-4 py-3 whitespace-nowrap text-sm font-medium">annual_inc</td>
-                          <td class="px-4 py-3 whitespace-nowrap text-sm">0.288</td>
-                          <td class="px-4 py-3 whitespace-nowrap text-sm">Negative (-0.044)</td>
-                          <td class="px-4 py-3 text-sm">Higher income strongly reduces default risk</td>
-                        </tr>
-                        <tr>
-                          <td class="px-4 py-3 whitespace-nowrap text-sm">5</td>
-                          <td class="px-4 py-3 whitespace-nowrap text-sm font-medium">high_credit_util</td>
-                          <td class="px-4 py-3 whitespace-nowrap text-sm">0.208</td>
-                          <td class="px-4 py-3 whitespace-nowrap text-sm">Positive (+0.010)</td>
-                          <td class="px-4 py-3 text-sm">Over-utilization (>70%) increases risk as expected</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-
-                  <div class="bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 p-4 mt-4">
-                    <p class="font-semibold text-blue-800 dark:text-blue-200">Key Insight</p>
-                    <p class="text-blue-700 dark:text-blue-300 mt-1">The model reveals a <strong>non-linear credit utilization pattern</strong> - moderate usage is healthy, but extremes (very low or very high) signal risk.</p>
-                  </div>
-                </div>
-              </div>
-
-              <!-- 2. Feature Behavior Patterns - Deep Dive -->
-              <div class="contact-info-card">
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">2. Feature Behavior Patterns - Deep Dive</h3>
-                <div class="space-y-4">
-                  <div class="figure-editorial">
-                    <h4 class="font-semibold mb-3" style="color: var(--dark);">SHAP Dependence Plots for Key Features</h4>
-                    <img src="figures/lightgbm how key features influence default probability.png" alt="SHAP Dependence Plots" class="w-full" />
-                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Shows U-shaped relationship for credit utilization and threshold effects for income at $40K and $80K</p>
-                  </div>
-
-                  <h4 class="font-semibold mt-6 mb-3" style="color: var(--brown);">Linear Relationships (Correlation > 0.8)</h4>
-                  
-                  <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-4 mb-3">
-                    <h5 class="font-semibold text-lg mb-2">Interest Rate (r = 0.896)</h5>
-                    <ul class="space-y-1 text-gray-700 dark:text-gray-300">
-                      <li><strong>Pattern</strong>: Strong positive correlation with SHAP values</li>
-                      <li><strong>Interpretation</strong>: Model learned that rate is <strong>consequence, not cause</strong> of risk</li>
-                      <li><strong>Business logic</strong>: High-risk borrowers already priced with higher rates</li>
-                      <li><strong>Action</strong>: Use rate as validation metric, not primary decision factor</li>
-                    </ul>
-                  </div>
-
-                  <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-4 mb-3">
-                    <h5 class="font-semibold text-lg mb-2">Annual Income (r = −0.811)</h5>
-                    <ul class="space-y-1 text-gray-700 dark:text-gray-300">
-                      <li><strong>Pattern</strong>: Clear negative correlation - higher income = lower risk</li>
-                      <li><strong>Threshold effects</strong>: Risk drops significantly above $40K, plateaus after $80K</li>
-                      <li><strong>Business application</strong>: Set minimum income requirements by loan amount</li>
-                    </ul>
-                  </div>
-
-                  <h4 class="font-semibold mt-6 mb-3" style="color: var(--brown);">Non-Linear Relationships</h4>
-                  
-                  <div class="bg-amber-50 dark:bg-amber-900/20 border-l-4 border-amber-500 p-4">
-                    <h5 class="font-semibold text-amber-800 dark:text-amber-200 mb-2">Credit Utilization — U-Shaped Curve Discovery</h5>
-                    <ul class="space-y-1 text-amber-700 dark:text-amber-300">
-                      <li><strong>Low utilization (&lt;30%)</strong>: Slight risk increase - possibly inactive cards or limited credit experience</li>
-                      <li><strong>Moderate utilization (30-70%)</strong>: <strong>Optimal range</strong> - active but responsible credit use</li>
-                      <li><strong>High utilization (&gt;70%)</strong>: Sharp risk increase - financial stress signal</li>
-                    </ul>
-                    <p class="mt-2 text-amber-700 dark:text-amber-300">This finding challenges conventional wisdom and suggests a more nuanced underwriting approach.</p>
-                  </div>
-                </div>
-              </div>
-
-              <!-- 3. Model Comparison Insights -->
-              <div class="contact-info-card">
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">3. Model Comparison Insights</h3>
-                <div class="space-y-4">
-                  <div class="figure-editorial">
-                    <h4 class="font-semibold mb-3" style="color: var(--coral);">Model Comparison: Random Forest vs LightGBM Feature Importance</h4>
-                    <img src="figures/rf vs lightgbm.png" alt="RF vs LightGBM Comparison" class="w-full" />
-                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Both models agree on core features (annual_inc, int_rate, revol_util) but LightGBM reveals additional interaction patterns</p>
-                  </div>
-
-                  <h4 class="font-semibold mt-6 mb-3" style="color: var(--brown);">Consensus Features (Both Models Agree)</h4>
-                  <div class="bg-green-50 dark:bg-green-900/20 border-l-4 border-green-500 p-4">
-                    <p class="content-kicker">High-Confidence Risk Factors</p>
-                    <ul class="mt-2 space-y-1 text-green-700 dark:text-green-300">
-                      <li><code class="bg-green-100 dark:bg-green-800 px-1 rounded">annual_inc</code> - Fundamental payment ability</li>
-                      <li><code class="bg-green-100 dark:bg-green-800 px-1 rounded">int_rate</code> - Market risk assessment</li>
-                      <li><code class="bg-green-100 dark:bg-green-800 px-1 rounded">revol_util</code> - Credit behavior indicator</li>
-                      <li><code class="bg-green-100 dark:bg-green-800 px-1 rounded">financial_stress_index</code> - Our engineered composite metric</li>
-                      <li><code class="bg-green-100 dark:bg-green-800 px-1 rounded">risk_adjusted_rate</code> - Premium over baseline rate</li>
-                    </ul>
-                    <p class="mt-3 font-semibold text-green-800 dark:text-green-200">These features should be heavily weighted in final decisions as both models confirm their importance.</p>
-                  </div>
-                </div>
-              </div>
-
-              <!-- 4. SHAP-Based Risk Profiles -->
-              <div class="contact-info-card">
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">4. SHAP-Based Risk Profiles</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <!-- High Risk Borrower Profile -->
-                  <div class="border-2 border-red-500 rounded-lg overflow-hidden">
-                    <div class="bg-red-500 text-white p-3">
-                      <h5 class="font-semibold text-lg">High-Risk Borrower Profile<span class="risk-tag risk-tag--high">High Risk</span></h5>
-                    </div>
-                    <div class="p-4 bg-white dark:bg-gray-900">
-                      <h6 class="font-semibold text-red-600 dark:text-red-400 mb-2">Credit Stress Signals</h6>
-                      <ul class="space-y-1 text-sm text-gray-700 dark:text-gray-300 mb-4">
-                        <li>• Credit utilization &gt; 85% (SHAP: +0.20)</li>
-                        <li>• Multiple recent inquiries</li>
-                        <li>• Thin credit file (&lt;3 years history)</li>
-                      </ul>
-                      
-                      <h6 class="font-semibold text-red-600 dark:text-red-400 mb-2">Financial Capacity Issues</h6>
-                      <ul class="space-y-1 text-sm text-gray-700 dark:text-gray-300 mb-4">
-                        <li>• Annual income &lt; $40,000 (SHAP: +0.30)</li>
-                        <li>• High loan-to-income ratio</li>
-                        <li>• Requesting 60-month term</li>
-                      </ul>
-                      
-                      <h6 class="font-semibold text-red-600 dark:text-red-400 mb-2">Market Risk Indicators</h6>
-                      <ul class="space-y-1 text-sm text-gray-700 dark:text-gray-300 mb-4">
-                        <li>• Assigned F/G grade</li>
-                        <li>• Interest rate &gt; 18%</li>
-                        <li>• High-risk state location</li>
-                      </ul>
-                      
-                      <div class="mt-4 p-3 bg-red-50 dark:bg-red-900/20 rounded">
-                        <p class="text-sm"><strong style="color: var(--coral);">Combined SHAP Impact: +0.75 to +1.0</strong></p>
-                        <p class="text-xs text-gray-600 dark:text-gray-400 mt-1">(Pushes probability from 16.8% baseline to 60%+ default risk)</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- Low Risk Borrower Profile -->
-                  <div class="border-2 border-green-500 rounded-lg overflow-hidden">
-                    <div class="bg-green-500 text-white p-3">
-                      <h5 class="font-semibold text-lg">Low-Risk Borrower Profile<span class="risk-tag risk-tag--low">Low Risk</span></h5>
-                    </div>
-                    <div class="p-4 bg-white dark:bg-gray-900">
-                      <h6 class="font-semibold text-green-600 dark:text-green-400 mb-2">Financial Strength</h6>
-                      <ul class="space-y-1 text-sm text-gray-700 dark:text-gray-300 mb-4">
-                        <li>• Annual income &gt; $75,000 (SHAP: -0.40)</li>
-                        <li>• Moderate credit utilization (40-60%) (SHAP: -0.35)</li>
-                        <li>• Low debt-to-income ratio</li>
-                      </ul>
-                      
-                      <h6 class="font-semibold text-green-600 dark:text-green-400 mb-2">Credit Maturity</h6>
-                      <ul class="space-y-1 text-sm text-gray-700 dark:text-gray-300 mb-4">
-                        <li>• Established credit history (&gt;7 years)</li>
-                        <li>• No recent credit inquiries</li>
-                        <li>• Consistent payment history</li>
-                      </ul>
-                      
-                      <h6 class="font-semibold text-green-600 dark:text-green-400 mb-2">Loan Characteristics</h6>
-                      <ul class="space-y-1 text-sm text-gray-700 dark:text-gray-300 mb-4">
-                        <li>• 36-month term preference</li>
-                        <li>• A/B grade assignment</li>
-                        <li>• Interest rate &lt; 10%</li>
-                      </ul>
-                      
-                      <div class="mt-4 p-3 bg-green-50 dark:bg-green-900/20 rounded">
-                        <p class="text-sm"><strong style="color: var(--coral);">Combined SHAP Impact: -0.80 to -1.0</strong></p>
-                        <p class="text-xs text-gray-600 dark:text-gray-400 mt-1">(Reduces probability to &lt;5% default risk)</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- 5. Actionable Business Insights -->
-              <div class="contact-info-card">
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">5. Actionable Business Insights</h3>
-                
-                <h4 class="font-semibold mb-3" style="color: var(--brown);">Immediate Policy Changes</h4>
-                
-                <div class="space-y-4">
-                  <div class="border border-gray-200 dark:border-gray-700 rounded-lg">
-                    <div class="bg-gray-50 dark:bg-gray-800 p-3 border-b border-gray-200 dark:border-gray-700">
-                      <h5 class="font-semibold" style="color: var(--coral);">1. Revise Credit Utilization Assessment</h5>
-                    </div>
-                    <div class="p-4">
-                      <pre class="bg-gray-900 text-gray-100 p-3 rounded text-sm overflow-x-auto"><code>Old: Linear penalty for higher utilization
-New: 
-- Green zone: 30-70% utilization
-- Yellow zone: &lt;30% or 70-85%
-- Red zone: 0% (inactive) or &gt;85%</code></pre>
-                    </div>
-                  </div>
-
-                  <div class="border border-gray-200 dark:border-gray-700 rounded-lg">
-                    <div class="bg-gray-50 dark:bg-gray-800 p-3 border-b border-gray-200 dark:border-gray-700">
-                      <h5 class="font-semibold" style="color: var(--coral);">2. Grade-Term Combination Rules</h5>
-                    </div>
-                    <div class="p-4">
-                      <pre class="bg-gray-900 text-gray-100 p-3 rounded text-sm overflow-x-auto"><code>Auto-decline: F/G grade + 60-month term
-Manual review: E grade + 60-month term
-Auto-approve: A/B grade + 36-month term</code></pre>
-                    </div>
-                  </div>
-
-                  <div class="border border-gray-200 dark:border-gray-700 rounded-lg">
-                    <div class="bg-gray-50 dark:bg-gray-800 p-3 border-b border-gray-200 dark:border-gray-700">
-                      <h5 class="font-semibold" style="color: var(--coral);">3. Income-Based Loan Caps</h5>
-                    </div>
-                    <div class="p-4">
-                      <pre class="bg-gray-900 text-gray-100 p-3 rounded text-sm overflow-x-auto"><code>Income &lt; $40K: Max loan $10K
-Income $40-75K: Max loan $25K
-Income &gt; $75K: Max loan $50K</code></pre>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="bg-green-50 dark:bg-green-900/20 border-l-4 border-green-500 p-4 mt-6">
-                  <h4 class="font-semibold text-green-800 dark:text-green-200 mb-3">Strategic Insights</h4>
-                  <ol class="space-y-1 text-green-700 dark:text-green-300 list-decimal list-inside">
-                    <li><strong>Credit utilization is non-linear</strong> - moderate usage is healthy</li>
-                    <li><strong>Interest rate reflects rather than predicts risk</strong> - it's already priced in</li>
-                    <li><strong>Geographic risk matters</strong> - state_risk_score adds value</li>
-                    <li><strong>Feature engineering works</strong> - our composite features rank highly</li>
-                  </ol>
-
-                  <h4 class="font-semibold text-green-800 dark:text-green-200 mb-3 mt-4">Operational Recommendations</h4>
-                  <ol class="space-y-1 text-green-700 dark:text-green-300 list-decimal list-inside">
-                    <li>Implement three-tier utilization assessment</li>
-                    <li>Auto-decline toxic grade-term combinations</li>
-                    <li>Set <span style="color: var(--coral);">income-based loan caps</span></li>
-                    <li>Use model consensus as confidence metric</li>
-                  </ol>
-
-                  <h4 class="font-semibold text-green-800 dark:text-green-200 mb-3 mt-4">Next Steps</h4>
-                  <ol class="space-y-1 text-green-700 dark:text-green-300 list-decimal list-inside">
-                    <li>A/B test moderate utilization hypothesis</li>
-                    <li>Develop state-specific strategies</li>
-                    <li>Create customer segments based on SHAP profiles</li>
-                    <li>Build explanation engine for declined applications</li>
-                  </ol>
-                </div>
-              </div>
-
-              <!-- SHAP Analysis Conclusion -->
-              <div class="contact-info-card">
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">SHAP Analysis Conclusion</h3>
-                <p class="text-gray-700 dark:text-gray-300 mb-4">The LightGBM SHAP analysis revealed critical insights that challenge traditional lending wisdom:</p>
-                <ul class="space-y-2 text-gray-700 dark:text-gray-300 mb-4">
-                  <li>• <strong>Moderate credit utilization is actually protective</strong> (30-70% optimal range)</li>
-                  <li>• <strong>Interest rate is a consequence, not predictor of risk</strong></li>
-                  <li>• <strong>Geographic and temporal patterns matter more than expected</strong></li>
-                  <li>• <strong>Our engineered features successfully capture complex risk patterns</strong></li>
-                </ul>
-                <p class="text-gray-700 dark:text-gray-300">The SHAP analysis transforms our model from a "black box" into a transparent, interpretable system that not only predicts risk but also provides actionable insights for policy improvements and customer communication.</p>
+                <p class="subtitle">At threshold 0.16, LightGBM catches 74.9% of test-set defaults at 26.9% precision, for a total error cost of about $2.63M. Approving every applicant, so that every default becomes a loss, would cost $3.58M, so the model lowers expected loss by <strong>26.5%</strong>. The low precision is deliberate: at a 4.2:1 cost ratio, flagging some good loans to catch more defaults is the cheaper mistake — flagged loans enter a manual-review queue rather than an automatic decline.</p>
               </div>
             </div>
           </section>
 
-          <!-- Conclusion and Strategic Action Plan -->
-          <section id="conclusion" class="section-padding section--editorial" data-section-num="06">
+          <!-- SHAP Attribution -->
+          <section id="shap" class="section-padding section--editorial" data-section-num="06">
             <div class="section-header">
               <div class="section-eyebrow">
                 <span class="section-num">06</span>
-                <span class="section-kicker">Conclusion &amp; Roadmap</span>
+                <span class="section-kicker">Why Loans Default</span>
               </div>
-              <h2 class="section-title">Final Conclusions &amp; Strategic Action Plan</h2>
+              <h2 class="section-title">Why Loans Default: SHAP Attribution</h2>
             </div>
-            
+
             <div class="space-y-8">
-              <!-- Three-Tier Risk Response System -->
-              <div class="contact-info-card">
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">Production Integration Strategy: Three-Tier Risk Management System</h3>
-                <p class="subtitle mb-6">Based on model-predicted risk scores, implement a tiered management strategy that balances risk control with customer experience.</p>
-                
-                <div class="space-y-4">
-                  <div class="note note--evidence">
-                    <div class="note__label">Tier 1 · Auto-Approval (Score &lt; 0.15)</div>
-                    <div class="note__body">
-                      <p><strong>Coverage</strong>: ~60% of applications</p>
-                      <p><strong>Processing</strong>: instant approval, best rates offered</p>
-                      <p><strong>Default risk</strong>: &lt;5%</p>
-                      <p><strong>Business impact</strong>: maximize conversion, build customer loyalty</p>
-                    </div>
-                  </div>
+              <p class="subtitle">SHAP assigns each feature a signed contribution to each prediction, so the model's reasoning can be read globally and per loan. The attribution runs on the LightGBM model in original feature units, and every direction is checked against the EDA.</p>
 
-                  <div class="note note--caveat">
-                    <div class="note__label">Tier 2 · Standard Review (Score 0.15–0.30)</div>
-                    <div class="note__body">
-                      <p><strong>Coverage</strong>: ~25% of applications</p>
-                      <p><strong>Processing</strong>: quick automated verification checks</p>
-                      <p><strong>Default risk</strong>: 10–20%</p>
-                      <p><strong>Business impact</strong>: balance risk management with growth</p>
-                    </div>
-                  </div>
+              <figure class="figure-editorial">
+                <img src="figures/shap_summary.png" alt="SHAP summary" loading="lazy" decoding="async" />
+                <figcaption>SHAP summary — top drivers are loan term, annual income, grade, recent inquiries and purpose; the engineered financial_stress_index and grade_term_risk both rank in the top six.</figcaption>
+              </figure>
 
-                  <div class="note note--insight">
-                    <div class="note__label">Tier 3 · Manual Review (Score &gt; 0.30)</div>
-                    <div class="note__body">
-                      <p><strong>Coverage</strong>: ~15% of applications</p>
-                      <p><strong>Processing</strong>: manual underwriting or auto-decline</p>
-                      <p><strong>Default risk</strong>: &gt;30%</p>
-                      <p><strong>Business impact</strong>: prevent major losses, protect portfolio health</p>
-                    </div>
-                  </div>
+              <div class="note note--evidence">
+                <div class="note__label">Direction Check · Mean signed SHAP misleads</div>
+                <div class="note__body">
+                  <p><strong>Interest rate raises risk.</strong> Its mean signed SHAP is near zero, but that statistic hides the direction. The dependence plot shows a clear positive slope (correlation +0.55 between the rate and its SHAP value), matching the EDA correlation of 0.265 and the large Cohen's d. Mean signed SHAP is the wrong statistic to read direction from; the dependence relationship is the right one.</p>
+                  <p><strong>Utilization has no protective middle zone.</strong> Higher utilization pushes risk up throughout, in line with the monotone band chart. Higher income lowers risk (correlation −0.83); a worse grade raises it (+0.91).</p>
                 </div>
               </div>
 
-              <!-- Expected Business Outcomes -->
-              <div class="contact-info-card">
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">Expected Business Outcomes & Value</h3>
-                <div class="grid md:grid-cols-3 gap-6">
-                  <div class="text-center p-4 bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 rounded-lg">
-                    <div class="text-3xl font-bold" style="color: var(--blue);">$2.3M</div>
-                    <div class="text-sm mt-2" style="color: var(--brown);">Annual Cost Savings</div>
-                  </div>
-                  <div class="text-center p-4 bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 rounded-lg">
-                    <div class="text-3xl font-bold" style="color: var(--sage);">80.7%</div>
-                    <div class="text-sm mt-2" style="color: var(--brown);">Default Detection Rate</div>
-                  </div>
-                  <div class="text-center p-4 bg-gradient-to-br from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-lg">
-                    <div class="text-3xl font-bold" style="color: var(--coral);">60%</div>
-                    <div class="text-sm mt-2" style="color: var(--brown);">Auto-Approval Rate</div>
-                  </div>
+              <figure class="figure-editorial">
+                <img src="figures/shap_dependence.png" alt="SHAP dependence, direction check" loading="lazy" decoding="async" />
+                <figcaption>SHAP dependence, direction check — point-level dependence for rate, utilization, income and grade, all consistent with the EDA.</figcaption>
+              </figure>
+            </div>
+          </section>
+
+          <!-- Actions & Limits -->
+          <section id="recommendations" class="section-padding section--editorial" data-section-num="07">
+            <div class="section-header">
+              <div class="section-eyebrow">
+                <span class="section-num">07</span>
+                <span class="section-kicker">Actions &amp; Limits</span>
+              </div>
+              <h2 class="section-title">Actions &amp; Limits</h2>
+            </div>
+
+            <div class="space-y-8">
+              <div class="overflow-x-auto">
+                <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
+                  <thead>
+                    <tr class="bg-gray-100 dark:bg-gray-700/30">
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Initiative</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">What to do</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Basis in the analysis</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Score at the cost-optimal threshold</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Run new applications through LightGBM at threshold 0.16; send flagged loans to manual review, not automatic decline.</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">74.9% of defaults caught, 26.5% lower expected loss than approving all.</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Reprice or cap long-term loans</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Add a risk premium to 60-month loans or restrict them to stronger grades.</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">60-month default rate 32.4% vs 11.3% for 36-month; term is the top SHAP driver.</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Tighten the low-grade tail</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Apply enhanced review or hard cut-offs at grades E to G.</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">9.4% of volume but 22.0% of defaults.</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Stop treating verification as clearance</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Do not lower scrutiny because income was verified.</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Verified loans default more (19.4% vs 14.4%).</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="note note--caveat">
+                <div class="note__label">Limits</div>
+                <div class="note__body">
+                  <p>This is a single cross-section of completed loans with no origination dates, so no time-based validation is possible and <code>credit_history_years</code> is a fixed-reference approximation. Interest rate already embeds LendingClub's own risk pricing, so part of its predictive power reflects information the platform encoded at origination rather than an independent borrower signal. The cost figures use portfolio-average FN and FP costs; a production system would price each loan's exposure individually.</p>
                 </div>
               </div>
 
-              <!-- Implementation Roadmap -->
               <div class="contact-info-card">
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">Implementation Roadmap & Continuous Improvement</h3>
-                <div class="space-y-4">
-                  <div class="grid md:grid-cols-2 gap-6">
-                    <div>
-                      <h4 class="font-semibold mb-3" style="color: var(--dark);">Immediate Actions (0-30 days)</h4>
-                      <ul class="space-y-2 subtitle">
-                        <li>✓ Deploy three-tier risk management system</li>
-                        <li>✓ Implement cost-optimized decision thresholds</li>
-                        <li>✓ Establish model monitoring dashboard</li>
-                        <li>✓ Train risk team on new processes</li>
-                      </ul>
-                    </div>
-                    <div>
-                      <h4 class="font-semibold mb-3" style="color: var(--dark);">Mid-term Optimization (30-90 days)</h4>
-                      <ul class="space-y-2 subtitle">
-                        <li>✓ A/B test different threshold strategies</li>
-                        <li>✓ Collect manual review feedback</li>
-                        <li>✓ Optimize feature engineering</li>
-                        <li>✓ Establish quarterly retraining process</li>
-                      </ul>
-                    </div>
-                  </div>
-
-                  <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4 mt-6">
-                    <h4 class="font-semibold text-blue-800 dark:text-blue-200 mb-3">Key Success Factors</h4>
-                    <ul class="space-y-2 text-blue-700 dark:text-blue-300">
-                      <li><strong>Continuous monitoring</strong>: Track model performance drift and feature distribution changes</li>
-                      <li><strong>Feedback loops</strong>: Use manual review outcomes for model improvement</li>
-                      <li><strong>Cross-functional collaboration</strong>: Risk, sales, and IT teams working closely</li>
-                      <li><strong>Compliance</strong>: Ensure decision transparency and fairness</li>
-                    </ul>
-                  </div>
-
-                  <div class="mt-6 p-4 bg-gradient-to-r from-red-50 to-yellow-50 dark:from-red-900/20 dark:to-yellow-900/20 rounded-lg">
-                    <p class="text-lg font-semibold" style="color: var(--coral);">
-                      Core Value — this system not only reduces financial losses but more importantly establishes a data-driven risk management culture, laying the foundation for sustainable business growth.
-                    </p>
-                  </div>
-                </div>
+                <h3 class="text-xl font-semibold mb-3" style="color: var(--dark);">Reproducibility</h3>
+                <p class="subtitle">The notebook runs end to end locally (<code>uv run jupyter nbconvert --to notebook --execute</code>). All random seeds are fixed at 42; figures are written to <code>figures/</code>.</p>
               </div>
             </div>
           </section>
@@ -1414,7 +617,7 @@ Income &gt; $75K: Max loan $50K</code></pre>
       </div>
     </section>
 
-    <!-- Related Projects -->
+    <!-- Related projects -->
     <section id="related" class="section-padding">
       <div class="section-header reveal">
         <div class="section-eyebrow">
@@ -1428,10 +631,10 @@ Income &gt; $75K: Max loan $50K</code></pre>
           window.location.href = lang === 'en' ? '../e-commerce fraud detection/e-commerce fraud detection-en.html' : '../e-commerce fraud detection/e-commerce fraud detection.html';
           return false;
         ">
-          <h3 class="related-project-title">E-commerce First Transaction Fraud Detection</h3>
-          <p class="related-project-description">LightGBM-based fraud detection system achieving 51.2% detection rate</p>
+          <h3 class="related-project-title">First-Transaction Fraud Detection</h3>
+          <p class="related-project-description">Another cost-threshold problem: recall data-locked at 52%</p>
           <div class="related-project-link">
-            <span>View Details</span>
+            <span>View details</span>
             <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>
           </div>
         </a>
@@ -1441,9 +644,9 @@ Income &gt; $75K: Max loan $50K</code></pre>
           return false;
         ">
           <h3 class="related-project-title">Bank Customer Churn Prediction</h3>
-          <p class="related-project-description">XGBoost and SHAP-based customer churn prediction and retention strategy</p>
+          <p class="related-project-description">F2 threshold tuning and a C*≈3.3 break-even cost ratio</p>
           <div class="related-project-link">
-            <span>View Details</span>
+            <span>View details</span>
             <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>
           </div>
         </a>
@@ -1451,22 +654,20 @@ Income &gt; $75K: Max loan $50K</code></pre>
     </section>
   </main>
 
-  <!-- Bottom scripts: Prism / Local scripts / Logo animation / Detail page logic -->
+  <!-- Bottom scripts: Prism / local scripts / logo animation / detail-page logic -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
   <script src="../../assets/js/logo.js"></script>
-  <!-- Import common modules -->
   <script src="../../assets/js/common.js"></script>
   <script src="../../assets/js/charts.js"></script>
   <script src="../../assets/js/project.js"></script>
-  
+
   <!-- Language toggle functionality -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       const langToggle = document.getElementById('lang-toggle');
       if (langToggle) {
         langToggle.addEventListener('click', function() {
-          // Save language preference and redirect to Chinese version
           localStorage.setItem('language', 'zh');
           window.location.href = 'lending hub loan prediction.html';
         });

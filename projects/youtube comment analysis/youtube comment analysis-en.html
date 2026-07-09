@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <script>document.documentElement.classList.add('js');</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pet Owners in 5.8M YouTube Comments: A Weakly Supervised Read - Data Poetics</title>
+  <meta name="description" content="5.82M pet-channel comments with no ground-truth label: weak-supervision labelling + feature decoupling + 300 stratified hand labels. Masked model agreement-AUC 0.91, isolating 44,623 high-confidence owners at ~0.94 precision, and ranking creators by owner audience share." />
+
+  <!-- Same as homepage: Tailwind / fonts / icons / site styles -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+SC:wght@400;500;600&family=Noto+Serif+SC:wght@500&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/lucide-react/dist/umd/lucide-react.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="../../assets/css/index.css" />
+  <link rel="stylesheet" href="../../assets/css/project.css" />
+
+  <!-- Code highlighting + charts (common on detail pages) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+  <style>
+    .dark table.performance-table thead tr {
+      background-color: rgba(64, 64, 64, 0.25) !important;
+    }
+    .dark .dark\:text-gray-300 {
+      color: var(--dark) !important;
+    }
+  </style>
+</head>
+<body class="transition-colors duration-300">
+  <div class="scroll-progress" id="scroll-progress"></div>
+
+  <!-- Top navigation (reuses homepage structure and styles) -->
+  <header id="navbar" class="navbar fixed top-0 left-0 right-0 z-50">
+    <div class="container-main h-full flex items-center justify-between">
+      <a href="../../index-en.html#hero" class="navbar-logo" id="navbar-logo">
+        <svg class="logo-svg-nav" viewBox="0 0 40 40">
+          <g class="grid-bg">
+            <line class="grid-line-v" x1="8" y1="0" x2="8" y2="40" style="animation-delay: 0.1s, 0s" />
+            <line class="grid-line-v" x1="16" y1="0" x2="16" y2="40" style="animation-delay: 0.2s, 0.5s" />
+            <line class="grid-line-v" x1="24" y1="0" x2="24" y2="40" style="animation-delay: 0.3s, 1s" />
+            <line class="grid-line-v" x1="32" y1="0" x2="32" y2="40" style="animation-delay: 0.4s, 1.5s" />
+            <line class="grid-line-h" x1="0" y1="10" x2="40" y2="10" style="animation-delay: 0.5s, 0s" />
+            <line class="grid-line-h" x1="0" y1="20" x2="40" y2="20" style="animation-delay: 0.6s, 0.7s" />
+            <line class="grid-line-h" x1="0" y1="30" x2="40" y2="30" style="animation-delay: 0.7s, 1.4s" />
+          </g>
+          <line class="weaver-line" id="weaverLine" x1="0" y1="20" x2="40" y2="20" />
+          <text class="logo-letters" id="logoLetters" x="20" y="26" text-anchor="middle">JX</text>
+        </svg>
+        <div class="logo-name">
+          <div class="logo-name-text">Juye Xiao</div>
+          <div class="logo-name-subtitle">Data Analyst</div>
+        </div>
+      </a>
+
+      <nav class="hidden md:flex items-center space-x-8">
+        <a href="../../index-en.html#about" class="nav-link">About</a>
+        <a href="../../index-en.html#experience" class="nav-link">Experience</a>
+        <a href="../../index-en.html#education" class="nav-link">Education</a>
+        <a href="../../index-en.html#projects" class="nav-link">Projects</a>
+        <a href="../../index-en.html#skills" class="nav-link">Skills</a>
+        <a href="../../index-en.html#contact" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="flex items-center space-x-4">
+        <button id="theme-toggle" class="btn-secondary !p-2 !rounded-full" title="Toggle theme">
+          <i data-lucide="sun" class="block dark:hidden"></i>
+          <i data-lucide="moon" class="hidden dark:block"></i>
+        </button>
+        <button id="lang-toggle" class="btn-secondary !p-2 !rounded-full"><span class="font-bold text-sm">中</span></button>
+        <button id="menu-toggle" class="btn-secondary !p-2 !rounded-full md:hidden"
+          aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+          <i data-lucide="menu" class="menu-icon-open"></i>
+          <i data-lucide="x" class="menu-icon-close"></i>
+        </button>
+      </div>
+    </div>
+    <nav id="mobile-menu" class="mobile-menu md:hidden" aria-label="Mobile navigation">
+      <a href="../../index-en.html#about" class="nav-link">About</a>
+      <a href="../../index-en.html#experience" class="nav-link">Experience</a>
+      <a href="../../index-en.html#education" class="nav-link">Education</a>
+      <a href="../../index-en.html#projects" class="nav-link">Projects</a>
+      <a href="../../index-en.html#skills" class="nav-link">Skills</a>
+      <a href="../../index-en.html#contact" class="nav-link">Contact</a>
+    </nav>
+  </header>
+
+  <main class="container-main">
+    <!-- Project hero -->
+    <section id="project-hero" class="section-padding" style="padding-top: calc(var(--space-xl) + 72px)">
+      <div class="grid md:grid-cols-2 gap-16 items-center w-full">
+        <div class="reveal">
+          <div class="section-eyebrow">
+            <span class="section-kicker">Case Study · NLP &amp; Weak Supervision</span>
+          </div>
+          <h1 class="hero-title mt-2">Pet Owners in 5.8M YouTube Comments: A Weakly Supervised Read</h1>
+          <p class="subtitle mt-4 max-w-xl">There is no ground-truth owner label. Written honestly as weak supervision, held out by user, and checked against 300 hand labels — the answer is a modest but real signal, reported with intervals rather than a single headline number.</p>
+          <div class="reading-time">~15 min read<span class="sep">·</span>20 charts</div>
+
+          <div class="hero-stats">
+            <div class="hero-stat">
+              <div class="hero-stat__num">5.82M</div>
+              <div class="hero-stat__label">comments (2.54M users, 3,858 creators)</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat__num">0.91</div>
+              <div class="hero-stat__label">masked agreement-AUC</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat__num">0.94</div>
+              <div class="hero-stat__label">human precision @ precision-first τ</div>
+            </div>
+          </div>
+
+          <div class="mt-8 flex items-center gap-4">
+            <a href="#content" class="btn btn-primary">Start reading</a>
+            <a href="../../index-en.html#projects" class="btn btn-secondary">Back to projects</a>
+          </div>
+        </div>
+        <aside class="reveal hero-stack">
+          <div class="hero-stack__label">Methods · Stack</div>
+          <ol class="hero-stack__list">
+            <li>
+              <span class="hero-stack__num">01</span>
+              <span class="hero-stack__name">Weak-supervision LFs</span>
+              <span class="hero-stack__desc">Strong-possession / weak-context / negation rules, 1.5% positive</span>
+            </li>
+            <li>
+              <span class="hero-stack__num">02</span>
+              <span class="hero-stack__name">Feature decoupling</span>
+              <span class="hero-stack__desc">Masked TF-IDF strips every rule trigger word</span>
+            </li>
+            <li>
+              <span class="hero-stack__num">03</span>
+              <span class="hero-stack__name">XGBoost + grouped CV</span>
+              <span class="hero-stack__desc">GroupShuffleSplit / StratifiedGroupKFold by userid</span>
+            </li>
+            <li>
+              <span class="hero-stack__num">04</span>
+              <span class="hero-stack__name">Dual evaluation</span>
+              <span class="hero-stack__desc">Rule agreement-AUC + 300 stratified hand labels, Wilson intervals</span>
+            </li>
+            <li>
+              <span class="hero-stack__num">05</span>
+              <span class="hero-stack__name">Full-corpus scoring</span>
+              <span class="hero-stack__desc">τ_F1 / τ_P80 operating points, LDA topics, creator ranking</span>
+            </li>
+          </ol>
+          <div class="hero-stack__foot">Python · pandas · scikit-learn · xgboost · pyarrow · shap · LDA</div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Quick summary cards -->
+    <section id="quick-summary" class="section-padding">
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="summary-card">
+          <h3 class="summary-card-title">The Challenge</h3>
+          <p class="summary-card-content">5.82M comments, no ground-truth label at all. "Train a classifier and report the AUC" is circular reasoning — the task needs a method that honestly estimates the real signal, not an inflated score.</p>
+        </div>
+        <div class="summary-card">
+          <h3 class="summary-card-title">The Solution</h3>
+          <p class="summary-card-content">Weak-supervision labels + feature decoupling + grouping by user + 300 hand labels + an ablation that quantifies leakage, separating what merely reconstructs the rules from the real signal.</p>
+        </div>
+        <div class="summary-card">
+          <h3 class="summary-card-title">The Value</h3>
+          <p class="summary-card-content">Isolates 44,623 high-confidence owners at ~0.94 precision (91,443, 3.6%, at τ_F1); creators are ranked by likely-owner audience share to guide KOL targeting (Zak George 0.51 top).</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main content: TOC + body -->
+    <section id="content" class="section-padding">
+      <div class="grid md:grid-cols-12 gap-12">
+        <aside class="md:col-span-3">
+          <nav class="project-toc sticky top-24" id="project-toc">
+            <h3 class="text-xl font-semibold" style="color: var(--dark);">Contents</h3>
+            <ul class="mt-4 space-y-2" id="toc-list">
+              <li><a href="#summary" class="toc-link" data-section="summary">Executive Summary</a></li>
+              <li><a href="#data" class="toc-link" data-section="data">The Corpus</a></li>
+              <li><a href="#weak" class="toc-link" data-section="weak">Weak Supervision</a></li>
+              <li><a href="#decouple" class="toc-link" data-section="decouple">Decoupling &amp; Ablation</a></li>
+              <li><a href="#human" class="toc-link" data-section="human">Human Validation</a></li>
+              <li><a href="#shap" class="toc-link" data-section="shap">What the Model Uses</a></li>
+              <li><a href="#scoring" class="toc-link" data-section="scoring">Full-corpus Scoring</a></li>
+              <li><a href="#limits" class="toc-link" data-section="limits">Limits &amp; Reproducibility</a></li>
+            </ul>
+          </nav>
+        </aside>
+
+        <div class="md:col-span-9 content-area">
+          <!-- Executive Summary -->
+          <section id="summary" class="section-padding section--editorial" data-section-num="00">
+            <div class="section-header">
+              <div class="section-eyebrow">
+                <span class="section-num">00</span>
+                <span class="section-kicker">Executive Summary</span>
+              </div>
+              <h2 class="section-title">Executive Summary</h2>
+            </div>
+
+            <div class="space-y-6">
+              <div class="contact-info-card">
+                <p class="subtitle mb-4">There is no ground-truth owner label in this dataset. Written honestly as weak supervision, held out by user, and checked against 300 hand-labelled comments, the analysis estimates how much genuine ownership signal the comments carry. The answer is a modest but real signal, reported with intervals rather than a single headline number.</p>
+
+                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">Four findings</h3>
+                <ul class="list-disc list-inside space-y-3 subtitle mb-6">
+                  <li><strong>A high agreement score is mostly rule reconstruction.</strong> With the rule's own words left in the vocabulary a model reaches AUC 0.96; remove those words and it falls to 0.91. That 0.05 is not skill, it is the model re-deriving the regexes it was trained to imitate.</li>
+                  <li><strong>There is real signal underneath.</strong> Even blind to the trigger words, the masked model reaches 0.91 agreement-AUC by leaning on comment length, care vocabulary, creator and user behaviour, and language — not on "dog" or "cat".</li>
+                  <li><strong>The model finds owners the rules miss.</strong> In comment bands where the rules never fire, the model's high-scored picks are 3–9× more likely to be true owners than the band's base rate, and it out-predicts the full-vocabulary model there. That is generalisation, not memorisation.</li>
+                  <li><strong>Honesty costs precision points, not the whole result.</strong> A precision-first threshold still isolates ~45k users at ~0.94 precision.</li>
+                </ul>
+
+                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">At a glance</h3>
+                <div class="overflow-x-auto">
+                  <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
+                    <thead>
+                      <tr class="bg-gray-100 dark:bg-gray-700/30">
+                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Item</th>
+                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Result</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Corpus</strong></td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">5,818,979 comments, 2,536,890 users, 3,858 creators</td>
+                      </tr>
+                      <tr>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Rule label</strong></td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">1.5% positive (88,420 comments), three labelling functions</td>
+                      </tr>
+                      <tr>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Agreement-AUC</strong></td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">0.91 masked vs 0.96 full-vocabulary (the gap is rule reconstruction)</td>
+                      </tr>
+                      <tr>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Human precision</strong></td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">0.94 at a precision-first threshold; 0.58 at the F1 threshold (wide CI, n=300)</td>
+                      </tr>
+                      <tr>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Likely owners</strong></td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">91,443 users (3.6%) at τ_F1; 44,623 (1.8%) at τ_P80</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div class="note note--caveat">
+                <div class="note__label">Method · Why not just report 0.96</div>
+                <div class="note__body">
+                  <p>The label is synthesized by three regexes, and the same content words can enter the model — if those words are left in the vocabulary the model naturally reaches 0.96 agreement-AUC, but that is mostly reconstructing the labelling rule itself. This analysis defines the gap between 0.96 and the masked 0.91 explicitly as "rule reconstruction" and subtracts it, reporting only the 0.91 as genuine generalisation signal.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- The Corpus -->
+          <section id="data" class="section-padding section--editorial" data-section-num="01">
+            <div class="section-header">
+              <div class="section-eyebrow">
+                <span class="section-num">01</span>
+                <span class="section-kicker">The Corpus</span>
+              </div>
+              <h2 class="section-title">The Data</h2>
+            </div>
+
+            <div class="space-y-8">
+              <div class="contact-info-card">
+                <p class="subtitle">The dataset is a scrape of comments under pet-focused YouTube channels: three columns (<code>creator_name</code>, <code>userid</code>, <code>comment</code>), 5.82M rows after dropping 491 empty comments. It is not a panel of user behaviour: two thirds of users comment exactly once, 85% appear under a single creator, and the top 38 creators hold 66% of all comments — a creator Gini of 0.94.</p>
+              </div>
+
+              <figure class="figure-editorial">
+                <img src="figures/creator_concentration_lorenz.png" alt="Creator concentration Lorenz curve" loading="lazy" decoding="async" />
+                <figcaption>Creator concentration Lorenz curve — Gini 0.94, with the top 38 creators holding 66% of comments, made self-checking by the curve.</figcaption>
+              </figure>
+
+              <div class="figure-grid">
+                <figure class="figure-editorial">
+                  <img src="figures/user_activity_powerlaw_loglog.png" alt="User activity power law (log-log)" loading="lazy" decoding="async" />
+                  <figcaption>User activity follows a power law (log-log axes) — a few users comment heavily, a long tail comments once.</figcaption>
+                </figure>
+                <figure class="figure-editorial">
+                  <img src="figures/comments_per_user_distribution.png" alt="Comments-per-user distribution" loading="lazy" decoding="async" />
+                  <figcaption>Comments-per-user distribution — two thirds of users comment exactly once, so user-level aggregates are extremely sparse.</figcaption>
+                </figure>
+              </div>
+
+              <div class="figure-grid">
+                <figure class="figure-editorial">
+                  <img src="figures/comment_length_distribution.png" alt="Comment length distribution" loading="lazy" decoding="async" />
+                  <figcaption>Comment length distribution — most comments are short; length itself later becomes the masked model's top feature.</figcaption>
+                </figure>
+                <figure class="figure-editorial">
+                  <img src="figures/user_loyalty_creators_per_user.png" alt="User loyalty: creators per user" loading="lazy" decoding="async" />
+                  <figcaption>User loyalty: creators per user — 85% of users appear under a single creator.</figcaption>
+                </figure>
+              </div>
+
+              <figure class="figure-editorial">
+                <img src="figures/language_mix_estimate.png" alt="Language mix estimate" loading="lazy" decoding="async" />
+                <figcaption>Language mix estimate — about 94% of comments are dominantly Latin-script; every text model here is English-only, so conclusions cover that slice.</figcaption>
+              </figure>
+            </div>
+          </section>
+
+          <!-- Weak Supervision -->
+          <section id="weak" class="section-padding section--editorial" data-section-num="02">
+            <div class="section-header">
+              <div class="section-eyebrow">
+                <span class="section-num">02</span>
+                <span class="section-kicker">Weak Supervision</span>
+              </div>
+              <h2 class="section-title">Weak Supervision, Not a Hidden Truth Label</h2>
+            </div>
+
+            <div class="space-y-8">
+              <div class="contact-info-card">
+                <p class="subtitle">Three labelling functions write the noisy label: a <strong>strong possession rule</strong> ("my dog", "we adopted a kitten", "I'm a dog mom"), a <strong>weaker context rule</strong> ("my vet", "his crate", "when I feed my …"), and a <strong>negation rule</strong> ("I want a dog", "my friend's cat", "don't have a pet"). A comment is labelled 1 when a positive rule fires and negation does not. The result is a 1.5% positive rate.</p>
+              </div>
+
+              <figure class="figure-editorial">
+                <img src="figures/lf_coverage_overlap.png" alt="Labelling-function coverage and overlap" loading="lazy" decoding="async" />
+                <figcaption>Labelling-function coverage and overlap — the reach of each of the three LFs and their intersection, yielding 88,420 positives (1.5%).</figcaption>
+              </figure>
+
+              <div class="note note--process">
+                <div class="note__label">Design · Care vocabulary is deliberately kept out of the label</div>
+                <div class="note__body">
+                  <p>The care vocabulary is deliberately kept out of the label, so it can serve as a legitimate feature later. These labels are rules, not truth, and the negatives are unlabelled, not confirmed non-owners — which is why the evaluation below leans on human labels, not on the rule's own recall.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Decoupling & Ablation -->
+          <section id="decouple" class="section-padding section--editorial" data-section-num="03">
+            <div class="section-header">
+              <div class="section-eyebrow">
+                <span class="section-num">03</span>
+                <span class="section-kicker">Decoupling &amp; Ablation</span>
+              </div>
+              <h2 class="section-title">Decoupling, and the Ablation that Measures the Leakage</h2>
+            </div>
+
+            <div class="space-y-8">
+              <div class="contact-info-card">
+                <p class="subtitle">The model is trained on features chosen to <em>not</em> re-encode the rule: comment-level text style, the care-term count, and behaviour-only aggregates of the user and creator (counts, lengths, breadth, rank). User- and creator-level "ownership rate" features — which for the 67% single-comment users are just that comment's label — are dropped. Aggregates are computed once over the whole corpus and shared by training and scoring, so there is no train/serve skew; the split is by <code>userid</code>, so no user sits on both sides.</p>
+              </div>
+
+              <p class="subtitle">The TF-IDF vocabulary for the main model removes every content word the rules key on. A second, ablation model keeps them. On held-out users the masked model scores 0.91 and the full-vocabulary one 0.96 — the gap is the rule reconstruction.</p>
+
+              <figure class="figure-editorial">
+                <img src="figures/roc_pr_curves_rule_agreement.png" alt="ROC and PR curves, agreement with rule labels" loading="lazy" decoding="async" />
+                <figcaption>ROC and PR curves, agreement with rule labels — masked model 0.91 vs full-vocabulary 0.96, the gap being the rule self-reconstruction.</figcaption>
+              </figure>
+
+              <div class="figure-grid">
+                <figure class="figure-editorial">
+                  <img src="figures/threshold_tuning_rule_agreement.png" alt="Threshold tuning on rule agreement" loading="lazy" decoding="async" />
+                  <figcaption>Threshold tuning on rule agreement — where the F1 threshold and the precision-first threshold each land.</figcaption>
+                </figure>
+                <figure class="figure-editorial">
+                  <img src="figures/confusion_matrix_tau_f1.png" alt="Confusion matrix at the F1 threshold" loading="lazy" decoding="async" />
+                  <figcaption>Confusion matrix at the F1 threshold (τ_F1) — agreement with the rule labels; the held-out train/serve score difference is exactly zero.</figcaption>
+                </figure>
+              </div>
+            </div>
+          </section>
+
+          <!-- Human Validation -->
+          <section id="human" class="section-padding section--editorial" data-section-num="04">
+            <div class="section-header">
+              <div class="section-eyebrow">
+                <span class="section-num">04</span>
+                <span class="section-kicker">Human Validation</span>
+              </div>
+              <h2 class="section-title">Human Validation is the Honest Headline</h2>
+            </div>
+
+            <div class="space-y-8">
+              <p class="subtitle">300 comments were sampled across five strata — where each rule fires, where the care words fire without a possession phrase, and where nothing fires at all — and labelled by hand (LLM-assisted, spot-checked, 0 undecidable). The strong-rule stratum is 93% true owners; the weaker rule only 42%; the no-signal base rate is 5.6%.</p>
+
+              <figure class="figure-editorial">
+                <img src="figures/validation_precision_by_stratum.png" alt="Owner rate by stratum with 95% CI" loading="lazy" decoding="async" />
+                <figcaption>Owner rate by stratum with 95% CI — strong-possession 93%, weak rule 42%, no-signal 5.6%, with Wilson intervals reporting uncertainty honestly.</figcaption>
+              </figure>
+
+              <figure class="figure-editorial">
+                <img src="figures/precision_by_score_bin_human.png" alt="Owner rate by model score bin" loading="lazy" decoding="async" />
+                <figcaption>Owner rate by model score bin — the model score tracks real precision: the higher the score, the higher the hand-labelled owner rate.</figcaption>
+              </figure>
+
+              <div class="note note--evidence">
+                <div class="note__label">Decisive test · Rule-silent band: generalisation, not memorisation</div>
+                <div class="note__body">
+                  <p>The decisive test is the ablation on the rule-silent band: there the masked model beats the full-vocabulary one (AUC 0.70 vs 0.61). The full-vocabulary model wins only where the rules already fire — that is, it wins at reconstructing the rule and loses at finding the owners the rule missed. Among comments the rules never tagged, a human confirmed cases like <em>"i remembered my doggy baby named denver"</em> and <em>"i have a golden retriever and it was so hard to train him"</em> — ownership the regexes had no pattern for.</p>
+                </div>
+              </div>
+
+              <figure class="figure-editorial">
+                <img src="figures/ablation_masked_vs_full_vocab.png" alt="Masked vs full-vocabulary ablation" loading="lazy" decoding="async" />
+                <figcaption>Masked vs full-vocabulary ablation — on the rule-silent band the masked model's AUC 0.70 beats the full-vocabulary 0.61, the decisive evidence of generalisation.</figcaption>
+              </figure>
+            </div>
+          </section>
+
+          <!-- What the Model Uses -->
+          <section id="shap" class="section-padding section--editorial" data-section-num="05">
+            <div class="section-header">
+              <div class="section-eyebrow">
+                <span class="section-num">05</span>
+                <span class="section-kicker">What the Model Uses</span>
+              </div>
+              <h2 class="section-title">What the Model Keys On</h2>
+            </div>
+
+            <div class="space-y-8">
+              <p class="subtitle">SHAP on the masked model puts comment length first, then language fragments (non-English tokens push the score down, consistent with the English-only scope), <code>care_term_count</code>, and creator/user behaviour. No animal noun appears, because the model cannot see them — which is the point.</p>
+
+              <figure class="figure-editorial">
+                <img src="figures/shap_summary_beeswarm.png" alt="SHAP summary, masked model" loading="lazy" decoding="async" />
+                <figcaption>SHAP summary, masked model — comment length first, then language, care-term count and behaviour features; no animal noun appears.</figcaption>
+              </figure>
+
+              <figure class="figure-editorial">
+                <img src="figures/feature_importance_xgb_gain.png" alt="XGBoost gain feature importance" loading="lazy" decoding="async" />
+                <figcaption>XGBoost gain feature importance — corroborates the SHAP ranking, concentrated in text style and behaviour features.</figcaption>
+              </figure>
+            </div>
+          </section>
+
+          <!-- Full-corpus Scoring -->
+          <section id="scoring" class="section-padding section--editorial" data-section-num="06">
+            <div class="section-header">
+              <div class="section-eyebrow">
+                <span class="section-num">06</span>
+                <span class="section-kicker">Full-corpus Scoring</span>
+              </div>
+              <h2 class="section-title">Scoring the Whole Corpus, and Who the Owners Are</h2>
+            </div>
+
+            <div class="space-y-8">
+              <p class="subtitle">All 5.82M comments are scored through the identical pipeline; the held-out train/serve score difference is exactly zero. Two operating points are reported: 91,443 likely-owner users (3.6%) at the F1 threshold, 44,623 (1.8%) at the precision-first threshold.</p>
+
+              <figure class="figure-editorial">
+                <img src="figures/full_score_distribution.png" alt="Full-corpus score distribution" loading="lazy" decoding="async" />
+                <figcaption>Full-corpus score distribution — predicted scores over all 5.82M comments, with the two operating points (τ_F1 / τ_P80) cutting here.</figcaption>
+              </figure>
+
+              <div class="figure-grid">
+                <figure class="figure-editorial">
+                  <img src="figures/owner_segments.png" alt="Owner segments" loading="lazy" decoding="async" />
+                  <figcaption>Owner segments — user counts at the two operating points: 91,443 (3.6%) at τ_F1 and 44,623 (1.8%) at τ_P80.</figcaption>
+                </figure>
+                <figure class="figure-editorial">
+                  <img src="figures/user_value_tiers.png" alt="User value tiers" loading="lazy" decoding="async" />
+                  <figcaption>User value tiers — users tiered by activity and owner confidence, isolating the high-value audience for KOL targeting.</figcaption>
+                </figure>
+              </div>
+
+              <p class="subtitle">Ranked by predicted likely-owner share of audience, with a 1,000-user minimum so a tiny channel cannot top the list, the leaders are training and small-pet channels — Zak George's Dog Training (0.51), StormyRabbits and Lennon The Bunny (~0.44) — which fits: their audiences skew toward people who own the animal.</p>
+
+              <figure class="figure-editorial">
+                <img src="figures/creator_ranking_owner_share.png" alt="Creators by likely-owner audience share" loading="lazy" decoding="async" />
+                <figcaption>Creators by likely-owner audience share — Zak George's Dog Training tops at 0.51, with training and small-pet channels leading overall.</figcaption>
+              </figure>
+
+              <figure class="figure-editorial">
+                <img src="figures/lda_topic_prevalence.png" alt="LDA topic prevalence" loading="lazy" decoding="async" />
+                <figcaption>LDA topic prevalence — comments cluster into 8 topics (dogs, feeding puppies, pet loss, cats, horses, and more), mapping the community's discourse.</figcaption>
+              </figure>
+            </div>
+          </section>
+
+          <!-- Limits & Reproducibility -->
+          <section id="limits" class="section-padding section--editorial" data-section-num="07">
+            <div class="section-header">
+              <div class="section-eyebrow">
+                <span class="section-num">07</span>
+                <span class="section-kicker">Limits &amp; Reproducibility</span>
+              </div>
+              <h2 class="section-title">Limits &amp; Reproducibility</h2>
+            </div>
+
+            <div class="space-y-8">
+              <div class="note note--caveat">
+                <div class="note__label">Limitations</div>
+                <div class="note__body">
+                  <p>The training labels are rules, not truth; the negatives are unlabelled positives, so recall against the rules is not real recall.</p>
+                  <p>The validation set is 300 comments and LLM-assisted; its intervals are wide, and the labeller shares some language intuition with the rules — the rule-silent strata that carry the generalisation claim are least affected by that overlap.</p>
+                  <p>Everything is English-only (~94% of comments) and comment-level. A comment is weak evidence of ownership, and ownership is not consumption; the dataset is a creator-comment scrape, so "user behaviour" reflects collection, not browsing.</p>
+                </div>
+              </div>
+
+              <div class="contact-info-card">
+                <h3 class="text-xl font-semibold mb-3" style="color: var(--dark);">Reproducibility</h3>
+                <p class="subtitle">One seed (42) throughout; <code>GroupShuffleSplit</code> and <code>StratifiedGroupKFold</code> by <code>userid</code>; aggregates, scores, and the validation sample cached under <code>artifacts/</code>, model, vectorizer and feature spec under <code>models/</code>. Run end-to-end in about 29 minutes (LF scan ~75s, hyper-parameter search ~17 min, full scoring ~2 min):</p>
+                <pre class="bg-gray-900 text-gray-100 p-3 rounded text-sm overflow-x-auto mt-3"><code>uv run jupyter nbconvert --to notebook --execute --inplace "YouTube Comments Analysis.ipynb"</code></pre>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <!-- Related projects -->
+    <section id="related" class="section-padding">
+      <div class="section-header reveal">
+        <div class="section-eyebrow">
+          <span class="section-kicker">Continue Reading</span>
+        </div>
+        <h2 class="section-title">Related Projects</h2>
+      </div>
+      <div class="grid md:grid-cols-2 gap-6">
+        <a href="#" class="related-project-card group cursor-pointer" style="text-decoration: none;" onclick="
+          const lang = localStorage.getItem('language') || 'zh';
+          window.location.href = lang === 'en' ? '../e-commerce fraud detection/e-commerce fraud detection-en.html' : '../e-commerce fraud detection/e-commerce fraud detection.html';
+          return false;
+        ">
+          <h3 class="related-project-title">First-Transaction Fraud Detection</h3>
+          <p class="related-project-description">Rare positive class + a threshold operating point: recall data-locked at 52%</p>
+          <div class="related-project-link">
+            <span>View details</span>
+            <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>
+          </div>
+        </a>
+        <a href="#" class="related-project-card group cursor-pointer" style="text-decoration: none;" onclick="
+          const lang = localStorage.getItem('language') || 'zh';
+          window.location.href = lang === 'en' ? '../Bank Customer Churn Prediction/Bank Customer Churn Prediction-en.html' : '../Bank Customer Churn Prediction/Bank Customer Churn Prediction.html';
+          return false;
+        ">
+          <h3 class="related-project-title">Bank Customer Churn Prediction</h3>
+          <p class="related-project-description">Rare-class detection under the same ranking + operating-point frame</p>
+          <div class="related-project-link">
+            <span>View details</span>
+            <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>
+          </div>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Bottom scripts: Prism / local scripts / logo animation / detail-page logic -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="../../assets/js/logo.js"></script>
+  <script src="../../assets/js/common.js"></script>
+  <script src="../../assets/js/charts.js"></script>
+  <script src="../../assets/js/project.js"></script>
+
+  <!-- Language toggle functionality -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const langToggle = document.getElementById('lang-toggle');
+      if (langToggle) {
+        langToggle.addEventListener('click', function() {
+          localStorage.setItem('language', 'zh');
+          window.location.href = 'youtube comment analysis.html';
+        });
+      }
+    });
+  </script>
+</body>
+</html>

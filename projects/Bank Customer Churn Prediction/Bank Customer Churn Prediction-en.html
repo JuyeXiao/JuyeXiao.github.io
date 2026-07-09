@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="light">
 <head>
   <script>document.documentElement.classList.add('js');</script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bank Customer Churn Prediction & Key Driver Analysis - Data Poetics</title>
-  <meta name="description" content="Machine learning-based bank customer churn prediction model using XGBoost and SHAP for deep analysis of churn drivers" />
+  <title>Bank Customer Churn: Prediction and Key Drivers - Data Poetics</title>
+  <meta name="description" content="A machine learning analysis of 10,000 retail banking customers: XGBoost+SMOTE reaches ROC-AUC 0.876 / PR-AUC 0.727, F2 threshold tuning lifts churn capture from 61% to 85%, with a C*≈3.3 break-even cost ratio." />
 
-  <!-- Consistent with homepage: Tailwind / Fonts / Icons / Site styles -->
+  <!-- Same as homepage: Tailwind / fonts / icons / site styles -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -17,17 +17,25 @@
   <link rel="stylesheet" href="../../assets/css/index.css" />
   <link rel="stylesheet" href="../../assets/css/project.css" />
 
-  <!-- Code highlighting + Chart libraries (commonly used in detail pages) -->
+  <!-- Code highlighting + charts (common on detail pages) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+  <style>
+    .dark table.performance-table thead tr {
+      background-color: rgba(64, 64, 64, 0.25) !important;
+    }
+    .dark .dark\:text-gray-300 {
+      color: var(--dark) !important;
+    }
+  </style>
 </head>
 <body class="transition-colors duration-300">
   <div class="scroll-progress" id="scroll-progress"></div>
 
-  <!-- Top navigation (fully reusing homepage structure and style) -->
+  <!-- Top navigation (reuses homepage structure and styles) -->
   <header id="navbar" class="navbar fixed top-0 left-0 right-0 z-50">
     <div class="container-main h-full flex items-center justify-between">
-      <!-- Logo (jumps back to homepage Hero with animation) -->
       <a href="../../index-en.html#hero" class="navbar-logo" id="navbar-logo">
         <svg class="logo-svg-nav" viewBox="0 0 40 40">
           <g class="grid-bg">
@@ -48,7 +56,6 @@
         </div>
       </a>
 
-      <!-- In-page navigation (jumping to corresponding anchors on homepage) -->
       <nav class="hidden md:flex items-center space-x-8">
         <a href="../../index-en.html#about" class="nav-link">About</a>
         <a href="../../index-en.html#experience" class="nav-link">Experience</a>
@@ -82,502 +89,487 @@
   </header>
 
   <main class="container-main">
-    <!-- Project header (Hero-style detail page header) -->
+    <!-- Project hero -->
     <section id="project-hero" class="section-padding" style="padding-top: calc(var(--space-xl) + 72px)">
       <div class="grid md:grid-cols-2 gap-16 items-center w-full">
         <div class="reveal">
           <div class="section-eyebrow">
-            <span class="section-kicker">Case Study · Financial Customer Analytics</span>
+            <span class="section-kicker">Case Study · Customer Analytics &amp; Retention</span>
           </div>
-          <h1 class="hero-title mt-2">Bank Customer Churn &amp; the Drivers Behind It</h1>
-          <p class="subtitle mt-4 max-w-xl">An XGBoost + SHAP study that hands the "why" of attrition back to business teams.</p>
-          <div class="reading-time">~7 min read<span class="sep">·</span>5 figures</div>
+          <h1 class="hero-title mt-2">Bank Customer Churn: Prediction and Key Drivers</h1>
+          <p class="subtitle mt-4 max-w-xl">One in five customers leaves. Who churns, why, and what the bank can do before it happens — and why moving the threshold from 0.5 to 0.23 pays off.</p>
+          <div class="reading-time">~13 min read<span class="sep">·</span>15 charts</div>
 
           <div class="hero-stats">
             <div class="hero-stat">
               <div class="hero-stat__num">10K</div>
-              <div class="hero-stat__label">Customers</div>
+              <div class="hero-stat__label">retail customers (20.4% churn)</div>
             </div>
             <div class="hero-stat">
-              <div class="hero-stat__num">0.848</div>
-              <div class="hero-stat__label">AUC</div>
+              <div class="hero-stat__num">85%</div>
+              <div class="hero-stat__label">churn caught @ threshold 0.23</div>
             </div>
             <div class="hero-stat">
-              <div class="hero-stat__num">55%</div>
-              <div class="hero-stat__label">Churn Recall</div>
+              <div class="hero-stat__num">0.876</div>
+              <div class="hero-stat__label">ROC-AUC (test set)</div>
             </div>
           </div>
 
           <div class="mt-8 flex items-center gap-4">
-            <a href="#content" class="btn btn-primary">Start Reading</a>
-            <a href="../../index-en.html#projects" class="btn btn-secondary">Back to Projects</a>
+            <a href="#content" class="btn btn-primary">Start reading</a>
+            <a href="../../index-en.html#projects" class="btn btn-secondary">Back to projects</a>
           </div>
         </div>
         <aside class="reveal hero-stack">
-          <div class="hero-stack__label">Methods · Tech Stack</div>
+          <div class="hero-stack__label">Methods · Stack</div>
           <ol class="hero-stack__list">
             <li>
               <span class="hero-stack__num">01</span>
-              <span class="hero-stack__name">XGBoost</span>
-              <span class="hero-stack__desc">Gradient-boosted classifier, primary predictor</span>
+              <span class="hero-stack__name">XGBoost + SMOTE</span>
+              <span class="hero-stack__desc">First on both ranking metrics, ROC-AUC 0.876 / PR-AUC 0.727</span>
             </li>
             <li>
               <span class="hero-stack__num">02</span>
-              <span class="hero-stack__name">SMOTE</span>
-              <span class="hero-stack__desc">Synthetic over-sampling to balance the 20/80 churn skew</span>
+              <span class="hero-stack__name">Four models, one protocol</span>
+              <span class="hero-stack__desc">imblearn pipeline, SMOTE on training folds only, 5-fold GridSearchCV</span>
             </li>
             <li>
               <span class="hero-stack__num">03</span>
-              <span class="hero-stack__name">SHAP</span>
-              <span class="hero-stack__desc">Global + local attribution for explainable decisions</span>
+              <span class="hero-stack__name">F2 threshold tuning</span>
+              <span class="hero-stack__desc">0.5 → 0.23, churn capture 61% → 85%</span>
             </li>
             <li>
               <span class="hero-stack__num">04</span>
-              <span class="hero-stack__name">Stratified Split</span>
-              <span class="hero-stack__desc">Stratified sampling preserves class balance across splits</span>
+              <span class="hero-stack__name">Break-even analysis</span>
+              <span class="hero-stack__desc">No invented costs — only the ratio C*≈3.3</span>
             </li>
             <li>
               <span class="hero-stack__num">05</span>
-              <span class="hero-stack__name">GridSearchCV</span>
-              <span class="hero-stack__desc">Hyperparameter grid with 3-fold cross-validation</span>
+              <span class="hero-stack__name">SHAP three-way cross-check</span>
+              <span class="hero-stack__desc">SHAP × RF impurity × XGB gain agree on top features</span>
             </li>
           </ol>
-          <div class="hero-stack__foot">Python · pandas · scikit-learn · imblearn · matplotlib</div>
+          <div class="hero-stack__foot">Python · pandas · scikit-learn · xgboost · imbalanced-learn · shap</div>
         </aside>
       </div>
     </section>
 
-    <!-- Executive Summary (three-column info cards, redesigned) -->
-    <section id="executive-summary" class="section-padding section--editorial" data-section-num="00">
-      <div class="section-header reveal">
-        <div class="section-eyebrow">
-          <span class="section-num">00</span>
-          <span class="section-kicker">Executive Summary</span>
-        </div>
-        <h2 class="section-title">Executive Summary</h2>
-      </div>
+    <!-- Quick summary cards -->
+    <section id="quick-summary" class="section-padding">
       <div class="grid md:grid-cols-3 gap-6">
         <div class="summary-card">
-          <h3 class="summary-card-title">Business Challenge</h3>
-          <p class="summary-card-content">The primary challenge is reducing customer attrition by proactively identifying clients at high risk of churning. High churn rates lead to significant revenue loss and increased costs for acquiring new customers.</p>
+          <h3 class="summary-card-title">The Challenge</h3>
+          <p class="summary-card-content">20.4% of customers churn, and the two errors are unequal: missing a churner loses the whole relationship, a false alarm costs one retention offer.</p>
         </div>
         <div class="summary-card">
-          <h3 class="summary-card-title">Solution</h3>
-          <p class="summary-card-content">Analyzed a dataset of 10,000 bank customers to build an XGBoost+SMOTE machine learning model. Used SHAP technology to explain predictions and uncover specific drivers behind customer churn.</p>
+          <h3 class="summary-card-title">The Solution</h3>
+          <p class="summary-card-content">Four classifiers tuned under one protocol; XGBoost leads on both ranking metrics, then the decision threshold is set to the F2-optimal 0.23.</p>
         </div>
         <div class="summary-card">
-          <h3 class="summary-card-title">Business Value</h3>
-          <p class="summary-card-content">Provides an actionable predictive tool helping banks shift from reactive to proactive retention strategies. By accurately identifying at-risk customers, banks can optimize retention spending and reduce overall churn rates.</p>
+          <h3 class="summary-card-title">The Value</h3>
+          <p class="summary-card-content">Catches about 432 of 509 test-set churners (85%); as long as a churner is worth more than 3.3 retention offers, the aggressive operating point is cheaper.</p>
         </div>
       </div>
     </section>
 
-    <!-- Main content: Left sidebar + Right content (consistent with documentation standards) -->
+    <!-- Main content: TOC + body -->
     <section id="content" class="section-padding">
       <div class="grid md:grid-cols-12 gap-12">
-        <!-- Table of Contents (auto-generated) -->
         <aside class="md:col-span-3">
           <nav class="project-toc sticky top-24" id="project-toc">
-            <h3 class="text-xl font-semibold" style="color: var(--dark);">Table of Contents</h3>
+            <h3 class="text-xl font-semibold" style="color: var(--dark);">Contents</h3>
             <ul class="mt-4 space-y-2" id="toc-list">
-              <li><a href="#findings" class="toc-link" data-section="findings">Key Findings & Recommendations</a></li>
-              <li><a href="#methodology" class="toc-link" data-section="methodology">Data Analysis & Methodology</a></li>
-              <li><a href="#evaluation" class="toc-link" data-section="evaluation">Model Evaluation & Comparison</a></li>
-              <li><a href="#shap-analysis" class="toc-link" data-section="shap-analysis">Deep Dive: SHAP Analysis</a></li>
-              <li><a href="#conclusion" class="toc-link" data-section="conclusion">Conclusion & Action Plan</a></li>
+              <li><a href="#summary" class="toc-link" data-section="summary">Executive Summary</a></li>
+              <li><a href="#data" class="toc-link" data-section="data">Data &amp; EDA</a></li>
+              <li><a href="#models" class="toc-link" data-section="models">Model Bake-off</a></li>
+              <li><a href="#threshold" class="toc-link" data-section="threshold">Threshold Tuning</a></li>
+              <li><a href="#cost" class="toc-link" data-section="cost">Break-even Analysis</a></li>
+              <li><a href="#shap" class="toc-link" data-section="shap">Why Customers Leave</a></li>
+              <li><a href="#actions" class="toc-link" data-section="actions">Action Plan</a></li>
             </ul>
           </nav>
         </aside>
 
-        <!-- Content area -->
         <div class="md:col-span-9 content-area">
-          <!-- Key Findings & Recommended Actions -->
-          <section id="findings" class="section-padding section--editorial" data-section-num="01">
+          <!-- Executive Summary -->
+          <section id="summary" class="section-padding section--editorial" data-section-num="00">
+            <div class="section-header">
+              <div class="section-eyebrow">
+                <span class="section-num">00</span>
+                <span class="section-kicker">Executive Summary</span>
+              </div>
+              <h2 class="section-title">Executive Summary</h2>
+            </div>
+
+            <div class="space-y-6">
+              <div class="contact-info-card">
+                <p class="subtitle mb-4">A machine learning analysis of 10,000 retail banking customers: who leaves, why, and what the bank can do about it before it happens. The final model is XGBoost with SMOTE, tuned by 5-fold grid search.</p>
+
+                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">Four findings</h3>
+                <ul class="list-disc list-inside space-y-3 subtitle mb-6">
+                  <li><strong>Age is the strongest predictor.</strong> Both EDA and SHAP put age first: churn risk rises sharply between 40 and 50; the median churned customer is around 45, the median retained around 35.</li>
+                  <li><strong>Inactivity precedes churn.</strong> <code>IsActiveMember=0</code> is a top-three SHAP driver and the most usable early-warning signal — falling engagement shows up well before the account closes.</li>
+                  <li><strong>More products, more churn.</strong> Customers holding 3 or 4 products churn more, not less (counterintuitive); product count ranks second in all three importance views.</li>
+                  <li><strong>Germany is different.</strong> German customers churn far more often than French or Spanish ones, in both raw counts and model rankings.</li>
+                </ul>
+
+                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">At a glance</h3>
+                <div class="overflow-x-auto">
+                  <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
+                    <thead>
+                      <tr class="bg-gray-100 dark:bg-gray-700/30">
+                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Item</th>
+                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Result</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Customers analyzed</strong></td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">10,000 (2,037 churned, 20.4%)</td>
+                      </tr>
+                      <tr>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Final model</strong></td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">XGBoost with SMOTE, tuned by 5-fold grid search</td>
+                      </tr>
+                      <tr>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Ranking quality (test set)</strong></td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">ROC-AUC 0.876, PR-AUC 0.727</td>
+                      </tr>
+                      <tr>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Churners caught</strong></td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">85% at the tuned threshold 0.23, versus 61% at 0.5</td>
+                      </tr>
+                      <tr>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Main drivers</strong></td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Age, activity status, product count, geography</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Data & EDA -->
+          <section id="data" class="section-padding section--editorial" data-section-num="01">
             <div class="section-header">
               <div class="section-eyebrow">
                 <span class="section-num">01</span>
-                <span class="section-kicker">Findings &amp; Recommendations</span>
+                <span class="section-kicker">Data &amp; EDA</span>
               </div>
-              <h2 class="section-title">Key Findings &amp; Recommendations</h2>
+              <h2 class="section-title">Data &amp; Exploration</h2>
             </div>
-            
+
             <div class="space-y-8">
-              <!-- Finding 1: Age Factor -->
               <div class="contact-info-card">
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">1. Finding: Age is the Strongest Predictor of Churn</h3>
-                <div class="space-y-4">
-                  <div>
-                    <strong style="color: var(--coral);">Data Insight</strong>: Both initial exploratory data analysis and final SHAP model interpretation confirm that <code class="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded text-gray-900 dark:text-gray-100 font-mono text-sm">Age</code> is the most influential feature in predicting churn. The risk of churn increases significantly for customers in the 40-50 age bracket.
-                  </div>
-                  <div>
-                    <strong style="color: var(--sage);">Business Implication</strong>: This middle-aged demographic may be experiencing life changes that alter their financial needs, or they are being more aggressively targeted by competitors with tailored wealth management or investment products.
-                  </div>
-                  <div>
-                    <strong style="color: var(--blue);">Recommended Action</strong>:
-                    <ul class="list-disc list-inside mt-2 space-y-1 subtitle">
-                      <li>Develop and market specialized financial products for this demographic, such as retirement planning, investment services, or family education funds.</li>
-                      <li>Implement a targeted loyalty program for high-value customers over 40 to enhance their sense of value and recognition.</li>
-                    </ul>
-                  </div>
-                </div>
+                <p class="subtitle">The dataset holds demographic attributes (age, gender, country), account attributes (balance, product count, credit score, tenure, card ownership, activity flag) and the churn label. Quality checks found no missing values and no multicollinearity; identifier columns were dropped. Preprocessing: 75/25 stratified split (<code>random_state=42</code> throughout), one-hot for <code>Geography</code>, ordinal for <code>Gender</code>, standardized numerics — encoders and scaler fitted on the training set only, avoiding leakage.</p>
               </div>
 
-              <!-- Finding 2: Activity Status -->
-              <div class="contact-info-card">
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">2. Finding: Inactivity is a Critical Precursor to Churn</h3>
-                <div class="space-y-4">
-                  <div>
-                    <strong style="color: var(--coral);">Data Insight</strong>: A customer's status as a non-active member (<code class="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded text-gray-900 dark:text-gray-100 font-mono text-sm">IsActiveMember</code> = 0) is one of the top three drivers of churn. Analysis shows that non-active members are significantly more likely to leave compared to active members.
-                  </div>
-                  <div>
-                    <strong style="color: var(--sage);">Business Implication</strong>: A drop in customer engagement is a powerful and direct warning sign of potential attrition. This provides a crucial, albeit time-sensitive, window for intervention.
-                  </div>
-                  <div>
-                    <strong style="color: var(--blue);">Recommended Action</strong>:
-                    <ul class="list-disc list-inside mt-2 space-y-1 subtitle">
-                      <li>Establish an automated alert system that flags high-value customers who have been inactive for a specific period (e.g., 3 months).</li>
-                      <li>Trigger targeted re-engagement campaigns for these flagged customers, offering incentives such as bonus interest rates, fee waivers, or personalized consultations.</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
+              <figure class="figure-editorial">
+                <img src="figures/target_distribution.png" alt="Churn label distribution" loading="lazy" decoding="async" />
+                <figcaption>Churn label distribution — 2,037 of 10,000 customers churn (20.4%), a moderate class imbalance.</figcaption>
+              </figure>
 
-              <!-- Finding 3: Product Complexity -->
-              <div class="contact-info-card">
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">3. Finding: Product Portfolio Complexity Drives Churn</h3>
-                <div class="space-y-4">
-                  <div>
-                    <strong style="color: var(--coral);">Data Insight</strong>: Counterintuitively, the model shows that having 3 or 4 products (<code class="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded text-gray-900 dark:text-gray-100 font-mono text-sm">NumOfProducts</code>) is a strong predictor of churn. Customers with just 1 or 2 products are more likely to be loyal.
-                  </div>
-                  <div>
-                    <strong style="color: var(--sage);">Business Implication</strong>: The bank's current cross-selling strategy may be creating complexity and customer friction rather than building loyalty. A larger product portfolio does not guarantee a "stickier" customer.
-                  </div>
-                  <div>
-                    <strong style="color: var(--blue);">Recommended Action</strong>:
-                    <ul class="list-disc list-inside mt-2 space-y-1 subtitle">
-                      <li>Shift cross-selling focus from quantity to synergy. Train sales staff to recommend products that genuinely complement a customer's existing portfolio.</li>
-                      <li>For high-value customers with 3+ products and high churn scores, proactively offer a "portfolio review" service to simplify their finances and reinforce the bank's value proposition.</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
+              <figure class="figure-editorial">
+                <img src="figures/countplot_categorical_vs_exited.png" alt="Categorical features vs churn" loading="lazy" decoding="async" />
+                <figcaption>Categorical features vs churn — German customers churn markedly more than French or Spanish; holders of 3–4 products churn more, not less.</figcaption>
+              </figure>
 
-              <!-- Finding 4: Geographic Differences -->
-              <div class="contact-info-card">
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">4. Finding: Geographic Disparities Indicate Regional Challenges</h3>
-                <div class="space-y-4">
-                  <div>
-                    <strong style="color: var(--coral);">Data Insight</strong>: The analysis consistently identifies customers in <strong>Germany</strong> as having a higher propensity to churn compared to those in France and Spain.
-                  </div>
-                  <div>
-                    <strong style="color: var(--sage);">Business Implication</strong>: This suggests there may be region-specific factors at play, such as stronger local competition, service quality gaps, or a product mix less suited to the German market.
-                  </div>
-                  <div>
-                    <strong style="color: var(--blue);">Recommended Action</strong>:
-                    <ul class="list-disc list-inside mt-2 space-y-1 subtitle">
-                      <li>Conduct a targeted market analysis in Germany to understand local competitor offerings and customer pain points.</li>
-                      <li>Gather feedback from German customers and front-line staff to identify specific areas for service or product improvement.</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
+              <figure class="figure-editorial">
+                <img src="figures/boxplot_numerical_vs_exited.png" alt="Numeric features by churn status (boxplots)" loading="lazy" decoding="async" />
+                <figcaption>Numeric features by churn status — age separates most clearly, with a median churned age around 45 vs about 35 for retained.</figcaption>
+              </figure>
+
+              <figure class="figure-editorial">
+                <img src="figures/correlation_heatmap.png" alt="Feature correlation heatmap" loading="lazy" decoding="async" />
+                <figcaption>Feature correlation heatmap — no multicollinearity among features; each carries independent information.</figcaption>
+              </figure>
             </div>
           </section>
 
-          <!-- Data Analysis & Methodology -->
-          <section id="methodology" class="section-padding section--editorial" data-section-num="02">
+          <!-- Model Bake-off -->
+          <section id="models" class="section-padding section--editorial" data-section-num="02">
             <div class="section-header">
               <div class="section-eyebrow">
                 <span class="section-num">02</span>
-                <span class="section-kicker">Data Analysis &amp; Methodology</span>
+                <span class="section-kicker">Model Bake-off</span>
               </div>
-              <h2 class="section-title">Data Analysis &amp; Methodology</h2>
+              <h2 class="section-title">Model Comparison</h2>
             </div>
-            
+
             <div class="space-y-8">
-              <!-- Step 1: Data Access & EDA -->
               <div class="contact-info-card">
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">Step 1: Data Access & Exploratory Data Analysis (EDA)</h3>
-                <div class="space-y-4">
-                  <p class="subtitle">The first step was to access and perform quality checks on the customer data file (<code class="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded text-gray-900 dark:text-gray-100 font-mono text-sm">bank_churn.csv</code>). The dataset contains 10,000 customer records with 14 distinct attributes.</p>
-                  
-                  <div>
-                    <strong>Loading Data & Initial Check:</strong>
-                    <pre class="bg-gray-900 text-gray-100 p-4 rounded-lg mt-2 overflow-x-auto"><code class="language-python">import pandas as pd
-df = pd.read_csv('bank_churn.csv')
-df.info()</code></pre>
-                  </div>
-
-                  <div class="note note--evidence">
-                    <div class="note__label">Evidence</div>
-                    <div class="note__body">The dataset was found to be complete, with <strong>no missing values</strong>.</div>
-                  </div>
-
-                  <div>
-                    <strong>Visual Feature Exploration:</strong>
-                    <div class="figure-grid">
-                      <figure class="figure-editorial">
-                        <img src="figures/boxplot_numerical_vs_exited.png" alt="Boxplots of Numerical Features vs. Exited Status" loading="lazy" decoding="async" />
-                        <figcaption>Numerical features vs. churn status — significant differences in age and balance between churned and retained customers.</figcaption>
-                      </figure>
-                      <figure class="figure-editorial">
-                        <img src="figures/boxplot_categorical_vs_exited.png" alt="Countplots of Categorical Features vs. Exited Status" loading="lazy" decoding="async" />
-                        <figcaption>Categorical features vs. churn status — disproportionately high churn for German customers and inactive members.</figcaption>
-                      </figure>
-                    </div>
-                  </div>
-                </div>
+                <p class="subtitle">Four classifiers were tuned under one protocol so their comparison is like for like: each sits in an <code>imblearn</code> pipeline that applies SMOTE to the training folds only, and each was tuned by 5-fold <code>GridSearchCV</code> scoring ROC-AUC.</p>
               </div>
 
-              <!-- Step 2: Feature Engineering -->
-              <div class="contact-info-card">
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">Step 2: Feature Engineering & Data Preparation</h3>
-                <div class="space-y-4">
-                  <p class="subtitle">To prepare the data for modeling, we performed a series of preprocessing steps:</p>
-                  
-                  <div class="note note--process">
-                    <div class="note__label">Pipeline</div>
-                    <div class="note__body">
-                      <ul class="list-disc list-inside space-y-2">
-                        <li><strong>Feature Selection</strong>: Removed irrelevant columns like <code class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-gray-900 dark:text-gray-100 font-mono text-sm">RowNumber</code>, <code class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-gray-900 dark:text-gray-100 font-mono text-sm">CustomerId</code>, and <code class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-gray-900 dark:text-gray-100 font-mono text-sm">Surname</code>.</li>
-                        <li><strong>Data Splitting</strong>: Split dataset into training (75%) and testing (25%) sets using stratified sampling.</li>
-                        <li><strong>Data Encoding</strong>: Converted categorical features (<code class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-gray-900 dark:text-gray-100 font-mono text-sm">Geography</code>, <code class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-gray-900 dark:text-gray-100 font-mono text-sm">Gender</code>) to numerical format using One-Hot and Ordinal Encoding.</li>
-                        <li><strong>Data Standardization</strong>: Scaled numerical features using <code class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-gray-900 dark:text-gray-100 font-mono text-sm">StandardScaler</code>.</li>
-                      </ul>
-                    </div>
-                  </div>
-
-                  <pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto"><code class="language-python">from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler, OneHotEncoder, OrdinalEncoder
-
-# Remove irrelevant columns
-to_drop = ['RowNumber','CustomerId','Surname','Exited']
-X = churn_df.drop(to_drop, axis=1)
-y = churn_df['Exited']
-
-# Split data
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, stratify=y, random_state=1)
-
-# Standardization example
-scaler = StandardScaler()
-scaler.fit(X_train[num_cols])
-X_train[num_cols] = scaler.transform(X_train[num_cols])
-X_test[num_cols] = scaler.transform(X_test[num_cols])</code></pre>
-                </div>
+              <div class="overflow-x-auto">
+                <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
+                  <thead>
+                    <tr class="bg-gray-100 dark:bg-gray-700/30">
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Model</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">Accuracy</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">Precision</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">Recall</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">F1</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">ROC-AUC</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">PR-AUC</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="bg-green-50 dark:bg-green-900/20">
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>XGBoost with SMOTE</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.8544</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.6507</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.6149</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.6323</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.8757</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.7265</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Random forest</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.8440</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.6042</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.6778</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.6389</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.8681</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.7002</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">KNN</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.7388</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.4184</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.7250</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.5306</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.8078</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.5277</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Logistic regression</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.7160</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.3945</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.7387</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.5144</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.7900</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.4801</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
 
-              <!-- Step 3: Model Building -->
-              <div class="contact-info-card">
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">Step 3: Model Building, Optimization & Selection</h3>
-                <div class="space-y-4">
-                  <p class="subtitle">We trained multiple classification models. Recognizing the dataset's imbalance, we employed an advanced approach integrating <strong>XGBoost</strong> classifier with <strong>Synthetic Minority Over-sampling Technique (SMOTE)</strong> in a pipeline.</p>
-                  
-                  <pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto"><code class="language-python">from imblearn.pipeline import Pipeline
-from imblearn.over_sampling import SMOTE
-import xgboost as xgb
+              <p class="subtitle">Precision, recall and F1 are computed at the default 0.5 threshold; ROC-AUC and PR-AUC measure ranking quality independent of any threshold. With 20% churners, a no-skill model scores a PR-AUC near 0.20, so PR-AUC separates the models more sharply than ROC-AUC.</p>
 
-# Create SMOTE + XGBoost Pipeline
-pipeline = Pipeline([
-    ('smote', SMOTE(random_state=42)),
-    ('xgb', xgb.XGBClassifier(objective='binary:logistic', eval_metric='logloss', random_state=42))
-])
+              <div class="figure-grid">
+                <figure class="figure-editorial">
+                  <img src="figures/roc_curves_all_models.png" alt="ROC curves, all models" loading="lazy" decoding="async" />
+                  <figcaption>ROC curves, all models — XGBoost and random forest clearly lead.</figcaption>
+                </figure>
+                <figure class="figure-editorial">
+                  <img src="figures/pr_curves_all_models.png" alt="Precision-recall curves, all models" loading="lazy" decoding="async" />
+                  <figcaption>Precision-recall curves, all models — XGBoost leads at PR-AUC 0.727, far above the 0.20 no-skill baseline.</figcaption>
+                </figure>
+              </div>
 
-# Use GridSearchCV to find the best parameters
-grid_search = GridSearchCV(estimator=pipeline, param_grid=param_grid, scoring='roc_auc', cv=3)
-grid_search.fit(X_train, y_train)
-best_xgb_model_smote = grid_search.best_estimator_</code></pre>
+              <p class="subtitle">XGBoost leads on both ranking metrics and is the recommended model. Logistic regression and KNN post high recall only by flagging large numbers of loyal customers: at a precision near 0.4, six out of ten contacts would be wasted. Random forest comes close and slightly beats XGBoost on recall and F1 at the 0.5 threshold, but a threshold can be adjusted after training, while ranking quality cannot.</p>
+
+              <div class="figure-grid">
+                <figure class="figure-editorial">
+                  <img src="figures/gridsearch_lr_heatmap.png" alt="Logistic regression grid-search heatmap" loading="lazy" decoding="async" />
+                  <figcaption>Logistic regression grid-search heatmap — how the same 5-fold protocol selects across the hyperparameter grid.</figcaption>
+                </figure>
+                <figure class="figure-editorial">
+                  <img src="figures/confusion_matrix_xgboost.png" alt="XGBoost confusion matrix (default threshold)" loading="lazy" decoding="async" />
+                  <figcaption>XGBoost confusion matrix (default 0.5 threshold) — the balanced baseline before threshold tuning.</figcaption>
+                </figure>
+              </div>
+
+              <div class="note note--caveat">
+                <div class="note__label">Metric · Why accuracy is not the headline</div>
+                <div class="note__body">
+                  <p>Accuracy was rejected as a tuning metric because a model that always predicts "stays" is already 79.6% accurate on this data — the metric has no discriminative power on imbalanced data. Reporting ranking metrics (ROC-AUC / PR-AUC) plus an explicit operating point reflects the true ability to separate the rare class.</p>
                 </div>
               </div>
             </div>
           </section>
 
-          <!-- Model Evaluation & Comparison -->
-          <section id="evaluation" class="section-padding section--editorial" data-section-num="03">
+          <!-- Threshold Tuning -->
+          <section id="threshold" class="section-padding section--editorial" data-section-num="03">
             <div class="section-header">
               <div class="section-eyebrow">
                 <span class="section-num">03</span>
-                <span class="section-kicker">Model Evaluation</span>
+                <span class="section-kicker">Threshold Tuning</span>
               </div>
-              <h2 class="section-title">Model Evaluation &amp; Comparison</h2>
+              <h2 class="section-title">Threshold Tuning</h2>
             </div>
-            
+
             <div class="space-y-8">
-              <!-- Performance Overview -->
-              <div class="contact-info-card">
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">Model Performance Overview</h3>
-                <div class="overflow-x-auto">
-                  <table class="w-full border-collapse border border-gray-300 dark:border-gray-600">
-                    <thead>
-                      <tr class="bg-gray-100 dark:bg-gray-700">
-                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left text-gray-900 dark:text-gray-100 font-semibold">Model</th>
-                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left text-gray-900 dark:text-gray-100 font-semibold">Accuracy</th>
-                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left text-gray-900 dark:text-gray-100 font-semibold">Precision (Churn)</th>
-                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left text-gray-900 dark:text-gray-100 font-semibold">Recall (Churn)</th>
-                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left text-gray-900 dark:text-gray-100 font-semibold">AUC</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr class="bg-green-50 dark:bg-green-900/30">
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-bold text-gray-900 dark:text-gray-100">XGBoost with SMOTE</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">0.8408</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">0.6231</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-bold text-gray-900 dark:text-gray-100">0.5521</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-bold text-gray-900 dark:text-gray-100">0.8484</td>
-                      </tr>
-                      <tr class="bg-white dark:bg-gray-800">
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">Random Forest</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">0.8608</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">0.8132</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">0.4106</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">0.8446</td>
-                      </tr>
-                      <tr class="bg-gray-50 dark:bg-gray-800">
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">K-Nearest Neighbor</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">0.8428</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">0.7283</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">0.3635</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">0.7986</td>
-                      </tr>
-                      <tr class="bg-white dark:bg-gray-800">
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">Logistic Regression</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">0.8092</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">0.5964</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">0.1945</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">0.7722</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+              <p class="subtitle">The default 0.5 threshold treats both error types as equally costly. They are not: a missed churner costs the bank the customer relationship, a false alarm costs one retention offer. Sweeping the threshold and maximizing F2 (recall weighted twice as heavily as precision) gives an operating point that matches the retention objective:</p>
+
+              <div class="overflow-x-auto">
+                <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
+                  <thead>
+                    <tr class="bg-gray-100 dark:bg-gray-700/30">
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Operating point</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">Threshold</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">Precision</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">Recall</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">F1</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">F2</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">Flagged</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Default</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.50</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.6507</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.6149</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.6323</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.6218</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">481</td>
+                    </tr>
+                    <tr class="bg-green-50 dark:bg-green-900/20">
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>F2-optimal</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.23</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.4337</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.8487</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.5741</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.7124</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">996</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
 
-              <!-- Final Model Selection -->
+              <figure class="figure-editorial">
+                <img src="figures/threshold_tuning_xgboost.png" alt="Precision, recall and F2 against decision threshold" loading="lazy" decoding="async" />
+                <figcaption>Precision, recall and F2 against decision threshold — F2 peaks near 0.23, the recall-first operating point.</figcaption>
+              </figure>
+
+              <figure class="figure-editorial">
+                <img src="figures/confusion_matrix_threshold_comparison.png" alt="Confusion matrices at thresholds 0.50 and 0.23" loading="lazy" decoding="async" />
+                <figcaption>Confusion matrices at 0.50 vs 0.23 — false negatives fall from 196 to 77, at the cost of false positives rising from 168 to 564.</figcaption>
+              </figure>
+
               <div class="contact-info-card">
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">Final Model Selection & Justification</h3>
-                <div class="space-y-4">
-                  <p class="subtitle">For most churn prediction scenarios, the primary goal is to <strong>maximize identification of at-risk customers</strong> (high recall) to minimize revenue loss, while maintaining strong overall ability to distinguish between churners and non-churners (high AUC).</p>
-                  
-                  <div class="note note--insight">
-                    <div class="note__label">Decision</div>
-                    <div class="note__body">Given this, the <strong>XGBoost with SMOTE model is the definitive recommended choice</strong>. It offers the best combination of finding the highest number of actual churners (<strong>highest Recall</strong>) and the best overall predictive power (<strong>highest AUC</strong>).</div>
-                  </div>
-
-                  <div>
-                    <h4 class="font-semibold mb-2">Final Model Performance (XGBoost with SMOTE)</h4>
-                    <pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto"><code>Classification Report:
-              precision    recall  f1-score   support
-
-           0       0.89      0.91      0.90      1991
-           1       0.62      0.55      0.59       509
-
-    accuracy                           0.84      2500
-   macro avg       0.76      0.73      0.74      2500
-weighted avg       0.83      0.84      0.84      2500
-
-AUC Score: 0.8484</code></pre>
-                  </div>
-                </div>
+                <p class="subtitle">At 0.23 the model catches about 432 of the 509 test-set churners instead of about 313, and the contact list roughly doubles. Whether that trade pays off depends on offer cost against customer value; when campaign capacity is fixed, the threshold can sit anywhere on the precision-recall curve — which is exactly why the model with the strongest ranking is chosen.</p>
               </div>
             </div>
           </section>
 
-          <!-- SHAP Deep Analysis -->
-          <section id="shap-analysis" class="section-padding section--editorial" data-section-num="04">
+          <!-- Break-even Analysis -->
+          <section id="cost" class="section-padding section--editorial" data-section-num="04">
             <div class="section-header">
               <div class="section-eyebrow">
                 <span class="section-num">04</span>
-                <span class="section-kicker">SHAP Deep Dive</span>
+                <span class="section-kicker">Break-even Analysis</span>
               </div>
-              <h2 class="section-title">Explaining Model Predictions (SHAP)</h2>
+              <h2 class="section-title">Break-even Cost Analysis</h2>
             </div>
-            
-            <div class="space-y-8">
-              <div class="contact-info-card">
-                <p class="subtitle mb-6">To understand <em>why</em> the XGBoost model makes its predictions, we conducted SHAP (SHapley Additive exPlanations) analysis. This reveals the impact of each feature on individual predictions.</p>
-                
-                <!-- Global Insights -->
-                <div class="space-y-6">
-                  <h3 class="text-xl font-semibold" style="color: var(--dark);">Global Insights: Key Drivers of Customer Churn</h3>
-                  <figure class="figure-editorial">
-                    <img src="figures/SHAP_Global_Feature_Insights.png" alt="SHAP Global Feature Insights" loading="lazy" decoding="async" />
-                    <figcaption>SHAP global feature insights — Age, NumOfProducts, IsActiveMember and Geography (Germany) drive churn predictions most.</figcaption>
-                  </figure>
 
-                  <!-- Individual Customer Attribution -->
-                  <h3 class="text-xl font-semibold" style="color: var(--dark);">Individual Customer Attribution</h3>
-                  <p class="subtitle">We used SHAP force plots to dissect predictions for individual customers.</p>
-                  
-                  <figure class="figure-editorial">
-                    <img src="figures/SHAP_Local_Explanation_for_a_High-Risk_Customer.png" alt="SHAP Local Explanation for a High-Risk Customer" loading="lazy" decoding="async" />
-                    <figcaption>SHAP local explanation, high-risk customer — primarily driven toward churn by higher age and holding 3+ products.</figcaption>
-                  </figure>
-                  <figure class="figure-editorial">
-                    <img src="figures/SHAP_Local_Explanation_for_a_Low-Risk_Customer.png" alt="SHAP Local Explanation for a Low-Risk Customer" loading="lazy" decoding="async" />
-                    <figcaption>SHAP local explanation, low-risk customer — anchored toward retention by low age, even though inactive.</figcaption>
-                  </figure>
+            <div class="space-y-8">
+              <p class="subtitle">F2 is a proxy for "recall matters more"; the real objective is cost. This dataset has no cost fields (customer value, offer cost, campaign success rate), so rather than invent them, the analysis assumes only the cost ratio C = cost of a missed churner / cost of a wasted retention offer, and compares the two error types. At the default 0.5 threshold the model makes 168 wasted offers (false positives) and 196 missed churners (false negatives); at the tuned 0.23 threshold, 564 wasted offers and 77 missed churners. Setting the two error costs equal gives a break-even ratio of about <strong>C* = 3.3</strong>: the tuned threshold has lower total cost whenever missing a churner costs more than roughly 3.3 wasted offers.</p>
+
+              <figure class="figure-editorial">
+                <img src="figures/breakeven_cost_ratio.png" alt="Cost-optimal threshold against the cost ratio" loading="lazy" decoding="async" />
+                <figcaption>Cost-optimal threshold against the cost ratio — the more a lost customer costs relative to an offer, the lower the cost-optimal threshold.</figcaption>
+              </figure>
+
+              <div class="note note--insight">
+                <div class="note__label">Insight · The conclusion holds for any bank respecting the ratio</div>
+                <div class="note__body">
+                  <p>In retail banking a lost customer relationship is worth many times a single retention offer, so any realistic ratio sits well above 3.3 and the aggressive operating point is justified. No currency figure is assumed, so the conclusion holds for any bank whose economics respect the ratio. (SMOTE distorts probability calibration, so the operating threshold is found empirically rather than from the textbook 1/(1+C) rule.)</p>
                 </div>
               </div>
             </div>
           </section>
 
-          <!-- Conclusion & Strategic Action Plan -->
-          <section id="conclusion" class="section-padding section--editorial" data-section-num="05">
+          <!-- Why Customers Leave -->
+          <section id="shap" class="section-padding section--editorial" data-section-num="05">
             <div class="section-header">
               <div class="section-eyebrow">
                 <span class="section-num">05</span>
-                <span class="section-kicker">Conclusion &amp; Roadmap</span>
+                <span class="section-kicker">Why Customers Leave</span>
               </div>
-              <h2 class="section-title">Final Conclusion &amp; Strategic Action Plan</h2>
+              <h2 class="section-title">Why Customers Leave: SHAP Attribution</h2>
             </div>
-            
+
             <div class="space-y-8">
-              <!-- From Insights to Impact -->
-              <div class="contact-info-card">
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">From Insights to Impact</h3>
-                <p class="subtitle mb-6">Based on these findings, we recommend a proactive and segmented approach to customer retention.</p>
-                
-                <div class="overflow-x-auto">
-                  <table class="w-full border-collapse border border-gray-300 dark:border-gray-600">
-                    <thead>
-                      <tr class="bg-gray-100 dark:bg-gray-700">
-                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left text-gray-900 dark:text-gray-100 font-semibold">Strategy Pillar</th>
-                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left text-gray-900 dark:text-gray-100 font-semibold">Recommended Action</th>
-                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left text-gray-900 dark:text-gray-100 font-semibold">Data-Driven Rationale</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr class="bg-white dark:bg-gray-800">
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-bold text-gray-900 dark:text-gray-100">1. Proactive Retention</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">Deploy the XGBoost model to generate monthly "Churn Risk Scores" for every customer. Use SHAP force plots to provide service teams with top 3 reasons for high-risk scores.</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">The model's high AUC (0.85) and Recall (55%) make it effective for identifying at-risk customers. SHAP provides the "why" needed for personalized conversations.</td>
-                      </tr>
-                      <tr class="bg-gray-50 dark:bg-gray-800">
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-bold text-gray-900 dark:text-gray-100">2. Targeted Engagement</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">Launch re-engagement campaigns for "Non-Active Members" in medium-to-high risk categories. Offer bonus interest rates, free financial reviews, or new feature tutorials.</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100"><code class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-gray-900 dark:text-gray-100 font-mono text-sm">IsActiveMember</code> is a top-three predictor. SHAP analysis confirms that inactivity is a powerful force pushing customers towards churn.</td>
-                      </tr>
-                      <tr class="bg-white dark:bg-gray-800">
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-bold text-gray-900 dark:text-gray-100">3. Portfolio Optimization</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">Flag customers with 3+ products for a "Portfolio Health Check." Proactively reach out to help them consolidate accounts. Revise sales incentives to reward value over sheer quantity.</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100"><code class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-gray-900 dark:text-gray-100 font-mono text-sm">NumOfProducts</code> is a top predictor of churn. Goal is to turn a friction point (complexity) into a positive engagement opportunity (simplification and value).</td>
-                      </tr>
-                      <tr class="bg-gray-50 dark:bg-gray-800">
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-bold text-gray-900 dark:text-gray-100">4. Regional Strategy Review</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">Initiate a specific review of the German market. Conduct surveys and competitive analysis to understand why churn rates are significantly higher than in France and Spain.</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100"><code class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-gray-900 dark:text-gray-100 font-mono text-sm">Geography_Germany</code> consistently appears as a key factor increasing churn risk in both EDA and SHAP analysis.</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+              <p class="subtitle">SHAP assigns each feature a signed contribution to each prediction, so the model's reasoning can be read globally and per customer. To guard against method artifacts, the SHAP ranking was cross-checked against random forest impurity importances and XGBoost gain importances; the same features top all three.</p>
+
+              <div class="figure-grid">
+                <figure class="figure-editorial">
+                  <img src="figures/SHAP_Global_Feature_Insights.png" alt="SHAP summary plot" loading="lazy" decoding="async" />
+                  <figcaption>SHAP summary plot — age, activity status and product count sit at the top.</figcaption>
+                </figure>
+                <figure class="figure-editorial">
+                  <img src="figures/feature_importance_comparison.png" alt="Feature importance, three methods compared" loading="lazy" decoding="async" />
+                  <figcaption>Feature importance, three methods compared — SHAP, RF impurity and XGB gain agree on the top features.</figcaption>
+                </figure>
               </div>
 
-              <!-- Next Steps -->
+              <p class="subtitle">The two test-set extremes illustrate how the drivers combine. The highest-risk customer (churn probability 0.998) stacks every driver: 4 products, an age well above average, inactive, an above-average balance, located in Germany; only a short tenure pulls the other way, far too weakly to matter. The lowest-risk customer (churn probability 0.005) is the mirror image: 2 products, young, active, zero balance, high credit score.</p>
+
+              <div class="figure-grid">
+                <figure class="figure-editorial">
+                  <img src="figures/SHAP_Local_Explanation_for_a_High-Risk_Customer.png" alt="SHAP local explanation for a high-risk customer" loading="lazy" decoding="async" />
+                  <figcaption>SHAP local explanation for a high-risk customer (churn probability 0.998) — every driver stacks in the same direction.</figcaption>
+                </figure>
+                <figure class="figure-editorial">
+                  <img src="figures/SHAP_Local_Explanation_for_a_Low-Risk_Customer.png" alt="SHAP local explanation for a low-risk customer" loading="lazy" decoding="async" />
+                  <figcaption>SHAP local explanation for a low-risk customer (churn probability 0.005) — factors pull risk down together.</figcaption>
+                </figure>
+              </div>
+            </div>
+          </section>
+
+          <!-- Action Plan -->
+          <section id="actions" class="section-padding section--editorial" data-section-num="06">
+            <div class="section-header">
+              <div class="section-eyebrow">
+                <span class="section-num">06</span>
+                <span class="section-kicker">Action Plan</span>
+              </div>
+              <h2 class="section-title">Action Plan</h2>
+            </div>
+
+            <div class="space-y-8">
+              <div class="overflow-x-auto">
+                <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
+                  <thead>
+                    <tr class="bg-gray-100 dark:bg-gray-700/30">
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Initiative</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">What to do</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Basis in the analysis</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Monthly risk scoring</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Score every customer with XGBoost at the tuned threshold; give service teams each customer's top three SHAP factors before a call.</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Best ranking quality of the four candidates; 85% of churners caught at the tuned threshold.</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Re-engagement campaign</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Target inactive members in the medium-to-high risk band with a bonus rate, a fee waiver or a consultation.</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Inactivity is a top-three SHAP driver.</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Portfolio review</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Contact customers holding 3+ products for a simplification review; reward sales on fitting combinations rather than product count.</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Product count ranks second in all three importance views.</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>German market review</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Run competitor analysis and collect customer and branch feedback in Germany.</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Germany shows elevated churn in the EDA and the tree-model rankings.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
               <div class="contact-info-card">
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">Next Steps & Continuous Improvement</h3>
-                <ul class="space-y-3 subtitle">
-                  <li><strong style="color: var(--coral);">A/B Test Retention Strategies</strong>: Implement recommended actions on test groups to measure their direct impact on reducing churn compared to control groups.</li>
-                  <li><strong style="color: var(--sage);">Monitor and Retrain</strong>: The churn model should be retrained periodically (e.g., quarterly) with new data to adapt to changing market conditions and customer behavior.</li>
-                  <li><strong style="color: var(--blue);">Integrate with CRM Systems</strong>: Churn risk scores and SHAP insights should be integrated directly into Customer Relationship Management (CRM) systems to empower front-line staff with actionable intelligence.</li>
-                </ul>
+                <h3 class="text-xl font-semibold mb-3" style="color: var(--dark);">Follow-ups &amp; Reproducibility</h3>
+                <p class="subtitle">Follow-ups: A/B-test the offers against a control group, retrain quarterly, recheck the threshold whenever campaign economics change, and surface the risk score plus SHAP factors in the CRM. The notebook runs end to end locally (<code>uv run jupyter nbconvert --to notebook --execute</code>); all random seeds are fixed at 42, and figures are written to <code>figures/</code>.</p>
               </div>
             </div>
           </section>
@@ -585,7 +577,7 @@ AUC Score: 0.8484</code></pre>
       </div>
     </section>
 
-    <!-- Related Projects (redesigned) -->
+    <!-- Related projects -->
     <section id="related" class="section-padding">
       <div class="section-header reveal">
         <div class="section-eyebrow">
@@ -594,19 +586,27 @@ AUC Score: 0.8484</code></pre>
         <h2 class="section-title">Related Projects</h2>
       </div>
       <div class="grid md:grid-cols-2 gap-6">
-        <a href="../e-commerce fraud detection/e-commerce fraud detection-en.html" class="related-project-card group cursor-pointer" style="text-decoration: none;">
-          <h3 class="related-project-title">E-commerce First-Purchase Fraud Detection</h3>
-          <p class="related-project-description">LightGBM-based fraud detection system achieving 51.2% detection rate</p>
+        <a href="#" class="related-project-card group cursor-pointer" style="text-decoration: none;" onclick="
+          const lang = localStorage.getItem('language') || 'zh';
+          window.location.href = lang === 'en' ? '../lending hub loan prediction/lending hub loan prediction-en.html' : '../lending hub loan prediction/lending hub loan prediction.html';
+          return false;
+        ">
+          <h3 class="related-project-title">Lending Hub Loan Default Prediction</h3>
+          <p class="related-project-description">Threshold decision under a 4.2:1 cost asymmetry, catching 74.9% of defaults</p>
           <div class="related-project-link">
-            <span>View Details</span>
+            <span>View details</span>
             <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>
           </div>
         </a>
-        <a href="../lending hub loan prediction/lending hub loan prediction-en.html" class="related-project-card group cursor-pointer" style="text-decoration: none;">
-          <h3 class="related-project-title">Lending Hub Loan Default Prediction</h3>
-          <p class="related-project-description">Multi-model comparison-based loan risk prediction system</p>
+        <a href="#" class="related-project-card group cursor-pointer" style="text-decoration: none;" onclick="
+          const lang = localStorage.getItem('language') || 'zh';
+          window.location.href = lang === 'en' ? '../youtube comment analysis/youtube comment analysis-en.html' : '../youtube comment analysis/youtube comment analysis.html';
+          return false;
+        ">
+          <h3 class="related-project-title">YouTube Comment Pet-Owner Detection</h3>
+          <p class="related-project-description">Weak-supervised classification under the same ranking + operating-point frame</p>
           <div class="related-project-link">
-            <span>View Details</span>
+            <span>View details</span>
             <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>
           </div>
         </a>
@@ -614,29 +614,25 @@ AUC Score: 0.8484</code></pre>
     </section>
   </main>
 
-  <!-- Bottom scripts: Prism / Local scripts / Logo animation / Detail page logic -->
+  <!-- Bottom scripts: Prism / local scripts / logo animation / detail-page logic -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
   <script src="../../assets/js/logo.js"></script>
-  <!-- Include common modules -->
   <script src="../../assets/js/common.js"></script>
   <script src="../../assets/js/charts.js"></script>
   <script src="../../assets/js/project.js"></script>
-  
-  <!-- Language toggle script -->
+
+  <!-- Language toggle functionality -->
   <script>
-    // Language toggle functionality
     document.addEventListener('DOMContentLoaded', function() {
       const langToggle = document.getElementById('lang-toggle');
       if (langToggle) {
         langToggle.addEventListener('click', function() {
-          // Save preference and redirect to Chinese version
           localStorage.setItem('language', 'zh');
           window.location.href = 'Bank Customer Churn Prediction.html';
         });
       }
     });
   </script>
-
 </body>
 </html>

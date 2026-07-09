@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" class="light">
 <head>
   <script>document.documentElement.classList.add('js');</script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>银行客户流失预测与关键驱动因素分析 - 数据诗学</title>
-  <meta name="description" content="基于机器学习的银行客户流失预测模型，使用XGBoost和SHAP技术深度分析客户流失驱动因素" />
+  <title>银行客户流失预测与关键驱动因素 - 数据诗学</title>
+  <meta name="description" content="对 10,000 名零售银行客户的机器学习分析：XGBoost+SMOTE 达到 ROC-AUC 0.876 / PR-AUC 0.727，F2 阈值调优把流失捕获率从 61% 提升到 85%，并给出 C*≈3.3 的成本盈亏平衡比。" />
 
   <!-- 与首页一致：Tailwind / 字体 / 图标 / 站点样式 -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -20,6 +20,15 @@
   <!-- 代码高亮 + 图表库（详情页常用） -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+  <style>
+    .dark table.performance-table thead tr {
+      background-color: rgba(64, 64, 64, 0.25) !important;
+    }
+    .dark .dark\:text-gray-300 {
+      color: var(--dark) !important;
+    }
+  </style>
 </head>
 <body class="transition-colors duration-300">
   <div class="scroll-progress" id="scroll-progress"></div>
@@ -27,7 +36,6 @@
   <!-- 顶部导航（完全复用首页结构与样式） -->
   <header id="navbar" class="navbar fixed top-0 left-0 right-0 z-50">
     <div class="container-main h-full flex items-center justify-between">
-      <!-- Logo（跳回首页 Hero 并可播放动画） -->
       <a href="../../index.html#hero" class="navbar-logo" id="navbar-logo">
         <svg class="logo-svg-nav" viewBox="0 0 40 40">
           <g class="grid-bg">
@@ -48,7 +56,6 @@
         </div>
       </a>
 
-      <!-- 页内导航（跳转到首页对应锚点） -->
       <nav class="hidden md:flex items-center space-x-8">
         <a href="../../index.html#about" class="nav-link">关于</a>
         <a href="../../index.html#experience" class="nav-link">经历</a>
@@ -82,29 +89,29 @@
   </header>
 
   <main class="container-main">
-    <!-- 项目头部（Hero风格的详情页抬头） -->
+    <!-- 项目头部 -->
     <section id="project-hero" class="section-padding" style="padding-top: calc(var(--space-xl) + 72px)">
       <div class="grid md:grid-cols-2 gap-16 items-center w-full">
         <div class="reveal">
           <div class="section-eyebrow">
-            <span class="section-kicker">Case Study · 金融客户分析</span>
+            <span class="section-kicker">Case Study · 客户分析与留存</span>
           </div>
           <h1 class="hero-title mt-2">银行客户流失预测与关键驱动因素</h1>
-          <p class="subtitle mt-4 max-w-xl">基于 XGBoost + SHAP 的可解释建模，把"为什么流失"还给业务团队</p>
-          <div class="reading-time">约 7 分钟阅读<span class="sep">·</span>5 张图表</div>
+          <p class="subtitle mt-4 max-w-xl">一万名客户里每五个就有一个流失。谁会走、为什么走、银行来得及做什么——以及为什么把阈值从 0.5 降到 0.23 是划算的。</p>
+          <div class="reading-time">约 13 分钟阅读<span class="sep">·</span>15 张图表</div>
 
           <div class="hero-stats">
             <div class="hero-stat">
               <div class="hero-stat__num">10K</div>
-              <div class="hero-stat__label">客户样本</div>
+              <div class="hero-stat__label">零售客户（流失率 20.4%）</div>
             </div>
             <div class="hero-stat">
-              <div class="hero-stat__num">0.848</div>
-              <div class="hero-stat__label">AUC 分数</div>
+              <div class="hero-stat__num">85%</div>
+              <div class="hero-stat__label">流失捕获率 @ 阈值 0.23</div>
             </div>
             <div class="hero-stat">
-              <div class="hero-stat__num">55%</div>
-              <div class="hero-stat__label">流失召回率</div>
+              <div class="hero-stat__num">0.876</div>
+              <div class="hero-stat__label">ROC-AUC（测试集）</div>
             </div>
           </div>
 
@@ -118,466 +125,451 @@
           <ol class="hero-stack__list">
             <li>
               <span class="hero-stack__num">01</span>
-              <span class="hero-stack__name">XGBoost</span>
-              <span class="hero-stack__desc">梯度提升分类器，承担主预测任务</span>
+              <span class="hero-stack__name">XGBoost + SMOTE</span>
+              <span class="hero-stack__desc">两个排序指标双第一，ROC-AUC 0.876 / PR-AUC 0.727</span>
             </li>
             <li>
               <span class="hero-stack__num">02</span>
-              <span class="hero-stack__name">SMOTE</span>
-              <span class="hero-stack__desc">合成少数类过采样，平衡 20%/80% 流失分布</span>
+              <span class="hero-stack__name">同协议四模型对比</span>
+              <span class="hero-stack__desc">imblearn 流水线，SMOTE 只作用于训练折，5 折 GridSearchCV</span>
             </li>
             <li>
               <span class="hero-stack__num">03</span>
-              <span class="hero-stack__name">SHAP</span>
-              <span class="hero-stack__desc">全局 + 局部归因，让模型决策可解释</span>
+              <span class="hero-stack__name">F2 阈值调优</span>
+              <span class="hero-stack__desc">0.5 → 0.23，流失捕获率 61% → 85%</span>
             </li>
             <li>
               <span class="hero-stack__num">04</span>
-              <span class="hero-stack__name">Stratified Split</span>
-              <span class="hero-stack__desc">分层抽样保留训练 / 测试集的类别比例</span>
+              <span class="hero-stack__name">盈亏平衡分析</span>
+              <span class="hero-stack__desc">不编造成本，只算比值 C*≈3.3</span>
             </li>
             <li>
               <span class="hero-stack__num">05</span>
-              <span class="hero-stack__name">GridSearchCV</span>
-              <span class="hero-stack__desc">超参数网格搜索 + 3 折交叉验证</span>
+              <span class="hero-stack__name">SHAP 三方交叉验证</span>
+              <span class="hero-stack__desc">SHAP × RF 不纯度 × XGB gain，头部特征一致</span>
             </li>
           </ol>
-          <div class="hero-stack__foot">Python · pandas · scikit-learn · imblearn · matplotlib</div>
+          <div class="hero-stack__foot">Python · pandas · scikit-learn · xgboost · imbalanced-learn · shap</div>
         </aside>
       </div>
     </section>
 
-    <!-- 执行摘要（三列信息卡，重新设计） -->
-    <section id="executive-summary" class="section-padding section--editorial" data-section-num="00">
-      <div class="section-header reveal">
-        <div class="section-eyebrow">
-          <span class="section-num">00</span>
-          <span class="section-kicker">Executive Summary</span>
-        </div>
-        <h2 class="section-title">执行摘要</h2>
-      </div>
+    <!-- 简要摘要卡片 -->
+    <section id="quick-summary" class="section-padding">
       <div class="grid md:grid-cols-3 gap-6">
         <div class="summary-card">
           <h3 class="summary-card-title">业务挑战</h3>
-          <p class="summary-card-content">项目的主要挑战是通过主动识别具有高流失风险的客户来减少客户流失。高流失率会导致重大的收入损失和更高的新客户获取成本。</p>
+          <p class="summary-card-content">20.4% 的客户流失，漏掉一个流失客户丢的是整个客户关系，误报一个只是多发一份挽留优惠——两类错误代价悬殊。</p>
         </div>
         <div class="summary-card">
           <h3 class="summary-card-title">解决方案</h3>
-          <p class="summary-card-content">分析包含10,000名银行客户的数据集，构建XGBoost+SMOTE机器学习模型，使用SHAP技术解释预测结果，揭示客户流失的具体驱动因素。</p>
+          <p class="summary-card-content">四个分类器在同一套协议下调参对比，XGBoost 两个排序指标双第一；再把决策阈值按 F2 最优调到 0.23。</p>
         </div>
         <div class="summary-card">
           <h3 class="summary-card-title">商业价值</h3>
-          <p class="summary-card-content">提供可操作的预测工具，帮助银行从被动挽留转向主动挽留策略，通过精准识别高风险客户，优化挽留支出并降低整体流失率。</p>
+          <p class="summary-card-content">测试集 509 名流失客户抓到约 432 人（85%）；只要流失客户价值超过 3.3 份挽留优惠成本，激进的运营点就更省钱。</p>
         </div>
       </div>
     </section>
 
-    <!-- 主体内容：左侧目录 + 右侧正文（与文档规范一致） -->
+    <!-- 主体内容：左侧目录 + 右侧正文 -->
     <section id="content" class="section-padding">
       <div class="grid md:grid-cols-12 gap-12">
-        <!-- 目录（自动生成） -->
         <aside class="md:col-span-3">
           <nav class="project-toc sticky top-24" id="project-toc">
             <h3 class="text-xl font-semibold" style="color: var(--dark);">目录</h3>
             <ul class="mt-4 space-y-2" id="toc-list">
-              <li><a href="#findings" class="toc-link" data-section="findings">主要发现与建议</a></li>
-              <li><a href="#methodology" class="toc-link" data-section="methodology">数据分析方法论</a></li>
-              <li><a href="#evaluation" class="toc-link" data-section="evaluation">模型评估对比</a></li>
-              <li><a href="#shap-analysis" class="toc-link" data-section="shap-analysis">SHAP深度解析</a></li>
-              <li><a href="#conclusion" class="toc-link" data-section="conclusion">结论与行动计划</a></li>
+              <li><a href="#summary" class="toc-link" data-section="summary">执行摘要</a></li>
+              <li><a href="#data" class="toc-link" data-section="data">数据与探索</a></li>
+              <li><a href="#models" class="toc-link" data-section="models">模型对比</a></li>
+              <li><a href="#threshold" class="toc-link" data-section="threshold">阈值调优</a></li>
+              <li><a href="#cost" class="toc-link" data-section="cost">成本盈亏平衡</a></li>
+              <li><a href="#shap" class="toc-link" data-section="shap">客户为什么走</a></li>
+              <li><a href="#actions" class="toc-link" data-section="actions">行动计划</a></li>
             </ul>
           </nav>
         </aside>
 
-        <!-- 正文区域 -->
         <div class="md:col-span-9 content-area">
-          <!-- 主要发现与行动建议 -->
-          <section id="findings" class="section-padding section--editorial" data-section-num="01">
+          <!-- 执行摘要 -->
+          <section id="summary" class="section-padding section--editorial" data-section-num="00">
+            <div class="section-header">
+              <div class="section-eyebrow">
+                <span class="section-num">00</span>
+                <span class="section-kicker">Executive Summary</span>
+              </div>
+              <h2 class="section-title">执行摘要</h2>
+            </div>
+
+            <div class="space-y-6">
+              <div class="contact-info-card">
+                <p class="subtitle mb-4">一万名零售银行客户里，每五个就有一个流失了。这份分析回答三个问题：谁会走，为什么走，银行来得及做什么。最终模型是 XGBoost + SMOTE，经 5 折网格搜索调参。</p>
+
+                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">四个发现</h3>
+                <ul class="list-disc list-inside space-y-3 subtitle mb-6">
+                  <li><strong>年龄是最强预测因子。</strong>EDA 和 SHAP 都把年龄排在第一：40 到 50 岁之间流失风险陡增，流失客户年龄中位数约 45 岁，留存约 35 岁。</li>
+                  <li><strong>不活跃先于流失出现。</strong><code>IsActiveMember=0</code> 进 SHAP 前三，是模型里最有提前量的信号——参与度下滑在销户之前很久就能观察到。</li>
+                  <li><strong>产品越多，流失越多。</strong>持有 3、4 个产品的客户反而流失更多（反直觉），产品数在三种重要性度量里都排第二。</li>
+                  <li><strong>德国市场异常。</strong>无论看原始计数还是模型排序，德国客户的流失都远高于法国和西班牙。</li>
+                </ul>
+
+                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">结果速览</h3>
+                <div class="overflow-x-auto">
+                  <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
+                    <thead>
+                      <tr class="bg-gray-100 dark:bg-gray-700/30">
+                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">项目</th>
+                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">结果</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>分析对象</strong></td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">10,000 名客户（流失 2,037 人，占 20.4%）</td>
+                      </tr>
+                      <tr>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>最终模型</strong></td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">XGBoost + SMOTE，5 折网格搜索调参</td>
+                      </tr>
+                      <tr>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>排序能力（测试集）</strong></td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">ROC-AUC 0.876，PR-AUC 0.727</td>
+                      </tr>
+                      <tr>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>流失客户捕获率</strong></td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">调优阈值 0.23 下 85%；默认阈值 0.5 下 61%</td>
+                      </tr>
+                      <tr>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>主要驱动因素</strong></td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">年龄、活跃状态、产品数量、地区</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 数据与探索 -->
+          <section id="data" class="section-padding section--editorial" data-section-num="01">
             <div class="section-header">
               <div class="section-eyebrow">
                 <span class="section-num">01</span>
-                <span class="section-kicker">Findings &amp; Recommendations</span>
+                <span class="section-kicker">Data &amp; EDA</span>
               </div>
-              <h2 class="section-title">主要发现与行动建议</h2>
+              <h2 class="section-title">数据与探索</h2>
             </div>
-            
+
             <div class="space-y-8">
-              <!-- 发现1：年龄因素 -->
               <div class="contact-info-card">
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">1. 发现：年龄是预测流失的最强因素</h3>
-                <div class="space-y-4">
-                  <div>
-                    <strong style="color: var(--coral);">数据洞察</strong>：初步的探索性数据分析和最终的SHAP模型解释都证实，<code class="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded text-gray-900 dark:text-gray-100 font-mono text-sm">年龄</code>是预测客户流失中最具影响力的特征。对于40-50岁年龄段的客户，流失风险显著增加。
-                  </div>
-                  <div>
-                    <strong style="color: var(--sage);">业务启示</strong>：这一中年群体可能正在经历改变其财务需求的生活变化，或者他们正被竞争对手以定制化的财富管理或投资产品更积极地作为目标。
-                  </div>
-                  <div>
-                    <strong style="color: var(--blue);">行动建议</strong>：
-                    <ul class="list-disc list-inside mt-2 space-y-1 subtitle">
-                      <li>为这一群体开发和营销专门的金融产品，如退休规划、投资服务或家庭教育基金。</li>
-                      <li>为40岁以上的高价值客户实施有针对性的忠诚度计划，以增强他们的价值感和认同感。</li>
-                    </ul>
-                  </div>
-                </div>
+                <p class="subtitle">数据包含人口属性（年龄、性别、国家）、账户属性（余额、产品数、信用分、在网年限、信用卡、活跃标志）和流失标签。质量检查没有发现缺失值，特征之间也没有多重共线性；标识列直接删除。预处理为 75/25 分层划分（<code>random_state=42</code> 全程固定），<code>Geography</code> 独热编码，<code>Gender</code> 序数编码，数值特征标准化——编码器和缩放器只在训练集上拟合，避免数据泄漏。</p>
               </div>
 
-              <!-- 发现2：活跃状态 -->
-              <div class="contact-info-card">
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">2. 发现：不活跃是客户流失的关键前兆</h3>
-                <div class="space-y-4">
-                  <div>
-                    <strong style="color: var(--coral);">数据洞察</strong>：客户作为非活跃会员的状态（<code class="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded text-gray-900 dark:text-gray-100 font-mono text-sm">IsActiveMember</code> = 0）是导致流失的前三大驱动因素之一。分析显示，与活跃会员相比，非活跃会员离开的可能性要大得多。
-                  </div>
-                  <div>
-                    <strong style="color: var(--sage);">业务启示</strong>：客户参与度的下降是潜在流失的一个强有力和直接的警告信号。这为干预提供了一个关键但有时间敏感性的窗口。
-                  </div>
-                  <div>
-                    <strong style="color: var(--blue);">行动建议</strong>：
-                    <ul class="list-disc list-inside mt-2 space-y-1 subtitle">
-                      <li>建立一个自动警报系统，标记那些在特定时期内（例如3个月）不活跃的高价值客户。</li>
-                      <li>对这些被标记的客户触发有针对性的重新激活活动，提供如奖励利率、费用减免或个性化咨询等激励措施。</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
+              <figure class="figure-editorial">
+                <img src="figures/target_distribution.png" alt="流失标签分布" loading="lazy" decoding="async" />
+                <figcaption>流失标签分布——10,000 名客户中 2,037 人流失（20.4%），构成中度类别不平衡。</figcaption>
+              </figure>
 
-              <!-- 发现3：产品复杂性 -->
-              <div class="contact-info-card">
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">3. 发现：产品组合的复杂性驱动客户流失</h3>
-                <div class="space-y-4">
-                  <div>
-                    <strong style="color: var(--coral);">数据洞察</strong>：与直觉相反，模型显示拥有3或4个产品（<code class="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded text-gray-900 dark:text-gray-100 font-mono text-sm">NumOfProducts</code>）是流失的强预测因子。而仅有1或2个产品的客户更可能保持忠诚。
-                  </div>
-                  <div>
-                    <strong style="color: var(--sage);">业务启示</strong>：银行当前的交叉销售策略可能正在制造复杂性和客户摩擦，而不是建立忠诚度。更大的产品组合并不能保证客户"粘性"更强。
-                  </div>
-                  <div>
-                    <strong style="color: var(--blue);">行动建议</strong>：
-                    <ul class="list-disc list-inside mt-2 space-y-1 subtitle">
-                      <li>将交叉销售的重点从数量转向协同效应。培训销售人员推荐那些能真正补充客户现有投资组合的产品。</li>
-                      <li>对于拥有3个以上产品且流失风险评分高的高价值客户，主动提供"投资组合审查"服务，以简化他们的财务状况并强化银行的价值主张。</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
+              <figure class="figure-editorial">
+                <img src="figures/countplot_categorical_vs_exited.png" alt="分类特征与流失的关系" loading="lazy" decoding="async" />
+                <figcaption>分类特征与流失——德国客户流失显著高于法国和西班牙；持有 3、4 个产品的客户流失反而更高。</figcaption>
+              </figure>
 
-              <!-- 发现4：地理差异 -->
-              <div class="contact-info-card">
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">4. 发现：地理差异表明区域性挑战</h3>
-                <div class="space-y-4">
-                  <div>
-                    <strong style="color: var(--coral);">数据洞察</strong>：分析一致地指出，与法国和西班牙的客户相比，<strong>德国</strong>的客户有更高的流失倾向。
-                  </div>
-                  <div>
-                    <strong style="color: var(--sage);">业务启示</strong>：这表明可能存在特定区域的因素，如更强的本地竞争、服务质量差距，或产品组合不太适合德国市场。
-                  </div>
-                  <div>
-                    <strong style="color: var(--blue);">行动建议</strong>：
-                    <ul class="list-disc list-inside mt-2 space-y-1 subtitle">
-                      <li>在德国进行有针对性的市场分析，以了解本地竞争对手的产品和客户的痛点。</li>
-                      <li>从德国客户和一线员工那里收集反馈，以确定需要改进服务的具体领域。</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
+              <figure class="figure-editorial">
+                <img src="figures/boxplot_numerical_vs_exited.png" alt="数值特征按流失状态的箱线图" loading="lazy" decoding="async" />
+                <figcaption>数值特征按流失状态的箱线图——年龄的分布分离最明显，流失客户中位年龄约 45 岁 vs 留存约 35 岁。</figcaption>
+              </figure>
+
+              <figure class="figure-editorial">
+                <img src="figures/correlation_heatmap.png" alt="特征相关性热图" loading="lazy" decoding="async" />
+                <figcaption>特征相关性热图——特征间无多重共线性，各自携带独立信息。</figcaption>
+              </figure>
             </div>
           </section>
 
-          <!-- 数据分析与方法论 -->
-          <section id="methodology" class="section-padding section--editorial" data-section-num="02">
+          <!-- 模型对比 -->
+          <section id="models" class="section-padding section--editorial" data-section-num="02">
             <div class="section-header">
               <div class="section-eyebrow">
                 <span class="section-num">02</span>
-                <span class="section-kicker">Data Analysis &amp; Methodology</span>
+                <span class="section-kicker">Model Bake-off</span>
               </div>
-              <h2 class="section-title">数据分析与方法论</h2>
+              <h2 class="section-title">同协议下的模型对比</h2>
             </div>
-            
+
             <div class="space-y-8">
-              <!-- 步骤1：数据获取与EDA -->
               <div class="contact-info-card">
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">步骤 1：数据获取与探索性数据分析 (EDA)</h3>
-                <div class="space-y-4">
-                  <p class="subtitle">第一步是访问并对客户数据文件（<code class="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded text-gray-900 dark:text-gray-100 font-mono text-sm">bank_churn.csv</code>）进行质量检查。该数据集包含10,000条客户记录和14个不同的属性。</p>
-                  
-                  <div>
-                    <strong>加载数据与初步检查：</strong>
-                    <pre class="bg-gray-900 text-gray-100 p-4 rounded-lg mt-2 overflow-x-auto"><code class="language-python">import pandas as pd
-df = pd.read_csv('bank_churn.csv')
-df.info()</code></pre>
-                  </div>
-
-                  <div class="note note--evidence">
-                    <div class="note__label">Evidence</div>
-                    <div class="note__body">经检查，数据集是完整的，<strong>没有缺失值</strong>。</div>
-                  </div>
-
-                  <div>
-                    <strong>可视化特征探索：</strong>
-                    <div class="figure-grid">
-                      <figure class="figure-editorial">
-                        <img src="figures/boxplot_numerical_vs_exited.png" alt="数值特征与流失状态的箱线图" loading="lazy" decoding="async" />
-                        <figcaption>数值特征与流失状态——揭示了已流失和未流失客户在年龄和余额方面的显著差异。</figcaption>
-                      </figure>
-                      <figure class="figure-editorial">
-                        <img src="figures/boxplot_categorical_vs_exited.png" alt="分类特征与流失状态的计数图" loading="lazy" decoding="async" />
-                        <figcaption>分类特征与流失状态——显示德国客户和非活跃会员的流失率异常高。</figcaption>
-                      </figure>
-                    </div>
-                  </div>
-                </div>
+                <p class="subtitle">四个分类器在同一套协议下调参，对比才算数：每个模型都放进 <code>imblearn</code> 流水线，SMOTE 只作用于交叉验证的训练折；超参数用 5 折 <code>GridSearchCV</code> 按 ROC-AUC 选。</p>
               </div>
 
-              <!-- 步骤2：特征工程 -->
-              <div class="contact-info-card">
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">步骤 2：特征工程与数据准备</h3>
-                <div class="space-y-4">
-                  <p class="subtitle">为了准备用于建模的数据，我们执行了一系列预处理步骤：</p>
-                  
-                  <div class="note note--process">
-                    <div class="note__label">Pipeline</div>
-                    <div class="note__body">
-                      <ul class="list-disc list-inside space-y-2">
-                        <li><strong>特征选择</strong>：移除了<code class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-gray-900 dark:text-gray-100 font-mono text-sm">RowNumber</code>、<code class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-gray-900 dark:text-gray-100 font-mono text-sm">CustomerId</code>和<code class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-gray-900 dark:text-gray-100 font-mono text-sm">Surname</code>等无关列。</li>
-                        <li><strong>数据划分</strong>：使用分层抽样将数据集划分为训练集（75%）和测试集（25%）。</li>
-                        <li><strong>数据编码</strong>：将分类特征（<code class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-gray-900 dark:text-gray-100 font-mono text-sm">Geography</code>、<code class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-gray-900 dark:text-gray-100 font-mono text-sm">Gender</code>）转换为数值格式，使用独热编码和序数编码。</li>
-                        <li><strong>数据标准化</strong>：使用<code class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-gray-900 dark:text-gray-100 font-mono text-sm">StandardScaler</code>对数值特征进行标准化。</li>
-                      </ul>
-                    </div>
-                  </div>
-
-                  <pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto"><code class="language-python">from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler, OneHotEncoder, OrdinalEncoder
-
-# 移除无关列
-to_drop = ['RowNumber','CustomerId','Surname','Exited']
-X = churn_df.drop(to_drop, axis=1)
-y = churn_df['Exited']
-
-# 划分数据
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, stratify=y, random_state=1)
-
-# 标准化示例
-scaler = StandardScaler()
-scaler.fit(X_train[num_cols])
-X_train[num_cols] = scaler.transform(X_train[num_cols])
-X_test[num_cols] = scaler.transform(X_test[num_cols])</code></pre>
-                </div>
+              <div class="overflow-x-auto">
+                <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
+                  <thead>
+                    <tr class="bg-gray-100 dark:bg-gray-700/30">
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">模型</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">准确率</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">精确率</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">召回率</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">F1</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">ROC-AUC</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">PR-AUC</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="bg-green-50 dark:bg-green-900/20">
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>XGBoost + SMOTE</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.8544</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.6507</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.6149</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.6323</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.8757</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.7265</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">随机森林</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.8440</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.6042</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.6778</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.6389</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.8681</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.7002</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">KNN</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.7388</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.4184</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.7250</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.5306</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.8078</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.5277</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">逻辑回归</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.7160</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.3945</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.7387</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.5144</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.7900</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.4801</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
 
-              <!-- 步骤3：模型构建 -->
-              <div class="contact-info-card">
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">步骤 3：模型构建、优化与选择</h3>
-                <div class="space-y-4">
-                  <p class="subtitle">我们训练了多种分类模型。认识到数据集是不平衡的，我们采用了一种更高级的方法，将<strong>XGBoost</strong>分类器与<strong>合成少数类过采样技术（SMOTE）</strong>集成到一个流水线中。</p>
-                  
-                  <pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto"><code class="language-python">from imblearn.pipeline import Pipeline
-from imblearn.over_sampling import SMOTE
-import xgboost as xgb
+              <p class="subtitle">精确率、召回率、F1 按默认 0.5 阈值计算；ROC-AUC 和 PR-AUC 衡量排序能力，与阈值无关。流失客户占 20%，无技能模型的 PR-AUC 约 0.20，所以在这份数据上 PR-AUC 比 ROC-AUC 更能拉开差距。</p>
 
-# 创建SMOTE + XGBoost流水线
-pipeline = Pipeline([
-    ('smote', SMOTE(random_state=42)),
-    ('xgb', xgb.XGBClassifier(objective='binary:logistic', eval_metric='logloss', random_state=42))
-])
+              <div class="figure-grid">
+                <figure class="figure-editorial">
+                  <img src="figures/roc_curves_all_models.png" alt="四模型 ROC 曲线" loading="lazy" decoding="async" />
+                  <figcaption>四模型 ROC 曲线——XGBoost 与随机森林明显领先。</figcaption>
+                </figure>
+                <figure class="figure-editorial">
+                  <img src="figures/pr_curves_all_models.png" alt="四模型精确率-召回率曲线" loading="lazy" decoding="async" />
+                  <figcaption>四模型精确率-召回率曲线——XGBoost PR-AUC 0.727 领先，远高于 0.20 的无技能基线。</figcaption>
+                </figure>
+              </div>
 
-# 使用GridSearchCV寻找最佳参数
-grid_search = GridSearchCV(estimator=pipeline, param_grid=param_grid, scoring='roc_auc', cv=3)
-grid_search.fit(X_train, y_train)
-best_xgb_model_smote = grid_search.best_estimator_</code></pre>
+              <p class="subtitle">推荐 XGBoost：两个排序指标都是第一，而月度风险评分靠的就是排序能力。逻辑回归和 KNN 的高召回是拿大量误报换的，精确率 0.4 上下意味着十个联系对象里六个白打。随机森林最接近，在 0.5 阈值下召回和 F1 还略高一点，但阈值训练完随时能调，排序能力调不了。</p>
+
+              <div class="figure-grid">
+                <figure class="figure-editorial">
+                  <img src="figures/gridsearch_lr_heatmap.png" alt="逻辑回归网格搜索热图" loading="lazy" decoding="async" />
+                  <figcaption>逻辑回归网格搜索热图——展示同一套 5 折调参协议如何在超参数网格上选优。</figcaption>
+                </figure>
+                <figure class="figure-editorial">
+                  <img src="figures/confusion_matrix_xgboost.png" alt="XGBoost 混淆矩阵（默认阈值）" loading="lazy" decoding="async" />
+                  <figcaption>XGBoost 混淆矩阵（默认 0.5 阈值）——精确率与召回率相对均衡的基线状态。</figcaption>
+                </figure>
+              </div>
+
+              <div class="note note--caveat">
+                <div class="note__label">Metric · 为什么头条不是准确率</div>
+                <div class="note__body">
+                  <p>调参不用准确率，因为全部预测"留存"就有 79.6% 的准确率，这个指标在不平衡数据上没有分辨力。改报排序指标（ROC-AUC / PR-AUC）加上明确的运营点，才能真实反映模型对稀有类的分辨能力。</p>
                 </div>
               </div>
             </div>
           </section>
 
-          <!-- 模型评估与比较 -->
-          <section id="evaluation" class="section-padding section--editorial" data-section-num="03">
+          <!-- 阈值调优 -->
+          <section id="threshold" class="section-padding section--editorial" data-section-num="03">
             <div class="section-header">
               <div class="section-eyebrow">
                 <span class="section-num">03</span>
-                <span class="section-kicker">Model Evaluation</span>
+                <span class="section-kicker">Threshold Tuning</span>
               </div>
-              <h2 class="section-title">模型评估与比较</h2>
+              <h2 class="section-title">阈值调优</h2>
             </div>
-            
+
             <div class="space-y-8">
-              <!-- 性能概览 -->
-              <div class="contact-info-card">
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">各模型性能概览</h3>
-                <div class="overflow-x-auto">
-                  <table class="w-full border-collapse border border-gray-300 dark:border-gray-600">
-                    <thead>
-                      <tr class="bg-gray-100 dark:bg-gray-700">
-                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left text-gray-900 dark:text-gray-100 font-semibold">模型</th>
-                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left text-gray-900 dark:text-gray-100 font-semibold">准确率</th>
-                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left text-gray-900 dark:text-gray-100 font-semibold">精确率（流失）</th>
-                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left text-gray-900 dark:text-gray-100 font-semibold">召回率（流失）</th>
-                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left text-gray-900 dark:text-gray-100 font-semibold">AUC</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr class="bg-green-50 dark:bg-green-900/30">
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-bold text-gray-900 dark:text-gray-100">XGBoost（带SMOTE）</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">0.8408</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">0.6231</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-bold text-gray-900 dark:text-gray-100">0.5521</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-bold text-gray-900 dark:text-gray-100">0.8484</td>
-                      </tr>
-                      <tr class="bg-white dark:bg-gray-800">
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">随机森林</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">0.8608</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">0.8132</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">0.4106</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">0.8446</td>
-                      </tr>
-                      <tr class="bg-gray-50 dark:bg-gray-800">
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">K-最近邻</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">0.8428</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">0.7283</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">0.3635</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">0.7986</td>
-                      </tr>
-                      <tr class="bg-white dark:bg-gray-800">
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">逻辑回归</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">0.8092</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">0.5964</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">0.1945</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">0.7722</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+              <p class="subtitle">默认 0.5 阈值把两种错误当成同样代价，实际不是：漏掉一个真实流失客户，丢的是整个客户关系；误报一个，多发一份挽留优惠而已。扫描阈值并最大化 F2（召回权重是精确率的两倍）：</p>
+
+              <div class="overflow-x-auto">
+                <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
+                  <thead>
+                    <tr class="bg-gray-100 dark:bg-gray-700/30">
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">运营点</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">阈值</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">精确率</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">召回率</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">F1</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">F2</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">标记客户数</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">默认</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.50</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.6507</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.6149</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.6323</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.6218</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">481</td>
+                    </tr>
+                    <tr class="bg-green-50 dark:bg-green-900/20">
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>F2 最优</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.23</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.4337</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.8487</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.5741</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.7124</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">996</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
 
-              <!-- 最终模型选择 -->
+              <figure class="figure-editorial">
+                <img src="figures/threshold_tuning_xgboost.png" alt="阈值扫描：精确率、召回率与 F2" loading="lazy" decoding="async" />
+                <figcaption>阈值扫描：精确率、召回率与 F2——F2 在 0.23 附近取到最大值，这是召回优先的运营点。</figcaption>
+              </figure>
+
+              <figure class="figure-editorial">
+                <img src="figures/confusion_matrix_threshold_comparison.png" alt="0.50 与 0.23 阈值下的混淆矩阵对比" loading="lazy" decoding="async" />
+                <figcaption>0.50 与 0.23 阈值下的混淆矩阵对比——阈值降低后假阴从 196 减到 77，代价是假阳从 168 升到 564。</figcaption>
+              </figure>
+
               <div class="contact-info-card">
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">最终模型选择与理由</h3>
-                <div class="space-y-4">
-                  <p class="subtitle">对于大多数客户流失预测场景，主要目标是<strong>最大化识别出有风险的客户</strong>（高召回率），以最小化收入损失，同时保持强大的区分流失与非流失客户的总体能力（高AUC）。</p>
-                  
-                  <div class="note note--insight">
-                    <div class="note__label">Decision</div>
-                    <div class="note__body">基于此，<strong>带有 SMOTE 的 XGBoost 模型是最终推荐的选择</strong>。它在识别最多真实流失客户（<strong>最高的召回率</strong>）和拥有最佳整体预测能力（<strong>最高的 AUC</strong>）之间提供了最佳的组合。</div>
-                  </div>
-
-                  <div>
-                    <h4 class="font-semibold mb-2">最终模型性能（XGBoost with SMOTE）</h4>
-                    <pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto"><code>分类报告：
-              precision    recall  f1-score   support
-
-           0       0.89      0.91      0.90      1991
-           1       0.62      0.55      0.59       509
-
-    accuracy                           0.84      2500
-   macro avg       0.76      0.73      0.74      2500
-weighted avg       0.83      0.84      0.84      2500
-
-AUC 分数: 0.8484</code></pre>
-                  </div>
-                </div>
+                <p class="subtitle">阈值降到 0.23 后，测试集 509 名流失客户里能抓到约 432 人，默认阈值只有约 313 人；联系名单从 481 人翻到 996 人。这笔账值不值，取决于一份优惠的成本和一个客户的价值；预算固定时，阈值可以沿精确率-召回率曲线任意设，这正是选排序能力最强那个模型的原因。</p>
               </div>
             </div>
           </section>
 
-          <!-- SHAP深度解析 -->
-          <section id="shap-analysis" class="section-padding section--editorial" data-section-num="04">
+          <!-- 成本盈亏平衡 -->
+          <section id="cost" class="section-padding section--editorial" data-section-num="04">
             <div class="section-header">
               <div class="section-eyebrow">
                 <span class="section-num">04</span>
-                <span class="section-kicker">SHAP Deep Dive</span>
+                <span class="section-kicker">Break-even Analysis</span>
               </div>
-              <h2 class="section-title">解释模型预测（SHAP 分析）</h2>
+              <h2 class="section-title">成本盈亏平衡分析</h2>
             </div>
-            
-            <div class="space-y-8">
-              <div class="contact-info-card">
-                <p class="subtitle mb-6">为了理解XGBoost模型<em>为什么</em>会做出其预测，我们进行了SHAP（SHapley Additive exPlanations）分析。这揭示了每个特征对个体预测的影响。</p>
-                
-                <!-- 全局洞察 -->
-                <div class="space-y-6">
-                  <h3 class="text-xl font-semibold" style="color: var(--dark);">全局洞察：客户流失的关键驱动因素</h3>
-                  <figure class="figure-editorial">
-                    <img src="figures/SHAP_Global_Feature_Insights.png" alt="SHAP全局特征洞察图" loading="lazy" decoding="async" />
-                    <figcaption>SHAP 全局特征洞察——确认了年龄、产品数量、活跃状态和地理位置（德国）是驱动流失预测的最具影响力的因素。</figcaption>
-                  </figure>
 
-                  <!-- 个体客户归因 -->
-                  <h3 class="text-xl font-semibold" style="color: var(--dark);">个体客户归因</h3>
-                  <p class="subtitle">我们使用SHAP力图来剖析对单个客户的预测。</p>
-                  
-                  <figure class="figure-editorial">
-                    <img src="figures/SHAP_Local_Explanation_for_a_High-Risk_Customer.png" alt="高风险客户的SHAP局部解释图" loading="lazy" decoding="async" />
-                    <figcaption>高风险客户的 SHAP 局部解释——客户主要由较高年龄与拥有 3 个以上产品共同推高其流失风险。</figcaption>
-                  </figure>
-                  <figure class="figure-editorial">
-                    <img src="figures/SHAP_Local_Explanation_for_a_Low-Risk_Customer.png" alt="低风险客户的SHAP局部解释图" loading="lazy" decoding="async" />
-                    <figcaption>低风险客户的 SHAP 局部解释——较低的年龄将其锚定在留存方向，尽管他是非活跃会员。</figcaption>
-                  </figure>
+            <div class="space-y-8">
+              <p class="subtitle">F2 只是"更看重召回"的代理，真正的目标是成本。这份数据没有成本字段（客户价值、优惠成本、活动成功率），所以不去编造，只假设一个比值 C = 漏掉一个流失客户的代价 / 误发一份挽留优惠的代价，并只比较两类错误。默认 0.5 阈值下，模型误发 168 份优惠（假阳）、漏掉 196 个流失客户（假阴）；调优后的 0.23 阈值下，误发 564 份、漏掉 77 个。令两类错误的总成本相等，得到盈亏平衡比值约 <strong>C* = 3.3</strong>：只要漏掉一个流失客户的代价超过约 3.3 份误发优惠，调优阈值的总成本就更低。</p>
+
+              <figure class="figure-editorial">
+                <img src="figures/breakeven_cost_ratio.png" alt="成本最优阈值与成本比值的关系" loading="lazy" decoding="async" />
+                <figcaption>成本最优阈值与成本比值的关系——流失客户相对优惠越贵，成本最优阈值越低。</figcaption>
+              </figure>
+
+              <div class="note note--insight">
+                <div class="note__label">Insight · 结论对任何符合比值的银行都成立</div>
+                <div class="note__body">
+                  <p>零售银行里，一个流失客户关系的价值是单份挽留优惠的很多倍，任何现实中的比值都远高于 3.3，所以激进的运营点是划算的。全程不假设任何绝对金额，所以结论对任何符合这个比值的银行都成立。（SMOTE 扭曲了概率校准，所以运营阈值用经验扫描确定，而非教科书的 1/(1+C) 公式。）</p>
                 </div>
               </div>
             </div>
           </section>
 
-          <!-- 结论与战略行动计划 -->
-          <section id="conclusion" class="section-padding section--editorial" data-section-num="05">
+          <!-- 客户为什么走 -->
+          <section id="shap" class="section-padding section--editorial" data-section-num="05">
             <div class="section-header">
               <div class="section-eyebrow">
                 <span class="section-num">05</span>
-                <span class="section-kicker">Conclusion &amp; Roadmap</span>
+                <span class="section-kicker">Why Customers Leave</span>
               </div>
-              <h2 class="section-title">最终结论与战略行动计划</h2>
+              <h2 class="section-title">客户为什么走：SHAP 归因</h2>
             </div>
-            
+
             <div class="space-y-8">
-              <!-- 从洞察到行动 -->
-              <div class="contact-info-card">
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">从洞察到行动</h3>
-                <p class="subtitle mb-6">基于以上发现，我们建议采取一种主动且分层的客户挽留方法。</p>
-                
-                <div class="overflow-x-auto">
-                  <table class="w-full border-collapse border border-gray-300 dark:border-gray-600">
-                    <thead>
-                      <tr class="bg-gray-100 dark:bg-gray-700">
-                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left text-gray-900 dark:text-gray-100 font-semibold">战略支柱</th>
-                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left text-gray-900 dark:text-gray-100 font-semibold">建议行动</th>
-                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left text-gray-900 dark:text-gray-100 font-semibold">数据驱动的理由</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr class="bg-white dark:bg-gray-800">
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-bold text-gray-900 dark:text-gray-100">1. 主动挽留</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">部署XGBoost模型，为每位客户生成月度的"流失风险评分"。使用SHAP力图为客服团队提供客户高风险评分的前3个原因。</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">模型的AUC（0.85）和召回率（55%）很高，能有效识别风险客户。SHAP提供了进行个性化对话所需的"为什么"。</td>
-                      </tr>
-                      <tr class="bg-gray-50 dark:bg-gray-800">
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-bold text-gray-900 dark:text-gray-100">2. 精准激活</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">针对中高风险类别中的"非活跃会员"发起重新激活活动。提供奖励利率、免费财务审查或新功能教程。</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100"><code class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-gray-900 dark:text-gray-100 font-mono text-sm">IsActiveMember</code>是前三大预测因子之一。SHAP分析证实，不活跃是推动客户流失的强大力量。</td>
-                      </tr>
-                      <tr class="bg-white dark:bg-gray-800">
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-bold text-gray-900 dark:text-gray-100">3. 产品组合优化</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">标记拥有3个以上产品的客户进行"投资组合健康检查"。主动联系以帮助他们整合账户。修订销售激励，奖励价值组合而非纯粹数量。</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100"><code class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-gray-900 dark:text-gray-100 font-mono text-sm">NumOfProducts</code>是流失的重要预测因子。目标是将一个摩擦点（复杂性）转变为一个积极的互动机会（简化和价值）。</td>
-                      </tr>
-                      <tr class="bg-gray-50 dark:bg-gray-800">
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-bold text-gray-900 dark:text-gray-100">4. 区域战略审视</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">对德国市场进行专项审查。通过调查和竞争分析，了解为什么德国的流失率明显高于法国和西班牙。</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100"><code class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-gray-900 dark:text-gray-100 font-mono text-sm">Geography_Germany</code>在EDA和SHAP分析中始终是增加流失风险的关键因素。</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+              <p class="subtitle">SHAP 给每个特征在每次预测里的贡献一个带符号的数值，模型的判断既能整体读，也能逐个客户读。为排除方法本身的偏差，SHAP 排序与随机森林不纯度重要性、XGBoost gain 重要性交叉核对过，三种方法的头部特征一致。</p>
+
+              <div class="figure-grid">
+                <figure class="figure-editorial">
+                  <img src="figures/SHAP_Global_Feature_Insights.png" alt="SHAP 全局特征归因" loading="lazy" decoding="async" />
+                  <figcaption>SHAP 全局特征归因——年龄、活跃状态、产品数量排在最前。</figcaption>
+                </figure>
+                <figure class="figure-editorial">
+                  <img src="figures/feature_importance_comparison.png" alt="三种重要性度量对比" loading="lazy" decoding="async" />
+                  <figcaption>三种重要性度量对比——SHAP、随机森林不纯度、XGBoost gain 的头部特征一致。</figcaption>
+                </figure>
               </div>
 
-              <!-- 后续步骤 -->
+              <p class="subtitle">测试集的两个极端客户说明这些因素怎么叠加：风险最高的客户（流失概率 0.998）集齐了所有驱动因素——4 个产品、年龄远高于平均、不活跃、余额高于平均、身在德国；唯一反向的因素是在网年限较短，作用小到可以忽略。风险最低的客户（流失概率 0.005）刚好相反：2 个产品、年轻、活跃、零余额、信用分高。</p>
+
+              <div class="figure-grid">
+                <figure class="figure-editorial">
+                  <img src="figures/SHAP_Local_Explanation_for_a_High-Risk_Customer.png" alt="高风险客户的 SHAP 局部解释" loading="lazy" decoding="async" />
+                  <figcaption>高风险客户的 SHAP 局部解释（流失概率 0.998）——所有驱动因素同向叠加。</figcaption>
+                </figure>
+                <figure class="figure-editorial">
+                  <img src="figures/SHAP_Local_Explanation_for_a_Low-Risk_Customer.png" alt="低风险客户的 SHAP 局部解释" loading="lazy" decoding="async" />
+                  <figcaption>低风险客户的 SHAP 局部解释（流失概率 0.005）——各因素同向拉低风险。</figcaption>
+                </figure>
+              </div>
+            </div>
+          </section>
+
+          <!-- 行动计划 -->
+          <section id="actions" class="section-padding section--editorial" data-section-num="06">
+            <div class="section-header">
+              <div class="section-eyebrow">
+                <span class="section-num">06</span>
+                <span class="section-kicker">Action Plan</span>
+              </div>
+              <h2 class="section-title">行动计划</h2>
+            </div>
+
+            <div class="space-y-8">
+              <div class="overflow-x-auto">
+                <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
+                  <thead>
+                    <tr class="bg-gray-100 dark:bg-gray-700/30">
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">措施</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">怎么做</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">分析依据</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>月度风险评分</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">用 XGBoost 按调优阈值给全量客户打分；客服拨打前先看该客户的前三个 SHAP 因素。</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">四个候选里排序能力最好；调优阈值下抓住 85% 的流失客户。</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>再激活活动</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">对中高风险段的不活跃会员发加息、免手续费或面谈邀约。</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">不活跃是 SHAP 前三的驱动因素。</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>产品组合梳理</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">约持有 3 个以上产品的客户做精简梳理；销售激励改为奖励适配组合而非产品数量。</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">产品数在三种重要性度量里都排第二。</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>德国市场调查</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">做竞品分析，收集当地客户和网点员工的反馈。</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">德国在 EDA 和树模型排序里都是高流失。</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
               <div class="contact-info-card">
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">后续步骤与持续改进</h3>
-                <ul class="space-y-3 subtitle">
-                  <li><strong style="color: var(--coral);">A/B测试挽留策略</strong>：在测试组上实施建议的行动，以衡量其与对照组相比在减少流失方面的直接影响。</li>
-                  <li><strong style="color: var(--sage);">监控与再训练</strong>：应定期（例如每季度）用新数据重新训练流失模型，以适应变化的市场条件和客户行为。</li>
-                  <li><strong style="color: var(--blue);">与CRM系统集成</strong>：应将流失风险评分和SHAP洞察直接集成到客户关系管理（CRM）系统中，为一线员工提供可操作的情报。</li>
-                </ul>
+                <h3 class="text-xl font-semibold mb-3" style="color: var(--dark);">后续与复现</h3>
+                <p class="subtitle">后续：挽留方案对照 A/B 测试；每季度重训模型；营销成本变化时重新定阈值；把风险分和 SHAP 因素接进 CRM。notebook 可在本地完整重跑（<code>uv run jupyter nbconvert --to notebook --execute</code>），随机种子固定为 42，图表输出到 <code>figures/</code>。</p>
               </div>
             </div>
           </section>
@@ -585,7 +577,7 @@ AUC 分数: 0.8484</code></pre>
       </div>
     </section>
 
-    <!-- 相关项目（重新设计） -->
+    <!-- 相关项目 -->
     <section id="related" class="section-padding">
       <div class="section-header reveal">
         <div class="section-eyebrow">
@@ -594,17 +586,25 @@ AUC 分数: 0.8484</code></pre>
         <h2 class="section-title">相关项目</h2>
       </div>
       <div class="grid md:grid-cols-2 gap-6">
-        <a href="../e-commerce fraud detection/e-commerce fraud detection.html" class="related-project-card group cursor-pointer" style="text-decoration: none;">
-          <h3 class="related-project-title">电商首次交易欺诈检测</h3>
-          <p class="related-project-description">基于LightGBM的欺诈检测系统，实现51.2%检测率</p>
+        <a href="#" class="related-project-card group cursor-pointer" style="text-decoration: none;" onclick="
+          const lang = localStorage.getItem('language') || 'zh';
+          window.location.href = lang === 'en' ? '../lending hub loan prediction/lending hub loan prediction-en.html' : '../lending hub loan prediction/lending hub loan prediction.html';
+          return false;
+        ">
+          <h3 class="related-project-title">Lending Hub 贷款违约预测</h3>
+          <p class="related-project-description">成本 4.2:1 不对称下的阈值决策，抓住 74.9% 违约</p>
           <div class="related-project-link">
             <span>查看详情</span>
             <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>
           </div>
         </a>
-        <a href="../lending hub loan prediction/lending hub loan prediction.html" class="related-project-card group cursor-pointer" style="text-decoration: none;">
-          <h3 class="related-project-title">Lending Hub贷款违约预测</h3>
-          <p class="related-project-description">基于多模型对比的贷款风险预测系统</p>
+        <a href="#" class="related-project-card group cursor-pointer" style="text-decoration: none;" onclick="
+          const lang = localStorage.getItem('language') || 'zh';
+          window.location.href = lang === 'en' ? '../youtube comment analysis/youtube comment analysis-en.html' : '../youtube comment analysis/youtube comment analysis.html';
+          return false;
+        ">
+          <h3 class="related-project-title">YouTube 评论宠物主识别</h3>
+          <p class="related-project-description">同为"排序能力 + 运营点"框架下的弱监督分类</p>
           <div class="related-project-link">
             <span>查看详情</span>
             <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>
@@ -618,25 +618,21 @@ AUC 分数: 0.8484</code></pre>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
   <script src="../../assets/js/logo.js"></script>
-  <!-- 引入公共模块 -->
   <script src="../../assets/js/common.js"></script>
   <script src="../../assets/js/charts.js"></script>
   <script src="../../assets/js/project.js"></script>
-  
-  <!-- Language toggle script -->
+
+  <!-- Language toggle functionality -->
   <script>
-    // Language toggle functionality
     document.addEventListener('DOMContentLoaded', function() {
       const langToggle = document.getElementById('lang-toggle');
       if (langToggle) {
         langToggle.addEventListener('click', function() {
-          // Save preference and redirect to English version
           localStorage.setItem('language', 'en');
           window.location.href = 'Bank Customer Churn Prediction-en.html';
         });
       }
     });
   </script>
-
 </body>
 </html>

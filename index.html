@@ -384,13 +384,13 @@
                     <div class="number-decoration">01</div>
                 </a>
                 <!-- 中项目 -->
-                <a href="#" class="bento-item" data-grid-col="4" data-grid-row="2">
+                <a href="projects/youtube comment analysis/youtube comment analysis.html" class="bento-item" data-grid-col="4" data-grid-row="2">
                     <div class="bento-content">
                         <div class="flex-grow">
-                            <span class="bento-tag">机器学习</span>
-                            <h3 class="mt-4 text-xl">YouTube评论用户偏向分析与KOL识别</h3>
+                            <span class="bento-tag">NLP · 弱监督</span>
+                            <h3 class="mt-4 text-xl">582万条YouTube评论里的宠物主识别</h3>
                             <p class="mt-2 text-sm" style="color: var(--brown);">
-                                针对动物/宠物相关视频评论数据，精准识别潜在猫/狗饲养者，洞察其论热点，并定位高质量合作KOL，为广告精准投放和KOL选择提供数据驱动决策，预计可提升目标用户互动率达10%。
+                                无真实标签时怎么做分类：弱监督标注 + 特征解耦 + 300 条人工标注验证。掩码模型一致性 AUC 0.91，以约 94% 精度圈出 4.5 万名高置信宠物主，并按宠物主受众占比为 3,858 个频道排名。
                             </p>
                         </div>
                         <div class="mt-4 text-right">
@@ -409,7 +409,7 @@
                             </div>
                             <h3 class="mt-4 text-xl">银行客户流失预测与关键驱动因素分析</h3>
                             <p class="mt-2 text-sm" style="color: var(--brown);">
-                                基于XGBoost+SMOTE的机器学习模型，准确率84.8%。通过SHAP技术解释预测结果，发现客户流失的具体驱动因素。</p>
+                                XGBoost+SMOTE，ROC-AUC 0.876。F2 阈值调优把流失捕获率从 61% 提到 85%，并给出 C*≈3.3 的盈亏平衡成本比；持有 3–4 个产品的客户反而流失更多。</p>
                         </div>
                         <div class="mt-4 text-right">
                             <span class="text-link">查看详情</span>
@@ -424,9 +424,9 @@
                             <div class="flex justify-between items-start">
                                 <span class="bento-tag">风险控制</span>
                             </div>
-                            <h3 class="mt-4 text-xl">电商首次交易欺诈检测系统</h3>
+                            <h3 class="mt-4 text-xl">电商首单欺诈检测</h3>
                             <p class="mt-2 text-sm" style="color: var(--brown);">
-                                基于LightGBM的欺诈检测系统，实现51.2%欺诈识别率，同时保持98.6%精确度，有效保护用户体验。</p>
+                                13.8 万笔首单交易、1.02% 欺诈率。模型拦截 0.53% 流量抓住 51.6% 欺诈、仅 2 个误报，金额加权欺诈损失降低约 52%——并解释召回为何被数据锁死在 52%。</p>
                         </div>
                         <div class="mt-4 text-right">
                             <span class="text-link">查看详情</span>
@@ -441,9 +441,9 @@
                             <div class="flex justify-between items-start">
                                 <span class="bento-tag">金融分析</span>
                             </div>
-                            <h3 class="mt-4 text-xl">Lending Hub 贷款违约预测系统</h3>
+                            <h3 class="mt-4 text-xl">Lending Hub 贷款违约预测</h3>
                             <p class="mt-2 text-sm" style="color: var(--brown);">
-                                成本优化的随机森林模型，实现80.7%违约检测率，同时将信贷损失降低44.7%，预计每年节省230万美元。</p>
+                                9,004 笔 LendingClub 贷款、违约率 16.8%。漏判成本是误拒的 4.2 倍时，把阈值从 0.5 移到 0.16：抓住 74.9% 的违约，预期损失比全批放款低 26.5%。</p>
                         </div>
                         <div class="mt-4 text-right">
                             <span class="text-link">查看详情</span>

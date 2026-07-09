@@ -441,16 +441,15 @@
                     <div class="number-decoration">01</div>
                 </a>
                 <!-- Medium Project -->
-                <a href="#" class="bento-item" data-grid-col="4" data-grid-row="2">
+                <a href="projects/youtube comment analysis/youtube comment analysis-en.html" class="bento-item" data-grid-col="4" data-grid-row="2">
                     <div class="bento-content">
                         <div class="flex-grow">
-                            <span class="bento-tag">Machine Learning</span>
-                            <h3 class="mt-4 text-xl">YouTube Comment User Bias Analysis & KOL Identification</h3>
-                            <p class="mt-2 text-sm" style="color: var(--brown);">Targeting animal/pet-related video
-                                comment data, precisely identifying potential cat/dog owners, discovering trending
-                                discussion topics, and locating high-quality collaborative KOLs to provide data-driven
-                                decisions for targeted advertising and KOL selection, expected to increase target user
-                                engagement rate by 10%.</p>
+                            <span class="bento-tag">NLP · Weak Supervision</span>
+                            <h3 class="mt-4 text-xl">Pet Owners in 5.8M YouTube Comments</h3>
+                            <p class="mt-2 text-sm" style="color: var(--brown);">Classification with no ground-truth
+                                label: weak-supervision labelling + feature decoupling + 300 hand labels. The masked
+                                model reaches 0.91 agreement-AUC and isolates ~45k high-confidence owners at ~94%
+                                precision, then ranks 3,858 channels by owner audience share.</p>
                         </div>
                         <div class="mt-4 text-right">
                             <span class="text-link">View Details</span>
@@ -467,9 +466,9 @@
                                 <span class="bento-tag">Customer Analytics</span>
                             </div>
                             <h3 class="mt-4 text-xl">Bank Customer Churn Prediction & Key Driver Analysis</h3>
-                            <p class="mt-2 text-sm" style="color: var(--brown);">XGBoost+SMOTE based ML model achieving
-                                84.8% accuracy. Using SHAP technology to explain predictions and uncover specific churn
-                                drivers.</p>
+                            <p class="mt-2 text-sm" style="color: var(--brown);">XGBoost+SMOTE, ROC-AUC 0.876. F2
+                                threshold tuning lifts churn capture from 61% to 85%, with a C*≈3.3 break-even cost
+                                ratio; customers holding 3–4 products churn more, not less.</p>
                         </div>
                         <div class="mt-4 text-right">
                             <span class="text-link">View Details</span>
@@ -484,10 +483,10 @@
                             <div class="flex justify-between items-start">
                                 <span class="bento-tag">Risk Control</span>
                             </div>
-                            <h3 class="mt-4 text-xl">E-commerce First Transaction Fraud Detection</h3>
-                            <p class="mt-2 text-sm" style="color: var(--brown);">LightGBM-based fraud detection system
-                                achieving 51.2% detection rate while maintaining 98.6% precision, effectively protecting
-                                user experience.</p>
+                            <h3 class="mt-4 text-xl">E-commerce First-Transaction Fraud Detection</h3>
+                            <p class="mt-2 text-sm" style="color: var(--brown);">138K first transactions, 1.02% fraud.
+                                The model flags 0.53% of traffic to catch 51.6% of fraud with only 2 false positives,
+                                lowering value-weighted fraud loss ~52% — and explains why recall is capped at 52%.</p>
                         </div>
                         <div class="mt-4 text-right">
                             <span class="text-link">View Details</span>
@@ -502,10 +501,10 @@
                             <div class="flex justify-between items-start">
                                 <span class="bento-tag">Financial Analytics</span>
                             </div>
-                            <h3 class="mt-4 text-xl">Lending Hub Loan Default Prediction System</h3>
-                            <p class="mt-2 text-sm" style="color: var(--brown);">Cost-optimized Random Forest model
-                                achieving 80.7% default detection while reducing credit losses by 44.7%, expected to
-                                save $2.3M annually.</p>
+                            <h3 class="mt-4 text-xl">Lending Hub Loan Default Prediction</h3>
+                            <p class="mt-2 text-sm" style="color: var(--brown);">9,004 LendingClub loans, 16.8%
+                                default. When a missed default costs 4.2× a wrongful rejection, moving the threshold from
+                                0.5 to 0.16 catches 74.9% of defaults and cuts expected loss 26.5% below approving all.</p>
                         </div>
                         <div class="mt-4 text-right">
                             <span class="text-link">View Details</span>

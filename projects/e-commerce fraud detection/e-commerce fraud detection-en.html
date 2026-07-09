@@ -4,10 +4,10 @@
   <script>document.documentElement.classList.add('js');</script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Proactive Fraud Detection for First-Time E-commerce Transactions - Data Poetics</title>
-  <meta name="description" content="Machine learning-based proactive fraud detection system for first-time e-commerce transactions using tuned LightGBM and SHAP technology" />
+  <title>First-Transaction Fraud Detection: A Recall Ceiling and a Threshold Artifact - Data Poetics</title>
+  <meta name="description" content="A machine learning analysis of 138,376 e-commerce first-transaction records: LightGBM+SMOTE flags 0.53% of traffic to catch 51.6% of fraud with 2 false positives, lowering value-weighted fraud loss ~52% — plus why recall is capped near 52% and why 98.6% precision is a threshold artifact." />
 
-  <!-- Consistent with homepage: Tailwind / Fonts / Icons / Site styles -->
+  <!-- Same as homepage: Tailwind / fonts / icons / site styles -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -17,17 +17,25 @@
   <link rel="stylesheet" href="../../assets/css/index.css" />
   <link rel="stylesheet" href="../../assets/css/project.css" />
 
-  <!-- Code highlighting + Chart libraries (commonly used in detail pages) -->
+  <!-- Code highlighting + charts (common on detail pages) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+  <style>
+    .dark table.performance-table thead tr {
+      background-color: rgba(64, 64, 64, 0.25) !important;
+    }
+    .dark .dark\:text-gray-300 {
+      color: var(--dark) !important;
+    }
+  </style>
 </head>
 <body class="transition-colors duration-300">
   <div class="scroll-progress" id="scroll-progress"></div>
 
-  <!-- Top navigation (fully reusing homepage structure and style) -->
+  <!-- Top navigation (reuses homepage structure and styles) -->
   <header id="navbar" class="navbar fixed top-0 left-0 right-0 z-50">
     <div class="container-main h-full flex items-center justify-between">
-      <!-- Logo (jumps back to homepage Hero with animation) -->
       <a href="../../index-en.html#hero" class="navbar-logo" id="navbar-logo">
         <svg class="logo-svg-nav" viewBox="0 0 40 40">
           <g class="grid-bg">
@@ -48,7 +56,6 @@
         </div>
       </a>
 
-      <!-- In-page navigation (jumping to corresponding anchors on homepage) -->
       <nav class="hidden md:flex items-center space-x-8">
         <a href="../../index-en.html#about" class="nav-link">About</a>
         <a href="../../index-en.html#experience" class="nav-link">Experience</a>
@@ -82,662 +89,476 @@
   </header>
 
   <main class="container-main">
-    <!-- Project header (Hero-style detail page header) -->
+    <!-- Project hero -->
     <section id="project-hero" class="section-padding" style="padding-top: calc(var(--space-xl) + 72px)">
       <div class="grid md:grid-cols-2 gap-16 items-center w-full">
         <div class="reveal">
           <div class="section-eyebrow">
-            <span class="section-kicker">Case Study · Risk &amp; Fraud Detection</span>
+            <span class="section-kicker">Case Study · Risk &amp; Imbalanced Classification</span>
           </div>
-          <h1 class="hero-title mt-2">Catching First-Purchase Fraud by Behavior</h1>
-          <p class="subtitle mt-4 max-w-xl">A LightGBM + SHAP system that gives the business a verdict it can defend.</p>
-          <div class="reading-time">~10 min read<span class="sep">·</span>9 figures</div>
+          <h1 class="hero-title mt-2">First-Transaction Fraud Detection: A Recall Ceiling and a Threshold Artifact</h1>
+          <p class="subtitle mt-4 max-w-xl">Half of all fraud purchases within one second of signup and is perfectly separable; the other half is indistinguishable from a legitimate first purchase. This is why recall is capped near 52%, and why 98.6% precision at the default threshold measures the cutoff, not the model.</p>
+          <div class="reading-time">~10 min read<span class="sep">·</span>8 charts</div>
 
           <div class="hero-stats">
             <div class="hero-stat">
               <div class="hero-stat__num">138K</div>
-              <div class="hero-stat__label">First Purchases</div>
+              <div class="hero-stat__label">first transactions (1.02% fraud)</div>
             </div>
             <div class="hero-stat">
-              <div class="hero-stat__num">98.6%</div>
-              <div class="hero-stat__label">Precision</div>
+              <div class="hero-stat__num">−52%</div>
+              <div class="hero-stat__label">value-weighted fraud loss</div>
             </div>
             <div class="hero-stat">
-              <div class="hero-stat__num">51.2%</div>
-              <div class="hero-stat__label">Fraud Recall</div>
+              <div class="hero-stat__num">2</div>
+              <div class="hero-stat__label">false positives (in 27,393 legit)</div>
             </div>
           </div>
 
           <div class="mt-8 flex items-center gap-4">
-            <a href="#content" class="btn btn-primary">Start Reading</a>
-            <a href="../../index-en.html#projects" class="btn btn-secondary">Back to Projects</a>
+            <a href="#content" class="btn btn-primary">Start reading</a>
+            <a href="../../index-en.html#projects" class="btn btn-secondary">Back to projects</a>
           </div>
         </div>
         <aside class="reveal hero-stack">
-          <div class="hero-stack__label">Methods · Tech Stack</div>
+          <div class="hero-stack__label">Methods · Stack</div>
           <ol class="hero-stack__list">
             <li>
               <span class="hero-stack__num">01</span>
-              <span class="hero-stack__name">LightGBM</span>
-              <span class="hero-stack__desc">Primary model, leaf-wise growth + sparse-friendly</span>
+              <span class="hero-stack__name">LightGBM + SMOTE</span>
+              <span class="hero-stack__desc">Final model tuned on PR-AUC, 0.535 on the test set</span>
             </li>
             <li>
               <span class="hero-stack__num">02</span>
-              <span class="hero-stack__name">SMOTE</span>
-              <span class="hero-stack__desc">Synthetic minority sampling for the 1.02% fraud rate</span>
+              <span class="hero-stack__name">Leakage-free CV pipeline</span>
+              <span class="hero-stack__desc">CountEncoder and SMOTE fit inside training folds; 5-fold average precision</span>
             </li>
             <li>
               <span class="hero-stack__num">03</span>
-              <span class="hero-stack__name">Behavioral Features</span>
-              <span class="hero-stack__desc">Signup interval, device sharing, same-hour ops</span>
+              <span class="hero-stack__name">Significance testing</span>
+              <span class="hero-stack__desc">Chi-square filters out source, browser and weekend as spurious</span>
             </li>
             <li>
               <span class="hero-stack__num">04</span>
-              <span class="hero-stack__name">IP → Country</span>
-              <span class="hero-stack__desc">pandas merge_asof maps 97.3% of IP ranges</span>
+              <span class="hero-stack__name">Cost-threshold sweep</span>
+              <span class="hero-stack__desc">FP penalty $50–$200 sensitivity, optimal threshold 0.64</span>
             </li>
             <li>
               <span class="hero-stack__num">05</span>
-              <span class="hero-stack__name">SHAP</span>
-              <span class="hero-stack__desc">Explains why instant purchases are flagged fraud</span>
+              <span class="hero-stack__name">SHAP attribution</span>
+              <span class="hero-stack__desc">Signal concentrated in signup→purchase interval + device-share count</span>
             </li>
           </ol>
-          <div class="hero-stack__foot">Python · pandas · scikit-learn · imblearn · lightgbm</div>
+          <div class="hero-stack__foot">Python · pandas · scikit-learn · lightgbm · imbalanced-learn · shap</div>
         </aside>
       </div>
     </section>
 
-    <!-- Executive Summary (three-column info cards, redesigned) -->
-    <section id="executive-summary" class="section-padding section--editorial" data-section-num="00">
-      <div class="section-header reveal">
-        <div class="section-eyebrow">
-          <span class="section-num">00</span>
-          <span class="section-kicker">Executive Summary</span>
-        </div>
-        <h2 class="section-title">Executive Summary</h2>
-      </div>
+    <!-- Quick summary cards -->
+    <section id="quick-summary" class="section-padding">
       <div class="grid md:grid-cols-3 gap-6">
         <div class="summary-card">
-          <h3 class="summary-card-title">Business Challenge</h3>
-          <p class="summary-card-content">Company XYZ faces significant financial and reputational risk from fraudulent activities during new users' first transactions. The core challenge is effectively blocking fraud without introducing friction that could alienate legitimate new customers - a critical group for business growth. The severe data imbalance (only 1.02% fraud rate) makes traditional detection methods unreliable.</p>
+          <h3 class="summary-card-title">The Challenge</h3>
+          <p class="summary-card-content">A 1.02% imbalance (1,415 / 138,376) makes accuracy useless — predicting "legitimate" for everyone scores 98.98% and catches zero fraud. The goal is maximum fraud caught without hurting new customers.</p>
         </div>
         <div class="summary-card">
-          <h3 class="summary-card-title">Solution</h3>
-          <p class="summary-card-content">We developed a robust machine learning system leveraging a tuned LightGBM model to predict fraud probability for each new user's first transaction in real-time. The model was trained on user behavioral and technical data, interpreted using SHAP to ensure transparent and business-aligned decision-making. A three-tiered product integration strategy translates risk scores into concrete automated actions.</p>
+          <h3 class="summary-card-title">The Solution</h3>
+          <p class="summary-card-content">Four models compete under one leakage-free protocol, all tied at PR-AUC 0.535–0.541; LightGBM+SMOTE is chosen, with a cost-sensitive threshold decision on top.</p>
         </div>
         <div class="summary-card">
-          <h3 class="summary-card-title">Business Value</h3>
-          <p class="summary-card-content">Reduce fraud losses by 51.2%: Automatically identify and stop over half of all fraudulent first-time transactions; Protect customer experience & trust: Achieve 98.6% precision with only 0.01% false alarm rate (about 2 per 27,400 legitimate users); Increase operational efficiency: Automate detection process, allowing manual review teams to focus only on highest-risk cases.</p>
+          <h3 class="summary-card-title">The Value</h3>
+          <p class="summary-card-content">Flags 0.53% of traffic to catch 51.6% of fraud with only 2 false positives; value-weighted fraud loss falls from $14,503 to $6,939, about 52%.</p>
         </div>
       </div>
     </section>
 
-    <!-- Main content: Left sidebar + Right content (consistent with documentation standards) -->
+    <!-- Main content: TOC + body -->
     <section id="content" class="section-padding">
       <div class="grid md:grid-cols-12 gap-12">
-        <!-- Table of Contents (auto-generated) -->
         <aside class="md:col-span-3">
           <nav class="project-toc sticky top-24" id="project-toc">
-            <h3 class="text-xl font-semibold" style="color: var(--dark);">Table of Contents</h3>
+            <h3 class="text-xl font-semibold" style="color: var(--dark);">Contents</h3>
             <ul class="mt-4 space-y-2" id="toc-list">
-              <li><a href="#findings" class="toc-link" data-section="findings">Key Findings & Recommendations</a></li>
-              <li><a href="#methodology" class="toc-link" data-section="methodology">Data Analysis & Methodology</a></li>
-              <li><a href="#evaluation" class="toc-link" data-section="evaluation">Model Evaluation & Comparison</a></li>
-              <li><a href="#shap-analysis" class="toc-link" data-section="shap-analysis">Deep Dive: SHAP Analysis</a></li>
-              <li><a href="#conclusion" class="toc-link" data-section="conclusion">Conclusion & Action Plan</a></li>
+              <li><a href="#summary" class="toc-link" data-section="summary">Executive Summary</a></li>
+              <li><a href="#data" class="toc-link" data-section="data">The Data</a></li>
+              <li><a href="#eda" class="toc-link" data-section="eda">Exploratory Analysis</a></li>
+              <li><a href="#models" class="toc-link" data-section="models">Model Bake-off</a></li>
+              <li><a href="#ceiling" class="toc-link" data-section="ceiling">The Recall Ceiling</a></li>
+              <li><a href="#cost" class="toc-link" data-section="cost">Cost &amp; Threshold</a></li>
+              <li><a href="#shap" class="toc-link" data-section="shap">What the Model Uses</a></li>
+              <li><a href="#deployment" class="toc-link" data-section="deployment">Productionizing</a></li>
             </ul>
           </nav>
         </aside>
 
-        <!-- Content area -->
         <div class="md:col-span-9 content-area">
-          <!-- Key Findings & Recommended Actions -->
-          <section id="findings" class="section-padding section--editorial" data-section-num="01">
+          <!-- Executive Summary -->
+          <section id="summary" class="section-padding section--editorial" data-section-num="00">
             <div class="section-header">
               <div class="section-eyebrow">
-                <span class="section-num">01</span>
-                <span class="section-kicker">Findings &amp; Recommendations</span>
+                <span class="section-num">00</span>
+                <span class="section-kicker">Executive Summary</span>
               </div>
-              <h2 class="section-title">Key Findings &amp; Recommended Actions</h2>
+              <h2 class="section-title">Executive Summary</h2>
             </div>
-            
-            <div class="space-y-8">
-              <!-- Finding 1: Behavioral Pattern Recognition -->
+
+            <div class="space-y-6">
               <div class="contact-info-card">
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">1. Insight: Behavior, Not Demographics, Predicts Fraud</h3>
-                <div class="space-y-4">
-                  <div>
-                    <strong style="color: var(--coral);">Data Insight</strong>: The strongest fraud indicators are behavioral patterns, specifically <code class="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded text-gray-900 dark:text-gray-100 font-mono text-sm">instantaneous purchases</code> (sub-minute signup-to-purchase time) and <code class="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded text-gray-900 dark:text-gray-100 font-mono text-sm">shared devices</code> (multiple accounts on one device).
-                  </div>
-                  <div>
-                    <strong style="color: var(--sage);">Business Implication</strong>: Fraudsters successfully mimic legitimate users in demographics (age, gender) and purchase value, but their <em>actions</em> give them away. The key to detection lies in analyzing <em>how</em> they transact, not <em>who</em> they are.
-                  </div>
-                  <div>
-                    <strong style="color: var(--blue);">Recommended Action</strong>:
-                    <ul class="list-disc list-inside mt-2 space-y-1 subtitle">
-                      <li>Focus future fraud prevention efforts on capturing more behavioral and technical signals (e.g., advanced device fingerprinting, behavioral biometrics).</li>
-                      <li>Reduce reliance on demographic rules and establish real-time risk control systems based on behavioral analysis.</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
+                <p class="subtitle mb-4">This analysis of 138,376 e-commerce first-transaction records answers three questions: how well fraud can be predicted from a new user's opening purchase, why recall is capped near 52% no matter what model runs, and why the 98.6% precision at the default threshold measures the cutoff rather than the model. The final model is LightGBM + SMOTE, tuned on PR-AUC.</p>
 
-              <!-- Finding 2: High Precision Model -->
-              <div class="contact-info-card">
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">2. Insight: Near-Perfect Precision Model is Achievable</h3>
-                <div class="space-y-4">
-                  <div>
-                    <strong style="color: var(--coral);">Data Insight</strong>: The final model achieves 98.6% precision and 0.01% false alarm rate, meaning when the model flags a transaction, it is almost certainly fraudulent.
-                  </div>
-                  <div>
-                    <strong style="color: var(--sage);">Business Implication</strong>: We can operate with extremely high confidence. This directly addresses the primary business goal of protecting the new customer experience, avoiding potential customer loss due to false positives.
-                  </div>
-                  <div>
-                    <strong style="color: var(--blue);">Recommended Action</strong>:
-                    <ul class="list-disc list-inside mt-2 space-y-1 subtitle">
-                      <li>Deploy the model using the proposed three-tiered system, automatically trusting and approving the vast majority of transactions.</li>
-                      <li>Apply friction verification only to the small, accurately identified high-risk segment.</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
+                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">Four findings</h3>
+                <ul class="list-disc list-inside space-y-3 subtitle mb-6">
+                  <li><strong>The signal lives in two features; everything else is noise.</strong> Signup-to-purchase interval and device-share count carry almost all the discriminative power (SHAP mean 2.52 and 2.42; everything else below 0.7). Age, sex, value, channel and country carry no usable signal.</li>
+                  <li><strong>Recall is capped near 52% by the data, not the model.</strong> Half of all fraud — the 739 accounts purchasing within one second of signup — is perfectly separable; the other half is nearly indistinguishable, so recall does not move with threshold or model.</li>
+                  <li><strong>Precision at a fixed threshold reflects score scale, not model quality.</strong> The same LightGBM with class weights ranks identically (PR-AUC 0.54) yet shows only 34% precision at 0.5.</li>
+                  <li><strong>Most categorical signals do not survive a significance test.</strong> Marketing source is not significant (chi-square p = 0.27), weekend signup is not (p = 0.26), and country spans only 0.44%–1.91% on sample size alone.</li>
+                </ul>
 
-              <!-- Finding 3: Acquisition Channel Risk -->
-              <div class="contact-info-card">
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">3. Insight: Acquisition Channel is a Risk Indicator</h3>
-                <div class="space-y-4">
-                  <div>
-                    <strong style="color: var(--coral);">Data Insight</strong>: Users arriving via <strong>Direct traffic</strong> pose a higher fraud risk than those acquired through <strong>SEO</strong> or <strong>Ads</strong>.
-                  </div>
-                  <div>
-                    <strong style="color: var(--sage);">Business Implication</strong>: Fraudsters, especially those using automated scripts, often bypass standard marketing funnels. Organic discovery channels appear to be a signal of legitimacy.
-                  </div>
-                  <div>
-                    <strong style="color: var(--blue);">Recommended Action</strong>: Collaborate with marketing and security teams to apply nuanced monitoring to direct traffic. Consider this feature in future iterations of the risk assessment model.
-                  </div>
-                </div>
-              </div>
-
-              <!-- Finding 4: Time Pattern Analysis -->
-              <div class="contact-info-card">
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">4. Insight: Time Patterns Reveal Automated Fraud</h3>
-                <div class="space-y-4">
-                  <div>
-                    <strong style="color: var(--coral);">Data Insight</strong>: Instant purchases (<1 second) have nearly 100% fraud rate, very fast purchases (<60 seconds) have 85% fraud rate, while normal purchases (>1 day) have <0.5% fraud rate.
-                  </div>
-                  <div>
-                    <strong style="color: var(--sage);">Business Implication</strong>: The speed characteristics of automated scripts and bots are distinctly different from normal human behavior, providing a powerful detection signal.
-                  </div>
-                  <div>
-                    <strong style="color: var(--blue);">Recommended Action</strong>:
-                    <ul class="list-disc list-inside mt-2 space-y-1 subtitle">
-                      <li>Implement stricter verification processes for ultra-fast transactions (<1 minute).</li>
-                      <li>Establish time behavior baselines to monitor abnormally fast user operation patterns.</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <!-- Data Analysis & Methodology -->
-          <section id="methodology" class="section-padding section--editorial" data-section-num="02">
-            <div class="section-header">
-              <div class="section-eyebrow">
-                <span class="section-num">02</span>
-                <span class="section-kicker">Data Analysis &amp; Methodology</span>
-              </div>
-              <h2 class="section-title">Data Analysis &amp; Methodology</h2>
-            </div>
-            
-            <div class="space-y-8">
-              <!-- Data Overview -->
-              <div class="contact-info-card">
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">Dataset Overview & Quality Assessment</h3>
-                <div class="space-y-4">
-                  <p class="subtitle">The analysis includes 138,376 first-time transaction records, covering 11 core dimensions including user behavior, device information, and geographic location.</p>
-                  
-                  <div class="note note--evidence">
-                    <div class="note__label">Data Quality</div>
-                    <div class="note__body">
-                      <ul class="list-disc list-inside space-y-2">
-                        <li><strong>Excellent completeness</strong>: zero missing values across all 138,376 records.</li>
-                        <li><strong>Severe class imbalance</strong>: only 1,415 fraudulent transactions (1.02%), requiring special handling.</li>
-                        <li><strong>Reasonable time span</strong>: covers sufficient business cycles for pattern recognition.</li>
-                        <li><strong>Feature-rich</strong>: contains behavioral, technical, and geographic dimensions.</li>
-                      </ul>
-                    </div>
-                  </div>
-
-                  <div>
-                    <strong>Data Import & Environment Setup:</strong>
-                    <pre class="bg-gray-900 text-gray-100 p-4 rounded-lg mt-2 overflow-x-auto"><code class="language-python">import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
-from sklearn.model_selection import train_test_split, GridSearchCV
-from sklearn.metrics import precision_score, recall_score, f1_score, roc_auc_score
-from imblearn.over_sampling import SMOTE
-import lightgbm as lgb
-import shap
-
-# Load datasets
-fraud_data = pd.read_csv('Fraud_Data.csv')
-ip_country = pd.read_csv('IpAddress_to_Country.csv')
-
-print(f"Data shape: {fraud_data.shape}")
-print(f"Fraud rate: {fraud_data['class'].mean():.3%}")</code></pre>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Feature Engineering -->
-              <div class="contact-info-card">
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">Feature Engineering: Translating Behavior into Risk Signals</h3>
-                <div class="space-y-4">
-                  <p class="subtitle">Raw data doesn't directly reveal user intent. The purpose of feature engineering is to transform raw data points into meaningful <strong>behavioral and contextual features</strong> that act as powerful signals for fraud detection.</p>
-                  
-                  <div class="note note--process">
-                    <div class="note__label">Feature Buckets</div>
-                    <div class="note__body">
-                      <ul class="list-disc list-inside space-y-2">
-                        <li><strong>Time-behavior features</strong>: signup-to-purchase interval, same-hour ops, business hours activity.</li>
-                        <li><strong>Device-sharing features</strong>: single-device multi-account count, IP reuse.</li>
-                        <li><strong>Geographic features</strong>: IP-to-country mapping (97.3% success rate).</li>
-                        <li><strong>Channel features</strong>: traffic source encoding (Direct, SEO, Ads).</li>
-                      </ul>
-                    </div>
-                  </div>
-
-                  <div>
-                    <strong>Core Feature Engineering Code:</strong>
-                    <pre class="bg-gray-900 text-gray-100 p-4 rounded-lg mt-2 overflow-x-auto"><code class="language-python"># Time feature engineering
-fraud_data['interval_after_signup'] = (
-    pd.to_datetime(fraud_data['purchase_time']) - 
-    pd.to_datetime(fraud_data['signup_time'])
-).dt.total_seconds()
-
-# Create behavioral speed features
-fraud_data['is_instant_purchase'] = (fraud_data['interval_after_signup'] <= 1).astype(int)
-fraud_data['is_very_fast'] = (fraud_data['interval_after_signup'] <= 60).astype(int)
-fraud_data['is_same_day'] = (fraud_data['interval_after_signup'] <= 86400).astype(int)
-
-# Device sharing features
-device_counts = fraud_data['device_id'].value_counts()
-fraud_data['n_dev_shared'] = fraud_data['device_id'].map(device_counts)
-
-# IP geolocation mapping
-merged_df = pd.merge_asof(
-    fraud_df_sorted, ip_country_sorted,
-    left_on='ip_address', right_on='lower_bound_ip_address',
-    direction='backward'
-)</code></pre>
-                  </div>
-
-                  <h4 class="font-semibold mb-3 mt-6" style="color: var(--dark);">Key Time-Based Insights</h4>
-
-                  <figure class="figure-editorial">
-                    <img src="figures/interval_after_signup_log_speed_category_sighup_hour.png" alt="Time Interval Distribution" loading="lazy" decoding="async" />
-                    <figcaption>Signup-to-purchase interval distribution — instant purchases have nearly 100% fraud rate.</figcaption>
-                  </figure>
-
-                  <div class="note note--caveat">
-                    <div class="note__label">Key Pattern</div>
-                    <div class="note__body">
-                      <ul class="list-disc list-inside space-y-1">
-                        <li><strong>Instant purchases (&lt;1 second)</strong>: nearly 100% fraud rate</li>
-                        <li><strong>Very fast purchases (&lt;60 seconds)</strong>: 85% fraud rate</li>
-                        <li><strong>Normal purchases (&gt;1 day)</strong>: &lt;0.5% fraud rate</li>
-                        <li><strong>Overall fraud rate</strong>: 1.02%</li>
-                      </ul>
-                    </div>
-                  </div>
-
-                  <figure class="figure-editorial">
-                    <img src="figures/sighup_business_hours_sighup_weekend_same_hour.png" alt="Fraud Rate by Hour Patterns" loading="lazy" decoding="async" />
-                    <figcaption>Fraud rate by hour patterns — business-hour and same-hour purchases are strong fraud indicators.</figcaption>
-                  </figure>
-
-                  <p class="subtitle mb-4"><strong>Business Implications:</strong></p>
-                  <ul class="list-disc list-inside space-y-1 subtitle mb-6">
-                    <li>Instant purchases are almost certainly automated/fraudulent</li>
-                    <li>Fraudsters operate during business hours to blend with legitimate traffic</li>
-                    <li>Same-hour signup and purchase is the strongest temporal fraud indicator</li>
-                  </ul>
-
-                  <figure class="figure-editorial">
-                    <img src="figures/purchase_value.png" alt="Purchase Value Distribution" loading="lazy" decoding="async" />
-                    <figcaption>Purchase value distribution — fraudsters intentionally mimic normal purchase values.</figcaption>
-                  </figure>
-
-                  <figure class="figure-editorial">
-                    <img src="figures/age_distribution.png" alt="Age Distribution" loading="lazy" decoding="async" />
-                    <figcaption>Age distribution — fraud spans all demographics, likely using stolen identities.</figcaption>
-                  </figure>
-
-                  <figure class="figure-editorial">
-                    <img src="figures/market_source_browser.png" alt="Channel and Browser Analysis" loading="lazy" decoding="async" />
-                    <figcaption>Channel and browser analysis — direct traffic and Chrome show elevated fraud risk.</figcaption>
-                  </figure>
-
-                  <h4 class="font-semibold mb-3" style="color: var(--dark);">Pattern Summary</h4>
-                  <ul class="list-disc list-inside space-y-1 subtitle mb-6">
-                    <li><strong>Price Camouflage</strong>: Fraudsters mimic normal purchase values</li>
-                    <li><strong>No Age Profile</strong>: Fraud spans all demographics (identity theft)</li>
-                    <li><strong>Channel Risk</strong>: Direct > SEO > Ads</li>
-                    <li><strong>Browser Preference</strong>: Chrome most targeted due to market share</li>
-                  </ul>
-
-                  <figure class="figure-editorial">
-                    <img src="figures/keyfeature_correlation.png" alt="Feature Correlation Heatmap" loading="lazy" decoding="async" />
-                    <figcaption>Feature correlation heatmap — behavioral features show the strongest correlation with fraud.</figcaption>
-                  </figure>
-                </div>
-              </div>
-
-              <!-- Model Architecture -->
-              <div class="contact-info-card">
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">Model Architecture: LightGBM + SMOTE Pipeline</h3>
-                <div class="space-y-4">
-                  <p class="subtitle">Given the extreme class imbalance (1.02% fraud rate), we employ SMOTE (Synthetic Minority Over-sampling Technique) to balance training data while keeping the test set's original distribution to reflect real-world scenarios.</p>
-                  
-                  <pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto"><code class="language-python">from imblearn.pipeline import Pipeline
-from imblearn.over_sampling import SMOTE
-import lightgbm as lgb
-
-# Create SMOTE + LightGBM Pipeline
-pipeline = Pipeline([
-    ('smote', SMOTE(random_state=42)),
-    ('lgb', lgb.LGBMClassifier(
-        objective='binary',
-        metric='binary_logloss',
-        random_state=42,
-        class_weight='balanced'
-    ))
-])
-
-# Hyperparameter grid
-param_grid = {
-    'lgb__learning_rate': [0.1],
-    'lgb__max_depth': [15],
-    'lgb__n_estimators': [300],
-    'lgb__num_leaves': [100]
-}
-
-# Grid search optimization
-grid_search = GridSearchCV(
-    estimator=pipeline,
-    param_grid=param_grid,
-    scoring='f1',
-    cv=3,
-    n_jobs=-1
-)
-
-grid_search.fit(X_train, y_train)
-best_model = grid_search.best_estimator_</code></pre>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <!-- Model Evaluation & Comparison -->
-          <section id="evaluation" class="section-padding section--editorial" data-section-num="03">
-            <div class="section-header">
-              <div class="section-eyebrow">
-                <span class="section-num">03</span>
-                <span class="section-kicker">Model Evaluation</span>
-              </div>
-              <h2 class="section-title">Model Evaluation &amp; Comparison</h2>
-            </div>
-            
-            <div class="space-y-8">
-              <!-- Performance Overview -->
-              <div class="contact-info-card">
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">Comprehensive Model Performance Comparison</h3>
+                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">At a glance</h3>
                 <div class="overflow-x-auto">
-                  <table class="w-full border-collapse border border-gray-300 dark:border-gray-600">
+                  <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
                     <thead>
-                      <tr class="bg-gray-100 dark:bg-gray-700">
-                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left text-gray-900 dark:text-gray-100 font-semibold">Model</th>
-                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left text-gray-900 dark:text-gray-100 font-semibold">Accuracy</th>
-                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left text-gray-900 dark:text-gray-100 font-semibold">Precision</th>
-                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left text-gray-900 dark:text-gray-100 font-semibold">Recall</th>
-                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left text-gray-900 dark:text-gray-100 font-semibold">F1-Score</th>
-                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left text-gray-900 dark:text-gray-100 font-semibold">ROC-AUC</th>
+                      <tr class="bg-gray-100 dark:bg-gray-700/30">
+                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Item</th>
+                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Result</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr class="bg-green-50 dark:bg-green-900/30">
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-bold text-gray-900 dark:text-gray-100">LightGBM (Tuned)</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">0.9949</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-bold text-gray-900 dark:text-gray-100">0.9864</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-bold text-gray-900 dark:text-gray-100">0.5124</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-bold text-gray-900 dark:text-gray-100">0.6744</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-bold text-gray-900 dark:text-gray-100">0.7786</td>
+                      <tr>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Transactions analyzed</strong></td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">138,376 (1,415 fraud, 1.02%)</td>
                       </tr>
-                      <tr class="bg-white dark:bg-gray-800">
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">Random Forest</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">0.9948</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">0.9861</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">0.5018</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">0.6651</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">0.7532</td>
+                      <tr>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Final model</strong></td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">LightGBM + SMOTE, tuned on PR-AUC</td>
                       </tr>
-                      <tr class="bg-gray-50 dark:bg-gray-800">
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">Logistic Regression</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">0.9937</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">0.8056</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">0.5124</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">0.6263</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-gray-900 dark:text-gray-100">0.7589</td>
+                      <tr>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Ranking quality (test set)</strong></td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">PR-AUC 0.535, ROC-AUC 0.764</td>
+                      </tr>
+                      <tr>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Deployed operating point</strong></td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">flag 0.53% of traffic, catch 51.6% of fraud, 2 FPs in 27,393</td>
+                      </tr>
+                      <tr>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Value-weighted fraud loss</strong></td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">~52% below approving everything</td>
                       </tr>
                     </tbody>
                   </table>
                 </div>
               </div>
+            </div>
+          </section>
 
-              <!-- Model Selection Rationale -->
+          <!-- The Data -->
+          <section id="data" class="section-padding section--editorial" data-section-num="01">
+            <div class="section-header">
+              <div class="section-eyebrow">
+                <span class="section-num">01</span>
+                <span class="section-kicker">The Data</span>
+              </div>
+              <h2 class="section-title">The Data &amp; the Imbalance</h2>
+            </div>
+
+            <div class="space-y-8">
               <div class="contact-info-card">
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">Final Model Selection: Advantages of Tuned LightGBM</h3>
-                <div class="space-y-4">
-                  <p class="subtitle">LightGBM was selected as the production deployment model, excelling in three key dimensions: business-aligned precision, fraud detection capability, and overall discriminative power.</p>
-                  
-                  <div class="note note--insight">
-                    <div class="note__label">Why LightGBM</div>
-                    <div class="note__body">
-                      <ul class="list-disc list-inside space-y-2">
-                        <li><strong>Highest discriminative power</strong>: ROC-AUC of 0.7786, best overall predictive performance.</li>
-                        <li><strong>Business-friendly precision</strong>: 98.64% precision effectively protects customer experience.</li>
-                        <li><strong>Balanced F1</strong>: 0.6744 — highest among all models.</li>
-                        <li><strong>Production-ready</strong>: robust performance with minimal false positives.</li>
-                      </ul>
-                    </div>
-                  </div>
+                <p class="subtitle">The data is clean: 138,376 rows, no missing values, no duplicates. The single dominant fact is the imbalance — 1.02% fraud, roughly 1 in 97. With only 1,415 fraud examples, the model can only latch onto strong, repeated signals, which is exactly why it ends up leaning on two features.</p>
+              </div>
 
-                  <div class="note note--process">
-                    <div class="note__label">Business Impact</div>
-                    <div class="note__body">
-                      <div class="grid md:grid-cols-2 gap-4">
-                        <div>
-                          <strong>Fraud prevention:</strong>
-                          <ul class="list-disc list-inside mt-1">
-                            <li>51.2% fraud detection rate</li>
-                            <li>~$1.25M annual savings</li>
-                            <li>Significantly reduced chargeback risk</li>
-                          </ul>
-                        </div>
-                        <div>
-                        <strong>User Experience Protection:</strong>
-                        <ul class="list-disc list-inside mt-1">
-                          <li>Only 0.01% false positive rate</li>
-                          <li>1 false alarm per 13,700 users</li>
-                          <li>Protected new customer conversion rate</li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
+              <div class="note note--process">
+                <div class="note__label">Method · Why PR-AUC for evaluation, a range join for IP</div>
+                <div class="note__body">
+                  <p><strong>Accuracy is useless.</strong> Predicting "legitimate" for everyone scores 98.98% and catches zero fraud, so evaluation uses precision, recall and PR-AUC, which unlike ROC-AUC is sensitive to the rare class.</p>
+                  <p><strong>Recovering country from a numeric IP.</strong> A naive per-row scan of the lookup table is O(n·m); sorting both tables and using <code>merge_asof</code> does the range join in one pass. 14.7% of IPs fall outside every range and are marked Unknown.</p>
                 </div>
               </div>
             </div>
           </section>
 
-          <!-- SHAP Deep Analysis -->
-          <section id="shap-analysis" class="section-padding section--editorial" data-section-num="04">
+          <!-- Exploratory Analysis -->
+          <section id="eda" class="section-padding section--editorial" data-section-num="02">
+            <div class="section-header">
+              <div class="section-eyebrow">
+                <span class="section-num">02</span>
+                <span class="section-kicker">Exploratory Analysis</span>
+              </div>
+              <h2 class="section-title">What the Exploration Says</h2>
+            </div>
+
+            <div class="space-y-8">
+              <p class="subtitle"><strong>Purchase speed is the dominant signal.</strong> Legitimate users take a median of ~60 days between signup and first purchase; fraud takes a median of one second. The 739 transactions completed within one second are 100% fraud and account for 52% of all fraud in the data. The other half is spread across normal-looking intervals — the first sign of the recall ceiling.</p>
+
+              <figure class="figure-editorial">
+                <img src="figures/eda_interval_speed.png" alt="Signup-to-purchase interval and fraud rate by purchase speed" loading="lazy" decoding="async" />
+                <figcaption>Signup-to-purchase interval and fraud rate by purchase speed — legitimate median ~60 days vs 1 second for fraud; the 739 sub-second transactions are 100% fraud.</figcaption>
+              </figure>
+
+              <p class="subtitle"><strong>Device sharing is the second signal, and purchase value is not a signal at all.</strong> A device tied to a single account is almost never fraud (0.35%); once three or more accounts share a device the fraud rate is 58%. Purchase value is nearly identical across classes (mean $37.9 fraud vs $36.9 legitimate) — fraudsters deliberately transact at ordinary amounts.</p>
+
+              <figure class="figure-editorial">
+                <img src="figures/eda_value_device.png" alt="Purchase value by class and fraud rate by device sharing" loading="lazy" decoding="async" />
+                <figcaption>Purchase value by class and fraud rate by device sharing — value carries no signal; fraud rate hits 58% once 3+ accounts share a device.</figcaption>
+              </figure>
+
+              <div class="note note--evidence">
+                <div class="note__label">Significance · The channel and browser stories do not hold up</div>
+                <div class="note__body">
+                  <p>Sorted by fraud rate the differences look suggestive, but the significance tests flatten them: source is not significant (p = 0.27), browser reaches p = 0.007 only on sample size and spans a negligible 0.86%–1.13%. With 1,415 fraud cases, small rate differences are easy to over-read, so each is checked before it counts.</p>
+                </div>
+              </div>
+
+              <figure class="figure-editorial">
+                <img src="figures/eda_source_browser.png" alt="Fraud rate by marketing source and by browser" loading="lazy" decoding="async" />
+                <figcaption>Fraud rate by marketing source and by browser — suggestive when sorted, but neither survives a chi-square test as usable signal.</figcaption>
+              </figure>
+            </div>
+          </section>
+
+          <!-- Model Bake-off -->
+          <section id="models" class="section-padding section--editorial" data-section-num="03">
+            <div class="section-header">
+              <div class="section-eyebrow">
+                <span class="section-num">03</span>
+                <span class="section-kicker">Model Bake-off</span>
+              </div>
+              <h2 class="section-title">Models on Equal Terms</h2>
+            </div>
+
+            <div class="space-y-8">
+              <div class="contact-info-card">
+                <p class="subtitle">Three model families ran through one leakage-free protocol: an 80/20 stratified split, device- and IP-sharing counts encoded by a <code>CountEncoder</code> fit on training folds only, SMOTE applied inside the pipeline so synthetic rows never leak into validation, and 5-fold CV scored on average precision. A fourth variant — LightGBM with <code>scale_pos_weight</code> and no resampling — tests whether SMOTE changes ranking.</p>
+              </div>
+
+              <div class="overflow-x-auto">
+                <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
+                  <thead>
+                    <tr class="bg-gray-100 dark:bg-gray-700/30">
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Model</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">PR-AUC</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">ROC-AUC</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Logistic Regression (SMOTE)</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.535</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.757</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Random Forest (SMOTE)</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.541</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.762</td>
+                    </tr>
+                    <tr class="bg-green-50 dark:bg-green-900/20">
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>LightGBM (SMOTE)</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.540</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.758</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">LightGBM (weighted)</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.541</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.763</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <p class="subtitle">All four land in a 0.535–0.541 band whose width is smaller than the ±0.05 fold-to-fold standard deviation — they are tied. We proceed with tuned LightGBM + SMOTE (PR-AUC 0.535 on the held-out test set), while noting that logistic regression would be a defensible, simpler choice.</p>
+
+              <figure class="figure-editorial">
+                <img src="figures/calibration.png" alt="Calibration of the two imbalance strategies" loading="lazy" decoding="async" />
+                <figcaption>Calibration of the two imbalance strategies — SMOTE is near-calibrated in aggregate (mean predicted probability 0.010, close to the true 1.02%); the weighted model runs high at 0.125.</figcaption>
+              </figure>
+
+              <div class="note note--caveat">
+                <div class="note__label">Artifact · 98.6% precision measures the threshold, not the model</div>
+                <div class="note__body">
+                  <p>The model reaches 98.6% precision at threshold 0.5, but the same LightGBM trained with class weights (<code>scale_pos_weight</code>) instead of SMOTE ranks identically (PR-AUC 0.54) yet shows 34% precision at 0.5 — because it places scores on a different scale (mean predicted probability 0.125 versus the SMOTE model's 0.010). Precision at a fixed cutoff reflects where the threshold sits on a bimodal score distribution, not which model is better.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- The Recall Ceiling -->
+          <section id="ceiling" class="section-padding section--editorial" data-section-num="04">
             <div class="section-header">
               <div class="section-eyebrow">
                 <span class="section-num">04</span>
-                <span class="section-kicker">SHAP Deep Dive</span>
+                <span class="section-kicker">The Recall Ceiling</span>
               </div>
-              <h2 class="section-title">Explaining Model Predictions (SHAP)</h2>
+              <h2 class="section-title">The Recall Ceiling</h2>
             </div>
-            
+
             <div class="space-y-8">
+              <p class="subtitle">The precision-recall curve holds precision at ~1.0 up to recall 0.52, then falls off a cliff. Sweeping the threshold shows recall flat at ~0.52 throughout while precision climbs — the threshold trades precision, not recall. The score histogram explains why: predictions pile up near 0 or near 1, with almost nothing between. The fraud near 1.0 is the instant-purchase half, trivially caught; the other half scores as low as legitimate traffic, so no threshold recovers it.</p>
+
+              <figure class="figure-editorial">
+                <img src="figures/threshold_pr.png" alt="Precision-recall curve and precision/recall versus threshold" loading="lazy" decoding="async" />
+                <figcaption>Precision-recall curve and precision/recall versus threshold — recall stays flat at ~0.52 throughout while the threshold only buys precision.</figcaption>
+              </figure>
+
+              <figure class="figure-editorial">
+                <img src="figures/score_distribution.png" alt="Predicted scores are bimodal" loading="lazy" decoding="async" />
+                <figcaption>Predicted scores are bimodal — fraud scores pile up near 0 or 1 with almost nothing between, which is the source of the recall ceiling.</figcaption>
+              </figure>
+
               <div class="contact-info-card">
-                <p class="subtitle mb-6">To understand <em>why</em> the LightGBM model makes its predictions, we conducted SHAP (SHapley Additive exPlanations) analysis. This reveals the impact of each feature on individual predictions and contributions.</p>
-                
-                <!-- Global Insights -->
-                <div class="space-y-6">
-                  <h3 class="text-xl font-semibold" style="color: var(--dark);">Global Insights: Key Drivers of Fraud Detection</h3>
-                  
-                  <div class="note note--insight">
-                    <div class="note__label">SHAP Top 5</div>
-                    <div class="note__body">
-                      <ol class="list-decimal list-inside space-y-1">
-                        <li><strong>is_instant_purchase</strong> · instant purchases (0.45)</li>
-                        <li><strong>n_dev_shared</strong> · device sharing count (0.38)</li>
-                        <li><strong>same_hour</strong> · same-hour operations (0.31)</li>
-                        <li><strong>signup_business_hours</strong> · business-hours signup (0.12)</li>
-                        <li><strong>source_Direct</strong> · direct traffic source (0.08)</li>
-                      </ol>
-                    </div>
-                  </div>
+                <p class="subtitle">This is the honest limit of the feature set. On the test set the tuned model catches 146 of 283 fraud cases (51.6%) with 2 false positives out of 27,393 legitimate transactions (confusion matrix TN 27,391 / FP 2 / FN 137 / TP 146).</p>
+              </div>
 
-                  <h3 class="text-xl font-semibold" style="color: var(--dark);">Typical Characteristics of High-Risk Transactions</h3>
-                  <p class="subtitle">SHAP analysis reveals clear characteristics of what the model considers high-risk transactions:</p>
-                  
-                  <div class="grid md:grid-cols-2 gap-6">
-                    <div class="note note--caveat">
-                      <div class="note__label">High Risk Pattern</div>
-                      <div class="note__body">
-                        <ul class="list-disc list-inside space-y-1">
-                          <li><strong>Instant purchase</strong>: signup-to-purchase &lt;1 minute</li>
-                          <li><strong>Device sharing</strong>: multiple accounts on a single device</li>
-                          <li><strong>Direct access</strong>: bypassing normal marketing channels</li>
-                          <li><strong>Simultaneous ops</strong>: signup and purchase in the same hour</li>
-                        </ul>
-                      </div>
-                    </div>
-                    <div class="note note--evidence">
-                      <div class="note__label">Low Risk Pattern</div>
-                      <div class="note__body">
-                        <ul class="list-disc list-inside space-y-1">
-                          <li><strong>Delayed purchase</strong>: hours or days after signup</li>
-                          <li><strong>Device exclusivity</strong>: single user per device</li>
-                          <li><strong>Organic sources</strong>: arriving through SEO or Ads</li>
-                          <li><strong>Distributed ops</strong>: behavior across different time periods</li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-
-                  <h3 class="text-xl font-semibold" style="color: var(--dark);">Model Intelligence: Behavior Over Demographics</h3>
-                  <figure class="figure-editorial">
-                    <img src="figures/SHAP_bar.png" alt="SHAP Feature Importance Plot" loading="lazy" decoding="async" />
-                    <figcaption>SHAP feature importance — behavioral features dominate the model's decisions.</figcaption>
-                  </figure>
-                  <figure class="figure-editorial">
-                    <img src="figures/SHAP_feature_importance_beeswarm.png" alt="SHAP Summary Plot" loading="lazy" decoding="async" />
-                    <figcaption>SHAP summary — higher values for instant purchases and device sharing strongly increase fraud probability.</figcaption>
-                  </figure>
-
-                  <div class="note note--insight">
-                    <div class="note__label">Takeaway</div>
-                    <div class="note__body">
-                      SHAP analysis confirms that the model intelligently <strong>ignores non-predictive demographic features</strong> like <code class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-gray-900 dark:text-gray-100 font-mono text-sm">age</code>, <code class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-gray-900 dark:text-gray-100 font-mono text-sm">sex</code>, and <code class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-gray-900 dark:text-gray-100 font-mono text-sm">purchase_value</code>. The true indicators of fraud are not <em>who</em> the users are, but <em>how</em> they behave.
-                    </div>
-                  </div>
+              <div class="note note--caveat">
+                <div class="note__label">Data caveat · Live recall would likely be lower</div>
+                <div class="note__body">
+                  <p>The dataset is constructed so that instant-purchase and device-sharing patterns are unusually clean, which is why the top two features are so dominant and the instant-purchase cluster is 100% fraud. On live traffic these signals would be noisier, so real-world recall would likely be lower than 52%, not higher.</p>
                 </div>
               </div>
             </div>
           </section>
 
-          <!-- Conclusion & Strategic Action Plan -->
-          <section id="conclusion" class="section-padding section--editorial" data-section-num="05">
+          <!-- Cost & Threshold -->
+          <section id="cost" class="section-padding section--editorial" data-section-num="05">
             <div class="section-header">
               <div class="section-eyebrow">
                 <span class="section-num">05</span>
-                <span class="section-kicker">Conclusion &amp; Roadmap</span>
+                <span class="section-kicker">Cost &amp; Threshold</span>
               </div>
-              <h2 class="section-title">Final Conclusion &amp; Strategic Action Plan</h2>
+              <h2 class="section-title">Cost and the Threshold Decision</h2>
             </div>
-            
+
             <div class="space-y-8">
-              <!-- Three-Tiered Risk Response System -->
-              <div class="contact-info-card">
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">Product Integration Strategy: Three-Tiered Risk Response System</h3>
-                <p class="subtitle mb-6">Based on the model's predicted fraud probability scores, implement a layered risk response strategy that balances security protection with user experience.</p>
-                
-                <div class="space-y-4">
-                  <div class="note note--evidence">
-                    <div class="note__label">Tier 1 · Trust Lane (Score &lt; 0.5)</div>
-                    <div class="note__body">
-                      <p><strong>Action</strong>: automatically approve transactions instantly</p>
-                      <p><strong>User experience</strong>: completely frictionless, maximizing conversion and building trust</p>
-                    </div>
-                  </div>
+              <p class="subtitle">The 0.5 threshold is not a business choice. Pricing the two errors makes the trade-off explicit: a false negative costs the lost goods plus a flat chargeback fee, computed per transaction from its real purchase value; a false positive costs a fixed penalty for blocking a good first-time customer, whose true value is a business assumption rather than a measured number, so it is swept.</p>
 
-                  <div class="note note--caveat">
-                    <div class="note__label">Tier 2 · Verify (Score 0.5–0.9)</div>
-                    <div class="note__body">
-                      <p><strong>Action</strong>: temporarily hold and request low-friction verification (email or SMS code)</p>
-                      <p><strong>User experience</strong>: minor automated challenge acting as a smart filter</p>
-                    </div>
-                  </div>
+              <div class="overflow-x-auto">
+                <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
+                  <thead>
+                    <tr class="bg-gray-100 dark:bg-gray-700/30">
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">False-positive penalty</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">Optimal threshold</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">Total cost</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">vs. approve all</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">$50</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.64</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">$6,939</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">−52%</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">$100</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.64</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">$6,939</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">−52%</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">$200</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.64</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">$6,939</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">−52%</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
 
-                  <div class="note note--insight">
-                    <div class="note__label">Tier 3 · Block &amp; Review (Score &gt; 0.9)</div>
-                    <div class="note__body">
-                      <p><strong>Action</strong>: automatically decline and flag for the manual review queue</p>
-                      <p><strong>User experience</strong>: generic error message displayed; manual review creates a critical feedback loop</p>
-                    </div>
-                  </div>
+              <p class="subtitle">Because the scores are bimodal, the optimal threshold is insensitive to the exact penalty — anywhere from $50 to $200 lands near 0.6, and value-weighted fraud loss ($14,503 → $6,939) falls ~52% versus approving everyone (the model catches the instant-purchase half, which carries about half the total fraud value). A very high false-positive cost pushes the threshold up toward the pure instant-purchase cluster (recall ~0.52, essentially zero false alarms); a low false-positive cost pulls it down to trade precision for a few more catches. With this data the flat optimum lets the business prioritize precision at little cost in recall.</p>
+            </div>
+          </section>
+
+          <!-- What the Model Uses -->
+          <section id="shap" class="section-padding section--editorial" data-section-num="06">
+            <div class="section-header">
+              <div class="section-eyebrow">
+                <span class="section-num">06</span>
+                <span class="section-kicker">What the Model Uses</span>
+              </div>
+              <h2 class="section-title">What the Model Keys On</h2>
+            </div>
+
+            <div class="space-y-8">
+              <p class="subtitle">SHAP over the test set confirms the two-feature story in plain terms: a short gap between signup and purchase is the strongest push toward "fraud" (real customers browse and return; automated or stolen-credential purchases happen in seconds), and a device shared by many accounts is the second (the fraud-ring pattern). Everything else — sex, weekend, browser, hour — contributes a small fraction of the top two's weight and is better read as minor correlation than a real driver. The model ignores age, purchase value and marketing source.</p>
+
+              <figure class="figure-editorial">
+                <img src="figures/shap_beeswarm.png" alt="SHAP feature importance (beeswarm)" loading="lazy" decoding="async" />
+                <figcaption>SHAP feature importance (beeswarm) — the signup→purchase interval and device-share count dominate; every other feature contributes marginally.</figcaption>
+              </figure>
+
+              <figure class="figure-editorial">
+                <img src="figures/shap_bar.png" alt="SHAP mean absolute contribution" loading="lazy" decoding="async" />
+                <figcaption>SHAP mean absolute contribution — the top two features sit at 2.52 and 2.42; everything else falls below 0.7.</figcaption>
+              </figure>
+            </div>
+          </section>
+
+          <!-- Productionizing -->
+          <section id="deployment" class="section-padding section--editorial" data-section-num="07">
+            <div class="section-header">
+              <div class="section-eyebrow">
+                <span class="section-num">07</span>
+                <span class="section-kicker">Productionizing</span>
+              </div>
+              <h2 class="section-title">Turning Scores into Product Decisions</h2>
+            </div>
+
+            <div class="space-y-8">
+              <p class="subtitle">Binning the final model's test-set scores shows what a tiering actually looks like:</p>
+
+              <div class="overflow-x-auto">
+                <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
+                  <thead>
+                    <tr class="bg-gray-100 dark:bg-gray-700/30">
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Tier</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">Volume</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">Fraud rate</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">Fraud caught</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="bg-green-50 dark:bg-green-900/20">
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>High (≥ 0.7): decline + manual review</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.53%</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">100%</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">146</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Medium (0.3–0.7): step-up verification</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.01%</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0%</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Low (&lt; 0.3): auto-approve</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">99.5%</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.5%</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">137</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="note note--insight">
+                <div class="note__label">Insight · The middle tier is nearly empty</div>
+                <div class="note__body">
+                  <p>The high tier — 0.53% of traffic, essentially all fraud — is declined in real time and routed to manual review, catching ~52% of fraud with almost no false positives. The low tier is auto-approved with no friction; it is also where the missed half of fraud hides. The medium tier is nearly empty: the model does not produce a meaningful "uncertain" population at 0.5–0.9, so a step-up-verification lane built on these scores would sit idle. Recovering more fraud means deliberately lowering the high-tier threshold into the low-precision region, where each extra catch costs rapidly rising false positives.</p>
                 </div>
               </div>
 
-              <!-- Continuous Improvement Plan -->
               <div class="contact-info-card">
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">Continuous Improvement & Monitoring Mechanisms</h3>
-                <div class="space-y-4">
-                  <div class="grid md:grid-cols-2 gap-6">
-                    <div>
-                      <h4 class="font-semibold mb-3" style="color: var(--dark);">Monitoring Metrics</h4>
-                      <ul class="space-y-2 subtitle">
-                        <li><strong>Precision Maintenance</strong>: >95% precision threshold</li>
-                        <li><strong>Recall Stability</strong>: 45-55% detection rate range</li>
-                        <li><strong>False Positive Monitoring</strong>: <0.02% false positive rate ceiling</li>
-                        <li><strong>User Experience Impact</strong>: <1% additional verification rate</li>
-                      </ul>
-                    </div>
-                    <div>
-                      <h4 class="font-semibold mb-3" style="color: var(--dark);">Update Mechanisms</h4>
-                      <ul class="space-y-2 subtitle">
-                        <li><strong>A/B Testing</strong>: Small traffic validation of new strategies</li>
-                        <li><strong>Regular Retraining</strong>: Quarterly model update cycles</li>
-                        <li><strong>Feature Monitoring</strong>: Track feature distribution changes</li>
-                        <li><strong>Feedback Loop</strong>: Manual review results flow back to training</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
+                <h3 class="text-xl font-semibold mb-3" style="color: var(--dark);">Before deployment</h3>
+                <ul class="list-disc list-inside space-y-2 subtitle">
+                  <li>Validate the sharing-count features with a time-ordered backtest (they currently assume full-history knowledge).</li>
+                  <li>Monitor precision and recall on live traffic against the semi-synthetic clean split.</li>
+                  <li>Roll out behind an A/B test on a small traffic slice, tracking fraud caught, false-alarm rate and first-purchase conversion.</li>
+                </ul>
               </div>
-
             </div>
           </section>
         </div>
       </div>
     </section>
 
-    <!-- Related Projects -->
+    <!-- Related projects -->
     <section id="related" class="section-padding">
       <div class="section-header reveal">
         <div class="section-eyebrow">
@@ -746,19 +567,27 @@ best_model = grid_search.best_estimator_</code></pre>
         <h2 class="section-title">Related Projects</h2>
       </div>
       <div class="grid md:grid-cols-2 gap-6">
-        <a href="../Bank Customer Churn Prediction/Bank Customer Churn Prediction-en.html" class="related-project-card group cursor-pointer" style="text-decoration: none;">
-          <h3 class="related-project-title">Bank Customer Churn Prediction</h3>
-          <p class="related-project-description">XGBoost and SHAP-based customer churn prediction and retention strategy</p>
+        <a href="#" class="related-project-card group cursor-pointer" style="text-decoration: none;" onclick="
+          const lang = localStorage.getItem('language') || 'zh';
+          window.location.href = lang === 'en' ? '../lending hub loan prediction/lending hub loan prediction-en.html' : '../lending hub loan prediction/lending hub loan prediction.html';
+          return false;
+        ">
+          <h3 class="related-project-title">Lending Hub Loan Default Prediction</h3>
+          <p class="related-project-description">Threshold decision under a 4.2:1 cost asymmetry, catching 74.9% of defaults</p>
           <div class="related-project-link">
-            <span>View Details</span>
+            <span>View details</span>
             <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>
           </div>
         </a>
-        <a href="../lending hub loan prediction/lending hub loan prediction-en.html" class="related-project-card group cursor-pointer" style="text-decoration: none;">
-          <h3 class="related-project-title">Lending Hub Loan Default Prediction</h3>
-          <p class="related-project-description">Multi-model comparison-based loan risk prediction system</p>
+        <a href="#" class="related-project-card group cursor-pointer" style="text-decoration: none;" onclick="
+          const lang = localStorage.getItem('language') || 'zh';
+          window.location.href = lang === 'en' ? '../youtube comment analysis/youtube comment analysis-en.html' : '../youtube comment analysis/youtube comment analysis.html';
+          return false;
+        ">
+          <h3 class="related-project-title">YouTube Comment Pet-Owner Detection</h3>
+          <p class="related-project-description">Weak supervision and 300 hand labels when there is no ground truth</p>
           <div class="related-project-link">
-            <span>View Details</span>
+            <span>View details</span>
             <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>
           </div>
         </a>
@@ -766,23 +595,20 @@ best_model = grid_search.best_estimator_</code></pre>
     </section>
   </main>
 
-  <!-- Bottom scripts: Prism / Local scripts / Logo animation / Detail page logic -->
+  <!-- Bottom scripts: Prism / local scripts / logo animation / detail-page logic -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
   <script src="../../assets/js/logo.js"></script>
-  <!-- Include common modules -->
   <script src="../../assets/js/common.js"></script>
   <script src="../../assets/js/charts.js"></script>
   <script src="../../assets/js/project.js"></script>
-  
-  <!-- Language toggle script -->
+
+  <!-- Language toggle functionality -->
   <script>
-    // Language toggle functionality
     document.addEventListener('DOMContentLoaded', function() {
       const langToggle = document.getElementById('lang-toggle');
       if (langToggle) {
         langToggle.addEventListener('click', function() {
-          // Save preference and redirect to Chinese version
           localStorage.setItem('language', 'zh');
           window.location.href = 'e-commerce fraud detection.html';
         });

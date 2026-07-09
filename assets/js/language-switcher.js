@@ -18,7 +18,8 @@
                 projects: {
                     'Bank Customer Churn Prediction': 'projects/Bank Customer Churn Prediction/Bank Customer Churn Prediction.html',
                     'e-commerce fraud detection': 'projects/e-commerce fraud detection/e-commerce fraud detection.html',
-                    'lending hub loan prediction': 'projects/lending hub loan prediction/lending hub loan prediction.html'
+                    'lending hub loan prediction': 'projects/lending hub loan prediction/lending hub loan prediction.html',
+                    'youtube comment analysis': 'projects/youtube comment analysis/youtube comment analysis.html'
                 }
             }
         },
@@ -32,7 +33,8 @@
                 projects: {
                     'Bank Customer Churn Prediction': 'projects/Bank Customer Churn Prediction/Bank Customer Churn Prediction-en.html',
                     'e-commerce fraud detection': 'projects/e-commerce fraud detection/e-commerce fraud detection-en.html',
-                    'lending hub loan prediction': 'projects/lending hub loan prediction/lending hub loan prediction-en.html'
+                    'lending hub loan prediction': 'projects/lending hub loan prediction/lending hub loan prediction-en.html',
+                    'youtube comment analysis': 'projects/youtube comment analysis/youtube comment analysis-en.html'
                 }
             }
         }
