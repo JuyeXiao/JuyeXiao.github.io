@@ -4,8 +4,8 @@
   <script>document.documentElement.classList.add('js');</script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pet Owners in 5.8M YouTube Comments: A Weakly Supervised Read - Data Poetics</title>
-  <meta name="description" content="5.82M pet-channel comments with no ground-truth label: weak-supervision labelling + feature decoupling + 300 stratified hand labels. Masked model agreement-AUC 0.91, isolating 44,623 high-confidence owners at ~0.94 precision, and ranking creators by owner audience share." />
+  <title>Pet Owners in 5.8M YouTube Comments: A Weakly Supervised Estimate - Data Poetics</title>
+  <meta name="description" content="5.82M pet-channel comments with no owner label: weak-supervision labeling + feature decoupling + 300 stratified rubric labels. Agreement vs rule labels 0.91 restricted vs 0.96 full vocabulary (PR-AUC 0.21 vs 0.34); precision vs rubric labels 0.58 (95% CI [0.17, 0.96]) at τ_F1, isolating 91,443 likely owners (3.6%), and ranking creators by owner audience share." />
 
   <!-- Same as homepage: Tailwind / fonts / icons / site styles -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="../../assets/css/index.css" />
   <link rel="stylesheet" href="../../assets/css/project.css" />
 
-  <!-- Code highlighting + charts (common on detail pages) -->
+  <!-- Syntax highlight + chart lib (used on detail pages) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
@@ -96,9 +96,9 @@
           <div class="section-eyebrow">
             <span class="section-kicker">Case Study · NLP &amp; Weak Supervision</span>
           </div>
-          <h1 class="hero-title mt-2">Pet Owners in 5.8M YouTube Comments: A Weakly Supervised Read</h1>
-          <p class="subtitle mt-4 max-w-xl">There is no ground-truth owner label. Written honestly as weak supervision, held out by user, and checked against 300 hand labels — the answer is a modest but real signal, reported with intervals rather than a single headline number.</p>
-          <div class="reading-time">~15 min read<span class="sep">·</span>20 charts</div>
+          <h1 class="hero-title mt-2">Pet Owners in 5.8M YouTube Comments: A Weakly Supervised Estimate</h1>
+          <p class="subtitle mt-4 max-w-xl">These 5.82M comments carry no owner label, so the estimate is built as weak supervision and checked against 300 rubric labels. The signal is real but modest: the ordering of channels holds, the absolute shares do not.</p>
+          <div class="reading-time">~15 min read<span class="sep">·</span>20 figures</div>
 
           <div class="hero-stats">
             <div class="hero-stat">
@@ -107,11 +107,11 @@
             </div>
             <div class="hero-stat">
               <div class="hero-stat__num">0.91</div>
-              <div class="hero-stat__label">masked agreement-AUC</div>
+              <div class="hero-stat__label">agreement-AUC (vs rule labels, masked)</div>
             </div>
             <div class="hero-stat">
-              <div class="hero-stat__num">0.94</div>
-              <div class="hero-stat__label">human precision @ precision-first τ</div>
+              <div class="hero-stat__num">91,443</div>
+              <div class="hero-stat__label">likely owners (3.6%) @ τ_F1</div>
             </div>
           </div>
 
@@ -125,13 +125,13 @@
           <ol class="hero-stack__list">
             <li>
               <span class="hero-stack__num">01</span>
-              <span class="hero-stack__name">Weak-supervision LFs</span>
-              <span class="hero-stack__desc">Strong-possession / weak-context / negation rules, 1.5% positive</span>
+              <span class="hero-stack__name">Weak-supervision labeling functions</span>
+              <span class="hero-stack__desc">Strong-possessive / weak-context / negation LFs, 1.52% positive</span>
             </li>
             <li>
               <span class="hero-stack__num">02</span>
               <span class="hero-stack__name">Feature decoupling</span>
-              <span class="hero-stack__desc">Masked TF-IDF strips every rule trigger word</span>
+              <span class="hero-stack__desc">Restricted vocabulary drops every rule-trigger content word</span>
             </li>
             <li>
               <span class="hero-stack__num">03</span>
@@ -140,16 +140,16 @@
             </li>
             <li>
               <span class="hero-stack__num">04</span>
-              <span class="hero-stack__name">Dual evaluation</span>
-              <span class="hero-stack__desc">Rule agreement-AUC + 300 stratified hand labels, Wilson intervals</span>
+              <span class="hero-stack__name">Two kinds of label</span>
+              <span class="hero-stack__desc">Rule-agreement AUC + 300 stratified rubric labels, Wilson intervals</span>
             </li>
             <li>
               <span class="hero-stack__num">05</span>
-              <span class="hero-stack__name">Full-corpus scoring</span>
-              <span class="hero-stack__desc">τ_F1 / τ_P80 operating points, LDA topics, creator ranking</span>
+              <span class="hero-stack__name">Full-corpus scoring &amp; placement</span>
+              <span class="hero-stack__desc">τ_F1 / τ_P80 operating points, creator efficiency vs reach</span>
             </li>
           </ol>
-          <div class="hero-stack__foot">Python · pandas · scikit-learn · xgboost · pyarrow · shap · LDA</div>
+          <div class="hero-stack__foot">Python · pandas · scikit-learn · xgboost · pyarrow · shap</div>
         </aside>
       </div>
     </section>
@@ -159,20 +159,20 @@
       <div class="grid md:grid-cols-3 gap-6">
         <div class="summary-card">
           <h3 class="summary-card-title">The Challenge</h3>
-          <p class="summary-card-content">5.82M comments, no ground-truth label at all. "Train a classifier and report the AUC" is circular reasoning — the task needs a method that honestly estimates the real signal, not an inflated score.</p>
+          <p class="summary-card-content">Pet advertising is bought against channels, and the advertiser needs to tell owners from watchers. These 5.82M comments carry no such label — "train a classifier and report AUC" is circular; a method that honestly estimates the real signal is needed.</p>
         </div>
         <div class="summary-card">
-          <h3 class="summary-card-title">The Solution</h3>
-          <p class="summary-card-content">Weak-supervision labels + feature decoupling + grouping by user + 300 hand labels + an ablation that quantifies leakage, separating what merely reconstructs the rules from the real signal.</p>
+          <h3 class="summary-card-title">The Approach</h3>
+          <p class="summary-card-content">Three regex labeling functions write a noisy label; the model's features are chosen not to re-encode the rules; training and evaluation are held out by user; 300 comments labeled against a fixed rubric separate rule reconstruction from real signal.</p>
         </div>
         <div class="summary-card">
           <h3 class="summary-card-title">The Value</h3>
-          <p class="summary-card-content">Isolates 44,623 high-confidence owners at ~0.94 precision (91,443, 3.6%, at τ_F1); creators are ranked by likely-owner audience share to guide KOL targeting (Zak George 0.51 top).</p>
+          <p class="summary-card-content">τ_F1 isolates 91,443 likely owners (3.6%), with precision vs the rubric labels of 0.58, 95% CI [0.17, 0.96]. Creators are ranked by owner audience share for placement — but only the ordering holds, not any single channel's share as a measured fact.</p>
         </div>
       </div>
     </section>
 
-    <!-- Main content: TOC + body -->
+    <!-- Main content: sticky TOC + body -->
     <section id="content" class="section-padding">
       <div class="grid md:grid-cols-12 gap-12">
         <aside class="md:col-span-3">
@@ -183,16 +183,16 @@
               <li><a href="#data" class="toc-link" data-section="data">The Corpus</a></li>
               <li><a href="#weak" class="toc-link" data-section="weak">Weak Supervision</a></li>
               <li><a href="#decouple" class="toc-link" data-section="decouple">Decoupling &amp; Ablation</a></li>
-              <li><a href="#human" class="toc-link" data-section="human">Human Validation</a></li>
+              <li><a href="#human" class="toc-link" data-section="human">Two Kinds of Label</a></li>
               <li><a href="#shap" class="toc-link" data-section="shap">What the Model Uses</a></li>
-              <li><a href="#scoring" class="toc-link" data-section="scoring">Full-corpus Scoring</a></li>
+              <li><a href="#scoring" class="toc-link" data-section="scoring">Full-corpus Scoring &amp; Placement</a></li>
               <li><a href="#limits" class="toc-link" data-section="limits">Limits &amp; Reproducibility</a></li>
             </ul>
           </nav>
         </aside>
 
         <div class="md:col-span-9 content-area">
-          <!-- Executive Summary -->
+          <!-- Executive summary -->
           <section id="summary" class="section-padding section--editorial" data-section-num="00">
             <div class="section-header">
               <div class="section-eyebrow">
@@ -204,17 +204,17 @@
 
             <div class="space-y-6">
               <div class="contact-info-card">
-                <p class="subtitle mb-4">There is no ground-truth owner label in this dataset. Written honestly as weak supervision, held out by user, and checked against 300 hand-labelled comments, the analysis estimates how much genuine ownership signal the comments carry. The answer is a modest but real signal, reported with intervals rather than a single headline number.</p>
+                <p class="subtitle mb-4">A pet-category advertiser wants to know which channels reach people who own pets, not people who watch them. This 5.82M-comment scrape carries no owner label, so the task is framed as weak supervision: three regex labeling functions write a noisy label, the model's features are chosen not to re-encode those rules, training and evaluation are held out by user, and 300 comments labeled against a fixed rubric provide the check. The answer is a real but modest signal, reported with an interval rather than a single large number.</p>
 
                 <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">Four findings</h3>
                 <ul class="list-disc list-inside space-y-3 subtitle mb-6">
-                  <li><strong>A high agreement score is mostly rule reconstruction.</strong> With the rule's own words left in the vocabulary a model reaches AUC 0.96; remove those words and it falls to 0.91. That 0.05 is not skill, it is the model re-deriving the regexes it was trained to imitate.</li>
-                  <li><strong>There is real signal underneath.</strong> Even blind to the trigger words, the masked model reaches 0.91 agreement-AUC by leaning on comment length, care vocabulary, creator and user behaviour, and language — not on "dog" or "cat".</li>
-                  <li><strong>The model finds owners the rules miss.</strong> In comment bands where the rules never fire, the model's high-scored picks are 3–9× more likely to be true owners than the band's base rate, and it out-predicts the full-vocabulary model there. That is generalisation, not memorisation.</li>
-                  <li><strong>Honesty costs precision points, not the whole result.</strong> A precision-first threshold still isolates ~45k users at ~0.94 precision.</li>
+                  <li><strong>Most of a high agreement score is rule reconstruction.</strong> Keep the rule's words in the vocabulary and the model reaches agreement-AUC 0.96; drop them and it falls to 0.91. The 0.05 gap is not skill — it is the model rebuilding the regex; at a 1.5% positive rate the PR-AUC gap is the honest one, 0.21 vs 0.34.</li>
+                  <li><strong>There is real signal underneath.</strong> Blind to the trigger words, the restricted-vocabulary model still reaches 0.91 agreement-AUC on comment length, care words, creator and user behavior, and language — not on "dog"/"cat".</li>
+                  <li><strong>The model finds owners the rules miss.</strong> In the rule-silent stratum, the restricted-vocabulary model beats the full-vocabulary one against the rubric labels (0.70 vs 0.61). That is generalization, not memorization.</li>
+                  <li><strong>Honesty costs a few precision points, not the result.</strong> At the headline τ_F1, precision vs the rubric labels is 0.58 (wide interval); a precision-first threshold still isolates ~45k users at ~0.94 precision.</li>
                 </ul>
 
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">At a glance</h3>
+                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">Results at a glance</h3>
                 <div class="overflow-x-auto">
                   <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
                     <thead>
@@ -230,19 +230,19 @@
                       </tr>
                       <tr>
                         <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Rule label</strong></td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">1.5% positive (88,420 comments), three labelling functions</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">1.52% positive (88,420 comments), three labeling functions</td>
                       </tr>
                       <tr>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Agreement-AUC</strong></td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">0.91 masked vs 0.96 full-vocabulary (the gap is rule reconstruction)</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Agreement (vs rule labels)</strong></td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">ROC-AUC 0.91 masked vs 0.96 full; PR-AUC 0.21 vs 0.34</td>
                       </tr>
                       <tr>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Human precision</strong></td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">0.94 at a precision-first threshold; 0.58 at the F1 threshold (wide CI, n=300)</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Precision vs rubric labels</strong></td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">0.58, 95% CI [0.17, 0.96] at τ_F1 (n=300)</td>
                       </tr>
                       <tr>
                         <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Likely owners</strong></td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">91,443 users (3.6%) at τ_F1; 44,623 (1.8%) at τ_P80</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">91,443 users (3.6%) at τ_F1 = 0.862; 44,623 (1.8%) at τ_P80 = 0.920</td>
                       </tr>
                     </tbody>
                   </table>
@@ -250,49 +250,49 @@
               </div>
 
               <div class="note note--caveat">
-                <div class="note__label">Method · Why not just report 0.96</div>
+                <div class="note__label">Method · Why the headline is not 0.96</div>
                 <div class="note__body">
-                  <p>The label is synthesized by three regexes, and the same content words can enter the model — if those words are left in the vocabulary the model naturally reaches 0.96 agreement-AUC, but that is mostly reconstructing the labelling rule itself. This analysis defines the gap between 0.96 and the masked 0.91 explicitly as "rule reconstruction" and subtracts it, reporting only the 0.91 as genuine generalisation signal.</p>
+                  <p>The label is synthesized from three regexes, and the same content words can enter the model — keep them in the vocabulary and it naturally reaches agreement-AUC 0.96, but most of that is rebuilding the labeling rule itself. This analysis defines the gap between 0.96 and the masked 0.91 as "rule reconstruction" and deducts it; and the number that actually matters is not any agreement-AUC but precision against the 300 rubric labels, which measures how often the model is right about a real person.</p>
                 </div>
               </div>
             </div>
           </section>
 
-          <!-- The Corpus -->
+          <!-- The corpus -->
           <section id="data" class="section-padding section--editorial" data-section-num="01">
             <div class="section-header">
               <div class="section-eyebrow">
                 <span class="section-num">01</span>
                 <span class="section-kicker">The Corpus</span>
               </div>
-              <h2 class="section-title">The Data</h2>
+              <h2 class="section-title">The Corpus</h2>
             </div>
 
             <div class="space-y-8">
               <div class="contact-info-card">
-                <p class="subtitle">The dataset is a scrape of comments under pet-focused YouTube channels: three columns (<code>creator_name</code>, <code>userid</code>, <code>comment</code>), 5.82M rows after dropping 491 empty comments. It is not a panel of user behaviour: two thirds of users comment exactly once, 85% appear under a single creator, and the top 38 creators hold 66% of all comments — a creator Gini of 0.94.</p>
+                <p class="subtitle">The dataset is course-provided and not publicly available: comments scraped from pet-focused YouTube channels, in three columns (<code>creator_name</code>, <code>userid</code>, <code>comment</code>). After dropping 491 empty comments, 5,818,979 rows remain, from 2,536,890 users and 3,858 creators. Comments are short: mean 77.3 characters, median 43, 95th percentile 249. Four structural facts constrain everything downstream — they describe how the data was collected: 67.1% of users comment exactly once, 85.1% appear under a single creator, the top 38 creators hold 66.1% of all comments, and the Gini of comments across creators is 0.944. This is a creator-comment dump, not a user panel.</p>
               </div>
 
               <figure class="figure-editorial">
                 <img src="figures/creator_concentration_lorenz.png" alt="Creator concentration Lorenz curve" loading="lazy" decoding="async" />
-                <figcaption>Creator concentration Lorenz curve — Gini 0.94, with the top 38 creators holding 66% of comments, made self-checking by the curve.</figcaption>
+                <figcaption>Creator concentration Lorenz curve — the bend is severe: most creators contribute almost nothing and a few dozen contribute two thirds, checking against the Gini of 0.944.</figcaption>
               </figure>
 
               <div class="figure-grid">
                 <figure class="figure-editorial">
                   <img src="figures/user_activity_powerlaw_loglog.png" alt="User activity power law (log-log)" loading="lazy" decoding="async" />
-                  <figcaption>User activity follows a power law (log-log axes) — a few users comment heavily, a long tail comments once.</figcaption>
+                  <figcaption>User activity follows a power law (log-log) — a handful of users comment often, the long tail comments once.</figcaption>
                 </figure>
                 <figure class="figure-editorial">
-                  <img src="figures/comments_per_user_distribution.png" alt="Comments-per-user distribution" loading="lazy" decoding="async" />
-                  <figcaption>Comments-per-user distribution — two thirds of users comment exactly once, so user-level aggregates are extremely sparse.</figcaption>
+                  <img src="figures/comments_per_user_distribution.png" alt="Comments per user distribution" loading="lazy" decoding="async" />
+                  <figcaption>Comments-per-user distribution — two thirds of users comment exactly once, so user-level aggregate features are very sparse.</figcaption>
                 </figure>
               </div>
 
               <div class="figure-grid">
                 <figure class="figure-editorial">
                   <img src="figures/comment_length_distribution.png" alt="Comment length distribution" loading="lazy" decoding="async" />
-                  <figcaption>Comment length distribution — most comments are short; length itself later becomes the masked model's top feature.</figcaption>
+                  <figcaption>Comment length distribution — most comments are short, and length itself later becomes a top feature of the restricted-vocabulary model.</figcaption>
                 </figure>
                 <figure class="figure-editorial">
                   <img src="figures/user_loyalty_creators_per_user.png" alt="User loyalty: creators per user" loading="lazy" decoding="async" />
@@ -302,113 +302,258 @@
 
               <figure class="figure-editorial">
                 <img src="figures/language_mix_estimate.png" alt="Language mix estimate" loading="lazy" decoding="async" />
-                <figcaption>Language mix estimate — about 94% of comments are dominantly Latin-script; every text model here is English-only, so conclusions cover that slice.</figcaption>
+                <figcaption>Script mix on a 200,000-comment sample — 93.90% of comments are dominantly Latin script. Modeling and its conclusions cover that slice only; the remaining 6% is scored but never validated.</figcaption>
               </figure>
             </div>
           </section>
 
-          <!-- Weak Supervision -->
+          <!-- Weak supervision -->
           <section id="weak" class="section-padding section--editorial" data-section-num="02">
             <div class="section-header">
               <div class="section-eyebrow">
                 <span class="section-num">02</span>
                 <span class="section-kicker">Weak Supervision</span>
               </div>
-              <h2 class="section-title">Weak Supervision, Not a Hidden Truth Label</h2>
+              <h2 class="section-title">Three Labeling Functions and Their Cost</h2>
             </div>
 
             <div class="space-y-8">
               <div class="contact-info-card">
-                <p class="subtitle">Three labelling functions write the noisy label: a <strong>strong possession rule</strong> ("my dog", "we adopted a kitten", "I'm a dog mom"), a <strong>weaker context rule</strong> ("my vet", "his crate", "when I feed my …"), and a <strong>negation rule</strong> ("I want a dog", "my friend's cat", "don't have a pet"). A comment is labelled 1 when a positive rule fires and negation does not. The result is a 1.5% positive rate.</p>
+                <p class="subtitle">Hand-labeling 5.8M comments is not available at any realistic budget, and hand-labeling a subset large enough to train on would consume the budget an honest evaluation needs. The labeling budget is therefore spent once, on 300 comments, all for evaluation; training labels come from three explicit labeling functions (Snorkel-style) that keep what the model imitates open to inspection. A comment is positive when a positive function fires and negation does not, at a 1.52% positive rate (88,420 comments), an imbalance of about 1:65.</p>
+              </div>
+
+              <div class="overflow-x-auto">
+                <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
+                  <thead>
+                    <tr class="bg-gray-100 dark:bg-gray-700/30">
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Function</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center">Sign</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Keys on</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Examples</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><code>LF_strong_possessive</code></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center dark:text-gray-200">+1</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">first-person possession</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">"my dog", "we adopted a kitten", "I'm a dog mom"</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><code>LF_medium_context</code></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center dark:text-gray-200">+1</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">weaker ownership context</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">"my vet", "his crate", "when I feed my"</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><code>LF_negation</code></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center dark:text-gray-200">−1</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">high-precision non-ownership</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">"I want a dog", "my friend's cat", "don't have a pet"</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
 
               <figure class="figure-editorial">
-                <img src="figures/lf_coverage_overlap.png" alt="Labelling-function coverage and overlap" loading="lazy" decoding="async" />
-                <figcaption>Labelling-function coverage and overlap — the reach of each of the three LFs and their intersection, yielding 88,420 positives (1.5%).</figcaption>
+                <img src="figures/lf_coverage_overlap.png" alt="Labeling-function coverage and overlap" loading="lazy" decoding="async" />
+                <figcaption>Coverage per function and pairwise overlap — coverage is carried almost entirely by the strong rule (1.466%); the medium rule adds little, and negation is deliberately narrow, removing one kind of false positive.</figcaption>
               </figure>
 
               <div class="note note--process">
-                <div class="note__label">Design · Care vocabulary is deliberately kept out of the label</div>
+                <div class="note__label">Design · Care words kept out of the label, and the PU cost</div>
                 <div class="note__body">
-                  <p>The care vocabulary is deliberately kept out of the label, so it can serve as a legitimate feature later. These labels are rules, not truth, and the negatives are unlabelled, not confirmed non-owners — which is why the evaluation below leans on human labels, not on the rule's own recall.</p>
+                  <p>The care vocabulary (vet, feed, walk, train, adopt, …) is deliberately kept out of the label so it can later be a legitimate feature — because the label does not depend on care words, a model that leans on them has generalized. Two costs follow: a zero means "no rule fired", not "confirmed non-owner", so the negatives are unlabeled positives (a positive-and-unlabeled problem) and recall against these labels is not real recall; and the label inherits the rules' blind spots, so an owner who never writes a possession phrase is labeled negative. Both are why evaluation must lean on the rubric labels, not the rules' own recall.</p>
                 </div>
               </div>
             </div>
           </section>
 
-          <!-- Decoupling & Ablation -->
+          <!-- Decoupling & ablation -->
           <section id="decouple" class="section-padding section--editorial" data-section-num="03">
             <div class="section-header">
               <div class="section-eyebrow">
                 <span class="section-num">03</span>
                 <span class="section-kicker">Decoupling &amp; Ablation</span>
               </div>
-              <h2 class="section-title">Decoupling, and the Ablation that Measures the Leakage</h2>
+              <h2 class="section-title">Decoupling, and the Ablation That Measures Leakage</h2>
             </div>
 
             <div class="space-y-8">
               <div class="contact-info-card">
-                <p class="subtitle">The model is trained on features chosen to <em>not</em> re-encode the rule: comment-level text style, the care-term count, and behaviour-only aggregates of the user and creator (counts, lengths, breadth, rank). User- and creator-level "ownership rate" features — which for the 67% single-comment users are just that comment's label — are dropped. Aggregates are computed once over the whole corpus and shared by training and scoring, so there is no train/serve skew; the split is by <code>userid</code>, so no user sits on both sides.</p>
+                <p class="subtitle">The label is a regex over comment text, and any feature that carries the same information lets the model rebuild the rule. So the three LFs, the user/creator-level "ownership rate" (which, for the 67% who comment once, is literally that comment's own label), and per-animal one-hots are all dropped, leaving 17 structured features that never touch the label: comment-level style, the comment's care-term count, and commenting-only user and creator aggregates. Aggregates are computed once over the corpus and read from one table by both training and scoring; the split is by <code>userid</code>, so no user sits on both sides. The main model's TF-IDF vocabulary treats the 39 rule-trigger content words as stop words; a second model keeps them — the two differ in one thing, so the gap between their scores measures how much of a high score is the rule reconstructing itself.</p>
               </div>
 
-              <p class="subtitle">The TF-IDF vocabulary for the main model removes every content word the rules key on. A second, ablation model keeps them. On held-out users the masked model scores 0.91 and the full-vocabulary one 0.96 — the gap is the rule reconstruction.</p>
+              <div class="overflow-x-auto">
+                <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
+                  <thead>
+                    <tr class="bg-gray-100 dark:bg-gray-700/30">
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Model (held-out users, vs rule labels)</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">ROC-AUC</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">PR-AUC</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Logistic regression</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.8627</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.1243</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Random forest</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.8602</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.1157</td>
+                    </tr>
+                    <tr class="bg-green-50 dark:bg-green-900/20">
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>XGBoost (restricted vocabulary)</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>0.9109</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>0.2095</strong></td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">XGBoost (full vocabulary, ablation)</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.9639</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.3385</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <p class="subtitle">XGBoost wins on both metrics, about 0.05 ROC-AUC over both baselines and nearly doubling PR-AUC against logistic regression; the two baselines land within 0.003 of each other, which pins the gain on the learner (the feature matrix is identical across all three rows). At a 1.52% positive rate PR-AUC is the figure to read: the ROC framing compresses the masked-0.91 vs full-0.96 gap into what reads as a rounding detail (5.8% relative), while PR-AUC exposes it — 0.21 vs 0.34, a rule-reconstruction gap of 0.13, 62% relative. Letting the rule's own words into the vocabulary inflates performance by almost two thirds.</p>
 
               <figure class="figure-editorial">
-                <img src="figures/roc_pr_curves_rule_agreement.png" alt="ROC and PR curves, agreement with rule labels" loading="lazy" decoding="async" />
-                <figcaption>ROC and PR curves, agreement with rule labels — masked model 0.91 vs full-vocabulary 0.96, the gap being the rule self-reconstruction.</figcaption>
+                <img src="figures/roc_pr_curves_rule_agreement.png" alt="ROC and PR curves against rule labels" loading="lazy" decoding="async" />
+                <figcaption>Four models against the rule labels on held-out users — the ROC panel compresses the differences; the PR panel is where they live.</figcaption>
               </figure>
 
               <div class="figure-grid">
                 <figure class="figure-editorial">
-                  <img src="figures/threshold_tuning_rule_agreement.png" alt="Threshold tuning on rule agreement" loading="lazy" decoding="async" />
-                  <figcaption>Threshold tuning on rule agreement — where the F1 threshold and the precision-first threshold each land.</figcaption>
+                  <img src="figures/threshold_tuning_rule_agreement.png" alt="Threshold sweep against rule agreement" loading="lazy" decoding="async" />
+                  <figcaption>Precision, recall, and F1 against the threshold for the restricted-vocabulary model on held-out rule labels — the F1 curve is flat near its peak, landing at τ_F1 = 0.862.</figcaption>
                 </figure>
                 <figure class="figure-editorial">
-                  <img src="figures/confusion_matrix_tau_f1.png" alt="Confusion matrix at the F1 threshold" loading="lazy" decoding="async" />
-                  <figcaption>Confusion matrix at the F1 threshold (τ_F1) — agreement with the rule labels; the held-out train/serve score difference is exactly zero.</figcaption>
+                  <img src="figures/confusion_matrix_tau_f1.png" alt="Confusion matrix at τ_F1" loading="lazy" decoding="async" />
+                  <figcaption>Confusion matrix at τ_F1 — against rule labels, precision 0.259, recall 0.321, F1 0.287; a high AUC and low F1 are consistent, the ranking is informative but at a single cut most flagged comments do not match the rule.</figcaption>
                 </figure>
               </div>
             </div>
           </section>
 
-          <!-- Human Validation -->
+          <!-- Two kinds of label -->
           <section id="human" class="section-padding section--editorial" data-section-num="04">
             <div class="section-header">
               <div class="section-eyebrow">
                 <span class="section-num">04</span>
                 <span class="section-kicker">Human Validation</span>
               </div>
-              <h2 class="section-title">Human Validation is the Honest Headline</h2>
+              <h2 class="section-title">Two Kinds of Label, and Two Operating Points</h2>
             </div>
 
             <div class="space-y-8">
-              <p class="subtitle">300 comments were sampled across five strata — where each rule fires, where the care words fire without a possession phrase, and where nothing fires at all — and labelled by hand (LLM-assisted, spot-checked, 0 undecidable). The strong-rule stratum is 93% true owners; the weaker rule only 42%; the no-signal base rate is 5.6%.</p>
+              <div class="contact-info-card">
+                <p class="subtitle">There are two kinds of label, answering different questions: <strong>rule labels</strong> (344,882 held-out comments) measure how well the model reproduces the rules; <strong>rubric labels</strong> (300 hand-checked comments) measure how often the model is right about a real person. The 300 are drawn across five strata — where the rules fire, where care words appear without possession, and where the rules stay silent, the last most important — labeled against a fixed rubric (LLM-assisted, spot-checked, zero undecidable), and because strata are sampled at very different rates, every metric is corpus-weighted.</p>
+              </div>
+
+              <div class="overflow-x-auto">
+                <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
+                  <thead>
+                    <tr class="bg-gray-100 dark:bg-gray-700/30">
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Stratum</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Definition</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">Owner rate</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">95% Wilson CI</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="bg-green-50 dark:bg-green-900/20">
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">S1 strong</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">strong possession fires</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>0.933</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">[0.841, 0.974] (56/60)</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">S2 medium only</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">weaker context</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.417</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">[0.301, 0.543] (25/60)</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">S3 negation</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">non-ownership</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.067</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">[0.018, 0.213] (2/30)</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">S4 care, no possession</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">rule-silent</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.100</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">[0.047, 0.201] (6/60)</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">S5 no signal</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">rule-silent</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.056</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">[0.024, 0.124] (5/90)</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
 
               <figure class="figure-editorial">
-                <img src="figures/validation_precision_by_stratum.png" alt="Owner rate by stratum with 95% CI" loading="lazy" decoding="async" />
-                <figcaption>Owner rate by stratum with 95% CI — strong-possession 93%, weak rule 42%, no-signal 5.6%, with Wilson intervals reporting uncertainty honestly.</figcaption>
+                <img src="figures/validation_precision_by_stratum.png" alt="Owner rate by stratum with 95% intervals" loading="lazy" decoding="async" />
+                <figcaption>Owner rate per stratum with 95% Wilson intervals — each stratum's rate is a labeling function's real precision. The strong rule is genuinely precise at 0.933, the medium rule barely better than a coin flip at 0.417; the S1–S5 separation is what makes the sample usable.</figcaption>
               </figure>
+
+              <p class="subtitle">The operating threshold is selected on held-out rule labels (never on the rubric), landing at τ_F1 = 0.862 — which is what makes the next figures out-of-sample statements. The two operating points trade off:</p>
+
+              <div class="overflow-x-auto">
+                <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
+                  <thead>
+                    <tr class="bg-gray-100 dark:bg-gray-700/30">
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Threshold</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Selected on</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Precision vs rubric</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Recall vs rubric</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="bg-green-50 dark:bg-green-900/20">
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>τ_F1 = 0.862</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">held-out <strong>rule</strong> labels</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>0.575</strong>, 95% CI [0.172, 0.958]</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">0.247, [0.065, 0.585]</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">τ_P80 = 0.920</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">the <strong>rubric</strong> sample itself</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">0.938 (in-sample, optimistic)</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">0.217</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <p class="subtitle"><strong>τ_F1 is the headline</strong> because its threshold and its evaluation use different data: precision 0.58 means that of the users it flags, roughly six in ten really own a pet, and the interval [0.17, 0.96] spans almost the whole range — on 300 labels that is the honest width, and the point estimate should not be quoted alone. <strong>τ_P80 looks better and is worth less</strong>: its 0.938 precision is measured on the same 300 comments the threshold was chosen from, so it is in-sample and optimistic, carries no interval, and appears here only for completeness.</p>
 
               <figure class="figure-editorial">
                 <img src="figures/precision_by_score_bin_human.png" alt="Owner rate by model score bin" loading="lazy" decoding="async" />
-                <figcaption>Owner rate by model score bin — the model score tracks real precision: the higher the score, the higher the hand-labelled owner rate.</figcaption>
+                <figcaption>Corpus-weighted owner rate by score bin with stratified bootstrap intervals — the point estimates rise monotonically (higher score, higher chance of a real owner), but the top two bins overlap heavily, so this sample cannot establish that a 0.9 score beats a 0.7 score.</figcaption>
               </figure>
 
               <div class="note note--evidence">
-                <div class="note__label">Decisive test · Rule-silent band: generalisation, not memorisation</div>
+                <div class="note__label">Decisive test · Rule-silent stratum: generalization, not memorization</div>
                 <div class="note__body">
-                  <p>The decisive test is the ablation on the rule-silent band: there the masked model beats the full-vocabulary one (AUC 0.70 vs 0.61). The full-vocabulary model wins only where the rules already fire — that is, it wins at reconstructing the rule and loses at finding the owners the rule missed. Among comments the rules never tagged, a human confirmed cases like <em>"i remembered my doggy baby named denver"</em> and <em>"i have a golden retriever and it was so hard to train him"</em> — ownership the regexes had no pattern for.</p>
+                  <p>The test that matters is the rule-silent region. On the S4 band (care words present, no possession, n=60, 6 true owners) the two models diverge: on rule labels the full-vocabulary model wins 0.96 vs 0.91, but on the S4 rubric labels the ordering reverses, the restricted-vocabulary model <strong>0.704</strong> beating full-vocabulary 0.614. The full-vocabulary model only wins where the rules already fire — winning at reconstruction, losing at finding owners the rules miss. Confirmed examples like <em>"i remembered my doggy baby named denver"</em> and <em>"i have a golden retriever and it was so hard to train him"</em> contain no possession phrase the regexes match. Cautions: the S4 AUC rests on 60 comments, 6 positives, no interval, and covers only part of the rule-silent region.</p>
                 </div>
               </div>
 
               <figure class="figure-editorial">
-                <img src="figures/ablation_masked_vs_full_vocab.png" alt="Masked vs full-vocabulary ablation" loading="lazy" decoding="async" />
-                <figcaption>Masked vs full-vocabulary ablation — on the rule-silent band the masked model's AUC 0.70 beats the full-vocabulary 0.61, the decisive evidence of generalisation.</figcaption>
+                <img src="figures/ablation_masked_vs_full_vocab.png" alt="Restricted versus full vocabulary" loading="lazy" decoding="async" />
+                <figcaption>Restricted vs full vocabulary — on rule labels full wins (0.96 vs 0.91), in the S4 rubric labels the ordering reverses (0.70 vs 0.61), the decisive evidence of generalization over memorization.</figcaption>
               </figure>
             </div>
           </section>
 
-          <!-- What the Model Uses -->
+          <!-- What the model uses -->
           <section id="shap" class="section-padding section--editorial" data-section-num="05">
             <div class="section-header">
               <div class="section-eyebrow">
@@ -419,86 +564,145 @@
             </div>
 
             <div class="space-y-8">
-              <p class="subtitle">SHAP on the masked model puts comment length first, then language fragments (non-English tokens push the score down, consistent with the English-only scope), <code>care_term_count</code>, and creator/user behaviour. No animal noun appears, because the model cannot see them — which is the point.</p>
+              <p class="subtitle">SHAP on the restricted-vocabulary model (over a 20,000-row sample of the held-out set) puts comment length and reaction structure near the top, with the care-term count and creator/user commenting behavior close behind. No animal noun appears — the mechanical reason is that they are not in the vocabulary, and the decoupling worked in that narrow sense. Two features deserve a note: <code>care_term_count</code> ranks twelfth by gain (256.4), contributing without carrying the model; and several of the highest-gain TF-IDF terms are Spanish (que, los, por), so the model is partly detecting language (non-English comments rarely get an English possession phrase) — a real pattern, and a fragile basis for a conclusion.</p>
 
               <figure class="figure-editorial">
-                <img src="figures/shap_summary_beeswarm.png" alt="SHAP summary, masked model" loading="lazy" decoding="async" />
-                <figcaption>SHAP summary, masked model — comment length first, then language, care-term count and behaviour features; no animal noun appears.</figcaption>
+                <img src="figures/shap_summary_beeswarm.png" alt="SHAP summary" loading="lazy" decoding="async" />
+                <figcaption>SHAP summary — longer comments and higher care-term counts push toward owner; short reaction comments push away. No animal noun anywhere.</figcaption>
               </figure>
 
               <figure class="figure-editorial">
-                <img src="figures/feature_importance_xgb_gain.png" alt="XGBoost gain feature importance" loading="lazy" decoding="async" />
-                <figcaption>XGBoost gain feature importance — corroborates the SHAP ranking, concentrated in text style and behaviour features.</figcaption>
+                <img src="figures/feature_importance_xgb_gain.png" alt="Top features by XGBoost gain" loading="lazy" decoding="async" />
+                <figcaption>XGBoost gain for the top 20 features — gain and SHAP are computed differently yet agree on the same picture, a weak check that neither is an artifact of its method.</figcaption>
               </figure>
             </div>
           </section>
 
-          <!-- Full-corpus Scoring -->
+          <!-- Full-corpus scoring & placement -->
           <section id="scoring" class="section-padding section--editorial" data-section-num="06">
             <div class="section-header">
               <div class="section-eyebrow">
                 <span class="section-num">06</span>
                 <span class="section-kicker">Full-corpus Scoring</span>
               </div>
-              <h2 class="section-title">Scoring the Whole Corpus, and Who the Owners Are</h2>
+              <h2 class="section-title">Full-corpus Scoring, and Reading the Ranking as Placement</h2>
             </div>
 
             <div class="space-y-8">
-              <p class="subtitle">All 5.82M comments are scored through the identical pipeline; the held-out train/serve score difference is exactly zero. Two operating points are reported: 91,443 likely-owner users (3.6%) at the F1 threshold, 44,623 (1.8%) at the precision-first threshold.</p>
-
-              <figure class="figure-editorial">
-                <img src="figures/full_score_distribution.png" alt="Full-corpus score distribution" loading="lazy" decoding="async" />
-                <figcaption>Full-corpus score distribution — predicted scores over all 5.82M comments, with the two operating points (τ_F1 / τ_P80) cutting here.</figcaption>
-              </figure>
+              <p class="subtitle">All 5,818,979 comments are scored through the identical pipeline in 2.2 minutes: the same global aggregates, the same fitted vectorizer, the same model. On held-out test users the maximum absolute difference between the training-time and scoring-time score is exactly zero — the train/serve consistency that computing aggregates once was meant to buy. A user's score is the maximum over that user's comments: 91,443 likely owners (3.60% of 2,536,890) at τ_F1, and 44,623 (1.76%) at τ_P80.</p>
 
               <div class="figure-grid">
                 <figure class="figure-editorial">
-                  <img src="figures/owner_segments.png" alt="Owner segments" loading="lazy" decoding="async" />
-                  <figcaption>Owner segments — user counts at the two operating points: 91,443 (3.6%) at τ_F1 and 44,623 (1.8%) at τ_P80.</figcaption>
+                  <img src="figures/full_score_distribution.png" alt="Score distributions" loading="lazy" decoding="async" />
+                  <figcaption>Comment-level and user-level score distributions (log y) — dashed lines mark the two thresholds τ_F1 / τ_P80.</figcaption>
                 </figure>
                 <figure class="figure-editorial">
-                  <img src="figures/user_value_tiers.png" alt="User value tiers" loading="lazy" decoding="async" />
-                  <figcaption>User value tiers — users tiered by activity and owner confidence, isolating the high-value audience for KOL targeting.</figcaption>
+                  <img src="figures/owner_segments.png" alt="Owner segments" loading="lazy" decoding="async" />
+                  <figcaption>Owner segments — user counts at the two operating points, 91,443 (3.6%) at τ_F1 and 44,623 (1.8%) at τ_P80.</figcaption>
                 </figure>
               </div>
 
-              <p class="subtitle">Ranked by predicted likely-owner share of audience, with a 1,000-user minimum so a tiny channel cannot top the list, the leaders are training and small-pet channels — Zak George's Dog Training (0.51), StormyRabbits and Lennon The Bunny (~0.44) — which fits: their audiences skew toward people who own the animal.</p>
+              <p class="subtitle">Ranked by predicted likely-owner share of audience (minimum 1,000 unique users, so a small channel cannot top the list on a handful of comments), the leaders are training and small-pet channels. But the share alone runs two advertiser questions together — how efficiently a channel reaches owners, and how many owners it reaches at all. Splitting them changes the answer:</p>
+
+              <div class="overflow-x-auto">
+                <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
+                  <thead>
+                    <tr class="bg-gray-100 dark:bg-gray-700/30">
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Channel</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">Audience (users)</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">Likely-owner share</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">Likely owners reached</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Zak Georges Dog Training rEvolution</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">13,404</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>0.513</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">6,870</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">StormyRabbits</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">4,285</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.446</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">1,913</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Lennon The Bunny</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">6,488</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.441</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">2,858</td>
+                    </tr>
+                    <tr class="bg-green-50 dark:bg-green-900/20">
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Cole &amp; Marmalade</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">31,883</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.267</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>8,500</strong></td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">RaleighLink14</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">17,785</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.230</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">4,095</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Gone to the Snow Dogs</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">25,710</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.154</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">3,970</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
 
               <figure class="figure-editorial">
                 <img src="figures/creator_ranking_owner_share.png" alt="Creators by likely-owner audience share" loading="lazy" decoding="async" />
-                <figcaption>Creators by likely-owner audience share — Zak George's Dog Training tops at 0.51, with training and small-pet channels leading overall.</figcaption>
+                <figcaption>Top creators by likely-owner share (minimum 1,000 unique users) — Zak George dog training 0.513 leads, with training and small-pet channels ahead overall.</figcaption>
+              </figure>
+
+              <div class="note note--insight">
+                <div class="note__label">Insight · Efficiency and scale pick different channels</div>
+                <div class="note__body">
+                  <p>The two bold values fall on different rows. Zak George converts audience to owners at nearly twice the rate of Cole &amp; Marmalade (0.513 vs 0.267), yet Cole &amp; Marmalade reaches 24% more owners in absolute terms (8,500 vs 6,870), because its audience is 2.4 times larger. When the constraint is cost per owner reached, rank on share; when it is total owners reached, rank on owner count — a budget that ranks on share alone will systematically under-weight the large mid-share channels. <strong>Where this ranking applies</strong>: it supports an ordering of channels, not a promise of audience size; no single channel's share should be quoted to an advertiser as a measured fact, because precision against the rubric sample is only 0.58 with an interval of [0.17, 0.96]. The level does not survive, the ordering does — every channel is scored by the same model at the same threshold, so a comparison cancels most of the bias.</p>
+                </div>
+              </div>
+
+              <figure class="figure-editorial">
+                <img src="figures/user_value_tiers.png" alt="User value tiers" loading="lazy" decoding="async" />
+                <figcaption>User value tiers — users layered by activity and owner confidence to isolate a high-value audience for KOL placement.</figcaption>
               </figure>
 
               <figure class="figure-editorial">
                 <img src="figures/lda_topic_prevalence.png" alt="LDA topic prevalence" loading="lazy" decoding="async" />
-                <figcaption>LDA topic prevalence — comments cluster into 8 topics (dogs, feeding puppies, pet loss, cats, horses, and more), mapping the community's discourse.</figcaption>
+                <figcaption>LDA topic prevalence — comments cluster into 8 topics (dogs, feeding puppies, pet loss, cats, horses, …), mapping the community's topic structure.</figcaption>
               </figure>
             </div>
           </section>
 
-          <!-- Limits & Reproducibility -->
+          <!-- Limits & reproducibility -->
           <section id="limits" class="section-padding section--editorial" data-section-num="07">
             <div class="section-header">
               <div class="section-eyebrow">
                 <span class="section-num">07</span>
                 <span class="section-kicker">Limits &amp; Reproducibility</span>
               </div>
-              <h2 class="section-title">Limits &amp; Reproducibility</h2>
+              <h2 class="section-title">Limitations &amp; Reproducibility</h2>
             </div>
 
             <div class="space-y-8">
               <div class="note note--caveat">
-                <div class="note__label">Limitations</div>
+                <div class="note__label">Limits</div>
                 <div class="note__body">
-                  <p>The training labels are rules, not truth; the negatives are unlabelled positives, so recall against the rules is not real recall.</p>
-                  <p>The validation set is 300 comments and LLM-assisted; its intervals are wide, and the labeller shares some language intuition with the rules — the rule-silent strata that carry the generalisation claim are least affected by that overlap.</p>
-                  <p>Everything is English-only (~94% of comments) and comment-level. A comment is weak evidence of ownership, and ownership is not consumption; the dataset is a creator-comment scrape, so "user behaviour" reflects collection, not browsing.</p>
+                  <p><strong>The training labels are rules, not truth.</strong> The negatives are unlabeled positives, so recall against the rules is not real recall, and the model is trained to agree with the rules' blind spots.</p>
+                  <p><strong>The headline interval is wide.</strong> Precision at τ_F1 against the rubric labels is 0.58, interval [0.17, 0.96] on 300 labels; everything in the placement section inherits that width. τ_P80's 0.938 is in-sample, with no interval.</p>
+                  <p><strong>The generalization evidence is thin.</strong> The S4-band comparison rests on 60 comments with 6 positives, and the rule-silent lift figures (roughly 4× in S4, 9× in S5) rest on 8 and 2 comments.</p>
+                  <p><strong>Everything is English-only and comment-level.</strong> About 94% of comments are dominantly Latin script, and the model covers that slice; a comment is weak evidence of ownership, ownership is not purchase intent, and "user behavior" reflects what the scrape captured.</p>
                 </div>
               </div>
 
               <div class="contact-info-card">
-                <h3 class="text-xl font-semibold mb-3" style="color: var(--dark);">Reproducibility</h3>
-                <p class="subtitle">One seed (42) throughout; <code>GroupShuffleSplit</code> and <code>StratifiedGroupKFold</code> by <code>userid</code>; aggregates, scores, and the validation sample cached under <code>artifacts/</code>, model, vectorizer and feature spec under <code>models/</code>. Run end-to-end in about 29 minutes (LF scan ~75s, hyper-parameter search ~17 min, full scoring ~2 min):</p>
+                <h3 class="text-xl font-semibold mb-3" style="color: var(--dark);">Reproduction</h3>
+                <p class="subtitle">One seed (42) throughout; <code>GroupShuffleSplit</code> and <code>StratifiedGroupKFold</code> by <code>userid</code>; aggregates, scores, and the validation sample cached under <code>artifacts/</code>, the model, vectorizer, and feature spec under <code>models/</code>. About 29 minutes from scratch (labeling-function scan ~77s, hyper-parameter search 17.1 min, full-corpus scoring 2.2 min):</p>
                 <pre class="bg-gray-900 text-gray-100 p-3 rounded text-sm overflow-x-auto mt-3"><code>uv run jupyter nbconvert --to notebook --execute --inplace "YouTube Comments Analysis.ipynb"</code></pre>
               </div>
             </div>
@@ -521,7 +725,7 @@
           window.location.href = lang === 'en' ? '../e-commerce fraud detection/e-commerce fraud detection-en.html' : '../e-commerce fraud detection/e-commerce fraud detection.html';
           return false;
         ">
-          <h3 class="related-project-title">First-Transaction Fraud Detection</h3>
+          <h3 class="related-project-title">E-commerce First-Transaction Fraud Detection</h3>
           <p class="related-project-description">Rare positive class + a threshold operating point: recall data-locked at 52%</p>
           <div class="related-project-link">
             <span>View details</span>
@@ -544,7 +748,7 @@
     </section>
   </main>
 
-  <!-- Bottom scripts: Prism / local scripts / logo animation / detail-page logic -->
+  <!-- Footer scripts: Prism / local scripts / logo animation / detail-page logic -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
   <script src="../../assets/js/logo.js"></script>

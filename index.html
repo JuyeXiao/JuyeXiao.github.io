@@ -409,7 +409,7 @@
                             </div>
                             <h3 class="mt-4 text-xl">银行客户流失预测与关键驱动因素分析</h3>
                             <p class="mt-2 text-sm" style="color: var(--brown);">
-                                XGBoost+SMOTE，ROC-AUC 0.876。F2 阈值调优把流失捕获率从 61% 提到 85%，并给出 C*≈3.3 的盈亏平衡成本比；持有 3–4 个产品的客户反而流失更多。</p>
+                                XGBoost+SMOTE，ROC-AUC 0.876。F2 阈值在训练集折外预测上调到 0.20，流失捕获率从 61% 提到 87%，并给出 C*≈3.7 的盈亏平衡成本比；持有 3–4 个产品的客户反而流失更多。</p>
                         </div>
                         <div class="mt-4 text-right">
                             <span class="text-link">查看详情</span>
@@ -426,7 +426,7 @@
                             </div>
                             <h3 class="mt-4 text-xl">电商首单欺诈检测</h3>
                             <p class="mt-2 text-sm" style="color: var(--brown);">
-                                13.8 万笔首单交易、1.02% 欺诈率。模型拦截 0.53% 流量抓住 51.6% 欺诈、仅 2 个误报，金额加权欺诈损失降低约 52%——并解释召回为何被数据锁死在 52%。</p>
+                                13.8 万笔首单交易、1.02% 欺诈率。拦截 0.53% 流量抓住 51.6% 欺诈、仅 2 个误报，损失降约 51%——并诚实证明这一运营点可由一条单规则复现、召回被数据锁死在 52%。</p>
                         </div>
                         <div class="mt-4 text-right">
                             <span class="text-link">查看详情</span>
@@ -443,7 +443,7 @@
                             </div>
                             <h3 class="mt-4 text-xl">Lending Hub 贷款违约预测</h3>
                             <p class="mt-2 text-sm" style="color: var(--brown);">
-                                9,004 笔 LendingClub 贷款、违约率 16.8%。漏判成本是误拒的 4.2 倍时，把阈值从 0.5 移到 0.16：抓住 74.9% 的违约，预期损失比全批放款低 26.5%。</p>
+                                9,004 笔 LendingClub 贷款、违约率 16.8%。漏判成本是误拒的 4.2 倍时，把阈值从 0.5 移到 0.16：抓住 74.9% 的违约，预期损失比全批放款低 26.5%（净口径 6.6%）；而一条 60 个月期限规则就拿走降幅大头。</p>
                         </div>
                         <div class="mt-4 text-right">
                             <span class="text-link">查看详情</span>

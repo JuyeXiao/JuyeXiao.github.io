@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Lending Hub 贷款违约预测：成本不对称下的阈值决策 - 数据诗学</title>
-  <meta name="description" content="对 9,004 笔已结清 LendingClub 贷款的机器学习分析：LightGBM 在成本最优阈值 0.16 下抓住 74.9% 的违约，预期损失比全批放款低 26.5%；漏判成本 $9,437 是误拒成本 $2,243 的 4.2 倍。" />
+  <meta name="description" content="对 9,004 笔已结清 LendingClub 贷款的机器学习分析：LightGBM 在成本最优阈值 0.16 下抓住 74.9% 的违约（95% CI 70.5–79.2%），预期损失比全批放款低 26.5%（净口径 6.6%）；漏判成本 $9,437 是误拒成本 $2,243 的 4.2 倍。一条 60 个月期限规则就拿走降幅的大头。" />
 
   <!-- 与首页一致：Tailwind / 字体 / 图标 / 站点样式 -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -101,8 +101,8 @@
             <span class="section-kicker">Case Study · 信贷风险与成本敏感决策</span>
           </div>
           <h1 class="hero-title mt-2">Lending Hub 贷款违约预测：成本不对称下的阈值决策</h1>
-          <p class="subtitle mt-4 max-w-xl">仅用放款时可得的信息，违约能预测到什么程度？当漏判一笔违约的代价是误拒一笔好贷的 4.2 倍，0.5 从来不是正确的阈值。</p>
-          <div class="reading-time">约 12 分钟阅读<span class="sep">·</span>11 张图表</div>
+          <p class="subtitle mt-4 max-w-xl">漏判一笔违约的代价是误拒一笔好贷的 4.2 倍，模型因此按少亏钱调优，不按少分错调优。调好的 LightGBM 把预期损失压到全批准以下 26.5%——这份分析逐项检验这个数字经得起多少推敲。</p>
+          <div class="reading-time">约 14 分钟阅读<span class="sep">·</span>14 张图表</div>
 
           <div class="hero-stats">
             <div class="hero-stat">
@@ -115,7 +115,7 @@
             </div>
             <div class="hero-stat">
               <div class="hero-stat__num">−26.5%</div>
-              <div class="hero-stat__label">预期损失 vs 全批放款</div>
+              <div class="hero-stat__label">预期损失 vs 全批放款（净口径 6.6%）</div>
             </div>
           </div>
 
@@ -144,13 +144,13 @@
             </li>
             <li>
               <span class="hero-stack__num">04</span>
-              <span class="hero-stack__name">OOF 阈值调优</span>
-              <span class="hero-stack__desc">在 out-of-fold 概率上定 τ=0.16，测试集只碰一次</span>
+              <span class="hero-stack__name">OOF 阈值 + Bootstrap CI</span>
+              <span class="hero-stack__desc">折外概率上定 τ=0.16，头条数字附 95% 区间</span>
             </li>
             <li>
               <span class="hero-stack__num">05</span>
-              <span class="hero-stack__name">SHAP 归因</span>
-              <span class="hero-stack__desc">dependence 方向核查，纠正利率的平均带符号读法</span>
+              <span class="hero-stack__name">单变量基线 + 口径敏感性</span>
+              <span class="hero-stack__desc">一条期限规则拿走大头；净口径下降幅只剩 6.6%</span>
             </li>
           </ol>
           <div class="hero-stack__foot">Python · pandas · scikit-learn · lightgbm · imbalanced-learn · shap</div>
@@ -163,7 +163,7 @@
       <div class="grid md:grid-cols-3 gap-6">
         <div class="summary-card">
           <h3 class="summary-card-title">业务挑战</h3>
-          <p class="summary-card-content">16.8% 的贷款最终冲销，而两类错误代价悬殊：漏判一笔违约的损失是误拒一笔好贷的 4.2 倍。只优化准确率的模型会答错真正的问题。</p>
+          <p class="summary-card-content">16.8% 的贷款最终冲销，而两类错误代价悬殊：漏判一笔违约平均损失 $9,437 本金，误拒一笔好贷平均放弃 $2,243 利息，比率 4.2:1。只优化准确率的模型会答错真正的问题。</p>
         </div>
         <div class="summary-card">
           <h3 class="summary-card-title">解决方案</h3>
@@ -171,7 +171,7 @@
         </div>
         <div class="summary-card">
           <h3 class="summary-card-title">商业价值</h3>
-          <p class="summary-card-content">抓住 74.9% 的违约，总错误成本 $2.63M，比全批放款的 $3.58M 低 26.5%；损失集中在期限与低等级尾部，给出可执行的收紧点。</p>
+          <p class="summary-card-content">抓住 74.9% 的违约，总成本 $2.63M 比全批放款的 $3.58M 低 26.5%。但一条 60 个月期限规则就拿走这降幅的大头，模型多买的是违约覆盖与产品线内排序。</p>
         </div>
       </div>
     </section>
@@ -190,6 +190,7 @@
               <li><a href="#concentration" class="toc-link" data-section="concentration">损失集中在哪里</a></li>
               <li><a href="#models" class="toc-link" data-section="models">模型对比</a></li>
               <li><a href="#threshold" class="toc-link" data-section="threshold">阈值即业务决策</a></li>
+              <li><a href="#baseline" class="toc-link" data-section="baseline">规则基线与复核负担</a></li>
               <li><a href="#shap" class="toc-link" data-section="shap">SHAP 归因</a></li>
               <li><a href="#recommendations" class="toc-link" data-section="recommendations">建议与局限</a></li>
             </ul>
@@ -210,14 +211,14 @@
 
             <div class="space-y-6">
               <div class="contact-info-card">
-                <p class="subtitle mb-4">对 9,004 笔已结清 LendingClub 贷款的分析，回答三个问题：仅用放款时可得的信息，违约能预测到什么程度；两类错误代价不同时，决策阈值该定在哪里；真正驱动违约的是什么。最终模型是 LightGBM，只用放款时特征，按成本调阈值——它的价值不在排行榜分数，而在把预期损失压到最低。</p>
+                <p class="subtitle mb-4">这份数据里 9,004 笔已结清的 LendingClub 贷款，有 16.8% 以坏账收场。审批模型的两种错误并不等价：漏判一笔违约平均损失 $9,437 本金，误拒一笔好贷平均放弃 $2,243 利息，成本比 4.2:1 直接从还款记录里算出。三个分类器在同一套协议下训练，最终按最低折外成本选中 LightGBM——它的价值不在排行榜分数，而在把预期损失压到最低。</p>
 
                 <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">四个发现</h3>
                 <ul class="list-disc list-inside space-y-3 subtitle mb-6">
-                  <li><strong>贷款期限是单一最强杠杆。</strong>60 个月期违约率 32.4%，是 36 个月期 11.3% 的近三倍，期限在 SHAP 排序里也遥遥领先。</li>
-                  <li><strong>违约随等级陡增且集中。</strong>违约率从 A 级 7.4% 单调升到 G 级 52.9%；E 到 G 级仅占 9.4% 的贷款，却贡献全部违约的 22.0%。</li>
-                  <li><strong>成本最优阈值是 0.16，不是 0.5。</strong>漏判成本 $9,437 是误拒成本 $2,243 的 4.2 倍，按这个不对称调阈值能抓住四分之三的违约。</li>
-                  <li><strong>利率与利用率都单调抬高风险。</strong>利用率没有保护性中间带，最高一档违约率达 23.7%；收入越高则风险越低。</li>
+                  <li><strong>贷款期限是单一最强杠杆。</strong>60 个月期违约率 32.4%，是 36 个月期 11.3% 的近三倍；期限在 SHAP 排序里也遥遥领先。</li>
+                  <li><strong>一条期限规则就拿走 26.5 个百分点降幅里的 24.5 个。</strong>只拒 60 个月期限这一条纸面规则已省 24.5%，模型多买到的是违约覆盖（74.9% 对 48.0%）与产品线内排序。</li>
+                  <li><strong>守住 74.9% 召回，要送 46.9% 的申请进人工复核。</strong>召回下限是政策旋钮，价格是复核容量；阈值放到 0.20，队列降到 37.1%，召回让到 63.3%。</li>
+                  <li><strong>省多少钱取决于口径。</strong>扣除违约者已付利息后，降幅从头条的 26.5% 掉到 6.6%——同一份标记名单，两种漏判定价，对外应取净口径这个保守数。</li>
                 </ul>
 
                 <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">结果速览</h3>
@@ -232,23 +233,31 @@
                     <tbody>
                       <tr>
                         <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>分析对象</strong></td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">9,004 笔贷款（违约 1,517 笔，占 16.8%）</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">9,004 笔已结清贷款，16.8% 坏账</td>
+                      </tr>
+                      <tr>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>错误成本</strong></td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">漏判违约 $9,437，误拒好贷 $2,243，比率 4.2:1</td>
                       </tr>
                       <tr>
                         <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>最终模型</strong></td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">LightGBM，仅用放款时特征，按成本调阈值</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">LightGBM，阈值 0.16，按折外成本选定</td>
                       </tr>
                       <tr>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>排序能力（测试集）</strong></td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">ROC-AUC 0.733，PR-AUC 0.372（约 2.2× 基线）</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>违约捕获</strong></td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">74.9%（95% CI 70.5–79.2%），精确率 26.9%</td>
                       </tr>
                       <tr>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>违约捕获率</strong></td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">成本最优阈值 0.16 下 74.9%</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>排序能力</strong></td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">ROC-AUC 0.733（95% CI 0.706–0.760），PR-AUC 0.372</td>
                       </tr>
                       <tr>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>预期损失</strong></td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">比全批放款低 26.5%</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>预期损失降幅</strong></td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">头条口径 26.5%（95% CI 18.8–33.2%）；净口径 6.6%</td>
+                      </tr>
+                      <tr>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>复核负担</strong></td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">46.9% 的申请送入人工复核</td>
                       </tr>
                     </tbody>
                   </table>
@@ -269,8 +278,8 @@
 
             <div class="space-y-8">
               <div class="contact-info-card">
-                <p class="subtitle mb-3">每笔贷款包含贷款属性（金额、期限、利率、分期额、等级）、借款人属性（收入、就业年限、住房、地区）、信用记录属性（利用率、账户数、查询次数），以及 Fully Paid / Charged Off 标签。数据质量高：无重复行，261,000 个单元格里 319 个缺失（0.1%），只集中在 <code>emp_length</code> 和 <code>revol_util</code> 两列。</p>
-                <p class="subtitle">数据里还有还款结果列（<code>total_pymnt</code>、<code>total_rec_prncp</code>、<code>total_rec_int</code>、<code>out_prncp</code>）。这些在还款期间或之后才记录，放款时未知——因此不作为特征，只用于估计两类错误的成本。</p>
+                <p class="subtitle mb-3">数据是 LendingClub 公开放贷数据的清洗子集：9,004 笔 2012 至 2015 年放款、现已结清的贷款，共 29 列。每笔贷款的结局都已落定，Fully Paid 或 Charged Off，成本标定正是靠这一点才成立。清洗工作量很小：无重复行，缺失仅 319 格（占 0.1%），集中在就业年限与循环额度利用率两列。</p>
+                <p class="subtitle">数据里还有还款结果列（<code>total_pymnt</code>、<code>total_rec_prncp</code>、<code>total_rec_int</code>、<code>out_prncp</code>）。这些在还款期间或之后才记录，放款时未知——因此只做标定成本这一件事，做完就在特征进模型之前被整体剔除。</p>
               </div>
 
               <div class="note note--process">
@@ -301,7 +310,7 @@
 
             <div class="space-y-8">
               <div class="contact-info-card">
-                <p class="subtitle mb-4">除 <code>open_acc</code> 外，每个数值特征都以高显著性（p &lt; 0.001）区分违约与还清，但在 9,000 行上显著性太容易达到，所以有用的筛子是效应量。按 Cohen's d，利率是唯一的大效应，循环利用率为中等，其余都很小。</p>
+                <p class="subtitle mb-4">除 <code>open_acc</code> 外，每个数值特征都以高显著性（p &lt; 0.001）区分违约与还清，但在 9,000 行上显著性太容易达到，所以有用的筛子是效应量。按 Cohen's d，利率是唯一的大效应，循环利用率为中等，其余都很小，在册账户数则完全没有单变量信号。</p>
                 <div class="overflow-x-auto">
                   <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
                     <thead>
@@ -317,7 +326,7 @@
                         <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>利率</strong></td>
                         <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">11.63</td>
                         <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">14.59</td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.73</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>0.73</strong></td>
                       </tr>
                       <tr>
                         <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">循环利用率</td>
@@ -338,13 +347,13 @@
                         <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">−0.19</td>
                       </tr>
                       <tr>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">6 个月查询次数</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">6 个月征信查询</td>
                         <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.82</td>
                         <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">1.02</td>
                         <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.19</td>
                       </tr>
                       <tr>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">DTI</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">债务收入比</td>
                         <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">13.73</td>
                         <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">14.70</td>
                         <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.15</td>
@@ -354,25 +363,25 @@
                 </div>
               </div>
 
-              <p class="subtitle">分类拆解比任何单一数字都更清楚。违约率从 A 级（7.4%）单调升到 G 级（52.9%），60 个月期违约率接近 36 个月期的三倍。</p>
+              <p class="subtitle">分类拆解比任何单一数字都更清楚。信用等级与违约率单调同行，从 A 档的 7.4% 一路爬到 G 档的 52.9%；期限是全数据最锋利的一刀，60 个月贷款违约率 32.4%，36 个月只有 11.3%。</p>
 
               <figure class="figure-editorial">
                 <img src="figures/default_rate_by_categorical.png" alt="分类特征违约率" loading="lazy" decoding="async" />
-                <figcaption>分类特征违约率——期限、等级、用途、收入验证状态下的违约率拆解。60 个月期与低等级尾部是两个最大的裂口。</figcaption>
+                <figcaption>分类特征下的违约率——期限、等级、用途、收入验证状态下的拆解。60 个月期与低等级尾部是两个最大的裂口。</figcaption>
               </figure>
 
               <div class="note note--insight">
                 <div class="note__label">Counterintuitive · 已验证收入反而更高危</div>
                 <div class="note__body">
-                  <p>已验证收入的贷款违约率（19.4%）反而<strong>高于</strong>未验证的（14.4%）。这个反直觉结果反映的是谁被要求验证，而非验证本身的因果作用——验证状态不该被当成安全信号来读。这是一个典型的选择效应。</p>
+                  <p>收入验证反着走：已验证借款人违约率 19.4%，高于未验证的 14.4%。平台向看起来有风险的申请人索要验证，这个字段记录的是怀疑本身，不能当放行信号读——这是一个典型的选择效应。</p>
                 </div>
               </div>
 
-              <p class="subtitle">把连续驱动因素分桶，看到的是单调关系而非阈值式关系。违约率随循环利用率稳步上升，从 20% 以下的 10.5% 升到 80% 以上的 23.7%，中间没有任何回落，所以不存在保护性的「中等利用率」区间。收入方向相反，从 4 万美元以下的 20.5% 降到 10 万美元以上的 11.1%。</p>
+              <p class="subtitle">把连续驱动因素分桶，能看到关系的形状。违约率随利用率一路上行：20% 以下的桶 10.5%，80% 以上的桶 23.7%，中间没有任何回落，不存在「适度使用更安全」的保护带。收入反向，$40K 以下 20.5%，$100K 以上 11.1%。</p>
 
               <figure class="figure-editorial">
-                <img src="figures/default_rate_by_band.png" alt="分桶违约率" loading="lazy" decoding="async" />
-                <figcaption>分桶违约率——利用率与违约率单调正相关（无保护性中间带），收入与违约率单调负相关。</figcaption>
+                <img src="figures/default_rate_by_band.png" alt="风险分桶下的违约率" loading="lazy" decoding="async" />
+                <figcaption>风险分桶下的违约率——利用率与违约率单调正相关（无保护性中间带），收入与违约率单调负相关。</figcaption>
               </figure>
 
               <div class="figure-grid">
@@ -399,11 +408,11 @@
             </div>
 
             <div class="space-y-8">
-              <p class="subtitle">损失集中在哪里，看占比比看违约率更清楚：E 到 G 级仅占 9.4% 的贷款，却贡献了全部违约的 22.0%。对这条又薄又高危的尾部收紧政策，能不成比例地削掉损失。</p>
+              <p class="subtitle">数违约的笔数比只看违约率更能指向政策：E 至 G 三档只占 9.4% 的贷款，却贡献 22.0% 的违约，这条尾巴又细又贵。对它收紧政策，能不成比例地削掉损失。地理上，剔除不足 50 笔的州之后，内华达以 27.4% 领跑，对照组合均值 16.8%。</p>
 
               <figure class="figure-editorial">
                 <img src="figures/grade_and_state_concentration.png" alt="等级贡献与地区集中度" loading="lazy" decoding="async" />
-                <figcaption>等级贡献与地区集中度——低等级（E–G）以 9.4% 的贷款量贡献 22.0% 的违约；地区风险分数为模型补充了地理维度的增量信号。</figcaption>
+                <figcaption>各等级贷款占比对违约占比，以及分州违约率——低等级（E–G）以 9.4% 的贷款量贡献 22.0% 的违约。</figcaption>
               </figure>
 
               <div class="grid md:grid-cols-2 gap-6">
@@ -431,7 +440,7 @@
 
             <div class="space-y-8">
               <div class="contact-info-card">
-                <p class="subtitle">逻辑回归、随机森林、LightGBM 走同一套协议：剔除结果列；75/25 分层划分；高基数类别（<code>addr_state</code>、<code>purpose</code>）用交叉拟合目标编码器，只从训练折学习；SMOTE 放进流水线，合成样本绝不泄漏进验证；超参数用 5 折网格搜索按 average precision 选。所有从数据学习的步骤都在交叉验证内拟合，阈值在 out-of-fold 概率上确定，测试集因此保持为未被触碰的最终估计。</p>
+                <p class="subtitle">逻辑回归、随机森林、LightGBM 走同一套协议：剔除结果列；75/25 分层划分；高基数类别（<code>addr_state</code>、<code>purpose</code>）用交叉拟合目标编码器，只从训练折学习；SMOTE 放进流水线，合成样本绝不泄漏进验证；超参数用网格搜索按 average precision 选。训练集 5 折折外（OOF）预测既是调阈值的诚实概率，又能对照测试分数查过拟合——三个模型的测试分数都略高于折外，没有谁在背自己的折。</p>
               </div>
 
               <div class="overflow-x-auto">
@@ -445,7 +454,7 @@
                       <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">F2</th>
                       <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">ROC-AUC</th>
                       <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">PR-AUC</th>
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">总成本</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">测试成本</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -453,11 +462,11 @@
                       <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>LightGBM</strong></td>
                       <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.16</td>
                       <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">74.9%</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">26.9%</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>26.9%</strong></td>
                       <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.552</td>
                       <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.733</td>
                       <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.372</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">$2,627,872</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>$2,627,872</strong></td>
                     </tr>
                     <tr>
                       <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">逻辑回归</td>
@@ -465,16 +474,16 @@
                       <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">77.0%</td>
                       <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">26.4%</td>
                       <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.557</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.744</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.387</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>0.744</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>0.387</strong></td>
                       <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">$2,648,817</td>
                     </tr>
                     <tr>
                       <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">随机森林</td>
                       <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.19</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">79.9%</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>79.9%</strong></td>
                       <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">25.4%</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.559</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>0.559</strong></td>
                       <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.733</td>
                       <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.372</td>
                       <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">$2,715,463</td>
@@ -483,17 +492,24 @@
                 </table>
               </div>
 
-              <p class="subtitle">召回率、精确率、F2 按各模型的成本最优阈值计算；ROC-AUC 和 PR-AUC 与阈值无关。PR-AUC 约 0.37，相对 0.168 的无技能基线是约 2.2 倍提升，是仅用放款时信息应有的真实水平。</p>
+              <p class="subtitle">召回率、精确率、F2 按各模型的成本最优阈值计算；ROC-AUC 和 PR-AUC 与阈值无关。PR-AUC 约 0.37，相对 0.168 的无技能基线是约 2.2 倍提升，是仅用放款时信息应有的真实水平。四个排序指标列全部由逻辑回归领先。</p>
 
               <figure class="figure-editorial">
                 <img src="figures/pr_curves.png" alt="精确率-召回率曲线" loading="lazy" decoding="async" />
-                <figcaption>三模型精确率-召回率曲线——三条曲线几乎重叠，PR-AUC 约 0.37 是无技能基线 0.168 的约 2.2 倍。</figcaption>
+                <figcaption>测试集精确率-召回率曲线——三条曲线几乎重叠，PR-AUC 约 0.37 是无技能基线 0.168 的约 2.2 倍。</figcaption>
               </figure>
 
               <div class="note note--evidence">
-                <div class="note__label">Model Selection · 没有模型全面占优</div>
+                <div class="note__label">Model Selection · 两个模型统计不可分</div>
                 <div class="note__body">
-                  <p>逻辑回归排序指标最好，随机森林召回最高，LightGBM 成本最低、精确率最高。三者成本相差不到 1%，所以选择归结到业务目标：LightGBM 按最低 OOF 成本入选，逻辑回归是站得住脚的可解释替代。</p>
+                  <p>逻辑回归排序指标最好，随机森林召回最高，LightGBM 成本最低、精确率最高，三者成本相差不到 1%。bootstrap 检验下，LightGBM 与逻辑回归 $20,134 的平均成本差，区间横跨 [−$121,482, +$156,074]，LightGBM 只在 60.2% 的重采样中更便宜——两个模型在成本上统计不可分，怎么选是运营问题。LightGBM 按最低 OOF 成本入选，逻辑回归是站得住脚的可解释替代。</p>
+                </div>
+              </div>
+
+              <div class="note note--process">
+                <div class="note__label">Ablation · SMOTE 不承重</div>
+                <div class="note__body">
+                  <p>16.8% 的正类率下重采样不承重：保持超参数不变、只删 SMOTE 步骤重跑，折外指标最多动 0.010，方向还不一致（随机森林 PR-AUC 0.337→0.347，LightGBM 0.342→0.337，逻辑回归基本持平）。流水线对不平衡的适配发生在决策阈值上，SMOTE 留下只是因为超参数带着它调出来。</p>
                 </div>
               </div>
             </div>
@@ -510,62 +526,184 @@
             </div>
 
             <div class="space-y-8">
-              <p class="subtitle">默认 0.5 阈值最小化的是分类错误，但两类错误代价并不相等。漏判违约的代价是误报的 4.2 倍，成本最小的切点远在 0.5 以下。阈值在 out-of-fold 概率上确定，附带召回率不低于 75% 的约束，然后对测试集只应用一次。</p>
+              <p class="subtitle">默认 0.5 阈值最小化的是分类错误，但两类错误代价并不相等。对每个模型，在折外预测上扫描 0.05 至 0.94 的阈值网格，成本函数为 FN 数乘 $9,437 加 FP 数乘 $2,243，约束条件是至少抓住 75% 的违约——漏掉四分之一以上违约的违约预测系统，成本再好看也没做好本职。模型按最低折外成本选出，测试集全程不参与选择、只读一次。</p>
 
               <figure class="figure-editorial">
                 <img src="figures/threshold_tuning.png" alt="阈值调优曲线" loading="lazy" decoding="async" />
-                <figcaption>阈值调优——总期望成本随阈值变化的曲线在 0.16 附近取到最小值，这才是成本意义上的最优切点。</figcaption>
+                <figcaption>三个模型的召回、精确率与成本随阈值变化——总期望成本在 0.16 附近取到最小值（逻辑回归 0.27、随机森林 0.19），全部远低于默认的 0.5。</figcaption>
               </figure>
 
               <figure class="figure-editorial">
                 <img src="figures/threshold_confusion_roc.png" alt="阈值调优、混淆矩阵与 ROC" loading="lazy" decoding="async" />
-                <figcaption>阈值调优、混淆矩阵与 ROC 三联图——在 0.16 下抓住 74.9% 的违约，代价是接受较多假阳性。</figcaption>
+                <figcaption>默认与优化阈值的成本对比、混淆矩阵、ROC 曲线——在 0.16 下抓住 74.9% 的违约，代价是接受较多假阳性。</figcaption>
               </figure>
 
               <div class="contact-info-card">
-                <p class="subtitle">在阈值 0.16 下，LightGBM 抓住测试集 74.9% 的违约，精确率 26.9%，总错误成本约 $2.63M。全批放款（每笔违约都变成损失）成本 $3.58M，所以模型把预期损失压低了 <strong>26.5%</strong>。低精确率是有意为之：在 4.2:1 的成本比值下，多标记一些好贷以抓住更多违约是更便宜的错误——被标记的贷款进人工复核队列，而非直接拒绝。</p>
+                <p class="subtitle">在阈值 0.16 下，LightGBM 抓住测试集 74.9% 的违约，精确率 26.9%，总错误成本 $2,627,872。全批放款成本 $3,576,469，所以模型把预期损失压低了 <strong>26.5%</strong>。低精确率是有意为之：在 4.2:1 的成本比值下，多标三笔好贷换一笔违约是更便宜的错误——被标记的贷款进人工复核队列，而非直接拒绝。</p>
+              </div>
+
+              <div class="note note--evidence">
+                <div class="note__label">Uncertainty · Bootstrap 95% CI（×2,000）</div>
+                <div class="note__body">
+                  <p>头条数字全部来自一个 2,251 笔的测试集，对预测做 2,000 次有放回重采样、不重训，给每个数配上宽度：ROC-AUC 0.733 [0.706, 0.760]；PR-AUC 0.372 [0.325, 0.422]；召回 74.9% [70.5%, 79.2%]；精确率 26.9% [24.3%, 29.5%]；相对全批准的成本降幅 26.5% [18.8%, 33.2%]。没有一个区间算窄，也没有一个跨过会改变决策的水平。</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 规则基线与复核负担 -->
+          <section id="baseline" class="section-padding section--editorial" data-section-num="06">
+            <div class="section-header">
+              <div class="section-eyebrow">
+                <span class="section-num">06</span>
+                <span class="section-kicker">Rule Baselines &amp; Review Burden</span>
+              </div>
+              <h2 class="section-title">规则基线与复核负担</h2>
+            </div>
+
+            <div class="space-y-8">
+              <p class="subtitle">26.5% 的对照物是「全批准」，但没有放贷机构真的全批。更公平的对照是审批员不用模型也能执行的规则：E 至 G 档全拒，或 60 个月期限全拒。同一套成本函数、同一个测试集打分，仅期限一条规则就拿回了模型收益的大头。</p>
+
+              <div class="overflow-x-auto">
+                <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
+                  <thead>
+                    <tr class="bg-gray-100 dark:bg-gray-700/30">
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">政策</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">标记率</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">召回</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">测试成本</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">降幅</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">全批准</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.0%</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.0%</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">$3,576,469</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.0%</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">拒 E 至 G 档</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">9.2%</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">21.9%</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">$3,071,332</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">14.1%</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">拒 60 个月期限</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">24.7%</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">48.0%</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">$2,700,037</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">24.5%</td>
+                    </tr>
+                    <tr class="bg-green-50 dark:bg-green-900/20">
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>LightGBM（阈值 0.16）</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">46.9%</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>74.9%</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>$2,627,872</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>26.5%</strong></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <figure class="figure-editorial">
+                <img src="figures/policy_baseline_costs.png" alt="单变量规则对阵模型" loading="lazy" decoding="async" />
+                <figcaption>单变量规则对阵模型——一条写在纸上的期限规则就能拿到 24.5 个百分点，模型 26.5 个百分点里的大头。</figcaption>
+              </figure>
+
+              <p class="subtitle">24.5 个百分点：模型多买到的是 2 个百分点的成本、26.9 个百分点的召回（74.9% 对 48.0%），以及在 60 个月产品线内部排序风险的能力，代替一刀切砍掉整条产品线。只按这套成本函数打分，简单规则完全可以辩护；要违约覆盖度、要继续做 60 个月贷款，就需要模型的排序。</p>
+
+              <p class="subtitle">被标记的贷款要交给人来审，标记率本身就是运营成本。测试集 2,251 笔申请标记 1,056 笔（46.9%），换来 74.9% 的违约捕获——将近一半的进件落到复核台上，只有复核便宜或高度辅助时才行得通，而它正是 0.75 召回下限的直接价格。</p>
+
+              <figure class="figure-editorial">
+                <img src="figures/review_queue_flag_rate.png" alt="标记率与召回随阈值变化" loading="lazy" decoding="async" />
+                <figcaption>标记率与召回随阈值变化——75% 召回下限把标记率钉在 46.9%；放宽阈值到 0.20，队列缩到 37.1%，召回让到 63.3%。</figcaption>
+              </figure>
+
+              <div class="overflow-x-auto">
+                <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
+                  <thead>
+                    <tr class="bg-gray-100 dark:bg-gray-700/30">
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">阈值</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">标记率</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">召回</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="bg-green-50 dark:bg-green-900/20">
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>0.16</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">46.9%</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">74.9%</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.20</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">37.1%</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">63.3%</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.25</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">26.7%</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">51.1%</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.30</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">20.4%</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">42.6%</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="subtitle text-sm" style="opacity:.8;">第一行是测试集操作点，其余为折外读数。</p>
+
+              <div class="note note--caveat">
+                <div class="note__label">Caveat · 复核容量是硬约束时，定阈值的是这张表</div>
+                <div class="note__body">
+                  <p>75% 的召回下限是政策输入，不是估计值，任何重新谈判都从这条曲线出发。如果复核容量才是硬约束，定阈值的就是这张表，不是成本函数。</p>
+                </div>
               </div>
             </div>
           </section>
 
           <!-- SHAP 归因 -->
-          <section id="shap" class="section-padding section--editorial" data-section-num="06">
+          <section id="shap" class="section-padding section--editorial" data-section-num="07">
             <div class="section-header">
               <div class="section-eyebrow">
-                <span class="section-num">06</span>
+                <span class="section-num">07</span>
                 <span class="section-kicker">Why Loans Default</span>
               </div>
               <h2 class="section-title">贷款为什么违约：SHAP 归因</h2>
             </div>
 
             <div class="space-y-8">
-              <p class="subtitle">SHAP 给每个特征在每次预测里一个带符号的贡献，模型的判断既能整体读，也能逐笔读。归因在 LightGBM 上以原始特征量纲计算，每个方向都与 EDA 对照。</p>
+              <p class="subtitle">审批员解释不了的分数，到被拒的申请人面前是站不住的，所以对选定的 LightGBM 在原始单位特征上做 SHAP 归因。按平均绝对 SHAP 排序：期限 0.453 居首，年收入 0.251、等级 0.211、近期查询 0.179、用途 0.157 随后。四个衍生特征有两个进前八：等级期限交互 0.142，财务压力指数 0.111。</p>
 
               <figure class="figure-editorial">
                 <img src="figures/shap_summary.png" alt="SHAP 全局归因" loading="lazy" decoding="async" />
-                <figcaption>SHAP 全局归因——头部驱动因素是贷款期限、年收入、等级、近期查询次数、用途；人工构造的 financial_stress_index 与 grade_term_risk 均进前六。</figcaption>
+                <figcaption>SHAP 特征影响——头部驱动因素是贷款期限、年收入、等级、近期查询次数、用途；人工构造的 financial_stress_index 与 grade_term_risk 均进前八。</figcaption>
               </figure>
 
               <div class="note note--evidence">
                 <div class="note__label">Direction Check · 平均带符号 SHAP 会误导</div>
                 <div class="note__body">
-                  <p><strong>利率是抬高风险的。</strong>它的平均带符号 SHAP 接近零，但这个统计量掩盖了方向。dependence 图显示明显的正斜率（利率与其 SHAP 值相关 +0.55），与 EDA 相关 0.265 和大的 Cohen's d 一致。平均带符号 SHAP 是读方向的错误统计量，dependence 关系才是对的。</p>
-                  <p><strong>利用率没有保护性中间带。</strong>利用率越高，风险全程抬升，与单调分桶图一致。收入越高风险越低（相关 −0.83），等级越差风险越高（+0.91）。</p>
+                  <p><strong>利率是抬高风险的。</strong>它的平均带符号 SHAP 几乎为零，读起来像「没有影响」，但这个统计量掩盖了方向。依赖图说的是另一回事：利率与自身 SHAP 值的相关是 +0.55，利率越高预测风险越高，与第 02 节 d = 0.73 的差距一致；高利率贷款上的正推力和低利率贷款上的负推力在均值里刚好抵消。</p>
+                  <p><strong>利用率没有保护性中间带。</strong>利用率全程推高风险，与没有保护带的形状对上。收入（−0.83）与等级（+0.91）表现如预期，压力指数为正（+0.75）。</p>
                 </div>
               </div>
 
               <figure class="figure-editorial">
                 <img src="figures/shap_dependence.png" alt="SHAP dependence 方向检查" loading="lazy" decoding="async" />
-                <figcaption>SHAP dependence 方向检查——利率、利用率、收入、等级的逐点依赖关系，方向与 EDA 完全一致。</figcaption>
+                <figcaption>头部驱动因素的 SHAP 依赖散点——利率、利用率、收入、等级的逐点依赖关系，方向与 EDA 完全一致。</figcaption>
               </figure>
             </div>
           </section>
 
           <!-- 建议与局限 -->
-          <section id="recommendations" class="section-padding section--editorial" data-section-num="07">
+          <section id="recommendations" class="section-padding section--editorial" data-section-num="08">
             <div class="section-header">
               <div class="section-eyebrow">
-                <span class="section-num">07</span>
+                <span class="section-num">08</span>
                 <span class="section-kicker">Actions &amp; Limits</span>
               </div>
               <h2 class="section-title">建议与局限</h2>
@@ -585,7 +723,7 @@
                     <tr>
                       <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>按成本最优阈值打分</strong></td>
                       <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">新申请过 LightGBM 模型，阈值 0.16；被标记贷款进人工复核，不直接拒绝。</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">抓住 74.9% 的违约，预期损失比全批放款低 26.5%。</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">抓住 74.9% 的违约，预期损失比全批放款低 26.5%（净口径 6.6%）。</td>
                     </tr>
                     <tr>
                       <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>长期限贷款重新定价或设限</strong></td>
@@ -600,22 +738,59 @@
                     <tr>
                       <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>别把验证当放行</strong></td>
                       <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">不因收入已验证就降低审查。</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">已验证贷款违约率更高（19.4% vs 14.4%）。</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">已验证贷款违约率更高（19.4% vs 14.4%），是选择效应。</td>
                     </tr>
                   </tbody>
                 </table>
               </div>
 
+              <p class="subtitle">前文每个美元数字都压在同一个标定选择上：漏判一笔违约记 $9,437 本金损失。可违约者坏账前也付过利息，记进来后净漏判成本是 $6,684，成本比从 4.2:1 变成 3.0:1。用净口径重推决策，标记名单没有任何变化、最优阈值原地停在 0.16；变的是能宣称省下多少，从 26.5% 掉到 6.6%。</p>
+
+              <div class="overflow-x-auto">
+                <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
+                  <thead>
+                    <tr class="bg-gray-100 dark:bg-gray-700/30">
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">口径</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">FN 成本</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">成本比</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">最优阈值</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">测试降幅</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">头条口径：未收回本金</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">$9,437</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">4.2:1</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.16</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">26.5%</td>
+                    </tr>
+                    <tr class="bg-green-50 dark:bg-green-900/20">
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>净口径：本金减已收利息</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">$6,684</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">3.0:1</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.16</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>6.6%</strong></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <figure class="figure-editorial">
+                <img src="figures/cost_ratio_sensitivity.png" alt="假想成本比扫描下的最优阈值与降幅" loading="lazy" decoding="async" />
+                <figcaption>假想成本比扫描下的最优阈值与降幅——把比值从 3:1 扫到 5:1，阈值全程钉在 0.16（召回下限先于成本比生效），可宣称的降幅从 7.0% 拉到 34.2%。</figcaption>
+              </figure>
+
               <div class="note note--caveat">
                 <div class="note__label">Limits · 局限</div>
                 <div class="note__body">
-                  <p>这是一份单一横截面的已结清贷款，没有放款日期，无法做时间维度的验证，<code>credit_history_years</code> 是用固定参考日期算的近似值。利率本身已嵌入 LendingClub 自己的风险定价，所以它的一部分预测力反映的是平台在放款时编码进去的信息，而非独立的借款人信号。成本数字用的是组合平均的 FN/FP 成本；生产系统会对每笔贷款的敞口单独定价。</p>
+                  <p>这是一份没有放款日期的已结清贷款横截面：做不了时间维度的验证，<code>credit_history_years</code> 是用固定参考日期算的近似值。利率本身已嵌入 LendingClub 自己的风险定价，所以它的一部分预测力反映的是平台在放款时编码进去的信息，而非独立的借款人信号。成本数字用的是组合平均的 FN/FP 成本（口径敏感性见上）；生产系统会对每笔贷款的敞口单独定价。仅用申请时点数据，这个组合上 0.73 至 0.74 的 ROC-AUC 就是现实的天花板；类似数据上宣称远高于此的结果，值得先怀疑泄漏。</p>
                 </div>
               </div>
 
               <div class="contact-info-card">
                 <h3 class="text-xl font-semibold mb-3" style="color: var(--dark);">复现说明</h3>
-                <p class="subtitle">notebook 可在本地完整重跑（<code>uv run jupyter nbconvert --to notebook --execute</code>）。随机种子全程固定为 42，图表输出到 <code>figures/</code>。</p>
+                <p class="subtitle">notebook 可在本地完整重跑（<code>uv run jupyter nbconvert --to notebook --execute</code>）。随机种子全程固定为 42，图表输出到 <code>figures/</code>。本报告并存两套成本口径：头条标定下省 26.5%，计入违约者已付利息的净口径下省 6.6%——两套口径下的标记名单完全相同，对外引用请取净口径。</p>
               </div>
             </div>
           </section>
@@ -638,7 +813,7 @@
           return false;
         ">
           <h3 class="related-project-title">电商首单欺诈检测</h3>
-          <p class="related-project-description">另一道成本-阈值题：召回被数据锁死在 52%</p>
+          <p class="related-project-description">另一道成本-阈值题：一条单规则复现模型抓捕，召回被数据锁死在 52%</p>
           <div class="related-project-link">
             <span>查看详情</span>
             <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>
@@ -650,7 +825,7 @@
           return false;
         ">
           <h3 class="related-project-title">银行客户流失预测</h3>
-          <p class="related-project-description">F2 阈值调优与 C*≈3.3 盈亏平衡成本比</p>
+          <p class="related-project-description">F2 阈值调优与 C*≈3.7 盈亏平衡成本比</p>
           <div class="related-project-link">
             <span>查看详情</span>
             <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>

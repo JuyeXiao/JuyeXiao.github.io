@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bank Customer Churn: Prediction and Key Drivers - Data Poetics</title>
-  <meta name="description" content="A machine learning analysis of 10,000 retail banking customers: XGBoost+SMOTE reaches ROC-AUC 0.876 / PR-AUC 0.727, F2 threshold tuning lifts churn capture from 61% to 85%, with a C*≈3.3 break-even cost ratio." />
+  <meta name="description" content="A machine learning analysis of 10,000 retail banking customers: XGBoost+SMOTE reaches ROC-AUC 0.876 (95% CI [0.858, 0.892]) / PR-AUC 0.727, the threshold is tuned to 0.20 on out-of-fold training predictions, lifting churn capture from 61% to 87%, with a C*≈3.7 break-even cost ratio." />
 
   <!-- Same as homepage: Tailwind / fonts / icons / site styles -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="../../assets/css/index.css" />
   <link rel="stylesheet" href="../../assets/css/project.css" />
 
-  <!-- Code highlighting + charts (common on detail pages) -->
+  <!-- Syntax highlight + chart lib (used on detail pages) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
@@ -97,17 +97,17 @@
             <span class="section-kicker">Case Study · Customer Analytics &amp; Retention</span>
           </div>
           <h1 class="hero-title mt-2">Bank Customer Churn: Prediction and Key Drivers</h1>
-          <p class="subtitle mt-4 max-w-xl">One in five customers leaves. Who churns, why, and what the bank can do before it happens — and why moving the threshold from 0.5 to 0.23 pays off.</p>
-          <div class="reading-time">~13 min read<span class="sep">·</span>15 charts</div>
+          <p class="subtitle mt-4 max-w-xl">One in five customers in this 10,000-customer snapshot has already churned. Rank each customer by risk, explain every prediction — and see why moving the threshold from 0.5 to 0.20 pays off.</p>
+          <div class="reading-time">~14 min read<span class="sep">·</span>17 figures</div>
 
           <div class="hero-stats">
             <div class="hero-stat">
               <div class="hero-stat__num">10K</div>
-              <div class="hero-stat__label">retail customers (20.4% churn)</div>
+              <div class="hero-stat__label">retail customers (churn rate 20.4%)</div>
             </div>
             <div class="hero-stat">
-              <div class="hero-stat__num">85%</div>
-              <div class="hero-stat__label">churn caught @ threshold 0.23</div>
+              <div class="hero-stat__num">87%</div>
+              <div class="hero-stat__label">churn caught @ threshold 0.20</div>
             </div>
             <div class="hero-stat">
               <div class="hero-stat__num">0.876</div>
@@ -136,17 +136,17 @@
             <li>
               <span class="hero-stack__num">03</span>
               <span class="hero-stack__name">F2 threshold tuning</span>
-              <span class="hero-stack__desc">0.5 → 0.23, churn capture 61% → 85%</span>
+              <span class="hero-stack__desc">Selected at 0.20 on out-of-fold training predictions, capture 61% → 87%</span>
             </li>
             <li>
               <span class="hero-stack__num">04</span>
-              <span class="hero-stack__name">Break-even analysis</span>
-              <span class="hero-stack__desc">No invented costs — only the ratio C*≈3.3</span>
+              <span class="hero-stack__name">Break-even + bootstrap CI</span>
+              <span class="hero-stack__desc">No invented costs — only the ratio C*≈3.7; headline numbers carry 95% intervals</span>
             </li>
             <li>
               <span class="hero-stack__num">05</span>
-              <span class="hero-stack__name">SHAP three-way cross-check</span>
-              <span class="hero-stack__desc">SHAP × RF impurity × XGB gain agree on top features</span>
+              <span class="hero-stack__name">SHAP triangulated</span>
+              <span class="hero-stack__desc">SHAP × RF impurity × XGB gain agree on the top features</span>
             </li>
           </ol>
           <div class="hero-stack__foot">Python · pandas · scikit-learn · xgboost · imbalanced-learn · shap</div>
@@ -159,20 +159,20 @@
       <div class="grid md:grid-cols-3 gap-6">
         <div class="summary-card">
           <h3 class="summary-card-title">The Challenge</h3>
-          <p class="summary-card-content">20.4% of customers churn, and the two errors are unequal: missing a churner loses the whole relationship, a false alarm costs one retention offer.</p>
+          <p class="summary-card-content">20.4% of customers have churned, and replacing a lost customer costs more than keeping one. A miss forfeits the whole relationship; a false alarm only wastes a retention offer — the two errors cost very differently. The task is to flag the high-risk ones before they leave.</p>
         </div>
         <div class="summary-card">
-          <h3 class="summary-card-title">The Solution</h3>
-          <p class="summary-card-content">Four classifiers tuned under one protocol; XGBoost leads on both ranking metrics, then the decision threshold is set to the F2-optimal 0.23.</p>
+          <h3 class="summary-card-title">The Approach</h3>
+          <p class="summary-card-content">Four classifiers tuned under one protocol; XGBoost leads on both ranking metrics. The decision threshold is then set to the F2-optimal 0.20 on out-of-fold training predictions.</p>
         </div>
         <div class="summary-card">
           <h3 class="summary-card-title">The Value</h3>
-          <p class="summary-card-content">Catches about 432 of 509 test-set churners (85%); as long as a churner is worth more than 3.3 retention offers, the aggressive operating point is cheaper.</p>
+          <p class="summary-card-content">Catches 442 of the 509 test-set churners (87%); as long as a churner is worth more than about 3.7 retention offers, the aggressive operating point is cheaper.</p>
         </div>
       </div>
     </section>
 
-    <!-- Main content: TOC + body -->
+    <!-- Main content: sticky TOC + body -->
     <section id="content" class="section-padding">
       <div class="grid md:grid-cols-12 gap-12">
         <aside class="md:col-span-3">
@@ -180,7 +180,7 @@
             <h3 class="text-xl font-semibold" style="color: var(--dark);">Contents</h3>
             <ul class="mt-4 space-y-2" id="toc-list">
               <li><a href="#summary" class="toc-link" data-section="summary">Executive Summary</a></li>
-              <li><a href="#data" class="toc-link" data-section="data">Data &amp; EDA</a></li>
+              <li><a href="#data" class="toc-link" data-section="data">Data &amp; Churn by Group</a></li>
               <li><a href="#models" class="toc-link" data-section="models">Model Bake-off</a></li>
               <li><a href="#threshold" class="toc-link" data-section="threshold">Threshold Tuning</a></li>
               <li><a href="#cost" class="toc-link" data-section="cost">Break-even Analysis</a></li>
@@ -191,7 +191,7 @@
         </aside>
 
         <div class="md:col-span-9 content-area">
-          <!-- Executive Summary -->
+          <!-- Executive summary -->
           <section id="summary" class="section-padding section--editorial" data-section-num="00">
             <div class="section-header">
               <div class="section-eyebrow">
@@ -203,17 +203,17 @@
 
             <div class="space-y-6">
               <div class="contact-info-card">
-                <p class="subtitle mb-4">A machine learning analysis of 10,000 retail banking customers: who leaves, why, and what the bank can do about it before it happens. The final model is XGBoost with SMOTE, tuned by 5-fold grid search.</p>
+                <p class="subtitle mb-4">In this retail-bank dataset, 20.4% of 10,000 customers have already churned. Replacing a lost customer costs more than keeping one, so the goal is to flag the high-risk ones while there is still time to act. Four classifiers are trained and tuned under one protocol, and XGBoost ranks churners best on the held-out test set. This is a cross-sectional snapshot: it answers who churns, not when.</p>
 
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">Four findings</h3>
+                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">Four drivers</h3>
                 <ul class="list-disc list-inside space-y-3 subtitle mb-6">
-                  <li><strong>Age is the strongest predictor.</strong> Both EDA and SHAP put age first: churn risk rises sharply between 40 and 50; the median churned customer is around 45, the median retained around 35.</li>
-                  <li><strong>Inactivity precedes churn.</strong> <code>IsActiveMember=0</code> is a top-three SHAP driver and the most usable early-warning signal — falling engagement shows up well before the account closes.</li>
-                  <li><strong>More products, more churn.</strong> Customers holding 3 or 4 products churn more, not less (counterintuitive); product count ranks second in all three importance views.</li>
-                  <li><strong>Germany is different.</strong> German customers churn far more often than French or Spanish ones, in both raw counts and model rankings.</li>
+                  <li><strong>Age.</strong> The fifties band churns at 56%, the highest of any age band; risk climbs from 40 and falls back after 65. The median churner is about 45, the median retained customer about 35.</li>
+                  <li><strong>Product count.</strong> Three-product customers churn at 82.7% and all 60 four-product customers left; two products is safest at 7.6%.</li>
+                  <li><strong>Activity.</strong> Inactive customers churn at 26.9% against 14.3% for active ones — nearly double, and a behavior the bank can see early.</li>
+                  <li><strong>Geography.</strong> German customers churn at 32.4%, roughly double France at 16.2% and Spain at 16.7%.</li>
                 </ul>
 
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">At a glance</h3>
+                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">Results at a glance</h3>
                 <div class="overflow-x-auto">
                   <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
                     <thead>
@@ -229,19 +229,23 @@
                       </tr>
                       <tr>
                         <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Final model</strong></td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">XGBoost with SMOTE, tuned by 5-fold grid search</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">XGBoost + SMOTE, tuned by 5-fold grid search on ROC-AUC</td>
                       </tr>
                       <tr>
                         <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Ranking quality (test set)</strong></td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">ROC-AUC 0.876, PR-AUC 0.727</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">ROC-AUC 0.876 (95% CI [0.858, 0.892]), PR-AUC 0.727</td>
                       </tr>
                       <tr>
                         <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Churners caught</strong></td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">85% at the tuned threshold 0.23, versus 61% at 0.5</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">87% at the tuned threshold 0.20, versus 61% at 0.5</td>
                       </tr>
                       <tr>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Main drivers</strong></td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Age, activity status, product count, geography</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Break-even cost ratio</strong></td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">C* = 3.7 (tuned threshold wins once a miss costs more than 3.7 wasted offers)</td>
+                      </tr>
+                      <tr>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Drivers</strong></td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Age, activity, product count, geography</td>
                       </tr>
                     </tbody>
                   </table>
@@ -250,56 +254,119 @@
             </div>
           </section>
 
-          <!-- Data & EDA -->
+          <!-- Data & churn by group -->
           <section id="data" class="section-padding section--editorial" data-section-num="01">
             <div class="section-header">
               <div class="section-eyebrow">
                 <span class="section-num">01</span>
                 <span class="section-kicker">Data &amp; EDA</span>
               </div>
-              <h2 class="section-title">Data &amp; Exploration</h2>
+              <h2 class="section-title">Data &amp; Churn by Group</h2>
             </div>
 
             <div class="space-y-8">
               <div class="contact-info-card">
-                <p class="subtitle">The dataset holds demographic attributes (age, gender, country), account attributes (balance, product count, credit score, tenure, card ownership, activity flag) and the churn label. Quality checks found no missing values and no multicollinearity; identifier columns were dropped. Preprocessing: 75/25 stratified split (<code>random_state=42</code> throughout), one-hot for <code>Geography</code>, ordinal for <code>Gender</code>, standardized numerics — encoders and scaler fitted on the training set only, avoiding leakage.</p>
+                <p class="subtitle">The data comes from the public Kaggle Churn Modeling dataset, 10,000 rows by 14 columns, with no missing values. The target records whether a customer has churned, at 20.4% (2,037 customers); row number, customer id, and surname are identifiers, dropped before modeling. The four-to-one imbalance settles two choices: training needs resampling or class weighting, and evaluation leans on PR-AUC and recall — a model that always predicts "stays" is already 79.6% accurate while catching no churner at all. The data is split 75/25 with stratification (<code>random_state=42</code>), and the encoders and scaler are fit on the training set only, keeping the evaluation data out of every modeling decision.</p>
               </div>
 
-              <figure class="figure-editorial">
-                <img src="figures/target_distribution.png" alt="Churn label distribution" loading="lazy" decoding="async" />
-                <figcaption>Churn label distribution — 2,037 of 10,000 customers churn (20.4%), a moderate class imbalance.</figcaption>
-              </figure>
+              <div class="figure-grid">
+                <figure class="figure-editorial">
+                  <img src="figures/target_distribution.png" alt="Target distribution" loading="lazy" decoding="async" />
+                  <figcaption>Target distribution — 2,037 of 10,000 customers churned (20.4%), a moderate class imbalance.</figcaption>
+                </figure>
+                <figure class="figure-editorial">
+                  <img src="figures/correlation_heatmap.png" alt="Correlation matrix of features" loading="lazy" decoding="async" />
+                  <figcaption>Correlation matrix — feature-to-feature correlations are weak with no multicollinearity; age correlates positively with the target, activity negatively.</figcaption>
+                </figure>
+              </div>
 
-              <figure class="figure-editorial">
-                <img src="figures/countplot_categorical_vs_exited.png" alt="Categorical features vs churn" loading="lazy" decoding="async" />
-                <figcaption>Categorical features vs churn — German customers churn markedly more than French or Spanish; holders of 3–4 products churn more, not less.</figcaption>
-              </figure>
+              <p class="subtitle">The boxplots and countplots compare shapes; the table below adds the exact churn rate and group size behind each driver, giving every claim in the findings its n.</p>
 
-              <figure class="figure-editorial">
-                <img src="figures/boxplot_numerical_vs_exited.png" alt="Numeric features by churn status (boxplots)" loading="lazy" decoding="async" />
-                <figcaption>Numeric features by churn status — age separates most clearly, with a median churned age around 45 vs about 35 for retained.</figcaption>
-              </figure>
+              <div class="overflow-x-auto">
+                <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
+                  <thead>
+                    <tr class="bg-gray-100 dark:bg-gray-700/30">
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Group</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Category</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">Customers</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">Churn rate</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="bg-green-50 dark:bg-green-900/20">
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Geography</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Germany</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">2,509</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>32.4%</strong></td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Geography</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">France / Spain</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">5,014 / 2,477</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">16.2% / 16.7%</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Activity</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Inactive / Active</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">4,849 / 5,151</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>26.9%</strong> / 14.3%</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Products</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">1 / 2</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">5,084 / 4,590</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">27.7% / 7.6%</td>
+                    </tr>
+                    <tr class="bg-green-50 dark:bg-green-900/20">
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Products</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">3 / 4</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">266 / 60</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>82.7%</strong> / <strong>100%</strong></td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Age band</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">40–49 / 50–59 / 60–92</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">2,618 / 869 / 526</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">30.8% / <strong>56.0%</strong> / 27.9%</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Gender</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Female / Male</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">4,543 / 5,457</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">25.1% / 16.5%</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
 
-              <figure class="figure-editorial">
-                <img src="figures/correlation_heatmap.png" alt="Feature correlation heatmap" loading="lazy" decoding="async" />
-                <figcaption>Feature correlation heatmap — no multicollinearity among features; each carries independent information.</figcaption>
-              </figure>
+              <p class="subtitle">Which variable splits the two groups most sharply? Product count. Two products is the safe configuration; more than four in five three-product customers churn, and all 60 four-product customers left — though the 3-plus group is only 3.3% of the base, so the rate is extreme and the volume small. The age profile is non-monotonic: the fifties band at 56.0% is the peak, not "older is riskier."</p>
+
+              <div class="figure-grid">
+                <figure class="figure-editorial">
+                  <img src="figures/boxplot_numerical_vs_exited.png" alt="Boxplots of numerical features by churn" loading="lazy" decoding="async" />
+                  <figcaption>Boxplots of numerical features by churn — age separates the two groups most clearly, the median churner about 45 vs about 35 retained.</figcaption>
+                </figure>
+                <figure class="figure-editorial">
+                  <img src="figures/countplot_categorical_vs_exited.png" alt="Countplots of categorical features by churn" loading="lazy" decoding="async" />
+                  <figcaption>Countplots of categorical features — Germany holds a quarter of customers yet produces about as many churners as France; card ownership carries little signal, activity is the strongest.</figcaption>
+                </figure>
+              </div>
             </div>
           </section>
 
-          <!-- Model Bake-off -->
+          <!-- Model bake-off -->
           <section id="models" class="section-padding section--editorial" data-section-num="02">
             <div class="section-header">
               <div class="section-eyebrow">
                 <span class="section-num">02</span>
                 <span class="section-kicker">Model Bake-off</span>
               </div>
-              <h2 class="section-title">Model Comparison</h2>
+              <h2 class="section-title">Comparing Four Models</h2>
             </div>
 
             <div class="space-y-8">
               <div class="contact-info-card">
-                <p class="subtitle">Four classifiers were tuned under one protocol so their comparison is like for like: each sits in an <code>imblearn</code> pipeline that applies SMOTE to the training folds only, and each was tuned by 5-fold <code>GridSearchCV</code> scoring ROC-AUC.</p>
+                <p class="subtitle">The three baseline models (logistic regression, KNN, random forest) are first read at their untuned cross-validation ROC-AUC, then tuned alongside XGBoost under one protocol: SMOTE sits inside the cross-validation pipeline and touches only the training folds, never the validation folds, keeping the CV scores honest; <code>GridSearchCV</code> runs 5-fold, scored by ROC-AUC. At a 20% imbalance, accuracy rewards models that ignore the minority; ROC-AUC measures how well a model ranks churners ahead of non-churners, independent of any threshold.</p>
               </div>
 
               <div class="overflow-x-auto">
@@ -317,13 +384,13 @@
                   </thead>
                   <tbody>
                     <tr class="bg-green-50 dark:bg-green-900/20">
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>XGBoost with SMOTE</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>XGBoost + SMOTE</strong></td>
                       <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.8544</td>
                       <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.6507</td>
                       <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.6149</td>
                       <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.6323</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.8757</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.7265</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>0.8757</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>0.7265</strong></td>
                     </tr>
                     <tr>
                       <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Random forest</td>
@@ -356,53 +423,53 @@
                 </table>
               </div>
 
-              <p class="subtitle">Precision, recall and F1 are computed at the default 0.5 threshold; ROC-AUC and PR-AUC measure ranking quality independent of any threshold. With 20% churners, a no-skill model scores a PR-AUC near 0.20, so PR-AUC separates the models more sharply than ROC-AUC.</p>
+              <p class="subtitle">Accuracy flatters the majority class; precision, recall, and F1 describe the churn class at the default 0.5 threshold; ROC-AUC and PR-AUC measure threshold-free ranking quality, and PR-AUC is the stricter of the two because it concentrates on the 20% minority, where the no-skill baseline is about 0.20.</p>
 
               <div class="figure-grid">
                 <figure class="figure-editorial">
-                  <img src="figures/roc_curves_all_models.png" alt="ROC curves, all models" loading="lazy" decoding="async" />
-                  <figcaption>ROC curves, all models — XGBoost and random forest clearly lead.</figcaption>
+                  <img src="figures/roc_curves_all_models.png" alt="ROC curves for the four models" loading="lazy" decoding="async" />
+                  <figcaption>ROC curves for the four models — XGBoost and random forest lead clearly.</figcaption>
                 </figure>
                 <figure class="figure-editorial">
-                  <img src="figures/pr_curves_all_models.png" alt="Precision-recall curves, all models" loading="lazy" decoding="async" />
-                  <figcaption>Precision-recall curves, all models — XGBoost leads at PR-AUC 0.727, far above the 0.20 no-skill baseline.</figcaption>
+                  <img src="figures/pr_curves_all_models.png" alt="Precision-recall curves for the four models" loading="lazy" decoding="async" />
+                  <figcaption>Precision-recall curves — XGBoost leads at PR-AUC 0.727, well above the 0.20 no-skill baseline.</figcaption>
                 </figure>
               </div>
 
-              <p class="subtitle">XGBoost leads on both ranking metrics and is the recommended model. Logistic regression and KNN post high recall only by flagging large numbers of loyal customers: at a precision near 0.4, six out of ten contacts would be wasted. Random forest comes close and slightly beats XGBoost on recall and F1 at the 0.5 threshold, but a threshold can be adjusted after training, while ranking quality cannot.</p>
+              <p class="subtitle">XGBoost is recommended: first on both ranking metrics, and monthly risk scoring rests on ranking quality. Logistic regression and KNN buy their higher recall by flagging loyal customers — at about 0.4 precision, six of every ten contacts are wasted. Random forest edges XGBoost on recall and F1 at 0.5, but a threshold can be adjusted after training and ranking quality cannot.</p>
 
               <div class="figure-grid">
                 <figure class="figure-editorial">
-                  <img src="figures/gridsearch_lr_heatmap.png" alt="Logistic regression grid-search heatmap" loading="lazy" decoding="async" />
-                  <figcaption>Logistic regression grid-search heatmap — how the same 5-fold protocol selects across the hyperparameter grid.</figcaption>
+                  <img src="figures/gridsearch_lr_heatmap.png" alt="Logistic regression grid search heatmap" loading="lazy" decoding="async" />
+                  <figcaption>Logistic regression grid-search heatmap — how the shared 5-fold protocol selects the optimum across the hyperparameter grid.</figcaption>
                 </figure>
                 <figure class="figure-editorial">
                   <img src="figures/confusion_matrix_xgboost.png" alt="XGBoost confusion matrix (default threshold)" loading="lazy" decoding="async" />
-                  <figcaption>XGBoost confusion matrix (default 0.5 threshold) — the balanced baseline before threshold tuning.</figcaption>
+                  <figcaption>XGBoost confusion matrix at the default 0.5 threshold — the baseline with precision and recall relatively balanced.</figcaption>
                 </figure>
               </div>
 
-              <div class="note note--caveat">
-                <div class="note__label">Metric · Why accuracy is not the headline</div>
+              <div class="note note--evidence">
+                <div class="note__label">Ablation · The conclusions do not depend on SMOTE</div>
                 <div class="note__body">
-                  <p>Accuracy was rejected as a tuning metric because a model that always predicts "stays" is already 79.6% accurate on this data — the metric has no discriminative power on imbalanced data. Reporting ranking metrics (ROC-AUC / PR-AUC) plus an explicit operating point reflects the true ability to separate the rare class.</p>
+                  <p>Class imbalance has two standard answers: SMOTE oversampling, or weighting the minority class. Swapping SMOTE for <code>scale_pos_weight=3.91</code> in the same XGBoost grid leaves the two nearly tied: CV ROC-AUC 0.8579 vs 0.8568, test ROC-AUC 0.8711 vs 0.8757, test PR-AUC 0.7249 vs 0.7265. Every gap is far smaller than the confidence intervals in the next section, so the conclusions do not depend on SMOTE itself; the pipeline stays only because all downstream tuning and attribution build on it.</p>
                 </div>
               </div>
             </div>
           </section>
 
-          <!-- Threshold Tuning -->
+          <!-- Threshold tuning -->
           <section id="threshold" class="section-padding section--editorial" data-section-num="03">
             <div class="section-header">
               <div class="section-eyebrow">
                 <span class="section-num">03</span>
                 <span class="section-kicker">Threshold Tuning</span>
               </div>
-              <h2 class="section-title">Threshold Tuning</h2>
+              <h2 class="section-title">Setting the Threshold</h2>
             </div>
 
             <div class="space-y-8">
-              <p class="subtitle">The default 0.5 threshold treats both error types as equally costly. They are not: a missed churner costs the bank the customer relationship, a false alarm costs one retention offer. Sweeping the threshold and maximizing F2 (recall weighted twice as heavily as precision) gives an operating point that matches the retention objective:</p>
+              <p class="subtitle">The default 0.5 threshold treats both errors as equally costly, but they are not: a missed churner costs the whole relationship, a false alarm one retention offer. An F2 sweep scores each candidate threshold, weighting recall twice as heavily as precision. The threshold is selected on the training data alone: 5-fold cross-validation produces out-of-fold predicted probabilities on the training set, the F2 sweep runs on those, and the winning threshold is applied once to the test set — selecting on the test set would let the evaluation data leak into a modeling decision and overstate the operating point. The out-of-fold optimum is <strong>0.20</strong>.</p>
 
               <div class="overflow-x-auto">
                 <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
@@ -412,9 +479,8 @@
                       <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">Threshold</th>
                       <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">Precision</th>
                       <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">Recall</th>
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">F1</th>
                       <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">F2</th>
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">Flagged</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">Customers flagged</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -423,67 +489,73 @@
                       <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.50</td>
                       <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.6507</td>
                       <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.6149</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.6323</td>
                       <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.6218</td>
                       <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">481</td>
                     </tr>
                     <tr class="bg-green-50 dark:bg-green-900/20">
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>F2-optimal</strong></td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.23</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.4337</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.8487</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.5741</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.7124</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">996</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>F2-optimal (chosen on training OOF)</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.20</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.4070</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.8684</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.7079</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">1,086</td>
                     </tr>
                   </tbody>
                 </table>
               </div>
 
-              <figure class="figure-editorial">
-                <img src="figures/threshold_tuning_xgboost.png" alt="Precision, recall and F2 against decision threshold" loading="lazy" decoding="async" />
-                <figcaption>Precision, recall and F2 against decision threshold — F2 peaks near 0.23, the recall-first operating point.</figcaption>
-              </figure>
-
-              <figure class="figure-editorial">
-                <img src="figures/confusion_matrix_threshold_comparison.png" alt="Confusion matrices at thresholds 0.50 and 0.23" loading="lazy" decoding="async" />
-                <figcaption>Confusion matrices at 0.50 vs 0.23 — false negatives fall from 196 to 77, at the cost of false positives rising from 168 to 564.</figcaption>
-              </figure>
+              <div class="figure-grid">
+                <figure class="figure-editorial">
+                  <img src="figures/threshold_tuning_xgboost.png" alt="Precision, recall, and F2 versus threshold" loading="lazy" decoding="async" />
+                  <figcaption>The threshold sweep on out-of-fold training predictions — F2 peaks near 0.20, the recall-first operating point.</figcaption>
+                </figure>
+                <figure class="figure-editorial">
+                  <img src="figures/confusion_matrix_threshold_comparison.png" alt="Confusion matrices at thresholds 0.50 and 0.20" loading="lazy" decoding="async" />
+                  <figcaption>Confusion matrices at 0.50 vs 0.20 — false negatives fall from 196 to 67, at the cost of false positives rising from 168 to 644.</figcaption>
+                </figure>
+              </div>
 
               <div class="contact-info-card">
-                <p class="subtitle">At 0.23 the model catches about 432 of the 509 test-set churners instead of about 313, and the contact list roughly doubles. Whether that trade pays off depends on offer cost against customer value; when campaign capacity is fixed, the threshold can sit anywhere on the precision-recall curve — which is exactly why the model with the strongest ranking is chosen.</p>
+                <p class="subtitle">At 0.20 the model catches 442 of the 509 test-set churners instead of about 313, and the contact list grows from 481 to 1,086. The test-set F2 (0.708) is close to the training estimate (0.696), so the operating point chosen on the training folds transfers to unseen data. Whether that trade pays off depends on offer cost against customer value; when campaign capacity is fixed, the threshold can sit anywhere on the precision-recall curve — which is exactly why the model with the strongest ranking is chosen.</p>
               </div>
             </div>
           </section>
 
-          <!-- Break-even Analysis -->
+          <!-- Break-even analysis -->
           <section id="cost" class="section-padding section--editorial" data-section-num="04">
             <div class="section-header">
               <div class="section-eyebrow">
                 <span class="section-num">04</span>
                 <span class="section-kicker">Break-even Analysis</span>
               </div>
-              <h2 class="section-title">Break-even Cost Analysis</h2>
+              <h2 class="section-title">Break-even Analysis</h2>
             </div>
 
             <div class="space-y-8">
-              <p class="subtitle">F2 is a proxy for "recall matters more"; the real objective is cost. This dataset has no cost fields (customer value, offer cost, campaign success rate), so rather than invent them, the analysis assumes only the cost ratio C = cost of a missed churner / cost of a wasted retention offer, and compares the two error types. At the default 0.5 threshold the model makes 168 wasted offers (false positives) and 196 missed churners (false negatives); at the tuned 0.23 threshold, 564 wasted offers and 77 missed churners. Setting the two error costs equal gives a break-even ratio of about <strong>C* = 3.3</strong>: the tuned threshold has lower total cost whenever missing a churner costs more than roughly 3.3 wasted offers.</p>
+              <p class="subtitle">F2 is only a proxy for "weight recall more"; the real objective is cost. The data has no cost fields (customer value, offer cost, campaign success rate), so nothing is invented — this section assumes one quantity, the cost ratio C, the cost of a missed churner divided by the cost of a wasted retention offer, and compares only the two errors. The 0.5 threshold produces 168 false alarms and 196 misses; the 0.20 threshold produces 644 false alarms and 67 misses. Solving for the break-even gives <strong>C* = 3.7</strong>: the tuned threshold has lower total error cost whenever missing a churner costs more than 3.7 times a wasted offer. No currency figure is assumed, so the conclusion holds for any bank whose cost ratio clears that bar.</p>
 
               <figure class="figure-editorial">
-                <img src="figures/breakeven_cost_ratio.png" alt="Cost-optimal threshold against the cost ratio" loading="lazy" decoding="async" />
-                <figcaption>Cost-optimal threshold against the cost ratio — the more a lost customer costs relative to an offer, the lower the cost-optimal threshold.</figcaption>
+                <img src="figures/breakeven_cost_ratio.png" alt="Cost-optimal threshold versus cost ratio" loading="lazy" decoding="async" />
+                <figcaption>Cost-optimal threshold versus cost ratio — the more a churner costs relative to an offer, the lower the cost-optimal threshold.</figcaption>
               </figure>
 
               <div class="note note--insight">
-                <div class="note__label">Insight · The conclusion holds for any bank respecting the ratio</div>
+                <div class="note__label">Insight · Holds for any bank clearing the ratio</div>
                 <div class="note__body">
-                  <p>In retail banking a lost customer relationship is worth many times a single retention offer, so any realistic ratio sits well above 3.3 and the aggressive operating point is justified. No currency figure is assumed, so the conclusion holds for any bank whose economics respect the ratio. (SMOTE distorts probability calibration, so the operating threshold is found empirically rather than from the textbook 1/(1+C) rule.)</p>
+                  <p>In a retail bank, a churned relationship is worth many times a single retention offer, so any realistic ratio is far above 3.7 and the aggressive operating point pays off. No absolute currency figure is assumed, so the conclusion holds for any bank clearing that ratio. (SMOTE distorts probability calibration, so the operating threshold is set by empirical sweep rather than the textbook 1/(1+C) formula.)</p>
+                </div>
+              </div>
+
+              <div class="note note--evidence">
+                <div class="note__label">Uncertainty · Bootstrap 95% CI (×2,000)</div>
+                <div class="note__body">
+                  <p>The headline numbers are point estimates on one test set of 2,500 customers. Resampling it 2,000 times with replacement, without refitting the model, gives intervals that reflect test-set sampling noise only: ROC-AUC 0.876 [0.858, 0.892]; PR-AUC 0.727 [0.690, 0.762]; recall at 0.20 is 0.868 [0.838, 0.897]; precision 0.407 [0.377, 0.436]. The recall interval is narrow — "about 87% of churners caught" does not rest on one lucky split — but the ROC-AUC interval contains random forest's point estimate of 0.868. XGBoost leads on both ranking metrics, yet the lead falls inside test-set noise, so the model choice rests on ranking first on both metrics plus threshold flexibility, not on a statistically separated gap.</p>
                 </div>
               </div>
             </div>
           </section>
 
-          <!-- Why Customers Leave -->
+          <!-- Why customers leave -->
           <section id="shap" class="section-padding section--editorial" data-section-num="05">
             <div class="section-header">
               <div class="section-eyebrow">
@@ -494,45 +566,62 @@
             </div>
 
             <div class="space-y-8">
-              <p class="subtitle">SHAP assigns each feature a signed contribution to each prediction, so the model's reasoning can be read globally and per customer. To guard against method artifacts, the SHAP ranking was cross-checked against random forest impurity importances and XGBoost gain importances; the same features top all three.</p>
+              <p class="subtitle">A risk score tells the retention team who to call, not what to say. SHAP assigns each feature a signed contribution to each prediction, showing customer by customer which features push the prediction up and which push it down. To rule out single-model artifacts, the SHAP ranking is cross-checked against the random forest's impurity importances and XGBoost's gain importances; the top five agree across all three, with age and product count in the top two.</p>
 
               <div class="figure-grid">
                 <figure class="figure-editorial">
-                  <img src="figures/SHAP_Global_Feature_Insights.png" alt="SHAP summary plot" loading="lazy" decoding="async" />
-                  <figcaption>SHAP summary plot — age, activity status and product count sit at the top.</figcaption>
+                  <img src="figures/SHAP_Global_Feature_Insights.png" alt="SHAP global importance summary" loading="lazy" decoding="async" />
+                  <figcaption>SHAP global importance summary — age, activity, and product count rank at the top.</figcaption>
                 </figure>
                 <figure class="figure-editorial">
-                  <img src="figures/feature_importance_comparison.png" alt="Feature importance, three methods compared" loading="lazy" decoding="async" />
-                  <figcaption>Feature importance, three methods compared — SHAP, RF impurity and XGB gain agree on the top features.</figcaption>
+                  <img src="figures/feature_importance_comparison.png" alt="Three importance measures compared" loading="lazy" decoding="async" />
+                  <figcaption>Random forest impurity, XGBoost gain, and SHAP compared — the top features agree, so the story does not depend on the method.</figcaption>
                 </figure>
               </div>
 
-              <p class="subtitle">The two test-set extremes illustrate how the drivers combine. The highest-risk customer (churn probability 0.998) stacks every driver: 4 products, an age well above average, inactive, an above-average balance, located in Germany; only a short tenure pulls the other way, far too weakly to matter. The lowest-risk customer (churn probability 0.005) is the mirror image: 2 products, young, active, zero balance, high credit score.</p>
+              <p class="subtitle"><strong>The shape of age.</strong> The dependence plot gives the headline driver a shape: the contribution of age crosses zero around 40, peaks between 50 and 60 at up to +2 log-odds, and declines after 65, turning negative near 67. That matches the non-monotonic profile in the group table (30.8% in the forties, 56.0% in the fifties, 27.9% past 60) — the model has learned the same curve from the data, not a simple "older is riskier" rule.</p>
 
               <div class="figure-grid">
                 <figure class="figure-editorial">
-                  <img src="figures/SHAP_Local_Explanation_for_a_High-Risk_Customer.png" alt="SHAP local explanation for a high-risk customer" loading="lazy" decoding="async" />
-                  <figcaption>SHAP local explanation for a high-risk customer (churn probability 0.998) — every driver stacks in the same direction.</figcaption>
+                  <img src="figures/shap_dependence_age.png" alt="SHAP dependence plot for age" loading="lazy" decoding="async" />
+                  <figcaption>SHAP dependence plot for age — crosses zero around 40, peaks at 50–60, declines after 65, turning negative near 67.</figcaption>
                 </figure>
                 <figure class="figure-editorial">
-                  <img src="figures/SHAP_Local_Explanation_for_a_Low-Risk_Customer.png" alt="SHAP local explanation for a low-risk customer" loading="lazy" decoding="async" />
-                  <figcaption>SHAP local explanation for a low-risk customer (churn probability 0.005) — factors pull risk down together.</figcaption>
+                  <img src="figures/shap_dependence_tenure.png" alt="SHAP dependence plot for tenure" loading="lazy" decoding="async" />
+                  <figcaption>SHAP dependence plot for tenure — a small, almost uniformly protective contribution (centered near −0.3): a stabilizer, not a driver.</figcaption>
+                </figure>
+              </div>
+
+              <p class="subtitle"><strong>Reconciling tenure.</strong> In the boxplots tenure barely separates churners from non-churners, yet it ranks fourth by mean absolute SHAP. The dependence plot shows why: the model assigns each customer a small, almost uniformly protective contribution (none beyond about −0.9), with no strong trend across the 0-to-10-year range; those small values on every customer add up in a mean-of-absolute-values ranking. Tenure ranks as a stabilizer, not a driver, and the four-driver story stands.</p>
+
+              <p class="subtitle"><strong>Two customers, explained.</strong> The force plots take the two extremes of the test set by predicted probability. The highest-risk customer (churn probability 0.998) combines every major driver at once: 4 products, an age well above average, inactive, an above-average balance, and located in Germany; only a short tenure pulls the other way, far too weakly to matter — customers with this profile belong at the top of the call list, and the conversation should be about simplifying the product portfolio. The lowest-risk customer (churn probability 0.005) is the mirror image: 2 products, young, active, zero balance, high credit score.</p>
+
+              <div class="figure-grid">
+                <figure class="figure-editorial">
+                  <img src="figures/SHAP_Local_Explanation_for_a_High-Risk_Customer.png" alt="SHAP force plot for a high-risk customer" loading="lazy" decoding="async" />
+                  <figcaption>SHAP force plot for a high-risk customer (churn probability 0.998) — every major driver stacks the same way.</figcaption>
+                </figure>
+                <figure class="figure-editorial">
+                  <img src="figures/SHAP_Local_Explanation_for_a_Low-Risk_Customer.png" alt="SHAP force plot for a low-risk customer" loading="lazy" decoding="async" />
+                  <figcaption>SHAP force plot for a low-risk customer (churn probability 0.005) — every factor pulls risk down.</figcaption>
                 </figure>
               </div>
             </div>
           </section>
 
-          <!-- Action Plan -->
+          <!-- Action plan -->
           <section id="actions" class="section-padding section--editorial" data-section-num="06">
             <div class="section-header">
               <div class="section-eyebrow">
                 <span class="section-num">06</span>
                 <span class="section-kicker">Action Plan</span>
               </div>
-              <h2 class="section-title">Action Plan</h2>
+              <h2 class="section-title">Acting on the Findings</h2>
             </div>
 
             <div class="space-y-8">
+              <p class="subtitle">The four drivers agree across EDA, the three importance views, and SHAP, so the risk profile is specific: customers past 40 who have gone inactive, more so when they hold a large balance or bank in Germany. The findings turn into four actions.</p>
+
               <div class="overflow-x-auto">
                 <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
                   <thead>
@@ -546,30 +635,37 @@
                     <tr>
                       <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Monthly risk scoring</strong></td>
                       <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Score every customer with XGBoost at the tuned threshold; give service teams each customer's top three SHAP factors before a call.</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Best ranking quality of the four candidates; 85% of churners caught at the tuned threshold.</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Best ranking quality of the four candidates (ROC-AUC 0.876, 95% CI [0.858, 0.892]); 87% of churners caught at the tuned threshold.</td>
                     </tr>
                     <tr>
                       <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Re-engagement campaign</strong></td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Target inactive members in the medium-to-high risk band with a bonus rate, a fee waiver or a consultation.</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Inactivity is a top-three SHAP driver.</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Target inactive customers in the medium-to-high risk band with a bonus rate, a fee waiver, or a consultation.</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Inactive customers churn at 26.9% vs 14.3% for active; inactivity is a top-three SHAP driver.</td>
                     </tr>
                     <tr>
                       <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Portfolio review</strong></td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Contact customers holding 3+ products for a simplification review; reward sales on fitting combinations rather than product count.</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Product count ranks second in all three importance views.</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Contact customers holding three or more products for a simplification review; reward sales on combinations that fit the customer, not product count.</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Product count ranks second across all three importance views; three products churn at 82.7%, four at 100%.</td>
                     </tr>
                     <tr>
                       <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>German market review</strong></td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Run competitor analysis and collect customer and branch feedback in Germany.</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Germany shows elevated churn in the EDA and the tree-model rankings.</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Run competitor analysis and collect feedback from German customers and branch staff.</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Germany churns at 32.4%, roughly double France and Spain.</td>
                     </tr>
                   </tbody>
                 </table>
               </div>
 
+              <div class="note note--caveat">
+                <div class="note__label">Caveat · The threshold is a business setting, not a constant</div>
+                <div class="note__body">
+                  <p>The F2-optimal threshold of 0.20, selected on the training folds, catches 87% of churners on the test set (61% at the default) at a precision of 41%. It beats the default on total error cost whenever missing a churner costs more than 3.7 times a wasted offer. The right operating point follows from offer cost, campaign capacity, and customer value, and should be revisited when those change.</p>
+                </div>
+              </div>
+
               <div class="contact-info-card">
-                <h3 class="text-xl font-semibold mb-3" style="color: var(--dark);">Follow-ups &amp; Reproducibility</h3>
-                <p class="subtitle">Follow-ups: A/B-test the offers against a control group, retrain quarterly, recheck the threshold whenever campaign economics change, and surface the risk score plus SHAP factors in the CRM. The notebook runs end to end locally (<code>uv run jupyter nbconvert --to notebook --execute</code>); all random seeds are fixed at 42, and figures are written to <code>figures/</code>.</p>
+                <h3 class="text-xl font-semibold mb-3" style="color: var(--dark);">Next steps &amp; reproducibility</h3>
+                <p class="subtitle">Next: A/B-test the retention offers against a control group to measure the realized effect on churn; retrain quarterly and recheck the threshold when campaign economics change; push the risk score and SHAP factors into the CRM so branch staff can see them. The notebook runs on one seed (42) and reproduces end-to-end locally (<code>uv run jupyter nbconvert --to notebook --execute</code>), writing figures to <code>figures/</code>.</p>
               </div>
             </div>
           </section>
@@ -592,7 +688,7 @@
           return false;
         ">
           <h3 class="related-project-title">Lending Hub Loan Default Prediction</h3>
-          <p class="related-project-description">Threshold decision under a 4.2:1 cost asymmetry, catching 74.9% of defaults</p>
+          <p class="related-project-description">A threshold decision under a 4.2:1 cost asymmetry, catching 74.9% of defaults</p>
           <div class="related-project-link">
             <span>View details</span>
             <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>
@@ -603,7 +699,7 @@
           window.location.href = lang === 'en' ? '../youtube comment analysis/youtube comment analysis-en.html' : '../youtube comment analysis/youtube comment analysis.html';
           return false;
         ">
-          <h3 class="related-project-title">YouTube Comment Pet-Owner Detection</h3>
+          <h3 class="related-project-title">Pet Owners in YouTube Comments</h3>
           <p class="related-project-description">Weak-supervised classification under the same ranking + operating-point frame</p>
           <div class="related-project-link">
             <span>View details</span>
@@ -614,7 +710,7 @@
     </section>
   </main>
 
-  <!-- Bottom scripts: Prism / local scripts / logo animation / detail-page logic -->
+  <!-- Footer scripts: Prism / local scripts / logo animation / detail-page logic -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
   <script src="../../assets/js/logo.js"></script>

@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>582 万条 YouTube 评论里的宠物主：一次弱监督的估计 - 数据诗学</title>
-  <meta name="description" content="582 万条宠物频道评论、无真实标签：弱监督标注 + 特征解耦 + 300 条人工标注分层验证。掩码模型一致性 AUC 0.91，精度优先阈值下以约 0.94 精度识别 44,623 名高置信宠物主，并按宠物主受众占比为创作者排名。" />
+  <meta name="description" content="582 万条宠物频道评论、无真实标签：弱监督标注 + 特征解耦 + 300 条 rubric 分层验证。基于规则标签的一致性 AUC 掩码 0.91 vs 全词表 0.96（PR-AUC 0.21 vs 0.34）；τ_F1 上基于 rubric 标签的精确率 0.58、95% 区间 [0.17, 0.96]，圈出 91,443 名可能宠物主（3.6%），按宠物主受众占比为创作者排名。" />
 
   <!-- 与首页一致：Tailwind / 字体 / 图标 / 站点样式 -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -97,7 +97,7 @@
             <span class="section-kicker">Case Study · NLP 与弱监督</span>
           </div>
           <h1 class="hero-title mt-2">582 万条 YouTube 评论里的宠物主：一次弱监督的估计</h1>
-          <p class="subtitle mt-4 max-w-xl">这份数据没有真实的宠物主标签。把任务诚实地写成弱监督、按用户分组、用 300 条人工标注核对之后——答案是一个不大但真实的信号，用区间而非单一大数报告。</p>
+          <p class="subtitle mt-4 max-w-xl">这 582 万条评论没有宠物主标签，估计按弱监督搭建，并用 300 条 rubric 标注核对。信号真实但量级不大：频道之间的顺序立得住，绝对占比立不住。</p>
           <div class="reading-time">约 15 分钟阅读<span class="sep">·</span>20 张图表</div>
 
           <div class="hero-stats">
@@ -107,11 +107,11 @@
             </div>
             <div class="hero-stat">
               <div class="hero-stat__num">0.91</div>
-              <div class="hero-stat__label">掩码一致性 AUC</div>
+              <div class="hero-stat__label">一致性 AUC（基于规则标签，掩码）</div>
             </div>
             <div class="hero-stat">
-              <div class="hero-stat__num">0.94</div>
-              <div class="hero-stat__label">人工验证精度 @ 精度优先阈值</div>
+              <div class="hero-stat__num">91,443</div>
+              <div class="hero-stat__label">可能宠物主（3.6%）@ τ_F1</div>
             </div>
           </div>
 
@@ -126,12 +126,12 @@
             <li>
               <span class="hero-stack__num">01</span>
               <span class="hero-stack__name">弱监督标注函数</span>
-              <span class="hero-stack__desc">强占有 / 弱上下文 / 否定三条 LF，正类 1.5%</span>
+              <span class="hero-stack__desc">强占有 / 弱上下文 / 否定三条 LF，正类 1.52%</span>
             </li>
             <li>
               <span class="hero-stack__num">02</span>
               <span class="hero-stack__name">特征解耦</span>
-              <span class="hero-stack__desc">掩码 TF-IDF 剔除全部规则触发词</span>
+              <span class="hero-stack__desc">受限词表把规则命中的内容词全部剔出</span>
             </li>
             <li>
               <span class="hero-stack__num">03</span>
@@ -140,16 +140,16 @@
             </li>
             <li>
               <span class="hero-stack__num">04</span>
-              <span class="hero-stack__name">双重评估</span>
-              <span class="hero-stack__desc">规则一致性 AUC + 300 条分层人工标注、Wilson 区间</span>
+              <span class="hero-stack__name">两种标签口径</span>
+              <span class="hero-stack__desc">规则一致性 AUC + 300 条 rubric 分层标注、Wilson 区间</span>
             </li>
             <li>
               <span class="hero-stack__num">05</span>
-              <span class="hero-stack__name">全量打分与画像</span>
-              <span class="hero-stack__desc">τ_F1 / τ_P80 双运营点、LDA 主题、创作者排名</span>
+              <span class="hero-stack__name">全量打分与投放</span>
+              <span class="hero-stack__desc">τ_F1 / τ_P80 双运营点、创作者效率 vs 触达排名</span>
             </li>
           </ol>
-          <div class="hero-stack__foot">Python · pandas · scikit-learn · xgboost · pyarrow · shap · LDA</div>
+          <div class="hero-stack__foot">Python · pandas · scikit-learn · xgboost · pyarrow · shap</div>
         </aside>
       </div>
     </section>
@@ -159,15 +159,15 @@
       <div class="grid md:grid-cols-3 gap-6">
         <div class="summary-card">
           <h3 class="summary-card-title">业务挑战</h3>
-          <p class="summary-card-content">582 万条评论、无任何真值标签。"训练一个分类器再报 AUC"是循环论证——需要一套能诚实估计真实信号的方法，而不是刷高的分数。</p>
+          <p class="summary-card-content">宠物类广告按频道买，广告主要区分"养这种动物的人"和"只看这种动物的人"。582 万条评论里没有这个标签——"训练一个分类器再报 AUC"是循环论证，需要一套能诚实估计真实信号的方法。</p>
         </div>
         <div class="summary-card">
           <h3 class="summary-card-title">解决方案</h3>
-          <p class="summary-card-content">弱监督标注 + 特征解耦 + 按用户分组 + 300 条人工标注验证 + ablation 定量泄漏，把可复原规则的部分从真实信号里剥离出来。</p>
+          <p class="summary-card-content">三个正则标注函数写噪声标签；模型特征刻意不重新编码规则；训练与评估按用户分组留出；用 300 条按固定 rubric 标注的评论核对，把可复原规则的部分从真实信号里剥离。</p>
         </div>
         <div class="summary-card">
           <h3 class="summary-card-title">商业价值</h3>
-          <p class="summary-card-content">以约 0.94 精度圈出 44,623 名高置信宠物主（τ_F1 下 91,443 名、3.6%）；创作者按宠物主受众占比排名，指导 KOL 投放（Zak George 0.51 居首）。</p>
+          <p class="summary-card-content">τ_F1 下圈出 91,443 名可能宠物主（3.6%），基于 rubric 标签的精确率 0.58、95% 区间 [0.17, 0.96]。创作者按宠物主受众占比排名，指导 KOL 投放——但只支撑频道间的相对顺序，不支撑单频道占比的绝对承诺。</p>
         </div>
       </div>
     </section>
@@ -183,9 +183,9 @@
               <li><a href="#data" class="toc-link" data-section="data">数据与语料形态</a></li>
               <li><a href="#weak" class="toc-link" data-section="weak">弱监督</a></li>
               <li><a href="#decouple" class="toc-link" data-section="decouple">解耦与泄漏对照</a></li>
-              <li><a href="#human" class="toc-link" data-section="human">人工验证</a></li>
+              <li><a href="#human" class="toc-link" data-section="human">两种标签的评估</a></li>
               <li><a href="#shap" class="toc-link" data-section="shap">模型依赖什么</a></li>
-              <li><a href="#scoring" class="toc-link" data-section="scoring">全量打分与画像</a></li>
+              <li><a href="#scoring" class="toc-link" data-section="scoring">全量打分与投放</a></li>
               <li><a href="#limits" class="toc-link" data-section="limits">局限与复现</a></li>
             </ul>
           </nav>
@@ -204,14 +204,14 @@
 
             <div class="space-y-6">
               <div class="contact-info-card">
-                <p class="subtitle mb-4">这份数据没有真实的宠物主标签。把任务诚实地写成弱监督、按用户分组、并用 300 条人工标注核对之后，本分析估计这些评论到底携带多少真实的宠物拥有信号。答案是一个不大但真实的信号，用区间而非单一大数来报告。</p>
+                <p class="subtitle mb-4">宠物类广告主想知道哪些频道的受众真的养宠物，而不只是看宠物。这份 582 万条评论的抓取合集里没有宠物主标签，所以任务按弱监督处理：三个正则标注函数写出噪声标签，模型的特征刻意不重新编码这些规则，训练与评估按用户分组留出，最后用 300 条按固定 rubric 标注的评论来核对。答案是一个不大但真实的信号，用区间而非单一大数来报告。</p>
 
                 <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">四个发现</h3>
                 <ul class="list-disc list-inside space-y-3 subtitle mb-6">
-                  <li><strong>一致性高分大半是规则自我复原。</strong>把规则用的词留在词表里，模型达到 AUC 0.96；把这些词去掉，掉到 0.91。这 0.05 差的不是能力，是模型在重新推导它被训练去模仿的正则。</li>
-                  <li><strong>底下有真实信号。</strong>即便看不见触发词，掩码模型靠评论长度、护理词、创作者与用户行为、语言，仍达到 0.91 一致性 AUC——不靠 "dog"/"cat"。</li>
-                  <li><strong>模型能找到规则漏掉的宠物主。</strong>在规则完全不命中的评论层，模型高分段命中真实宠物主的比例是该层基础率的 3–9 倍，且在该层上反超全词表模型。这是泛化，不是记忆。</li>
-                  <li><strong>诚实付出的是几个精度点，不是整个结果。</strong>一个 precision 优先阈值仍能以约 0.94 精度圈出约 4.5 万用户。</li>
+                  <li><strong>一致性高分大半是规则自我复原。</strong>把规则用的词留在词表里，模型的一致性 AUC 是 0.96；把这些词去掉，掉到 0.91。这 0.05 差的不是能力，是模型在重建它被训练去模仿的正则——在 1.5% 的正类率下，PR-AUC 的差更诚实：0.21 vs 0.34。</li>
+                  <li><strong>底下有真实信号。</strong>即便看不见触发词，受限词表模型靠评论长度、护理词、创作者与用户行为、语言，仍达到 0.91 的一致性 AUC，不靠 "dog"/"cat"。</li>
+                  <li><strong>模型能找到规则漏掉的宠物主。</strong>在规则完全不命中的评论层，受限词表模型对 rubric 标签反超全词表模型（AUC 0.70 vs 0.61）。这是泛化，不是记忆。</li>
+                  <li><strong>诚实付出的是几个精度点，不是整个结果。</strong>头条运营点 τ_F1 上基于 rubric 标签的精确率 0.58（区间宽）；一个精确率优先的阈值仍能以约 0.94 精度圈出约 4.5 万用户。</li>
                 </ul>
 
                 <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">结果速览</h3>
@@ -230,19 +230,19 @@
                       </tr>
                       <tr>
                         <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>规则标签</strong></td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">1.5% 正类（88,420 条），三个标注函数</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">1.52% 正类（88,420 条），三个标注函数</td>
                       </tr>
                       <tr>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>一致性 AUC</strong></td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">掩码模型 0.91 vs 全词表 0.96（差值即规则重建）</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>一致性（基于规则标签）</strong></td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">ROC-AUC 掩码 0.91 vs 全词表 0.96；PR-AUC 0.21 vs 0.34</td>
                       </tr>
                       <tr>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>人工精度</strong></td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">precision 优先阈值下 0.94；F1 阈值下 0.58（区间宽，n=300）</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>基于 rubric 标签的精确率</strong></td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">τ_F1 上 0.58，95% CI [0.17, 0.96]（n=300）</td>
                       </tr>
                       <tr>
                         <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>可能宠物主</strong></td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">τ_F1 下 91,443 用户（3.6%）；τ_P80 下 44,623（1.8%）</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">τ_F1 = 0.862 下 91,443 用户（3.6%）；τ_P80 = 0.920 下 44,623（1.8%）</td>
                       </tr>
                     </tbody>
                   </table>
@@ -250,9 +250,9 @@
               </div>
 
               <div class="note note--caveat">
-                <div class="note__label">Method · 为什么不直接报 0.96</div>
+                <div class="note__label">Method · 为什么头条不是 0.96</div>
                 <div class="note__body">
-                  <p>标签由三条正则合成，同源的内容词又能进入模型——如果把这些词留在词表里，模型自然能达到 0.96 的一致性 AUC，但那大半是在重建标注规则本身。本分析把 0.96 与掩码后 0.91 的差值明确定义为"规则重建"并如实扣除，只把 0.91 当作真实的泛化信号来报告。</p>
+                  <p>标签由三条正则合成，同源的内容词又能进入模型——如果把这些词留在词表里，模型自然能达到 0.96 的一致性 AUC，但那大半是在重建标注规则本身。本分析把 0.96 与掩码后 0.91 的差值明确定义为"规则重建"并如实扣除；且真正要紧的数字不是任何一致性 AUC，而是基于 300 条 rubric 标签的精确率，它衡量的是"模型在一个真人身上判对的频率"。</p>
                 </div>
               </div>
             </div>
@@ -270,12 +270,12 @@
 
             <div class="space-y-8">
               <div class="contact-info-card">
-                <p class="subtitle">数据是宠物类 YouTube 频道下评论的抓取合集：三列（<code>creator_name</code>、<code>userid</code>、<code>comment</code>），去掉 491 条空评论后 582 万行。它不是用户行为面板：三分之二的用户只评论过一次，85% 只出现在单个创作者下，前 38 个创作者占 66% 的评论量——创作者 Gini 为 0.94。</p>
+                <p class="subtitle">数据集由课程提供、不可公开获取：从宠物类 YouTube 频道下抓取的评论，三列（<code>creator_name</code>、<code>userid</code>、<code>comment</code>）。去掉 491 条空评论后 5,818,979 行、2,536,890 个用户、3,858 个创作者。评论很短：均值 77.3 字符，中位数 43，95 分位 249。四个结构性事实约束着后面的每一步——它们描述的都是数据的采集方式：67.1% 的用户只评论过一次，85.1% 的用户只出现在一个创作者下，前 38 个创作者占 66.1% 的评论量，创作者评论量的 Gini 为 0.944。这是一份按创作者抓取的评论集，不是用户面板。</p>
               </div>
 
               <figure class="figure-editorial">
                 <img src="figures/creator_concentration_lorenz.png" alt="创作者集中度 Lorenz 曲线" loading="lazy" decoding="async" />
-                <figcaption>创作者集中度 Lorenz 曲线——Gini 0.94，前 38 个创作者占 66% 评论量，这个数字可自证。</figcaption>
+                <figcaption>创作者集中度 Lorenz 曲线——弯折很陡，绝大多数创作者几乎不贡献评论，几十个创作者贡献了三分之二，与 Gini 0.944 相互核对。</figcaption>
               </figure>
 
               <div class="figure-grid">
@@ -292,7 +292,7 @@
               <div class="figure-grid">
                 <figure class="figure-editorial">
                   <img src="figures/comment_length_distribution.png" alt="评论长度分布" loading="lazy" decoding="async" />
-                  <figcaption>评论长度分布——多数评论很短，长度本身后来成为掩码模型的头部特征。</figcaption>
+                  <figcaption>评论长度分布——多数评论很短，长度本身后来成为受限词表模型的头部特征。</figcaption>
                 </figure>
                 <figure class="figure-editorial">
                   <img src="figures/user_loyalty_creators_per_user.png" alt="用户忠诚度：每用户覆盖创作者数" loading="lazy" decoding="async" />
@@ -302,7 +302,7 @@
 
               <figure class="figure-editorial">
                 <img src="figures/language_mix_estimate.png" alt="语言构成估计" loading="lazy" decoding="async" />
-                <figcaption>语言构成估计——约 94% 评论以拉丁字母为主；所有文本模型都只处理英文，结论只覆盖这一部分。</figcaption>
+                <figcaption>20 万条抽样上的字符集分布——93.90% 的评论以拉丁字母为主。建模与结论只覆盖这一部分；剩下 6% 同样会被打分，但没有任何环节验证过打得合不合理。</figcaption>
               </figure>
             </div>
           </section>
@@ -314,23 +314,56 @@
                 <span class="section-num">02</span>
                 <span class="section-kicker">Weak Supervision</span>
               </div>
-              <h2 class="section-title">弱监督，而非隐藏的真值标签</h2>
+              <h2 class="section-title">三个标注函数与弱监督的代价</h2>
             </div>
 
             <div class="space-y-8">
               <div class="contact-info-card">
-                <p class="subtitle">三个标注函数写出噪声标签：<strong>强占有规则</strong>（"my dog"、"we adopted a kitten"、"I'm a dog mom"）、<strong>弱上下文规则</strong>（"my vet"、"his crate"、"when I feed my …"）、<strong>否定规则</strong>（"I want a dog"、"my friend's cat"、"don't have a pet"）。当正向规则命中且否定不命中时，评论标为 1。结果是 1.5% 的正类率。</p>
+                <p class="subtitle">人工标注 582 万条做不到，标注一个够训练的子集又会吃掉做诚实评估所需的预算。所以标注预算只花一次、花在 300 条上、且全部用于评估；训练标签改由三个显式的标注函数（Snorkel 式）产生，让模型模仿的对象始终摊在明处。正向函数命中且否定函数不命中时标为正类，正类率 1.52%（88,420 条），不平衡约 1:65。</p>
+              </div>
+
+              <div class="overflow-x-auto">
+                <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
+                  <thead>
+                    <tr class="bg-gray-100 dark:bg-gray-700/30">
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">标注函数</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center">符号</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">命中什么</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">例子</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><code>LF_strong_possessive</code></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center dark:text-gray-200">+1</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">第一人称占有</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">"my dog"、"we adopted a kitten"、"I'm a dog mom"</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><code>LF_medium_context</code></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center dark:text-gray-200">+1</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">较弱的拥有上下文</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">"my vet"、"his crate"、"when I feed my"</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><code>LF_negation</code></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center dark:text-gray-200">−1</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">高精度的非拥有</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">"I want a dog"、"my friend's cat"、"don't have a pet"</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
 
               <figure class="figure-editorial">
                 <img src="figures/lf_coverage_overlap.png" alt="标注函数覆盖率与重叠" loading="lazy" decoding="async" />
-                <figcaption>标注函数覆盖率与重叠——三条 LF 各自的命中范围与彼此的交叠，合成 88,420 条正类（1.5%）。</figcaption>
+                <figcaption>各函数的覆盖率与两两重叠——覆盖几乎全由强规则承担（1.466%），中等规则在强规则之外几乎没有增量，否定规则刻意做窄、只负责剔掉一类误判。</figcaption>
               </figure>
 
               <div class="note note--process">
-                <div class="note__label">Design · 护理词刻意不进标签</div>
+                <div class="note__label">Design · 护理词刻意不进标签，以及 PU 问题的代价</div>
                 <div class="note__body">
-                  <p>护理词表刻意不进标签，好让它稍后作为合法特征使用。这些标签是规则不是真值，负类是"未被命中"而非"确认非宠物主"——这正是下面的评估依赖人工标签、而非规则自身召回的原因。</p>
+                  <p>护理词表（vet、feed、walk、train、adopt 等）刻意排除在标签之外，好让它稍后作为合法特征使用——因为标签不依赖护理词，模型若依赖它们就说明它泛化了。代价有两条：其一，"零"的含义是"没有规则命中"而非"确认非宠物主"，负类是未被标记的正类，这让它成为一个正例与未标记（PU）问题，基于这批标签量出来的召回不是真实召回；其二，标签继承了规则的盲区，一个从不写占有短语的宠物主会被标成负类。这两条正是评估必须依赖 rubric 标签的原因。</p>
                 </div>
               </div>
             </div>
@@ -348,62 +381,174 @@
 
             <div class="space-y-8">
               <div class="contact-info-card">
-                <p class="subtitle">模型的特征刻意选成不重新编码规则：评论级文本风格、护理词计数、以及用户和创作者的纯行为聚合（数量、长度、广度、排名）。用户/创作者级"占有率"这类特征——对 67% 只评论一次的用户来说就是这条评论的标签本身——被剔除。聚合特征在全量上一次算好，训练与打分共用同一张表，因此没有 train/serve 偏移；按 <code>userid</code> 切分，因此没有用户跨在两边。</p>
+                <p class="subtitle">标签是一个跑在评论文本上的正则，任何携带同一信息的特征都会让模型去重建规则。所以规则用到的三个 LF、用户/创作者级"占有率"（对 67% 只评论一次的用户来说就是这条评论自己的标签）、逐动物 one-hot 全部剔除，只保留 17 个不碰标签的结构化特征：评论级文本风格、该条评论的护理词计数、纯评论行为的用户与创作者聚合。聚合特征在全量上只算一次，训练与打分共用同一张表；按 <code>userid</code> 切分，没有用户跨在两边。主模型的 TF-IDF 词表把规则命中的 39 个内容词当停用词剔除，另一个对照模型保留它们——两者只差这一件事，分数之差就直接量出了"规则用自己的词把自己重建了多少"。</p>
               </div>
 
-              <p class="subtitle">主模型的 TF-IDF 词表剔除了规则用到的全部内容词。另一个对照模型保留它们。在留出用户上，掩码模型 0.91、全词表模型 0.96——差值即规则重建。</p>
+              <div class="overflow-x-auto">
+                <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
+                  <thead>
+                    <tr class="bg-gray-100 dark:bg-gray-700/30">
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">模型（留出用户，基于规则标签）</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">ROC-AUC</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">PR-AUC</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">逻辑回归</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.8627</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.1243</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">随机森林</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.8602</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.1157</td>
+                    </tr>
+                    <tr class="bg-green-50 dark:bg-green-900/20">
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>XGBoost（受限词表）</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>0.9109</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>0.2095</strong></td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">XGBoost（全词表，消融）</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.9639</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.3385</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <p class="subtitle">XGBoost 在两个指标上都胜出，比两个基线各高约 0.05 ROC-AUC，PR-AUC 相对逻辑回归接近翻倍；两个基线彼此只差 0.003，这就把增益钉在了学习器上（三行的特征矩阵完全相同）。而在 1.52% 的正类率下更该读 PR-AUC：ROC 口径把掩码 0.91 与全词表 0.96 的差压成了像舍入误差的 0.05（相对差 5.8%），PR-AUC 才暴露真相——0.21 vs 0.34，规则重建值 0.13，相对差 62%。放规则用词进词表会把表现抬高将近三分之二。</p>
 
               <figure class="figure-editorial">
-                <img src="figures/roc_pr_curves_rule_agreement.png" alt="ROC 与 PR 曲线（对规则标签的一致性）" loading="lazy" decoding="async" />
-                <figcaption>ROC 与 PR 曲线（对规则标签的一致性）——掩码模型 0.91 vs 全词表 0.96，两者差距即规则自我复原的部分。</figcaption>
+                <img src="figures/roc_pr_curves_rule_agreement.png" alt="ROC 与 PR 曲线（基于规则标签）" loading="lazy" decoding="async" />
+                <figcaption>基于规则标签，四个模型在留出用户上的表现——ROC 面板把差距压平了，PR 面板才是差距所在。</figcaption>
               </figure>
 
               <div class="figure-grid">
                 <figure class="figure-editorial">
                   <img src="figures/threshold_tuning_rule_agreement.png" alt="对规则一致性的阈值调优" loading="lazy" decoding="async" />
-                  <figcaption>对规则一致性的阈值调优——F1 阈值与精度优先阈值两个运营点的取值位置。</figcaption>
+                  <figcaption>受限词表模型在留出规则标签上的精确率、召回率与 F1 随阈值变化——F1 峰值处很平，落在 τ_F1 = 0.862。</figcaption>
                 </figure>
                 <figure class="figure-editorial">
                   <img src="figures/confusion_matrix_tau_f1.png" alt="F1 阈值下的混淆矩阵" loading="lazy" decoding="async" />
-                  <figcaption>F1 阈值（τ_F1）下的混淆矩阵——对规则标签的一致性表现，留出集 train/serve 分数差恰为 0。</figcaption>
+                  <figcaption>τ_F1 下的混淆矩阵——基于规则标签精确率 0.259、召回 0.321、F1 0.287；高 AUC 与低 F1 不矛盾，排序有信息但单一切点上大多与规则不符。</figcaption>
                 </figure>
               </div>
             </div>
           </section>
 
-          <!-- 人工验证 -->
+          <!-- 两种标签的评估 -->
           <section id="human" class="section-padding section--editorial" data-section-num="04">
             <div class="section-header">
               <div class="section-eyebrow">
                 <span class="section-num">04</span>
                 <span class="section-kicker">Human Validation</span>
               </div>
-              <h2 class="section-title">人工验证才是诚实的头条</h2>
+              <h2 class="section-title">两种标签的口径，与两个运营点的取舍</h2>
             </div>
 
             <div class="space-y-8">
-              <p class="subtitle">300 条评论按五个层抽样——各规则命中处、护理词命中但无占有短语处、以及完全无信号处——并人工标注（LLM 辅助、抽查、0 条无法判断）。强占有层 93% 是真实宠物主；弱规则只有 42%；无信号基础率 5.6%。</p>
+              <div class="contact-info-card">
+                <p class="subtitle">这份分析里存在两种标签，回答的是不同问题：<strong>规则标签</strong>（344,882 条留出评论）衡量模型复现规则的程度；<strong>rubric 标签</strong>（300 条人工核对）衡量模型在一个真人身上判对的频率。300 条按五个层抽样——各规则命中处、护理词命中但无占有句式处、以及完全无信号处，后者尤其关键，标注按固定 rubric（LLM 辅助并抽查，0 条无法判定），且因各层抽样率差异极大，每个指标都做语料加权。</p>
+              </div>
+
+              <div class="overflow-x-auto">
+                <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
+                  <thead>
+                    <tr class="bg-gray-100 dark:bg-gray-700/30">
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">层</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">定义</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">宠物主比例</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">95% Wilson 区间</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="bg-green-50 dark:bg-green-900/20">
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">S1 强规则</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">强占有命中</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>0.933</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">[0.841, 0.974]（56/60）</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">S2 仅中等规则</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">较弱上下文</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.417</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">[0.301, 0.543]（25/60）</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">S3 否定规则</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">非拥有</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.067</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">[0.018, 0.213]（2/30）</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">S4 有护理词无占有</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">规则沉默区</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.100</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">[0.047, 0.201]（6/60）</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">S5 无信号</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">规则沉默区</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.056</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">[0.024, 0.124]（5/90）</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
 
               <figure class="figure-editorial">
                 <img src="figures/validation_precision_by_stratum.png" alt="各层宠物主比例与 95% 置信区间" loading="lazy" decoding="async" />
-                <figcaption>各层宠物主比例与 95% 置信区间——强占有层 93%、弱规则 42%、无信号 5.6%，用 Wilson 区间如实标注不确定性。</figcaption>
+                <figcaption>各层宠物主比例与 95% Wilson 区间——每层的比例就是一个标注函数的真实精确率。强规则 0.933 是真精确，中等规则 0.417 比抛硬币好不了多少；S1 与 S5 之间那道分隔是这批样本可用的前提。</figcaption>
               </figure>
+
+              <p class="subtitle">运营阈值在留出的规则标签上选（不碰 rubric），落在 τ_F1 = 0.862，这正是下面能成为样本外陈述的原因。两个运营点各有取舍：</p>
+
+              <div class="overflow-x-auto">
+                <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
+                  <thead>
+                    <tr class="bg-gray-100 dark:bg-gray-700/30">
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">阈值</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">选在哪批数据上</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">基于 rubric 标签的精确率</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">召回率</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="bg-green-50 dark:bg-green-900/20">
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>τ_F1 = 0.862</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">留出的<strong>规则</strong>标签</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>0.575</strong>，95% CI [0.172, 0.958]</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">0.247，[0.065, 0.585]</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">τ_P80 = 0.920</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>rubric 样本自身</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">0.938（样本内乐观）</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">0.217</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <p class="subtitle"><strong>τ_F1 是头条</strong>，因为它选阈值与做评估用的是不同数据：精确率 0.58 意味着它标出来的用户里约六成真的养宠物，区间 [0.17, 0.96] 几乎横跨整个取值范围——在 300 条标签上这就是诚实的宽度，点估计不应单独引用。<strong>τ_P80 看着更好，但值钱得多的是前者</strong>：它 0.938 的精确率量在选出它的同一批 300 条上，属于样本内乐观估计，不带区间，写在这里只是为了完整。</p>
 
               <figure class="figure-editorial">
                 <img src="figures/precision_by_score_bin_human.png" alt="按模型分数分箱的宠物主比例" loading="lazy" decoding="async" />
-                <figcaption>按模型分数分箱的宠物主比例——模型分数与真实精度同向，分数越高人工标注的宠物主比例越高。</figcaption>
+                <figcaption>各分箱的语料加权宠物主比例，带分层自助区间——点估计单调上升（分数越高越可能是真实宠物主），但最高两箱区间大面积重叠，这批样本无法确立"0.9 分明显好于 0.7 分"。</figcaption>
               </figure>
 
               <div class="note note--evidence">
-                <div class="note__label">Decisive test · 规则不命中层：泛化而非记忆</div>
+                <div class="note__label">Decisive test · 规则沉默层：泛化而非记忆</div>
                 <div class="note__body">
-                  <p>决定性的检验在规则不命中层：那里掩码模型反超全词表模型（AUC 0.70 vs 0.61）。全词表模型只在规则已经命中的地方赢——也就是它赢在复原规则，输在找出规则漏掉的宠物主。人工确认的例子包括 <em>"i remembered my doggy baby named denver"</em>、<em>"i have a golden retriever and it was so hard to train him"</em>——正则没有对应模式的养宠表达。</p>
+                  <p>真正的检验在规则沉默的区域。在 S4 层（有护理词、无占有句式，n=60、6 个真实宠物主），两个模型分道扬镳：基于规则标签全词表胜出 0.96 vs 0.91，基于 S4 的 rubric 标签次序反了过来，受限词表 <strong>0.704</strong> 反超全词表 0.614。全词表模型只在规则已命中处赢——赢在复原规则，输在找出规则漏掉的宠物主。人工确认的例子如 <em>"i remembered my doggy baby named denver"</em>、<em>"i have a golden retriever and it was so hard to train him"</em>，都不含正则能匹配的占有短语。提醒：S4 的 AUC 立在 60 条、6 个正类上、不带区间，且只是规则沉默区的一部分。</p>
                 </div>
               </div>
 
               <figure class="figure-editorial">
-                <img src="figures/ablation_masked_vs_full_vocab.png" alt="掩码 vs 全词表对照" loading="lazy" decoding="async" />
-                <figcaption>掩码 vs 全词表对照——在规则不命中层，掩码模型 AUC 0.70 反超全词表的 0.61，是泛化而非记忆的决定性证据。</figcaption>
+                <img src="figures/ablation_masked_vs_full_vocab.png" alt="受限词表 vs 全词表对照" loading="lazy" decoding="async" />
+                <figcaption>受限词表 vs 全词表——规则标签上全词表胜出（0.96 vs 0.91），S4 层 rubric 标签上次序反转（0.70 vs 0.61），是泛化而非记忆的决定性证据。</figcaption>
               </figure>
             </div>
           </section>
@@ -419,54 +564,112 @@
             </div>
 
             <div class="space-y-8">
-              <p class="subtitle">掩码模型的 SHAP 把评论长度排在第一，其次是语言片段（非英文 token 压低分数，与英文口径一致）、<code>care_term_count</code>、以及创作者/用户行为。没有任何动物名词出现，因为模型看不见它们——这正是重点。</p>
+              <p class="subtitle">受限词表模型的 SHAP（在留出集 2 万行子样本上计算）把评论长度与短反应句式排在靠前，护理词计数、创作者与用户的评论行为紧随其后。前列没有任何动物名词，机械原因是它们根本不在词表里——第 03 节的解耦在这个狭义上成功了。两个特征值得补一句：<code>care_term_count</code> 按 gain 排第 12（256.4），护理词有贡献但撑不起模型；gain 最高的几个 TF-IDF 词里有西班牙语（que、los、por），说明模型有一部分是在识别语言（非英文评论不太可能出现英文占有短语），这是真实规律，也是一个脆弱的立论基础。</p>
 
               <figure class="figure-editorial">
-                <img src="figures/shap_summary_beeswarm.png" alt="掩码模型 SHAP 摘要" loading="lazy" decoding="async" />
-                <figcaption>掩码模型 SHAP 摘要——评论长度居首，其后是语言、护理词计数与行为特征；没有任何动物名词。</figcaption>
+                <img src="figures/shap_summary_beeswarm.png" alt="受限词表模型 SHAP 摘要" loading="lazy" decoding="async" />
+                <figcaption>SHAP 摘要——评论越长、护理词越多，分数越被推向宠物主；短反应评论把分数推开。没有任何动物名词。</figcaption>
               </figure>
 
               <figure class="figure-editorial">
                 <img src="figures/feature_importance_xgb_gain.png" alt="XGBoost gain 特征重要性" loading="lazy" decoding="async" />
-                <figcaption>XGBoost gain 特征重要性——与 SHAP 排序印证，头部集中在文本风格与行为特征。</figcaption>
+                <figcaption>XGBoost gain 前 20 的特征——gain 与 SHAP 算法不同却给出同样图景，是一道弱校验：两者都不是各自方法的产物。</figcaption>
               </figure>
             </div>
           </section>
 
-          <!-- 全量打分与画像 -->
+          <!-- 全量打分与投放 -->
           <section id="scoring" class="section-padding section--editorial" data-section-num="06">
             <div class="section-header">
               <div class="section-eyebrow">
                 <span class="section-num">06</span>
                 <span class="section-kicker">Full-corpus Scoring</span>
               </div>
-              <h2 class="section-title">全量打分，以及宠物主是谁</h2>
+              <h2 class="section-title">全量打分，以及把排名读作投放决策</h2>
             </div>
 
             <div class="space-y-8">
-              <p class="subtitle">582 万条评论走同一条管线打分；留出集的 train/serve 分数差恰好为零。报告两个运营点：F1 阈值下 91,443 名可能宠物主用户（3.6%），precision 优先阈值下 44,623 名（1.8%）。</p>
-
-              <figure class="figure-editorial">
-                <img src="figures/full_score_distribution.png" alt="全量分数分布" loading="lazy" decoding="async" />
-                <figcaption>全量分数分布——582 万条评论的预测分数，两个运营点（τ_F1 / τ_P80）在此切分。</figcaption>
-              </figure>
+              <p class="subtitle">全部 5,818,979 条评论走同一条管线打分，耗时 2.2 分钟：同一批全局聚合、同一个已拟合向量器、同一个模型。在留出测试用户上，训练与打分的分数最大绝对差恰好为零——这正是"聚合只算一次"要买的训练/服务一致性。一个用户的分数取其所有评论的最高分：τ_F1 下 91,443 名可能宠物主（占 2,536,890 的 3.60%），τ_P80 下 44,623 名（1.76%）。</p>
 
               <div class="figure-grid">
+                <figure class="figure-editorial">
+                  <img src="figures/full_score_distribution.png" alt="全量分数分布" loading="lazy" decoding="async" />
+                  <figcaption>评论级与用户级分数分布（纵轴对数）——虚线标出两个阈值 τ_F1 / τ_P80。</figcaption>
+                </figure>
                 <figure class="figure-editorial">
                   <img src="figures/owner_segments.png" alt="宠物主分段" loading="lazy" decoding="async" />
                   <figcaption>宠物主分段——τ_F1 下 91,443 名（3.6%）、τ_P80 下 44,623 名（1.8%）两档运营点的用户规模。</figcaption>
                 </figure>
-                <figure class="figure-editorial">
-                  <img src="figures/user_value_tiers.png" alt="用户价值分层" loading="lazy" decoding="async" />
-                  <figcaption>用户价值分层——按活跃度与宠物主置信度对用户分层，为 KOL 投放圈定高价值人群。</figcaption>
-                </figure>
               </div>
 
-              <p class="subtitle">按预测宠物主受众占比对创作者排名（加 1000 用户最小规模，避免小频道靠少量评论登顶），领先的是训犬和小宠物频道——Zak George 训犬（0.51）、StormyRabbits 与 Lennon The Bunny（约 0.44）——它们的受众更偏向真正养这种动物的人。</p>
+              <p class="subtitle">按预测宠物主受众占比对创作者排名（设 1,000 名独立用户的最小规模，避免小频道靠少量评论登顶），领先的是训犬与小宠物频道。但"占比"一个数把广告主的两个问题混在了一起——触达宠物主的效率，与能触达的宠物主总量。拆开，答案就变了：</p>
+
+              <div class="overflow-x-auto">
+                <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
+                  <thead>
+                    <tr class="bg-gray-100 dark:bg-gray-700/30">
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">频道</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">受众（用户数）</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">宠物主占比</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">触达宠物主数</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Zak Georges Dog Training rEvolution</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">13,404</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>0.513</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">6,870</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">StormyRabbits</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">4,285</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.446</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">1,913</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Lennon The Bunny</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">6,488</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.441</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">2,858</td>
+                    </tr>
+                    <tr class="bg-green-50 dark:bg-green-900/20">
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Cole &amp; Marmalade</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">31,883</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.267</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>8,500</strong></td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">RaleighLink14</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">17,785</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.230</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">4,095</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Gone to the Snow Dogs</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">25,710</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.154</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">3,970</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
 
               <figure class="figure-editorial">
                 <img src="figures/creator_ranking_owner_share.png" alt="创作者按宠物主受众占比排名" loading="lazy" decoding="async" />
-                <figcaption>创作者按宠物主受众占比排名——Zak George 训犬 0.51 居首，训犬与小宠物频道整体领先。</figcaption>
+                <figcaption>宠物主占比最高的创作者（最小规模 1,000 名独立用户）——Zak George 训犬 0.513 居首，训犬与小宠物频道整体领先。</figcaption>
+              </figure>
+
+              <div class="note note--insight">
+                <div class="note__label">Insight · 效率与规模选中不同频道</div>
+                <div class="note__body">
+                  <p>两个粗体值不在同一行。Zak George 把受众转化为宠物主的效率接近 Cole &amp; Marmalade 的两倍（0.513 vs 0.267），但后者触达的宠物主绝对数仍多出 24%（8,500 vs 6,870），因为它的受众规模是前者的 2.4 倍。约束是单个宠物主的触达成本时按占比排，约束是宠物主触达总量时按触达数排——只按占比排序分配预算，占比中等的大频道会被系统性低估。<strong>这个排名的适用边界</strong>：它支撑频道之间的顺序，不支撑对受众规模的承诺；任何单一频道的占比都不应作为实测事实报给广告主，因为基于 rubric 标签的精确率只有 0.58、区间 [0.17, 0.96]。绝对水平立不住，顺序却立得住——同一模型同一阈值打分，两个频道相比时大部分测量偏差会抵消。</p>
+                </div>
+              </div>
+
+              <figure class="figure-editorial">
+                <img src="figures/user_value_tiers.png" alt="用户价值分层" loading="lazy" decoding="async" />
+                <figcaption>用户价值分层——按活跃度与宠物主置信度对用户分层，为 KOL 投放圈定高价值人群。</figcaption>
               </figure>
 
               <figure class="figure-editorial">
@@ -490,15 +693,16 @@
               <div class="note note--caveat">
                 <div class="note__label">Limits · 局限</div>
                 <div class="note__body">
-                  <p>训练标签是规则不是真值；负类是未标记的正类，因此对规则的召回不等于真实召回。</p>
-                  <p>验证集仅 300 条且 LLM 辅助，区间较宽；标注者与规则共享部分语言直觉——支撑泛化结论的"规则不命中层"最不受此影响。</p>
-                  <p>全部为英文（约 94% 评论）且评论级。评论是宠物拥有的弱证据，拥有也不等于消费能力；数据是创作者-评论抓取，"用户行为"反映采集方式。</p>
+                  <p><strong>训练标签是规则不是真值。</strong>负类是未标记的正类，所以对规则的召回不等于真实召回，而且模型被训练去认同规则的盲区。</p>
+                  <p><strong>头条数字的区间很宽。</strong>τ_F1 处基于 rubric 标签的精确率是 0.58、区间 [0.17, 0.96]，立在 300 条标签上；投放一节的一切都继承这个宽度。τ_P80 的 0.938 是样本内的，不带区间。</p>
+                  <p><strong>泛化证据很薄。</strong>S4 层对比立在 60 条、6 个正类上，规则沉默层高分段的倍数（S4 约 4 倍、S5 约 9 倍）分别只立在 8 条与 2 条上。</p>
+                  <p><strong>全部是英文且评论级。</strong>约 94% 评论以拉丁字母为主，模型只覆盖这一部分；评论是宠物拥有的弱证据，拥有不等于购买意图；数据是创作者-评论抓取，"用户行为"反映采集方式。</p>
                 </div>
               </div>
 
               <div class="contact-info-card">
                 <h3 class="text-xl font-semibold mb-3" style="color: var(--dark);">复现说明</h3>
-                <p class="subtitle">全程单一随机种子（42）；按 <code>userid</code> 的 <code>GroupShuffleSplit</code> 与 <code>StratifiedGroupKFold</code>；聚合、分数、验证样本缓存在 <code>artifacts/</code>，模型、向量器、特征清单在 <code>models/</code>。从头运行约 29 分钟（LF 扫描约 75 秒，超参搜索约 17 分钟，全量打分约 2 分钟）：</p>
+                <p class="subtitle">全程单一随机种子（42）；按 <code>userid</code> 的 <code>GroupShuffleSplit</code> 与 <code>StratifiedGroupKFold</code>；聚合、分数、验证样本缓存在 <code>artifacts/</code>，模型、向量器、特征清单在 <code>models/</code>。从头运行约 29 分钟（标注函数扫描约 77 秒，超参搜索 17.1 分钟，全量打分 2.2 分钟）：</p>
                 <pre class="bg-gray-900 text-gray-100 p-3 rounded text-sm overflow-x-auto mt-3"><code>uv run jupyter nbconvert --to notebook --execute --inplace "YouTube Comments Analysis.ipynb"</code></pre>
               </div>
             </div>

@@ -466,9 +466,10 @@
                                 <span class="bento-tag">Customer Analytics</span>
                             </div>
                             <h3 class="mt-4 text-xl">Bank Customer Churn Prediction & Key Driver Analysis</h3>
-                            <p class="mt-2 text-sm" style="color: var(--brown);">XGBoost+SMOTE, ROC-AUC 0.876. F2
-                                threshold tuning lifts churn capture from 61% to 85%, with a C*≈3.3 break-even cost
-                                ratio; customers holding 3–4 products churn more, not less.</p>
+                            <p class="mt-2 text-sm" style="color: var(--brown);">XGBoost+SMOTE, ROC-AUC 0.876. The F2
+                                threshold, tuned on out-of-fold training predictions (0.20), lifts churn capture from
+                                61% to 87%, with a C*≈3.7 break-even cost ratio; customers holding 3–4 products churn
+                                more, not less.</p>
                         </div>
                         <div class="mt-4 text-right">
                             <span class="text-link">View Details</span>
@@ -485,8 +486,9 @@
                             </div>
                             <h3 class="mt-4 text-xl">E-commerce First-Transaction Fraud Detection</h3>
                             <p class="mt-2 text-sm" style="color: var(--brown);">138K first transactions, 1.02% fraud.
-                                The model flags 0.53% of traffic to catch 51.6% of fraud with only 2 false positives,
-                                lowering value-weighted fraud loss ~52% — and explains why recall is capped at 52%.</p>
+                                Flagging 0.53% of traffic catches 51.6% of fraud with only 2 false positives, cutting
+                                loss ~51% — and honestly shows a single rule reproduces this operating point, with recall
+                                data-capped at 52%.</p>
                         </div>
                         <div class="mt-4 text-right">
                             <span class="text-link">View Details</span>
@@ -504,7 +506,8 @@
                             <h3 class="mt-4 text-xl">Lending Hub Loan Default Prediction</h3>
                             <p class="mt-2 text-sm" style="color: var(--brown);">9,004 LendingClub loans, 16.8%
                                 default. When a missed default costs 4.2× a wrongful rejection, moving the threshold from
-                                0.5 to 0.16 catches 74.9% of defaults and cuts expected loss 26.5% below approving all.</p>
+                                0.5 to 0.16 catches 74.9% of defaults and cuts expected loss 26.5% below approving all
+                                (6.6% net) — though a single 60-month term rule takes most of the reduction.</p>
                         </div>
                         <div class="mt-4 text-right">
                             <span class="text-link">View Details</span>

@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>电商首单欺诈检测：召回天花板与阈值假象 - 数据诗学</title>
-  <meta name="description" content="对 138,376 笔电商首单交易的机器学习分析：LightGBM+SMOTE 拦截 0.53% 流量抓住 51.6% 欺诈、仅 2 个误报，金额加权欺诈损失降低约 52%；以及为什么召回被数据锁死在 52%、98.6% 精确率是阈值假象。" />
+  <meta name="description" content="对 138,376 笔电商首单交易的机器学习分析：LightGBM+SMOTE 拦截 0.53% 流量抓住 51.6% 欺诈、仅 2 个误报，金额加权欺诈损失降约 51%；一条 interval≤1 秒的单规则抓到完全相同的 146 笔，召回被数据锁死在 52%。" />
 
   <!-- 与首页一致：Tailwind / 字体 / 图标 / 站点样式 -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -97,8 +97,8 @@
             <span class="section-kicker">Case Study · 风险控制与不平衡分类</span>
           </div>
           <h1 class="hero-title mt-2">电商首单欺诈检测：召回天花板与阈值假象</h1>
-          <p class="subtitle mt-4 max-w-xl">半数欺诈在注册后 1 秒内下单、完全可分；另一半与正常首单无法区分。这份分析解释召回为何被数据锁死在 52%，以及默认阈值下 98.6% 的精确率衡量的是阈值而非模型。</p>
-          <div class="reading-time">约 10 分钟阅读<span class="sep">·</span>8 张图表</div>
+          <p class="subtitle mt-4 max-w-xl">两个特征承载全部信号，召回被数据钉在 52% 而非受制于模型，金额加权损失降约一半。一条单规则几乎精确复现了这个运营点——所以模型的价值是一份可调分数、加一个必须被监控的时段前提，而不是增量抓捕。</p>
+          <div class="reading-time">约 13 分钟阅读<span class="sep">·</span>8 张图表</div>
 
           <div class="hero-stats">
             <div class="hero-stat">
@@ -106,8 +106,8 @@
               <div class="hero-stat__label">首单交易（欺诈率 1.02%）</div>
             </div>
             <div class="hero-stat">
-              <div class="hero-stat__num">−52%</div>
-              <div class="hero-stat__label">金额加权欺诈损失</div>
+              <div class="hero-stat__num">−51%</div>
+              <div class="hero-stat__label">金额加权欺诈损失（CI 44–57%）</div>
             </div>
             <div class="hero-stat">
               <div class="hero-stat__num">2</div>
@@ -135,13 +135,13 @@
             </li>
             <li>
               <span class="hero-stack__num">03</span>
-              <span class="hero-stack__name">显著性检验</span>
-              <span class="hero-stack__desc">卡方过滤营销渠道、浏览器、周末等伪信号</span>
+              <span class="hero-stack__name">折外阈值 + 成本扫描</span>
+              <span class="hero-stack__desc">阈值在训练折外预测上选定 0.59，罚金与手续费均做敏感性</span>
             </li>
             <li>
               <span class="hero-stack__num">04</span>
-              <span class="hero-stack__name">成本-阈值扫描</span>
-              <span class="hero-stack__desc">FP 罚金 $50–$200 敏感性分析，最优阈值 0.64</span>
+              <span class="hero-stack__name">单规则基线 + 时间切分回测</span>
+              <span class="hero-stack__desc">interval≤1 秒规则对照，时序切分下检验泛化</span>
             </li>
             <li>
               <span class="hero-stack__num">05</span>
@@ -159,15 +159,15 @@
       <div class="grid md:grid-cols-3 gap-6">
         <div class="summary-card">
           <h3 class="summary-card-title">业务挑战</h3>
-          <p class="summary-card-content">1.02% 的极端不平衡（1,415 / 138,376）让准确率失效——全判"正常"也有 98.98% 准确率却抓到零欺诈。目标是在不伤害新客的约束下最大化欺诈捕获。</p>
+          <p class="summary-card-content">1.02% 的极端不平衡（1,415 / 138,376）让准确率失效——全判"正常"也有 98.98% 准确率却抓到零欺诈。两类错误代价悬殊：漏判是一笔约 38 美元订单上有上限的拒付，误拒是一位好客户昂贵而弥散的首次印象。</p>
         </div>
         <div class="summary-card">
           <h3 class="summary-card-title">解决方案</h3>
-          <p class="summary-card-content">四个模型走同一套无泄漏协议公平对比，PR-AUC 全部打平在 0.535–0.541；选 LightGBM+SMOTE，并做成本敏感的阈值决策。</p>
+          <p class="summary-card-content">四个模型走同一套无泄漏协议公平对比，PR-AUC 全部打平在 0.535–0.541；选 LightGBM+SMOTE，阈值在训练折外预测上按成本选定 0.59，测试集只评估一次。</p>
         </div>
         <div class="summary-card">
           <h3 class="summary-card-title">商业价值</h3>
-          <p class="summary-card-content">拦截 0.53% 流量抓住 51.6% 欺诈、仅 2 个误报；金额加权欺诈损失 $14,503 → $6,939，降低约 52%。</p>
+          <p class="summary-card-content">拦截 0.53% 流量抓住 51.6% 欺诈、仅 2 个误报，金额加权损失 $14,503 → $7,139，降约 51%。而一条 interval≤1 秒的单规则抓到完全相同的 146 笔——模型的价值因此是可调分数与备用信号，而非增量抓捕。</p>
         </div>
       </div>
     </section>
@@ -181,10 +181,12 @@
             <ul class="mt-4 space-y-2" id="toc-list">
               <li><a href="#summary" class="toc-link" data-section="summary">执行摘要</a></li>
               <li><a href="#data" class="toc-link" data-section="data">数据与不平衡</a></li>
-              <li><a href="#eda" class="toc-link" data-section="eda">探索性分析</a></li>
+              <li><a href="#eda" class="toc-link" data-section="eda">两个信号</a></li>
               <li><a href="#models" class="toc-link" data-section="models">模型对比</a></li>
               <li><a href="#ceiling" class="toc-link" data-section="ceiling">召回天花板</a></li>
               <li><a href="#cost" class="toc-link" data-section="cost">成本与阈值</a></li>
+              <li><a href="#rule" class="toc-link" data-section="rule">单规则基线</a></li>
+              <li><a href="#backtest" class="toc-link" data-section="backtest">时间切分回测</a></li>
               <li><a href="#shap" class="toc-link" data-section="shap">模型依赖什么</a></li>
               <li><a href="#deployment" class="toc-link" data-section="deployment">分层策略与上线</a></li>
             </ul>
@@ -204,14 +206,14 @@
 
             <div class="space-y-6">
               <div class="contact-info-card">
-                <p class="subtitle mb-4">对 138,376 笔电商首单交易的分析，回答三个问题：用新用户的开局购买能多可靠地预测欺诈，为什么无论换什么模型召回都卡在 52% 左右，以及为什么默认阈值下的 98.6% 精确率衡量的是阈值而非模型。最终模型是 LightGBM + SMOTE，按 PR-AUC 调参。</p>
+                <p class="subtitle mb-4">某电商平台在线销售电子产品，必须在新用户的首单上、实时判定这笔交易是否欺诈。数据里 138,376 笔交易中有 1,415 笔欺诈，欺诈率 1.02%。两个特征几乎做了全部工作：注册到购买的间隔，以及有多少账号共享买家的设备。最终模型是 LightGBM + SMOTE，按 PR-AUC 调参。</p>
 
                 <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">四个发现</h3>
                 <ul class="list-disc list-inside space-y-3 subtitle mb-6">
-                  <li><strong>信号集中在两个特征，其余都是噪声。</strong>注册→购买时间间隔和设备共享账号数几乎承担全部判别力（SHAP 均值 2.52 与 2.42，其余均低于 0.7）；年龄、性别、金额、渠道、国家都没有可用信号。</li>
-                  <li><strong>召回被数据锁死在约 52%，不是模型问题。</strong>半数欺诈——注册后 1 秒内下单的 739 个账号——完全可分；另一半与正常首单几乎无法区分，因此召回稳定在 52% 左右，不随阈值或模型变化。</li>
-                  <li><strong>固定阈值下的精确率反映分数量纲，不是模型质量。</strong>同一 LightGBM 换成类别权重，排序能力完全相同（PR-AUC 0.54），0.5 阈值下精确率却只有 34%。</li>
-                  <li><strong>大多数类别信号过不了显著性检验。</strong>营销渠道不显著（卡方 p=0.27），周末注册不显著（p=0.26），国家仅凭样本量达到显著、幅度只有 0.44%–1.91%。</li>
+                  <li><strong>两个特征做全部工作，第三个的权重不到四分之一。</strong>间隔与设备共享的平均 SHAP 为 2.52 与 2.42，第三名只有 0.66；年龄、金额、渠道、国家都没有可用信号。</li>
+                  <li><strong>召回停在 52%，任何阈值只换来精确率。</strong>一半欺诈完全可分、一半对这套特征不可见，所以在这份数据上没有任何模型或阈值能越过召回 0.52。</li>
+                  <li><strong>一条规则抓到同样的 146 笔，模型在 0.59 处不多抓一笔。</strong>注册后 1 秒内拦截精确复现了运营点，且零误伤，模型是 2 笔。</li>
+                  <li><strong>可分欺诈只持续 13 天，时间切分下模型 PR-AUC 0.005。</strong>739 笔秒购全部落在时间轴开头 13 天，训练在它之前、测试在它之后的模型无从下手。</li>
                 </ul>
 
                 <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">结果速览</h3>
@@ -234,15 +236,19 @@
                       </tr>
                       <tr>
                         <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>排序质量（测试集）</strong></td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">PR-AUC 0.535，ROC-AUC 0.764</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">PR-AUC 0.535，四个模型彼此在噪声内</td>
                       </tr>
                       <tr>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>部署运营点</strong></td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">标记 0.53% 流量，抓住 51.6% 欺诈，27,393 笔中 2 个误报</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>运营点（折外选阈 0.59）</strong></td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">标记 0.53% 流量，抓 146/283（51.6%），2 个误报</td>
                       </tr>
                       <tr>
                         <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>金额加权欺诈损失</strong></td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">比全放行低约 52%</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">$14,503 → $7,139，降 51%（95% CI 44–57%）</td>
+                      </tr>
+                      <tr>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>单规则基线</strong></td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">间隔 ≤ 1 秒抓到同样的 146 笔欺诈，零误伤</td>
                       </tr>
                     </tbody>
                   </table>
@@ -263,54 +269,86 @@
 
             <div class="space-y-8">
               <div class="contact-info-card">
-                <p class="subtitle">数据很干净：138,376 行，无缺失、无重复。唯一主导性的事实是不平衡——欺诈率 1.02%，约 1/97。而只有 1,415 个欺诈样本，模型只能抓住强且重复的信号，这正是它最终只依赖两个特征的原因。</p>
+                <p class="subtitle mb-4"><strong>成本是不对称的，后续每个选择都由它决定。</strong>漏判欺诈是有界的一次性损失：货发出去，随后一笔拒付，落在均价约 38 美元的订单上。误拒好客户是另一种损失：当下的拒绝很便宜，但获取一位首单买家的成本很高，一次被拒可能让关系还没开始就结束，这个损失弥散且难以定价。既然被拦的首单比漏掉的更贵，系统调向高精确率，评估用 PR-AUC 而非准确率。</p>
+                <p class="subtitle">数据由课程提供、半合成，共两份 CSV：一张 138,376 行 × 11 列的交易表，一张 IP 区间到国家的对照表。数据本身干净——无缺失、无重复。唯一压倒性的事实是不平衡：欺诈是 138,376 笔中的 1,415 笔，约每 97 笔一笔。可学的欺诈样本只有约 1,415 个，模型只能抓强且重复的信号，这正是它最终依赖两个特征、忽略其余的原因。</p>
               </div>
 
               <div class="note note--process">
                 <div class="note__label">Method · 为什么评估用 PR-AUC，IP 用区间连接</div>
                 <div class="note__body">
                   <p><strong>准确率失效。</strong>对所有人预测"正常"就能拿 98.98% 的准确率却抓到零欺诈，所以评估改用精确率、召回率和 PR-AUC——后者不同于 ROC-AUC，对稀有类敏感。</p>
-                  <p><strong>IP→国家的高效还原。</strong>逐行扫描查找表是 O(n·m)；把两张表排序后用 <code>merge_asof</code> 做区间连接可一次完成。14.7% 的 IP 落在所有区间之外，标为 Unknown。</p>
+                  <p><strong>IP→国家的高效还原。</strong>逐行扫描查找表是 O(n·m)；把两张表排序后用 <code>merge_asof</code> 做区间连接可一趟完成，越过上界的回填为 Unknown。14.7% 的行未映射，映射到的最大国家是美国（53,023 笔）。国家随后被排除出模型，理由见下一节。</p>
                 </div>
               </div>
             </div>
           </section>
 
-          <!-- 探索性分析 -->
+          <!-- 两个信号 -->
           <section id="eda" class="section-padding section--editorial" data-section-num="02">
             <div class="section-header">
               <div class="section-eyebrow">
                 <span class="section-num">02</span>
-                <span class="section-kicker">Exploratory Analysis</span>
+                <span class="section-kicker">Two Signals</span>
               </div>
-              <h2 class="section-title">探索性分析说明了什么</h2>
+              <h2 class="section-title">两个信号</h2>
             </div>
 
             <div class="space-y-8">
-              <p class="subtitle"><strong>购买速度是主导信号。</strong>正常用户从注册到首单的中位间隔约 60 天，欺诈的中位间隔是 1 秒。1 秒内完成的 739 笔交易 100% 是欺诈，占全部欺诈的 52%。另一半欺诈散布在看似正常的间隔里——这是召回天花板的第一个迹象。</p>
+              <p class="subtitle">只有 1,415 笔欺诈时，小的率差极易被过度解读，所以每个分类对比都配一次显著性检验，一个模式只有既显著、幅度又足够大才算数。两个特征越过了这条线，其余没有。</p>
+
+              <p class="subtitle"><strong>购买速度是主信号。</strong>正常用户从注册到首单的中位间隔约 60 天，欺诈的中位间隔是 1 秒。注册后 1 秒内完成的 739 笔交易全部是欺诈，占全部欺诈的 52.2%。另一半欺诈散布在看起来正常的间隔上——这是召回天花板的第一个征兆。</p>
 
               <figure class="figure-editorial">
                 <img src="figures/eda_interval_speed.png" alt="注册到购买的间隔与按购买速度的欺诈率" loading="lazy" decoding="async" />
-                <figcaption>注册到购买的间隔与按购买速度的欺诈率——正常用户中位间隔约 60 天，欺诈是 1 秒；1 秒内的 739 笔交易 100% 欺诈。</figcaption>
+                <figcaption>左图里欺诈坍缩到最短的间隔上；右图按速度分档的欺诈率对秒购近乎全为欺诈、其余各档接近基础率。这个信号是速度上的一道阈值，不是渐变。</figcaption>
               </figure>
 
-              <p class="subtitle"><strong>设备共享是第二个信号，而金额根本不是信号。</strong>只绑定一个账号的设备几乎从不欺诈（0.35%）；一旦三个及以上账号共用一台设备，欺诈率升到 58%。金额则在两类间几乎相同（欺诈均值 $37.9 vs 正常 $36.9）——欺诈者刻意在普通金额区间交易。</p>
+              <p class="subtitle"><strong>设备共享是第二个信号，金额根本不是。</strong>只挂一个账号的设备几乎从不欺诈（0.35%）；一旦三个及以上账号共享一台设备，欺诈率达到 58%——欺诈团伙的指纹。金额则在两类间几乎相同（欺诈均值 $37.87 vs 正常 $36.93），欺诈者刻意在普通金额上交易，任何"拦大额"的规则都会漏掉他们。</p>
+
+              <div class="overflow-x-auto">
+                <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
+                  <thead>
+                    <tr class="bg-gray-100 dark:bg-gray-700/30">
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">设备上的账号数</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">欺诈率</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">交易数</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">1 个账号</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.35%</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">130,212</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">2 个及以上</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">11.73%</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">8,164</td>
+                    </tr>
+                    <tr class="bg-green-50 dark:bg-green-900/20">
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>3 个及以上</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>58.19%</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">842</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
 
               <figure class="figure-editorial">
                 <img src="figures/eda_value_device.png" alt="按类别的金额分布与按设备共享数的欺诈率" loading="lazy" decoding="async" />
-                <figcaption>按类别的金额分布与按设备共享数的欺诈率——金额几乎无信号，设备共享 ≥3 个账号时欺诈率达 58%。</figcaption>
+                <figcaption>左图两类的购买金额分布几乎重叠，金额不带信号；右图欺诈率随设备共享陡升。</figcaption>
               </figure>
 
               <div class="note note--evidence">
-                <div class="note__label">Significance · 渠道和浏览器的故事站不住</div>
+                <div class="note__label">Significance · 过不了检验的模式</div>
                 <div class="note__body">
-                  <p>按欺诈率排序时差异看着有戏，显著性检验却把它们抹平：渠道不显著（p=0.27），浏览器仅凭样本量达到 p=0.007、幅度只有可忽略的 0.86%–1.13%。只有 1,415 个欺诈样本时，微小的比率差异极易被过度解读，所以每个差异都先检验再采信。</p>
+                  <p>购买金额、人口属性都无信号。分类字段里，营销渠道不显著（卡方 p = 0.272），周末注册不显著（p = 0.255）。浏览器和国家达到显著（p = 0.007、p = 0.004），纯粹因为样本量大，而幅度都小（浏览器 0.86%–1.13%；较大国家 0.44%–1.91%）。国家因此被排除出模型：地理信号太弱，加进来引入的噪声大于贡献。</p>
                 </div>
               </div>
 
               <figure class="figure-editorial">
                 <img src="figures/eda_source_browser.png" alt="按营销渠道与按浏览器的欺诈率" loading="lazy" decoding="async" />
-                <figcaption>按营销渠道与按浏览器的欺诈率——排序上看似有差异，卡方检验后均不构成可用信号。</figcaption>
+                <figcaption>每根条都贴着整体率虚线，那些达到统计显著的率差在运营上可以忽略——这些字段不是建模信号。</figcaption>
               </figure>
             </div>
           </section>
@@ -322,7 +360,7 @@
                 <span class="section-num">03</span>
                 <span class="section-kicker">Model Bake-off</span>
               </div>
-              <h2 class="section-title">公平比较的模型</h2>
+              <h2 class="section-title">分数刻度的假象</h2>
             </div>
 
             <div class="space-y-8">
@@ -334,47 +372,52 @@
                 <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
                   <thead>
                     <tr class="bg-gray-100 dark:bg-gray-700/30">
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">模型</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">模型（5 折 CV，SMOTE 折内）</th>
                       <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">PR-AUC</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">标准差</th>
                       <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">ROC-AUC</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Logistic Regression (SMOTE)</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">逻辑回归</td>
                       <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.535</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.052</td>
                       <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.757</td>
                     </tr>
                     <tr>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Random Forest (SMOTE)</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.541</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">随机森林</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>0.541</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.049</td>
                       <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.762</td>
                     </tr>
                     <tr class="bg-green-50 dark:bg-green-900/20">
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>LightGBM (SMOTE)</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>LightGBM（SMOTE）</strong></td>
                       <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.540</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.050</td>
                       <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.758</td>
                     </tr>
                     <tr>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">LightGBM (weighted)</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.541</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.763</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">LightGBM（类别权重）</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>0.541</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.052</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>0.763</strong></td>
                     </tr>
                   </tbody>
                 </table>
               </div>
 
-              <p class="subtitle">四者都落在 0.535–0.541 的区间，其宽度小于 ±0.05 的折间标准差——它们打平。我们选用调参后的 LightGBM + SMOTE（测试集 PR-AUC 0.535），同时指出逻辑回归本可作为更简单、同样成立的选择。</p>
+              <p class="subtitle">四个都落在 PR-AUC 0.535 到 0.541，而折间标准差约 0.05，比任何模型间的差都大——它们打平。逻辑回归追平了梯度提升模型，说明信号活在每个模型都能找到的两个特征里，复杂度买不到东西。最终选 LightGBM + SMOTE，取其速度与对特征类型的原生处理，在紧凑网格上调出 <code>learning_rate 0.05</code>、<code>n_estimators 400</code>、<code>num_leaves 31</code>；测试集默认 0.5 阈值下读数为 PR-AUC 0.535、ROC-AUC 0.764、精确率 0.986、召回 0.516。</p>
 
               <figure class="figure-editorial">
                 <img src="figures/calibration.png" alt="两种不平衡策略的校准曲线" loading="lazy" decoding="async" />
-                <figcaption>两种不平衡策略的校准曲线——SMOTE 版整体接近校准（预测概率均值 0.010，贴近真实 1.02%），权重版偏高（0.125）。</figcaption>
+                <figcaption>SMOTE 曲线贴着对角线，分数可以当概率读；权重曲线远在对角线之上，高估风险。同样的排序、不同的刻度，而这个刻度就是 98.6% 精确率与 34% 之间的全部差别。</figcaption>
               </figure>
 
               <div class="note note--caveat">
                 <div class="note__label">Artifact · 98.6% 精确率衡量的是阈值，不是模型</div>
                 <div class="note__body">
-                  <p>模型在 0.5 阈值下达到 98.6% 精确率，但同一 LightGBM 换成类别权重（<code>scale_pos_weight</code>）而非 SMOTE，排序能力完全相同（PR-AUC 0.54），在 0.5 阈值下精确率却只有 34%——因为它把分数放在了不同的量纲上（预测概率均值 0.125，对比 SMOTE 版的 0.010）。固定阈值下的精确率反映的是阈值落在双峰分数分布的哪个位置，而不是哪个模型更好。</p>
+                  <p>SMOTE 模型与类别权重变体给出相同的排序能力（PR-AUC 0.536），可在固定 0.5 阈值下，SMOTE 模型显示 98.6% 精确率，权重模型只有 34%。差异全在分数刻度：权重模型的平均预测概率是 0.125，是真实 1.02% 率的十二倍；SMOTE 模型的平均预测概率是 0.010，贴近真实率。在 0.5 阈值处测得的精确率，只告诉你这个阈值落在分数分布的哪里，不告诉你哪个模型排序更好。保留 SMOTE 模型，是因为它近似校准，让分数在第 09 节被转成分层时可以当概率读。</p>
                 </div>
               </div>
             </div>
@@ -391,26 +434,26 @@
             </div>
 
             <div class="space-y-8">
-              <p class="subtitle">精确率-召回率曲线在召回 0.52 之前维持精确率约 1.0，随后断崖下跌。扫描阈值可见召回全程平贴在 0.52，而精确率在爬升——阈值换来的是精确率，不是召回。分数直方图解释了原因：预测值堆在 0 附近或 1 附近，中间几乎没有。接近 1.0 的欺诈是 instant-purchase 那一半，唾手可得；另一半的分数低到与正常流量无异，任何阈值都救不回来。</p>
+              <p class="subtitle">精确率-召回率曲线把精确率保持在 1.0 附近直到召回 0.52，随后跳崖；召回在每个阈值上都平在 0.52 左右，只有精确率在爬升——阈值换来的是精确率，不是召回。分数直方图解释了原因：预测堆在 0 附近或 1 附近，中间几乎没有。靠近 1.0 的欺诈是秒购那一半，平凡可抓；另一半的分数低到与正常流量无异，没有任何阈值能捞回来。</p>
 
               <figure class="figure-editorial">
                 <img src="figures/threshold_pr.png" alt="精确率-召回率曲线与精确率/召回率随阈值变化" loading="lazy" decoding="async" />
-                <figcaption>精确率-召回率曲线与精确率/召回率随阈值变化——召回全程平贴 0.52，阈值只换来精确率。</figcaption>
+                <figcaption>左图 PR 曲线在召回 0.52 处竖直下坠；右图召回始终平直，只有精确率随阈值响应。过了 0.52，移动阈值是用误伤换不来更多抓捕。</figcaption>
               </figure>
 
               <figure class="figure-editorial">
                 <img src="figures/score_distribution.png" alt="预测分数呈双峰分布" loading="lazy" decoding="async" />
-                <figcaption>预测分数呈双峰分布——欺诈分数堆在 0 或 1 两端，中间几乎为空，这正是召回天花板的成因。</figcaption>
+                <figcaption>在对数计数轴上，两类都聚在两端，中间近乎空。双峰分数就是为什么两峰之间任何阈值选出的是同一批交易。</figcaption>
               </figure>
 
               <div class="contact-info-card">
-                <p class="subtitle">这是特征集的诚实上限。测试集上调参模型抓住 283 笔欺诈中的 146 笔（51.6%），误报为 27,393 笔正常交易中的 2 笔（混淆矩阵 TN 27,391 / FP 2 / FN 137 / TP 146）。</p>
+                <p class="subtitle">这是特征集的诚实上限，是数据的属性而非模型的缺陷。测试集上调参模型抓住 283 笔欺诈中的 146 笔（51.6%），误报为 27,393 笔正常交易中的 2 笔（混淆矩阵 TN 27,391 / FP 2 / FN 137 / TP 146）。一半欺诈完全可分、一半对这套特征不可见，所以在这份数据上没有任何阈值、任何模型能越过召回 0.52。</p>
               </div>
 
               <div class="note note--caveat">
                 <div class="note__label">Data caveat · 线上召回大概率更低</div>
                 <div class="note__body">
-                  <p>本数据集的构造让 instant-purchase 与设备共享模式异常干净，这正是前两个特征如此主导、且 instant-purchase 簇 100% 欺诈的原因。真实流量里这些信号会更嘈杂，所以线上召回大概率低于 52%，而非更高。</p>
+                  <p>本数据集的构造让秒购与设备共享模式异常干净，这正是前两个特征如此主导、且秒购簇 100% 欺诈的原因。真实流量里这些信号会更嘈杂，所以线上召回大概率低于 52%，而非更高。</p>
                 </div>
               </div>
             </div>
@@ -423,86 +466,220 @@
                 <span class="section-num">05</span>
                 <span class="section-kicker">Cost &amp; Threshold</span>
               </div>
-              <h2 class="section-title">成本与阈值决策</h2>
+              <h2 class="section-title">运营点</h2>
             </div>
 
             <div class="space-y-8">
-              <p class="subtitle">0.5 阈值不是业务决策。给两类错误定价能把权衡摆明：漏报的成本是丢失的商品加一笔固定拒付费，按每笔交易的真实金额计算；误报的成本是拦下一位优质新客的固定罚金，其真实价值是业务假设而非可测数字，故做敏感性扫描。</p>
+              <p class="subtitle">0.5 阈值不是业务决策。在测试集上扫出的阈值，是在评估它的同一批数据上被优化的，所以扫描落在<strong>训练集的折外预测</strong>上，测试集只在选定阈值下用一次。成本模型把漏判欺诈定价为该笔的购买金额加一笔固定 15 美元拒付费，把误拒好客户定价为一个固定罚金、从 50 扫到 200 美元；15 美元的手续费本身也是假设，一并扫描（8、15、30 美元）。</p>
 
               <div class="overflow-x-auto">
                 <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
                   <thead>
                     <tr class="bg-gray-100 dark:bg-gray-700/30">
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">误报罚金</th>
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">最优阈值</th>
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">总成本</th>
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">对比全放行</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">误伤罚金</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">阈值（折外选）</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">测试集成本</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">低于不作为</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
                       <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">$50</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.64</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">$6,939</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">−52%</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.59</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">$7,039</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">51%</td>
                     </tr>
-                    <tr>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">$100</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.64</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">$6,939</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">−52%</td>
+                    <tr class="bg-green-50 dark:bg-green-900/20">
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>$100</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.59</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">$7,139</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">51%</td>
                     </tr>
                     <tr>
                       <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">$200</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.64</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">$6,939</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">−52%</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.59</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">$7,339</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">49%</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="subtitle text-sm" style="opacity:.8;">不作为基线（全部批准）在测试集上成本 $14,503。手续费扫描（8、15、30 美元）同样把阈值留在 0.59、降幅留在 51%。</p>
+
+              <p class="subtitle">阈值落在 0.59 的平台上，每种成本假设都如此，原因是第 04 节的双峰分数：分数堆在 0 与 1 附近，两峰之间任何阈值选出同一批交易，成本假设不是敏感输入。在测试集上评估一次，这个运营点标记 0.53% 的流量，抓到 283 笔欺诈中的 146 笔（精确率 0.986、召回 0.516、两笔误伤），把金额加权损失从 $14,503 降到 $7,139，降幅 51%。</p>
+
+              <div class="note note--evidence">
+                <div class="note__label">Uncertainty · Bootstrap ×2,000</div>
+                <div class="note__body">
+                  <p>测试集只有 283 笔欺诈，头条数字带着真实的抽样噪声。对测试集做 2,000 次 bootstrap，成本降幅是 51%、95% 区间 [44%, 57%]，召回 51.6%、区间 [45.6%, 57.4%]。区间宽到头条应引用"约一半"而不是三位小数，但没有任何合理的重采样会改变这个数字所支撑的决策。</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 单规则基线 -->
+          <section id="rule" class="section-padding section--editorial" data-section-num="06">
+            <div class="section-header">
+              <div class="section-eyebrow">
+                <span class="section-num">06</span>
+                <span class="section-kicker">Single-Rule Baseline</span>
+              </div>
+              <h2 class="section-title">单规则基线</h2>
+            </div>
+
+            <div class="space-y-8">
+              <p class="subtitle">51% 的降幅对比的是"全部批准"，而没有哪家运营真这么做。正确的比较对象，是探索阶段已经交到手上的最简单规则：注册后 1 秒内完成的购买全是欺诈，那就拦掉——工程师一个下午就能上线。在把降幅记到模型头上之前，值得先看看这条规则单独已经拿走了多少。</p>
+
+              <div class="overflow-x-auto">
+                <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
+                  <thead>
+                    <tr class="bg-gray-100 dark:bg-gray-700/30">
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">决策</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">精确率</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">召回</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">误伤</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">成本</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">低于不作为</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="bg-green-50 dark:bg-green-900/20">
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>规则：间隔 ≤ 1 秒</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>1.000</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.516</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>0</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>$6,939</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>52%</strong></td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">模型 @ 阈值 0.59</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.986</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.516</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">2</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">$7,139</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">51%</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="subtitle text-sm" style="opacity:.8;">同一成本模型，误伤罚金 100 美元。两者抓到同样的 146 笔；模型没多抓规则漏掉的，也没漏掉规则抓到的。</p>
+
+              <p class="subtitle">在这个运营点上，规则和模型抓到同样的 146 笔欺诈。模型没在规则之外多抓一笔，也没漏掉规则的任何一笔；它甚至更贵一点，因为它的两笔误伤比规则的零笔多两笔。模型在这里做的每一件事，一条 <code>if</code> 语句都已经做到了。</p>
+
+              <div class="note note--insight">
+                <div class="note__label">Insight · 模型多买到的是什么</div>
+                <div class="note__body">
+                  <p>规则抓到 146 笔，模型抓到同样的 146 笔。训练出来的模型还提供的东西不是增量抓捕：是一份可以支撑其他运营点或复核队列的可调分数，加一个这个阈值恰好用不上的第二信号，即设备共享。钉在"1 秒"上的规则对切点很脆、且对速度以外一切失明；模型带着一份校准过的概率和一个备用的团伙信号。所以先上规则、模型垫后，是站得住的上线顺序——但任何关于模型价值的说法，都得用这些词来讲，而不是讲它在运营点上多抓了欺诈。</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 时间切分回测 -->
+          <section id="backtest" class="section-padding section--editorial" data-section-num="07">
+            <div class="section-header">
+              <div class="section-eyebrow">
+                <span class="section-num">07</span>
+                <span class="section-kicker">Time-Split Backtest</span>
+              </div>
+              <h2 class="section-title">时段模式的转变</h2>
+            </div>
+
+            <div class="space-y-8">
+              <p class="subtitle">头条评估有两处比生产更宽容：切分是随机的，训练与测试行来自同一时期；共享计数是在整个训练窗口上算的，而线上系统只知道每笔交易之前的历史。最终配置在时间顺序的 80/20 切分下重跑，计数用两种口径——同一套训练窗口 <code>CountEncoder</code>，以及每行只看截至自身历史的因果计数——把时间漂移与特征计算方式分开。</p>
+
+              <div class="overflow-x-auto">
+                <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
+                  <thead>
+                    <tr class="bg-gray-100 dark:bg-gray-700/30">
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">切分</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">PR-AUC</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">ROC-AUC</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">精确率 @0.5</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">召回 @0.5</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="bg-green-50 dark:bg-green-900/20">
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>随机切分（第 03 节流水线）</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>0.535</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>0.764</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>0.986</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>0.516</strong></td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">时间切分，训练窗口计数</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.005</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.490</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.000</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.000</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">时间切分，因果计数</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.005</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.522</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.000</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.000</td>
                     </tr>
                   </tbody>
                 </table>
               </div>
 
-              <p class="subtitle">因为分数是双峰的，最优阈值对罚金的具体取值不敏感——$50 到 $200 都落在 0.6 附近，金额加权的欺诈损失（$14,503 → $6,939）比全放行低约 52%（模型抓住了 instant-purchase 那一半，它承担了约一半的总欺诈金额）。极高的误报成本会把阈值推高到纯 instant-purchase 簇（召回约 0.52，几乎零误报）；较低的误报成本会把它拉低，用精确率换几个额外的抓获。平坦的最优区间让业务可以优先保精确率而几乎不损召回。</p>
+              <p class="subtitle">时间切分下模型坍缩到随机水平：PR-AUC 掉到 0.005（流行率水平），ROC-AUC 在 0.5 附近。因果计数与训练窗口计数没有差别，所以坍缩不是特征计算的问题，是时段的转变。欺诈率从时间轴前 80% 的 1.16% 稀释到后 20% 的 0.47%，可分的那簇完全消失：739 笔秒购全部落在 2015 年 1 月 1 日到 1 月 13 日之间，后段窗口一笔都没有，后段欺诈的间隔停在看似正常的水平、中位约 90 天。</p>
+
+              <div class="note note--caveat">
+                <div class="note__label">Caveat · 头条数字条件于训练窗口的时段</div>
+                <div class="note__body">
+                  <p>可学的特征是一次爆发，不是常态——它占据数据开头的 13 天。头条数字描述的是秒购与设备农场爆发存在时模型抓什么，而不是安静月份它抓什么。这种突然性部分是半合成构造的产物，把全部可分欺诈种进 13 天里，所以这个切分夸大了真实系统衰减的陡峭程度。在线上，实用的防御是时段监控（秒购占比、设备共享率）加重训触发器，而不是这个特定切分。</p>
+                </div>
+              </div>
             </div>
           </section>
 
           <!-- 模型依赖什么 -->
-          <section id="shap" class="section-padding section--editorial" data-section-num="06">
+          <section id="shap" class="section-padding section--editorial" data-section-num="08">
             <div class="section-header">
               <div class="section-eyebrow">
-                <span class="section-num">06</span>
+                <span class="section-num">08</span>
                 <span class="section-kicker">What the Model Uses</span>
               </div>
-              <h2 class="section-title">模型依赖什么</h2>
+              <h2 class="section-title">双特征模型</h2>
             </div>
 
             <div class="space-y-8">
-              <p class="subtitle">测试集上的 SHAP 用平实的话印证了两特征的故事：signup 到 purchase 的短间隔是最强的"欺诈"推力（真实客户会浏览、会再来；自动化或盗用凭证的购买在几秒内完成），设备被多账号共享是第二强（欺诈团伙的指纹）。其余一切——性别、周末、浏览器、小时——只贡献前两者权重的一小部分，更应读作轻微相关而非真实驱动。模型忽略了年龄、金额和营销渠道。</p>
+              <p class="subtitle">面对"向非技术干系人解释"这个问题，SHAP 把每个预测归因到它的特征，在最终模型上、在测试集上计算，结果印证了探索：间隔特征得分 2.517，设备共享 2.420，排第三的 sex 只有 0.664，小了近四倍。用大白话说，模型问两个问题——买家等了多久（短间隔强推向欺诈），以及有多少账号共享设备（高计数是团伙模式）。其余一切只贡献前两名权重的一小部分，更该读作轻微相关而非真实驱动。</p>
 
               <figure class="figure-editorial">
                 <img src="figures/shap_beeswarm.png" alt="SHAP 特征重要性（beeswarm）" loading="lazy" decoding="async" />
-                <figcaption>SHAP 特征重要性（beeswarm）——注册→购买间隔与设备共享数两个特征主导判别，其余特征贡献微弱。</figcaption>
+                <figcaption>短间隔与高设备共享计数把预测推向欺诈；其余特征都聚在零影响附近。</figcaption>
               </figure>
 
               <figure class="figure-editorial">
                 <img src="figures/shap_bar.png" alt="SHAP 平均绝对贡献排序" loading="lazy" decoding="async" />
-                <figcaption>SHAP 平均绝对贡献排序——两个头部特征均值 2.52 与 2.42，其余全部低于 0.7。</figcaption>
+                <figcaption>按特征的平均绝对 SHAP。前两名与第三名之间的落差就是全部故事：这是一个双特征模型。</figcaption>
               </figure>
+
+              <div class="note note--caveat">
+                <div class="note__label">Caveat · 半合成把告诫推到最尖锐处</div>
+                <div class="note__body">
+                  <p>这份数据的构造使秒购与设备共享模式异常干净，这正是前两个特征如此主导、秒购簇 100% 欺诈的原因。在真实流量上这些信号会更噪，所以真实世界的召回大概率低于这里看到的 52%，而不是更高。</p>
+                </div>
+              </div>
             </div>
           </section>
 
           <!-- 分层策略与上线 -->
-          <section id="deployment" class="section-padding section--editorial" data-section-num="07">
+          <section id="deployment" class="section-padding section--editorial" data-section-num="09">
             <div class="section-header">
               <div class="section-eyebrow">
-                <span class="section-num">07</span>
+                <span class="section-num">09</span>
                 <span class="section-kicker">Productionizing</span>
               </div>
-              <h2 class="section-title">把分数落成产品决策</h2>
+              <h2 class="section-title">分数分层</h2>
             </div>
 
             <div class="space-y-8">
-              <p class="subtitle">对最终模型测试集分数分箱，能看出真实的分层长什么样：</p>
+              <p class="subtitle">驱动政策的应该是分数分布，而不是一个圆整数切点。把最终模型的测试集分数分箱，就能看到真实的分层长什么样——三档，只有两档承重。</p>
 
               <div class="overflow-x-auto">
                 <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
@@ -529,7 +706,7 @@
                     </tr>
                     <tr>
                       <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">低（&lt; 0.3）：自动放行</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">99.5%</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">99.46%</td>
                       <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.5%</td>
                       <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">137</td>
                     </tr>
@@ -540,16 +717,18 @@
               <div class="note note--insight">
                 <div class="note__label">Insight · 中间层几乎为空</div>
                 <div class="note__body">
-                  <p>高风险层——0.53% 流量、几乎全是欺诈——实时拒绝并转人工复核，抓住约 52% 的欺诈且几乎零误报。低风险层无摩擦自动放行，也正是被漏掉的那一半欺诈藏身之处。中间层几乎为空：模型不会在 0.5–0.9 产生有意义的"不确定"人群，所以基于这些分数搭的二次验证通道会几乎空转。要多抓欺诈，就得主动把高风险层阈值下调进低精确率区间，每多抓一笔都要付出迅速上升的误报。</p>
+                  <p>高风险层——0.53% 流量、在这份样本里 100% 欺诈——实时拒绝并转人工复核，抓住全部欺诈的 52% 且几乎零误报，而第 06 节已证明一条单规则就能复现它，所以先上规则、模型垫后是站得住的上线顺序。低风险层无摩擦自动放行，也正是被漏掉的那一半欺诈藏身之处。中间层近乎空置、只有 4 笔：想捞回一部分漏掉的欺诈，只能主动把高档阈值往低精确率区压，那是有代价的取舍，不是一条免费的档位。</p>
                 </div>
               </div>
 
               <div class="contact-info-card">
-                <h3 class="text-xl font-semibold mb-3" style="color: var(--dark);">上线前检查</h3>
+                <h3 class="text-xl font-semibold mb-3" style="color: var(--dark);">局限与下一步</h3>
                 <ul class="list-disc list-inside space-y-2 subtitle">
-                  <li>用按时间排序的回测验证共享计数特征（它们目前假设了全量历史）。</li>
-                  <li>在线上流量对照半合成的干净划分监控精确率与召回。</li>
-                  <li>先在小流量切片上做 A/B 测试，跟踪抓获欺诈、误报率和首单转化。</li>
+                  <li><strong>可学的信号是一个时段模式。</strong>全部可分欺诈落在 13 天的爆发里；部署需要的是时段监控（秒购占比、设备共享率）和重训触发器，而不是一个更好的分类器。</li>
+                  <li><strong>计数特征假设历史已积累。</strong>设备与 IP 计数是在训练窗口上算的；第 07 节的因果计数跑法，是等到有平稳数据后量化这个差距的模板。</li>
+                  <li><strong>召回受特征所限，不受模型所限。</strong>抬高天花板需要新信号，如设备指纹、跨用户速度、支付工具情报，而不是一个更大的模型。</li>
+                  <li><strong>数据是半合成的。</strong>线上应监控精确率与召回，并用人工复核队列确认的标签重训模型。</li>
+                  <li><strong>灰度上 A/B 测试。</strong>在小流量切片上跟踪抓到的欺诈、误报率与首单转化，再全量上线。</li>
                 </ul>
               </div>
             </div>
@@ -573,7 +752,7 @@
           return false;
         ">
           <h3 class="related-project-title">Lending Hub 贷款违约预测</h3>
-          <p class="related-project-description">成本 4.2:1 不对称下的阈值决策，抓住 74.9% 违约</p>
+          <p class="related-project-description">成本 4.2:1 不对称下的阈值决策，一条期限规则拿走大部分降幅</p>
           <div class="related-project-link">
             <span>查看详情</span>
             <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>
