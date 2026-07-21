@@ -413,7 +413,6 @@ html.dark .note {
   line-height: 1.5;
   color: var(--brown);
   margin-top: var(--space-sm);
-  max-width: 60ch;
   text-align: left;
 }
 
