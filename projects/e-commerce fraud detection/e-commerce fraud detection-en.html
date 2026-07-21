@@ -97,7 +97,7 @@
             <span class="section-kicker">Case Study · Risk Control &amp; Imbalanced Classification</span>
           </div>
           <h1 class="hero-title mt-2">E-commerce First-Transaction Fraud Detection: The Recall Ceiling and a Scale Artifact</h1>
-          <p class="subtitle mt-4 max-w-xl">Two features carry all the signal, recall is capped near 52% by the data rather than the model, and the value-weighted loss falls about half. A one-line rule reproduces that operating point almost exactly — so the model's value is a graded score and a regime it must be monitored against, well short of incremental catch.</p>
+          <p class="subtitle mt-4 max-w-xl">Two features carry all the signal, recall is capped near 52% by the data rather than the model, and the value-weighted loss falls about half. A one-line rule reproduces that operating point almost exactly; so the model's value is a graded score and a regime it must be monitored against, well short of incremental catch.</p>
           <div class="reading-time">~13 min read<span class="sep">·</span>8 figures</div>
 
           <div class="hero-stats">
@@ -159,7 +159,7 @@
       <div class="grid md:grid-cols-3 gap-6">
         <div class="summary-card">
           <h3 class="summary-card-title">The Challenge</h3>
-          <p class="summary-card-content">A 1.02% imbalance (1,415 / 138,376) makes accuracy useless — predicting "legitimate" for everyone scores 98.98% and catches zero fraud. The two errors cost very differently: a miss is a bounded chargeback on a ~$38 order, a wrongful block is an expensive, diffuse first impression.</p>
+          <p class="summary-card-content">A 1.02% imbalance (1,415 / 138,376) makes accuracy useless: predicting "legitimate" for everyone scores 98.98% and catches zero fraud. The two errors cost very differently: a miss is a bounded chargeback on a ~$38 order, a wrongful block is an expensive, diffuse first impression.</p>
         </div>
         <div class="summary-card">
           <h3 class="summary-card-title">The Approach</h3>
@@ -167,7 +167,7 @@
         </div>
         <div class="summary-card">
           <h3 class="summary-card-title">The Value</h3>
-          <p class="summary-card-content">Flags 0.53% of traffic to catch 51.6% of fraud with only 2 false positives, cutting value-weighted loss $14,503 → $7,139, about 51%. A single interval≤1s rule catches the exact same 146 cases — so the model's value is a graded score and a backup signal, not incremental catch.</p>
+          <p class="summary-card-content">Flags 0.53% of traffic to catch 51.6% of fraud with only 2 false positives, cutting value-weighted loss $14,503 → $7,139, about 51%. A single interval≤1s rule catches the exact same 146 cases; so the model's value is a graded score and a backup signal, not incremental catch.</p>
         </div>
       </div>
     </section>
@@ -227,7 +227,7 @@
                     </thead>
                     <tbody>
                       <tr>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Transactions analysed</strong></td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Transactions analyzed</strong></td>
                         <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">138,376 (1,415 fraud, 1.02%)</td>
                       </tr>
                       <tr>
@@ -269,14 +269,14 @@
 
             <div class="space-y-8">
               <div class="contact-info-card">
-                <p class="subtitle mb-4"><strong>The cost is asymmetric, and every downstream choice follows from it.</strong> A missed fraud is a bounded, one-off loss: the goods ship and a chargeback follows, on an order averaging about $38. A blocked good customer is a different loss: the immediate decline is cheap, but acquiring a first-time buyer was expensive and a declined first purchase can end the relationship before it starts — a loss that is diffuse and hard to price. Because a blocked first transaction is costlier than a missed one, the system is tuned for high precision and evaluated on PR-AUC instead of accuracy.</p>
-                <p class="subtitle">The dataset is course-provided and semi-synthetic: two CSVs, a transaction table of 138,376 rows by 11 columns and an IP-range-to-country lookup. The data is clean — no missing values, no duplicate rows. The single dominant fact is the imbalance: fraud is 1,415 of 138,376 transactions, roughly one in 97. Only about 1,415 fraud examples exist to learn from, so the model can latch only onto signals that are strong and repeated — which is why it ends up relying on two features and ignoring the rest.</p>
+                <p class="subtitle mb-4"><strong>The cost is asymmetric, and every downstream choice follows from it.</strong> A missed fraud is a bounded, one-off loss: the goods ship and a chargeback follows, on an order averaging about $38. A blocked good customer is a different loss: the immediate decline is cheap, but acquiring a first-time buyer was expensive and a declined first purchase can end the relationship before it starts, a loss that is diffuse and hard to price. Because a blocked first transaction is costlier than a missed one, the system is tuned for high precision and evaluated on PR-AUC instead of accuracy.</p>
+                <p class="subtitle">The dataset is course-provided and semi-synthetic: two CSVs, a transaction table of 138,376 rows by 11 columns and an IP-range-to-country lookup. The data is clean: no missing values, no duplicate rows. The single dominant fact is the imbalance: fraud is 1,415 of 138,376 transactions, roughly one in 97. Only about 1,415 fraud examples exist to learn from, so the model can latch only onto signals that are strong and repeated, which is why it ends up relying on two features and ignoring the rest.</p>
               </div>
 
               <div class="note note--process">
                 <div class="note__label">Method · Why PR-AUC, and IP by interval join</div>
                 <div class="note__body">
-                  <p><strong>Accuracy fails.</strong> Predicting "legitimate" for everyone scores 98.98% accuracy and catches zero fraud, so evaluation uses precision, recall, and PR-AUC — which, unlike ROC-AUC, is sensitive to the rare class.</p>
+                  <p><strong>Accuracy fails.</strong> Predicting "legitimate" for everyone scores 98.98% accuracy and catches zero fraud, so evaluation uses precision, recall, and PR-AUC, which, unlike ROC-AUC, is sensitive to the rare class.</p>
                   <p><strong>Efficient IP→country recovery.</strong> Scanning the lookup table per row is O(n·m); instead both tables are sorted and joined in one pass with <code>merge_asof</code>, backfilling to Unknown past an upper bound. That leaves 14.7% of rows unmapped, with the United States the largest mapped country at 53,023. Country is later dropped for the reason in the next section.</p>
                 </div>
               </div>
@@ -294,16 +294,16 @@
             </div>
 
             <div class="space-y-8">
-              <p class="subtitle">With only 1,415 fraud cases, small differences in fraud rate are easy to over-read, so every categorical comparison is paired with a significance test — a pattern counts only if it is both significant and large enough to matter. Two features clear that bar; the rest do not.</p>
+              <p class="subtitle">With only 1,415 fraud cases, small differences in fraud rate are easy to over-read, so every categorical comparison is paired with a significance test; a pattern counts only if it is both significant and large enough to matter. Two features clear that bar; the rest do not.</p>
 
-              <p class="subtitle"><strong>Purchase speed is the dominant signal.</strong> Legitimate users take a median of about 60 days between signing up and their first purchase; fraud takes a median of one second. Every one of the 739 transactions completed within one second of signup is fraud, and those account for 52.2% of all fraud in the data. The other half of fraud is spread across normal-looking intervals — the first sign of the recall ceiling.</p>
+              <p class="subtitle"><strong>Purchase speed is the dominant signal.</strong> Legitimate users take a median of about 60 days between signing up and their first purchase; fraud takes a median of one second. Every one of the 739 transactions completed within one second of signup is fraud, and those account for 52.2% of all fraud in the data. The other half of fraud is spread across normal-looking intervals, the first sign of the recall ceiling.</p>
 
               <figure class="figure-editorial">
                 <img src="figures/eda_interval_speed.png" alt="Signup-to-purchase interval and fraud rate by speed" loading="lazy" decoding="async" />
                 <figcaption>Fraud collapses onto the shortest intervals (left); the fraud rate by speed band (right) is near-total for instant purchases and near the base rate everywhere else. The signal is a threshold on speed, not a gradient.</figcaption>
               </figure>
 
-              <p class="subtitle"><strong>Device sharing is the second signal; amount is not one.</strong> A device tied to a single account is almost never fraud (0.35%); once three or more accounts share one, the fraud rate is 58% — the fraud-ring fingerprint. Amount is nearly identical across classes (fraud averages $37.87 against a legitimate $36.93): fraudsters transact at ordinary amounts on purpose, and any "flag large purchases" rule would miss them.</p>
+              <p class="subtitle"><strong>Device sharing is the second signal; amount is not one.</strong> A device tied to a single account is almost never fraud (0.35%); once three or more accounts share one, the fraud rate is 58%, the fraud-ring fingerprint. Amount is nearly identical across classes (fraud averages $37.87 against a legitimate $36.93): fraudsters transact at ordinary amounts on purpose, and any "flag large purchases" rule would miss them.</p>
 
               <div class="overflow-x-auto">
                 <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
@@ -348,7 +348,7 @@
 
               <figure class="figure-editorial">
                 <img src="figures/eda_source_browser.png" alt="Fraud rate by marketing source and browser" loading="lazy" decoding="async" />
-                <figcaption>Every bar sits close to the dashed overall-rate line, and the spreads that reach significance are operationally negligible — these fields are not modeling signal.</figcaption>
+                <figcaption>Every bar sits close to the dashed overall-rate line, and the spreads that reach significance are operationally negligible: these fields are not modeling signal.</figcaption>
               </figure>
             </div>
           </section>
@@ -365,7 +365,7 @@
 
             <div class="space-y-8">
               <div class="contact-info-card">
-                <p class="subtitle">Three model families run the same leak-free flow: an 80/20 stratified split, device and IP sharing counts encoded with a <code>CountEncoder</code> fit on the training fold only, SMOTE placed inside the pipeline so synthetic samples never leak into a validation fold, and 5-fold CV scored on average precision. A fourth variant — LightGBM with <code>scale_pos_weight</code> and no resampling — tests whether SMOTE changes the ranking.</p>
+                <p class="subtitle">Three model families run the same leak-free flow: an 80/20 stratified split, device and IP sharing counts encoded with a <code>CountEncoder</code> fit on the training fold only, SMOTE placed inside the pipeline so synthetic samples never leak into a validation fold, and 5-fold CV scored on average precision. A fourth variant, LightGBM with <code>scale_pos_weight</code> and no resampling, tests whether SMOTE changes the ranking.</p>
               </div>
 
               <div class="overflow-x-auto">
@@ -407,11 +407,11 @@
                 </table>
               </div>
 
-              <p class="subtitle">All four land at PR-AUC 0.535 to 0.541, and the fold-to-fold standard deviation of about 0.05 is larger than any gap between models — they tie. Logistic regression matches the gradient-boosted models, because the signal lives in two features that every model finds; complexity buys nothing. The final model is LightGBM + SMOTE, chosen for speed and native handling of the feature types, tuned to <code>learning_rate 0.05</code>, <code>n_estimators 400</code>, <code>num_leaves 31</code>; on the test set at the default 0.5 cutoff it reads PR-AUC 0.535, ROC-AUC 0.764, precision 0.986, recall 0.516.</p>
+              <p class="subtitle">All four land at PR-AUC 0.535 to 0.541, and the fold-to-fold standard deviation of about 0.05 is larger than any gap between models; they tie. Logistic regression matches the gradient-boosted models, because the signal lives in two features that every model finds; complexity buys nothing. The final model is LightGBM + SMOTE, chosen for speed and native handling of the feature types, tuned to <code>learning_rate 0.05</code>, <code>n_estimators 400</code>, <code>num_leaves 31</code>; on the test set at the default 0.5 cutoff it reads PR-AUC 0.535, ROC-AUC 0.764, precision 0.986, recall 0.516.</p>
 
               <figure class="figure-editorial">
                 <img src="figures/calibration.png" alt="Calibration of the two imbalance strategies" loading="lazy" decoding="async" />
-                <figcaption>The SMOTE curve tracks the diagonal — its scores can be read as probabilities; the class-weight curve sits well above it, over-stating risk. Same ranking, different scale — and that scale is all that separates 98.6% precision from 34%.</figcaption>
+                <figcaption>The SMOTE curve tracks the diagonal: its scores can be read as probabilities; the class-weight curve sits well above it, over-stating risk. Same ranking, different scale: and that scale is all that separates 98.6% precision from 34%.</figcaption>
               </figure>
 
               <div class="note note--caveat">
@@ -434,7 +434,7 @@
             </div>
 
             <div class="space-y-8">
-              <p class="subtitle">The precision-recall curve holds precision near 1.0 up to recall 0.52, then falls off a cliff; recall stays flat at about 0.52 across every threshold while precision climbs — the threshold trades for precision, not recall. The score histogram explains why: predictions pile up near 0 or near 1, with almost nothing in between. The fraud near 1.0 is the instant-purchase half, trivially caught; the other half scores as low as legitimate traffic, and no threshold recovers it.</p>
+              <p class="subtitle">The precision-recall curve holds precision near 1.0 up to recall 0.52, then falls off a cliff; recall stays flat at about 0.52 across every threshold while precision climbs; the threshold trades for precision, not recall. The score histogram explains why: predictions pile up near 0 or near 1, with almost nothing in between. The fraud near 1.0 is the instant-purchase half, trivially caught; the other half scores as low as legitimate traffic, and no threshold recovers it.</p>
 
               <figure class="figure-editorial">
                 <img src="figures/threshold_pr.png" alt="Precision-recall curve and precision/recall against threshold" loading="lazy" decoding="async" />
@@ -447,7 +447,7 @@
               </figure>
 
               <div class="contact-info-card">
-                <p class="subtitle">This is the feature set's honest ceiling — a property of the data, not a defect of the model. On the test set the tuned model catches 146 of 283 fraud cases (51.6%), with 2 false positives among 27,393 legitimate transactions (confusion matrix TN 27,391 / FP 2 / FN 137 / TP 146). Half the fraud is perfectly separable and half is invisible to these features, so no threshold or model reaches past recall 0.52 here.</p>
+                <p class="subtitle">This is the feature set's honest ceiling, a property of the data, not a defect of the model. On the test set the tuned model catches 146 of 283 fraud cases (51.6%), with 2 false positives among 27,393 legitimate transactions (confusion matrix TN 27,391 / FP 2 / FN 137 / TP 146). Half the fraud is perfectly separable and half is invisible to these features, so no threshold or model reaches past recall 0.52 here.</p>
               </div>
 
               <div class="note note--caveat">
@@ -528,7 +528,7 @@
             </div>
 
             <div class="space-y-8">
-              <p class="subtitle">The 51% reduction is measured against approving everything, which no operation actually does. The right comparison is against the simplest rule the exploration already handed us: purchases completed within one second of signup are all fraud — block them. An engineer could ship that in an afternoon. Before crediting the model with the reduction, it is worth checking how much of it this single rule already captures.</p>
+              <p class="subtitle">The 51% reduction is measured against approving everything, which no operation actually does. The right comparison is against the simplest rule the exploration already handed us: purchases completed within one second of signup are all fraud; block them. An engineer could ship that in an afternoon. Before crediting the model with the reduction, it is worth checking how much of it this single rule already captures.</p>
 
               <div class="overflow-x-auto">
                 <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
@@ -569,7 +569,7 @@
               <div class="note note--insight">
                 <div class="note__label">Insight · What the model still buys</div>
                 <div class="note__body">
-                  <p>The rule catches 146; the model catches the same 146. What the trained model still provides is not incremental catch: it is a graded score that could support other operating points or a review queue, and a second signal — device sharing — that this threshold happens not to need. A rule fixed at "one second" is brittle to the cutoff and blind to everything but speed; the model carries a calibrated probability and a fraud-ring signal in reserve. Shipping the rule first and the model behind it is a legitimate order — but any claim about the model's worth has to be made in those terms, not as extra fraud caught at the operating point.</p>
+                  <p>The rule catches 146; the model catches the same 146. What the trained model still provides is not incremental catch: it is a graded score that could support other operating points or a review queue, and a second signal, device sharing, that this threshold happens not to need. A rule fixed at "one second" is brittle to the cutoff and blind to everything but speed; the model carries a calibrated probability and a fraud-ring signal in reserve. Shipping the rule first and the model behind it is a legitimate order, but any claim about the model's worth has to be made in those terms, not as extra fraud caught at the operating point.</p>
                 </div>
               </div>
             </div>
@@ -586,7 +586,7 @@
             </div>
 
             <div class="space-y-8">
-              <p class="subtitle">Two things about the headline evaluation are kinder than production: the split is random, with training and test rows from the same period; and the sharing counts are computed over the whole training window, while a live system knows only the history before each transaction. The final configuration is re-run under a time-ordered 80/20 split, with counts computed two ways — the same training-window <code>CountEncoder</code>, and a causal count where each row sees only its own history — isolating drift from feature computation.</p>
+              <p class="subtitle">Two things about the headline evaluation are kinder than production: the split is random, with training and test rows from the same period; and the sharing counts are computed over the whole training window, while a live system knows only the history before each transaction. The final configuration is re-run under a time-ordered 80/20 split, with counts computed two ways: the same training-window <code>CountEncoder</code>, and a causal count where each row sees only its own history, isolating drift from feature computation.</p>
 
               <div class="overflow-x-auto">
                 <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
@@ -625,12 +625,12 @@
                 </table>
               </div>
 
-              <p class="subtitle">Under a time-ordered split the model collapses to chance: PR-AUC drops to 0.005, at the prevalence level, and ROC-AUC to about 0.5. Causal versus training-window counts makes no difference, so the collapse is not about feature computation — it is a regime change. Fraud thins from 1.16% in the first 80% of the timeline to 0.47% in the last 20%, and the separable cluster disappears entirely: all 739 instant purchases fall between January 1 and January 13, 2015, the late window contains none, and its fraud sits at normal-looking intervals with a median near 90 days.</p>
+              <p class="subtitle">Under a time-ordered split the model collapses to chance: PR-AUC drops to 0.005, at the prevalence level, and ROC-AUC to about 0.5. Causal versus training-window counts makes no difference, so the collapse is not about feature computation; it is a regime change. Fraud thins from 1.16% in the first 80% of the timeline to 0.47% in the last 20%, and the separable cluster disappears entirely: all 739 instant purchases fall between January 1 and January 13, 2015, the late window contains none, and its fraud sits at normal-looking intervals with a median near 90 days.</p>
 
               <div class="note note--caveat">
                 <div class="note__label">Caveat · The headline is conditional on the training-window regime</div>
                 <div class="note__body">
-                  <p>The learnable signature is a burst, not a constant — it occupies 13 days at the start of the data. The headline describes what the model catches when instant-purchase and device-farming bursts are present, not a quiet month. The abruptness is partly an artifact of the semi-synthetic construction, which planted all separable fraud in a 13-day window, so this split overstates how suddenly a real system would decay. On live traffic the practical defense is regime monitoring (the share of instant purchases and the device-sharing rate) with retraining triggers, in place of this particular split.</p>
+                  <p>The learnable signature is a burst, not a constant; it occupies 13 days at the start of the data. The headline describes what the model catches when instant-purchase and device-farming bursts are present, not a quiet month. The abruptness is partly an artifact of the semi-synthetic construction, which planted all separable fraud in a 13-day window, so this split overstates how suddenly a real system would decay. On live traffic the practical defense is regime monitoring (the share of instant purchases and the device-sharing rate) with retraining triggers, in place of this particular split.</p>
                 </div>
               </div>
             </div>
@@ -647,7 +647,7 @@
             </div>
 
             <div class="space-y-8">
-              <p class="subtitle">For the "explain it to a non-technical stakeholder" question, SHAP attributes each prediction to its features, computed on the final model over the test set, and confirms the exploration. The interval feature scores 2.517 and device sharing 2.420; the third-ranked feature, sex, is 0.664, nearly four times smaller. In plain terms the model asks two questions — how long the buyer waited (a short gap pushes hard toward fraud), and how many accounts share the device (a high count is the fraud-ring pattern). Everything else contributes a small fraction of the top two's weight and is better read as minor correlation than a real driver.</p>
+              <p class="subtitle">For the "explain it to a non-technical stakeholder" question, SHAP attributes each prediction to its features, computed on the final model over the test set, and confirms the exploration. The interval feature scores 2.517 and device sharing 2.420; the third-ranked feature, sex, is 0.664, nearly four times smaller. In plain terms the model asks two questions: how long the buyer waited (a short gap pushes hard toward fraud), and how many accounts share the device (a high count is the fraud-ring pattern). Everything else contributes a small fraction of the top two's weight and is better read as minor correlation than a real driver.</p>
 
               <figure class="figure-editorial">
                 <img src="figures/shap_beeswarm.png" alt="SHAP summary (beeswarm)" loading="lazy" decoding="async" />
@@ -679,7 +679,7 @@
             </div>
 
             <div class="space-y-8">
-              <p class="subtitle">The score distribution should drive the policy, in place of a round-number cutoff. Binning the final model's test-set scores shows what an actual tiering looks like — three bands, only two of which carry weight.</p>
+              <p class="subtitle">The score distribution should drive the policy, in place of a round-number cutoff. Binning the final model's test-set scores shows what an actual tiering looks like: three bands, only two of which carry weight.</p>
 
               <div class="overflow-x-auto">
                 <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
@@ -717,7 +717,7 @@
               <div class="note note--insight">
                 <div class="note__label">Insight · The middle tier is nearly empty</div>
                 <div class="note__body">
-                  <p>The high tier — 0.53% of traffic, 100% fraud in this sample — declines in real time and routes to manual review, catching 52% of all fraud with almost no false positives; section 06 showed a one-line rule reproduces it, so shipping the rule first and the model behind it is a legitimate rollout order. The low tier auto-approves with no friction, and this is where the missed half of fraud hides. The medium tier is nearly empty at four transactions: recovering some of the missed fraud means deliberately lowering the high-tier threshold into the low-precision region — a conscious trade, not a free tier.</p>
+                  <p>The high tier, 0.53% of traffic, 100% fraud in this sample, declines in real time and routes to manual review, catching 52% of all fraud with almost no false positives; section 06 showed a one-line rule reproduces it, so shipping the rule first and the model behind it is a legitimate rollout order. The low tier auto-approves with no friction, and this is where the missed half of fraud hides. The medium tier is nearly empty at four transactions: recovering some of the missed fraud means deliberately lowering the high-tier threshold into the low-precision region, a conscious trade, not a free tier.</p>
                 </div>
               </div>
 
@@ -726,7 +726,7 @@
                 <ul class="list-disc list-inside space-y-2 subtitle">
                   <li><strong>The learnable signal is a regime.</strong> All separable fraud sits in a 13-day burst; deployment needs regime monitoring (the share of instant purchases and the device-sharing rate) and retraining triggers more than a better classifier.</li>
                   <li><strong>The count features assume accumulated history.</strong> Device and IP counts are computed over the training window; the causal-count run in section 07 is the template for measuring that gap once stationary data exists.</li>
-                  <li><strong>Recall is feature-limited, not model-limited.</strong> Moving the ceiling requires new signals such as device fingerprinting, cross-user velocity, or payment-instrument intelligence — not a bigger model.</li>
+                  <li><strong>Recall is feature-limited, not model-limited.</strong> Moving the ceiling requires new signals such as device fingerprinting, cross-user velocity, or payment-instrument intelligence, not a bigger model.</li>
                   <li><strong>The data is semi-synthetic.</strong> On live traffic precision and recall should be monitored and the model retrained on confirmed labels from the manual-review queue.</li>
                   <li><strong>Roll out behind an A/B test</strong> on a small traffic slice, tracking fraud caught, false-alarm rate, and first-purchase conversion before a full launch.</li>
                 </ul>

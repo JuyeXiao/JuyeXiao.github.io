@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LendingClub Loan Default: Prediction under Asymmetric Cost - Data Poetics</title>
-  <meta name="description" content="A machine learning analysis of 9,004 completed LendingClub loans: LightGBM catches 74.9% of defaults (95% CI 70.5–79.2%) at the cost-optimal threshold 0.16, lowering expected loss 26.5% below approving everyone (6.6% net). A missed default costs $9,437, a wrongly rejected good loan $2,243 — a 4.2:1 ratio. One 60-month term rule takes most of the reduction." />
+  <meta name="description" content="A machine learning analysis of 9,004 completed LendingClub loans: LightGBM catches 74.9% of defaults (95% CI 70.5–79.2%) at the cost-optimal threshold 0.16, lowering expected loss 26.5% below approving everyone (6.6% net). A missed default costs $9,437, a wrongly rejected good loan $2,243, a 4.2:1 ratio. One 60-month term rule takes most of the reduction." />
 
   <!-- Same as homepage: Tailwind / fonts / icons / site styles -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -101,7 +101,7 @@
             <span class="section-kicker">Case Study · Credit Risk &amp; Cost-Sensitive Decisions</span>
           </div>
           <h1 class="hero-title mt-2">LendingClub Loan Default: A Threshold Decision under Asymmetric Cost</h1>
-          <p class="subtitle mt-4 max-w-xl">A missed default costs 4.2 times a wrongly declined loan, so the model is tuned to lose less money, not to make fewer classification errors. The tuned LightGBM cuts expected loss 26.5% against approving everyone — this analysis checks how much of that number survives scrutiny.</p>
+          <p class="subtitle mt-4 max-w-xl">A missed default costs 4.2 times a wrongly declined loan, so the model is tuned to lose less money, not to make fewer classification errors. The tuned LightGBM cuts expected loss 26.5% against approving everyone; this analysis checks how much of that number survives scrutiny.</p>
           <div class="reading-time">~14 min read<span class="sep">·</span>14 figures</div>
 
           <div class="hero-stats">
@@ -163,7 +163,7 @@
       <div class="grid md:grid-cols-3 gap-6">
         <div class="summary-card">
           <h3 class="summary-card-title">The Challenge</h3>
-          <p class="summary-card-content">16.8% of loans charge off, and the two errors cost very differently: a missed default loses $9,437 of principal, a wrongly declined good loan forgoes $2,243 of interest — a 4.2:1 ratio. A model optimizing accuracy answers the wrong question.</p>
+          <p class="summary-card-content">16.8% of loans charge off, and the two errors cost very differently: a missed default loses $9,437 of principal, a wrongly declined good loan forgoes $2,243 of interest, a 4.2:1 ratio. A model optimizing accuracy answers the wrong question.</p>
         </div>
         <div class="summary-card">
           <h3 class="summary-card-title">The Approach</h3>
@@ -171,7 +171,7 @@
         </div>
         <div class="summary-card">
           <h3 class="summary-card-title">The Value</h3>
-          <p class="summary-card-content">Catches 74.9% of defaults, total cost $2.63M against $3.58M for approving everyone — 26.5% lower. But a single 60-month term rule takes most of that reduction; the model's margin is default coverage and within-book ranking.</p>
+          <p class="summary-card-content">Catches 74.9% of defaults, total cost $2.63M against $3.58M for approving everyone, 26.5% lower. But a single 60-month term rule takes most of that reduction; the model's margin is default coverage and within-book ranking.</p>
         </div>
       </div>
     </section>
@@ -211,14 +211,14 @@
 
             <div class="space-y-6">
               <div class="contact-info-card">
-                <p class="subtitle mb-4">Of the 9,004 completed LendingClub loans in this extract, 16.8% ended in charge-off, and the two ways an underwriting model can be wrong carry different prices: a missed default loses $9,437 of principal on average, a wrongly declined good loan forgoes $2,243 of interest, a 4.2:1 asymmetry measured directly from the repayment records. Three classifiers were trained under one protocol, and LightGBM was selected on lowest out-of-fold cost — its value lies not in a leaderboard score but in losing the least money.</p>
+                <p class="subtitle mb-4">Of the 9,004 completed LendingClub loans in this extract, 16.8% ended in charge-off, and the two ways an underwriting model can be wrong carry different prices: a missed default loses $9,437 of principal on average, a wrongly declined good loan forgoes $2,243 of interest, a 4.2:1 asymmetry measured directly from the repayment records. Three classifiers were trained under one protocol, and LightGBM was selected on lowest out-of-fold cost; its value lies not in a leaderboard score but in losing the least money.</p>
 
                 <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">Four findings</h3>
                 <ul class="list-disc list-inside space-y-3 subtitle mb-6">
                   <li><strong>Loan term is the single strongest lever.</strong> 60-month loans default at 32.4%, three times the 36-month rate of 11.3%; term also tops the SHAP ranking.</li>
                   <li><strong>A one-variable term rule captures 24.5 of the model's 26.5 points of saving.</strong> Declining all 60-month terms already saves 24.5%; the model buys default coverage (74.9% against 48.0%) and within-book ranking.</li>
                   <li><strong>Holding 74.9% recall sends 46.9% of applications to manual review.</strong> The recall floor is a policy dial priced in queue capacity; a 0.20 threshold cuts the queue to 37.1% at 63.3% recall.</li>
-                  <li><strong>The saving depends on the accounting.</strong> Crediting the interest defaulters pay before charging off drops the reduction from a headline 26.5% to 6.6% — identical flag list, and the conservative net figure is the one to quote.</li>
+                  <li><strong>The saving depends on the accounting.</strong> Crediting the interest defaulters pay before charging off drops the reduction from a headline 26.5% to 6.6%, identical flag list, and the conservative net figure is the one to quote.</li>
                 </ul>
 
                 <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">Results at a glance</h3>
@@ -279,7 +279,7 @@
             <div class="space-y-8">
               <div class="contact-info-card">
                 <p class="subtitle mb-3">The dataset is a cleaned extract of LendingClub public lending data: 9,004 completed loans issued between 2012 and 2015, 29 columns. Every loan is finished business, either Fully Paid or Charged Off; that closure is what makes the cost calibration possible. Cleaning needs are minimal: no duplicate rows, 319 missing cells (0.1%) confined to employment length and revolving utilization.</p>
-                <p class="subtitle">The data also holds repayment-outcome columns (<code>total_pymnt</code>, <code>total_rec_prncp</code>, <code>total_rec_int</code>, <code>out_prncp</code>). Recorded during or after repayment and unknown at approval, they do exactly one job — calibrating the costs — and are removed before any feature reaches a model.</p>
+                <p class="subtitle">The data also holds repayment-outcome columns (<code>total_pymnt</code>, <code>total_rec_prncp</code>, <code>total_rec_int</code>, <code>out_prncp</code>). Recorded during or after repayment and unknown at approval, they do exactly one job, calibrating the costs, and are removed before any feature reaches a model.</p>
               </div>
 
               <div class="note note--process">
@@ -293,7 +293,7 @@
 
               <figure class="figure-editorial">
                 <img src="figures/target_distribution.png" alt="Loan status distribution" loading="lazy" decoding="async" />
-                <figcaption>Loan status distribution — 7,487 fully paid vs 1,517 charged off, a 16.8% default rate and a 4.9:1 class imbalance.</figcaption>
+                <figcaption>Loan status distribution: 7,487 fully paid vs 1,517 charged off, a 16.8% default rate and a 4.9:1 class imbalance.</figcaption>
               </figure>
             </div>
           </section>
@@ -310,7 +310,7 @@
 
             <div class="space-y-8">
               <div class="contact-info-card">
-                <p class="subtitle mb-4">Every numeric feature except <code>open_acc</code> separates default from repayment at high significance (p &lt; 0.001), but significance is cheap on 9,000 rows, so the useful filter is effect size. By Cohen's d, interest rate is the one large effect, revolving utilization is moderate, and the rest are small — open accounts carry no univariate signal.</p>
+                <p class="subtitle mb-4">Every numeric feature except <code>open_acc</code> separates default from repayment at high significance (p &lt; 0.001), but significance is cheap on 9,000 rows, so the useful filter is effect size. By Cohen's d, interest rate is the one large effect, revolving utilization is moderate, and the rest are small; open accounts carry no univariate signal.</p>
                 <div class="overflow-x-auto">
                   <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
                     <thead>
@@ -367,13 +367,13 @@
 
               <figure class="figure-editorial">
                 <img src="figures/default_rate_by_categorical.png" alt="Default rate by categorical attribute" loading="lazy" decoding="async" />
-                <figcaption>Default rate by categorical attribute — the breakdown across term, grade, purpose, and verification status. The 60-month term and the low-grade tail are the two largest gaps.</figcaption>
+                <figcaption>Default rate by categorical attribute: the breakdown across term, grade, purpose, and verification status. The 60-month term and the low-grade tail are the two largest gaps.</figcaption>
               </figure>
 
               <div class="note note--insight">
                 <div class="note__label">Counterintuitive · Verified income runs riskier</div>
                 <div class="note__body">
-                  <p>Income verification runs backwards: verified borrowers default more (19.4%) than unverified ones (14.4%). Because verification is demanded of applicants who already look risky, the field records suspicion, not causation — it cannot be read as a clearance signal. A textbook selection effect.</p>
+                  <p>Income verification runs backwards: verified borrowers default more (19.4%) than unverified ones (14.4%). Because verification is demanded of applicants who already look risky, the field records suspicion, not causation; it cannot be read as a clearance signal. A textbook selection effect.</p>
                 </div>
               </div>
 
@@ -381,17 +381,17 @@
 
               <figure class="figure-editorial">
                 <img src="figures/default_rate_by_band.png" alt="Default rate across risk bands" loading="lazy" decoding="async" />
-                <figcaption>Default rate across risk bands — utilization correlates monotonically with default (no protective middle band), income monotonically the other way.</figcaption>
+                <figcaption>Default rate across risk bands: utilization correlates monotonically with default (no protective middle band), income monotonically the other way.</figcaption>
               </figure>
 
               <div class="figure-grid">
                 <figure class="figure-editorial">
                   <img src="figures/numeric_distributions_by_status.png" alt="Numeric feature distributions by status" loading="lazy" decoding="async" />
-                  <figcaption>Numeric feature distributions by repayment status — interest rate shifts most, consistent with its large Cohen's d.</figcaption>
+                  <figcaption>Numeric feature distributions by repayment status: interest rate shifts most, consistent with its large Cohen's d.</figcaption>
                 </figure>
                 <figure class="figure-editorial">
                   <img src="figures/correlation_heatmap.png" alt="Feature correlation heatmap" loading="lazy" decoding="async" />
-                  <figcaption>Feature correlation heatmap — no serious multicollinearity; interest rate and grade are highly correlated (pricing embeds grade information).</figcaption>
+                  <figcaption>Feature correlation heatmap: no serious multicollinearity; interest rate and grade are highly correlated (pricing embeds grade information).</figcaption>
                 </figure>
               </div>
             </div>
@@ -412,7 +412,7 @@
 
               <figure class="figure-editorial">
                 <img src="figures/grade_and_state_concentration.png" alt="Grade contribution and geographic concentration" loading="lazy" decoding="async" />
-                <figcaption>Loan share vs default share by grade, and state default rates — the low grades (E–G) contribute 22.0% of defaults on 9.4% of loan volume.</figcaption>
+                <figcaption>Loan share vs default share by grade, and state default rates: the low grades (E–G) contribute 22.0% of defaults on 9.4% of loan volume.</figcaption>
               </figure>
 
               <div class="grid md:grid-cols-2 gap-6">
@@ -440,7 +440,7 @@
 
             <div class="space-y-8">
               <div class="contact-info-card">
-                <p class="subtitle">Logistic regression, random forest, and LightGBM run the same protocol: outcome columns removed; a 75/25 stratified split; high-cardinality categoricals (<code>addr_state</code>, <code>purpose</code>) via cross-fitted target encoders learned from training folds only; SMOTE inside the pipeline so synthetic samples never leak into validation; hyperparameters via grid search on average precision. Out-of-fold (OOF) predictions from 5-fold CV both feed the threshold tuning and, against test scores, measure overfitting — test edges out OOF for every model, so nothing memorized its folds.</p>
+                <p class="subtitle">Logistic regression, random forest, and LightGBM run the same protocol: outcome columns removed; a 75/25 stratified split; high-cardinality categoricals (<code>addr_state</code>, <code>purpose</code>) via cross-fitted target encoders learned from training folds only; SMOTE inside the pipeline so synthetic samples never leak into validation; hyperparameters via grid search on average precision. Out-of-fold (OOF) predictions from 5-fold CV both feed the threshold tuning and, against test scores, measure overfitting; test edges out OOF for every model, so nothing memorized its folds.</p>
               </div>
 
               <div class="overflow-x-auto">
@@ -496,13 +496,13 @@
 
               <figure class="figure-editorial">
                 <img src="figures/pr_curves.png" alt="Precision-recall curves" loading="lazy" decoding="async" />
-                <figcaption>Precision-recall curves on the test set — the three curves nearly overlap, PR-AUC ~0.37 against a 0.168 no-skill baseline.</figcaption>
+                <figcaption>Precision-recall curves on the test set: the three curves nearly overlap, PR-AUC ~0.37 against a 0.168 no-skill baseline.</figcaption>
               </figure>
 
               <div class="note note--evidence">
                 <div class="note__label">Model Selection · The two models are statistically interchangeable</div>
                 <div class="note__body">
-                  <p>Logistic regression leads on ranking, random forest on recall, LightGBM on cost and precision, and the three costs differ by under 1%. Under a bootstrap, the $20,134 mean cost gap to logistic regression carries an interval of [−$121,482, +$156,074], and LightGBM is cheaper in only 60.2% of resamples — on cost the two are statistically interchangeable, and the choice is operational. LightGBM is chosen on lowest OOF cost; logistic regression is a defensible interpretable alternative.</p>
+                  <p>Logistic regression leads on ranking, random forest on recall, LightGBM on cost and precision, and the three costs differ by under 1%. Under a bootstrap, the $20,134 mean cost gap to logistic regression carries an interval of [−$121,482, +$156,074], and LightGBM is cheaper in only 60.2% of resamples; on cost the two are statistically interchangeable, and the choice is operational. LightGBM is chosen on lowest OOF cost; logistic regression is a defensible interpretable alternative.</p>
                 </div>
               </div>
 
@@ -526,20 +526,20 @@
             </div>
 
             <div class="space-y-8">
-              <p class="subtitle">The default 0.5 threshold minimizes classification errors, but the two errors are not equally costly. For each model, thresholds from 0.05 to 0.94 are scored on the OOF predictions with the calibrated cost function (FN × $9,437 + FP × $2,243), subject to catching at least 75% of defaults — a default-prediction system that misses over a quarter of defaults is not doing its job. The model is picked on lowest OOF cost; the test set plays no part in selection and is read once.</p>
+              <p class="subtitle">The default 0.5 threshold minimizes classification errors, but the two errors are not equally costly. For each model, thresholds from 0.05 to 0.94 are scored on the OOF predictions with the calibrated cost function (FN × $9,437 + FP × $2,243), subject to catching at least 75% of defaults; a default-prediction system that misses over a quarter of defaults is not doing its job. The model is picked on lowest OOF cost; the test set plays no part in selection and is read once.</p>
 
               <figure class="figure-editorial">
                 <img src="figures/threshold_tuning.png" alt="Recall, precision, and cost against threshold" loading="lazy" decoding="async" />
-                <figcaption>Recall, precision, and cost against threshold per model — total expected cost bottoms out near 0.16 (logistic regression 0.27, random forest 0.19), all far below the default 0.5.</figcaption>
+                <figcaption>Recall, precision, and cost against threshold per model: total expected cost bottoms out near 0.16 (logistic regression 0.27, random forest 0.19), all far below the default 0.5.</figcaption>
               </figure>
 
               <figure class="figure-editorial">
                 <img src="figures/threshold_confusion_roc.png" alt="Threshold, confusion matrix, and ROC" loading="lazy" decoding="async" />
-                <figcaption>Cost at default vs optimized threshold, confusion matrix, ROC curves — at 0.16 the model catches 74.9% of defaults at the cost of accepting more false positives.</figcaption>
+                <figcaption>Cost at default vs optimized threshold, confusion matrix, ROC curves: at 0.16 the model catches 74.9% of defaults at the cost of accepting more false positives.</figcaption>
               </figure>
 
               <div class="contact-info-card">
-                <p class="subtitle">At threshold 0.16, LightGBM catches 74.9% of test defaults at 26.9% precision for a total error cost of $2,627,872. Approving everyone costs $3,576,469, so the model cuts expected loss <strong>26.5%</strong>. The low precision is deliberate: at 4.2:1, flagging three good loans to catch one default is the cheaper mistake — flagged loans are routed to a manual-review queue, never to an automatic decline.</p>
+                <p class="subtitle">At threshold 0.16, LightGBM catches 74.9% of test defaults at 26.9% precision for a total error cost of $2,627,872. Approving everyone costs $3,576,469, so the model cuts expected loss <strong>26.5%</strong>. The low precision is deliberate: at 4.2:1, flagging three good loans to catch one default is the cheaper mistake; flagged loans are routed to a manual-review queue, never to an automatic decline.</p>
               </div>
 
               <div class="note note--evidence">
@@ -610,16 +610,16 @@
 
               <figure class="figure-editorial">
                 <img src="figures/policy_baseline_costs.png" alt="One-variable policy rules against the model" loading="lazy" decoding="async" />
-                <figcaption>One-variable policy rules against the model — a rule an underwriter could write on paper takes 24.5 of the model's 26.5 points.</figcaption>
+                <figcaption>One-variable policy rules against the model: a rule an underwriter could write on paper takes 24.5 of the model's 26.5 points.</figcaption>
               </figure>
 
               <p class="subtitle">24.5 percentage points: what the model buys beyond the term rule is 2 points of cost, 26.9 points of recall (74.9% against 48.0%), and the ability to rank risk inside the 60-month book instead of declining the product line wholesale. A lender that judges only by this cost function can defend the simple rule; one that wants default coverage, or wants to keep writing 60-month loans, needs the ranking.</p>
 
-              <p class="subtitle">Flagged loans go to human reviewers, so the flag rate is an operating cost in its own right: 1,056 of 2,251 test applications, 46.9%, flagged to catch 74.9% of defaults. Nearly half the intake lands on the review desk, workable only if review is cheap or heavily assisted — the direct price of the 0.75 recall floor.</p>
+              <p class="subtitle">Flagged loans go to human reviewers, so the flag rate is an operating cost in its own right: 1,056 of 2,251 test applications, 46.9%, flagged to catch 74.9% of defaults. Nearly half the intake lands on the review desk, workable only if review is cheap or heavily assisted, the direct price of the 0.75 recall floor.</p>
 
               <figure class="figure-editorial">
                 <img src="figures/review_queue_flag_rate.png" alt="Flag rate and recall against threshold" loading="lazy" decoding="async" />
-                <figcaption>Flag rate and recall against threshold — the 75% floor pins the flag rate at 46.9%; loosening to 0.20 cuts the queue to 37.1% at 63.3% recall.</figcaption>
+                <figcaption>Flag rate and recall against threshold: the 75% floor pins the flag rate at 46.9%; loosening to 0.20 cuts the queue to 37.1% at 63.3% recall.</figcaption>
               </figure>
 
               <div class="overflow-x-auto">
@@ -681,7 +681,7 @@
 
               <figure class="figure-editorial">
                 <img src="figures/shap_summary.png" alt="SHAP feature impact" loading="lazy" decoding="async" />
-                <figcaption>SHAP feature impact on default risk — the top drivers are loan term, annual income, grade, recent inquiries, and purpose; the engineered financial_stress_index and grade_term_risk both rank in the top eight.</figcaption>
+                <figcaption>SHAP feature impact on default risk: the top drivers are loan term, annual income, grade, recent inquiries, and purpose; the engineered financial_stress_index and grade_term_risk both rank in the top eight.</figcaption>
               </figure>
 
               <div class="note note--evidence">
@@ -694,7 +694,7 @@
 
               <figure class="figure-editorial">
                 <img src="figures/shap_dependence.png" alt="SHAP dependence direction check" loading="lazy" decoding="async" />
-                <figcaption>SHAP value against feature value for the top drivers — interest rate, utilization, income, and grade point in exactly the directions the EDA does.</figcaption>
+                <figcaption>SHAP value against feature value for the top drivers: interest rate, utilization, income, and grade point in exactly the directions the EDA does.</figcaption>
               </figure>
             </div>
           </section>
@@ -738,13 +738,13 @@
                     <tr>
                       <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Do not treat verification as clearance</strong></td>
                       <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Do not relax scrutiny because income is verified.</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Verified loans default more (19.4% vs 14.4%) — a selection effect.</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Verified loans default more (19.4% vs 14.4%), a selection effect.</td>
                     </tr>
                   </tbody>
                 </table>
               </div>
 
-              <p class="subtitle">Every dollar figure rests on one calibration choice: a missed default counted as $9,437 of lost principal. Defaulters also pay interest before charging off, and crediting it puts the net FN cost at $6,684, moving the ratio from 4.2:1 to 3.0:1. Re-deriving the decision under the net accounting changes nothing about who gets flagged — the optimal threshold stays at 0.16 — but the claimed saving falls from 26.5% to 6.6%.</p>
+              <p class="subtitle">Every dollar figure rests on one calibration choice: a missed default counted as $9,437 of lost principal. Defaulters also pay interest before charging off, and crediting it puts the net FN cost at $6,684, moving the ratio from 4.2:1 to 3.0:1. Re-deriving the decision under the net accounting changes nothing about who gets flagged: the optimal threshold stays at 0.16, but the claimed saving falls from 26.5% to 6.6%.</p>
 
               <div class="overflow-x-auto">
                 <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
@@ -778,7 +778,7 @@
 
               <figure class="figure-editorial">
                 <img src="figures/cost_ratio_sensitivity.png" alt="Optimal threshold and reduction across assumed cost ratios" loading="lazy" decoding="async" />
-                <figcaption>Optimal threshold and reduction across assumed cost ratios — sweeping the ratio from 3:1 to 5:1 pins the threshold at 0.16 (the recall floor binds first), while the claimed reduction runs from 7.0% to 34.2%.</figcaption>
+                <figcaption>Optimal threshold and reduction across assumed cost ratios: sweeping the ratio from 3:1 to 5:1 pins the threshold at 0.16 (the recall floor binds first), while the claimed reduction runs from 7.0% to 34.2%.</figcaption>
               </figure>
 
               <div class="note note--caveat">
@@ -790,7 +790,7 @@
 
               <div class="contact-info-card">
                 <h3 class="text-xl font-semibold mb-3" style="color: var(--dark);">Reproduction</h3>
-                <p class="subtitle">The notebook reproduces end-to-end locally (<code>uv run jupyter nbconvert --to notebook --execute</code>), on a single seed (42), writing figures to <code>figures/</code>. Two cost accountings coexist in this report: 26.5% under the headline calibration, 6.6% net of interest received — the flag list is identical under both, so quote the net figure externally.</p>
+                <p class="subtitle">The notebook reproduces end-to-end locally (<code>uv run jupyter nbconvert --to notebook --execute</code>), on a single seed (42), writing figures to <code>figures/</code>. Two cost accountings coexist in this report: 26.5% under the headline calibration, 6.6% net of interest received; the flag list is identical under both, so quote the net figure externally.</p>
               </div>
             </div>
           </section>

@@ -97,7 +97,7 @@
             <span class="section-kicker">Case Study · 客户分析与留存</span>
           </div>
           <h1 class="hero-title mt-2">银行客户流失预测与关键驱动因素</h1>
-          <p class="subtitle mt-4 max-w-xl">一份含 10,000 名客户的横截面数据里，两成已经流失。给每位客户排出风险次序，解释每个预测——以及为什么把阈值从 0.5 降到 0.20 是划算的。</p>
+          <p class="subtitle mt-4 max-w-xl">一份含 10,000 名客户的横截面数据里，两成已经流失。给每位客户排出风险次序，解释每个预测，以及为什么把阈值从 0.5 降到 0.20 是划算的。</p>
           <div class="reading-time">约 14 分钟阅读<span class="sep">·</span>17 张图表</div>
 
           <div class="hero-stats">
@@ -159,7 +159,7 @@
       <div class="grid md:grid-cols-3 gap-6">
         <div class="summary-card">
           <h3 class="summary-card-title">业务挑战</h3>
-          <p class="summary-card-content">20.4% 的客户流失，再获取成本高于挽留成本。漏掉一个流失客户丢的是整段客户关系，误报一个只是多发一份挽留优惠——两类错误代价悬殊，目标是在客户离开前把高风险的人挑出来。</p>
+          <p class="summary-card-content">20.4% 的客户流失，再获取成本高于挽留成本。漏掉一个流失客户丢的是整段客户关系，误报一个只是多发一份挽留优惠，两类错误代价悬殊，目标是在客户离开前把高风险的人挑出来。</p>
         </div>
         <div class="summary-card">
           <h3 class="summary-card-title">解决方案</h3>
@@ -266,17 +266,17 @@
 
             <div class="space-y-8">
               <div class="contact-info-card">
-                <p class="subtitle">数据来自 Kaggle 公开数据集 Churn Modelling，10,000 行 × 14 列，无缺失值。目标变量记录客户是否已流失，流失率 20.4%（2,037 人）；行号、客户号、姓氏三列是标识符，建模前剔除。四比一的类不平衡决定两件下游的事：训练需要重采样或类权重，评估要看 PR-AUC 与召回率——一个永远预测"留存"的模型准确率就有 79.6%，却一个流失客户也认不出。数据按 75/25 分层划分（<code>random_state=42</code>），编码器与标准化器只在训练集上拟合，把评估数据挡在建模决策之外。</p>
+                <p class="subtitle">数据来自 Kaggle 公开数据集 Churn Modelling，10,000 行 × 14 列，无缺失值。目标变量记录客户是否已流失，流失率 20.4%（2,037 人）；行号、客户号、姓氏三列是标识符，建模前剔除。四比一的类不平衡决定两件下游的事：训练需要重采样或类权重，评估要看 PR-AUC 与召回率：一个永远预测"留存"的模型准确率就有 79.6%，却一个流失客户也认不出。数据按 75/25 分层划分（<code>random_state=42</code>），编码器与标准化器只在训练集上拟合，把评估数据挡在建模决策之外。</p>
               </div>
 
               <div class="figure-grid">
                 <figure class="figure-editorial">
                   <img src="figures/target_distribution.png" alt="流失标签分布" loading="lazy" decoding="async" />
-                  <figcaption>目标分布——10,000 名客户中 2,037 人流失（20.4%），构成中度类别不平衡。</figcaption>
+                  <figcaption>目标分布：10,000 名客户中 2,037 人流失（20.4%），构成中度类别不平衡。</figcaption>
                 </figure>
                 <figure class="figure-editorial">
                   <img src="figures/correlation_heatmap.png" alt="特征相关性矩阵" loading="lazy" decoding="async" />
-                  <figcaption>相关性矩阵——特征间相关性弱、无多重共线性；年龄对目标正相关、活跃状态负相关。</figcaption>
+                  <figcaption>相关性矩阵：特征间相关性弱、无多重共线性；年龄对目标正相关、活跃状态负相关。</figcaption>
                 </figure>
               </div>
 
@@ -339,16 +339,16 @@
                 </table>
               </div>
 
-              <p class="subtitle">哪个变量把两组分得最开？产品数。两个产品是最安全的配置，持有三个产品的客户超过八成流失、四个产品的 60 人全部离开——不过 3 个及以上产品的客户只占总量的 3.3%，比率极端、人数不多。年龄段的剖面是非单调的：五十岁段 56.0% 是峰值，不是"越老越危险"。</p>
+              <p class="subtitle">哪个变量把两组分得最开？产品数。两个产品是最安全的配置，持有三个产品的客户超过八成流失、四个产品的 60 人全部离开，不过 3 个及以上产品的客户只占总量的 3.3%，比率极端、人数不多。年龄段的剖面是非单调的：五十岁段 56.0% 是峰值，不是"越老越危险"。</p>
 
               <div class="figure-grid">
                 <figure class="figure-editorial">
                   <img src="figures/boxplot_numerical_vs_exited.png" alt="数值特征按流失与否的箱线图" loading="lazy" decoding="async" />
-                  <figcaption>数值特征按流失状态的箱线图——年龄把两组分得最开，流失客户中位约 45 岁 vs 留存约 35 岁。</figcaption>
+                  <figcaption>数值特征按流失状态的箱线图：年龄把两组分得最开，流失客户中位约 45 岁 vs 留存约 35 岁。</figcaption>
                 </figure>
                 <figure class="figure-editorial">
                   <img src="figures/countplot_categorical_vs_exited.png" alt="分类特征按流失与否的计数图" loading="lazy" decoding="async" />
-                  <figcaption>分类特征计数图——德国只占客户的四分之一，流失人数却与法国相当；是否持卡几乎不带信号，活跃状态是最强的分类信号。</figcaption>
+                  <figcaption>分类特征计数图：德国只占客户的四分之一，流失人数却与法国相当；是否持卡几乎不带信号，活跃状态是最强的分类信号。</figcaption>
                 </figure>
               </div>
             </div>
@@ -428,11 +428,11 @@
               <div class="figure-grid">
                 <figure class="figure-editorial">
                   <img src="figures/roc_curves_all_models.png" alt="四模型 ROC 曲线" loading="lazy" decoding="async" />
-                  <figcaption>四模型 ROC 曲线——XGBoost 与随机森林明显领先。</figcaption>
+                  <figcaption>四模型 ROC 曲线：XGBoost 与随机森林明显领先。</figcaption>
                 </figure>
                 <figure class="figure-editorial">
                   <img src="figures/pr_curves_all_models.png" alt="四模型精确率-召回率曲线" loading="lazy" decoding="async" />
-                  <figcaption>四模型精确率-召回率曲线——XGBoost PR-AUC 0.727 领先，远高于 0.20 的无技能基线。</figcaption>
+                  <figcaption>四模型精确率-召回率曲线：XGBoost PR-AUC 0.727 领先，远高于 0.20 的无技能基线。</figcaption>
                 </figure>
               </div>
 
@@ -441,11 +441,11 @@
               <div class="figure-grid">
                 <figure class="figure-editorial">
                   <img src="figures/gridsearch_lr_heatmap.png" alt="逻辑回归网格搜索热图" loading="lazy" decoding="async" />
-                  <figcaption>逻辑回归网格搜索热图——展示同一套 5 折调参协议如何在超参数网格上选优。</figcaption>
+                  <figcaption>逻辑回归网格搜索热图：展示同一套 5 折调参协议如何在超参数网格上选优。</figcaption>
                 </figure>
                 <figure class="figure-editorial">
                   <img src="figures/confusion_matrix_xgboost.png" alt="XGBoost 混淆矩阵（默认阈值）" loading="lazy" decoding="async" />
-                  <figcaption>XGBoost 混淆矩阵（默认 0.5 阈值）——精确率与召回率相对均衡的基线状态。</figcaption>
+                  <figcaption>XGBoost 混淆矩阵（默认 0.5 阈值）：精确率与召回率相对均衡的基线状态。</figcaption>
                 </figure>
               </div>
 
@@ -469,7 +469,7 @@
             </div>
 
             <div class="space-y-8">
-              <p class="subtitle">默认 0.5 阈值把两种错误当成同样代价，实际不是：漏判一个流失客户损失整段客户关系，误报只浪费一次挽留 offer。用 F2 分数扫描候选阈值，它把召回权重放到精确率的两倍。阈值只在训练数据上选：用 5 折交叉验证在训练集上产出折外预测概率，F2 扫描跑在这些概率上，选中的阈值再一次性用到测试集——把阈值选在测试集上，等于让评估数据渗进建模决策，会高估运营点。训练集折外最优阈值是 <strong>0.20</strong>。</p>
+              <p class="subtitle">默认 0.5 阈值把两种错误当成同样代价，实际不是：漏判一个流失客户损失整段客户关系，误报只浪费一次挽留 offer。用 F2 分数扫描候选阈值，它把召回权重放到精确率的两倍。阈值只在训练数据上选：用 5 折交叉验证在训练集上产出折外预测概率，F2 扫描跑在这些概率上，选中的阈值再一次性用到测试集。把阈值选在测试集上，等于让评估数据渗进建模决策，会高估运营点。训练集折外最优阈值是 <strong>0.20</strong>。</p>
 
               <div class="overflow-x-auto">
                 <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
@@ -507,11 +507,11 @@
               <div class="figure-grid">
                 <figure class="figure-editorial">
                   <img src="figures/threshold_tuning_xgboost.png" alt="阈值扫描：精确率、召回率与 F2" loading="lazy" decoding="async" />
-                  <figcaption>训练集折外预测上的阈值扫描——F2 在 0.20 附近取到最大值，这是召回优先的运营点。</figcaption>
+                  <figcaption>训练集折外预测上的阈值扫描：F2 在 0.20 附近取到最大值，这是召回优先的运营点。</figcaption>
                 </figure>
                 <figure class="figure-editorial">
                   <img src="figures/confusion_matrix_threshold_comparison.png" alt="0.50 与 0.20 阈值下的混淆矩阵对比" loading="lazy" decoding="async" />
-                  <figcaption>0.50 与 0.20 阈值下的混淆矩阵对比——阈值降低后假阴从 196 减到 67，代价是假阳从 168 升到 644。</figcaption>
+                  <figcaption>0.50 与 0.20 阈值下的混淆矩阵对比：阈值降低后假阴从 196 减到 67，代价是假阳从 168 升到 644。</figcaption>
                 </figure>
               </div>
 
@@ -536,7 +536,7 @@
 
               <figure class="figure-editorial">
                 <img src="figures/breakeven_cost_ratio.png" alt="成本最优阈值随成本比变化" loading="lazy" decoding="async" />
-                <figcaption>成本最优阈值随成本比变化——流失客户相对优惠越贵，成本最优阈值越低。</figcaption>
+                <figcaption>成本最优阈值随成本比变化：流失客户相对优惠越贵，成本最优阈值越低。</figcaption>
               </figure>
 
               <div class="note note--insight">
@@ -549,7 +549,7 @@
               <div class="note note--evidence">
                 <div class="note__label">Uncertainty · Bootstrap 95% CI（×2,000）</div>
                 <div class="note__body">
-                  <p>头条数字是单一测试集（2,500 名客户）上的点估计。对测试集做 2,000 次有放回重抽、模型不重训，区间只反映测试集的抽样噪声：ROC-AUC 0.876 [0.858, 0.892]；PR-AUC 0.727 [0.690, 0.762]；0.20 阈值下召回率 0.868 [0.838, 0.897]；精确率 0.407 [0.377, 0.436]。召回率区间很窄，"捕获约 87% 流失客户"不靠某一次幸运的划分；但 ROC-AUC 区间包住了随机森林的点估计 0.868——XGBoost 两个排序指标都领先，可这点领先落在测试集噪声之内，所以模型选择靠的是它在两个指标上都排第一、外加阈值可调，而不是一个统计上分得开的差距。</p>
+                  <p>头条数字是单一测试集（2,500 名客户）上的点估计。对测试集做 2,000 次有放回重抽、模型不重训，区间只反映测试集的抽样噪声：ROC-AUC 0.876 [0.858, 0.892]；PR-AUC 0.727 [0.690, 0.762]；0.20 阈值下召回率 0.868 [0.838, 0.897]；精确率 0.407 [0.377, 0.436]。召回率区间很窄，"捕获约 87% 流失客户"不靠某一次幸运的划分；但 ROC-AUC 区间包住了随机森林的点估计 0.868。XGBoost 两个排序指标都领先，可这点领先落在测试集噪声之内，所以模型选择靠的是它在两个指标上都排第一、外加阈值可调，而不是一个统计上分得开的差距。</p>
                 </div>
               </div>
             </div>
@@ -571,39 +571,39 @@
               <div class="figure-grid">
                 <figure class="figure-editorial">
                   <img src="figures/SHAP_Global_Feature_Insights.png" alt="SHAP 全局特征归因" loading="lazy" decoding="async" />
-                  <figcaption>SHAP 全局重要性摘要——年龄、活跃状态、产品数排在最前。</figcaption>
+                  <figcaption>SHAP 全局重要性摘要：年龄、活跃状态、产品数排在最前。</figcaption>
                 </figure>
                 <figure class="figure-editorial">
                   <img src="figures/feature_importance_comparison.png" alt="三种重要性度量对比" loading="lazy" decoding="async" />
-                  <figcaption>随机森林不纯度、XGBoost gain、SHAP 三种重要性对照——头部特征一致，结论不取决于用哪种方法算。</figcaption>
+                  <figcaption>随机森林不纯度、XGBoost gain、SHAP 三种重要性对照：头部特征一致，结论不取决于用哪种方法算。</figcaption>
                 </figure>
               </div>
 
-              <p class="subtitle"><strong>年龄的形状。</strong>依赖图给头条驱动因素一个形状：年龄的贡献约在 40 岁过零，50 到 60 岁到峰值（最高约 +2 log-odds），65 岁后回落、约 67 岁转为负向。这与分组表里的非单调剖面吻合（四十岁段 30.8%、五十岁段 56.0%、60 岁以上 27.9%）——模型从数据里学到的是同一条曲线，不是"越老越危险"这么简单的规则。</p>
+              <p class="subtitle"><strong>年龄的形状。</strong>依赖图给头条驱动因素一个形状：年龄的贡献约在 40 岁过零，50 到 60 岁到峰值（最高约 +2 log-odds），65 岁后回落、约 67 岁转为负向。这与分组表里的非单调剖面吻合（四十岁段 30.8%、五十岁段 56.0%、60 岁以上 27.9%），模型从数据里学到的是同一条曲线，不是"越老越危险"这么简单的规则。</p>
 
               <div class="figure-grid">
                 <figure class="figure-editorial">
                   <img src="figures/shap_dependence_age.png" alt="年龄的 SHAP 依赖图" loading="lazy" decoding="async" />
-                  <figcaption>年龄的 SHAP 依赖图——约 40 岁过零，50–60 到峰值，65 岁后回落、约 67 岁转负。</figcaption>
+                  <figcaption>年龄的 SHAP 依赖图：约 40 岁过零，50–60 到峰值，65 岁后回落、约 67 岁转负。</figcaption>
                 </figure>
                 <figure class="figure-editorial">
                   <img src="figures/shap_dependence_tenure.png" alt="在网年限的 SHAP 依赖图" loading="lazy" decoding="async" />
-                  <figcaption>在网年限的 SHAP 依赖图——小幅、几乎一致的保护性贡献（约以 −0.3 为中心），是稳定器不是驱动因素。</figcaption>
+                  <figcaption>在网年限的 SHAP 依赖图：小幅、几乎一致的保护性贡献（约以 −0.3 为中心），是稳定器不是驱动因素。</figcaption>
                 </figure>
               </div>
 
               <p class="subtitle"><strong>在网年限的调和。</strong>箱线图里流失与留存客户的在网年限几乎分不开，可它按平均绝对 SHAP 值排到第四。依赖图解释了原因：模型给每个客户小幅、几乎一致的保护性贡献（绝对值都不超过 0.9），在 0 到 10 年范围里没有明显趋势；这些小值在"绝对值均值"排序里积少成多，所以在网年限是稳定器，不是驱动因素，四个驱动因素的叙事不变。</p>
 
-              <p class="subtitle"><strong>两个客户的解释。</strong>力图取测试集里预测概率的两个极端。最高风险客户（流失概率 0.998）同时集齐每个主要驱动因素：4 个产品、远高于平均的年龄、非活跃、高于平均的余额、身在德国，只有短在网年限微弱反向拉，远不足以扭转——这类客户该排在呼叫清单最前，谈话主题应是精简产品组合。最低风险客户（流失概率 0.005）是镜像：2 个产品、年轻、活跃、零余额、高信用分。</p>
+              <p class="subtitle"><strong>两个客户的解释。</strong>力图取测试集里预测概率的两个极端。最高风险客户（流失概率 0.998）同时集齐每个主要驱动因素：4 个产品、远高于平均的年龄、非活跃、高于平均的余额、身在德国，只有短在网年限微弱反向拉，远不足以扭转。这类客户该排在呼叫清单最前，谈话主题应是精简产品组合。最低风险客户（流失概率 0.005）是镜像：2 个产品、年轻、活跃、零余额、高信用分。</p>
 
               <div class="figure-grid">
                 <figure class="figure-editorial">
                   <img src="figures/SHAP_Local_Explanation_for_a_High-Risk_Customer.png" alt="高风险客户的 SHAP 力图" loading="lazy" decoding="async" />
-                  <figcaption>高风险客户的 SHAP 力图（流失概率 0.998）——所有主要驱动因素同向叠加。</figcaption>
+                  <figcaption>高风险客户的 SHAP 力图（流失概率 0.998）：所有主要驱动因素同向叠加。</figcaption>
                 </figure>
                 <figure class="figure-editorial">
                   <img src="figures/SHAP_Local_Explanation_for_a_Low-Risk_Customer.png" alt="低风险客户的 SHAP 力图" loading="lazy" decoding="async" />
-                  <figcaption>低风险客户的 SHAP 力图（流失概率 0.005）——各因素同向拉低风险。</figcaption>
+                  <figcaption>低风险客户的 SHAP 力图（流失概率 0.005）：各因素同向拉低风险。</figcaption>
                 </figure>
               </div>
             </div>

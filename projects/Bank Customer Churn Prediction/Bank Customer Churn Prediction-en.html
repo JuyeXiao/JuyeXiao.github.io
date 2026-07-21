@@ -97,7 +97,7 @@
             <span class="section-kicker">Case Study · Customer Analytics &amp; Retention</span>
           </div>
           <h1 class="hero-title mt-2">Bank Customer Churn: Prediction and Key Drivers</h1>
-          <p class="subtitle mt-4 max-w-xl">One in five customers in this 10,000-customer snapshot has already churned. Rank each customer by risk, explain every prediction — and see why moving the threshold from 0.5 to 0.20 pays off.</p>
+          <p class="subtitle mt-4 max-w-xl">One in five customers in this 10,000-customer snapshot has already churned. Rank each customer by risk, explain every prediction, and see why moving the threshold from 0.5 to 0.20 pays off.</p>
           <div class="reading-time">~14 min read<span class="sep">·</span>17 figures</div>
 
           <div class="hero-stats">
@@ -141,7 +141,7 @@
             <li>
               <span class="hero-stack__num">04</span>
               <span class="hero-stack__name">Break-even + bootstrap CI</span>
-              <span class="hero-stack__desc">No invented costs — only the ratio C*≈3.7; headline numbers carry 95% intervals</span>
+              <span class="hero-stack__desc">No invented costs, only the ratio C*≈3.7; headline numbers carry 95% intervals</span>
             </li>
             <li>
               <span class="hero-stack__num">05</span>
@@ -159,7 +159,7 @@
       <div class="grid md:grid-cols-3 gap-6">
         <div class="summary-card">
           <h3 class="summary-card-title">The Challenge</h3>
-          <p class="summary-card-content">20.4% of customers have churned, and replacing a lost customer costs more than keeping one. A miss forfeits the whole relationship; a false alarm only wastes a retention offer — the two errors cost very differently. The task is to flag the high-risk ones before they leave.</p>
+          <p class="summary-card-content">20.4% of customers have churned, and replacing a lost customer costs more than keeping one. A miss forfeits the whole relationship; a false alarm only wastes a retention offer; the two errors cost very differently. The task is to flag the high-risk ones before they leave.</p>
         </div>
         <div class="summary-card">
           <h3 class="summary-card-title">The Approach</h3>
@@ -209,7 +209,7 @@
                 <ul class="list-disc list-inside space-y-3 subtitle mb-6">
                   <li><strong>Age.</strong> The fifties band churns at 56%, the highest of any age band; risk climbs from 40 and falls back after 65. The median churner is about 45, the median retained customer about 35.</li>
                   <li><strong>Product count.</strong> Three-product customers churn at 82.7% and all 60 four-product customers left; two products is safest at 7.6%.</li>
-                  <li><strong>Activity.</strong> Inactive customers churn at 26.9% against 14.3% for active ones — nearly double, and a behavior the bank can see early.</li>
+                  <li><strong>Activity.</strong> Inactive customers churn at 26.9% against 14.3% for active ones, nearly double, and a behavior the bank can see early.</li>
                   <li><strong>Geography.</strong> German customers churn at 32.4%, roughly double France at 16.2% and Spain at 16.7%.</li>
                 </ul>
 
@@ -266,17 +266,17 @@
 
             <div class="space-y-8">
               <div class="contact-info-card">
-                <p class="subtitle">The data comes from the public Kaggle Churn Modeling dataset, 10,000 rows by 14 columns, with no missing values. The target records whether a customer has churned, at 20.4% (2,037 customers); row number, customer id, and surname are identifiers, dropped before modeling. The four-to-one imbalance settles two choices: training needs resampling or class weighting, and evaluation leans on PR-AUC and recall — a model that always predicts "stays" is already 79.6% accurate while catching no churner at all. The data is split 75/25 with stratification (<code>random_state=42</code>), and the encoders and scaler are fit on the training set only, keeping the evaluation data out of every modeling decision.</p>
+                <p class="subtitle">The data comes from the public Kaggle Churn Modeling dataset, 10,000 rows by 14 columns, with no missing values. The target records whether a customer has churned, at 20.4% (2,037 customers); row number, customer id, and surname are identifiers, dropped before modeling. The four-to-one imbalance settles two choices: training needs resampling or class weighting, and evaluation leans on PR-AUC and recall; a model that always predicts "stays" is already 79.6% accurate while catching no churner at all. The data is split 75/25 with stratification (<code>random_state=42</code>), and the encoders and scaler are fit on the training set only, keeping the evaluation data out of every modeling decision.</p>
               </div>
 
               <div class="figure-grid">
                 <figure class="figure-editorial">
                   <img src="figures/target_distribution.png" alt="Target distribution" loading="lazy" decoding="async" />
-                  <figcaption>Target distribution — 2,037 of 10,000 customers churned (20.4%), a moderate class imbalance.</figcaption>
+                  <figcaption>Target distribution: 2,037 of 10,000 customers churned (20.4%), a moderate class imbalance.</figcaption>
                 </figure>
                 <figure class="figure-editorial">
                   <img src="figures/correlation_heatmap.png" alt="Correlation matrix of features" loading="lazy" decoding="async" />
-                  <figcaption>Correlation matrix — feature-to-feature correlations are weak with no multicollinearity; age correlates positively with the target, activity negatively.</figcaption>
+                  <figcaption>Correlation matrix: feature-to-feature correlations are weak with no multicollinearity; age correlates positively with the target, activity negatively.</figcaption>
                 </figure>
               </div>
 
@@ -339,16 +339,16 @@
                 </table>
               </div>
 
-              <p class="subtitle">Which variable splits the two groups most sharply? Product count. Two products is the safe configuration; more than four in five three-product customers churn, and all 60 four-product customers left — though the 3-plus group is only 3.3% of the base, so the rate is extreme and the volume small. The age profile is non-monotonic: the fifties band at 56.0% is the peak, not "older is riskier."</p>
+              <p class="subtitle">Which variable splits the two groups most sharply? Product count. Two products is the safe configuration; more than four in five three-product customers churn, and all 60 four-product customers left, though the 3-plus group is only 3.3% of the base, so the rate is extreme and the volume small. The age profile is non-monotonic: the fifties band at 56.0% is the peak, not "older is riskier."</p>
 
               <div class="figure-grid">
                 <figure class="figure-editorial">
                   <img src="figures/boxplot_numerical_vs_exited.png" alt="Boxplots of numerical features by churn" loading="lazy" decoding="async" />
-                  <figcaption>Boxplots of numerical features by churn — age separates the two groups most clearly, the median churner about 45 vs about 35 retained.</figcaption>
+                  <figcaption>Boxplots of numerical features by churn: age separates the two groups most clearly, the median churner about 45 vs about 35 retained.</figcaption>
                 </figure>
                 <figure class="figure-editorial">
                   <img src="figures/countplot_categorical_vs_exited.png" alt="Countplots of categorical features by churn" loading="lazy" decoding="async" />
-                  <figcaption>Countplots of categorical features — Germany holds a quarter of customers yet produces about as many churners as France; card ownership carries little signal, activity is the strongest.</figcaption>
+                  <figcaption>Countplots of categorical features: Germany holds a quarter of customers yet produces about as many churners as France; card ownership carries little signal, activity is the strongest.</figcaption>
                 </figure>
               </div>
             </div>
@@ -428,24 +428,24 @@
               <div class="figure-grid">
                 <figure class="figure-editorial">
                   <img src="figures/roc_curves_all_models.png" alt="ROC curves for the four models" loading="lazy" decoding="async" />
-                  <figcaption>ROC curves for the four models — XGBoost and random forest lead clearly.</figcaption>
+                  <figcaption>ROC curves for the four models: XGBoost and random forest lead clearly.</figcaption>
                 </figure>
                 <figure class="figure-editorial">
                   <img src="figures/pr_curves_all_models.png" alt="Precision-recall curves for the four models" loading="lazy" decoding="async" />
-                  <figcaption>Precision-recall curves — XGBoost leads at PR-AUC 0.727, well above the 0.20 no-skill baseline.</figcaption>
+                  <figcaption>Precision-recall curves: XGBoost leads at PR-AUC 0.727, well above the 0.20 no-skill baseline.</figcaption>
                 </figure>
               </div>
 
-              <p class="subtitle">XGBoost is recommended: first on both ranking metrics, and monthly risk scoring rests on ranking quality. Logistic regression and KNN buy their higher recall by flagging loyal customers — at about 0.4 precision, six of every ten contacts are wasted. Random forest edges XGBoost on recall and F1 at 0.5, but a threshold can be adjusted after training and ranking quality cannot.</p>
+              <p class="subtitle">XGBoost is recommended: first on both ranking metrics, and monthly risk scoring rests on ranking quality. Logistic regression and KNN buy their higher recall by flagging loyal customers: at about 0.4 precision, six of every ten contacts are wasted. Random forest edges XGBoost on recall and F1 at 0.5, but a threshold can be adjusted after training and ranking quality cannot.</p>
 
               <div class="figure-grid">
                 <figure class="figure-editorial">
                   <img src="figures/gridsearch_lr_heatmap.png" alt="Logistic regression grid search heatmap" loading="lazy" decoding="async" />
-                  <figcaption>Logistic regression grid-search heatmap — how the shared 5-fold protocol selects the optimum across the hyperparameter grid.</figcaption>
+                  <figcaption>Logistic regression grid-search heatmap: how the shared 5-fold protocol selects the optimum across the hyperparameter grid.</figcaption>
                 </figure>
                 <figure class="figure-editorial">
                   <img src="figures/confusion_matrix_xgboost.png" alt="XGBoost confusion matrix (default threshold)" loading="lazy" decoding="async" />
-                  <figcaption>XGBoost confusion matrix at the default 0.5 threshold — the baseline with precision and recall relatively balanced.</figcaption>
+                  <figcaption>XGBoost confusion matrix at the default 0.5 threshold: the baseline with precision and recall relatively balanced.</figcaption>
                 </figure>
               </div>
 
@@ -469,7 +469,7 @@
             </div>
 
             <div class="space-y-8">
-              <p class="subtitle">The default 0.5 threshold treats both errors as equally costly, but they are not: a missed churner costs the whole relationship, a false alarm one retention offer. An F2 sweep scores each candidate threshold, weighting recall twice as heavily as precision. The threshold is selected on the training data alone: 5-fold cross-validation produces out-of-fold predicted probabilities on the training set, the F2 sweep runs on those, and the winning threshold is applied once to the test set — selecting on the test set would let the evaluation data leak into a modeling decision and overstate the operating point. The out-of-fold optimum is <strong>0.20</strong>.</p>
+              <p class="subtitle">The default 0.5 threshold treats both errors as equally costly, but they are not: a missed churner costs the whole relationship, a false alarm one retention offer. An F2 sweep scores each candidate threshold, weighting recall twice as heavily as precision. The threshold is selected on the training data alone: 5-fold cross-validation produces out-of-fold predicted probabilities on the training set, the F2 sweep runs on those, and the winning threshold is applied once to the test set; selecting on the test set would let the evaluation data leak into a modeling decision and overstate the operating point. The out-of-fold optimum is <strong>0.20</strong>.</p>
 
               <div class="overflow-x-auto">
                 <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
@@ -507,16 +507,16 @@
               <div class="figure-grid">
                 <figure class="figure-editorial">
                   <img src="figures/threshold_tuning_xgboost.png" alt="Precision, recall, and F2 versus threshold" loading="lazy" decoding="async" />
-                  <figcaption>The threshold sweep on out-of-fold training predictions — F2 peaks near 0.20, the recall-first operating point.</figcaption>
+                  <figcaption>The threshold sweep on out-of-fold training predictions: F2 peaks near 0.20, the recall-first operating point.</figcaption>
                 </figure>
                 <figure class="figure-editorial">
                   <img src="figures/confusion_matrix_threshold_comparison.png" alt="Confusion matrices at thresholds 0.50 and 0.20" loading="lazy" decoding="async" />
-                  <figcaption>Confusion matrices at 0.50 vs 0.20 — false negatives fall from 196 to 67, at the cost of false positives rising from 168 to 644.</figcaption>
+                  <figcaption>Confusion matrices at 0.50 vs 0.20: false negatives fall from 196 to 67, at the cost of false positives rising from 168 to 644.</figcaption>
                 </figure>
               </div>
 
               <div class="contact-info-card">
-                <p class="subtitle">At 0.20 the model catches 442 of the 509 test-set churners instead of about 313, and the contact list grows from 481 to 1,086. The test-set F2 (0.708) is close to the training estimate (0.696), so the operating point chosen on the training folds transfers to unseen data. Whether that trade pays off depends on offer cost against customer value; when campaign capacity is fixed, the threshold can sit anywhere on the precision-recall curve — which is exactly why the model with the strongest ranking is chosen.</p>
+                <p class="subtitle">At 0.20 the model catches 442 of the 509 test-set churners instead of about 313, and the contact list grows from 481 to 1,086. The test-set F2 (0.708) is close to the training estimate (0.696), so the operating point chosen on the training folds transfers to unseen data. Whether that trade pays off depends on offer cost against customer value; when campaign capacity is fixed, the threshold can sit anywhere on the precision-recall curve, which is exactly why the model with the strongest ranking is chosen.</p>
               </div>
             </div>
           </section>
@@ -532,11 +532,11 @@
             </div>
 
             <div class="space-y-8">
-              <p class="subtitle">F2 is only a proxy for "weight recall more"; the real objective is cost. The data has no cost fields (customer value, offer cost, campaign success rate), so nothing is invented — this section assumes one quantity, the cost ratio C, the cost of a missed churner divided by the cost of a wasted retention offer, and compares only the two errors. The 0.5 threshold produces 168 false alarms and 196 misses; the 0.20 threshold produces 644 false alarms and 67 misses. Solving for the break-even gives <strong>C* = 3.7</strong>: the tuned threshold has lower total error cost whenever missing a churner costs more than 3.7 times a wasted offer. No currency figure is assumed, so the conclusion holds for any bank whose cost ratio clears that bar.</p>
+              <p class="subtitle">F2 is only a proxy for "weight recall more"; the real objective is cost. The data has no cost fields (customer value, offer cost, campaign success rate), so nothing is invented; this section assumes one quantity, the cost ratio C, the cost of a missed churner divided by the cost of a wasted retention offer, and compares only the two errors. The 0.5 threshold produces 168 false alarms and 196 misses; the 0.20 threshold produces 644 false alarms and 67 misses. Solving for the break-even gives <strong>C* = 3.7</strong>: the tuned threshold has lower total error cost whenever missing a churner costs more than 3.7 times a wasted offer. No currency figure is assumed, so the conclusion holds for any bank whose cost ratio clears that bar.</p>
 
               <figure class="figure-editorial">
                 <img src="figures/breakeven_cost_ratio.png" alt="Cost-optimal threshold versus cost ratio" loading="lazy" decoding="async" />
-                <figcaption>Cost-optimal threshold versus cost ratio — the more a churner costs relative to an offer, the lower the cost-optimal threshold.</figcaption>
+                <figcaption>Cost-optimal threshold versus cost ratio: the more a churner costs relative to an offer, the lower the cost-optimal threshold.</figcaption>
               </figure>
 
               <div class="note note--insight">
@@ -549,7 +549,7 @@
               <div class="note note--evidence">
                 <div class="note__label">Uncertainty · Bootstrap 95% CI (×2,000)</div>
                 <div class="note__body">
-                  <p>The headline numbers are point estimates on one test set of 2,500 customers. Resampling it 2,000 times with replacement, without refitting the model, gives intervals that reflect test-set sampling noise only: ROC-AUC 0.876 [0.858, 0.892]; PR-AUC 0.727 [0.690, 0.762]; recall at 0.20 is 0.868 [0.838, 0.897]; precision 0.407 [0.377, 0.436]. The recall interval is narrow — "about 87% of churners caught" does not rest on one lucky split — but the ROC-AUC interval contains random forest's point estimate of 0.868. XGBoost leads on both ranking metrics, yet the lead falls inside test-set noise, so the model choice rests on ranking first on both metrics plus threshold flexibility, not on a statistically separated gap.</p>
+                  <p>The headline numbers are point estimates on one test set of 2,500 customers. Resampling it 2,000 times with replacement, without refitting the model, gives intervals that reflect test-set sampling noise only: ROC-AUC 0.876 [0.858, 0.892]; PR-AUC 0.727 [0.690, 0.762]; recall at 0.20 is 0.868 [0.838, 0.897]; precision 0.407 [0.377, 0.436]. The recall interval is narrow: "about 87% of churners caught" does not rest on one lucky split, but the ROC-AUC interval contains random forest's point estimate of 0.868. XGBoost leads on both ranking metrics, yet the lead falls inside test-set noise, so the model choice rests on ranking first on both metrics plus threshold flexibility, not on a statistically separated gap.</p>
                 </div>
               </div>
             </div>
@@ -571,39 +571,39 @@
               <div class="figure-grid">
                 <figure class="figure-editorial">
                   <img src="figures/SHAP_Global_Feature_Insights.png" alt="SHAP global importance summary" loading="lazy" decoding="async" />
-                  <figcaption>SHAP global importance summary — age, activity, and product count rank at the top.</figcaption>
+                  <figcaption>SHAP global importance summary: age, activity, and product count rank at the top.</figcaption>
                 </figure>
                 <figure class="figure-editorial">
                   <img src="figures/feature_importance_comparison.png" alt="Three importance measures compared" loading="lazy" decoding="async" />
-                  <figcaption>Random forest impurity, XGBoost gain, and SHAP compared — the top features agree, so the story does not depend on the method.</figcaption>
+                  <figcaption>Random forest impurity, XGBoost gain, and SHAP compared: the top features agree, so the story does not depend on the method.</figcaption>
                 </figure>
               </div>
 
-              <p class="subtitle"><strong>The shape of age.</strong> The dependence plot gives the headline driver a shape: the contribution of age crosses zero around 40, peaks between 50 and 60 at up to +2 log-odds, and declines after 65, turning negative near 67. That matches the non-monotonic profile in the group table (30.8% in the forties, 56.0% in the fifties, 27.9% past 60) — the model has learned the same curve from the data, not a simple "older is riskier" rule.</p>
+              <p class="subtitle"><strong>The shape of age.</strong> The dependence plot gives the headline driver a shape: the contribution of age crosses zero around 40, peaks between 50 and 60 at up to +2 log-odds, and declines after 65, turning negative near 67. That matches the non-monotonic profile in the group table (30.8% in the forties, 56.0% in the fifties, 27.9% past 60); the model has learned the same curve from the data, not a simple "older is riskier" rule.</p>
 
               <div class="figure-grid">
                 <figure class="figure-editorial">
                   <img src="figures/shap_dependence_age.png" alt="SHAP dependence plot for age" loading="lazy" decoding="async" />
-                  <figcaption>SHAP dependence plot for age — crosses zero around 40, peaks at 50–60, declines after 65, turning negative near 67.</figcaption>
+                  <figcaption>SHAP dependence plot for age: crosses zero around 40, peaks at 50–60, declines after 65, turning negative near 67.</figcaption>
                 </figure>
                 <figure class="figure-editorial">
                   <img src="figures/shap_dependence_tenure.png" alt="SHAP dependence plot for tenure" loading="lazy" decoding="async" />
-                  <figcaption>SHAP dependence plot for tenure — a small, almost uniformly protective contribution (centered near −0.3): a stabilizer, not a driver.</figcaption>
+                  <figcaption>SHAP dependence plot for tenure: a small, almost uniformly protective contribution (centered near −0.3): a stabilizer, not a driver.</figcaption>
                 </figure>
               </div>
 
               <p class="subtitle"><strong>Reconciling tenure.</strong> In the boxplots tenure barely separates churners from non-churners, yet it ranks fourth by mean absolute SHAP. The dependence plot shows why: the model assigns each customer a small, almost uniformly protective contribution (none beyond about −0.9), with no strong trend across the 0-to-10-year range; those small values on every customer add up in a mean-of-absolute-values ranking. Tenure ranks as a stabilizer, not a driver, and the four-driver story stands.</p>
 
-              <p class="subtitle"><strong>Two customers, explained.</strong> The force plots take the two extremes of the test set by predicted probability. The highest-risk customer (churn probability 0.998) combines every major driver at once: 4 products, an age well above average, inactive, an above-average balance, and located in Germany; only a short tenure pulls the other way, far too weakly to matter — customers with this profile belong at the top of the call list, and the conversation should be about simplifying the product portfolio. The lowest-risk customer (churn probability 0.005) is the mirror image: 2 products, young, active, zero balance, high credit score.</p>
+              <p class="subtitle"><strong>Two customers, explained.</strong> The force plots take the two extremes of the test set by predicted probability. The highest-risk customer (churn probability 0.998) combines every major driver at once: 4 products, an age well above average, inactive, an above-average balance, and located in Germany; only a short tenure pulls the other way, far too weakly to matter; customers with this profile belong at the top of the call list, and the conversation should be about simplifying the product portfolio. The lowest-risk customer (churn probability 0.005) is the mirror image: 2 products, young, active, zero balance, high credit score.</p>
 
               <div class="figure-grid">
                 <figure class="figure-editorial">
                   <img src="figures/SHAP_Local_Explanation_for_a_High-Risk_Customer.png" alt="SHAP force plot for a high-risk customer" loading="lazy" decoding="async" />
-                  <figcaption>SHAP force plot for a high-risk customer (churn probability 0.998) — every major driver stacks the same way.</figcaption>
+                  <figcaption>SHAP force plot for a high-risk customer (churn probability 0.998): every major driver stacks the same way.</figcaption>
                 </figure>
                 <figure class="figure-editorial">
                   <img src="figures/SHAP_Local_Explanation_for_a_Low-Risk_Customer.png" alt="SHAP force plot for a low-risk customer" loading="lazy" decoding="async" />
-                  <figcaption>SHAP force plot for a low-risk customer (churn probability 0.005) — every factor pulls risk down.</figcaption>
+                  <figcaption>SHAP force plot for a low-risk customer (churn probability 0.005): every factor pulls risk down.</figcaption>
                 </figure>
               </div>
             </div>

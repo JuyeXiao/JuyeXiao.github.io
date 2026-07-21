@@ -101,7 +101,7 @@
             <span class="section-kicker">Case Study · 信贷风险与成本敏感决策</span>
           </div>
           <h1 class="hero-title mt-2">LendingClub 贷款违约预测：成本不对称下的阈值决策</h1>
-          <p class="subtitle mt-4 max-w-xl">漏判一笔违约的代价是误拒一笔好贷的 4.2 倍，模型因此按少亏钱调优，不按少分错调优。调好的 LightGBM 把预期损失压到全批准以下 26.5%——这份分析逐项检验这个数字经得起多少推敲。</p>
+          <p class="subtitle mt-4 max-w-xl">漏判一笔违约的代价是误拒一笔好贷的 4.2 倍，模型因此按少亏钱调优，不按少分错调优。调好的 LightGBM 把预期损失压到全批准以下 26.5%。这份分析逐项检验这个数字经得起多少推敲。</p>
           <div class="reading-time">约 14 分钟阅读<span class="sep">·</span>14 张图表</div>
 
           <div class="hero-stats">
@@ -211,14 +211,14 @@
 
             <div class="space-y-6">
               <div class="contact-info-card">
-                <p class="subtitle mb-4">这份数据里 9,004 笔已结清的 LendingClub 贷款，有 16.8% 以坏账收场。审批模型的两种错误并不等价：漏判一笔违约平均损失 $9,437 本金，误拒一笔好贷平均放弃 $2,243 利息，成本比 4.2:1 直接从还款记录里算出。三个分类器在同一套协议下训练，最终按最低折外成本选中 LightGBM——它的价值不在排行榜分数，而在把预期损失压到最低。</p>
+                <p class="subtitle mb-4">这份数据里 9,004 笔已结清的 LendingClub 贷款，有 16.8% 以坏账收场。审批模型的两种错误并不等价：漏判一笔违约平均损失 $9,437 本金，误拒一笔好贷平均放弃 $2,243 利息，成本比 4.2:1 直接从还款记录里算出。三个分类器在同一套协议下训练，最终按最低折外成本选中 LightGBM。它的价值不在排行榜分数，而在把预期损失压到最低。</p>
 
                 <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">四个发现</h3>
                 <ul class="list-disc list-inside space-y-3 subtitle mb-6">
                   <li><strong>贷款期限是单一最强杠杆。</strong>60 个月期违约率 32.4%，是 36 个月期 11.3% 的近三倍；期限在 SHAP 排序里也遥遥领先。</li>
                   <li><strong>一条期限规则就拿走 26.5 个百分点降幅里的 24.5 个。</strong>只拒 60 个月期限这一条纸面规则已省 24.5%，模型多买到的是违约覆盖（74.9% 对 48.0%）与产品线内排序。</li>
                   <li><strong>守住 74.9% 召回，要送 46.9% 的申请进人工复核。</strong>召回下限是政策旋钮，价格是复核容量；阈值放到 0.20，队列降到 37.1%，召回让到 63.3%。</li>
-                  <li><strong>省多少钱取决于口径。</strong>扣除违约者已付利息后，降幅从头条的 26.5% 掉到 6.6%——同一份标记名单，两种漏判定价，对外应取净口径这个保守数。</li>
+                  <li><strong>省多少钱取决于口径。</strong>扣除违约者已付利息后，降幅从头条的 26.5% 掉到 6.6%。同一份标记名单，两种漏判定价，对外应取净口径这个保守数。</li>
                 </ul>
 
                 <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">结果速览</h3>
@@ -279,7 +279,7 @@
             <div class="space-y-8">
               <div class="contact-info-card">
                 <p class="subtitle mb-3">数据是 LendingClub 公开放贷数据的清洗子集：9,004 笔 2012 至 2015 年放款、现已结清的贷款，共 29 列。每笔贷款的结局都已落定，Fully Paid 或 Charged Off，成本标定正是靠这一点才成立。清洗工作量很小：无重复行，缺失仅 319 格（占 0.1%），集中在就业年限与循环额度利用率两列。</p>
-                <p class="subtitle">数据里还有还款结果列（<code>total_pymnt</code>、<code>total_rec_prncp</code>、<code>total_rec_int</code>、<code>out_prncp</code>）。这些在还款期间或之后才记录，放款时未知——因此只做标定成本这一件事，做完就在特征进模型之前被整体剔除。</p>
+                <p class="subtitle">数据里还有还款结果列（<code>total_pymnt</code>、<code>total_rec_prncp</code>、<code>total_rec_int</code>、<code>out_prncp</code>）。这些在还款期间或之后才记录，放款时未知，因此只做标定成本这一件事，做完就在特征进模型之前被整体剔除。</p>
               </div>
 
               <div class="note note--process">
@@ -293,7 +293,7 @@
 
               <figure class="figure-editorial">
                 <img src="figures/target_distribution.png" alt="贷款状态分布" loading="lazy" decoding="async" />
-                <figcaption>贷款状态分布——7,487 笔全额支付 vs 1,517 笔冲销，16.8% 的违约率构成 4.9:1 的类别不平衡。</figcaption>
+                <figcaption>贷款状态分布：7,487 笔全额支付 vs 1,517 笔冲销，16.8% 的违约率构成 4.9:1 的类别不平衡。</figcaption>
               </figure>
             </div>
           </section>
@@ -367,13 +367,13 @@
 
               <figure class="figure-editorial">
                 <img src="figures/default_rate_by_categorical.png" alt="分类特征违约率" loading="lazy" decoding="async" />
-                <figcaption>分类特征下的违约率——期限、等级、用途、收入验证状态下的拆解。60 个月期与低等级尾部是两个最大的裂口。</figcaption>
+                <figcaption>分类特征下的违约率：期限、等级、用途、收入验证状态下的拆解。60 个月期与低等级尾部是两个最大的裂口。</figcaption>
               </figure>
 
               <div class="note note--insight">
                 <div class="note__label">Counterintuitive · 已验证收入反而更高危</div>
                 <div class="note__body">
-                  <p>收入验证反着走：已验证借款人违约率 19.4%，高于未验证的 14.4%。平台向看起来有风险的申请人索要验证，这个字段记录的是怀疑本身，不能当放行信号读——这是一个典型的选择效应。</p>
+                  <p>收入验证反着走：已验证借款人违约率 19.4%，高于未验证的 14.4%。平台向看起来有风险的申请人索要验证，这个字段记录的是怀疑本身，不能当放行信号读。这是一个典型的选择效应。</p>
                 </div>
               </div>
 
@@ -381,17 +381,17 @@
 
               <figure class="figure-editorial">
                 <img src="figures/default_rate_by_band.png" alt="风险分桶下的违约率" loading="lazy" decoding="async" />
-                <figcaption>风险分桶下的违约率——利用率与违约率单调正相关（无保护性中间带），收入与违约率单调负相关。</figcaption>
+                <figcaption>风险分桶下的违约率：利用率与违约率单调正相关（无保护性中间带），收入与违约率单调负相关。</figcaption>
               </figure>
 
               <div class="figure-grid">
                 <figure class="figure-editorial">
                   <img src="figures/numeric_distributions_by_status.png" alt="数值特征按状态的分布" loading="lazy" decoding="async" />
-                  <figcaption>数值特征按还款状态的分布对比——利率的分布偏移最明显，与其大 Cohen's d 一致。</figcaption>
+                  <figcaption>数值特征按还款状态的分布对比：利率的分布偏移最明显，与其大 Cohen's d 一致。</figcaption>
                 </figure>
                 <figure class="figure-editorial">
                   <img src="figures/correlation_heatmap.png" alt="特征相关性热图" loading="lazy" decoding="async" />
-                  <figcaption>特征相关性热图——无严重多重共线性，利率与等级高度相关（平台定价已内嵌等级信息）。</figcaption>
+                  <figcaption>特征相关性热图：无严重多重共线性，利率与等级高度相关（平台定价已内嵌等级信息）。</figcaption>
                 </figure>
               </div>
             </div>
@@ -412,7 +412,7 @@
 
               <figure class="figure-editorial">
                 <img src="figures/grade_and_state_concentration.png" alt="等级贡献与地区集中度" loading="lazy" decoding="async" />
-                <figcaption>各等级贷款占比对违约占比，以及分州违约率——低等级（E–G）以 9.4% 的贷款量贡献 22.0% 的违约。</figcaption>
+                <figcaption>各等级贷款占比对违约占比，以及分州违约率：低等级（E–G）以 9.4% 的贷款量贡献 22.0% 的违约。</figcaption>
               </figure>
 
               <div class="grid md:grid-cols-2 gap-6">
@@ -440,7 +440,7 @@
 
             <div class="space-y-8">
               <div class="contact-info-card">
-                <p class="subtitle">逻辑回归、随机森林、LightGBM 走同一套协议：剔除结果列；75/25 分层划分；高基数类别（<code>addr_state</code>、<code>purpose</code>）用交叉拟合目标编码器，只从训练折学习；SMOTE 放进流水线，合成样本绝不泄漏进验证；超参数用网格搜索按 average precision 选。训练集 5 折折外（OOF）预测既是调阈值的诚实概率，又能对照测试分数查过拟合——三个模型的测试分数都略高于折外，没有谁在背自己的折。</p>
+                <p class="subtitle">逻辑回归、随机森林、LightGBM 走同一套协议：剔除结果列；75/25 分层划分；高基数类别（<code>addr_state</code>、<code>purpose</code>）用交叉拟合目标编码器，只从训练折学习；SMOTE 放进流水线，合成样本绝不泄漏进验证；超参数用网格搜索按 average precision 选。训练集 5 折折外（OOF）预测既是调阈值的诚实概率，又能对照测试分数查过拟合。三个模型的测试分数都略高于折外，没有谁在背自己的折。</p>
               </div>
 
               <div class="overflow-x-auto">
@@ -496,13 +496,13 @@
 
               <figure class="figure-editorial">
                 <img src="figures/pr_curves.png" alt="精确率-召回率曲线" loading="lazy" decoding="async" />
-                <figcaption>测试集精确率-召回率曲线——三条曲线几乎重叠，PR-AUC 约 0.37 是无技能基线 0.168 的约 2.2 倍。</figcaption>
+                <figcaption>测试集精确率-召回率曲线：三条曲线几乎重叠，PR-AUC 约 0.37 是无技能基线 0.168 的约 2.2 倍。</figcaption>
               </figure>
 
               <div class="note note--evidence">
                 <div class="note__label">Model Selection · 两个模型统计不可分</div>
                 <div class="note__body">
-                  <p>逻辑回归排序指标最好，随机森林召回最高，LightGBM 成本最低、精确率最高，三者成本相差不到 1%。bootstrap 检验下，LightGBM 与逻辑回归 $20,134 的平均成本差，区间横跨 [−$121,482, +$156,074]，LightGBM 只在 60.2% 的重采样中更便宜——两个模型在成本上统计不可分，怎么选是运营问题。LightGBM 按最低 OOF 成本入选，逻辑回归是站得住脚的可解释替代。</p>
+                  <p>逻辑回归排序指标最好，随机森林召回最高，LightGBM 成本最低、精确率最高，三者成本相差不到 1%。bootstrap 检验下，LightGBM 与逻辑回归 $20,134 的平均成本差，区间横跨 [−$121,482, +$156,074]，LightGBM 只在 60.2% 的重采样中更便宜。两个模型在成本上统计不可分，怎么选是运营问题。LightGBM 按最低 OOF 成本入选，逻辑回归是站得住脚的可解释替代。</p>
                 </div>
               </div>
 
@@ -526,20 +526,20 @@
             </div>
 
             <div class="space-y-8">
-              <p class="subtitle">默认 0.5 阈值最小化的是分类错误，但两类错误代价并不相等。对每个模型，在折外预测上扫描 0.05 至 0.94 的阈值网格，成本函数为 FN 数乘 $9,437 加 FP 数乘 $2,243，约束条件是至少抓住 75% 的违约——漏掉四分之一以上违约的违约预测系统，成本再好看也没做好本职。模型按最低折外成本选出，测试集全程不参与选择、只读一次。</p>
+              <p class="subtitle">默认 0.5 阈值最小化的是分类错误，但两类错误代价并不相等。对每个模型，在折外预测上扫描 0.05 至 0.94 的阈值网格，成本函数为 FN 数乘 $9,437 加 FP 数乘 $2,243，约束条件是至少抓住 75% 的违约：漏掉四分之一以上违约的违约预测系统，成本再好看也没做好本职。模型按最低折外成本选出，测试集全程不参与选择、只读一次。</p>
 
               <figure class="figure-editorial">
                 <img src="figures/threshold_tuning.png" alt="阈值调优曲线" loading="lazy" decoding="async" />
-                <figcaption>三个模型的召回、精确率与成本随阈值变化——总期望成本在 0.16 附近取到最小值（逻辑回归 0.27、随机森林 0.19），全部远低于默认的 0.5。</figcaption>
+                <figcaption>三个模型的召回、精确率与成本随阈值变化：总期望成本在 0.16 附近取到最小值（逻辑回归 0.27、随机森林 0.19），全部远低于默认的 0.5。</figcaption>
               </figure>
 
               <figure class="figure-editorial">
                 <img src="figures/threshold_confusion_roc.png" alt="阈值调优、混淆矩阵与 ROC" loading="lazy" decoding="async" />
-                <figcaption>默认与优化阈值的成本对比、混淆矩阵、ROC 曲线——在 0.16 下抓住 74.9% 的违约，代价是接受较多假阳性。</figcaption>
+                <figcaption>默认与优化阈值的成本对比、混淆矩阵、ROC 曲线：在 0.16 下抓住 74.9% 的违约，代价是接受较多假阳性。</figcaption>
               </figure>
 
               <div class="contact-info-card">
-                <p class="subtitle">在阈值 0.16 下，LightGBM 抓住测试集 74.9% 的违约，精确率 26.9%，总错误成本 $2,627,872。全批放款成本 $3,576,469，所以模型把预期损失压低了 <strong>26.5%</strong>。低精确率是有意为之：在 4.2:1 的成本比值下，多标三笔好贷换一笔违约是更便宜的错误——被标记的贷款进人工复核队列，而非直接拒绝。</p>
+                <p class="subtitle">在阈值 0.16 下，LightGBM 抓住测试集 74.9% 的违约，精确率 26.9%，总错误成本 $2,627,872。全批放款成本 $3,576,469，所以模型把预期损失压低了 <strong>26.5%</strong>。低精确率是有意为之：在 4.2:1 的成本比值下，多标三笔好贷换一笔违约是更便宜的错误。被标记的贷款进人工复核队列，而非直接拒绝。</p>
               </div>
 
               <div class="note note--evidence">
@@ -610,16 +610,16 @@
 
               <figure class="figure-editorial">
                 <img src="figures/policy_baseline_costs.png" alt="单变量规则对阵模型" loading="lazy" decoding="async" />
-                <figcaption>单变量规则对阵模型——一条写在纸上的期限规则就能拿到 24.5 个百分点，模型 26.5 个百分点里的大头。</figcaption>
+                <figcaption>单变量规则对阵模型：一条写在纸上的期限规则就能拿到 24.5 个百分点，模型 26.5 个百分点里的大头。</figcaption>
               </figure>
 
               <p class="subtitle">24.5 个百分点：模型多买到的是 2 个百分点的成本、26.9 个百分点的召回（74.9% 对 48.0%），以及在 60 个月产品线内部排序风险的能力，代替一刀切砍掉整条产品线。只按这套成本函数打分，简单规则完全可以辩护；要违约覆盖度、要继续做 60 个月贷款，就需要模型的排序。</p>
 
-              <p class="subtitle">被标记的贷款要交给人来审，标记率本身就是运营成本。测试集 2,251 笔申请标记 1,056 笔（46.9%），换来 74.9% 的违约捕获——将近一半的进件落到复核台上，只有复核便宜或高度辅助时才行得通，而它正是 0.75 召回下限的直接价格。</p>
+              <p class="subtitle">被标记的贷款要交给人来审，标记率本身就是运营成本。测试集 2,251 笔申请标记 1,056 笔（46.9%），换来 74.9% 的违约捕获。将近一半的进件落到复核台上，只有复核便宜或高度辅助时才行得通，而它正是 0.75 召回下限的直接价格。</p>
 
               <figure class="figure-editorial">
                 <img src="figures/review_queue_flag_rate.png" alt="标记率与召回随阈值变化" loading="lazy" decoding="async" />
-                <figcaption>标记率与召回随阈值变化——75% 召回下限把标记率钉在 46.9%；放宽阈值到 0.20，队列缩到 37.1%，召回让到 63.3%。</figcaption>
+                <figcaption>标记率与召回随阈值变化：75% 召回下限把标记率钉在 46.9%；放宽阈值到 0.20，队列缩到 37.1%，召回让到 63.3%。</figcaption>
               </figure>
 
               <div class="overflow-x-auto">
@@ -681,7 +681,7 @@
 
               <figure class="figure-editorial">
                 <img src="figures/shap_summary.png" alt="SHAP 全局归因" loading="lazy" decoding="async" />
-                <figcaption>SHAP 特征影响——头部驱动因素是贷款期限、年收入、等级、近期查询次数、用途；人工构造的 financial_stress_index 与 grade_term_risk 均进前八。</figcaption>
+                <figcaption>SHAP 特征影响：头部驱动因素是贷款期限、年收入、等级、近期查询次数、用途；人工构造的 financial_stress_index 与 grade_term_risk 均进前八。</figcaption>
               </figure>
 
               <div class="note note--evidence">
@@ -694,7 +694,7 @@
 
               <figure class="figure-editorial">
                 <img src="figures/shap_dependence.png" alt="SHAP dependence 方向检查" loading="lazy" decoding="async" />
-                <figcaption>头部驱动因素的 SHAP 依赖散点——利率、利用率、收入、等级的逐点依赖关系，方向与 EDA 完全一致。</figcaption>
+                <figcaption>头部驱动因素的 SHAP 依赖散点：利率、利用率、收入、等级的逐点依赖关系，方向与 EDA 完全一致。</figcaption>
               </figure>
             </div>
           </section>
@@ -778,7 +778,7 @@
 
               <figure class="figure-editorial">
                 <img src="figures/cost_ratio_sensitivity.png" alt="假想成本比扫描下的最优阈值与降幅" loading="lazy" decoding="async" />
-                <figcaption>假想成本比扫描下的最优阈值与降幅——把比值从 3:1 扫到 5:1，阈值全程钉在 0.16（召回下限先于成本比生效），可宣称的降幅从 7.0% 拉到 34.2%。</figcaption>
+                <figcaption>假想成本比扫描下的最优阈值与降幅：把比值从 3:1 扫到 5:1，阈值全程钉在 0.16（召回下限先于成本比生效），可宣称的降幅从 7.0% 拉到 34.2%。</figcaption>
               </figure>
 
               <div class="note note--caveat">
@@ -790,7 +790,7 @@
 
               <div class="contact-info-card">
                 <h3 class="text-xl font-semibold mb-3" style="color: var(--dark);">复现说明</h3>
-                <p class="subtitle">notebook 可在本地完整重跑（<code>uv run jupyter nbconvert --to notebook --execute</code>）。随机种子全程固定为 42，图表输出到 <code>figures/</code>。本报告并存两套成本口径：头条标定下省 26.5%，计入违约者已付利息的净口径下省 6.6%——两套口径下的标记名单完全相同，对外引用请取净口径。</p>
+                <p class="subtitle">notebook 可在本地完整重跑（<code>uv run jupyter nbconvert --to notebook --execute</code>）。随机种子全程固定为 42，图表输出到 <code>figures/</code>。本报告并存两套成本口径：头条标定下省 26.5%，计入违约者已付利息的净口径下省 6.6%。两套口径下的标记名单完全相同，对外引用请取净口径。</p>
               </div>
             </div>
           </section>
