@@ -122,7 +122,7 @@ portfolio/
 |---|---|---|
 | 银行客户流失预测 | `projects/Bank Customer Churn Prediction/` | 5 |
 | 电商欺诈检测 | `projects/e-commerce fraud detection/` | 8 |
-| 贷款违约预测 | `projects/lending hub loan prediction/` | 15 |
+| 贷款违约预测 | `projects/lendingclub loan prediction/` | 15 |
 
 ### 3.3 页面流程
 
@@ -290,7 +290,7 @@ portfolio/
 │   ├── e-commerce fraud detection/
 │   │   ├── *.html / *-en.html
 │   │   └── figures/                        # 8 张 PNG
-│   └── lending hub loan prediction/
+│   └── lendingclub loan prediction/
 │       ├── *.html / *-en.html
 │       └── figures/                        # 15 张 PNG
 ├── assets/

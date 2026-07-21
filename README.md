@@ -30,7 +30,7 @@ portfolio/
 │   ├── e-commerce fraud detection/        # 电商欺诈检测 ✅
 │   │   ├── *.html / *-en.html             # 中英两版项目页
 │   │   └── figures/                       # 8 张数据可视化图表
-│   └── lending hub loan prediction/       # 贷款违约预测 ✅
+│   └── lendingclub loan prediction/       # 贷款违约预测 ✅
 │       ├── *.html / *-en.html             # 中英两版项目页
 │       └── figures/                       # 15 张数据可视化图表
 ├── assets/
