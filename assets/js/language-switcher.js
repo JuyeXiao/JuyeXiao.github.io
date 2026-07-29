@@ -19,6 +19,7 @@
                     'Bank Customer Churn Prediction': 'projects/Bank Customer Churn Prediction/Bank Customer Churn Prediction.html',
                     'e-commerce fraud detection': 'projects/e-commerce fraud detection/e-commerce fraud detection.html',
                     'lendingclub loan prediction': 'projects/lendingclub loan prediction/lendingclub loan prediction.html',
+                    'spglobal climate comparison': 'projects/spglobal climate comparison/spglobal climate comparison.html',
                     'youtube comment analysis': 'projects/youtube comment analysis/youtube comment analysis.html'
                 }
             }
@@ -34,6 +35,7 @@
                     'Bank Customer Churn Prediction': 'projects/Bank Customer Churn Prediction/Bank Customer Churn Prediction-en.html',
                     'e-commerce fraud detection': 'projects/e-commerce fraud detection/e-commerce fraud detection-en.html',
                     'lendingclub loan prediction': 'projects/lendingclub loan prediction/lendingclub loan prediction-en.html',
+                    'spglobal climate comparison': 'projects/spglobal climate comparison/spglobal climate comparison-en.html',
                     'youtube comment analysis': 'projects/youtube comment analysis/youtube comment analysis-en.html'
                 }
             }

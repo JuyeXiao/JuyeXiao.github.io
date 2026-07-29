@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <script>document.documentElement.classList.add('js');</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Satellite LST against CMIP6 Air Temperature: Rebuilding and Auditing a 2022 Capstone - Data Poetics</title>
+  <meta name="description" content="A 2026 rebuild and audit of a 2022 Columbia SPS and S&amp;P Global capstone: four regions, 15 CMIP6 models, two emissions scenarios. Between 74% and 97% of RMSE² is the physical gap between skin and air temperature; the RMSE winner of 2022 won on an unrevised data version; the published anchor of 9.1046 carries a 360-day calendar error, and correct handling returns 8.4599. The deliverable is a monthly bias correction that survives a holdout test, taking median RMSE against day LST from 12.29–19.17 °C down to 2.36–3.78 °C." />
+
+  <!-- Same as the homepage: Tailwind / fonts / icons / site styles -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+SC:wght@400;500;600&family=Noto+Serif+SC:wght@500&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="../../assets/css/index.css" />
+  <link rel="stylesheet" href="../../assets/css/project.css" />
+
+  <!-- Syntax highlighting + charts (common on detail pages) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
+
+  <style>
+    /* Table body rules now come from project.css; only two non-table tweaks remain */
+    .dark table.performance-table thead tr {
+      background-color: rgba(64, 64, 64, 0.25) !important;
+    }
+    /* Lift dark:text-gray-300 one step in narrative paragraphs */
+    .dark .dark\:text-gray-300 {
+      color: var(--dark) !important;
+    }
+  </style>
+</head>
+<body class="transition-colors duration-300">
+  <div class="scroll-progress" id="scroll-progress"></div>
+
+  <!-- Top navigation (reuses the homepage structure and styles) -->
+  <header id="navbar" class="navbar fixed top-0 left-0 right-0 z-50">
+    <div class="container-main h-full flex items-center justify-between">
+      <!-- Logo (returns to the homepage hero and can replay the animation) -->
+      <a href="../../index-en.html#hero" class="navbar-logo" id="navbar-logo">
+        <svg class="logo-svg-nav" viewBox="0 0 40 40">
+          <g class="grid-bg">
+            <line class="grid-line-v" x1="8" y1="0" x2="8" y2="40" style="animation-delay: 0.1s, 0s" />
+            <line class="grid-line-v" x1="16" y1="0" x2="16" y2="40" style="animation-delay: 0.2s, 0.5s" />
+            <line class="grid-line-v" x1="24" y1="0" x2="24" y2="40" style="animation-delay: 0.3s, 1s" />
+            <line class="grid-line-v" x1="32" y1="0" x2="32" y2="40" style="animation-delay: 0.4s, 1.5s" />
+            <line class="grid-line-h" x1="0" y1="10" x2="40" y2="10" style="animation-delay: 0.5s, 0s" />
+            <line class="grid-line-h" x1="0" y1="20" x2="40" y2="20" style="animation-delay: 0.6s, 0.7s" />
+            <line class="grid-line-h" x1="0" y1="30" x2="40" y2="30" style="animation-delay: 0.7s, 1.4s" />
+          </g>
+          <line class="weaver-line" id="weaverLine" x1="0" y1="20" x2="40" y2="20" />
+          <text class="logo-letters" id="logoLetters" x="20" y="26" text-anchor="middle">JX</text>
+        </svg>
+        <div class="logo-name">
+          <div class="logo-name-text">Juye Xiao</div>
+          <div class="logo-name-subtitle">Data Analyst</div>
+        </div>
+      </a>
+
+      <!-- In-page navigation (jumps to the matching homepage anchors) -->
+      <nav class="hidden md:flex items-center space-x-8">
+        <a href="../../index-en.html#about" class="nav-link">About</a>
+        <a href="../../index-en.html#experience" class="nav-link">Experience</a>
+        <a href="../../index-en.html#education" class="nav-link">Education</a>
+        <a href="../../index-en.html#projects" class="nav-link">Projects</a>
+        <a href="../../index-en.html#skills" class="nav-link">Skills</a>
+        <a href="../../index-en.html#contact" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="flex items-center space-x-4">
+        <button id="theme-toggle" class="btn-secondary !p-2 !rounded-full" title="Toggle theme">
+          <i data-lucide="sun" class="block dark:hidden"></i>
+          <i data-lucide="moon" class="hidden dark:block"></i>
+        </button>
+        <button id="lang-toggle" class="btn-secondary !p-2 !rounded-full"><span class="font-bold text-sm">中</span></button>
+        <button id="menu-toggle" class="btn-secondary !p-2 !rounded-full md:hidden"
+          aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+          <i data-lucide="menu" class="menu-icon-open"></i>
+          <i data-lucide="x" class="menu-icon-close"></i>
+        </button>
+      </div>
+    </div>
+    <nav id="mobile-menu" class="mobile-menu md:hidden" aria-label="Mobile navigation">
+      <a href="../../index-en.html#about" class="nav-link">About</a>
+      <a href="../../index-en.html#experience" class="nav-link">Experience</a>
+      <a href="../../index-en.html#education" class="nav-link">Education</a>
+      <a href="../../index-en.html#projects" class="nav-link">Projects</a>
+      <a href="../../index-en.html#skills" class="nav-link">Skills</a>
+      <a href="../../index-en.html#contact" class="nav-link">Contact</a>
+    </nav>
+  </header>
+
+  <main class="container-main">
+    <!-- Project header (hero-style masthead for the detail page) -->
+    <section id="project-hero" class="section-padding" style="padding-top: calc(var(--space-xl) + 72px)">
+      <div class="grid md:grid-cols-2 gap-16 items-center w-full">
+        <div class="reveal">
+          <div class="section-eyebrow">
+            <span class="section-kicker">Case Study · Climate Data Pipeline &amp; Model Audit</span>
+          </div>
+          <h1 class="hero-title mt-2">Satellite LST against CMIP6 Air Temperature: Rebuilding and Auditing a 2022 Capstone</h1>
+          <p class="subtitle mt-4 max-w-xl">A 2022 deliverable ranked climate models by RMSE against daytime satellite land surface temperature. Rebuilding the whole pipeline from primary sources four years later shows what that ranking was measuring: 74% to 97% of the RMSE is the physical gap between skin and air temperature, which is what the leaderboard was really sorting.</p>
+          <div class="reading-time">~28 min read<span class="sep">·</span>13 figures</div>
+
+          <div class="hero-stats">
+            <div class="hero-stat">
+              <div class="hero-stat__num">15 × 4 × 2</div>
+              <div class="hero-stat__label">CMIP6 models × regions × emissions scenarios (1,020 grid points)</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat__num">74–97%</div>
+              <div class="hero-stat__label">Share of RMSE² carried by offset (regional medians)</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat__num">2.36–3.78</div>
+              <div class="hero-stat__label">Holdout RMSE after monthly correction (°C), from 12.29–19.17 raw</div>
+            </div>
+          </div>
+
+          <div class="mt-8 flex items-center gap-4">
+            <a href="#content" class="btn btn-primary">Start Reading</a>
+            <a href="../../index-en.html#projects" class="btn btn-secondary">Back to Projects</a>
+          </div>
+        </div>
+        <aside class="reveal hero-stack">
+          <div class="hero-stack__label">Methods · Stack</div>
+          <ol class="hero-stack__list">
+            <li>
+              <span class="hero-stack__num">01</span>
+              <span class="hero-stack__name">Google Earth Engine</span>
+              <span class="hero-stack__desc">MOD11A1 extracted point by point at native 1 km, 1,020 grid-cell centers across four regions</span>
+            </li>
+            <li>
+              <span class="hero-stack__num">02</span>
+              <span class="hero-stack__name">NASA THREDDS NCSS</span>
+              <span class="hero-stack__desc">NEX-GDDP-CMIP6 subset server-side, anonymous S3 as fallback, highest file revision selected automatically</span>
+            </li>
+            <li>
+              <span class="hero-stack__num">03</span>
+              <span class="hero-stack__name">xarray + cftime</span>
+              <span class="hero-stack__desc">360-day calendars never pass through a Gregorian parse, which keeps three model time axes intact</span>
+            </li>
+            <li>
+              <span class="hero-stack__num">04</span>
+              <span class="hero-stack__name">Error decomposition + Taylor diagrams</span>
+              <span class="hero-stack__desc">rmse² = bias² + crmse², a 120-row metric table over four regions and two scenarios</span>
+            </li>
+            <li>
+              <span class="hero-stack__num">05</span>
+              <span class="hero-stack__name">Moving-block bootstrap + SARIMA</span>
+              <span class="hero-stack__desc">12-month blocks over 2,000 resamples; AICc grid search against three baselines</span>
+            </li>
+          </ol>
+          <div class="hero-stack__foot">Python · xarray · pandas · numpy · statsmodels · pymannkendall · Google Earth Engine</div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Compact summary cards -->
+    <section id="quick-summary" class="section-padding">
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="summary-card">
+          <h3 class="summary-card-title">Business Challenge</h3>
+          <p class="summary-card-content">Putting climate model output onto specific parcels means knowing how far the modeled temperature sits from what the satellite measures. The 2022 deliverable ranked models by RMSE and named a winner, but nobody opened that RMSE up to see what was inside it.</p>
+        </div>
+        <div class="summary-card">
+          <h3 class="summary-card-title">Approach</h3>
+          <p class="summary-card-content">A 2026 rebuild from two public NASA databases, scaled out to four regions, 15 models and two scenarios, splitting RMSE into an offset term and a shape term and attaching a moving-block bootstrap interval to every rank.</p>
+        </div>
+        <div class="summary-card">
+          <h3 class="summary-card-title">Deliverable</h3>
+          <p class="summary-card-content">What the rebuild yields is a regional monthly bias correction that survives a holdout test: median RMSE against day LST falls from 12.29–19.17 °C on raw tas to 2.36–3.78 °C. It is delivered with three usage constraints.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main body: table of contents at left, prose at right -->
+    <section id="content" class="section-padding">
+      <div class="grid md:grid-cols-12 gap-12">
+        <!-- Table of contents -->
+        <aside class="md:col-span-3">
+          <nav class="project-toc sticky top-24" id="project-toc">
+            <h3 class="text-xl font-semibold" style="color: var(--dark);">Contents</h3>
+            <ul class="mt-4 space-y-2" id="toc-list">
+              <li><a href="#summary" class="toc-link" data-section="summary">Executive Summary</a></li>
+              <li><a href="#brief" class="toc-link" data-section="brief">The Sponsor's Question and the 2022 Deliverable</a></li>
+              <li><a href="#data" class="toc-link" data-section="data">Data and Study Regions</a></li>
+              <li><a href="#method" class="toc-link" data-section="method">Method: Splitting RMSE</a></li>
+              <li><a href="#observation" class="toc-link" data-section="observation">Observation Quality and the Aggregation Rule</a></li>
+              <li><a href="#offset" class="toc-link" data-section="offset">Model Comparison: Offset Dominance</a></li>
+              <li><a href="#regions" class="toc-link" data-section="regions">Regional Contrasts and Scenario Choice</a></li>
+              <li><a href="#audit" class="toc-link" data-section="audit">Auditing 2022: Three Findings</a></li>
+              <li><a href="#correction" class="toc-link" data-section="correction">Bias Correction and Forecast Feasibility</a></li>
+              <li><a href="#recommendations" class="toc-link" data-section="recommendations">Guidance and Limits</a></li>
+            </ul>
+          </nav>
+        </aside>
+
+        <!-- Prose area -->
+        <div class="md:col-span-9 content-area">
+          <!-- Executive summary -->
+          <section id="summary" class="section-padding section--editorial" data-section-num="00">
+            <div class="section-header">
+              <div class="section-eyebrow">
+                <span class="section-num">00</span>
+                <span class="section-kicker">Executive Summary</span>
+              </div>
+              <h2 class="section-title">Summary of Findings</h2>
+            </div>
+
+            <div class="space-y-6">
+              <div class="contact-info-card">
+                <p class="subtitle mb-4">This analysis returns to a question posed in autumn 2022: how far apart satellite land surface temperature (LST) and modeled near-surface air temperature (tas) sit, and which term carries the gap. Back then one California region was ranked by RMSE and a best model came out of it. Four years later every original data link had gone dead. I rebuilt the pipeline from two public NASA databases, scaled it out to four regions, 15 CMIP6 models and two emissions scenarios, and put each of the 2022 conclusions back somewhere it could be tested.</p>
+
+                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">Six Findings</h3>
+                <ul class="list-disc list-inside space-y-3 subtitle mb-6">
+                  <li><strong>Offset accounts for 74% to 97% of squared error.</strong> Regional medians of bias² as a share of RMSE² are AU 74%, CA 79%, TK 90% and XJ 97%, with all 60 region-model combinations falling between 0.48 and 0.97. A ranking by RMSE ranks the physical gap between skin and air temperature.</li>
+                  <li><strong>CMCC-CM2-SR5 won 2022 on its data version.</strong> It minimizes raw RMSE in all four regions, yet on shape it ranks 4th in CA, 1st in AU and 15th in both XJ and TK. Of the 15 models it is the only one with no v2.0 revision in the NEX archive.</li>
+                  <li><strong>A calendar error sits inside the published RMSE anchor.</strong> Three models run on a 360-day calendar, and parsing their time axes as Gregorian dates returns 9.0725 °C. What 2022 published was 9.1046; correct handling through cftime returns 8.4599 °C.</li>
+                  <li><strong>The ranks do not separate.</strong> Four regions produce four different cRMSE winners, and three of those change under ssp126. Median 95% bootstrap intervals on one model run 1.14 °C in CA, 1.20 in TK, 0.93 in AU and 0.76 in XJ, a width that covers the entire field in three of the four regions.</li>
+                  <li><strong>What the rebuild delivers is a bias correction.</strong> Fitted on 2015–2018 and tested on 2019–2020, median RMSE against day LST falls from 12.29–19.17 °C on raw tas to 2.36–3.78 °C with twelve monthly values.</li>
+                  <li><strong>Six years of monthly data cannot support a SARIMA.</strong> On CA's 299-month record the residual diagnostics pass (Ljung-Box p = 0.9379) and the model beats monthly climatology; run on 72 months the same procedure fails the diagnostics (p = 0.0) and loses to climatology. The 2022 forecasting plan was infeasible on the data it had.</li>
+                </ul>
+
+                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">Results at a Glance</h3>
+                <div class="overflow-x-auto">
+                  <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
+                    <thead>
+                      <tr class="bg-gray-100 dark:bg-gray-700/30">
+                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Item</th>
+                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Result</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Scope</strong></td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Four regions × 15 CMIP6 models × 2 scenarios, monthly over 2015–2020</td>
+                      </tr>
+                      <tr>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Observations</strong></td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">MODIS MOD11A1 point LST, 1,020 grid-cell centers, daily</td>
+                      </tr>
+                      <tr>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Core decomposition</strong></td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">rmse² = bias² + crmse², with offset taking 74% to 97%</td>
+                      </tr>
+                      <tr>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Audit findings</strong></td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">A 360-day calendar error, an unrevised data version, an over-coarse extraction scale</td>
+                      </tr>
+                      <tr class="bg-green-50 dark:bg-green-900/20">
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Deliverable</strong></td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Regional monthly bias correction, holdout median RMSE 2.36–3.78 °C</td>
+                      </tr>
+                      <tr>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Reference baseline</strong></td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Climatology of the observations at 1.85–3.08 °C, better in all four regions</td>
+                      </tr>
+                      <tr>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Ranking verdict</strong></td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Each leader occupies a rank range of CA 1–2, XJ 1–6, TK 1–7, AU 1–10</td>
+                      </tr>
+                      <tr>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Scenario verdict</strong></td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Over six years, every SSP gap interval contains zero</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- The sponsor's question -->
+          <section id="brief" class="section-padding section--editorial" data-section-num="01">
+            <div class="section-header">
+              <div class="section-eyebrow">
+                <span class="section-num">01</span>
+                <span class="section-kicker">The Sponsor's Question</span>
+              </div>
+              <h2 class="section-title">The Sponsor's Question and the 2022 Deliverable</h2>
+            </div>
+
+            <div class="space-y-8">
+              <div class="contact-info-card">
+                <p class="subtitle mb-3">The project addendum of 14 October 2022 set the objective as monitoring and predicting climate-related hazards from the temporal and spatial data in satellite imagery, connecting those to economic data, and informing the risk assessments behind the products S&amp;P sells to its clients. What that placed on the student side was collecting and tidying the datasets, then quantifying per GCM the difference between observational and derived data in the MODIS and NEX-GDDP NASA databases, with California given as an example region.</p>
+                <p class="subtitle">Landing that output on a given parcel requires three operational answers first. Each of the three gets an answer with an uncertainty attached below.</p>
+              </div>
+
+              <ul class="list-disc list-inside space-y-3 subtitle">
+                <li>Which GCM to feed into a regional heat estimate.</li>
+                <li>Whether the scenarios have to be run separately, or one is enough.</li>
+                <li>Whether a grid-cell value can stand in for a specific location.</li>
+              </ul>
+
+              <div class="note note--process">
+                <div class="note__label">Why Rebuild · The case for starting over</div>
+                <div class="note__body">
+                  <p>Every data link in the 2022 deliverables has since gone dead, and the original CSVs cannot be traced back to a particular revision of a particular file. The first motive for rebuilding was to make every number recomputable from public sources. The second was to take conclusions drawn on one region and a handful of models and see whether they hold at four regions and 15.</p>
+                  <p>Auditing was never the goal of this work; it is a by-product of the rebuild. Once the pipeline ran end to end, the older numbers acquired a position they could be checked against. Section 07 reports the three that matched up.</p>
+                </div>
+              </div>
+
+              <p class="subtitle">Scope: this page covers data collection, the pipeline, and the quantification of the observation-model difference, which are all the clauses the addendum placed on the analysis side. Projecting hazard indicators forward and overlaying economic exposure data were not attempted here, and Section 09 lists both as open items.</p>
+            </div>
+          </section>
+
+          <!-- Data and study regions -->
+          <section id="data" class="section-padding section--editorial" data-section-num="02">
+            <div class="section-header">
+              <div class="section-eyebrow">
+                <span class="section-num">02</span>
+                <span class="section-kicker">Data &amp; Study Regions</span>
+              </div>
+              <h2 class="section-title">Two Sources and Four Study Regions</h2>
+            </div>
+
+            <div class="space-y-8">
+              <p class="subtitle">Both sources are public. NEX needs no account, while MODIS needs one free Earth Engine authorization. Raw data stays out of version control and is rebuilt by the scripts; the download manifest recording which revision of which file came from where is committed.</p>
+
+              <div class="overflow-x-auto">
+                <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
+                  <thead>
+                    <tr class="bg-gray-100 dark:bg-gray-700/30">
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Dataset</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Source and channel</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Volume and period</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>MODIS land surface temperature</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><a href="https://developers.google.com/earth-engine/datasets/catalog/MODIS_061_MOD11A1" target="_blank" rel="noopener">MODIS/061/MOD11A1</a>, extracted point by point through Google Earth Engine at the native 1 km resolution, using <code>LST_Day_1km</code>, <code>LST_Night_1km</code> and the matching QC bands</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">1,020 grid-cell centers across four regions, daily; 2015–2020 for all four, plus 2000–2024 for CA</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>NEX-GDDP-CMIP6 tas</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><a href="https://www.nccs.nasa.gov/services/data-collections/land-based-products/nex-gddp-cmip6" target="_blank" rel="noopener">NASA NEX-GDDP-CMIP6</a>, subset server-side through <a href="https://ds.nccs.nasa.gov/thredds/ncss/grid/AMES/NEX/GDDP-CMIP6" target="_blank" rel="noopener">NCCS THREDDS</a> with anonymous <a href="https://nex-gddp-cmip6.s3.us-west-2.amazonaws.com" target="_blank" rel="noopener">S3</a> as fallback, highest file revision selected automatically</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">15 models × 2 scenarios × 4 regions, 720 files landing as 120 CSV sets; 2015–2020, daily</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <p class="subtitle">The 15 models are CanESM5, CMCC-CM2-SR5, CMCC-ESM2, GISS-E2-1-G, HadGEM3-GC31-MM, INM-CM4-8, INM-CM5-0, KACE-1-0-G, KIOST-ESM, MIROC6, NESM3, NorESM2-LM, NorESM2-MM, TaiESM1 and UKESM1-0-LL. Scenarios are ssp126 and ssp585.</p>
+
+              <div class="overflow-x-auto">
+                <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
+                  <thead>
+                    <tr class="bg-gray-100 dark:bg-gray-700/30">
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Code</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Location</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Climate</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">Grid points</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">Valid months</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>CA</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Sierra National Forest, California, USA</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Montane Mediterranean</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">156</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">69</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>XJ</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Southern Tarim Basin, Xinjiang, China</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Hyper-arid desert</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">144</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">67</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>TK</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Mary Region, Turkmenistan (Karakum)</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Arid continental</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">144</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">60</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>AU</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Inland New South Wales, Australia</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Temperate to semi-arid (Southern Hemisphere)</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">576</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">72</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <p class="subtitle">Sample points are the NEX 0.25° grid-cell centers, generated by the rule "grid-cell center inside the bounding box", which matches the point counts region by region. That step fixes the identity of the sample, and every comparison below sits on the same set of locations. Valid months are counted out of 72.</p>
+
+              <figure class="figure-editorial">
+                <img src="figures/regions_overview.png" alt="Observations and models across four regions" loading="lazy" decoding="async" />
+                <figcaption>MODIS day LST (black) against tas from 15 models (thin lines, ssp585), monthly over 2015–2020. In all four panels the model lines sit wholly below the observations with a spacing that varies by region, and Section 05 takes that spacing apart.</figcaption>
+              </figure>
+
+              <div class="contact-info-card">
+                <h3 class="text-xl font-semibold mb-3" style="color: var(--dark);">Why LST Has to Be Compared with tas</h3>
+                <p class="subtitle mb-3">The CMIP variable name <code>tas</code> composes temperature with air and surface, and the file attributes carry <code>cell_methods: area: time: mean</code>, meaning an average over the cell area and over 24 hours. MODIS LST is point skin temperature at the instant of overpass, around 10:30 for the day pass and 22:30 for the night pass. These are not the same quantity.</p>
+                <p class="subtitle">Within CMIP the variable of the same kind as LST is ts, the model's own skin temperature, but the NEX-GDDP-CMIP6 distribution list carries nine variables (<code>hurs huss pr rlds rsds sfcWind tas tasmax tasmin</code>) and ts is not among them. Observation and model were never the same physical quantity, which is the root of every bias figure here and the reason the correction in Section 08 exists.</p>
+              </div>
+
+              <div class="note note--caveat">
+                <div class="note__label">Caveat · TK metrics rest on a warm-season-leaning subset</div>
+                <div class="note__body">
+                  <p>All 12 of TK's missing months fall in the cold season, 8 in January to March and 4 in December. Its metrics therefore rest on a subset that leans warm, and they do not sit on the same month set as the other three regions. Wherever a TK number appears alongside another region on this page, it should be read with that sentence attached.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Method -->
+          <section id="method" class="section-padding section--editorial" data-section-num="03">
+            <div class="section-header">
+              <div class="section-eyebrow">
+                <span class="section-num">03</span>
+                <span class="section-kicker">Method: Splitting RMSE</span>
+              </div>
+              <h2 class="section-title">Error Decomposition, Cleaning Recipes, Test Design</h2>
+            </div>
+
+            <div class="space-y-8">
+              <div class="contact-info-card">
+                <h3 class="text-xl font-semibold mb-3" style="color: var(--dark);">Splitting RMSE into Offset and Shape</h3>
+                <p class="subtitle mb-3">The goal is to separate the systematic offset that two different physical quantities must have from the error a model makes in seasonal shape, so that any ranking sits on the second. Two alternatives were on the table. A single RMSE, which is what 2022 used, mixes both terms into one number; minimizing it therefore amounts to minimizing the offset. Correlation ignores offset entirely, but it also fails to penalize amplitude error.</p>
+                <p class="subtitle">This rebuild uses the identity <code>rmse² = bias² + crmse²</code> and reports all three terms, adding the standard-deviation ratio and Taylor diagrams so amplitude error stays visible. Per model it computes bias, cRMSE, correlation, standard-deviation ratio and interannual anomaly correlation, giving a 120-row metric table over four regions and two scenarios. Anomaly correlation is reported for completeness and measures no skill here, because free-running GCMs are not initialized from observations and are not expected to track individual years.</p>
+              </div>
+
+              <p class="subtitle">The cost is that cRMSE responds to the observation cleaning recipe, and how strongly varies by region (Section 05 quantifies it). Ranking by cRMSE obliges the analysis to disclose how the observations were aggregated.</p>
+
+              <div class="note note--process">
+                <div class="note__label">Calendar · Three model time axes cannot be parsed as Gregorian</div>
+                <div class="note__body">
+                  <p>HadGEM3-GC31-MM, KACE-1-0-G and UKESM1-0-LL run on a 360-day calendar of twelve 30-day months. Files are opened through cftime throughout, and monthly aggregation groups on the first seven characters of the date string, never passing through a Gregorian parse.</p>
+                  <p>This step can be tested directly, and the test appears in Section 07, because it also explains how the published figure came about.</p>
+                </div>
+              </div>
+
+              <div class="contact-info-card">
+                <h3 class="text-xl font-semibold mb-3" style="color: var(--dark);">The Observation Cleaning Recipe</h3>
+                <p class="subtitle mb-3">Cloud contamination makes LST missing on a daily basis. A monthly mean therefore depends on which days and which grid points enter it, and the aggregation rule has to be fixed in advance and published. Two recipes were available. The 2022-style average replaces the missing marker with NaN, averages however many valid points a day happens to have, then takes the monthly mean. Under the coverage rule, any day with valid points below 50% is discarded first, and any month left holding fewer than 10 valid days is set to NaN.</p>
+                <p class="subtitle mb-3">Recipe one keeps every month at the price of mixing a cold, low-coverage subsample into the monthly mean. Recipe two pays in missing months for monthly values built on comparable spatial sampling. Results here use the coverage rule, which masks 3 months in CA, 5 in XJ, 12 in TK and none in AU.</p>
+                <p class="subtitle">The MOD11A1 QC bitmask is applied at extraction. Night series run on a relaxed threshold (at least 10% of points per day, at least 5 valid days per month) because night-time passing rates are much thinner, and night results are used qualitatively only.</p>
+              </div>
+
+              <div class="contact-info-card">
+                <h3 class="text-xl font-semibold mb-3" style="color: var(--dark);">Attaching Uncertainty to Ranks and Forecasts</h3>
+                <p class="subtitle mb-3">"Which model is better" only means something when the answer can state by how much, and whether that margin separates at all. Ranks use a moving-block bootstrap: 12-month blocks to keep the annual cycle intact under resampling; 2,000 resamples; the same months for every model, giving paired ranks.</p>
+                <p class="subtitle">Forecasts use a holdout window against three baselines (monthly climatology, seasonal naive, Prophet), reporting MASE and the realized coverage of the 95% prediction interval. SARIMA orders come from an AICc grid search on the training segment, and evaluation uses the holdout segment only. One evaluation detail deserves stating. Linear interpolation fills missing values at the end of a series by carrying the previous value forward, which manufactures synthetic observations. TK's 2020-12, 2020-03 in the CA short window and 2024-02 in the CA long window all arose that way. All three months remain in training and in the plots, but they are excluded from RMSE, MAE, MASE and interval coverage.</p>
+              </div>
+            </div>
+          </section>
+
+          <!-- Observation quality -->
+          <section id="observation" class="section-padding section--editorial" data-section-num="04">
+            <div class="section-header">
+              <div class="section-eyebrow">
+                <span class="section-num">04</span>
+                <span class="section-kicker">Observation Quality</span>
+              </div>
+              <h2 class="section-title">Observation Quality and the Aggregation Rule</h2>
+            </div>
+
+            <div class="space-y-8">
+              <p class="subtitle">Before comparing models, the observations get audited, and each figure below carries a constraint on how a downstream number may be read. Daytime QC passing rates are CA 66.40%, TK 59.50%, XJ 56.18% and AU 51.80%; night-time rates are AU 33.65%, TK 31.64%, CA 31.14% and XJ 12.69%, thinner than the day side by 1.54× in AU up to 4.43× in XJ. Out of 2192 days, those with no valid observation anywhere in the region number 136 in AU, 96 in TK, 47 in XJ and 34 in CA. A night sample that thin is why those series stay qualitative throughout.</p>
+
+              <p class="subtitle">Missingness is strongly seasonal, in the direction climate implies. Multi-year extremes of the daytime missing rate by calendar month run from 58% in January to 12% in August for CA, 61% in January to 20% in October for XJ, and 71% in December to 8% in September for TK. AU is the exception, staying between 42% and 54% all year with its peak in July, the Southern Hemisphere winter.</p>
+
+              <figure class="figure-editorial">
+                <img src="figures/CA_missingness_monthly.png" alt="CA monthly missingness" loading="lazy" decoding="async" />
+                <figcaption>Monthly missing-observation rate for CA day and night LST after QC. Missingness here is itself a data product: because it is seasonally structured, no multi-year average over these observations is an equal-weight average, and cold months carry less weight than warm ones.</figcaption>
+              </figure>
+
+              <p class="subtitle">Moving CA from the 2022-style average to the current recipe raises the monthly regional day LST by 0.88 °C, and almost all of that belongs to the aggregation rule. Holding the QC setting fixed and switching only from the 2022-style average to the coverage rule moves the mean by +0.91 °C, with 2019-11 moving +5.60 °C on its own. Holding aggregation fixed and toggling only the QC bitmask moves the mean by −0.01 °C, with no month moving more than 0.24 °C.</p>
+
+              <figure class="figure-editorial">
+                <img src="figures/CA_qc_sensitivity.png" alt="CA under three cleaning recipes" loading="lazy" decoding="async" />
+                <figcaption>Monthly regional day LST for CA under three processing recipes. Two of the three lines nearly coincide (QC on and off under the same aggregation rule) while the third, the 2022-style average, sits systematically lower.</figcaption>
+              </figure>
+
+              <div class="note note--evidence">
+                <div class="note__label">Discipline · Never quote a bias figure without its cleaning recipe</div>
+                <div class="note__body">
+                  <p>The mechanism is visible at the level of the raw file: the bitmask removes 877 of 227,933 valid point-days, while the coverage rule discards whole low-coverage days whose surviving pixels are cold. The decisive part of the recipe is therefore the aggregation rule, with the QC switch contributing two orders of magnitude less.</p>
+                  <p>One consequence is that two bias figures computed under different recipes cannot be subtracted; the difference measures the processing. The same discipline reappears as a ranking in Section 05, where XJ's winner depends on which recipe was used.</p>
+                </div>
+              </div>
+
+              <p class="subtitle">The regional mean represents timing well and absolute level poorly. Correlation between a single point's series and the regional mean has a median of 0.981 in TK, 0.970 in AU, 0.963 in CA and 0.962 in XJ; remove the seasonal cycle and those medians fall to 0.865, 0.835, 0.830 and 0.794. Most of the original agreement was the annual cycle every point shares. Per-point long-term means have a standard deviation of 4.20 °C in AU, 4.90 in TK, 8.00 in CA and 8.73 in XJ, and the daily cross-point standard deviation runs XJ 8.6, CA 8.3, TK 5.4, AU 4.6 °C.</p>
+
+              <figure class="figure-editorial">
+                <img src="figures/CA_spatial_variability.png" alt="CA spatial variability" loading="lazy" decoding="async" />
+                <figcaption>Per-point dispersion in CA: cross-point standard deviation of daily day LST at left (30-day rolling mean), the regional mean against the per-point range in the middle, and the distribution of per-point correlations at right. Using a 0.25° cell as a station value means accepting a 4.2 to 8.7 °C spread of per-point means.</figcaption>
+              </figure>
+
+              <p class="subtitle">Diurnal range sorts with aridity, averaging 31.8 °C in XJ, 22.9 in TK, 18.7 in CA and 16.2 in AU, and for CA the monthly climatology of that range runs from 23.5 °C in May down to 11.3 °C in January. This quantity sets the scale of the day-side bias, since the same model tas necessarily sits further from day LST where the diurnal range is larger. All four numbers should be read as upper bounds, because the day and night series come from different QC subsamples and surviving night pixels favor clear nights.</p>
+            </div>
+          </section>
+
+          <!-- Offset dominance -->
+          <section id="offset" class="section-padding section--editorial" data-section-num="05">
+            <div class="section-header">
+              <div class="section-eyebrow">
+                <span class="section-num">05</span>
+                <span class="section-kicker">Offset Dominance</span>
+              </div>
+              <h2 class="section-title">Model Comparison: Offset Dominance and Rank Resolution</h2>
+            </div>
+
+            <div class="space-y-8">
+              <p class="subtitle">Across four regions and 15 models each, the day-side bias is negative and the night-side bias positive in every case, 15 of 15. Median day-side bias is −19.0 °C in XJ, −15.8 in TK, −12.4 in CA and −10.8 in AU; median night-side bias is +12.7, +6.8, +6.6 and +5.3 °C.</p>
+
+              <figure class="figure-editorial">
+                <img src="figures/CA_ensemble_envelope.png" alt="CA ensemble inside the day-night envelope" loading="lazy" decoding="async" />
+                <figcaption>CA: MODIS day LST (solid black), night LST (dashed gray) and tas from 15 models (thin red, ssp585). Model lines run as a bundle between the two observed series, confirming that the offset is a difference of physical quantities, though the relation does not discriminate between models.</figcaption>
+              </figure>
+
+              <p class="subtitle">Regional medians of bias² as a share of RMSE² are AU 74%, CA 79%, TK 90% and XJ 97%, and across all 60 region-model combinations the share spans 0.48 to 0.97.</p>
+
+              <figure class="figure-editorial">
+                <img src="figures/CA_bias_share.png" alt="CA bias share per model" loading="lazy" decoding="async" />
+                <figcaption>Share of RMSE² carried by bias², per model, in CA, with a regional median of 79%. Offset takes 79% of the squared error in CA and 97% in XJ, which leaves 3% there for models to compete over.</figcaption>
+              </figure>
+
+              <div class="note note--insight">
+                <div class="note__label">Counterintuitive · The choice of variable outweighs the choice of model</div>
+                <div class="note__body">
+                  <p>Cross-model spread within a month (largest minus smallest of the 15 values) averages 8.7 °C in CA, 8.0 in TK, 7.3 in AU and 7.1 in XJ, all smaller than the width of the day-night envelope. More than half of CA's 8.7 °C comes from a single model: the other 14 span only 1.6 °C of bias, while CMCC-CM2-SR5 runs 4.9 °C warmer than the next one.</p>
+                  <p>Which variable and which cleaning recipe are used therefore matters more than which of the 15 models is picked. That also caps what model selection can buy, since there was never much to choose from.</p>
+                </div>
+              </div>
+
+              <p class="subtitle">Moving from an RMSE ranking to a cRMSE ranking displaces 10 of 15 models by five places or more in XJ, 9 of 15 in TK, 4 of 15 in CA and 2 of 15 in AU. Spearman correlation between the two rankings is −0.31 in XJ, −0.27 in TK, 0.66 in CA and 0.76 in AU. In both arid regions the two metrics produce essentially opposite orderings.</p>
+
+              <figure class="figure-editorial">
+                <img src="figures/XJ_rank_slope.png" alt="XJ rank reshuffle" loading="lazy" decoding="async" />
+                <figcaption>XJ: RMSE ranks including bias on the left axis, cRMSE ranks with bias removed on the right, one line per model. Ten models move five places or more and the rank correlation is negative, making the two leaderboards incommensurable.</figcaption>
+              </figure>
+
+              <p class="subtitle">The ranks themselves also fail to separate. Under the block bootstrap the median 95% interval on a single model's cRMSE is 1.14 °C in CA, 1.20 in TK, 0.93 in AU and 0.76 in XJ, and 14 to 15 models overlap the leader's interval in three of the four regions.</p>
+
+              <div class="overflow-x-auto">
+                <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
+                  <thead>
+                    <tr class="bg-gray-100 dark:bg-gray-700/30">
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Region</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">Median 95% interval on one model</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">Overlapping the leader</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">Leader's rank range</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="bg-green-50 dark:bg-green-900/20">
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>CA</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">1.14 °C</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">12/15</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>1–2</strong></td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>XJ</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.76 °C</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">15/15</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">1–6</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>TK</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">1.20 °C</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">14/15</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">1–7</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>AU</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.93 °C</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">15/15</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">1–10</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <p class="subtitle">Only CA holds its leader inside the top two. Leaderboards can stay, but only their ends carry information: the distance between 6th and 9th place measures resampling noise.</p>
+
+              <p class="subtitle">In XJ the ranking also depends on the cleaning recipe. Recomputing every cRMSE against the 2022-style average leaves XJ correlated with its original ordering at Spearman 0.721, with five models moving three places or more and first place changing from GISS-E2-1-G to TaiESM1. TK is stable by comparison at Spearman 0.936, one model moving three places or more and first place unchanged; there the coverage rule raises every cRMSE by roughly 1.4 °C without touching the order.</p>
+            </div>
+          </section>
+
+          <!-- Regional contrasts -->
+          <section id="regions" class="section-padding section--editorial" data-section-num="06">
+            <div class="section-header">
+              <div class="section-eyebrow">
+                <span class="section-num">06</span>
+                <span class="section-kicker">Regional Contrasts</span>
+              </div>
+              <h2 class="section-title">Regional Contrasts and Scenario Choice</h2>
+            </div>
+
+            <div class="space-y-8">
+              <p class="subtitle">Median RMSE runs AU 12.61 &lt; CA 14.01 &lt; TK 16.63 &lt; XJ 19.32 °C. By cRMSE the order almost reverses: XJ 3.55 &lt; TK 5.24 &lt; AU 6.33 &lt; CA 6.44 °C. Correlation follows cRMSE, highest in XJ at 0.98, then TK 0.96, AU 0.94 and CA 0.92.</p>
+
+              <figure class="figure-editorial">
+                <img src="figures/ALL_region_metric_boxplots.png" alt="Regional metric distributions" loading="lazy" decoding="async" />
+                <figcaption>Metric distributions by region (ssp585, 15 models). By RMSE, XJ is the worst region; by cRMSE and correlation it is the best. Same data, two orderings.</figcaption>
+              </figure>
+
+              <div class="note note--insight">
+                <div class="note__label">Resolved · What the 2022 record reported without explaining</div>
+                <div class="note__body">
+                  <p>The older record noted a self-contradictory observation: one region showing high RMSE together with a high R². One mechanism drives both. An arid surface runs much hotter than the air above it, which inflates the offset term; aridity also means clear skies, which makes the seasonal cycle cleanest and pushes cRMSE down while lifting correlation.</p>
+                  <p>Both statements describe different terms of the same identity, each correct on its own, and they look contradictory only when treated as one number. Once rmse² = bias² + crmse² is split apart, the observation turns from an anomaly into an expectation.</p>
+                </div>
+              </div>
+
+              <p class="subtitle">Regional cRMSE winners under ssp585 are MIROC6 at 5.647 °C in CA, GISS-E2-1-G at 3.249 in XJ, TaiESM1 at 4.409 in TK and CMCC-CM2-SR5 at 5.975 in AU. Under ssp126 only CA keeps its winner, and the other three change.</p>
+
+              <figure class="figure-editorial">
+                <img src="figures/ALL_rank_heatmap.png" alt="Cross-region rank heatmap" loading="lazy" decoding="async" />
+                <figcaption>Ranks of 15 models across four regions (ssp585, 1 is best). No row holds a stable band. GISS-E2-1-G has the best average rank at 3.5 while every other model falls between 5.75 and 10.5, and ordering within that span carries no information.</figcaption>
+              </figure>
+
+              <p class="subtitle">Bias and cRMSE are two independent axes. Pooling all 60 region-model points they correlate at +0.88, while within regions the correlation is −0.20 in CA, +0.39 in XJ, +0.56 in TK and −0.60 in AU. Pooled agreement comes from the aridity gradient entering both terms at once, so it describes a regional contrast with no model-level relationship behind it.</p>
+
+              <figure class="figure-editorial">
+                <img src="figures/ALL_bias_vs_crmse.png" alt="Bias against cRMSE" loading="lazy" decoding="async" />
+                <figcaption>Bias on the horizontal axis, cRMSE on the vertical, colored by region. Four clusters separate horizontally (the regional effect) and each cluster stays narrow vertically (the model effect): knowing that a model has the smallest offset in a region says almost nothing about whether its shape is the best there.</figcaption>
+              </figure>
+
+              <p class="subtitle">On the Taylor diagrams each region forms its own cluster, with standard-deviation ratios below 1 throughout, because the annual amplitude of daily mean air temperature is smaller than that of midday skin temperature. Pairing these two variables produces that gap and no model defect is involved. Cross-model range in correlation is 0.012 in XJ, 0.036 in TK, 0.044 in CA and 0.059 in AU, while the range in standard-deviation ratio is 0.121 in TK, 0.091 in CA, 0.086 in AU and 0.070 in XJ, so which region is "most dispersed" depends on which axis is read.</p>
+
+              <div class="contact-info-card">
+                <h3 class="text-xl font-semibold mb-3" style="color: var(--dark);">The Two SSPs Are Interchangeable over This Window</h3>
+                <p class="subtitle mb-3">A paired test over the 14 models on revised files gives a mean <code>bias(ssp585) − bias(ssp126)</code> of +0.181 °C in CA, +0.111 in XJ, +0.086 in TK and −0.018 in AU, with all four 95% intervals containing zero. Paired-t p-values run from 0.070 to 0.794 and Wilcoxon agrees at 0.068 to 0.670. The largest single model-region gap anywhere is 0.70 °C against regional bias medians of −10.8 to −19.0 °C, so even at its maximum the scenario term stays under 7% of the quantity being measured. Including all 15 models, median scenario gaps are +0.33, +0.24, +0.16 and +0.06 °C in CA, XJ, TK and AU, the increment coming from the model in Section 07.</p>
+                <p class="subtitle">The type of evidence here needs stating: failing to reject a null at n = 14 does not establish equality. What supports the practical verdict is the width of the intervals, in that a difference at either bound stays far below the quantity being measured. The verdict also holds for this six-year window only, since scenario differences accumulate on multi-decadal horizons.</p>
+              </div>
+            </div>
+          </section>
+
+          <!-- Auditing 2022 -->
+          <section id="audit" class="section-padding section--editorial" data-section-num="07">
+            <div class="section-header">
+              <div class="section-eyebrow">
+                <span class="section-num">07</span>
+                <span class="section-kicker">Auditing the 2022 Deliverable</span>
+              </div>
+              <h2 class="section-title">Auditing 2022: Three Findings</h2>
+            </div>
+
+            <div class="space-y-8">
+              <p class="subtitle">Three of the older numbers matched up once the rebuilt pipeline gave them something to be checked against. What gets audited below is work my own team handed over.</p>
+
+              <div class="note note--evidence">
+                <div class="note__label">Audit · Finding 1: The published RMSE anchor carries a calendar error</div>
+                <div class="note__body">
+                  <p>For one combination (CA / ssp585 / HadGEM3-GC31-MM), correct calendar handling gives a monthly RMSE of <strong>8.4599 °C</strong>, while treating day <em>N</em> of the 360-day calendar as "2015-01-01 plus <em>N</em> days" gives 9.0725 °C. The value published in 2022 was <strong>9.1046</strong>, which differs from the second figure by 0.0321, a gap consistent with a data revision.</p>
+                  <p>Only the three 360-day models are affected while the other twelve are untouched, so a cross-model ranking built on a Gregorian parse is unfair to those three by construction. The error reproduces directly and corrects directly, since the fix amounts to enabling cftime when the files are opened.</p>
+                </div>
+              </div>
+
+              <div class="contact-info-card">
+                <h3 class="text-xl font-semibold mb-3" style="color: var(--dark);">Finding 2: The RMSE Winner Won on Its Data Version</h3>
+                <p class="subtitle mb-3">CMCC-CM2-SR5 ranks 1st on RMSE in all four regions and 4th, 15th, 15th and 1st on cRMSE in CA, XJ, TK and AU. Its bias in the CA table is −6.80 °C where every other model runs between −11.66 and −13.27, and it pulls the minimum bias² share under ssp585 down from 0.75 to 0.54.</p>
+                <p class="subtitle">That offset can be traced to the files. Its ssp585 run is warmer than its own ssp126 by +6.63 °C in CA, +5.50 in AU, +4.83 in XJ and +4.22 in TK, while the same gap for the other 14 models falls entirely between −0.61 and +0.70 °C, placing it 12 to 21 standard deviations outside that distribution.</p>
+              </div>
+
+              <figure class="figure-editorial">
+                <img src="figures/ALL_scenario_divergence.png" alt="Scenario gap per model" loading="lazy" decoding="async" />
+                <figcaption>bias(ssp585) − bias(ssp126) for 15 models across four regions. Fourteen models hug the zero line and one sits 4 to 7 °C above it. That outlier is an archive-version artifact, so any ranking putting this model first should be checked against its file version.</figcaption>
+              </figure>
+
+              <div class="note note--evidence">
+                <div class="note__label">Evidence · The version trail and a scenario-free corroboration</div>
+                <div class="note__body">
+                  <p>The download manifest supplies the explanation: all 48 of its files carry no version suffix, while all 48 files of each of the other 14 models carry <code>_v2.0</code>. NASA never published a revision for this model, so the pipeline could only take the original v1.0 product, and v1.0 is precisely the release that later revisions exist to correct. Both scenario files carry <code>variant_label = r1i1p1f1</code>, ruling out an ensemble-member difference, and the gap is fully present in the first year, ruling out accumulated scenario forcing.</p>
+                  <p>Splicing each model's CMIP6 historical run onto its SSP run allows a test involving no scenario at all. Over 2000–2014 the other 14 models' four-region mean bias against day LST clusters at −15.00 ± 0.15 °C while CMCC-CM2-SR5 sits at −9.61 °C, 35 standard deviations outside the field. Its ssp585 carries the same offset (−9.69) while its ssp126 does not (−14.99, 1.2 standard deviations inside the field), so the offset spans two released segments of this model's v1.0 product.</p>
+                  <p>The audit verdict does not depend on that version evidence. cRMSE ranks are computed on the same files, and last place in both arid regions is on its own enough to reject the model as a recommended choice. What the version evidence changes is the explanation of why its offset is the smallest.</p>
+                </div>
+              </div>
+
+              <div class="contact-info-card">
+                <h3 class="text-xl font-semibold mb-3" style="color: var(--dark);">Finding 3: That Observation Record Held No Point Values</h3>
+                <p class="subtitle mb-3">The MODIS CSVs in the 2022 deliverables were not the product of a point-by-point extraction. Across 156 points on a given day, the median count of distinct values is 14 (minimum 0, maximum 18), so roughly eleven points share one number. That extraction used too coarse a <code>scale</code> and returned image-pyramid block means tens of kilometers wide, biasing the record cold by 3.78 °C.</p>
+                <p class="subtitle">Seasonal shape survives intact: the old and new monthly series correlate at r = 0.9902, and their deseasonalized anomalies at r = 0.8394. The two records can corroborate each other in timing but not in level, and subtracting a 2022 bias figure from one on this page measures the extraction settings.</p>
+              </div>
+            </div>
+          </section>
+
+          <!-- Bias correction and forecasting -->
+          <section id="correction" class="section-padding section--editorial" data-section-num="08">
+            <div class="section-header">
+              <div class="section-eyebrow">
+                <span class="section-num">08</span>
+                <span class="section-kicker">Bias Correction &amp; Forecasting</span>
+              </div>
+              <h2 class="section-title">Bias Correction and Forecast Feasibility</h2>
+            </div>
+
+            <div class="space-y-8">
+              <p class="subtitle">The 2022 plan included a forecasting stage whose libraries were imported but never run. Running it now settles a more consequential question: whether that method could have worked at all on the data then available. One procedure over two sample sizes decides it, using the 2000–2024 CA record (299 months, of which 13 fail the coverage rule, leaving 286) against the four regional 2015–2020 windows of 72 months.</p>
+
+              <p class="subtitle">On the long record the method holds. For CA's 299 months the STL trend component moves inside a 4.2 °C band with a residual standard deviation of 1.76 °C, and the annual cycle takes most of the variance. ADF rejects a unit root at p = 0.0038 and KPSS does not reject stationarity. An AICc grid search selects SARIMA(1,0,2)(0,1,1)₁₂, whose residual Ljung-Box p is about 3.5e−28 with the first 13 months of burn-in included and 0.9379 once they are dropped.</p>
+
+              <p class="subtitle">Over the 2023–2024 holdout window, RMSE is 3.154 °C for SARIMA, 3.691 for monthly climatology, 4.123 for Prophet and 4.379 for seasonal naive, an advantage over climatology of 0.54 °C or roughly 15%. Twenty-three of the 24 months are scored, since 2024-02 is an interpolated synthetic value and was excluded. Two caveats travel with that number: MASE is 1.080, meaning the model does not beat the rule of reusing last year's value for the same month, and realized coverage of the 95% prediction interval is 87%, or 20 of the 23 scored months, short of its nominal level.</p>
+
+              <figure class="figure-editorial">
+                <img src="figures/CA_sarima_holdout_24m.png" alt="CA 24-month holdout" loading="lazy" decoding="async" />
+                <figcaption>CA holdout over 2023–2024, SARIMA against three baselines, with the shaded band the SARIMA 95% prediction interval. This is a qualified win: putting the model to work as a forecaster means accepting a monthly error on the order of 3 °C.</figcaption>
+              </figure>
+
+              <p class="subtitle">The same procedure fails on 72 months. In the CA short-window control (11 months scored), RMSE is 2.430 °C for monthly climatology, 3.166 for Prophet, 3.229 for SARIMA and 4.530 for seasonal naive; climatology's MASE of 0.869 is the only one below 1; and the SARIMA residual Ljung-Box p is 0.0. The other three regions behave as their sample size implies.</p>
+
+              <div class="overflow-x-auto">
+                <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
+                  <thead>
+                    <tr class="bg-gray-100 dark:bg-gray-700/30">
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Region</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Lowest holdout RMSE</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">RMSE of all four predictors (°C)</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">SARIMA Ljung-Box p</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>XJ</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">SARIMA</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">SARIMA 2.018, seasonal naive 2.126, climatology 2.162, Prophet 2.197</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.0</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>TK</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Monthly climatology</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">climatology 1.962, SARIMA 2.582, Prophet 2.838, seasonal naive 3.956 (11 months scored)</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.0</td>
+                    </tr>
+                    <tr class="bg-green-50 dark:bg-green-900/20">
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>AU</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Monthly climatology</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">climatology 2.398, seasonal naive 3.215, Prophet 3.986, SARIMA 4.727</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.0006</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <p class="subtitle">XJ's SARIMA has the nominally lowest RMSE, but by only 0.14 °C and with a MASE of 1.037, again above 1. AU deserves its own sentence: six years of monthly data cannot support a SARIMA there, and monthly climatology is the best available forecast for that region. The 2022 forecasting plan was therefore unworkable on the six years of data it had, independently of how it was executed.</p>
+
+              <p class="subtitle">No region shows a significant trend. Seasonal Mann-Kendall returns no trend in all four, at p = 0.494 for CA, 0.786 for XJ, 0.465 for TK and 0.551 for AU. Sen slopes are −0.099 and −0.080 °C/decade for CA, with XJ at −0.18, TK at −1.59 and AU at −0.85. TK carries the largest point estimate in absolute terms, yet it rests on six paired points per calendar month with all 12 masked months in the cold season, so drift in sample composition outweighs any real trend. None of these are statements about global warming; they describe daytime skin temperature inside one bounding box after cloud screening and the coverage rule.</p>
+
+              <div class="contact-info-card">
+                <h3 class="text-xl font-semibold mb-3" style="color: var(--dark);">What the Correction Rests On</h3>
+                <p class="subtitle">Sections 05 and 06 point the same way: estimating the offset well is worth more than choosing among 15 models. Model tas falls between night and day LST in 15 of 15 cases in all four regions, running 10.8 to 19.0 °C below day LST and 5.3 to 12.7 °C above night LST as regional medians. Because the sign and magnitude of that offset follow from a physical relation and vary systematically by region, the offset is estimable.</p>
+              </div>
+
+              <figure class="figure-editorial">
+                <img src="figures/ALL_daynight_bracket.png" alt="Day-night bracket across four regions" loading="lazy" decoding="async" />
+                <figcaption>Ensemble-median bias by region: negative against day LST everywhere, positive against night LST everywhere, with the day-side gap widening with aridity. The quantity to estimate is how much to add going from tas to day LST; two limits apply, in that the bracket does not discriminate between models and the two columns rest on different month sets.</figcaption>
+              </figure>
+
+              <p class="subtitle">Fitted on 2015–2018 and tested on 2019–2020 (valid months, calibration/test: CA 46/23, XJ 44/23, TK 40/20, AU 48/24), median RMSE against day LST comes out as below. Cells in the first three rows are medians over the 15 models, while the last row involves no model at all.</p>
+
+              <div class="overflow-x-auto">
+                <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
+                  <thead>
+                    <tr class="bg-gray-100 dark:bg-gray-700/30">
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Form of correction</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">CA</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">XJ</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">TK</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">AU</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Raw tas, uncorrected</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">13.37</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">19.17</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">15.89</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">12.29</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">One regional constant</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">6.74</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">3.67</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">4.62</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">6.54</td>
+                    </tr>
+                    <tr class="bg-green-50 dark:bg-green-900/20">
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Twelve monthly values</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>3.78</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>2.36</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>3.63</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>2.51</strong></td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Reference: climatology of the observations</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">3.08</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">1.85</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">2.80</td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">2.05</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <p class="subtitle">Units are °C. No intervals are attached, because the test window is the two years 2019–2020 and every cell comes from that single window. The monthly form beats the single constant in all four regions by 1.0 to 4.0 °C, and one regional constant already takes the apparent error from 12–19 °C down to the 3.7–6.7 °C range, which is where the return on correcting exceeds the return on model selection.</p>
+
+              <p class="subtitle">A climatology of the observations alone, using no model at all, scores 1.85 to 3.08 °C and beats the corrected ensemble median in all four regions, the single exception anywhere being TK's best individual model at 2.07 °C against climatology's 2.80. This is not a failure of the recipe: a free-running GCM carries no interannual skill, so over a two-year test window it cannot beat a climatology built from the same observations.</p>
+
+              <div class="note note--caveat">
+                <div class="note__label">Scope · Where the recipe applies, and three usage constraints</div>
+                <div class="note__body">
+                  <p>That fixes its scope: <strong>future periods</strong>, where no climatology can be computed; <strong>scenario contrasts</strong>, which do not exist in the observations; and <strong>locations without a usable satellite record</strong>. Anywhere outside those three, with several years of local MODIS record in hand and only the present climatology at issue, using the observed monthly climatology directly is both more accurate and simpler.</p>
+                  <p>Three constraints are delivered with the recipe. It is fitted at the regional level only, so the 4.2 to 8.7 °C per-point spread from Section 04 remains; the test window is two years, too short to separate the model from a climatology; and the offsets are fitted on monthly series, so applying them at daily resolution needs a separate argument first.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Guidance and limits -->
+          <section id="recommendations" class="section-padding section--editorial" data-section-num="09">
+            <div class="section-header">
+              <div class="section-eyebrow">
+                <span class="section-num">09</span>
+                <span class="section-kicker">Guidance &amp; Limits</span>
+              </div>
+              <h2 class="section-title">Five Recommendations and What Remains Open</h2>
+            </div>
+
+            <div class="space-y-8">
+              <p class="subtitle">The three operational questions from Section 01 come back here, together with the cleaning recipe and the file provenance, as five recommendations. Each carries the evidence behind it.</p>
+
+              <div class="overflow-x-auto">
+                <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
+                  <thead>
+                    <tr class="bg-gray-100 dark:bg-gray-700/30">
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Guidance</th>
+                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Evidence</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Do not rank models by RMSE against satellite LST</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Between 74% and 97% of RMSE² is the physical difference between skin and air temperature. Use cRMSE and correlation instead, and expect a crowded top: in XJ and AU all 15 models have intervals overlapping the leader's.</td>
+                    </tr>
+                    <tr class="bg-green-50 dark:bg-green-900/20">
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Estimating the offset is worth more than choosing between models</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">One regional constant takes apparent error from 12–19 °C down to 3.7–6.7 °C, and twelve monthly values take it to 2.36–3.78 °C. In CA, setting aside the model on unrevised data, the remaining 14 span only 1.6 °C of bias.</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Near-term work does not need both scenarios</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Over this six-year window every scenario-gap interval contains zero and the largest single gap is 0.70 °C. That holds for this window only; once a projection window reaches multi-decadal length, scenarios must be presented separately.</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Do not treat a 0.25° cell as a station value</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Per-point long-term means inside one box have a standard deviation of 4.2 to 8.7 °C, and the models carry no interannual skill by construction. Neither spatial detail nor year-specific claims are supported by this data.</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Quote every bias figure with its cleaning recipe</strong></td>
+                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Changing the aggregation rule in one region moves the monthly mean by 0.91 °C, so subtracting two differently processed bias figures measures the processing. Check a model's file version before selecting it.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="note note--caveat">
+                <div class="note__label">Limits · Caveats and open questions</div>
+                <div class="note__body">
+                  <p>Four caveats disclosed above each place a constraint on how a number should be read: TK's metrics rest on a warm-season-leaning subset; night series sit on relaxed coverage thresholds and stay qualitative; anomaly correlation is a completeness column; standard-deviation ratios below 1 come from the variable pairing.</p>
+                  <p>Three questions on the observation side have no answer yet. QC-induced spatial sampling bias is unquantified, since no statistic relates a grid point's coverage to its temperature. Night-side coverage thresholds (10% of points per day, 5 valid days per month) were chosen so the night series would exist at all, with no sensitivity analysis behind them. Sample size on the night side is not printed.</p>
+                  <p>Three more sit on the method side. The comparison window is still 2015–2020, and splicing each model's CMIP6 historical segment onto its SSP run would extend it to match the MODIS record. The bias correction is regional, so a per-grid-point correction field is its natural extension. And the correction was tested over two years only, too short to separate a model carrying no interannual skill from a climatology.</p>
+                  <p>Two further items from the sponsor's original statement were not attempted: projecting hazard indicators forward, and connecting them to economic exposure data. For the first, data and method are in place, and what blocks it is whether a monthly offset may legitimately be applied to daily tas. The second requires first verifying the licensing and grid conventions of the candidate public economic products.</p>
+                </div>
+              </div>
+
+              <div class="contact-info-card">
+                <h3 class="text-xl font-semibold mb-3" style="color: var(--dark);">Reproduction</h3>
+                <p class="subtitle mb-3">All data is publicly available and every number can be recomputed from the repository. The pipeline comes in eight modules (region definitions, NEX subsetting, GEE extraction, preprocessing, metrics, time series), analysis notebooks 01 to 09 are committed with outputs so they read without running, and the download manifest records which revision of which file came from where. The metric table is itself cross-checked: the 30 CA rows recomputed inside notebook 05 agree with the four-region table produced by notebook 04 row by row, all within ±0.02.</p>
+                <p class="subtitle">One number is deliberately not reproduced: the 9.1046 from Section 07. This pipeline returns 8.4599 under correct calendar handling, and it should not be adjusted to match the older value.</p>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <!-- Related projects -->
+    <section id="related" class="section-padding">
+      <div class="section-header reveal">
+        <div class="section-eyebrow">
+          <span class="section-kicker">Continue Reading</span>
+        </div>
+        <h2 class="section-title">Related Projects</h2>
+      </div>
+      <div class="grid md:grid-cols-2 gap-6">
+        <a href="#" class="related-project-card group cursor-pointer" style="text-decoration: none;" onclick="
+          const lang = localStorage.getItem('language') || 'zh';
+          window.location.href = lang === 'en' ? '../youtube comment analysis/youtube comment analysis-en.html' : '../youtube comment analysis/youtube comment analysis.html';
+          return false;
+        ">
+          <h3 class="related-project-title">YouTube Pet-Owner Detection</h3>
+          <p class="related-project-description">Another question of measurement basis: labels come from rules, so the metrics score agreement with those rules</p>
+          <div class="related-project-link">
+            <span>View Details</span>
+            <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>
+          </div>
+        </a>
+        <a href="#" class="related-project-card group cursor-pointer" style="text-decoration: none;" onclick="
+          const lang = localStorage.getItem('language') || 'zh';
+          window.location.href = lang === 'en' ? '../lendingclub loan prediction/lendingclub loan prediction-en.html' : '../lendingclub loan prediction/lendingclub loan prediction.html';
+          return false;
+        ">
+          <h3 class="related-project-title">LendingClub Loan Default Prediction</h3>
+          <p class="related-project-description">A threshold decision under asymmetric cost, where one single-variable rule takes most of the gain</p>
+          <div class="related-project-link">
+            <span>View Details</span>
+            <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>
+          </div>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer scripts: Prism / local scripts / logo animation / detail-page logic -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="../../assets/js/logo.js"></script>
+  <!-- Shared modules -->
+  <script src="../../assets/js/common.js"></script>
+  <script src="../../assets/js/charts.js"></script>
+  <script src="../../assets/js/project.js"></script>
+
+  <!-- Language toggle functionality -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const langToggle = document.getElementById('lang-toggle');
+      if (langToggle) {
+        langToggle.addEventListener('click', function() {
+          // Save language preference and redirect to the Chinese version
+          localStorage.setItem('language', 'zh');
+          window.location.href = 'spglobal climate comparison.html';
+        });
+      }
+    });
+  </script>
+</body>
+</html>
