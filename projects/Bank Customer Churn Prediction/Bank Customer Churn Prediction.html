@@ -4,6 +4,7 @@
   <script>document.documentElement.classList.add('js');</script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml" />
   <title>银行客户流失预测与关键驱动因素 - 数据诗学</title>
   <meta name="description" content="对 10,000 名零售银行客户的机器学习分析：XGBoost+SMOTE 达到 ROC-AUC 0.876（95% CI [0.858, 0.892]）/ PR-AUC 0.727，阈值在训练集折外预测上按 F2 调到 0.20，把流失捕获率从 61% 提升到 87%，并给出 C*≈3.7 的盈亏平衡成本比。" />
 
@@ -682,11 +683,7 @@
         <h2 class="section-title">相关项目</h2>
       </div>
       <div class="grid md:grid-cols-2 gap-6">
-        <a href="#" class="related-project-card group cursor-pointer" style="text-decoration: none;" onclick="
-          const lang = localStorage.getItem('language') || 'zh';
-          window.location.href = lang === 'en' ? '../lendingclub loan prediction/lendingclub loan prediction-en.html' : '../lendingclub loan prediction/lendingclub loan prediction.html';
-          return false;
-        ">
+        <a href="../lendingclub loan prediction/lendingclub loan prediction.html" class="related-project-card group cursor-pointer" style="text-decoration: none;">
           <h3 class="related-project-title">LendingClub 贷款违约预测</h3>
           <p class="related-project-description">成本 4.2:1 不对称下的阈值决策，抓住 74.9% 违约</p>
           <div class="related-project-link">
@@ -694,11 +691,7 @@
             <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>
           </div>
         </a>
-        <a href="#" class="related-project-card group cursor-pointer" style="text-decoration: none;" onclick="
-          const lang = localStorage.getItem('language') || 'zh';
-          window.location.href = lang === 'en' ? '../youtube comment analysis/youtube comment analysis-en.html' : '../youtube comment analysis/youtube comment analysis.html';
-          return false;
-        ">
+        <a href="../youtube comment analysis/youtube comment analysis.html" class="related-project-card group cursor-pointer" style="text-decoration: none;">
           <h3 class="related-project-title">YouTube 评论宠物主识别</h3>
           <p class="related-project-description">同为"排序能力 + 运营点"框架下的弱监督分类</p>
           <div class="related-project-link">

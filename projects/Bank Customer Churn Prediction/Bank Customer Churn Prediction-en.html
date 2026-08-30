@@ -4,6 +4,7 @@
   <script>document.documentElement.classList.add('js');</script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml" />
   <title>Bank Customer Churn: Prediction and Key Drivers - Data Poetics</title>
   <meta name="description" content="A machine learning analysis of 10,000 retail banking customers: XGBoost+SMOTE reaches ROC-AUC 0.876 (95% CI [0.858, 0.892]) / PR-AUC 0.727, the threshold is tuned to 0.20 on out-of-fold training predictions, lifting churn capture from 61% to 87%, with a C*≈3.7 break-even cost ratio." />
 
@@ -682,11 +683,7 @@
         <h2 class="section-title">Related Projects</h2>
       </div>
       <div class="grid md:grid-cols-2 gap-6">
-        <a href="#" class="related-project-card group cursor-pointer" style="text-decoration: none;" onclick="
-          const lang = localStorage.getItem('language') || 'zh';
-          window.location.href = lang === 'en' ? '../lendingclub loan prediction/lendingclub loan prediction-en.html' : '../lendingclub loan prediction/lendingclub loan prediction.html';
-          return false;
-        ">
+        <a href="../lendingclub loan prediction/lendingclub loan prediction-en.html" class="related-project-card group cursor-pointer" style="text-decoration: none;">
           <h3 class="related-project-title">LendingClub Loan Default Prediction</h3>
           <p class="related-project-description">A threshold decision under a 4.2:1 cost asymmetry, catching 74.9% of defaults</p>
           <div class="related-project-link">
@@ -694,11 +691,7 @@
             <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>
           </div>
         </a>
-        <a href="#" class="related-project-card group cursor-pointer" style="text-decoration: none;" onclick="
-          const lang = localStorage.getItem('language') || 'zh';
-          window.location.href = lang === 'en' ? '../youtube comment analysis/youtube comment analysis-en.html' : '../youtube comment analysis/youtube comment analysis.html';
-          return false;
-        ">
+        <a href="../youtube comment analysis/youtube comment analysis-en.html" class="related-project-card group cursor-pointer" style="text-decoration: none;">
           <h3 class="related-project-title">Pet Owners in YouTube Comments</h3>
           <p class="related-project-description">Weak-supervised classification under the same ranking + operating-point frame</p>
           <div class="related-project-link">

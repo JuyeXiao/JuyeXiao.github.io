@@ -4,6 +4,7 @@
   <script>document.documentElement.classList.add('js');</script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml" />
   <title>Pet Owners in 5.8M YouTube Comments: A Weakly Supervised Estimate - Data Poetics</title>
   <meta name="description" content="5.82M pet-channel comments with no owner label: weak-supervision labeling + feature decoupling + 300 stratified rubric labels. ROC-AUC vs rule labels 0.91 restricted vs 0.96 full vocabulary (PR-AUC 0.21 vs 0.34); precision vs rubric labels 0.58 (95% CI [0.17, 0.96]) at τ_F1, isolating 91,443 likely owners (3.6%), and ranking creators by owner audience share." />
 
@@ -720,11 +721,7 @@
         <h2 class="section-title">Related Projects</h2>
       </div>
       <div class="grid md:grid-cols-2 gap-6">
-        <a href="#" class="related-project-card group cursor-pointer" style="text-decoration: none;" onclick="
-          const lang = localStorage.getItem('language') || 'zh';
-          window.location.href = lang === 'en' ? '../e-commerce fraud detection/e-commerce fraud detection-en.html' : '../e-commerce fraud detection/e-commerce fraud detection.html';
-          return false;
-        ">
+        <a href="../e-commerce fraud detection/e-commerce fraud detection-en.html" class="related-project-card group cursor-pointer" style="text-decoration: none;">
           <h3 class="related-project-title">E-commerce First-Transaction Fraud Detection</h3>
           <p class="related-project-description">Rare positive class + a threshold operating point: recall data-locked at 52%</p>
           <div class="related-project-link">
@@ -732,11 +729,7 @@
             <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>
           </div>
         </a>
-        <a href="#" class="related-project-card group cursor-pointer" style="text-decoration: none;" onclick="
-          const lang = localStorage.getItem('language') || 'zh';
-          window.location.href = lang === 'en' ? '../spglobal climate comparison/spglobal climate comparison-en.html' : '../spglobal climate comparison/spglobal climate comparison.html';
-          return false;
-        ">
+        <a href="../spglobal climate comparison/spglobal climate comparison-en.html" class="related-project-card group cursor-pointer" style="text-decoration: none;">
           <h3 class="related-project-title">Satellite LST against CMIP6 Air Temperature</h3>
           <p class="related-project-description">Another measurement-basis problem: RMSE ranks a physical gap, 74% to 97% of it unrelated to model skill</p>
           <div class="related-project-link">

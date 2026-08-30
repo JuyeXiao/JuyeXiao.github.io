@@ -4,6 +4,7 @@
   <script>document.documentElement.classList.add('js');</script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml" />
   <title>LendingClub 贷款违约预测：成本不对称下的阈值决策 - 数据诗学</title>
   <meta name="description" content="对 9,004 笔已结清 LendingClub 贷款的机器学习分析：LightGBM 在成本最优阈值 0.16 下抓住 74.9% 的违约（95% CI 70.5–79.2%），预期损失比全批放款低 26.5%（净口径 6.6%）；漏判成本 $9,437 是误拒成本 $2,243 的 4.2 倍。一条 60 个月期限规则就拿走降幅的大头。" />
 
@@ -807,11 +808,7 @@
         <h2 class="section-title">相关项目</h2>
       </div>
       <div class="grid md:grid-cols-2 gap-6">
-        <a href="#" class="related-project-card group cursor-pointer" style="text-decoration: none;" onclick="
-          const lang = localStorage.getItem('language') || 'zh';
-          window.location.href = lang === 'en' ? '../e-commerce fraud detection/e-commerce fraud detection-en.html' : '../e-commerce fraud detection/e-commerce fraud detection.html';
-          return false;
-        ">
+        <a href="../e-commerce fraud detection/e-commerce fraud detection.html" class="related-project-card group cursor-pointer" style="text-decoration: none;">
           <h3 class="related-project-title">电商首单欺诈检测</h3>
           <p class="related-project-description">另一道成本-阈值题：一条单规则复现模型抓捕，召回被数据锁死在 52%</p>
           <div class="related-project-link">
@@ -819,11 +816,7 @@
             <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>
           </div>
         </a>
-        <a href="#" class="related-project-card group cursor-pointer" style="text-decoration: none;" onclick="
-          const lang = localStorage.getItem('language') || 'zh';
-          window.location.href = lang === 'en' ? '../Bank Customer Churn Prediction/Bank Customer Churn Prediction-en.html' : '../Bank Customer Churn Prediction/Bank Customer Churn Prediction.html';
-          return false;
-        ">
+        <a href="../Bank Customer Churn Prediction/Bank Customer Churn Prediction.html" class="related-project-card group cursor-pointer" style="text-decoration: none;">
           <h3 class="related-project-title">银行客户流失预测</h3>
           <p class="related-project-description">F2 阈值调优与 C*≈3.7 盈亏平衡成本比</p>
           <div class="related-project-link">

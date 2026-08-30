@@ -4,6 +4,7 @@
   <script>document.documentElement.classList.add('js');</script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml" />
   <title>LendingClub Loan Default: Prediction under Asymmetric Cost - Data Poetics</title>
   <meta name="description" content="A machine learning analysis of 9,004 completed LendingClub loans: LightGBM catches 74.9% of defaults (95% CI 70.5–79.2%) at the cost-optimal threshold 0.16, lowering expected loss 26.5% below approving everyone (6.6% net). A missed default costs $9,437, a wrongly rejected good loan $2,243, a 4.2:1 ratio. One 60-month term rule takes most of the reduction." />
 
@@ -807,11 +808,7 @@
         <h2 class="section-title">Related Projects</h2>
       </div>
       <div class="grid md:grid-cols-2 gap-6">
-        <a href="#" class="related-project-card group cursor-pointer" style="text-decoration: none;" onclick="
-          const lang = localStorage.getItem('language') || 'zh';
-          window.location.href = lang === 'en' ? '../e-commerce fraud detection/e-commerce fraud detection-en.html' : '../e-commerce fraud detection/e-commerce fraud detection.html';
-          return false;
-        ">
+        <a href="../e-commerce fraud detection/e-commerce fraud detection-en.html" class="related-project-card group cursor-pointer" style="text-decoration: none;">
           <h3 class="related-project-title">E-commerce First-Transaction Fraud Detection</h3>
           <p class="related-project-description">Another cost-threshold problem: a single rule reproduces the model's catches, recall data-locked at 52%</p>
           <div class="related-project-link">
@@ -819,11 +816,7 @@
             <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>
           </div>
         </a>
-        <a href="#" class="related-project-card group cursor-pointer" style="text-decoration: none;" onclick="
-          const lang = localStorage.getItem('language') || 'zh';
-          window.location.href = lang === 'en' ? '../Bank Customer Churn Prediction/Bank Customer Churn Prediction-en.html' : '../Bank Customer Churn Prediction/Bank Customer Churn Prediction.html';
-          return false;
-        ">
+        <a href="../Bank Customer Churn Prediction/Bank Customer Churn Prediction-en.html" class="related-project-card group cursor-pointer" style="text-decoration: none;">
           <h3 class="related-project-title">Bank Customer Churn Prediction</h3>
           <p class="related-project-description">F2 threshold tuning and a C*≈3.7 break-even cost ratio</p>
           <div class="related-project-link">

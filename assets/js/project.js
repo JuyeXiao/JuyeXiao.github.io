@@ -4,7 +4,6 @@
 (function () {
   document.addEventListener('DOMContentLoaded', function () {
     initScrollReveals();
-    initImageZoom();
     initCodeHighlight();
     initToc();
     initScrollProgress();
@@ -21,27 +20,6 @@
       });
     }, { threshold: 0.1 });
     elements.forEach((el) => observer.observe(el));
-  }
-
-  // 点击图片全屏查看
-  function initImageZoom() {
-    const images = document.querySelectorAll(
-      '.figure-editorial img, .content-area img, .project-content img, article img'
-    );
-    images.forEach((img) => {
-      img.style.cursor = 'zoom-in';
-      img.addEventListener('click', function () {
-        const overlay = document.createElement('div');
-        overlay.className = 'image-overlay';
-        overlay.style.cssText = 'position:fixed;inset:0;background:rgba(20,18,15,0.92);z-index:9999;display:flex;align-items:center;justify-content:center;cursor:zoom-out;padding:40px;';
-        const full = document.createElement('img');
-        full.src = this.src;
-        full.style.cssText = 'max-width:92%;max-height:92%;object-fit:contain;box-shadow:0 24px 60px rgba(0,0,0,0.5);';
-        overlay.appendChild(full);
-        document.body.appendChild(overlay);
-        overlay.addEventListener('click', () => document.body.removeChild(overlay));
-      });
-    });
   }
 
   function initCodeHighlight() {

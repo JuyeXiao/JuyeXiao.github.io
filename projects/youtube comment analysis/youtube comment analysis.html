@@ -4,6 +4,7 @@
   <script>document.documentElement.classList.add('js');</script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml" />
   <title>582 万条 YouTube 评论里的宠物主：一次弱监督的估计 - 数据诗学</title>
   <meta name="description" content="582 万条宠物频道评论、无真实标签：弱监督标注 + 特征解耦 + 300 条 rubric 分层验证。基于规则标签的 ROC-AUC 掩码 0.91 vs 全词表 0.96（PR-AUC 0.21 vs 0.34）；τ_F1 上基于 rubric 标签的精确率 0.58、95% 区间 [0.17, 0.96]，圈出 91,443 名可能宠物主（3.6%），按宠物主受众占比为创作者排名。" />
 
@@ -720,11 +721,7 @@
         <h2 class="section-title">相关项目</h2>
       </div>
       <div class="grid md:grid-cols-2 gap-6">
-        <a href="#" class="related-project-card group cursor-pointer" style="text-decoration: none;" onclick="
-          const lang = localStorage.getItem('language') || 'zh';
-          window.location.href = lang === 'en' ? '../e-commerce fraud detection/e-commerce fraud detection-en.html' : '../e-commerce fraud detection/e-commerce fraud detection.html';
-          return false;
-        ">
+        <a href="../e-commerce fraud detection/e-commerce fraud detection.html" class="related-project-card group cursor-pointer" style="text-decoration: none;">
           <h3 class="related-project-title">电商首单欺诈检测</h3>
           <p class="related-project-description">稀有正类 + 阈值运营点：召回被数据锁死在 52%</p>
           <div class="related-project-link">
@@ -732,11 +729,7 @@
             <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>
           </div>
         </a>
-        <a href="#" class="related-project-card group cursor-pointer" style="text-decoration: none;" onclick="
-          const lang = localStorage.getItem('language') || 'zh';
-          window.location.href = lang === 'en' ? '../spglobal climate comparison/spglobal climate comparison-en.html' : '../spglobal climate comparison/spglobal climate comparison.html';
-          return false;
-        ">
+        <a href="../spglobal climate comparison/spglobal climate comparison.html" class="related-project-card group cursor-pointer" style="text-decoration: none;">
           <h3 class="related-project-title">卫星地表温度与 CMIP6 气温</h3>
           <p class="related-project-description">同为口径题：RMSE 排的是物理量差，74% 到 97% 与模型能力无关</p>
           <div class="related-project-link">
