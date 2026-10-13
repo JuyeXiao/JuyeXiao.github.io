@@ -14,7 +14,7 @@
   <meta name="twitter:description" content="结合 18,219 个观测点、道路网络与嵌套空间评价，分析奥克兰污染物分布。随机森林在区域分块评价中的 NO₂ 合并 R² 为 0.576017，道路相对预测图覆盖 628.74 km，并通过分区误差诊断提出补充观测方案。">
   <link rel="canonical" href="https://juyexiao.github.io/projects/healthy%20home/healthy%20home.html">
   <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../../assets/css/utilities.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&amp;family=Inter:wght@200;300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;700&amp;family=Noto+Sans+SC:wght@400;500;600&amp;family=Noto+Serif+SC:wght@500&amp;display=swap" rel="stylesheet">
@@ -96,7 +96,7 @@
   </section>
 
   <section id="content" class="section-padding report-layout">
-    <aside><nav class="project-toc" id="project-toc" aria-label="报告目录"><h3>目录</h3><ul id="toc-list"><li><a class="toc-link" href="#report-section-1">概览</a></li><li><a class="toc-link" href="#report-section-2">摘要</a></li><li><a class="toc-link" href="#report-section-3">空间预测任务</a></li><li><a class="toc-link" href="#report-section-4">观测数据与路网</a></li><li><a class="toc-link" href="#report-section-5">道路距离与上下文特征</a></li><li><a class="toc-link" href="#report-section-6">嵌套空间评价</a></li><li><a class="toc-link" href="#report-section-7">污染物预测结果</a></li><li><a class="toc-link" href="#report-section-8">道路距离与污染物分布</a></li><li><a class="toc-link" href="#report-section-9">预测面与相对等级</a></li><li><a class="toc-link" href="#report-section-10">健康字段与预测值的分区关联</a></li><li><a class="toc-link" href="#report-section-11">分区误差与空间诊断</a></li><li><a class="toc-link" href="#report-section-12">项目结论与改进方向</a></li></ul></nav></aside>
+    <aside><nav class="project-toc" id="project-toc" aria-label="报告目录"><p class="project-toc__title">目录</p><ul id="toc-list"><li><a class="toc-link" href="#report-section-1">概览</a></li><li><a class="toc-link" href="#report-section-2">摘要</a></li><li><a class="toc-link" href="#report-section-3">空间预测任务</a></li><li><a class="toc-link" href="#report-section-4">观测数据与路网</a></li><li><a class="toc-link" href="#report-section-5">道路距离与上下文特征</a></li><li><a class="toc-link" href="#report-section-6">嵌套空间评价</a></li><li><a class="toc-link" href="#report-section-7">污染物预测结果</a></li><li><a class="toc-link" href="#report-section-8">道路距离与污染物分布</a></li><li><a class="toc-link" href="#report-section-9">预测面与相对等级</a></li><li><a class="toc-link" href="#report-section-10">健康字段与预测值的分区关联</a></li><li><a class="toc-link" href="#report-section-11">分区误差与空间诊断</a></li><li><a class="toc-link" href="#report-section-12">项目结论与改进方向</a></li></ul></nav></aside>
     <article class="content-area report-body" id="report-body"><div class="report-block" id="report-intro-1">
 <p>道路附近的污染物数值较高，跨区域预测更难。结合模型比较、分区关联和误差诊断，提出候选路段调查与补充观测方案。</p>
 
@@ -104,8 +104,8 @@
 <div aria-label="数据表（可横向滚动）" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
 <thead>
 <tr>
-<th scope="col"></th>
-<th scope="col"></th>
+<th scope="col"><span class="generated-table-label">指标</span></th>
+<th scope="col"><span class="generated-table-label">数值</span></th>
 </tr>
 </thead>
 <tbody>

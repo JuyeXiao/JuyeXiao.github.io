@@ -6,7 +6,7 @@
 .report-actions, .report-series { display: flex; flex-wrap: wrap; gap: var(--space-sm); }
 .report-actions { margin-top: var(--space-md); }
 .report-series { padding: var(--space-sm) 0; border-block: 1px solid var(--tan); }
-.report-series__link { color: var(--brown); padding: var(--space-xs); text-decoration: underline; text-underline-offset: 4px; }
+.report-series__link { min-height: 44px; color: var(--brown); padding: var(--space-xs); text-decoration: underline; text-underline-offset: 4px; }
 .report-series__link.is-current { color: var(--charcoal); font-weight: 600; }
 .report-layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-lg); }
 .report-layout > *, .report-body, .report-block { min-width: 0; }
@@ -18,7 +18,7 @@
 .report-body ul { list-style: disc; }
 .report-body ol { list-style: decimal; }
 .report-body li { margin-block: var(--space-xs); line-height: 1.75; }
-.report-body a { color: var(--blue); text-decoration: underline; text-underline-offset: 3px; }
+.report-body a { color: var(--link); text-decoration: underline; text-underline-offset: 3px; }
 .report-body blockquote { border-left: 2px solid var(--tan); padding: var(--space-xs) var(--space-md); }
 .report-body code { font-family: var(--font-mono); font-size: .88em; overflow-wrap: anywhere; }
 .report-body pre { overflow-x: auto; padding: var(--space-sm); border: 1px solid var(--tan); }
@@ -32,7 +32,7 @@
 .report-page .hero-stat__num { font-size: clamp(1.25rem, 3vw, 2.75rem); overflow-wrap: anywhere; }
 .report-page .hero-stat__label { letter-spacing: .04em; overflow-wrap: anywhere; }
 .report-page .project-toc { max-height: none; }
-.report-page .toc-link { padding-block: 10px; }
+.report-page .toc-link { padding-block: 10px; min-height: 44px; }
 .report-body .figure-editorial figcaption::before { content: none; }
 .figure-zoom { display: block; width: 100%; padding: 0; border: 0; background: transparent; cursor: zoom-in; }
 .figure-zoom:focus-visible { outline: 3px solid var(--blue); outline-offset: 4px; }
@@ -74,7 +74,7 @@ html.dark .project-toc {
   border-left-color: var(--tan);
 }
 
-.project-toc h3 {
+.project-toc__title {
   font-family: var(--font-primary);
   font-size: 0.7rem;
   letter-spacing: 0.22em;

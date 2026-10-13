@@ -14,7 +14,7 @@
   <meta name="twitter:description" content="对 800,634 笔到期终态贷款进行时间切分，比较模型排序、阈值与费用情景。在固定 10% 复核容量下，LightGBM 命中率为 37.88%，等级规则为 32.38%；结合 SHAP 解释与成本分析提出人工复核方案。">
   <link rel="canonical" href="https://juyexiao.github.io/projects/lendingclub%20loan%20prediction/full%20data.html">
   <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../../assets/css/utilities.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&amp;family=Inter:wght@200;300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;700&amp;family=Noto+Sans+SC:wght@400;500;600&amp;family=Noto+Serif+SC:wght@500&amp;display=swap" rel="stylesheet">
@@ -96,7 +96,7 @@
   </section>
 <nav class="report-series" aria-label="系列阅读"><a class="report-series__link" href="lendingclub loan prediction.html">LendingClub：9,004 笔贷款样本</a><a class="report-series__link is-current" href="full data.html">LendingClub 全量分析：时间评估与容量取舍</a></nav>
   <section id="content" class="section-padding report-layout">
-    <aside><nav class="project-toc" id="project-toc" aria-label="报告目录"><h3>目录</h3><ul id="toc-list"><li><a class="toc-link" href="#report-section-1">概览</a></li><li><a class="toc-link" href="#report-section-2">摘要</a></li><li><a class="toc-link" href="#report-section-3">1 贷款风险识别与复核决策问题</a></li><li><a class="toc-link" href="#report-section-4">2 分析样本与贷款结局</a></li><li><a class="toc-link" href="#report-section-5">3 贷款风险分布与群体差异</a></li><li><a class="toc-link" href="#report-section-6">4 预测字段选择与特征处理</a></li><li><a class="toc-link" href="#report-section-7">5 时间划分与模型比较</a></li><li><a class="toc-link" href="#report-section-8">6 费用假设与阈值选择</a></li><li><a class="toc-link" href="#report-section-9">7 风险排序、误标代价与模型解释</a></li><li><a class="toc-link" href="#report-section-10">8 不同时间划分下的模型表现</a></li><li><a class="toc-link" href="#report-section-11">9 从分析到实施建议</a></li></ul></nav></aside>
+    <aside><nav class="project-toc" id="project-toc" aria-label="报告目录"><p class="project-toc__title">目录</p><ul id="toc-list"><li><a class="toc-link" href="#report-section-1">概览</a></li><li><a class="toc-link" href="#report-section-2">摘要</a></li><li><a class="toc-link" href="#report-section-3">1 贷款风险识别与复核决策问题</a></li><li><a class="toc-link" href="#report-section-4">2 分析样本与贷款结局</a></li><li><a class="toc-link" href="#report-section-5">3 贷款风险分布与群体差异</a></li><li><a class="toc-link" href="#report-section-6">4 预测字段选择与特征处理</a></li><li><a class="toc-link" href="#report-section-7">5 时间划分与模型比较</a></li><li><a class="toc-link" href="#report-section-8">6 费用假设与阈值选择</a></li><li><a class="toc-link" href="#report-section-9">7 风险排序、误标代价与模型解释</a></li><li><a class="toc-link" href="#report-section-10">8 不同时间划分下的模型表现</a></li><li><a class="toc-link" href="#report-section-11">9 从分析到实施建议</a></li></ul></nav></aside>
     <article class="content-area report-body" id="report-body"><div class="report-block" id="report-intro-1">
 <p>80 万笔成熟贷款显示清晰的等级、期限与信用负担风险差异。LightGBM 能把风险集中到优先标记人群，但高召回带来的误标代价抵消了净成本收益。分析据此提出分层复核、容量约束和费用敏感的阈值实施方案。</p>
 
@@ -104,8 +104,8 @@
 <div aria-label="数据表（可横向滚动）" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
 <thead>
 <tr>
-<th scope="col"></th>
-<th scope="col"></th>
+<th scope="col"><span class="generated-table-label">指标</span></th>
+<th scope="col"><span class="generated-table-label">数值</span></th>
 </tr>
 </thead>
 <tbody>

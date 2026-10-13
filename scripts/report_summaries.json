@@ -4,6 +4,7 @@
       "title": "银行客户流失：模式、解释与服务容量",
       "tag": "客户分析",
       "description": "结合 10,000 名客户的分组分析、模型比较与 SHAP 解释，识别流失信号并设计服务优先级。冻结阈值 0.275 的测试召回率为 78.39%、精确率为 48.25%，进一步比较不同服务容量下的覆盖与成本。",
+      "card_description": "识别客户流失信号，比较服务容量与成本，为主动联系名单排序，帮助把有限服务资源用在更值得复核的客户上。",
       "stats": [
         [
           "10,000",
@@ -23,6 +24,7 @@
       "title": "Bank churn: patterns, explanations and service capacity",
       "tag": "Customer Analytics",
       "description": "Group analysis, model comparison and SHAP across 10,000 customers identify churn signals and inform service priorities. At the frozen threshold of 0.275, test recall is 78.39% and precision is 48.25%; capacity and cost comparisons guide follow-up planning.",
+      "card_description": "Identify churn signals and compare service capacity with follow-up costs to prioritize customers for proactive contact and further review.",
       "stats": [
         [
           "10,000",
@@ -44,6 +46,7 @@
       "title": "电商首单欺诈：时间评估与审核建议",
       "tag": "风险分析",
       "description": "围绕 138,376 笔首单交易，分析购买时序、设备与 IP 行为，比较不平衡处理方法。通过前向验证和成本情景评估，提出按模型分数与交易线索分级的人工审核方案。",
+      "card_description": "按时间验证时，既定筛查规则未检出测试集欺诈；结合设备、IP 与交易时序线索，提出分级人工审核方案。",
       "stats": [
         [
           "138,376",
@@ -63,6 +66,7 @@
       "title": "First-order fraud: temporal evaluation and review proposals",
       "tag": "Risk Analytics",
       "description": "Analyze purchase timing, device and IP behavior across 138,376 first-order transactions, and compare class-imbalance methods. Forward validation and cost scenarios inform a tiered manual-review proposal using model scores and transaction signals.",
+      "card_description": "Time-based validation found no test-set fraud at the selected decision threshold. Device, IP and transaction-timing signals inform a tiered manual-review proposal.",
       "stats": [
         [
           "138,376",
@@ -84,6 +88,7 @@
       "title": "LendingClub：9,004 笔贷款样本",
       "tag": "金融分析",
       "description": "从 9,004 笔历史贷款中分析违约分布，比较模型与期限规则，设计不对称成本下的筛查策略。Random Forest 冻结阈值 0.22，测试召回率 70.45%，净模拟成本降幅 4.68%。",
+      "card_description": "比较贷款模型与简单期限规则在漏判、误判成本下的取舍，为复核名单和筛查阈值提供依据。",
       "stats": [
         [
           "9,004",
@@ -103,6 +108,7 @@
       "title": "LendingClub: the 9,004-loan sample",
       "tag": "Financial Analytics",
       "description": "Analyze default patterns in 9,004 historical loans, compare models with a loan-term rule, and design screening policies under asymmetric costs. Random Forest at the frozen threshold of 0.22 achieves 70.45% test recall and a 4.68% net simulated cost reduction.",
+      "card_description": "Compare loan models with a simple loan-term rule under the costs of missed defaults and false alerts to inform review lists and screening thresholds.",
       "stats": [
         [
           "9,004",
@@ -124,6 +130,7 @@
       "title": "YouTube 评论：养宠文本信号与频道筛选",
       "tag": "NLP · 弱监督",
       "description": "对 5,818,979 条评论构建弱监督分类与频道候选排名，结合 TF-IDF、行为特征和 SHAP 分析养宠文本信号。300 条新评论经助手复核，294 条可判定，条件加权精确率为 0.8982。",
+      "card_description": "从评论中识别养宠文本线索，结合频道规模与信号占比筛选待复核频道，为后续投放试点提供候选名单。",
       "stats": [
         [
           "5,818,979",
@@ -143,6 +150,7 @@
       "title": "YouTube comments: ownership signals and channel screening",
       "tag": "NLP · Weak Supervision",
       "description": "Build weakly supervised classification and channel candidate rankings from 5,818,979 comments, using TF-IDF, behavioral features and SHAP to analyze pet-ownership language. Assistant review of 300 new comments yields 294 determinate labels and conditional weighted precision of 0.8982.",
+      "card_description": "Identify pet-related signals in comments and combine their share with channel size to shortlist channels for review before an advertising pilot.",
       "stats": [
         [
           "5,818,979",
@@ -164,6 +172,7 @@
       "title": "A/B Testing：Cookie Cats 关卡门实验",
       "tag": "实验分析",
       "description": "比较 90,189 名玩家的留存与参与度，结合分流检验、自助法和统计功效评估关卡门位置。第 40 关组的 7 日留存比第 30 关组低 0.82 个百分点，95% 区间为 [−1.33, −0.31]，据此提出关卡与回访体验建议。",
+      "card_description": "第 40 关组的 7 日留存比第 30 关组低 0.82 个百分点；结合实验分流检查，提出关卡位置与回访体验的改进建议。",
       "stats": [
         [
           "90,189",
@@ -183,6 +192,7 @@
       "title": "A/B Testing: the Cookie Cats gate experiment",
       "tag": "Experiment Analysis",
       "description": "Compare retention and engagement across 90,189 players, combining allocation checks, bootstrap estimates and power analysis. Seven-day retention is 0.82 percentage points lower in the level-40 group than the level-30 group, with a 95% interval of [−1.33, −0.31], informing gate and return-experience recommendations.",
+      "card_description": "Seven-day retention was 0.82 percentage points lower in the level-40 group than in the level-30 group. Allocation checks qualify recommendations on gate placement and the return experience.",
       "stats": [
         [
           "90,189",
@@ -204,6 +214,7 @@
       "title": "Healthy Home：奥克兰空间预测与道路地图",
       "tag": "空间数据分析",
       "description": "结合 18,219 个观测点、道路网络与嵌套空间评价，分析奥克兰污染物分布。随机森林在区域分块评价中的 NO₂ 合并 R² 为 0.576017，道路相对预测图覆盖 628.74 km，并通过分区误差诊断提出补充观测方案。",
+      "card_description": "用区域分块评价检验污染物预测，结合道路相对预测图与分区误差，提出哪些区域需要补充观测。",
       "stats": [
         [
           "18,219",
@@ -223,6 +234,7 @@
       "title": "Healthy Home: spatial prediction and road mapping in Oakland",
       "tag": "Spatial Analytics",
       "description": "Combine 18,219 observations, road networks and nested spatial evaluation to analyze pollutant patterns in Oakland. Random Forest achieves pooled NO₂ R² of 0.576017 under spatial-block evaluation. Relative prediction maps cover 628.74 km of roads, with area-level error analysis informing further sampling.",
+      "card_description": "Evaluate pollutant predictions on held-out areas, then use relative road maps and area-level errors to identify where more observations are needed.",
       "stats": [
         [
           "18,219",
@@ -244,6 +256,7 @@
       "title": "Amazon 手表评论：聚类、主题与改进建议",
       "tag": "NLP · 主题建模",
       "description": "从 960,872 条原始记录中整理评论语料，使用 K-Means 与 LDA 分析 858,037 条建模评论。故障／退货主题均分 2.37 星，覆盖建模一星评论的 52.9%，为产品排查、说明优化与评论监测提供线索。",
+      "card_description": "故障与退货是低分评论中的突出主题；将评论聚类与主题分析转为产品排查、说明优化和评论监测建议。",
       "stats": [
         [
           "960,713",
@@ -263,6 +276,7 @@
       "title": "Amazon watch reviews: clustering, topics and recommendations",
       "tag": "NLP · Topic Modeling",
       "description": "Prepare the review corpus from 960,872 raw records and analyze 858,037 modeled reviews with K-Means and LDA. The malfunction/returns topic averages 2.37 stars and covers 52.9% of modeled one-star reviews, informing product checks, clearer instructions and review monitoring.",
+      "card_description": "Malfunctions and returns stand out in low-rated reviews. Clustering and topic analysis turn that feedback into recommendations for product checks, clearer instructions and review monitoring.",
       "stats": [
         [
           "960,713",
@@ -324,6 +338,7 @@
       "title": "S&P Global Capstone：气候模型、预测与空间暴露",
       "tag": "气候与空间分析",
       "description": "在 2022 年 Capstone 基础上完成 2026 年重建分析，覆盖四个研究框、1,020 个格子，串联气候模型比较、短期预测、长期情景与空间暴露。2035–2044 年 ssp585 情景下，204 个格子×暴露层条目满足拟议优先核查规则。",
+      "card_description": "比较气候模型与预测在不同区域的表现，将未来气候情景与人口、土地暴露叠加，提出优先核查地点的规则。",
       "stats": [
         [
           "1,020",
@@ -343,6 +358,7 @@
       "title": "S&P Global Capstone: climate models, forecasts and spatial exposure",
       "tag": "Climate & Spatial Analytics",
       "description": "A 2026 reconstruction of the 2022 capstone covers four study boxes and 1,020 cells, connecting climate-model comparison, short-term forecasting, long-term scenarios and spatial exposure. Under ssp585 for 2035–2044, 204 cell–layer entries meet a proposed priority-check rule.",
+      "card_description": "Compare climate models and forecasts across regions, then combine future scenarios with population and land exposure to propose rules for prioritizing locations for further checks.",
       "stats": [
         [
           "1,020",

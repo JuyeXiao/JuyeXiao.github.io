@@ -346,7 +346,7 @@ class CommonFeatures {
             top: 100px;
             right: 20px;
             background: var(--${type === 'error' ? 'coral' : type === 'success' ? 'sage' : 'blue'});
-            color: white;
+            color: var(--notification-${type === 'error' ? 'error-text' : 'text'});
             padding: 16px 24px;
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);

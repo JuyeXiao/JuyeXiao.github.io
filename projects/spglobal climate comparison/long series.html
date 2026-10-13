@@ -14,7 +14,7 @@
   <meta name="twitter:description" content="基于 2000–2024 年共 299 个月的观测记录，使用五个测试窗口比较 12 与 24 个月预测。按区域选择月气候态基线，并识别 TK 的 Prophet 与 AU 24 个月 SARIMA 候选方法，结合趋势和校准诊断安排后续检验。">
   <link rel="canonical" href="https://juyexiao.github.io/projects/spglobal%20climate%20comparison/long%20series.html">
   <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../../assets/css/utilities.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&amp;family=Inter:wght@200;300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;700&amp;family=Noto+Sans+SC:wght@400;500;600&amp;family=Noto+Serif+SC:wght@500&amp;display=swap" rel="stylesheet">
@@ -96,7 +96,7 @@
   </section>
 <nav class="report-series" aria-label="系列阅读"><a class="report-series__link" href="spglobal climate comparison.html">S&amp;P Global Capstone：气候模型、预测与空间暴露</a><a class="report-series__link" href="model comparison.html">Capstone 专题：模型比较</a><a class="report-series__link is-current" href="long series.html">Capstone 专题：长序列与短期预测</a><a class="report-series__link" href="projection overlay.html">长期配对情景与空间暴露</a></nav>
   <section id="content" class="section-padding report-layout">
-    <aside><nav class="project-toc" id="project-toc" aria-label="报告目录"><h3>目录</h3><ul id="toc-list"><li><a class="toc-link" href="#report-section-1">1. 长序列分析摘要</a></li><li><a class="toc-link" href="#report-section-2">2. 长序列的检验用途</a></li><li><a class="toc-link" href="#report-section-3">3. 数据两侧补齐与身份核验</a></li><li><a class="toc-link" href="#report-section-4">4. 方法：拼接口径、缺测口径与检验安排</a></li><li><a class="toc-link" href="#report-section-5">5. 短期预测的区域与长度选择</a></li><li><a class="toc-link" href="#report-section-6">6. 趋势：四道检验之后剩下什么</a></li><li><a class="toc-link" href="#report-section-7">7. 偏差订正：长窗、集合口径与前置期</a></li><li><a class="toc-link" href="#report-section-8">8. 模型集合与数据版本</a></li><li><a class="toc-link" href="#report-section-9">9. 预测与校准的后续检验</a></li></ul></nav></aside>
+    <aside><nav class="project-toc" id="project-toc" aria-label="报告目录"><p class="project-toc__title">目录</p><ul id="toc-list"><li><a class="toc-link" href="#report-section-1">1. 长序列分析摘要</a></li><li><a class="toc-link" href="#report-section-2">2. 长序列的检验用途</a></li><li><a class="toc-link" href="#report-section-3">3. 数据两侧补齐与身份核验</a></li><li><a class="toc-link" href="#report-section-4">4. 方法：拼接口径、缺测口径与检验安排</a></li><li><a class="toc-link" href="#report-section-5">5. 短期预测的区域与长度选择</a></li><li><a class="toc-link" href="#report-section-6">6. 趋势：四道检验之后剩下什么</a></li><li><a class="toc-link" href="#report-section-7">7. 偏差订正：长窗、集合口径与前置期</a></li><li><a class="toc-link" href="#report-section-8">8. 模型集合与数据版本</a></li><li><a class="toc-link" href="#report-section-9">9. 预测与校准的后续检验</a></li></ul></nav></aside>
     <article class="content-area report-body" id="report-body"><section id="report-section-1" class="section-padding section--editorial" data-section-num="01"><div class="section-header"><h2 class="section-title">1. 长序列分析摘要</h2></div><div class="report-block" id="report-1-1">
 <p>本报告利用 2000–2024 年的观测与模型序列，比较短期预测方法、检验观测趋势，并评估偏差订正的稳定性。预测比较采用五个测试窗口和两种预测长度，缺测填补与参数选择限定在训练期内。校准检验使用相同的近期留出数据，并考察校准窗口与模型集合的影响。</p>
 <p>短期预测需要按区域和预测长度选择方法。CA、XJ 继续以月气候态为默认基线，TK 的 Prophet 和 AU 的 24 个月 SARIMA 则作为待进一步验证的候选。长期评估采用同一模型内配对的多模型情景。情景温差相对容易解释，而绝对超阈月数还受校准窗口和历史频率偏差影响。</p>

@@ -14,7 +14,7 @@
   <meta name="twitter:description" content="Combine 18,219 observations, road networks and nested spatial evaluation to analyze pollutant patterns in Oakland. Random Forest achieves pooled NO₂ R² of 0.576017 under spatial-block evaluation. Relative prediction maps cover 628.74 km of roads, with area-level error analysis informing further sampling.">
   <link rel="canonical" href="https://juyexiao.github.io/projects/healthy%20home/healthy%20home-en.html">
   <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../../assets/css/utilities.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&amp;family=Inter:wght@200;300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;700&amp;family=Noto+Sans+SC:wght@400;500;600&amp;family=Noto+Serif+SC:wght@500&amp;display=swap" rel="stylesheet">
@@ -96,7 +96,7 @@
   </section>
 
   <section id="content" class="section-padding report-layout">
-    <aside><nav class="project-toc" id="project-toc" aria-label="Report contents"><h3>Contents</h3><ul id="toc-list"><li><a class="toc-link" href="#report-section-1">At a glance</a></li><li><a class="toc-link" href="#report-section-2">Executive summary</a></li><li><a class="toc-link" href="#report-section-3">Spatial prediction tasks</a></li><li><a class="toc-link" href="#report-section-4">Observation data and road network</a></li><li><a class="toc-link" href="#report-section-5">Road distances and context features</a></li><li><a class="toc-link" href="#report-section-6">Nested spatial evaluation</a></li><li><a class="toc-link" href="#report-section-7">Pollutant prediction results</a></li><li><a class="toc-link" href="#report-section-8">Road distance and pollutant distributions</a></li><li><a class="toc-link" href="#report-section-9">Prediction coverage and relative grades</a></li><li><a class="toc-link" href="#report-section-10">Tract associations with the health field</a></li><li><a class="toc-link" href="#report-section-11">Zone errors and spatial diagnostics</a></li><li><a class="toc-link" href="#report-section-12">Project findings and next steps</a></li></ul></nav></aside>
+    <aside><nav class="project-toc" id="project-toc" aria-label="Report contents"><p class="project-toc__title">Contents</p><ul id="toc-list"><li><a class="toc-link" href="#report-section-1">At a glance</a></li><li><a class="toc-link" href="#report-section-2">Executive summary</a></li><li><a class="toc-link" href="#report-section-3">Spatial prediction tasks</a></li><li><a class="toc-link" href="#report-section-4">Observation data and road network</a></li><li><a class="toc-link" href="#report-section-5">Road distances and context features</a></li><li><a class="toc-link" href="#report-section-6">Nested spatial evaluation</a></li><li><a class="toc-link" href="#report-section-7">Pollutant prediction results</a></li><li><a class="toc-link" href="#report-section-8">Road distance and pollutant distributions</a></li><li><a class="toc-link" href="#report-section-9">Prediction coverage and relative grades</a></li><li><a class="toc-link" href="#report-section-10">Tract associations with the health field</a></li><li><a class="toc-link" href="#report-section-11">Zone errors and spatial diagnostics</a></li><li><a class="toc-link" href="#report-section-12">Project findings and next steps</a></li></ul></nav></aside>
     <article class="content-area report-body" id="report-body"><div class="report-block" id="report-intro-1">
 <p>Pollutant values are higher near motorways, while prediction is harder across regions. Model comparisons, tract associations and error diagnostics inform a proposed road-investigation and sampling plan.</p>
 
@@ -104,8 +104,8 @@
 <div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
 <thead>
 <tr>
-<th scope="col"></th>
-<th scope="col"></th>
+<th scope="col"><span class="generated-table-label">Metric</span></th>
+<th scope="col"><span class="generated-table-label">Value</span></th>
 </tr>
 </thead>
 <tbody>

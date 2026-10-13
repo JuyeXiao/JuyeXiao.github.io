@@ -14,6 +14,10 @@
     --blue:     #5B8FB9;
     --gold:     #D4A574;
     
+    --link: #36668D;
+    --notification-text: #1A1612;
+    --notification-error-text: #FFFFFF;
+
     /* 2. 字体系统 */
     --font-primary: 'Inter', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', -apple-system, sans-serif;
     --font-chinese: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif; /* 兼容保留 */
@@ -63,6 +67,8 @@ html.dark {
     --sage:     #A7D4B4;
     --blue:     #7BA9CD;
     --gold:     #E4B584;
+    --link: #7BA9CD;
+    --notification-error-text: #171717;
 }
 
 /* --- 基础样式 --- */
@@ -452,6 +458,12 @@ html.dark .nav-link::after { background-color: var(--gold); }
     transform: translateY(0) scale(0.97);
     transition-duration: var(--duration-fast);
 }
+
+#theme-toggle, #lang-toggle, #menu-toggle {
+    min-width: 44px;
+    min-height: 44px;
+}
+#theme-toggle svg, #menu-toggle svg { margin-inline: auto; }
 
 /* 语言切换按钮文字悬停效果 */
 #lang-toggle span {

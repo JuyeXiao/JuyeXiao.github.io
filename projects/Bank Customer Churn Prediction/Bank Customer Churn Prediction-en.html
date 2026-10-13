@@ -14,7 +14,7 @@
   <meta name="twitter:description" content="Group analysis, model comparison and SHAP across 10,000 customers identify churn signals and inform service priorities. At the frozen threshold of 0.275, test recall is 78.39% and precision is 48.25%; capacity and cost comparisons guide follow-up planning.">
   <link rel="canonical" href="https://juyexiao.github.io/projects/Bank%20Customer%20Churn%20Prediction/Bank%20Customer%20Churn%20Prediction-en.html">
   <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../../assets/css/utilities.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&amp;family=Inter:wght@200;300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;700&amp;family=Noto+Sans+SC:wght@400;500;600&amp;family=Noto+Serif+SC:wght@500&amp;display=swap" rel="stylesheet">
@@ -96,7 +96,7 @@
   </section>
 
   <section id="content" class="section-padding report-layout">
-    <aside><nav class="project-toc" id="project-toc" aria-label="Report contents"><h3>Contents</h3><ul id="toc-list"><li><a class="toc-link" href="#report-section-1">At a glance</a></li><li><a class="toc-link" href="#report-section-2">Executive summary</a></li><li><a class="toc-link" href="#report-section-3">1 Framing the churn problem</a></li><li><a class="toc-link" href="#report-section-4">2 Checking the data</a></li><li><a class="toc-link" href="#report-section-5">3 Reading churn by group</a></li><li><a class="toc-link" href="#report-section-6">4 Preparing the features</a></li><li><a class="toc-link" href="#report-section-7">5 Comparing four models</a></li><li><a class="toc-link" href="#report-section-8">6 Setting the threshold and its cost</a></li><li><a class="toc-link" href="#report-section-9">7 Model prediction basis and business interpretation</a></li><li><a class="toc-link" href="#report-section-10">8 Acting on the findings</a></li><li><a class="toc-link" href="#report-section-11">9 Explanation methods</a></li></ul></nav></aside>
+    <aside><nav class="project-toc" id="project-toc" aria-label="Report contents"><p class="project-toc__title">Contents</p><ul id="toc-list"><li><a class="toc-link" href="#report-section-1">At a glance</a></li><li><a class="toc-link" href="#report-section-2">Executive summary</a></li><li><a class="toc-link" href="#report-section-3">1 Framing the churn problem</a></li><li><a class="toc-link" href="#report-section-4">2 Checking the data</a></li><li><a class="toc-link" href="#report-section-5">3 Reading churn by group</a></li><li><a class="toc-link" href="#report-section-6">4 Preparing the features</a></li><li><a class="toc-link" href="#report-section-7">5 Comparing four models</a></li><li><a class="toc-link" href="#report-section-8">6 Setting the threshold and its cost</a></li><li><a class="toc-link" href="#report-section-9">7 Model prediction basis and business interpretation</a></li><li><a class="toc-link" href="#report-section-10">8 Acting on the findings</a></li><li><a class="toc-link" href="#report-section-11">9 Explanation methods</a></li></ul></nav></aside>
     <article class="content-area report-body" id="report-body"><div class="report-block" id="report-intro-1">
 <p>Product count and activity identify priority groups for investigation; model comparisons and SHAP explain screening decisions; threshold tradeoffs translate risk scores into list capacity and service proposals.</p>
 
@@ -104,8 +104,8 @@
 <div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
 <thead>
 <tr>
-<th scope="col"></th>
-<th scope="col"></th>
+<th scope="col"><span class="generated-table-label">Metric</span></th>
+<th scope="col"><span class="generated-table-label">Value</span></th>
 </tr>
 </thead>
 <tbody>

@@ -14,7 +14,7 @@
   <meta name="twitter:description" content="结合 10,000 名客户的分组分析、模型比较与 SHAP 解释，识别流失信号并设计服务优先级。冻结阈值 0.275 的测试召回率为 78.39%、精确率为 48.25%，进一步比较不同服务容量下的覆盖与成本。">
   <link rel="canonical" href="https://juyexiao.github.io/projects/Bank%20Customer%20Churn%20Prediction/Bank%20Customer%20Churn%20Prediction.html">
   <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../../assets/css/utilities.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&amp;family=Inter:wght@200;300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;700&amp;family=Noto+Sans+SC:wght@400;500;600&amp;family=Noto+Serif+SC:wght@500&amp;display=swap" rel="stylesheet">
@@ -96,7 +96,7 @@
   </section>
 
   <section id="content" class="section-padding report-layout">
-    <aside><nav class="project-toc" id="project-toc" aria-label="报告目录"><h3>目录</h3><ul id="toc-list"><li><a class="toc-link" href="#report-section-1">概览</a></li><li><a class="toc-link" href="#report-section-2">摘要</a></li><li><a class="toc-link" href="#report-section-3">1 界定流失问题</a></li><li><a class="toc-link" href="#report-section-4">2 检查数据质量</a></li><li><a class="toc-link" href="#report-section-5">3 读分组流失率</a></li><li><a class="toc-link" href="#report-section-6">4 准备建模特征</a></li><li><a class="toc-link" href="#report-section-7">5 对比四个模型</a></li><li><a class="toc-link" href="#report-section-8">6 设定阈值与成本</a></li><li><a class="toc-link" href="#report-section-9">7 模型预测依据与业务解释</a></li><li><a class="toc-link" href="#report-section-10">8 落地行动</a></li><li><a class="toc-link" href="#report-section-11">9 解释方法</a></li></ul></nav></aside>
+    <aside><nav class="project-toc" id="project-toc" aria-label="报告目录"><p class="project-toc__title">目录</p><ul id="toc-list"><li><a class="toc-link" href="#report-section-1">概览</a></li><li><a class="toc-link" href="#report-section-2">摘要</a></li><li><a class="toc-link" href="#report-section-3">1 界定流失问题</a></li><li><a class="toc-link" href="#report-section-4">2 检查数据质量</a></li><li><a class="toc-link" href="#report-section-5">3 读分组流失率</a></li><li><a class="toc-link" href="#report-section-6">4 准备建模特征</a></li><li><a class="toc-link" href="#report-section-7">5 对比四个模型</a></li><li><a class="toc-link" href="#report-section-8">6 设定阈值与成本</a></li><li><a class="toc-link" href="#report-section-9">7 模型预测依据与业务解释</a></li><li><a class="toc-link" href="#report-section-10">8 落地行动</a></li><li><a class="toc-link" href="#report-section-11">9 解释方法</a></li></ul></nav></aside>
     <article class="content-area report-body" id="report-body"><div class="report-block" id="report-intro-1">
 <p>产品数与活跃状态揭示优先排查人群；模型比较与 SHAP 解释筛选依据；阈值权衡把风险识别转成名单容量与服务方案。</p>
 
@@ -104,8 +104,8 @@
 <div aria-label="数据表（可横向滚动）" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
 <thead>
 <tr>
-<th scope="col"></th>
-<th scope="col"></th>
+<th scope="col"><span class="generated-table-label">指标</span></th>
+<th scope="col"><span class="generated-table-label">数值</span></th>
 </tr>
 </thead>
 <tbody>

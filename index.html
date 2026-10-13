@@ -5,15 +5,19 @@
     <script>document.documentElement.classList.add('js');</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>数据分析师作品集</title>
+    <title>肖炬晔｜数据分析师作品集</title>
+    <meta name="description" content="肖炬晔的数据分析作品集：工作经历与项目案例，涵盖客户分析、风险识别、实验分析、文本与空间数据分析。">
+    <meta property="og:title" content="肖炬晔｜数据分析师作品集">
+    <meta property="og:description" content="肖炬晔的数据分析作品集：工作经历与项目案例，涵盖客户分析、风险识别、实验分析、文本与空间数据分析。">
+    <meta property="og:type" content="website">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
 
-    <!-- 配置 CSP 以允许 Tailwind CSS 运行 -->
+    <!-- 内容安全策略 -->
     <meta http-equiv="Content-Security-Policy"
-        content="script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://unpkg.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com;">
+        content="script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com;">
 
-    <!-- 引入Tailwind CSS for rapid prototyping -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 本地预生成的工具样式 -->
+    <link rel="stylesheet" href="assets/css/utilities.css">
 
     <!-- 引入字体 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -193,7 +197,7 @@
         <section id="about" class="section-padding about-after-hero">
             <div class="grid md:grid-cols-12 gap-12 items-stretch max-w-6xl mx-auto reveal">
                 <figure class="about-portrait hidden md:block md:col-span-5">
-                    <img src="assets/img/about-portrait.jpg" alt="肖炬晔个人照片" loading="lazy">
+                    <img src="assets/img/about-portrait.jpg" alt="" loading="lazy">
                 </figure>
                 <div class="md:col-span-7 about-copy">
                     <h2 class="text-3xl font-bold">理性与感性的融合</h2>
@@ -370,7 +374,7 @@
                     <div class="bento-content"><div class="flex-grow">
                         <span class="bento-tag">气候与空间分析</span>
                         <h3 class="mt-4 text-xl">S&amp;P Global Capstone：气候模型、预测与空间暴露</h3>
-                        <p class="mt-2 text-sm">在 2022 年 Capstone 基础上完成 2026 年重建分析，覆盖四个研究框、1,020 个格子，串联气候模型比较、短期预测、长期情景与空间暴露。2035–2044 年 ssp585 情景下，204 个格子×暴露层条目满足拟议优先核查规则。</p>
+                        <p class="mt-2 text-sm">比较气候模型与预测在不同区域的表现，将未来气候情景与人口、土地暴露叠加，提出优先核查地点的规则。</p>
                     </div><div class="mt-4 text-right"><span class="text-link">查看详情</span></div></div>
                     <div class="number-decoration">01</div>
                 </a>
@@ -378,7 +382,7 @@
                     <div class="bento-content"><div class="flex-grow">
                         <span class="bento-tag">NLP · 弱监督</span>
                         <h3 class="mt-4 text-xl">YouTube 评论：养宠文本信号与频道筛选</h3>
-                        <p class="mt-2 text-sm">对 5,818,979 条评论构建弱监督分类与频道候选排名，结合 TF-IDF、行为特征和 SHAP 分析养宠文本信号。300 条新评论经助手复核，294 条可判定，条件加权精确率为 0.8982。</p>
+                        <p class="mt-2 text-sm">从评论中识别养宠文本线索，结合频道规模与信号占比筛选待复核频道，为后续投放试点提供候选名单。</p>
                     </div><div class="mt-4 text-right"><span class="text-link">查看详情</span></div></div>
                     <div class="number-decoration">02</div>
                 </a>
@@ -386,7 +390,7 @@
                     <div class="bento-content"><div class="flex-grow">
                         <span class="bento-tag">客户分析</span>
                         <h3 class="mt-4 text-xl">银行客户流失：模式、解释与服务容量</h3>
-                        <p class="mt-2 text-sm">结合 10,000 名客户的分组分析、模型比较与 SHAP 解释，识别流失信号并设计服务优先级。冻结阈值 0.275 的测试召回率为 78.39%、精确率为 48.25%，进一步比较不同服务容量下的覆盖与成本。</p>
+                        <p class="mt-2 text-sm">识别客户流失信号，比较服务容量与成本，为主动联系名单排序，帮助把有限服务资源用在更值得复核的客户上。</p>
                     </div><div class="mt-4 text-right"><span class="text-link">查看详情</span></div></div>
                     <div class="number-decoration">03</div>
                 </a>
@@ -394,7 +398,7 @@
                     <div class="bento-content"><div class="flex-grow">
                         <span class="bento-tag">风险分析</span>
                         <h3 class="mt-4 text-xl">电商首单欺诈：时间评估与审核建议</h3>
-                        <p class="mt-2 text-sm">围绕 138,376 笔首单交易，分析购买时序、设备与 IP 行为，比较不平衡处理方法。通过前向验证和成本情景评估，提出按模型分数与交易线索分级的人工审核方案。</p>
+                        <p class="mt-2 text-sm">按时间验证时，既定筛查规则未检出测试集欺诈；结合设备、IP 与交易时序线索，提出分级人工审核方案。</p>
                     </div><div class="mt-4 text-right"><span class="text-link">查看详情</span></div></div>
                     <div class="number-decoration">04</div>
                 </a>
@@ -402,7 +406,7 @@
                     <div class="bento-content"><div class="flex-grow">
                         <span class="bento-tag">金融分析</span>
                         <h3 class="mt-4 text-xl">LendingClub：9,004 笔贷款样本</h3>
-                        <p class="mt-2 text-sm">从 9,004 笔历史贷款中分析违约分布，比较模型与期限规则，设计不对称成本下的筛查策略。Random Forest 冻结阈值 0.22，测试召回率 70.45%，净模拟成本降幅 4.68%。</p>
+                        <p class="mt-2 text-sm">比较贷款模型与简单期限规则在漏判、误判成本下的取舍，为复核名单和筛查阈值提供依据。</p>
                     </div><div class="mt-4 text-right"><span class="text-link">查看详情</span></div></div>
                     <div class="number-decoration">05</div>
                 </a>
@@ -410,7 +414,7 @@
                     <div class="bento-content"><div class="flex-grow">
                         <span class="bento-tag">实验分析</span>
                         <h3 class="mt-4 text-xl">A/B Testing：Cookie Cats 关卡门实验</h3>
-                        <p class="mt-2 text-sm">比较 90,189 名玩家的留存与参与度，结合分流检验、自助法和统计功效评估关卡门位置。第 40 关组的 7 日留存比第 30 关组低 0.82 个百分点，95% 区间为 [−1.33, −0.31]，据此提出关卡与回访体验建议。</p>
+                        <p class="mt-2 text-sm">第 40 关组的 7 日留存比第 30 关组低 0.82 个百分点；结合实验分流检查，提出关卡位置与回访体验的改进建议。</p>
                     </div><div class="mt-4 text-right"><span class="text-link">查看详情</span></div></div>
                     <div class="number-decoration">06</div>
                 </a>
@@ -418,7 +422,7 @@
                     <div class="bento-content"><div class="flex-grow">
                         <span class="bento-tag">空间数据分析</span>
                         <h3 class="mt-4 text-xl">Healthy Home：奥克兰空间预测与道路地图</h3>
-                        <p class="mt-2 text-sm">结合 18,219 个观测点、道路网络与嵌套空间评价，分析奥克兰污染物分布。随机森林在区域分块评价中的 NO₂ 合并 R² 为 0.576017，道路相对预测图覆盖 628.74 km，并通过分区误差诊断提出补充观测方案。</p>
+                        <p class="mt-2 text-sm">用区域分块评价检验污染物预测，结合道路相对预测图与分区误差，提出哪些区域需要补充观测。</p>
                     </div><div class="mt-4 text-right"><span class="text-link">查看详情</span></div></div>
                     <div class="number-decoration">07</div>
                 </a>
@@ -426,7 +430,7 @@
                     <div class="bento-content"><div class="flex-grow">
                         <span class="bento-tag">NLP · 主题建模</span>
                         <h3 class="mt-4 text-xl">Amazon 手表评论：聚类、主题与改进建议</h3>
-                        <p class="mt-2 text-sm">从 960,872 条原始记录中整理评论语料，使用 K-Means 与 LDA 分析 858,037 条建模评论。故障／退货主题均分 2.37 星，覆盖建模一星评论的 52.9%，为产品排查、说明优化与评论监测提供线索。</p>
+                        <p class="mt-2 text-sm">故障与退货是低分评论中的突出主题；将评论聚类与主题分析转为产品排查、说明优化和评论监测建议。</p>
                     </div><div class="mt-4 text-right"><span class="text-link">查看详情</span></div></div>
                     <div class="number-decoration">08</div>
                 </a>

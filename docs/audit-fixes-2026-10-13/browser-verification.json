@@ -1,0 +1,4595 @@
+{
+  "browser": "155.0.4283.45",
+  "views": [
+    {
+      "width": 1440,
+      "documentWidth": 1440,
+      "title": "肖炬晔｜数据分析师作品集",
+      "theme": false,
+      "h1": {
+        "x": 52,
+        "y": 348.859375,
+        "width": 732.65625,
+        "height": 73.25,
+        "top": 348.859375,
+        "right": 784.65625,
+        "bottom": 422.109375,
+        "left": 52
+      },
+      "controls": [
+        {
+          "id": "theme-toggle",
+          "x": 1284,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 1328,
+          "bottom": 57.5,
+          "left": 1284
+        },
+        {
+          "id": "lang-toggle",
+          "x": 1344,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 1388,
+          "bottom": 57.5,
+          "left": 1344
+        }
+      ],
+      "runtimeCSS": false,
+      "case": "zh-light-1440-home",
+      "cards": [
+        {
+          "title": "S&P Global Capstone：气候模型、预测与空间暴露",
+          "text": "比较气候模型与预测在不同区域的表现，将未来气候情景与人口、土地暴露叠加，提出优先核查地点的规则。",
+          "rect": {
+            "x": 52,
+            "y": 204.796875,
+            "width": 880,
+            "height": 256.375,
+            "top": 204.796875,
+            "right": 932,
+            "bottom": 461.171875,
+            "left": 52
+          },
+          "height": 254,
+          "contentHeight": 294
+        },
+        {
+          "title": "YouTube 评论：养宠文本信号与频道筛选",
+          "text": "从评论中识别养宠文本线索，结合频道规模与信号占比筛选待复核频道，为后续投放试点提供候选名单。",
+          "rect": {
+            "x": 964,
+            "y": 204.796875,
+            "width": 424,
+            "height": 256.375,
+            "top": 204.796875,
+            "right": 1388,
+            "bottom": 461.171875,
+            "left": 964
+          },
+          "height": 254,
+          "contentHeight": 294
+        },
+        {
+          "title": "银行客户流失：模式、解释与服务容量",
+          "text": "识别客户流失信号，比较服务容量与成本，为主动联系名单排序，帮助把有限服务资源用在更值得复核的客户上。",
+          "rect": {
+            "x": 52,
+            "y": 493.171875,
+            "width": 424,
+            "height": 228.375,
+            "top": 493.171875,
+            "right": 476,
+            "bottom": 721.546875,
+            "left": 52
+          },
+          "height": 226,
+          "contentHeight": 266
+        },
+        {
+          "title": "电商首单欺诈：时间评估与审核建议",
+          "text": "按时间验证时，既定筛查规则未检出测试集欺诈；结合设备、IP 与交易时序线索，提出分级人工审核方案。",
+          "rect": {
+            "x": 508,
+            "y": 493.171875,
+            "width": 424,
+            "height": 228.375,
+            "top": 493.171875,
+            "right": 932,
+            "bottom": 721.546875,
+            "left": 508
+          },
+          "height": 226,
+          "contentHeight": 266
+        },
+        {
+          "title": "LendingClub：9,004 笔贷款样本",
+          "text": "比较贷款模型与简单期限规则在漏判、误判成本下的取舍，为复核名单和筛查阈值提供依据。",
+          "rect": {
+            "x": 964,
+            "y": 493.171875,
+            "width": 424,
+            "height": 228.375,
+            "top": 493.171875,
+            "right": 1388,
+            "bottom": 721.546875,
+            "left": 964
+          },
+          "height": 226,
+          "contentHeight": 266
+        },
+        {
+          "title": "A/B Testing：Cookie Cats 关卡门实验",
+          "text": "第 40 关组的 7 日留存比第 30 关组低 0.82 个百分点；结合实验分流检查，提出关卡位置与回访体验的改进建议。",
+          "rect": {
+            "x": 52,
+            "y": 753.546875,
+            "width": 424,
+            "height": 256.375,
+            "top": 753.546875,
+            "right": 476,
+            "bottom": 1009.921875,
+            "left": 52
+          },
+          "height": 254,
+          "contentHeight": 294
+        },
+        {
+          "title": "Healthy Home：奥克兰空间预测与道路地图",
+          "text": "用区域分块评价检验污染物预测，结合道路相对预测图与分区误差，提出哪些区域需要补充观测。",
+          "rect": {
+            "x": 508,
+            "y": 753.546875,
+            "width": 424,
+            "height": 256.375,
+            "top": 753.546875,
+            "right": 932,
+            "bottom": 1009.921875,
+            "left": 508
+          },
+          "height": 254,
+          "contentHeight": 294
+        },
+        {
+          "title": "Amazon 手表评论：聚类、主题与改进建议",
+          "text": "故障与退货是低分评论中的突出主题；将评论聚类与主题分析转为产品排查、说明优化和评论监测建议。",
+          "rect": {
+            "x": 964,
+            "y": 753.546875,
+            "width": 424,
+            "height": 256.375,
+            "top": 753.546875,
+            "right": 1388,
+            "bottom": 1009.921875,
+            "left": 964
+          },
+          "height": 254,
+          "contentHeight": 294
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "documentWidth": 1440,
+      "title": "联系我 - 肖炬晔 - 数据分析师作品集",
+      "theme": false,
+      "h1": {
+        "x": 144,
+        "y": 182,
+        "width": 1152,
+        "height": 48,
+        "top": 182,
+        "right": 1296,
+        "bottom": 230,
+        "left": 144
+      },
+      "controls": [
+        {
+          "id": "theme-toggle",
+          "x": 1284,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 1328,
+          "bottom": 57.5,
+          "left": 1284
+        },
+        {
+          "id": "lang-toggle",
+          "x": 1344,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 1388,
+          "bottom": 57.5,
+          "left": 1344
+        }
+      ],
+      "runtimeCSS": false,
+      "case": "zh-light-1440-contact"
+    },
+    {
+      "width": 1440,
+      "documentWidth": 1440,
+      "title": "银行客户流失：从客户模式到服务行动 - 数据诗学",
+      "theme": false,
+      "h1": {
+        "x": 52,
+        "y": 183.5625,
+        "width": 979.1875,
+        "height": 52.796875,
+        "top": 183.5625,
+        "right": 1031.1875,
+        "bottom": 236.359375,
+        "left": 52
+      },
+      "controls": [
+        {
+          "id": "theme-toggle",
+          "x": 1284,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 1328,
+          "bottom": 57.5,
+          "left": 1284
+        },
+        {
+          "id": "lang-toggle",
+          "x": 1344,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 1388,
+          "bottom": 57.5,
+          "left": 1344
+        }
+      ],
+      "runtimeCSS": false,
+      "case": "zh-light-1440-bank",
+      "links": [
+        {
+          "text": "Churn Modelling",
+          "color": "rgb(54, 102, 141)",
+          "bg": "rgb(250, 247, 242)",
+          "ratio": 5.709224793578483
+        },
+        {
+          "text": "TreeSHAP",
+          "color": "rgb(54, 102, 141)",
+          "bg": "rgb(250, 247, 242)",
+          "ratio": 5.709224793578483
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "documentWidth": 1440,
+      "title": "气候模型比较、预测方法与空间暴露评估 - 数据诗学",
+      "theme": false,
+      "h1": {
+        "x": 52,
+        "y": 183.5625,
+        "width": 979.1875,
+        "height": 52.796875,
+        "top": 183.5625,
+        "right": 1031.1875,
+        "bottom": 236.359375,
+        "left": 52
+      },
+      "controls": [
+        {
+          "id": "theme-toggle",
+          "x": 1284,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 1328,
+          "bottom": 57.5,
+          "left": 1284
+        },
+        {
+          "id": "lang-toggle",
+          "x": 1344,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 1388,
+          "bottom": 57.5,
+          "left": 1344
+        }
+      ],
+      "runtimeCSS": false,
+      "case": "zh-light-1440-climate",
+      "links": [
+        {
+          "text": "MODIS",
+          "color": "rgb(54, 102, 141)",
+          "bg": "rgb(250, 247, 242)",
+          "ratio": 5.709224793578483
+        },
+        {
+          "text": "NEX-GDDP-CMIP6",
+          "color": "rgb(54, 102, 141)",
+          "bg": "rgb(250, 247, 242)",
+          "ratio": 5.709224793578483
+        },
+        {
+          "text": "NASA Terra 轨道资料",
+          "color": "rgb(54, 102, 141)",
+          "bg": "rgb(250, 247, 242)",
+          "ratio": 5.709224793578483
+        },
+        {
+          "text": "MODIS MOD11A1",
+          "color": "rgb(54, 102, 141)",
+          "bg": "rgb(250, 247, 242)",
+          "ratio": 5.709224793578483
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "documentWidth": 390,
+      "title": "肖炬晔｜数据分析师作品集",
+      "theme": false,
+      "h1": {
+        "x": 32,
+        "y": 132.1875,
+        "width": 326,
+        "height": 46.078125,
+        "top": 132.1875,
+        "right": 358,
+        "bottom": 178.265625,
+        "left": 32
+      },
+      "controls": [
+        {
+          "id": "theme-toggle",
+          "x": 210,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 254,
+          "bottom": 57.5,
+          "left": 210
+        },
+        {
+          "id": "lang-toggle",
+          "x": 270,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 314,
+          "bottom": 57.5,
+          "left": 270
+        },
+        {
+          "id": "menu-toggle",
+          "x": 330,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 374,
+          "bottom": 57.5,
+          "left": 330
+        }
+      ],
+      "runtimeCSS": false,
+      "case": "zh-light-390-home",
+      "cards": [
+        {
+          "title": "S&P Global Capstone：气候模型、预测与空间暴露",
+          "text": "比较气候模型与预测在不同区域的表现，将未来气候情景与人口、土地暴露叠加，提出优先核查地点的规则。",
+          "rect": {
+            "x": 16,
+            "y": -812.375,
+            "width": 358,
+            "height": 400,
+            "top": -812.375,
+            "right": 374,
+            "bottom": -412.375,
+            "left": 16
+          },
+          "height": 398,
+          "contentHeight": 438
+        },
+        {
+          "title": "YouTube 评论：养宠文本信号与频道筛选",
+          "text": "从评论中识别养宠文本线索，结合频道规模与信号占比筛选待复核频道，为后续投放试点提供候选名单。",
+          "rect": {
+            "x": 16,
+            "y": -380.375,
+            "width": 358,
+            "height": 400,
+            "top": -380.375,
+            "right": 374,
+            "bottom": 19.625,
+            "left": 16
+          },
+          "height": 398,
+          "contentHeight": 438
+        },
+        {
+          "title": "银行客户流失：模式、解释与服务容量",
+          "text": "识别客户流失信号，比较服务容量与成本，为主动联系名单排序，帮助把有限服务资源用在更值得复核的客户上。",
+          "rect": {
+            "x": 16,
+            "y": 51.625,
+            "width": 358,
+            "height": 276.375,
+            "top": 51.625,
+            "right": 374,
+            "bottom": 328,
+            "left": 16
+          },
+          "height": 274,
+          "contentHeight": 314
+        },
+        {
+          "title": "电商首单欺诈：时间评估与审核建议",
+          "text": "按时间验证时，既定筛查规则未检出测试集欺诈；结合设备、IP 与交易时序线索，提出分级人工审核方案。",
+          "rect": {
+            "x": 16,
+            "y": 360,
+            "width": 358,
+            "height": 276.375,
+            "top": 360,
+            "right": 374,
+            "bottom": 636.375,
+            "left": 16
+          },
+          "height": 274,
+          "contentHeight": 314
+        },
+        {
+          "title": "LendingClub：9,004 笔贷款样本",
+          "text": "比较贷款模型与简单期限规则在漏判、误判成本下的取舍，为复核名单和筛查阈值提供依据。",
+          "rect": {
+            "x": 16,
+            "y": 668.375,
+            "width": 358,
+            "height": 276.375,
+            "top": 668.375,
+            "right": 374,
+            "bottom": 944.75,
+            "left": 16
+          },
+          "height": 274,
+          "contentHeight": 314
+        },
+        {
+          "title": "A/B Testing：Cookie Cats 关卡门实验",
+          "text": "第 40 关组的 7 日留存比第 30 关组低 0.82 个百分点；结合实验分流检查，提出关卡位置与回访体验的改进建议。",
+          "rect": {
+            "x": 16,
+            "y": 976.75,
+            "width": 358,
+            "height": 276.375,
+            "top": 976.75,
+            "right": 374,
+            "bottom": 1253.125,
+            "left": 16
+          },
+          "height": 274,
+          "contentHeight": 314
+        },
+        {
+          "title": "Healthy Home：奥克兰空间预测与道路地图",
+          "text": "用区域分块评价检验污染物预测，结合道路相对预测图与分区误差，提出哪些区域需要补充观测。",
+          "rect": {
+            "x": 16,
+            "y": 1285.125,
+            "width": 358,
+            "height": 276.375,
+            "top": 1285.125,
+            "right": 374,
+            "bottom": 1561.5,
+            "left": 16
+          },
+          "height": 274,
+          "contentHeight": 314
+        },
+        {
+          "title": "Amazon 手表评论：聚类、主题与改进建议",
+          "text": "故障与退货是低分评论中的突出主题；将评论聚类与主题分析转为产品排查、说明优化和评论监测建议。",
+          "rect": {
+            "x": 16,
+            "y": 1593.5,
+            "width": 358,
+            "height": 276.375,
+            "top": 1593.5,
+            "right": 374,
+            "bottom": 1869.875,
+            "left": 16
+          },
+          "height": 274,
+          "contentHeight": 314
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "documentWidth": 390,
+      "title": "联系我 - 肖炬晔 - 数据分析师作品集",
+      "theme": false,
+      "h1": {
+        "x": 16,
+        "y": 152,
+        "width": 358,
+        "height": 40,
+        "top": 152,
+        "right": 374,
+        "bottom": 192,
+        "left": 16
+      },
+      "controls": [
+        {
+          "id": "theme-toggle",
+          "x": 210,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 254,
+          "bottom": 57.5,
+          "left": 210
+        },
+        {
+          "id": "lang-toggle",
+          "x": 270,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 314,
+          "bottom": 57.5,
+          "left": 270
+        },
+        {
+          "id": "menu-toggle",
+          "x": 330,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 374,
+          "bottom": 57.5,
+          "left": 330
+        }
+      ],
+      "runtimeCSS": false,
+      "case": "zh-light-390-contact"
+    },
+    {
+      "width": 390,
+      "documentWidth": 390,
+      "title": "银行客户流失：从客户模式到服务行动 - 数据诗学",
+      "theme": false,
+      "h1": {
+        "x": 16,
+        "y": 183.5625,
+        "width": 358,
+        "height": 73.90625,
+        "top": 183.5625,
+        "right": 374,
+        "bottom": 257.46875,
+        "left": 16
+      },
+      "controls": [
+        {
+          "id": "theme-toggle",
+          "x": 210,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 254,
+          "bottom": 57.5,
+          "left": 210
+        },
+        {
+          "id": "lang-toggle",
+          "x": 270,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 314,
+          "bottom": 57.5,
+          "left": 270
+        },
+        {
+          "id": "menu-toggle",
+          "x": 330,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 374,
+          "bottom": 57.5,
+          "left": 330
+        }
+      ],
+      "runtimeCSS": false,
+      "case": "zh-light-390-bank",
+      "links": [
+        {
+          "text": "Churn Modelling",
+          "color": "rgb(54, 102, 141)",
+          "bg": "rgb(250, 247, 242)",
+          "ratio": 5.709224793578483
+        },
+        {
+          "text": "TreeSHAP",
+          "color": "rgb(54, 102, 141)",
+          "bg": "rgb(250, 247, 242)",
+          "ratio": 5.709224793578483
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "documentWidth": 390,
+      "title": "气候模型比较、预测方法与空间暴露评估 - 数据诗学",
+      "theme": false,
+      "h1": {
+        "x": 16,
+        "y": 183.5625,
+        "width": 358,
+        "height": 73.90625,
+        "top": 183.5625,
+        "right": 374,
+        "bottom": 257.46875,
+        "left": 16
+      },
+      "controls": [
+        {
+          "id": "theme-toggle",
+          "x": 210,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 254,
+          "bottom": 57.5,
+          "left": 210
+        },
+        {
+          "id": "lang-toggle",
+          "x": 270,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 314,
+          "bottom": 57.5,
+          "left": 270
+        },
+        {
+          "id": "menu-toggle",
+          "x": 330,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 374,
+          "bottom": 57.5,
+          "left": 330
+        }
+      ],
+      "runtimeCSS": false,
+      "case": "zh-light-390-climate",
+      "links": [
+        {
+          "text": "MODIS",
+          "color": "rgb(54, 102, 141)",
+          "bg": "rgb(250, 247, 242)",
+          "ratio": 5.709224793578483
+        },
+        {
+          "text": "NEX-GDDP-CMIP6",
+          "color": "rgb(54, 102, 141)",
+          "bg": "rgb(250, 247, 242)",
+          "ratio": 5.709224793578483
+        },
+        {
+          "text": "NASA Terra 轨道资料",
+          "color": "rgb(54, 102, 141)",
+          "bg": "rgb(250, 247, 242)",
+          "ratio": 5.709224793578483
+        },
+        {
+          "text": "MODIS MOD11A1",
+          "color": "rgb(54, 102, 141)",
+          "bg": "rgb(250, 247, 242)",
+          "ratio": 5.709224793578483
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "documentWidth": 1440,
+      "title": "肖炬晔｜数据分析师作品集",
+      "theme": true,
+      "h1": {
+        "x": 52,
+        "y": 348.859375,
+        "width": 732.65625,
+        "height": 73.25,
+        "top": 348.859375,
+        "right": 784.65625,
+        "bottom": 422.109375,
+        "left": 52
+      },
+      "controls": [
+        {
+          "id": "theme-toggle",
+          "x": 1284,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 1328,
+          "bottom": 57.5,
+          "left": 1284
+        },
+        {
+          "id": "lang-toggle",
+          "x": 1344,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 1388,
+          "bottom": 57.5,
+          "left": 1344
+        }
+      ],
+      "runtimeCSS": false,
+      "case": "zh-dark-1440-home",
+      "cards": [
+        {
+          "title": "S&P Global Capstone：气候模型、预测与空间暴露",
+          "text": "比较气候模型与预测在不同区域的表现，将未来气候情景与人口、土地暴露叠加，提出优先核查地点的规则。",
+          "rect": {
+            "x": 52,
+            "y": 204.796875,
+            "width": 880,
+            "height": 256.375,
+            "top": 204.796875,
+            "right": 932,
+            "bottom": 461.171875,
+            "left": 52
+          },
+          "height": 254,
+          "contentHeight": 294
+        },
+        {
+          "title": "YouTube 评论：养宠文本信号与频道筛选",
+          "text": "从评论中识别养宠文本线索，结合频道规模与信号占比筛选待复核频道，为后续投放试点提供候选名单。",
+          "rect": {
+            "x": 964,
+            "y": 204.796875,
+            "width": 424,
+            "height": 256.375,
+            "top": 204.796875,
+            "right": 1388,
+            "bottom": 461.171875,
+            "left": 964
+          },
+          "height": 254,
+          "contentHeight": 294
+        },
+        {
+          "title": "银行客户流失：模式、解释与服务容量",
+          "text": "识别客户流失信号，比较服务容量与成本，为主动联系名单排序，帮助把有限服务资源用在更值得复核的客户上。",
+          "rect": {
+            "x": 52,
+            "y": 493.171875,
+            "width": 424,
+            "height": 228.375,
+            "top": 493.171875,
+            "right": 476,
+            "bottom": 721.546875,
+            "left": 52
+          },
+          "height": 226,
+          "contentHeight": 266
+        },
+        {
+          "title": "电商首单欺诈：时间评估与审核建议",
+          "text": "按时间验证时，既定筛查规则未检出测试集欺诈；结合设备、IP 与交易时序线索，提出分级人工审核方案。",
+          "rect": {
+            "x": 508,
+            "y": 493.171875,
+            "width": 424,
+            "height": 228.375,
+            "top": 493.171875,
+            "right": 932,
+            "bottom": 721.546875,
+            "left": 508
+          },
+          "height": 226,
+          "contentHeight": 266
+        },
+        {
+          "title": "LendingClub：9,004 笔贷款样本",
+          "text": "比较贷款模型与简单期限规则在漏判、误判成本下的取舍，为复核名单和筛查阈值提供依据。",
+          "rect": {
+            "x": 964,
+            "y": 493.171875,
+            "width": 424,
+            "height": 228.375,
+            "top": 493.171875,
+            "right": 1388,
+            "bottom": 721.546875,
+            "left": 964
+          },
+          "height": 226,
+          "contentHeight": 266
+        },
+        {
+          "title": "A/B Testing：Cookie Cats 关卡门实验",
+          "text": "第 40 关组的 7 日留存比第 30 关组低 0.82 个百分点；结合实验分流检查，提出关卡位置与回访体验的改进建议。",
+          "rect": {
+            "x": 52,
+            "y": 753.546875,
+            "width": 424,
+            "height": 256.375,
+            "top": 753.546875,
+            "right": 476,
+            "bottom": 1009.921875,
+            "left": 52
+          },
+          "height": 254,
+          "contentHeight": 294
+        },
+        {
+          "title": "Healthy Home：奥克兰空间预测与道路地图",
+          "text": "用区域分块评价检验污染物预测，结合道路相对预测图与分区误差，提出哪些区域需要补充观测。",
+          "rect": {
+            "x": 508,
+            "y": 753.546875,
+            "width": 424,
+            "height": 256.375,
+            "top": 753.546875,
+            "right": 932,
+            "bottom": 1009.921875,
+            "left": 508
+          },
+          "height": 254,
+          "contentHeight": 294
+        },
+        {
+          "title": "Amazon 手表评论：聚类、主题与改进建议",
+          "text": "故障与退货是低分评论中的突出主题；将评论聚类与主题分析转为产品排查、说明优化和评论监测建议。",
+          "rect": {
+            "x": 964,
+            "y": 753.546875,
+            "width": 424,
+            "height": 256.375,
+            "top": 753.546875,
+            "right": 1388,
+            "bottom": 1009.921875,
+            "left": 964
+          },
+          "height": 254,
+          "contentHeight": 294
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "documentWidth": 1440,
+      "title": "联系我 - 肖炬晔 - 数据分析师作品集",
+      "theme": true,
+      "h1": {
+        "x": 144,
+        "y": 152,
+        "width": 1152,
+        "height": 48,
+        "top": 152,
+        "right": 1296,
+        "bottom": 200,
+        "left": 144
+      },
+      "controls": [
+        {
+          "id": "theme-toggle",
+          "x": 1284,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 1328,
+          "bottom": 57.5,
+          "left": 1284
+        },
+        {
+          "id": "lang-toggle",
+          "x": 1344,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 1388,
+          "bottom": 57.5,
+          "left": 1344
+        }
+      ],
+      "runtimeCSS": false,
+      "case": "zh-dark-1440-contact"
+    },
+    {
+      "width": 1440,
+      "documentWidth": 1440,
+      "title": "银行客户流失：从客户模式到服务行动 - 数据诗学",
+      "theme": true,
+      "h1": {
+        "x": 52,
+        "y": 183.5625,
+        "width": 979.1875,
+        "height": 52.796875,
+        "top": 183.5625,
+        "right": 1031.1875,
+        "bottom": 236.359375,
+        "left": 52
+      },
+      "controls": [
+        {
+          "id": "theme-toggle",
+          "x": 1284,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 1328,
+          "bottom": 57.5,
+          "left": 1284
+        },
+        {
+          "id": "lang-toggle",
+          "x": 1344,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 1388,
+          "bottom": 57.5,
+          "left": 1344
+        }
+      ],
+      "runtimeCSS": false,
+      "case": "zh-dark-1440-bank",
+      "links": [
+        {
+          "text": "Churn Modelling",
+          "color": "rgb(123, 169, 205)",
+          "bg": "rgb(23, 23, 23)",
+          "ratio": 7.170225342437461
+        },
+        {
+          "text": "TreeSHAP",
+          "color": "rgb(123, 169, 205)",
+          "bg": "rgb(23, 23, 23)",
+          "ratio": 7.170225342437461
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "documentWidth": 1440,
+      "title": "气候模型比较、预测方法与空间暴露评估 - 数据诗学",
+      "theme": true,
+      "h1": {
+        "x": 52,
+        "y": 183.5625,
+        "width": 979.1875,
+        "height": 52.796875,
+        "top": 183.5625,
+        "right": 1031.1875,
+        "bottom": 236.359375,
+        "left": 52
+      },
+      "controls": [
+        {
+          "id": "theme-toggle",
+          "x": 1284,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 1328,
+          "bottom": 57.5,
+          "left": 1284
+        },
+        {
+          "id": "lang-toggle",
+          "x": 1344,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 1388,
+          "bottom": 57.5,
+          "left": 1344
+        }
+      ],
+      "runtimeCSS": false,
+      "case": "zh-dark-1440-climate",
+      "links": [
+        {
+          "text": "MODIS",
+          "color": "rgb(123, 169, 205)",
+          "bg": "rgb(23, 23, 23)",
+          "ratio": 7.170225342437461
+        },
+        {
+          "text": "NEX-GDDP-CMIP6",
+          "color": "rgb(123, 169, 205)",
+          "bg": "rgb(23, 23, 23)",
+          "ratio": 7.170225342437461
+        },
+        {
+          "text": "NASA Terra 轨道资料",
+          "color": "rgb(123, 169, 205)",
+          "bg": "rgb(23, 23, 23)",
+          "ratio": 7.170225342437461
+        },
+        {
+          "text": "MODIS MOD11A1",
+          "color": "rgb(123, 169, 205)",
+          "bg": "rgb(23, 23, 23)",
+          "ratio": 7.170225342437461
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "documentWidth": 390,
+      "title": "肖炬晔｜数据分析师作品集",
+      "theme": true,
+      "h1": {
+        "x": 32,
+        "y": 116.1875,
+        "width": 326,
+        "height": 46.078125,
+        "top": 116.1875,
+        "right": 358,
+        "bottom": 162.265625,
+        "left": 32
+      },
+      "controls": [
+        {
+          "id": "theme-toggle",
+          "x": 210,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 254,
+          "bottom": 57.5,
+          "left": 210
+        },
+        {
+          "id": "lang-toggle",
+          "x": 270,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 314,
+          "bottom": 57.5,
+          "left": 270
+        },
+        {
+          "id": "menu-toggle",
+          "x": 330,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 374,
+          "bottom": 57.5,
+          "left": 330
+        }
+      ],
+      "runtimeCSS": false,
+      "case": "zh-dark-390-home",
+      "cards": [
+        {
+          "title": "S&P Global Capstone：气候模型、预测与空间暴露",
+          "text": "比较气候模型与预测在不同区域的表现，将未来气候情景与人口、土地暴露叠加，提出优先核查地点的规则。",
+          "rect": {
+            "x": 16,
+            "y": -812.375,
+            "width": 358,
+            "height": 400,
+            "top": -812.375,
+            "right": 374,
+            "bottom": -412.375,
+            "left": 16
+          },
+          "height": 398,
+          "contentHeight": 438
+        },
+        {
+          "title": "YouTube 评论：养宠文本信号与频道筛选",
+          "text": "从评论中识别养宠文本线索，结合频道规模与信号占比筛选待复核频道，为后续投放试点提供候选名单。",
+          "rect": {
+            "x": 16,
+            "y": -380.375,
+            "width": 358,
+            "height": 400,
+            "top": -380.375,
+            "right": 374,
+            "bottom": 19.625,
+            "left": 16
+          },
+          "height": 398,
+          "contentHeight": 438
+        },
+        {
+          "title": "银行客户流失：模式、解释与服务容量",
+          "text": "识别客户流失信号，比较服务容量与成本，为主动联系名单排序，帮助把有限服务资源用在更值得复核的客户上。",
+          "rect": {
+            "x": 16,
+            "y": 51.625,
+            "width": 358,
+            "height": 276.375,
+            "top": 51.625,
+            "right": 374,
+            "bottom": 328,
+            "left": 16
+          },
+          "height": 274,
+          "contentHeight": 314
+        },
+        {
+          "title": "电商首单欺诈：时间评估与审核建议",
+          "text": "按时间验证时，既定筛查规则未检出测试集欺诈；结合设备、IP 与交易时序线索，提出分级人工审核方案。",
+          "rect": {
+            "x": 16,
+            "y": 360,
+            "width": 358,
+            "height": 276.375,
+            "top": 360,
+            "right": 374,
+            "bottom": 636.375,
+            "left": 16
+          },
+          "height": 274,
+          "contentHeight": 314
+        },
+        {
+          "title": "LendingClub：9,004 笔贷款样本",
+          "text": "比较贷款模型与简单期限规则在漏判、误判成本下的取舍，为复核名单和筛查阈值提供依据。",
+          "rect": {
+            "x": 16,
+            "y": 668.375,
+            "width": 358,
+            "height": 276.375,
+            "top": 668.375,
+            "right": 374,
+            "bottom": 944.75,
+            "left": 16
+          },
+          "height": 274,
+          "contentHeight": 314
+        },
+        {
+          "title": "A/B Testing：Cookie Cats 关卡门实验",
+          "text": "第 40 关组的 7 日留存比第 30 关组低 0.82 个百分点；结合实验分流检查，提出关卡位置与回访体验的改进建议。",
+          "rect": {
+            "x": 16,
+            "y": 976.75,
+            "width": 358,
+            "height": 276.375,
+            "top": 976.75,
+            "right": 374,
+            "bottom": 1253.125,
+            "left": 16
+          },
+          "height": 274,
+          "contentHeight": 314
+        },
+        {
+          "title": "Healthy Home：奥克兰空间预测与道路地图",
+          "text": "用区域分块评价检验污染物预测，结合道路相对预测图与分区误差，提出哪些区域需要补充观测。",
+          "rect": {
+            "x": 16,
+            "y": 1285.125,
+            "width": 358,
+            "height": 276.375,
+            "top": 1285.125,
+            "right": 374,
+            "bottom": 1561.5,
+            "left": 16
+          },
+          "height": 274,
+          "contentHeight": 314
+        },
+        {
+          "title": "Amazon 手表评论：聚类、主题与改进建议",
+          "text": "故障与退货是低分评论中的突出主题；将评论聚类与主题分析转为产品排查、说明优化和评论监测建议。",
+          "rect": {
+            "x": 16,
+            "y": 1593.5,
+            "width": 358,
+            "height": 276.375,
+            "top": 1593.5,
+            "right": 374,
+            "bottom": 1869.875,
+            "left": 16
+          },
+          "height": 274,
+          "contentHeight": 314
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "documentWidth": 390,
+      "title": "联系我 - 肖炬晔 - 数据分析师作品集",
+      "theme": true,
+      "h1": {
+        "x": 16,
+        "y": 152,
+        "width": 358,
+        "height": 40,
+        "top": 152,
+        "right": 374,
+        "bottom": 192,
+        "left": 16
+      },
+      "controls": [
+        {
+          "id": "theme-toggle",
+          "x": 210,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 254,
+          "bottom": 57.5,
+          "left": 210
+        },
+        {
+          "id": "lang-toggle",
+          "x": 270,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 314,
+          "bottom": 57.5,
+          "left": 270
+        },
+        {
+          "id": "menu-toggle",
+          "x": 330,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 374,
+          "bottom": 57.5,
+          "left": 330
+        }
+      ],
+      "runtimeCSS": false,
+      "case": "zh-dark-390-contact"
+    },
+    {
+      "width": 390,
+      "documentWidth": 390,
+      "title": "银行客户流失：从客户模式到服务行动 - 数据诗学",
+      "theme": true,
+      "h1": {
+        "x": 16,
+        "y": 183.5625,
+        "width": 358,
+        "height": 73.90625,
+        "top": 183.5625,
+        "right": 374,
+        "bottom": 257.46875,
+        "left": 16
+      },
+      "controls": [
+        {
+          "id": "theme-toggle",
+          "x": 210,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 254,
+          "bottom": 57.5,
+          "left": 210
+        },
+        {
+          "id": "lang-toggle",
+          "x": 270,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 314,
+          "bottom": 57.5,
+          "left": 270
+        },
+        {
+          "id": "menu-toggle",
+          "x": 330,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 374,
+          "bottom": 57.5,
+          "left": 330
+        }
+      ],
+      "runtimeCSS": false,
+      "case": "zh-dark-390-bank",
+      "links": [
+        {
+          "text": "Churn Modelling",
+          "color": "rgb(123, 169, 205)",
+          "bg": "rgb(23, 23, 23)",
+          "ratio": 7.170225342437461
+        },
+        {
+          "text": "TreeSHAP",
+          "color": "rgb(123, 169, 205)",
+          "bg": "rgb(23, 23, 23)",
+          "ratio": 7.170225342437461
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "documentWidth": 390,
+      "title": "气候模型比较、预测方法与空间暴露评估 - 数据诗学",
+      "theme": true,
+      "h1": {
+        "x": 16,
+        "y": 183.5625,
+        "width": 358,
+        "height": 73.90625,
+        "top": 183.5625,
+        "right": 374,
+        "bottom": 257.46875,
+        "left": 16
+      },
+      "controls": [
+        {
+          "id": "theme-toggle",
+          "x": 210,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 254,
+          "bottom": 57.5,
+          "left": 210
+        },
+        {
+          "id": "lang-toggle",
+          "x": 270,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 314,
+          "bottom": 57.5,
+          "left": 270
+        },
+        {
+          "id": "menu-toggle",
+          "x": 330,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 374,
+          "bottom": 57.5,
+          "left": 330
+        }
+      ],
+      "runtimeCSS": false,
+      "case": "zh-dark-390-climate",
+      "links": [
+        {
+          "text": "MODIS",
+          "color": "rgb(123, 169, 205)",
+          "bg": "rgb(23, 23, 23)",
+          "ratio": 7.170225342437461
+        },
+        {
+          "text": "NEX-GDDP-CMIP6",
+          "color": "rgb(123, 169, 205)",
+          "bg": "rgb(23, 23, 23)",
+          "ratio": 7.170225342437461
+        },
+        {
+          "text": "NASA Terra 轨道资料",
+          "color": "rgb(123, 169, 205)",
+          "bg": "rgb(23, 23, 23)",
+          "ratio": 7.170225342437461
+        },
+        {
+          "text": "MODIS MOD11A1",
+          "color": "rgb(123, 169, 205)",
+          "bg": "rgb(23, 23, 23)",
+          "ratio": 7.170225342437461
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "documentWidth": 1440,
+      "title": "Juye Xiao | Data Analyst Portfolio",
+      "theme": false,
+      "h1": {
+        "x": 52,
+        "y": 280.859375,
+        "width": 732.65625,
+        "height": 73.25,
+        "top": 280.859375,
+        "right": 784.65625,
+        "bottom": 354.109375,
+        "left": 52
+      },
+      "controls": [
+        {
+          "id": "theme-toggle",
+          "x": 1284,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 1328,
+          "bottom": 57.5,
+          "left": 1284
+        },
+        {
+          "id": "lang-toggle",
+          "x": 1344,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 1388,
+          "bottom": 57.5,
+          "left": 1344
+        }
+      ],
+      "runtimeCSS": false,
+      "case": "en-light-1440-home",
+      "cards": [
+        {
+          "title": "S&P Global Capstone: climate models, forecasts and spatial exposure",
+          "text": "Compare climate models and forecasts across regions, then combine future scenarios with population and land exposure to propose rules for prioritizing locations for further checks.",
+          "rect": {
+            "x": 52,
+            "y": 140.296875,
+            "width": 880,
+            "height": 276.375,
+            "top": 140.296875,
+            "right": 932,
+            "bottom": 416.671875,
+            "left": 52
+          },
+          "height": 274,
+          "contentHeight": 314
+        },
+        {
+          "title": "YouTube comments: ownership signals and channel screening",
+          "text": "Identify pet-related signals in comments and combine their share with channel size to shortlist channels for review before an advertising pilot.",
+          "rect": {
+            "x": 964,
+            "y": 140.296875,
+            "width": 424,
+            "height": 276.375,
+            "top": 140.296875,
+            "right": 1388,
+            "bottom": 416.671875,
+            "left": 964
+          },
+          "height": 274,
+          "contentHeight": 314
+        },
+        {
+          "title": "Bank churn: patterns, explanations and service capacity",
+          "text": "Identify churn signals and compare service capacity with follow-up costs to prioritize customers for proactive contact and further review.",
+          "rect": {
+            "x": 52,
+            "y": 448.671875,
+            "width": 424,
+            "height": 296.375,
+            "top": 448.671875,
+            "right": 476,
+            "bottom": 745.046875,
+            "left": 52
+          },
+          "height": 294,
+          "contentHeight": 334
+        },
+        {
+          "title": "First-order fraud: temporal evaluation and review proposals",
+          "text": "Time-based validation found no test-set fraud at the selected decision threshold. Device, IP and transaction-timing signals inform a tiered manual-review proposal.",
+          "rect": {
+            "x": 508,
+            "y": 448.671875,
+            "width": 424,
+            "height": 296.375,
+            "top": 448.671875,
+            "right": 932,
+            "bottom": 745.046875,
+            "left": 508
+          },
+          "height": 294,
+          "contentHeight": 334
+        },
+        {
+          "title": "LendingClub: the 9,004-loan sample",
+          "text": "Compare loan models with a simple loan-term rule under the costs of missed defaults and false alerts to inform review lists and screening thresholds.",
+          "rect": {
+            "x": 964,
+            "y": 448.671875,
+            "width": 424,
+            "height": 296.375,
+            "top": 448.671875,
+            "right": 1388,
+            "bottom": 745.046875,
+            "left": 964
+          },
+          "height": 294,
+          "contentHeight": 334
+        },
+        {
+          "title": "A/B Testing: the Cookie Cats gate experiment",
+          "text": "Seven-day retention was 0.82 percentage points lower in the level-40 group than in the level-30 group. Allocation checks qualify recommendations on gate placement and the return experience.",
+          "rect": {
+            "x": 52,
+            "y": 777.046875,
+            "width": 424,
+            "height": 296.375,
+            "top": 777.046875,
+            "right": 476,
+            "bottom": 1073.421875,
+            "left": 52
+          },
+          "height": 294,
+          "contentHeight": 334
+        },
+        {
+          "title": "Healthy Home: spatial prediction and road mapping in Oakland",
+          "text": "Evaluate pollutant predictions on held-out areas, then use relative road maps and area-level errors to identify where more observations are needed.",
+          "rect": {
+            "x": 508,
+            "y": 777.046875,
+            "width": 424,
+            "height": 296.375,
+            "top": 777.046875,
+            "right": 932,
+            "bottom": 1073.421875,
+            "left": 508
+          },
+          "height": 294,
+          "contentHeight": 334
+        },
+        {
+          "title": "Amazon watch reviews: clustering, topics and recommendations",
+          "text": "Malfunctions and returns stand out in low-rated reviews. Clustering and topic analysis turn that feedback into recommendations for product checks, clearer instructions and review monitoring.",
+          "rect": {
+            "x": 964,
+            "y": 777.046875,
+            "width": 424,
+            "height": 296.375,
+            "top": 777.046875,
+            "right": 1388,
+            "bottom": 1073.421875,
+            "left": 964
+          },
+          "height": 294,
+          "contentHeight": 334
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "documentWidth": 1440,
+      "title": "Contact - Juye Xiao - Data Analyst Portfolio",
+      "theme": false,
+      "h1": {
+        "x": 144,
+        "y": 182,
+        "width": 1152,
+        "height": 48,
+        "top": 182,
+        "right": 1296,
+        "bottom": 230,
+        "left": 144
+      },
+      "controls": [
+        {
+          "id": "theme-toggle",
+          "x": 1284,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 1328,
+          "bottom": 57.5,
+          "left": 1284
+        },
+        {
+          "id": "lang-toggle",
+          "x": 1344,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 1388,
+          "bottom": 57.5,
+          "left": 1344
+        }
+      ],
+      "runtimeCSS": false,
+      "case": "en-light-1440-contact"
+    },
+    {
+      "width": 1440,
+      "documentWidth": 1440,
+      "title": "Bank customer churn: from customer patterns to service action - Data Poetics",
+      "theme": false,
+      "h1": {
+        "x": 52,
+        "y": 183.5625,
+        "width": 979.1875,
+        "height": 105.59375,
+        "top": 183.5625,
+        "right": 1031.1875,
+        "bottom": 289.15625,
+        "left": 52
+      },
+      "controls": [
+        {
+          "id": "theme-toggle",
+          "x": 1284,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 1328,
+          "bottom": 57.5,
+          "left": 1284
+        },
+        {
+          "id": "lang-toggle",
+          "x": 1344,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 1388,
+          "bottom": 57.5,
+          "left": 1344
+        }
+      ],
+      "runtimeCSS": false,
+      "case": "en-light-1440-bank",
+      "links": [
+        {
+          "text": "Churn Modeling",
+          "color": "rgb(54, 102, 141)",
+          "bg": "rgb(250, 247, 242)",
+          "ratio": 5.709224793578483
+        },
+        {
+          "text": "TreeSHAP",
+          "color": "rgb(54, 102, 141)",
+          "bg": "rgb(250, 247, 242)",
+          "ratio": 5.709224793578483
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "documentWidth": 1440,
+      "title": "Climate model comparison, forecasting and spatial exposure assessment - Data Poetics",
+      "theme": false,
+      "h1": {
+        "x": 52,
+        "y": 183.5625,
+        "width": 979.1875,
+        "height": 105.59375,
+        "top": 183.5625,
+        "right": 1031.1875,
+        "bottom": 289.15625,
+        "left": 52
+      },
+      "controls": [
+        {
+          "id": "theme-toggle",
+          "x": 1284,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 1328,
+          "bottom": 57.5,
+          "left": 1284
+        },
+        {
+          "id": "lang-toggle",
+          "x": 1344,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 1388,
+          "bottom": 57.5,
+          "left": 1344
+        }
+      ],
+      "runtimeCSS": false,
+      "case": "en-light-1440-climate",
+      "links": [
+        {
+          "text": "MODIS",
+          "color": "rgb(54, 102, 141)",
+          "bg": "rgb(250, 247, 242)",
+          "ratio": 5.709224793578483
+        },
+        {
+          "text": "NEX-GDDP-CMIP6",
+          "color": "rgb(54, 102, 141)",
+          "bg": "rgb(250, 247, 242)",
+          "ratio": 5.709224793578483
+        },
+        {
+          "text": "NASA Terra orbit information",
+          "color": "rgb(54, 102, 141)",
+          "bg": "rgb(250, 247, 242)",
+          "ratio": 5.709224793578483
+        },
+        {
+          "text": "MODIS MOD11A1",
+          "color": "rgb(54, 102, 141)",
+          "bg": "rgb(250, 247, 242)",
+          "ratio": 5.709224793578483
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "documentWidth": 390,
+      "title": "Juye Xiao | Data Analyst Portfolio",
+      "theme": false,
+      "h1": {
+        "x": 32,
+        "y": 132.1875,
+        "width": 326,
+        "height": 92.15625,
+        "top": 132.1875,
+        "right": 358,
+        "bottom": 224.34375,
+        "left": 32
+      },
+      "controls": [
+        {
+          "id": "theme-toggle",
+          "x": 210,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 254,
+          "bottom": 57.5,
+          "left": 210
+        },
+        {
+          "id": "lang-toggle",
+          "x": 270,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 314,
+          "bottom": 57.5,
+          "left": 270
+        },
+        {
+          "id": "menu-toggle",
+          "x": 330,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 374,
+          "bottom": 57.5,
+          "left": 330
+        }
+      ],
+      "runtimeCSS": false,
+      "case": "en-light-390-home",
+      "cards": [
+        {
+          "title": "S&P Global Capstone: climate models, forecasts and spatial exposure",
+          "text": "Compare climate models and forecasts across regions, then combine future scenarios with population and land exposure to propose rules for prioritizing locations for further checks.",
+          "rect": {
+            "x": 16,
+            "y": -931.046875,
+            "width": 358,
+            "height": 400,
+            "top": -931.046875,
+            "right": 374,
+            "bottom": -531.046875,
+            "left": 16
+          },
+          "height": 398,
+          "contentHeight": 438
+        },
+        {
+          "title": "YouTube comments: ownership signals and channel screening",
+          "text": "Identify pet-related signals in comments and combine their share with channel size to shortlist channels for review before an advertising pilot.",
+          "rect": {
+            "x": 16,
+            "y": -499.046875,
+            "width": 358,
+            "height": 400,
+            "top": -499.046875,
+            "right": 374,
+            "bottom": -99.046875,
+            "left": 16
+          },
+          "height": 398,
+          "contentHeight": 438
+        },
+        {
+          "title": "Bank churn: patterns, explanations and service capacity",
+          "text": "Identify churn signals and compare service capacity with follow-up costs to prioritize customers for proactive contact and further review.",
+          "rect": {
+            "x": 16,
+            "y": -67.046875,
+            "width": 358,
+            "height": 324.375,
+            "top": -67.046875,
+            "right": 374,
+            "bottom": 257.328125,
+            "left": 16
+          },
+          "height": 322,
+          "contentHeight": 362
+        },
+        {
+          "title": "First-order fraud: temporal evaluation and review proposals",
+          "text": "Time-based validation found no test-set fraud at the selected decision threshold. Device, IP and transaction-timing signals inform a tiered manual-review proposal.",
+          "rect": {
+            "x": 16,
+            "y": 289.328125,
+            "width": 358,
+            "height": 324.375,
+            "top": 289.328125,
+            "right": 374,
+            "bottom": 613.703125,
+            "left": 16
+          },
+          "height": 322,
+          "contentHeight": 362
+        },
+        {
+          "title": "LendingClub: the 9,004-loan sample",
+          "text": "Compare loan models with a simple loan-term rule under the costs of missed defaults and false alerts to inform review lists and screening thresholds.",
+          "rect": {
+            "x": 16,
+            "y": 645.703125,
+            "width": 358,
+            "height": 296.375,
+            "top": 645.703125,
+            "right": 374,
+            "bottom": 942.078125,
+            "left": 16
+          },
+          "height": 294,
+          "contentHeight": 334
+        },
+        {
+          "title": "A/B Testing: the Cookie Cats gate experiment",
+          "text": "Seven-day retention was 0.82 percentage points lower in the level-40 group than in the level-30 group. Allocation checks qualify recommendations on gate placement and the return experience.",
+          "rect": {
+            "x": 16,
+            "y": 974.078125,
+            "width": 358,
+            "height": 316.375,
+            "top": 974.078125,
+            "right": 374,
+            "bottom": 1290.453125,
+            "left": 16
+          },
+          "height": 314,
+          "contentHeight": 354
+        },
+        {
+          "title": "Healthy Home: spatial prediction and road mapping in Oakland",
+          "text": "Evaluate pollutant predictions on held-out areas, then use relative road maps and area-level errors to identify where more observations are needed.",
+          "rect": {
+            "x": 16,
+            "y": 1322.453125,
+            "width": 358,
+            "height": 324.375,
+            "top": 1322.453125,
+            "right": 374,
+            "bottom": 1646.828125,
+            "left": 16
+          },
+          "height": 322,
+          "contentHeight": 362
+        },
+        {
+          "title": "Amazon watch reviews: clustering, topics and recommendations",
+          "text": "Malfunctions and returns stand out in low-rated reviews. Clustering and topic analysis turn that feedback into recommendations for product checks, clearer instructions and review monitoring.",
+          "rect": {
+            "x": 16,
+            "y": 1678.828125,
+            "width": 358,
+            "height": 344.375,
+            "top": 1678.828125,
+            "right": 374,
+            "bottom": 2023.203125,
+            "left": 16
+          },
+          "height": 342,
+          "contentHeight": 382
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "documentWidth": 390,
+      "title": "Contact - Juye Xiao - Data Analyst Portfolio",
+      "theme": false,
+      "h1": {
+        "x": 16,
+        "y": 182,
+        "width": 358,
+        "height": 80,
+        "top": 182,
+        "right": 374,
+        "bottom": 262,
+        "left": 16
+      },
+      "controls": [
+        {
+          "id": "theme-toggle",
+          "x": 210,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 254,
+          "bottom": 57.5,
+          "left": 210
+        },
+        {
+          "id": "lang-toggle",
+          "x": 270,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 314,
+          "bottom": 57.5,
+          "left": 270
+        },
+        {
+          "id": "menu-toggle",
+          "x": 330,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 374,
+          "bottom": 57.5,
+          "left": 330
+        }
+      ],
+      "runtimeCSS": false,
+      "case": "en-light-390-contact"
+    },
+    {
+      "width": 390,
+      "documentWidth": 390,
+      "title": "Bank customer churn: from customer patterns to service action - Data Poetics",
+      "theme": false,
+      "h1": {
+        "x": 16,
+        "y": 183.5625,
+        "width": 358,
+        "height": 110.859375,
+        "top": 183.5625,
+        "right": 374,
+        "bottom": 294.421875,
+        "left": 16
+      },
+      "controls": [
+        {
+          "id": "theme-toggle",
+          "x": 210,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 254,
+          "bottom": 57.5,
+          "left": 210
+        },
+        {
+          "id": "lang-toggle",
+          "x": 270,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 314,
+          "bottom": 57.5,
+          "left": 270
+        },
+        {
+          "id": "menu-toggle",
+          "x": 330,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 374,
+          "bottom": 57.5,
+          "left": 330
+        }
+      ],
+      "runtimeCSS": false,
+      "case": "en-light-390-bank",
+      "links": [
+        {
+          "text": "Churn Modeling",
+          "color": "rgb(54, 102, 141)",
+          "bg": "rgb(250, 247, 242)",
+          "ratio": 5.709224793578483
+        },
+        {
+          "text": "TreeSHAP",
+          "color": "rgb(54, 102, 141)",
+          "bg": "rgb(250, 247, 242)",
+          "ratio": 5.709224793578483
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "documentWidth": 390,
+      "title": "Climate model comparison, forecasting and spatial exposure assessment - Data Poetics",
+      "theme": false,
+      "h1": {
+        "x": 16,
+        "y": 183.5625,
+        "width": 358,
+        "height": 147.8125,
+        "top": 183.5625,
+        "right": 374,
+        "bottom": 331.375,
+        "left": 16
+      },
+      "controls": [
+        {
+          "id": "theme-toggle",
+          "x": 210,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 254,
+          "bottom": 57.5,
+          "left": 210
+        },
+        {
+          "id": "lang-toggle",
+          "x": 270,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 314,
+          "bottom": 57.5,
+          "left": 270
+        },
+        {
+          "id": "menu-toggle",
+          "x": 330,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 374,
+          "bottom": 57.5,
+          "left": 330
+        }
+      ],
+      "runtimeCSS": false,
+      "case": "en-light-390-climate",
+      "links": [
+        {
+          "text": "MODIS",
+          "color": "rgb(54, 102, 141)",
+          "bg": "rgb(250, 247, 242)",
+          "ratio": 5.709224793578483
+        },
+        {
+          "text": "NEX-GDDP-CMIP6",
+          "color": "rgb(54, 102, 141)",
+          "bg": "rgb(250, 247, 242)",
+          "ratio": 5.709224793578483
+        },
+        {
+          "text": "NASA Terra orbit information",
+          "color": "rgb(54, 102, 141)",
+          "bg": "rgb(250, 247, 242)",
+          "ratio": 5.709224793578483
+        },
+        {
+          "text": "MODIS MOD11A1",
+          "color": "rgb(54, 102, 141)",
+          "bg": "rgb(250, 247, 242)",
+          "ratio": 5.709224793578483
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "documentWidth": 1440,
+      "title": "Juye Xiao | Data Analyst Portfolio",
+      "theme": true,
+      "h1": {
+        "x": 52,
+        "y": 280.859375,
+        "width": 732.65625,
+        "height": 73.25,
+        "top": 280.859375,
+        "right": 784.65625,
+        "bottom": 354.109375,
+        "left": 52
+      },
+      "controls": [
+        {
+          "id": "theme-toggle",
+          "x": 1284,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 1328,
+          "bottom": 57.5,
+          "left": 1284
+        },
+        {
+          "id": "lang-toggle",
+          "x": 1344,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 1388,
+          "bottom": 57.5,
+          "left": 1344
+        }
+      ],
+      "runtimeCSS": false,
+      "case": "en-dark-1440-home",
+      "cards": [
+        {
+          "title": "S&P Global Capstone: climate models, forecasts and spatial exposure",
+          "text": "Compare climate models and forecasts across regions, then combine future scenarios with population and land exposure to propose rules for prioritizing locations for further checks.",
+          "rect": {
+            "x": 52,
+            "y": 140.296875,
+            "width": 880,
+            "height": 276.375,
+            "top": 140.296875,
+            "right": 932,
+            "bottom": 416.671875,
+            "left": 52
+          },
+          "height": 274,
+          "contentHeight": 314
+        },
+        {
+          "title": "YouTube comments: ownership signals and channel screening",
+          "text": "Identify pet-related signals in comments and combine their share with channel size to shortlist channels for review before an advertising pilot.",
+          "rect": {
+            "x": 964,
+            "y": 140.296875,
+            "width": 424,
+            "height": 276.375,
+            "top": 140.296875,
+            "right": 1388,
+            "bottom": 416.671875,
+            "left": 964
+          },
+          "height": 274,
+          "contentHeight": 314
+        },
+        {
+          "title": "Bank churn: patterns, explanations and service capacity",
+          "text": "Identify churn signals and compare service capacity with follow-up costs to prioritize customers for proactive contact and further review.",
+          "rect": {
+            "x": 52,
+            "y": 448.671875,
+            "width": 424,
+            "height": 296.375,
+            "top": 448.671875,
+            "right": 476,
+            "bottom": 745.046875,
+            "left": 52
+          },
+          "height": 294,
+          "contentHeight": 334
+        },
+        {
+          "title": "First-order fraud: temporal evaluation and review proposals",
+          "text": "Time-based validation found no test-set fraud at the selected decision threshold. Device, IP and transaction-timing signals inform a tiered manual-review proposal.",
+          "rect": {
+            "x": 508,
+            "y": 448.671875,
+            "width": 424,
+            "height": 296.375,
+            "top": 448.671875,
+            "right": 932,
+            "bottom": 745.046875,
+            "left": 508
+          },
+          "height": 294,
+          "contentHeight": 334
+        },
+        {
+          "title": "LendingClub: the 9,004-loan sample",
+          "text": "Compare loan models with a simple loan-term rule under the costs of missed defaults and false alerts to inform review lists and screening thresholds.",
+          "rect": {
+            "x": 964,
+            "y": 448.671875,
+            "width": 424,
+            "height": 296.375,
+            "top": 448.671875,
+            "right": 1388,
+            "bottom": 745.046875,
+            "left": 964
+          },
+          "height": 294,
+          "contentHeight": 334
+        },
+        {
+          "title": "A/B Testing: the Cookie Cats gate experiment",
+          "text": "Seven-day retention was 0.82 percentage points lower in the level-40 group than in the level-30 group. Allocation checks qualify recommendations on gate placement and the return experience.",
+          "rect": {
+            "x": 52,
+            "y": 777.046875,
+            "width": 424,
+            "height": 296.375,
+            "top": 777.046875,
+            "right": 476,
+            "bottom": 1073.421875,
+            "left": 52
+          },
+          "height": 294,
+          "contentHeight": 334
+        },
+        {
+          "title": "Healthy Home: spatial prediction and road mapping in Oakland",
+          "text": "Evaluate pollutant predictions on held-out areas, then use relative road maps and area-level errors to identify where more observations are needed.",
+          "rect": {
+            "x": 508,
+            "y": 777.046875,
+            "width": 424,
+            "height": 296.375,
+            "top": 777.046875,
+            "right": 932,
+            "bottom": 1073.421875,
+            "left": 508
+          },
+          "height": 294,
+          "contentHeight": 334
+        },
+        {
+          "title": "Amazon watch reviews: clustering, topics and recommendations",
+          "text": "Malfunctions and returns stand out in low-rated reviews. Clustering and topic analysis turn that feedback into recommendations for product checks, clearer instructions and review monitoring.",
+          "rect": {
+            "x": 964,
+            "y": 777.046875,
+            "width": 424,
+            "height": 296.375,
+            "top": 777.046875,
+            "right": 1388,
+            "bottom": 1073.421875,
+            "left": 964
+          },
+          "height": 294,
+          "contentHeight": 334
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "documentWidth": 1440,
+      "title": "Contact - Juye Xiao - Data Analyst Portfolio",
+      "theme": true,
+      "h1": {
+        "x": 144,
+        "y": 152,
+        "width": 1152,
+        "height": 48,
+        "top": 152,
+        "right": 1296,
+        "bottom": 200,
+        "left": 144
+      },
+      "controls": [
+        {
+          "id": "theme-toggle",
+          "x": 1284,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 1328,
+          "bottom": 57.5,
+          "left": 1284
+        },
+        {
+          "id": "lang-toggle",
+          "x": 1344,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 1388,
+          "bottom": 57.5,
+          "left": 1344
+        }
+      ],
+      "runtimeCSS": false,
+      "case": "en-dark-1440-contact"
+    },
+    {
+      "width": 1440,
+      "documentWidth": 1440,
+      "title": "Bank customer churn: from customer patterns to service action - Data Poetics",
+      "theme": true,
+      "h1": {
+        "x": 52,
+        "y": 183.5625,
+        "width": 979.1875,
+        "height": 105.59375,
+        "top": 183.5625,
+        "right": 1031.1875,
+        "bottom": 289.15625,
+        "left": 52
+      },
+      "controls": [
+        {
+          "id": "theme-toggle",
+          "x": 1284,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 1328,
+          "bottom": 57.5,
+          "left": 1284
+        },
+        {
+          "id": "lang-toggle",
+          "x": 1344,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 1388,
+          "bottom": 57.5,
+          "left": 1344
+        }
+      ],
+      "runtimeCSS": false,
+      "case": "en-dark-1440-bank",
+      "links": [
+        {
+          "text": "Churn Modeling",
+          "color": "rgb(123, 169, 205)",
+          "bg": "rgb(23, 23, 23)",
+          "ratio": 7.170225342437461
+        },
+        {
+          "text": "TreeSHAP",
+          "color": "rgb(123, 169, 205)",
+          "bg": "rgb(23, 23, 23)",
+          "ratio": 7.170225342437461
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "documentWidth": 1440,
+      "title": "Climate model comparison, forecasting and spatial exposure assessment - Data Poetics",
+      "theme": true,
+      "h1": {
+        "x": 52,
+        "y": 183.5625,
+        "width": 979.1875,
+        "height": 105.59375,
+        "top": 183.5625,
+        "right": 1031.1875,
+        "bottom": 289.15625,
+        "left": 52
+      },
+      "controls": [
+        {
+          "id": "theme-toggle",
+          "x": 1284,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 1328,
+          "bottom": 57.5,
+          "left": 1284
+        },
+        {
+          "id": "lang-toggle",
+          "x": 1344,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 1388,
+          "bottom": 57.5,
+          "left": 1344
+        }
+      ],
+      "runtimeCSS": false,
+      "case": "en-dark-1440-climate",
+      "links": [
+        {
+          "text": "MODIS",
+          "color": "rgb(123, 169, 205)",
+          "bg": "rgb(23, 23, 23)",
+          "ratio": 7.170225342437461
+        },
+        {
+          "text": "NEX-GDDP-CMIP6",
+          "color": "rgb(123, 169, 205)",
+          "bg": "rgb(23, 23, 23)",
+          "ratio": 7.170225342437461
+        },
+        {
+          "text": "NASA Terra orbit information",
+          "color": "rgb(123, 169, 205)",
+          "bg": "rgb(23, 23, 23)",
+          "ratio": 7.170225342437461
+        },
+        {
+          "text": "MODIS MOD11A1",
+          "color": "rgb(123, 169, 205)",
+          "bg": "rgb(23, 23, 23)",
+          "ratio": 7.170225342437461
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "documentWidth": 390,
+      "title": "Juye Xiao | Data Analyst Portfolio",
+      "theme": true,
+      "h1": {
+        "x": 32,
+        "y": 132.1875,
+        "width": 326,
+        "height": 92.15625,
+        "top": 132.1875,
+        "right": 358,
+        "bottom": 224.34375,
+        "left": 32
+      },
+      "controls": [
+        {
+          "id": "theme-toggle",
+          "x": 210,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 254,
+          "bottom": 57.5,
+          "left": 210
+        },
+        {
+          "id": "lang-toggle",
+          "x": 270,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 314,
+          "bottom": 57.5,
+          "left": 270
+        },
+        {
+          "id": "menu-toggle",
+          "x": 330,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 374,
+          "bottom": 57.5,
+          "left": 330
+        }
+      ],
+      "runtimeCSS": false,
+      "case": "en-dark-390-home",
+      "cards": [
+        {
+          "title": "S&P Global Capstone: climate models, forecasts and spatial exposure",
+          "text": "Compare climate models and forecasts across regions, then combine future scenarios with population and land exposure to propose rules for prioritizing locations for further checks.",
+          "rect": {
+            "x": 16,
+            "y": -931.046875,
+            "width": 358,
+            "height": 400,
+            "top": -931.046875,
+            "right": 374,
+            "bottom": -531.046875,
+            "left": 16
+          },
+          "height": 398,
+          "contentHeight": 438
+        },
+        {
+          "title": "YouTube comments: ownership signals and channel screening",
+          "text": "Identify pet-related signals in comments and combine their share with channel size to shortlist channels for review before an advertising pilot.",
+          "rect": {
+            "x": 16,
+            "y": -499.046875,
+            "width": 358,
+            "height": 400,
+            "top": -499.046875,
+            "right": 374,
+            "bottom": -99.046875,
+            "left": 16
+          },
+          "height": 398,
+          "contentHeight": 438
+        },
+        {
+          "title": "Bank churn: patterns, explanations and service capacity",
+          "text": "Identify churn signals and compare service capacity with follow-up costs to prioritize customers for proactive contact and further review.",
+          "rect": {
+            "x": 16,
+            "y": -67.046875,
+            "width": 358,
+            "height": 324.375,
+            "top": -67.046875,
+            "right": 374,
+            "bottom": 257.328125,
+            "left": 16
+          },
+          "height": 322,
+          "contentHeight": 362
+        },
+        {
+          "title": "First-order fraud: temporal evaluation and review proposals",
+          "text": "Time-based validation found no test-set fraud at the selected decision threshold. Device, IP and transaction-timing signals inform a tiered manual-review proposal.",
+          "rect": {
+            "x": 16,
+            "y": 289.328125,
+            "width": 358,
+            "height": 324.375,
+            "top": 289.328125,
+            "right": 374,
+            "bottom": 613.703125,
+            "left": 16
+          },
+          "height": 322,
+          "contentHeight": 362
+        },
+        {
+          "title": "LendingClub: the 9,004-loan sample",
+          "text": "Compare loan models with a simple loan-term rule under the costs of missed defaults and false alerts to inform review lists and screening thresholds.",
+          "rect": {
+            "x": 16,
+            "y": 645.703125,
+            "width": 358,
+            "height": 296.375,
+            "top": 645.703125,
+            "right": 374,
+            "bottom": 942.078125,
+            "left": 16
+          },
+          "height": 294,
+          "contentHeight": 334
+        },
+        {
+          "title": "A/B Testing: the Cookie Cats gate experiment",
+          "text": "Seven-day retention was 0.82 percentage points lower in the level-40 group than in the level-30 group. Allocation checks qualify recommendations on gate placement and the return experience.",
+          "rect": {
+            "x": 16,
+            "y": 974.078125,
+            "width": 358,
+            "height": 316.375,
+            "top": 974.078125,
+            "right": 374,
+            "bottom": 1290.453125,
+            "left": 16
+          },
+          "height": 314,
+          "contentHeight": 354
+        },
+        {
+          "title": "Healthy Home: spatial prediction and road mapping in Oakland",
+          "text": "Evaluate pollutant predictions on held-out areas, then use relative road maps and area-level errors to identify where more observations are needed.",
+          "rect": {
+            "x": 16,
+            "y": 1322.453125,
+            "width": 358,
+            "height": 324.375,
+            "top": 1322.453125,
+            "right": 374,
+            "bottom": 1646.828125,
+            "left": 16
+          },
+          "height": 322,
+          "contentHeight": 362
+        },
+        {
+          "title": "Amazon watch reviews: clustering, topics and recommendations",
+          "text": "Malfunctions and returns stand out in low-rated reviews. Clustering and topic analysis turn that feedback into recommendations for product checks, clearer instructions and review monitoring.",
+          "rect": {
+            "x": 16,
+            "y": 1678.828125,
+            "width": 358,
+            "height": 344.375,
+            "top": 1678.828125,
+            "right": 374,
+            "bottom": 2023.203125,
+            "left": 16
+          },
+          "height": 342,
+          "contentHeight": 382
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "documentWidth": 390,
+      "title": "Contact - Juye Xiao - Data Analyst Portfolio",
+      "theme": true,
+      "h1": {
+        "x": 16,
+        "y": 182,
+        "width": 358,
+        "height": 80,
+        "top": 182,
+        "right": 374,
+        "bottom": 262,
+        "left": 16
+      },
+      "controls": [
+        {
+          "id": "theme-toggle",
+          "x": 210,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 254,
+          "bottom": 57.5,
+          "left": 210
+        },
+        {
+          "id": "lang-toggle",
+          "x": 270,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 314,
+          "bottom": 57.5,
+          "left": 270
+        },
+        {
+          "id": "menu-toggle",
+          "x": 330,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 374,
+          "bottom": 57.5,
+          "left": 330
+        }
+      ],
+      "runtimeCSS": false,
+      "case": "en-dark-390-contact"
+    },
+    {
+      "width": 390,
+      "documentWidth": 390,
+      "title": "Bank customer churn: from customer patterns to service action - Data Poetics",
+      "theme": true,
+      "h1": {
+        "x": 16,
+        "y": 183.5625,
+        "width": 358,
+        "height": 110.859375,
+        "top": 183.5625,
+        "right": 374,
+        "bottom": 294.421875,
+        "left": 16
+      },
+      "controls": [
+        {
+          "id": "theme-toggle",
+          "x": 210,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 254,
+          "bottom": 57.5,
+          "left": 210
+        },
+        {
+          "id": "lang-toggle",
+          "x": 270,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 314,
+          "bottom": 57.5,
+          "left": 270
+        },
+        {
+          "id": "menu-toggle",
+          "x": 330,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 374,
+          "bottom": 57.5,
+          "left": 330
+        }
+      ],
+      "runtimeCSS": false,
+      "case": "en-dark-390-bank",
+      "links": [
+        {
+          "text": "Churn Modeling",
+          "color": "rgb(123, 169, 205)",
+          "bg": "rgb(23, 23, 23)",
+          "ratio": 7.170225342437461
+        },
+        {
+          "text": "TreeSHAP",
+          "color": "rgb(123, 169, 205)",
+          "bg": "rgb(23, 23, 23)",
+          "ratio": 7.170225342437461
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "documentWidth": 390,
+      "title": "Climate model comparison, forecasting and spatial exposure assessment - Data Poetics",
+      "theme": true,
+      "h1": {
+        "x": 16,
+        "y": 183.5625,
+        "width": 358,
+        "height": 147.8125,
+        "top": 183.5625,
+        "right": 374,
+        "bottom": 331.375,
+        "left": 16
+      },
+      "controls": [
+        {
+          "id": "theme-toggle",
+          "x": 210,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 254,
+          "bottom": 57.5,
+          "left": 210
+        },
+        {
+          "id": "lang-toggle",
+          "x": 270,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 314,
+          "bottom": 57.5,
+          "left": 270
+        },
+        {
+          "id": "menu-toggle",
+          "x": 330,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 374,
+          "bottom": 57.5,
+          "left": 330
+        }
+      ],
+      "runtimeCSS": false,
+      "case": "en-dark-390-climate",
+      "links": [
+        {
+          "text": "MODIS",
+          "color": "rgb(123, 169, 205)",
+          "bg": "rgb(23, 23, 23)",
+          "ratio": 7.170225342437461
+        },
+        {
+          "text": "NEX-GDDP-CMIP6",
+          "color": "rgb(123, 169, 205)",
+          "bg": "rgb(23, 23, 23)",
+          "ratio": 7.170225342437461
+        },
+        {
+          "text": "NASA Terra orbit information",
+          "color": "rgb(123, 169, 205)",
+          "bg": "rgb(23, 23, 23)",
+          "ratio": 7.170225342437461
+        },
+        {
+          "text": "MODIS MOD11A1",
+          "color": "rgb(123, 169, 205)",
+          "bg": "rgb(23, 23, 23)",
+          "ratio": 7.170225342437461
+        }
+      ]
+    }
+  ],
+  "no_js": [
+    {
+      "width": 390,
+      "documentWidth": 390,
+      "title": "肖炬晔｜数据分析师作品集",
+      "theme": false,
+      "h1": {
+        "x": 32,
+        "y": 116.1875,
+        "width": 326,
+        "height": 46.078125,
+        "top": 116.1875,
+        "right": 358,
+        "bottom": 162.265625,
+        "left": 32
+      },
+      "controls": [
+        {
+          "id": "theme-toggle",
+          "x": 210,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 254,
+          "bottom": 57.5,
+          "left": 210
+        },
+        {
+          "id": "lang-toggle",
+          "x": 270,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 314,
+          "bottom": 57.5,
+          "left": 270
+        },
+        {
+          "id": "menu-toggle",
+          "x": 330,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 374,
+          "bottom": 57.5,
+          "left": 330
+        }
+      ],
+      "runtimeCSS": false,
+      "page": "index.html"
+    },
+    {
+      "width": 390,
+      "documentWidth": 390,
+      "title": "Juye Xiao | Data Analyst Portfolio",
+      "theme": false,
+      "h1": {
+        "x": 32,
+        "y": 116.1875,
+        "width": 326,
+        "height": 92.15625,
+        "top": 116.1875,
+        "right": 358,
+        "bottom": 208.34375,
+        "left": 32
+      },
+      "controls": [
+        {
+          "id": "theme-toggle",
+          "x": 210,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 254,
+          "bottom": 57.5,
+          "left": 210
+        },
+        {
+          "id": "lang-toggle",
+          "x": 270,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 314,
+          "bottom": 57.5,
+          "left": 270
+        },
+        {
+          "id": "menu-toggle",
+          "x": 330,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 374,
+          "bottom": 57.5,
+          "left": 330
+        }
+      ],
+      "runtimeCSS": false,
+      "page": "index-en.html"
+    },
+    {
+      "width": 390,
+      "documentWidth": 390,
+      "title": "联系我 - 肖炬晔 - 数据分析师作品集",
+      "theme": false,
+      "h1": {
+        "x": 16,
+        "y": 152,
+        "width": 358,
+        "height": 40,
+        "top": 152,
+        "right": 374,
+        "bottom": 192,
+        "left": 16
+      },
+      "controls": [
+        {
+          "id": "theme-toggle",
+          "x": 210,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 254,
+          "bottom": 57.5,
+          "left": 210
+        },
+        {
+          "id": "lang-toggle",
+          "x": 270,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 314,
+          "bottom": 57.5,
+          "left": 270
+        },
+        {
+          "id": "menu-toggle",
+          "x": 330,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 374,
+          "bottom": 57.5,
+          "left": 330
+        }
+      ],
+      "runtimeCSS": false,
+      "page": "contact.html"
+    },
+    {
+      "width": 390,
+      "documentWidth": 390,
+      "title": "Contact - Juye Xiao - Data Analyst Portfolio",
+      "theme": false,
+      "h1": {
+        "x": 16,
+        "y": 152,
+        "width": 358,
+        "height": 80,
+        "top": 152,
+        "right": 374,
+        "bottom": 232,
+        "left": 16
+      },
+      "controls": [
+        {
+          "id": "theme-toggle",
+          "x": 210,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 254,
+          "bottom": 57.5,
+          "left": 210
+        },
+        {
+          "id": "lang-toggle",
+          "x": 270,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 314,
+          "bottom": 57.5,
+          "left": 270
+        },
+        {
+          "id": "menu-toggle",
+          "x": 330,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 374,
+          "bottom": 57.5,
+          "left": 330
+        }
+      ],
+      "runtimeCSS": false,
+      "page": "contact-en.html"
+    },
+    {
+      "width": 390,
+      "documentWidth": 390,
+      "title": "Cookie Cats: does a later gate keep players longer? - Data Poetics",
+      "theme": false,
+      "h1": {
+        "x": 16,
+        "y": 183.5625,
+        "width": 358,
+        "height": 110.859375,
+        "top": 183.5625,
+        "right": 374,
+        "bottom": 294.421875,
+        "left": 16
+      },
+      "controls": [
+        {
+          "id": "theme-toggle",
+          "x": 210,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 254,
+          "bottom": 57.5,
+          "left": 210
+        },
+        {
+          "id": "lang-toggle",
+          "x": 270,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 314,
+          "bottom": 57.5,
+          "left": 270
+        },
+        {
+          "id": "menu-toggle",
+          "x": 330,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 374,
+          "bottom": 57.5,
+          "left": 330
+        }
+      ],
+      "runtimeCSS": false,
+      "page": "projects/ab testing/ab testing-en.html"
+    },
+    {
+      "width": 390,
+      "documentWidth": 390,
+      "title": "Cookie Cats：把关卡门后移，能留住更多玩家吗？ - 数据诗学",
+      "theme": false,
+      "h1": {
+        "x": 16,
+        "y": 183.5625,
+        "width": 358,
+        "height": 110.859375,
+        "top": 183.5625,
+        "right": 374,
+        "bottom": 294.421875,
+        "left": 16
+      },
+      "controls": [
+        {
+          "id": "theme-toggle",
+          "x": 210,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 254,
+          "bottom": 57.5,
+          "left": 210
+        },
+        {
+          "id": "lang-toggle",
+          "x": 270,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 314,
+          "bottom": 57.5,
+          "left": 270
+        },
+        {
+          "id": "menu-toggle",
+          "x": 330,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 374,
+          "bottom": 57.5,
+          "left": 330
+        }
+      ],
+      "runtimeCSS": false,
+      "page": "projects/ab testing/ab testing.html"
+    },
+    {
+      "width": 390,
+      "documentWidth": 390,
+      "title": "Amazon watch review analysis: from clustering and topic modeling to practical recommendations - Data Poetics",
+      "theme": false,
+      "h1": {
+        "x": 16,
+        "y": 183.5625,
+        "width": 358,
+        "height": 184.765625,
+        "top": 183.5625,
+        "right": 374,
+        "bottom": 368.328125,
+        "left": 16
+      },
+      "controls": [
+        {
+          "id": "theme-toggle",
+          "x": 210,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 254,
+          "bottom": 57.5,
+          "left": 210
+        },
+        {
+          "id": "lang-toggle",
+          "x": 270,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 314,
+          "bottom": 57.5,
+          "left": 270
+        },
+        {
+          "id": "menu-toggle",
+          "x": 330,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 374,
+          "bottom": 57.5,
+          "left": 330
+        }
+      ],
+      "runtimeCSS": false,
+      "page": "projects/amazon watch reviews/amazon watch reviews-en.html"
+    },
+    {
+      "width": 390,
+      "documentWidth": 390,
+      "title": "亚马逊手表评论分析：从聚类与主题建模到改进建议 - 数据诗学",
+      "theme": false,
+      "h1": {
+        "x": 16,
+        "y": 183.5625,
+        "width": 358,
+        "height": 110.859375,
+        "top": 183.5625,
+        "right": 374,
+        "bottom": 294.421875,
+        "left": 16
+      },
+      "controls": [
+        {
+          "id": "theme-toggle",
+          "x": 210,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 254,
+          "bottom": 57.5,
+          "left": 210
+        },
+        {
+          "id": "lang-toggle",
+          "x": 270,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 314,
+          "bottom": 57.5,
+          "left": 270
+        },
+        {
+          "id": "menu-toggle",
+          "x": 330,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 374,
+          "bottom": 57.5,
+          "left": 330
+        }
+      ],
+      "runtimeCSS": false,
+      "page": "projects/amazon watch reviews/amazon watch reviews.html"
+    },
+    {
+      "width": 390,
+      "documentWidth": 390,
+      "title": "Bank customer churn: from customer patterns to service action - Data Poetics",
+      "theme": false,
+      "h1": {
+        "x": 16,
+        "y": 183.5625,
+        "width": 358,
+        "height": 110.859375,
+        "top": 183.5625,
+        "right": 374,
+        "bottom": 294.421875,
+        "left": 16
+      },
+      "controls": [
+        {
+          "id": "theme-toggle",
+          "x": 210,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 254,
+          "bottom": 57.5,
+          "left": 210
+        },
+        {
+          "id": "lang-toggle",
+          "x": 270,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 314,
+          "bottom": 57.5,
+          "left": 270
+        },
+        {
+          "id": "menu-toggle",
+          "x": 330,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 374,
+          "bottom": 57.5,
+          "left": 330
+        }
+      ],
+      "runtimeCSS": false,
+      "page": "projects/Bank Customer Churn Prediction/Bank Customer Churn Prediction-en.html"
+    },
+    {
+      "width": 390,
+      "documentWidth": 390,
+      "title": "银行客户流失：从客户模式到服务行动 - 数据诗学",
+      "theme": false,
+      "h1": {
+        "x": 16,
+        "y": 183.5625,
+        "width": 358,
+        "height": 73.90625,
+        "top": 183.5625,
+        "right": 374,
+        "bottom": 257.46875,
+        "left": 16
+      },
+      "controls": [
+        {
+          "id": "theme-toggle",
+          "x": 210,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 254,
+          "bottom": 57.5,
+          "left": 210
+        },
+        {
+          "id": "lang-toggle",
+          "x": 270,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 314,
+          "bottom": 57.5,
+          "left": 270
+        },
+        {
+          "id": "menu-toggle",
+          "x": 330,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 374,
+          "bottom": 57.5,
+          "left": 330
+        }
+      ],
+      "runtimeCSS": false,
+      "page": "projects/Bank Customer Churn Prediction/Bank Customer Churn Prediction.html"
+    },
+    {
+      "width": 390,
+      "documentWidth": 390,
+      "title": "First-Order Fraud: Behavioral Patterns, Models and Decision Trade-offs - Data Poetics",
+      "theme": false,
+      "h1": {
+        "x": 16,
+        "y": 183.5625,
+        "width": 358,
+        "height": 147.8125,
+        "top": 183.5625,
+        "right": 374,
+        "bottom": 331.375,
+        "left": 16
+      },
+      "controls": [
+        {
+          "id": "theme-toggle",
+          "x": 210,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 254,
+          "bottom": 57.5,
+          "left": 210
+        },
+        {
+          "id": "lang-toggle",
+          "x": 270,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 314,
+          "bottom": 57.5,
+          "left": 270
+        },
+        {
+          "id": "menu-toggle",
+          "x": 330,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 374,
+          "bottom": 57.5,
+          "left": 330
+        }
+      ],
+      "runtimeCSS": false,
+      "page": "projects/e-commerce fraud detection/e-commerce fraud detection-en.html"
+    },
+    {
+      "width": 390,
+      "documentWidth": 390,
+      "title": "电商首单欺诈：行为特征、模型识别与决策取舍 - 数据诗学",
+      "theme": false,
+      "h1": {
+        "x": 16,
+        "y": 183.5625,
+        "width": 358,
+        "height": 110.859375,
+        "top": 183.5625,
+        "right": 374,
+        "bottom": 294.421875,
+        "left": 16
+      },
+      "controls": [
+        {
+          "id": "theme-toggle",
+          "x": 210,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 254,
+          "bottom": 57.5,
+          "left": 210
+        },
+        {
+          "id": "lang-toggle",
+          "x": 270,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 314,
+          "bottom": 57.5,
+          "left": 270
+        },
+        {
+          "id": "menu-toggle",
+          "x": 330,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 374,
+          "bottom": 57.5,
+          "left": 330
+        }
+      ],
+      "runtimeCSS": false,
+      "page": "projects/e-commerce fraud detection/e-commerce fraud detection.html"
+    },
+    {
+      "width": 390,
+      "documentWidth": 390,
+      "title": "Nested spatial evaluation and relative pollutant mapping in Oakland - Data Poetics",
+      "theme": false,
+      "h1": {
+        "x": 16,
+        "y": 183.5625,
+        "width": 358,
+        "height": 147.8125,
+        "top": 183.5625,
+        "right": 374,
+        "bottom": 331.375,
+        "left": 16
+      },
+      "controls": [
+        {
+          "id": "theme-toggle",
+          "x": 210,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 254,
+          "bottom": 57.5,
+          "left": 210
+        },
+        {
+          "id": "lang-toggle",
+          "x": 270,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 314,
+          "bottom": 57.5,
+          "left": 270
+        },
+        {
+          "id": "menu-toggle",
+          "x": 330,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 374,
+          "bottom": 57.5,
+          "left": 330
+        }
+      ],
+      "runtimeCSS": false,
+      "page": "projects/healthy home/healthy home-en.html"
+    },
+    {
+      "width": 390,
+      "documentWidth": 390,
+      "title": "奥克兰污染物的嵌套空间评价与相对预测图 - 数据诗学",
+      "theme": false,
+      "h1": {
+        "x": 16,
+        "y": 183.5625,
+        "width": 358,
+        "height": 73.90625,
+        "top": 183.5625,
+        "right": 374,
+        "bottom": 257.46875,
+        "left": 16
+      },
+      "controls": [
+        {
+          "id": "theme-toggle",
+          "x": 210,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 254,
+          "bottom": 57.5,
+          "left": 210
+        },
+        {
+          "id": "lang-toggle",
+          "x": 270,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 314,
+          "bottom": 57.5,
+          "left": 270
+        },
+        {
+          "id": "menu-toggle",
+          "x": 330,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 374,
+          "bottom": 57.5,
+          "left": 330
+        }
+      ],
+      "runtimeCSS": false,
+      "page": "projects/healthy home/healthy home.html"
+    },
+    {
+      "width": 390,
+      "documentWidth": 390,
+      "title": "From loan risk patterns to review policy: a full-data LendingClub analysis - Data Poetics",
+      "theme": false,
+      "h1": {
+        "x": 16,
+        "y": 183.5625,
+        "width": 358,
+        "height": 147.8125,
+        "top": 183.5625,
+        "right": 374,
+        "bottom": 331.375,
+        "left": 16
+      },
+      "controls": [
+        {
+          "id": "theme-toggle",
+          "x": 210,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 254,
+          "bottom": 57.5,
+          "left": 210
+        },
+        {
+          "id": "lang-toggle",
+          "x": 270,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 314,
+          "bottom": 57.5,
+          "left": 270
+        },
+        {
+          "id": "menu-toggle",
+          "x": 330,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 374,
+          "bottom": 57.5,
+          "left": 330
+        }
+      ],
+      "runtimeCSS": false,
+      "page": "projects/lendingclub loan prediction/full data-en.html"
+    },
+    {
+      "width": 390,
+      "documentWidth": 390,
+      "title": "从贷款风险模式到复核策略：LendingClub 全量分析 - 数据诗学",
+      "theme": false,
+      "h1": {
+        "x": 16,
+        "y": 183.5625,
+        "width": 358,
+        "height": 110.859375,
+        "top": 183.5625,
+        "right": 374,
+        "bottom": 294.421875,
+        "left": 16
+      },
+      "controls": [
+        {
+          "id": "theme-toggle",
+          "x": 210,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 254,
+          "bottom": 57.5,
+          "left": 210
+        },
+        {
+          "id": "lang-toggle",
+          "x": 270,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 314,
+          "bottom": 57.5,
+          "left": 270
+        },
+        {
+          "id": "menu-toggle",
+          "x": 330,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 374,
+          "bottom": 57.5,
+          "left": 330
+        }
+      ],
+      "runtimeCSS": false,
+      "page": "projects/lendingclub loan prediction/full data.html"
+    },
+    {
+      "width": 390,
+      "documentWidth": 390,
+      "title": "LendingClub loan risk patterns and policy trade-offs - Data Poetics",
+      "theme": false,
+      "h1": {
+        "x": 16,
+        "y": 183.5625,
+        "width": 358,
+        "height": 110.859375,
+        "top": 183.5625,
+        "right": 374,
+        "bottom": 294.421875,
+        "left": 16
+      },
+      "controls": [
+        {
+          "id": "theme-toggle",
+          "x": 210,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 254,
+          "bottom": 57.5,
+          "left": 210
+        },
+        {
+          "id": "lang-toggle",
+          "x": 270,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 314,
+          "bottom": 57.5,
+          "left": 270
+        },
+        {
+          "id": "menu-toggle",
+          "x": 330,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 374,
+          "bottom": 57.5,
+          "left": 330
+        }
+      ],
+      "runtimeCSS": false,
+      "page": "projects/lendingclub loan prediction/lendingclub loan prediction-en.html"
+    },
+    {
+      "width": 390,
+      "documentWidth": 390,
+      "title": "LendingClub 贷款风险模式与策略取舍 - 数据诗学",
+      "theme": false,
+      "h1": {
+        "x": 16,
+        "y": 183.5625,
+        "width": 358,
+        "height": 73.90625,
+        "top": 183.5625,
+        "right": 374,
+        "bottom": 257.46875,
+        "left": 16
+      },
+      "controls": [
+        {
+          "id": "theme-toggle",
+          "x": 210,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 254,
+          "bottom": 57.5,
+          "left": 210
+        },
+        {
+          "id": "lang-toggle",
+          "x": 270,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 314,
+          "bottom": 57.5,
+          "left": 270
+        },
+        {
+          "id": "menu-toggle",
+          "x": 330,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 374,
+          "bottom": 57.5,
+          "left": 330
+        }
+      ],
+      "runtimeCSS": false,
+      "page": "projects/lendingclub loan prediction/lendingclub loan prediction.html"
+    },
+    {
+      "width": 390,
+      "documentWidth": 390,
+      "title": "The Long Record (2000–2024): Four Regions and Spliced Model Runs - Data Poetics",
+      "theme": false,
+      "h1": {
+        "x": 16,
+        "y": 183.5625,
+        "width": 358,
+        "height": 147.8125,
+        "top": 183.5625,
+        "right": 374,
+        "bottom": 331.375,
+        "left": 16
+      },
+      "controls": [
+        {
+          "id": "theme-toggle",
+          "x": 210,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 254,
+          "bottom": 57.5,
+          "left": 210
+        },
+        {
+          "id": "lang-toggle",
+          "x": 270,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 314,
+          "bottom": 57.5,
+          "left": 270
+        },
+        {
+          "id": "menu-toggle",
+          "x": 330,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 374,
+          "bottom": 57.5,
+          "left": 330
+        }
+      ],
+      "runtimeCSS": false,
+      "page": "projects/spglobal climate comparison/long series-en.html"
+    },
+    {
+      "width": 390,
+      "documentWidth": 390,
+      "title": "长记录（2000–2024）：四区域观测与拼接模型序列 - 数据诗学",
+      "theme": false,
+      "h1": {
+        "x": 16,
+        "y": 183.5625,
+        "width": 358,
+        "height": 110.859375,
+        "top": 183.5625,
+        "right": 374,
+        "bottom": 294.421875,
+        "left": 16
+      },
+      "controls": [
+        {
+          "id": "theme-toggle",
+          "x": 210,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 254,
+          "bottom": 57.5,
+          "left": 210
+        },
+        {
+          "id": "lang-toggle",
+          "x": 270,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 314,
+          "bottom": 57.5,
+          "left": 270
+        },
+        {
+          "id": "menu-toggle",
+          "x": 330,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 374,
+          "bottom": 57.5,
+          "left": 330
+        }
+      ],
+      "runtimeCSS": false,
+      "page": "projects/spglobal climate comparison/long series.html"
+    },
+    {
+      "width": 390,
+      "documentWidth": 390,
+      "title": "Satellite land surface temperature against downscaled CMIP6 air temperature: four regions, 15 models, two scenarios - Data Poetics",
+      "theme": false,
+      "h1": {
+        "x": 16,
+        "y": 183.5625,
+        "width": 358,
+        "height": 221.71875,
+        "top": 183.5625,
+        "right": 374,
+        "bottom": 405.28125,
+        "left": 16
+      },
+      "controls": [
+        {
+          "id": "theme-toggle",
+          "x": 210,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 254,
+          "bottom": 57.5,
+          "left": 210
+        },
+        {
+          "id": "lang-toggle",
+          "x": 270,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 314,
+          "bottom": 57.5,
+          "left": 270
+        },
+        {
+          "id": "menu-toggle",
+          "x": 330,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 374,
+          "bottom": 57.5,
+          "left": 330
+        }
+      ],
+      "runtimeCSS": false,
+      "page": "projects/spglobal climate comparison/model comparison-en.html"
+    },
+    {
+      "width": 390,
+      "documentWidth": 390,
+      "title": "卫星地表温度与降尺度 CMIP6 气温的可比性：四区域、15 个模型、两个情景 - 数据诗学",
+      "theme": false,
+      "h1": {
+        "x": 16,
+        "y": 183.5625,
+        "width": 358,
+        "height": 147.8125,
+        "top": 183.5625,
+        "right": 374,
+        "bottom": 331.375,
+        "left": 16
+      },
+      "controls": [
+        {
+          "id": "theme-toggle",
+          "x": 210,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 254,
+          "bottom": 57.5,
+          "left": 210
+        },
+        {
+          "id": "lang-toggle",
+          "x": 270,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 314,
+          "bottom": 57.5,
+          "left": 270
+        },
+        {
+          "id": "menu-toggle",
+          "x": 330,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 374,
+          "bottom": 57.5,
+          "left": 330
+        }
+      ],
+      "runtimeCSS": false,
+      "page": "projects/spglobal climate comparison/model comparison.html"
+    },
+    {
+      "width": 390,
+      "documentWidth": 390,
+      "title": "Paired long-term scenarios and spatial exposure - Data Poetics",
+      "theme": false,
+      "h1": {
+        "x": 16,
+        "y": 183.5625,
+        "width": 358,
+        "height": 110.859375,
+        "top": 183.5625,
+        "right": 374,
+        "bottom": 294.421875,
+        "left": 16
+      },
+      "controls": [
+        {
+          "id": "theme-toggle",
+          "x": 210,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 254,
+          "bottom": 57.5,
+          "left": 210
+        },
+        {
+          "id": "lang-toggle",
+          "x": 270,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 314,
+          "bottom": 57.5,
+          "left": 270
+        },
+        {
+          "id": "menu-toggle",
+          "x": 330,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 374,
+          "bottom": 57.5,
+          "left": 330
+        }
+      ],
+      "runtimeCSS": false,
+      "page": "projects/spglobal climate comparison/projection overlay-en.html"
+    },
+    {
+      "width": 390,
+      "documentWidth": 390,
+      "title": "长期配对情景与空间暴露 - 数据诗学",
+      "theme": false,
+      "h1": {
+        "x": 16,
+        "y": 183.5625,
+        "width": 358,
+        "height": 73.90625,
+        "top": 183.5625,
+        "right": 374,
+        "bottom": 257.46875,
+        "left": 16
+      },
+      "controls": [
+        {
+          "id": "theme-toggle",
+          "x": 210,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 254,
+          "bottom": 57.5,
+          "left": 210
+        },
+        {
+          "id": "lang-toggle",
+          "x": 270,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 314,
+          "bottom": 57.5,
+          "left": 270
+        },
+        {
+          "id": "menu-toggle",
+          "x": 330,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 374,
+          "bottom": 57.5,
+          "left": 330
+        }
+      ],
+      "runtimeCSS": false,
+      "page": "projects/spglobal climate comparison/projection overlay.html"
+    },
+    {
+      "width": 390,
+      "documentWidth": 390,
+      "title": "Climate model comparison, forecasting and spatial exposure assessment - Data Poetics",
+      "theme": false,
+      "h1": {
+        "x": 16,
+        "y": 183.5625,
+        "width": 358,
+        "height": 147.8125,
+        "top": 183.5625,
+        "right": 374,
+        "bottom": 331.375,
+        "left": 16
+      },
+      "controls": [
+        {
+          "id": "theme-toggle",
+          "x": 210,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 254,
+          "bottom": 57.5,
+          "left": 210
+        },
+        {
+          "id": "lang-toggle",
+          "x": 270,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 314,
+          "bottom": 57.5,
+          "left": 270
+        },
+        {
+          "id": "menu-toggle",
+          "x": 330,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 374,
+          "bottom": 57.5,
+          "left": 330
+        }
+      ],
+      "runtimeCSS": false,
+      "page": "projects/spglobal climate comparison/spglobal climate comparison-en.html"
+    },
+    {
+      "width": 390,
+      "documentWidth": 390,
+      "title": "气候模型比较、预测方法与空间暴露评估 - 数据诗学",
+      "theme": false,
+      "h1": {
+        "x": 16,
+        "y": 183.5625,
+        "width": 358,
+        "height": 73.90625,
+        "top": 183.5625,
+        "right": 374,
+        "bottom": 257.46875,
+        "left": 16
+      },
+      "controls": [
+        {
+          "id": "theme-toggle",
+          "x": 210,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 254,
+          "bottom": 57.5,
+          "left": 210
+        },
+        {
+          "id": "lang-toggle",
+          "x": 270,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 314,
+          "bottom": 57.5,
+          "left": 270
+        },
+        {
+          "id": "menu-toggle",
+          "x": 330,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 374,
+          "bottom": 57.5,
+          "left": 330
+        }
+      ],
+      "runtimeCSS": false,
+      "page": "projects/spglobal climate comparison/spglobal climate comparison.html"
+    },
+    {
+      "width": 390,
+      "documentWidth": 390,
+      "title": "Weak supervision and model-assisted evaluation of YouTube comments - Data Poetics",
+      "theme": false,
+      "h1": {
+        "x": 16,
+        "y": 183.5625,
+        "width": 358,
+        "height": 147.8125,
+        "top": 183.5625,
+        "right": 374,
+        "bottom": 331.375,
+        "left": 16
+      },
+      "controls": [
+        {
+          "id": "theme-toggle",
+          "x": 210,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 254,
+          "bottom": 57.5,
+          "left": 210
+        },
+        {
+          "id": "lang-toggle",
+          "x": 270,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 314,
+          "bottom": 57.5,
+          "left": 270
+        },
+        {
+          "id": "menu-toggle",
+          "x": 330,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 374,
+          "bottom": 57.5,
+          "left": 330
+        }
+      ],
+      "runtimeCSS": false,
+      "page": "projects/youtube comment analysis/youtube comment analysis-en.html"
+    },
+    {
+      "width": 390,
+      "documentWidth": 390,
+      "title": "YouTube 评论的弱监督与模型辅助评价 - 数据诗学",
+      "theme": false,
+      "h1": {
+        "x": 16,
+        "y": 183.5625,
+        "width": 358,
+        "height": 73.90625,
+        "top": 183.5625,
+        "right": 374,
+        "bottom": 257.46875,
+        "left": 16
+      },
+      "controls": [
+        {
+          "id": "theme-toggle",
+          "x": 210,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 254,
+          "bottom": 57.5,
+          "left": 210
+        },
+        {
+          "id": "lang-toggle",
+          "x": 270,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 314,
+          "bottom": 57.5,
+          "left": 270
+        },
+        {
+          "id": "menu-toggle",
+          "x": 330,
+          "y": 13.5,
+          "width": 44,
+          "height": 44,
+          "top": 13.5,
+          "right": 374,
+          "bottom": 57.5,
+          "left": 330
+        }
+      ],
+      "runtimeCSS": false,
+      "page": "projects/youtube comment analysis/youtube comment analysis.html"
+    }
+  ],
+  "language": [
+    {
+      "mode": "manual",
+      "url": "http://127.0.0.1:57716/index-en.html?source=local-check#projects"
+    },
+    {
+      "mode": "manual",
+      "url": "http://127.0.0.1:57716/index.html?source=local-check#projects"
+    },
+    {
+      "mode": "manual",
+      "url": "http://127.0.0.1:57716/contact-en.html?source=local-check#contact-name"
+    },
+    {
+      "mode": "manual",
+      "url": "http://127.0.0.1:57716/contact.html?source=local-check#contact-name"
+    },
+    {
+      "mode": "manual",
+      "url": "http://127.0.0.1:57716/projects/Bank%20Customer%20Churn%20Prediction/Bank%20Customer%20Churn%20Prediction-en.html?source=local-check#report-section-4"
+    },
+    {
+      "mode": "manual",
+      "url": "http://127.0.0.1:57716/projects/Bank%20Customer%20Churn%20Prediction/Bank%20Customer%20Churn%20Prediction.html?source=local-check#report-section-4"
+    },
+    {
+      "mode": "saved-preference",
+      "url": "http://127.0.0.1:57716/projects/Bank%20Customer%20Churn%20Prediction/Bank%20Customer%20Churn%20Prediction-en.html?source=preference#report-section-4"
+    }
+  ],
+  "notifications": [
+    {
+      "text": "消息已发送，感谢您的来信！我会尽快回复。",
+      "color": "rgb(26, 22, 18)",
+      "bg": "rgb(149, 185, 159)",
+      "role": "status",
+      "live": "polite",
+      "lang": "zh",
+      "theme": "light",
+      "success": true,
+      "contrast": 8.324452207322238
+    },
+    {
+      "text": "发送失败，请稍后重试，或使用“直接邮件”。",
+      "color": "rgb(255, 255, 255)",
+      "bg": "rgb(164, 61, 73)",
+      "role": "alert",
+      "live": "assertive",
+      "lang": "zh",
+      "theme": "light",
+      "success": false,
+      "contrast": 6.283271666821111
+    },
+    {
+      "color": "rgb(26, 22, 18)",
+      "bg": "rgb(91, 143, 185)",
+      "lang": "zh",
+      "theme": "light",
+      "type": "info",
+      "contrast": 5.203240105529986
+    },
+    {
+      "color": "rgb(26, 22, 18)",
+      "bg": "rgb(91, 143, 185)",
+      "lang": "zh",
+      "theme": "light",
+      "type": "warning",
+      "contrast": 5.203240105529986
+    },
+    {
+      "text": "消息已发送，感谢您的来信！我会尽快回复。",
+      "color": "rgb(26, 22, 18)",
+      "bg": "rgb(167, 212, 180)",
+      "role": "status",
+      "live": "polite",
+      "lang": "zh",
+      "theme": "dark",
+      "success": true,
+      "contrast": 10.895428811655641
+    },
+    {
+      "text": "发送失败，请稍后重试，或使用“直接邮件”。",
+      "color": "rgb(23, 23, 23)",
+      "bg": "rgb(255, 128, 128)",
+      "role": "alert",
+      "live": "assertive",
+      "lang": "zh",
+      "theme": "dark",
+      "success": false,
+      "contrast": 7.3857333357485695
+    },
+    {
+      "color": "rgb(26, 22, 18)",
+      "bg": "rgb(123, 169, 205)",
+      "lang": "zh",
+      "theme": "dark",
+      "type": "info",
+      "contrast": 7.194435863704943
+    },
+    {
+      "color": "rgb(26, 22, 18)",
+      "bg": "rgb(123, 169, 205)",
+      "lang": "zh",
+      "theme": "dark",
+      "type": "warning",
+      "contrast": 7.194435863704943
+    },
+    {
+      "text": "Thanks! Your message has been sent. I will get back to you soon.",
+      "color": "rgb(26, 22, 18)",
+      "bg": "rgb(149, 185, 159)",
+      "role": "status",
+      "live": "polite",
+      "lang": "en",
+      "theme": "light",
+      "success": true,
+      "contrast": 8.324452207322238
+    },
+    {
+      "text": "Sorry, something went wrong. Please try again or use \"Email Directly\".",
+      "color": "rgb(255, 255, 255)",
+      "bg": "rgb(164, 61, 73)",
+      "role": "alert",
+      "live": "assertive",
+      "lang": "en",
+      "theme": "light",
+      "success": false,
+      "contrast": 6.283271666821111
+    },
+    {
+      "color": "rgb(26, 22, 18)",
+      "bg": "rgb(91, 143, 185)",
+      "lang": "en",
+      "theme": "light",
+      "type": "info",
+      "contrast": 5.203240105529986
+    },
+    {
+      "color": "rgb(26, 22, 18)",
+      "bg": "rgb(91, 143, 185)",
+      "lang": "en",
+      "theme": "light",
+      "type": "warning",
+      "contrast": 5.203240105529986
+    },
+    {
+      "text": "Thanks! Your message has been sent. I will get back to you soon.",
+      "color": "rgb(26, 22, 18)",
+      "bg": "rgb(167, 212, 180)",
+      "role": "status",
+      "live": "polite",
+      "lang": "en",
+      "theme": "dark",
+      "success": true,
+      "contrast": 10.895428811655641
+    },
+    {
+      "text": "Sorry, something went wrong. Please try again or use \"Email Directly\".",
+      "color": "rgb(23, 23, 23)",
+      "bg": "rgb(255, 128, 128)",
+      "role": "alert",
+      "live": "assertive",
+      "lang": "en",
+      "theme": "dark",
+      "success": false,
+      "contrast": 7.3857333357485695
+    },
+    {
+      "color": "rgb(26, 22, 18)",
+      "bg": "rgb(123, 169, 205)",
+      "lang": "en",
+      "theme": "dark",
+      "type": "info",
+      "contrast": 7.194435863704943
+    },
+    {
+      "color": "rgb(26, 22, 18)",
+      "bg": "rgb(123, 169, 205)",
+      "lang": "en",
+      "theme": "dark",
+      "type": "warning",
+      "contrast": 7.194435863704943
+    }
+  ],
+  "failures": [],
+  "old_cdn_requests": [],
+  "resolved_false_positives": {
+    "reason": "Original scrollHeight included the deliberately clipped background numbers. All 64 actual card text layouts are inside their card bounds.",
+    "raw_findings": [
+      [
+        "zh-light-1440-home",
+        "card-clipping"
+      ],
+      [
+        "zh-light-390-home",
+        "card-clipping"
+      ],
+      [
+        "zh-dark-1440-home",
+        "card-clipping"
+      ],
+      [
+        "zh-dark-390-home",
+        "card-clipping"
+      ],
+      [
+        "en-light-1440-home",
+        "card-clipping"
+      ],
+      [
+        "en-light-390-home",
+        "card-clipping"
+      ],
+      [
+        "en-dark-1440-home",
+        "card-clipping"
+      ],
+      [
+        "en-dark-390-home",
+        "card-clipping"
+      ]
+    ],
+    "confirmation": "card-confirmation.json"
+  }
+}

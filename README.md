@@ -2,7 +2,7 @@
 
 ## 🎯 项目状态
 
-**核心功能已完成** —— 主页、项目详情页、联系页、双语切换、深色模式均已上线；剩余事项见 [📈 开发进度](#-开发进度)。
+主页、项目详情页、联系页、双语切换和深色模式已实现；当前本地验收与范围见 [2026-10-13 审计修复记录](docs/audit-fixes-2026-10-13/DELIVERY.md)。部署是否完成需单独核对 GitHub Pages 状态。
 
 ## 🌟 特性
 
@@ -17,6 +17,14 @@
 - **SEO 优化**：完整的元数据和结构化数据
 
 ## 📁 项目结构
+
+页面使用已生成的本地 `assets/css/utilities.css`，访问网站不再依赖 Tailwind CDN 或 JavaScript 生成布局。修改工具类或新增页面后，在仓库根目录重新生成并一并保存该 CSS：
+
+```bash
+npx --yes tailwindcss@3.4.17 -c scripts/tailwind.config.cjs -i assets/css/utilities.input.css -o assets/css/utilities.css --minify
+```
+
+生成配置扫描主页、联系页、项目页和站点脚本，并使用 `html.dark` 切换深色样式。普通文案和现有自定义 CSS 修改不需要重新生成；部署仍直接使用静态文件。
 
 ```
 portfolio/
@@ -38,6 +46,8 @@ portfolio/
 │   └── amazon watch reviews/             # 手表评论聚类与主题建模
 ├── assets/
 │   ├── css/                                # 样式文件
+│   │   ├── utilities.css                  # 预生成的 Tailwind 样式，先加载
+│   │   ├── utilities.input.css            # 生成输入，配置见 scripts/tailwind.config.cjs
 │   │   ├── index.css                      # 主样式 + 全局变量 ✅
 │   │   ├── project.css                    # 项目详情页样式 ✅
 │   │   ├── contact.css                    # 联系页面样式 ✅
@@ -51,7 +61,7 @@ portfolio/
 │   │   ├── language-switcher.js           # 中英双语 URL 切换 ✅
 │   │   └── charts.js                      # 图表工具（脚手架）
 │   └── img/                               # 图片资源
-│       ├── about-portrait.jpg             # About 区肖像
+│       ├── about-portrait.jpg             # About 区装饰性墙面光影图
 │       └── hero/atmosphere-bg.jpg         # Hero 通栏氛围背景
 ├── test-common.html                         # common.js 手动测试页
 ├── demo-editorial-hero.html                 # Hero 设计探索 demo
@@ -67,15 +77,15 @@ portfolio/
 
 ## 🛠️ 技术栈
 
-- **前端**：纯静态 HTML5、CSS3、JavaScript (ES6+)，无构建流程
+- **前端**：纯静态 HTML5、CSS3、JavaScript (ES6+)，部署时无构建步骤；工具类变更时预生成 CSS
 - **CSS 架构**：CSS Grid、Flexbox、CSS 自定义属性（变量）
 - **设计系统**：米色调色板（Data Poetics 设计风格）
 - **动画**：CSS Animation + Intersection Observer
 - **图表**：Plotly.js（待集成）；项目页当前使用静态 PNG 图表
 - **代码高亮**：Prism.js（按需引入）
 - **图标**：Lucide Icons（CDN）
-- **CSS 工具类**：Tailwind CSS（开发期 CDN 运行时构建）
-- **字体**：Google Fonts（Inter、JetBrains Mono）
+- **CSS 工具类**：Tailwind CSS 3.4.17（本地生成的静态 CSS）
+- **字体**：Google Fonts（Inter、JetBrains Mono、Fraunces、Noto Sans SC、Noto Serif SC）
 - **部署**：GitHub Pages（直接从 `master` 分支静态托管）
 
 
@@ -83,12 +93,12 @@ portfolio/
 
 ### 米色调色板（Data Poetics设计系统）
 - **背景色**：#FAF7F2 (奶油色) / #E8DFD3 (米色)
-- **文字色**：#2C2416 (深褐) / #8B7355 (棕色)
+- **文字色**：#2C2416 (深褐) / #6B5942 (棕色)
 - **边框色**：#D4C4B0 (棕褐色)
 - **强调色**：
-  - #FF6B6B (珊瑚色) - 主要强调
+  - #A43D49 (珊瑚色) - 主要强调
   - #95B99F (鼠尾草绿) - 成功/增长
-  - #5B8FB9 (天蓝色) - 链接/信息
+  - #5B8FB9 (天蓝色) - 数据/信息色；正文链接单独使用 `--link: #36668D`（深色为 `#7BA9CD`）
   - #D4A574 (金色) - 特殊强调
 
 ### 响应式断点
@@ -122,7 +132,7 @@ portfolio/
 
 详情正文依据当前对应语言的正式 Markdown 报告，按个人作品集的阅读需要整理，展示分析问题、方法、结果和行动建议。图片为源报告当前引用的原始文件，未重绘。旧资源文件保留，不再作为当前报告引用。
 
-首页卡片、项目导语和相关项目文案维护于 `scripts/report_summaries.json`；正文展示调整维护于 `scripts/report_presentation.json`。页面不展示内部运行说明、材料访问声明或仅含内部文件入口的附录。生成时逐项核对原文，验证结果表格和图表引用，并保留公开来源与方法链接。
+首页卡片、项目导语和相关项目文案维护于 `scripts/report_summaries.json`：`card_description` 仅供首页卡片使用，`description` 用于详情导语、元信息和相关项目；正文展示调整维护于 `scripts/report_presentation.json`。页面不展示内部运行说明、材料访问声明或仅含内部文件入口的附录。生成时逐项核对原文，验证结果表格和图表引用，并保留公开来源与方法链接。
 
 原始同步记录见 [内容同步交付说明](docs/content-sync-2026-10-13/DELIVERY.md)，当前展示调整及验证见 [作品集文案调整](docs/portfolio-presentation-2026-10-13/DELIVERY.md)。维护脚本 `scripts/sync_reports.py` 的 `render` 和 `verify` 使用原始来源清单核对输入，并将当前记录写入展示调整目录。网页本身仍无需构建；脚本不执行 notebook、不训练模型。
 
@@ -133,7 +143,8 @@ portfolio/
 1. 在相应的CSS文件中添加样式
 2. 在JavaScript文件中添加逻辑
 3. 更新HTML模板
-4. 测试响应式布局
+4. 工具类变化时按上文命令生成 `utilities.css`；页面依次加载它、`index.css` 和页面专用 CSS
+5. 测试中英文、明暗主题、手机/桌面布局、无 JS 可读性，以及带章节锚点的语言切换
 
 
 ## 📈 开发进度
@@ -147,12 +158,14 @@ portfolio/
 - 联系页面与表单
 - 响应式布局（手机 / 平板 / 桌面）
 - **中英双语**：每个页面都有 `-en.html` 镜像 + 切换按钮 + 偏好持久化
+- 本地静态 Tailwind CSS（工具类变更后按上文命令重新生成）
+- 中英文简历按钮连接对应 PDF
+- 审计修复：卡片摘要、对比度、44px 头部按钮、目录/表头语义、锚点保留、页面描述和 GitHub 可见入口
 
 ### ⚠️ 进行中
 - 图表交互化（`charts.js` 仅为脚手架，Plotly 集成待做）
-- 简历下载按钮联动（PDF 文件已就位，hero 区按钮 `href` 仍为占位符 `#`）
+
 
 ### 📋 待完成
 - GitHub Actions 自动化部署
-- 性能优化（图片懒加载、WebP、资源压缩）
-- Tailwind 生产构建（当前使用开发期 CDN 运行时）
+- WebP 转换、进一步资源优化和生产性能验收（现有报告图片已懒加载，工具 CSS 已压缩）

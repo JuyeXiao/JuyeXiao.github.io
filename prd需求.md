@@ -1,10 +1,11 @@
-# 数据分析师个人作品集网站 PRD文档 v3.0
+# 数据分析师个人作品集网站 PRD文档 v3.1
 
-**版本：** v3.0（与 2026-05 实际实现对齐版）
+**版本：** v3.1（2026-10-13 本地实现同步；上线状态单独验证）
 **最初日期：** 2025年1月
 **重写日期：** 2026年5月
+**实现同步：** 2026年10月13日；本轮验证见 [审计修复记录](docs/audit-fixes-2026-10-13/DELIVERY.md)。
 **作者：** Juye Xiao + Claude Code
-**说明：** 本版本删除了 v2.x 中虚构的运行时数据层（`data.js` / `ContentRenderer` / `Plotly` 动态渲染），并按当前已部署的真实静态站点结构重写 §3 信息架构、§4 功能需求、§6 技术架构、§8 开发计划、§9 测试、§12 成功标准。
+**说明：** 本版本删除了 v2.x 中虚构的运行时数据层（`data.js` / `ContentRenderer` / `Plotly` 动态渲染），并按静态站点结构重写 §3 信息架构、§4 功能需求、§6 技术架构、§8 开发计划、§9 测试、§12 成功标准。
 
 ---
 
@@ -40,7 +41,7 @@
 
 | 阶段 | 目标 | 关键结果 |
 |------|------|---------|
-| **短期** | 网站上线、对外可分享 | - 5 个核心页面（主页 + 3 个项目详情页 + 联系页）<br>- GitHub Pages 部署 |
+| **短期** | 网站上线、对外可分享 | - 28 个发布页面（中英文主页、联系页及 24 个报告页）<br>- GitHub Pages 部署 |
 | **中期** | 在求职 / Networking 场景中产生价值 | - 至少 5 次面试邀请<br>- 项目页平均停留时间 > 3 分钟 |
 | **长期** | 建立个人品牌沉淀 | - 月均访问 100+<br>- 持续更新机制<br>- 形成可复用的作品集模板 |
 
@@ -102,7 +103,7 @@ portfolio/
 │
 ├── 联系页 contact.html / contact-en.html
 │   ├── 联系方式（邮箱 / LinkedIn / GitHub）
-│   └── 联系表单（mailto 集成）
+│   └── 联系表单（Web3Forms AJAX + 直接邮件入口）
 │
 └── 项目详情页 projects/<name>/<name>.html / <name>-en.html
     ├── 返回主页导航
@@ -154,12 +155,12 @@ graph TD
 |---|---|---|
 | **固定导航栏** | 滚动时保持可见，半透明 + 模糊 | 各分辨率正常吸顶 |
 | **Hero 区** | 左栏自我介绍 + 右栏 Now 信息卡 + 通栏氛围背景图 | 信息完整，深浅模式下都有视觉冲击 |
-| **About 区** | 杂志式 5/7 分栏（左肖像 + 右文案） | 移动端单列堆叠，桌面端 portrait 显示 |
+| **About 区** | 杂志式 5/7 分栏（左装饰图 + 右文案） | 移动端单列堆叠，桌面端装饰图显示，空 alt |
 | **工作经历时间轴** | 3/9 分栏 + 多条目堆叠 | 时间线清晰、可滚动阅读 |
 | **教育背景** | 3/9 分栏 | 与经历区视觉对齐 |
-| **项目 Bento 网格** | 主页展示 3 个核心项目 | 卡片悬停效果，点击跳转详情页 |
+| **项目 Bento 网格** | 主页展示 8 个主项目；卡片突出问题与主要判断 | 卡片悬停效果，点击跳转详情页 |
 | **技能矩阵** | 技术 / 工具 / 软技能分组卡片 | 清晰展示熟练度 |
-| **简历下载入口** | 中英文 PDF | ⚠ 当前 Hero CTA `href="#"` 仍未连线，待修复 |
+| **简历下载入口** | 中英文 PDF | ✅ 按当前语种连接对应 PDF，文件存在 |
 | **响应式布局** | 适配手机 / 平板 / 桌面 | 各设备显示正常，无横向滚动 |
 
 #### P1 - 增强功能
@@ -184,6 +185,7 @@ graph TD
 | 偏好存储 | 点击切换时写入 `localStorage.language`，值为 `'zh'` 或 `'en'` |
 | 自动重定向 | 页面加载时如果 `localStorage.language` 与当前 URL 不一致，跳转到对应语种页面 |
 | 链接重写 | `language-switcher.js` 自动重写导航链接、项目卡片链接、Logo 链接、联系按钮 `href`，使内部跳转保持当前语种 |
+| 章节与参数 | 手动切换和语言偏好跳转均保留对应 hash 与 query |
 | 浏览器语言检测 | **不实现**。首次访问默认中文，由用户主动切换 |
 | 翻译数据 | **不存在统一翻译表**。中英内容分别硬编码在两份 HTML 文件中，需要同步手动维护 |
 
@@ -211,7 +213,7 @@ graph TD
 
 | 功能模块 | 描述 | 状态 |
 |---|---|---|
-| **侧边目录导航** | 长页面快速跳转 | ⚠ 部分实现 |
+| **侧边目录导航** | 长页面快速跳转 | ✅ 24 个报告页；目录标签语义已修正 |
 | **代码可复制** | 一键复制按钮 | ⚠ 待实现 |
 | **图表交互化（Plotly.js）** | 替换部分静态 PNG 为交互图 | ❌ 未实现，`charts.js` 仅为脚手架 |
 | **相关项目推荐** | 底部跳转其他项目 | ❌ 未实现 |
@@ -266,17 +268,19 @@ graph TD
 
 | 层级 | 选择 | 说明 |
 |------|---------|------|
-| **前端** | 纯静态 HTML5 / CSS3 / ES6+ JS | 无构建步骤 |
+| **前端** | 纯静态 HTML5 / CSS3 / ES6+ JS | 部署时无构建步骤；工具类修改后预生成 CSS |
 | **CSS 工具** | CSS Grid + Flexbox + 自定义属性 | 12 列网格、米色变量系统 |
-| **Tailwind** | CDN 运行时版本 `cdn.tailwindcss.com` | ⚠ 开发期方案，生产应换静态构建 |
+| **Tailwind** | 3.4.17 CLI 生成本地 `utilities.css` | 工具类变化后重新生成，页面先加载工具 CSS；命令见 README |
 | **图标** | Lucide Icons（CDN） | — |
-| **字体** | Google Fonts：Inter + JetBrains Mono | `--font-display: Fraunces` 已声明但未在 `<link>` 中加载（回退到 Songti SC / Georgia） |
+| **字体** | Google Fonts：Inter、JetBrains Mono、Fraunces、Noto Sans SC、Noto Serif SC | 已在发布页面加载，并保留系统字体回退 |
 | **代码高亮** | Prism.js（按需引入） | 项目详情页使用 |
 | **图表** | 静态 PNG（项目 `figures/` 下） | `charts.js` 是 Plotly.js 集成脚手架，**未启用** |
 | **动画** | CSS Animation + IntersectionObserver | 原生实现 |
 | **部署** | GitHub Pages，从 `master` 分支静态托管 | 无 CI/CD 流水线 |
 
-### 6.2 实际文件结构
+### 6.2 主要文件结构
+
+当前首页有 8 个项目入口，详情有 12 组中英文报告、96 个当前引用的图表文件。完整目录以 [README](README.md) 与 [页面清单](docs/content-sync-2026-10-13/page-catalog.md) 为准；以下为原有核心目录示例。
 
 ```
 portfolio/
@@ -286,13 +290,13 @@ portfolio/
 │   ├── _template.html                      # 项目页模板
 │   ├── Bank Customer Churn Prediction/
 │   │   ├── *.html / *-en.html
-│   │   └── figures/                        # 5 张 PNG
+│   │   └── figures/                        # 当前引用图表及历史资源
 │   ├── e-commerce fraud detection/
 │   │   ├── *.html / *-en.html
-│   │   └── figures/                        # 8 张 PNG
+│   │   └── figures/                        # 当前引用图表及历史资源
 │   └── lendingclub loan prediction/
 │       ├── *.html / *-en.html
-│       └── figures/                        # 15 张 PNG
+│       └── figures/                        # 当前引用图表及历史资源
 ├── assets/
 │   ├── css/
 │   │   ├── index.css                       # 主样式 + 全局变量
@@ -308,7 +312,7 @@ portfolio/
 │   │   ├── language-switcher.js            # URL 路由式中英切换
 │   │   └── charts.js                       # Plotly 脚手架（未启用）
 │   └── img/
-│       ├── about-portrait.jpg              # About 区肖像
+│       ├── about-portrait.jpg              # About 区装饰图
 │       └── hero/atmosphere-bg.jpg          # Hero 通栏氛围背景
 ├── test-common.html                         # common.js 手动测试页
 ├── demo-editorial-hero.html                 # Hero 设计探索 demo
@@ -328,7 +332,7 @@ portfolio/
 | `common.js` | 基础设施：主题切换、导航滚动、Lucide 图标初始化、`.reveal` 滚动渐现 IntersectionObserver。`DOMContentLoaded` 时自动实例化 `window.commonFeatures`。每个页面都加载。 |
 | `language-switcher.js` | URL 路由式中英切换。读取当前 URL 判断语种，写入 `localStorage.language`，自动重写内部链接 `href`。**不读 navigator.language**。 |
 | `index.js` | 主页专属：Scroll Spy 高亮、锚点平滑滚动、数字计数动画。基于 `commonFeatures`。 |
-| `contact.js` | 联系页表单：mailto 链接构建 + 客户端打开。 |
+| `contact.js` | 联系页表单：通过 Web3Forms AJAX 提交；成功/错误通知与双语文案。另有直接邮件入口。 |
 | `project.js` | 项目页专属：`initScrollReveals()` 渐现、`initScrollProgress()` 顶部进度条、`initReadingTime()` 阅读时间估算、`.figure-editorial img` 点击放大。 |
 | `logo.js` | "Data Weaver" SVG 三段式动画（0-0.7s 网格 → 0.8-2.3s 织梭 → 1.8-2.8s JX）。 |
 | `charts.js` | Plotly.js 集成的脚手架，**当前未启用**，所有项目页图表为静态 PNG。 |
@@ -369,16 +373,16 @@ setTimeout(() => this.logoLetters.classList.add('animate'), 1800); // JX 显现
 参见 `设计风格文档米色.md`（Design System 2.0 - 米色版）。要点：
 - 95% 中性色 + 5% 强调色（Coral / Sage / Blue / Gold）
 - 12 列网格 + 8px 间距音阶
-- 字体：Inter（正文）/ JetBrains Mono（代码）/ Fraunces（展示，回退中）
+- 字体：Inter（正文）/ JetBrains Mono（代码）/ Fraunces / Noto Serif SC（展示，已加载并保留回退）
 - 暗色模式映射到墨色系（`html.dark` 类）
 
 ---
 
 ## 8. 开发计划与完成度
 
-### 8.1 当前完成度（2026-05）
+### 8.1 当前实现状态（2026-10-13）
 
-**整体完成度约 85%。剩余 15% 主要是简历下载联动、Plotly 交互图表、生产构建优化。**
+静态内容、简历入口、双语、主题及本轮八项审计修复已完成本地验证。Plotly 交互图表、进一步性能优化及跨浏览器验收仍待处理，不以估算百分比表示完成度。
 
 #### Phase 1: 基础架构 — ✅ 已完成
 - [X] 项目目录结构
@@ -405,9 +409,7 @@ setTimeout(() => this.logoLetters.classList.add('animate'), 1800); // JX 显现
 
 #### Phase 3: 项目详情页 — ✅ 已完成
 - [X] `_template.html` 模板
-- [X] 银行客户流失预测（5 图）
-- [X] 电商欺诈检测（8 图）
-- [X] 贷款违约预测（15 图）
+- [X] 8 个首页主项目，12 组双语详情共 24 页；正文引用 96 个图表文件
 - [X] Prism.js 代码高亮
 - [X] 阅读进度条 + 阅读时间估算
 - [X] 项目目录系统 + 图片点击放大
@@ -418,28 +420,28 @@ setTimeout(() => this.logoLetters.classList.add('animate'), 1800); // JX 显现
 #### Phase 4: 功能增强 — ✅ 多数完成
 - [X] 主题切换 + 暗色模式
 - [X] 滚动 / Logo / 数字计数动画
-- [X] 联系表单（mailto 集成）
+- [X] 联系表单（Web3Forms AJAX；本轮仅模拟响应验证，未真实投递）
 - [X] SEO 基础（meta + Open Graph + JSON-LD）
 - [X] 中英语言切换（`language-switcher.js`，URL 路由式）
-- [X] 中英两套页面镜像（主页 + 联系页 + 3 个项目页）
+- [X] 中英两套页面镜像（主页 + 联系页 + 12 个报告页）
 - [X] 智能链接重写
-- [❌] 简历下载 CTA 联动 — Hero 按钮 `href="#"` 仍未连线对应语种 PDF
+- [X] 简历下载 CTA — Hero 按钮连接对应语种 PDF
 
 #### Phase 5: 部署与优化 — ⚠ 部分完成
 - [X] GitHub Pages 部署（从 master 分支静态托管）
 - [ ] 性能优化（WebP 转换、图片懒加载、资源压缩）
-- [ ] Tailwind 生产构建（替换 CDN 运行时）
+- [X] Tailwind 静态 CSS（替换发布页面 CDN 运行时）
 - [ ] GitHub Actions 自动化部署
 - [ ] 跨浏览器深度测试
 - [ ] 移动端深度优化
 
 ### 8.2 已知技术债
 
-1. **Tailwind CDN 运行时** — `cdn.tailwindcss.com` 不适合生产，应换为预编译产出
-2. **Fraunces 字体未加载** — `--font-display` 声明了 Fraunces，但 `index.html` 的 Google Fonts URL 未包含，实际回退到系统衬线字
-3. **`charts.js` 脚手架** — 引入了但未使用，可保留供未来集成
-4. **Hero 简历下载 CTA** — `href="#"` 占位，应根据当前语种指向 `肖炬晔简历.pdf` 或 `Juye Xiao Resume.pdf`
-5. **`test-common.html` / `demo-editorial-hero.html`** — 开发期手动测试与设计探索页面，可考虑移到 `dev/` 子目录或在生产构建中排除
+1. **`charts.js` 脚手架** — 尚未启用交互图表。
+2. **性能与兼容性** — WebP 转换、生产性能、Firefox/Safari 和真实移动设备仍未完成本轮验收。
+3. **`test-common.html` / `demo-editorial-hero.html`** — 保留为历史开发页面，不属于本轮 28 个发布页面的验收范围。
+
+Tailwind 运行时依赖、字体加载和简历链接不再列为当前未完成项。
 
 ---
 
@@ -497,7 +499,7 @@ setTimeout(() => this.logoLetters.classList.add('animate'), 1800); // JX 显现
 | 风险项 | 概率 | 影响 | 等级 | 缓解措施 |
 |--------|------|------|------|---------|
 | **技术风险** | | | | |
-| Tailwind CDN 运行时性能 | 高 | 中 | 高 | 切换到预编译构建 |
+| 工具 CSS 与页面类名不一致 | 中 | 中 | 中 | 已使用预生成 CSS；修改工具类后按 README 命令重新生成 |
 | 双副本翻译漂移（中英内容不同步） | 中 | 中 | 中 | 修改时强制两份一起改，建立 review checklist |
 | 浏览器兼容性 | 中 | 中 | 中 | 充分测试 + 必要 Polyfill |
 | **内容风险** | | | | |
@@ -565,8 +567,8 @@ git push origin master
 
 | 版本 | 时间 | 主要特性 |
 |------|------|---------|
-| v3.0 | 2026.05 | 当前版本，对齐真实实现 |
-| v3.1 | +1~2 月 | 修复简历 CTA + WebP 图片优化 + Tailwind 生产构建 |
+| v3.0 | 2026.05 | 历史基线，对齐当时实现 |
+| v3.1 | 2026.10.13 | 报告同步、首页摘要与八项审计修复；WebP 优化仍待处理 |
 | v3.2 | +3 月 | 至少 1 个 Plotly 交互图集成；GitHub Actions 自动部署 |
 | v4.0 | +6 月 | 新增"博客 / 学习笔记"区，或迁移到 Astro 静态生成器 |
 
@@ -578,9 +580,9 @@ git push origin master
 
 ### 12.1 短期（1 个月内）
 - ✅ 网站已上线 GitHub Pages 并对外可访问
-- ✅ 主页 + 3 个项目详情页 + 联系页全部上线
+- ✅ 28 个中英文发布页面完成本地验证；上线状态以 GitHub Pages 部署结果为准
 - ✅ 移动端和桌面端均正常显示
-- [ ] 简历下载 CTA 修复并真正可用
+- [X] 简历下载 CTA 指向对应 PDF，文件与本地链接已验证
 - [ ] Lighthouse 综合分 ≥ 90
 
 ### 12.2 中期（3 个月内）
@@ -626,6 +628,8 @@ git push origin master
 | v2.1 | 2025.01 | 添加实际实现状态标记 | Claude Code |
 | v2.2 | 2025.01 | 三个项目页完成、28 张图表上线 | Claude Code |
 | v3.0 | 2026.05 | 与实际实现全面对齐重写：删除虚构的 `data.js` / `ContentRenderer` / `Plotly 动态渲染` 架构；按真实 Hero/About/Experience 12 列布局重写 §3；语言切换改为 URL 路由式实事描述；删除假项目名（sales-forecasting 等）；测试章节简化为手动清单；更新时间锚点 | Juye Xiao + Claude Code |
+
+**v3.1 同步：** 2026-10-13 更新项目数量、静态 CSS、语言锚点、字体、简历及表单实现说明；验收边界见本轮审计修复记录。
 
 **v3.0 重写要点：**
 - 删除：§4.3 fictional `portfolioData` schema、§6.3 `class ProjectDetail` 动态加载示例、§9 Jest 风格 e2e 测试用例、§6 文件结构中的 `data.js` / `content-renderer.js` / `assets/data/projects/` / `CLAUDE.md`

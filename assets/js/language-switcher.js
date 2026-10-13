@@ -152,7 +152,7 @@
             const targetUrl = this.getTargetPageUrl(targetLang);
             
             // Navigate to the target page
-            window.location.href = targetUrl;
+            window.location.href = targetUrl + window.location.search + window.location.hash;
         }
 
         /**
@@ -172,7 +172,7 @@
                 const targetUrl = this.getTargetPageUrl(savedLang);
                 // Only redirect if we're not already on the correct page
                 if (!window.location.pathname.endsWith(targetUrl)) {
-                    window.location.href = targetUrl;
+                    window.location.href = targetUrl + window.location.search + window.location.hash;
                 }
             }
         }

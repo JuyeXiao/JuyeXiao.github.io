@@ -14,7 +14,7 @@
   <meta name="twitter:description" content="对 5,818,979 条评论构建弱监督分类与频道候选排名，结合 TF-IDF、行为特征和 SHAP 分析养宠文本信号。300 条新评论经助手复核，294 条可判定，条件加权精确率为 0.8982。">
   <link rel="canonical" href="https://juyexiao.github.io/projects/youtube%20comment%20analysis/youtube%20comment%20analysis.html">
   <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../../assets/css/utilities.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&amp;family=Inter:wght@200;300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;700&amp;family=Noto+Sans+SC:wght@400;500;600&amp;family=Noto+Serif+SC:wght@500&amp;display=swap" rel="stylesheet">
@@ -96,7 +96,7 @@
   </section>
 
   <section id="content" class="section-padding report-layout">
-    <aside><nav class="project-toc" id="project-toc" aria-label="报告目录"><h3>目录</h3><ul id="toc-list"><li><a class="toc-link" href="#report-section-1">摘要</a></li><li><a class="toc-link" href="#report-section-2">概览</a></li><li><a class="toc-link" href="#report-section-3">1 业务问题：评论文本中的养宠信号与频道筛选</a></li><li><a class="toc-link" href="#report-section-4">2 语料：一份抓取合集的构成与预处理</a></li><li><a class="toc-link" href="#report-section-5">3 标签：三个标注函数与弱监督的代价</a></li><li><a class="toc-link" href="#report-section-6">4 特征：与规则解耦，以及消融实验的设计</a></li><li><a class="toc-link" href="#report-section-7">5 建模：基线、选型与调参</a></li><li><a class="toc-link" href="#report-section-8">6 规则评价、旧标签与新样本助手复核</a></li><li><a class="toc-link" href="#report-section-9">7 结果：模型学到了什么，泛化到哪</a></li><li><a class="toc-link" href="#report-section-10">8 全语料评分与候选排名</a></li><li><a class="toc-link" href="#report-section-11">9 频道筛选与后续验证</a></li></ul></nav></aside>
+    <aside><nav class="project-toc" id="project-toc" aria-label="报告目录"><p class="project-toc__title">目录</p><ul id="toc-list"><li><a class="toc-link" href="#report-section-1">摘要</a></li><li><a class="toc-link" href="#report-section-2">概览</a></li><li><a class="toc-link" href="#report-section-3">1 业务问题：评论文本中的养宠信号与频道筛选</a></li><li><a class="toc-link" href="#report-section-4">2 语料：一份抓取合集的构成与预处理</a></li><li><a class="toc-link" href="#report-section-5">3 标签：三个标注函数与弱监督的代价</a></li><li><a class="toc-link" href="#report-section-6">4 特征：与规则解耦，以及消融实验的设计</a></li><li><a class="toc-link" href="#report-section-7">5 建模：基线、选型与调参</a></li><li><a class="toc-link" href="#report-section-8">6 规则评价、旧标签与新样本助手复核</a></li><li><a class="toc-link" href="#report-section-9">7 结果：模型学到了什么，泛化到哪</a></li><li><a class="toc-link" href="#report-section-10">8 全语料评分与候选排名</a></li><li><a class="toc-link" href="#report-section-11">9 频道筛选与后续验证</a></li></ul></nav></aside>
     <article class="content-area report-body" id="report-body"><div class="report-block" id="report-intro-1">
 <p>从 581.90 万条宠物频道评论中提取养宠相关文本信号，比较弱监督模型，并把评论与用户分数转成“相关性 × 候选规模”的频道试点建议。</p>
 
@@ -110,8 +110,8 @@
 <div aria-label="数据表（可横向滚动）" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
 <thead>
 <tr>
-<th scope="col"></th>
-<th scope="col"></th>
+<th scope="col"><span class="generated-table-label">指标</span></th>
+<th scope="col"><span class="generated-table-label">数值</span></th>
 </tr>
 </thead>
 <tbody>

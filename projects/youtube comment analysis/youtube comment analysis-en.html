@@ -14,7 +14,7 @@
   <meta name="twitter:description" content="Build weakly supervised classification and channel candidate rankings from 5,818,979 comments, using TF-IDF, behavioral features and SHAP to analyze pet-ownership language. Assistant review of 300 new comments yields 294 determinate labels and conditional weighted precision of 0.8982.">
   <link rel="canonical" href="https://juyexiao.github.io/projects/youtube%20comment%20analysis/youtube%20comment%20analysis-en.html">
   <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../../assets/css/utilities.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&amp;family=Inter:wght@200;300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;700&amp;family=Noto+Sans+SC:wght@400;500;600&amp;family=Noto+Serif+SC:wght@500&amp;display=swap" rel="stylesheet">
@@ -96,7 +96,7 @@
   </section>
 
   <section id="content" class="section-padding report-layout">
-    <aside><nav class="project-toc" id="project-toc" aria-label="Report contents"><h3>Contents</h3><ul id="toc-list"><li><a class="toc-link" href="#report-section-1">Executive summary</a></li><li><a class="toc-link" href="#report-section-2">At a glance</a></li><li><a class="toc-link" href="#report-section-3">1 The business question: pet-ownership text signals and channel shortlisting</a></li><li><a class="toc-link" href="#report-section-4">2 The corpus: composition and preprocessing of a scrape</a></li><li><a class="toc-link" href="#report-section-5">3 Labels: three labeling functions and the cost of weak supervision</a></li><li><a class="toc-link" href="#report-section-6">4 Features: decoupling from the rule, and the ablation design</a></li><li><a class="toc-link" href="#report-section-7">5 Modeling: baselines, model choice, and tuning</a></li><li><a class="toc-link" href="#report-section-8">6 Rule evaluation, historical labels and new assistant review</a></li><li><a class="toc-link" href="#report-section-9">7 Results: what the model learned, and how far it generalizes</a></li><li><a class="toc-link" href="#report-section-10">8 Full-corpus scoring and candidate rankings</a></li><li><a class="toc-link" href="#report-section-11">9 Channel screening and further evaluation</a></li></ul></nav></aside>
+    <aside><nav class="project-toc" id="project-toc" aria-label="Report contents"><p class="project-toc__title">Contents</p><ul id="toc-list"><li><a class="toc-link" href="#report-section-1">Executive summary</a></li><li><a class="toc-link" href="#report-section-2">At a glance</a></li><li><a class="toc-link" href="#report-section-3">1 The business question: pet-ownership text signals and channel shortlisting</a></li><li><a class="toc-link" href="#report-section-4">2 The corpus: composition and preprocessing of a scrape</a></li><li><a class="toc-link" href="#report-section-5">3 Labels: three labeling functions and the cost of weak supervision</a></li><li><a class="toc-link" href="#report-section-6">4 Features: decoupling from the rule, and the ablation design</a></li><li><a class="toc-link" href="#report-section-7">5 Modeling: baselines, model choice, and tuning</a></li><li><a class="toc-link" href="#report-section-8">6 Rule evaluation, historical labels and new assistant review</a></li><li><a class="toc-link" href="#report-section-9">7 Results: what the model learned, and how far it generalizes</a></li><li><a class="toc-link" href="#report-section-10">8 Full-corpus scoring and candidate rankings</a></li><li><a class="toc-link" href="#report-section-11">9 Channel screening and further evaluation</a></li></ul></nav></aside>
     <article class="content-area report-body" id="report-body"><div class="report-block" id="report-intro-1">
 <p>Pet-ownership signals are extracted from 5.819 million channel comments, weak-supervision models are compared, and comment/user scores are translated into a relevance × candidate-scale framework for channel pilots.</p>
 
@@ -110,8 +110,8 @@
 <div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
 <thead>
 <tr>
-<th scope="col"></th>
-<th scope="col"></th>
+<th scope="col"><span class="generated-table-label">Metric</span></th>
+<th scope="col"><span class="generated-table-label">Value</span></th>
 </tr>
 </thead>
 <tbody>

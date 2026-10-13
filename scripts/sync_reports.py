@@ -91,7 +91,7 @@ def plain(node):
     # Serialize/reparse so adjacent text nodes created by link adaptation behave
     # exactly as they do in the saved HTML, without inventing word boundaries.
     copy = BeautifulSoup(str(node), 'html.parser')
-    for caption in copy.select('.generated-alt-caption'):
+    for caption in copy.select('.generated-alt-caption, .generated-table-label'):
         caption.decompose()
     return re.sub(r'\s+', ' ', copy.get_text(' ', strip=True)).strip()
 
@@ -180,7 +180,14 @@ def render():
                 fig.append(caption)
         for table in soup.find_all('table'):
             table['class'] = 'report-table'
-            for th in table.select('thead th'): th['scope'] = 'col'
+            headers = table.select('thead th')
+            if len(headers) == 2 and all(not th.get_text(strip=True) for th in headers):
+                labels = ('指标', '数值') if page['lang'] == 'zh' else ('Metric', 'Value')
+                for th, label in zip(headers, labels):
+                    span = soup.new_tag('span', attrs={'class': 'generated-table-label'})
+                    span.string = label
+                    th.append(span)
+            for th in headers: th['scope'] = 'col'
             table.wrap(soup.new_tag('div',attrs={'class':'report-table-wrap','tabindex':'0','role':'region','aria-label':'数据表（可横向滚动）' if page['lang']=='zh' else 'Data table (scroll horizontally)'}))
         for math in soup.find_all('math'):
             parent = math.parent
@@ -274,7 +281,7 @@ def render():
   <meta name="twitter:description" content="{html.escape(cfg['description'],quote=True)}">
   <link rel="canonical" href="{url}">
   <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../../assets/css/utilities.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&amp;family=Inter:wght@200;300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;700&amp;family=Noto+Sans+SC:wght@400;500;600&amp;family=Noto+Serif+SC:wght@500&amp;display=swap" rel="stylesheet">
@@ -297,7 +304,7 @@ def render():
   </section>
 {series}
   <section id="content" class="section-padding report-layout">
-    <aside><nav class="project-toc" id="project-toc" aria-label="{'报告目录' if lang=='zh' else 'Report contents'}"><h3>{'目录' if lang=='zh' else 'Contents'}</h3><ul id="toc-list">{''.join(toc)}</ul></nav></aside>
+    <aside><nav class="project-toc" id="project-toc" aria-label="{'报告目录' if lang=='zh' else 'Report contents'}"><p class="project-toc__title">{'目录' if lang=='zh' else 'Contents'}</p><ul id="toc-list">{''.join(toc)}</ul></nav></aside>
     <article class="content-area report-body" id="report-body">{''.join(chunks)}</article>
   </section>
 {series}
@@ -324,7 +331,7 @@ def render():
                     <div class="bento-content"><div class="flex-grow">
                         <span class="bento-tag">{html.escape(c['tag'])}</span>
                         <h3 class="mt-4 text-xl">{html.escape(c['title'])}</h3>
-                        <p class="mt-2 text-sm">{html.escape(c['description'])}</p>
+                        <p class="mt-2 text-sm">{html.escape(c.get('card_description', c['description']))}</p>
                     </div><div class="mt-4 text-right"><span class="text-link">{'查看详情' if lang=='zh' else 'Read case'}</span></div></div>
                     <div class="number-decoration">{n:02}</div>
                 </a>''')

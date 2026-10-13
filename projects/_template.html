@@ -8,7 +8,7 @@
   <meta name="description" content="项目详情标准模板" />
 
   <!-- 与首页一致：Tailwind / 字体 / 图标 / 站点样式 -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../assets/css/utilities.css">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+SC:wght@400;500;600&family=Noto+Serif+SC:wght@500&display=swap" rel="stylesheet" />
@@ -149,7 +149,7 @@
       <div class="grid md:grid-cols-12 gap-12">
         <aside class="md:col-span-3">
           <nav class="project-toc sticky top-24" id="project-toc">
-            <h3 class="text-xl font-semibold" style="color: var(--dark);">目录</h3>
+            <p class="project-toc__title text-xl font-semibold" style="color: var(--dark);">目录</p>
             <ul class="mt-4 space-y-2" id="toc-list">
               <li><a href="#findings" class="toc-link" data-section="findings">主要发现与建议</a></li>
               <li><a href="#methodology" class="toc-link" data-section="methodology">数据分析方法论</a></li>

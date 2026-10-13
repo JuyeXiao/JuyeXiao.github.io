@@ -5,15 +5,19 @@
     <script>document.documentElement.classList.add('js');</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Analyst Portfolio</title>
+    <title>Juye Xiao | Data Analyst Portfolio</title>
+    <meta name="description" content="Explore Juye Xiao’s data analysis experience and project reports in customer analytics, risk, experiments, text analysis and spatial data.">
+    <meta property="og:title" content="Juye Xiao | Data Analyst Portfolio">
+    <meta property="og:description" content="Explore Juye Xiao’s data analysis experience and project reports in customer analytics, risk, experiments, text analysis and spatial data.">
+    <meta property="og:type" content="website">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
 
-    <!-- Configure CSP to allow Tailwind CSS -->
+    <!-- Content Security Policy -->
     <meta http-equiv="Content-Security-Policy"
-        content="script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://unpkg.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com;">
+        content="script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com;">
 
-    <!-- Tailwind CSS for rapid prototyping -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Locally generated utility styles -->
+    <link rel="stylesheet" href="assets/css/utilities.css">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -196,7 +200,7 @@
         <section id="about" class="section-padding about-after-hero">
             <div class="grid md:grid-cols-12 gap-12 items-stretch max-w-6xl mx-auto reveal">
                 <figure class="about-portrait hidden md:block md:col-span-5">
-                    <img src="assets/img/about-portrait.jpg" alt="Portrait of Juye Xiao" loading="lazy">
+                    <img src="assets/img/about-portrait.jpg" alt="" loading="lazy">
                 </figure>
                 <div class="md:col-span-7 about-copy">
                     <h2 class="text-3xl font-bold">The Fusion of Logic and Insight</h2>
@@ -425,7 +429,7 @@
                     <div class="bento-content"><div class="flex-grow">
                         <span class="bento-tag">Climate &amp; Spatial Analytics</span>
                         <h3 class="mt-4 text-xl">S&amp;P Global Capstone: climate models, forecasts and spatial exposure</h3>
-                        <p class="mt-2 text-sm">A 2026 reconstruction of the 2022 capstone covers four study boxes and 1,020 cells, connecting climate-model comparison, short-term forecasting, long-term scenarios and spatial exposure. Under ssp585 for 2035–2044, 204 cell–layer entries meet a proposed priority-check rule.</p>
+                        <p class="mt-2 text-sm">Compare climate models and forecasts across regions, then combine future scenarios with population and land exposure to propose rules for prioritizing locations for further checks.</p>
                     </div><div class="mt-4 text-right"><span class="text-link">Read case</span></div></div>
                     <div class="number-decoration">01</div>
                 </a>
@@ -433,7 +437,7 @@
                     <div class="bento-content"><div class="flex-grow">
                         <span class="bento-tag">NLP · Weak Supervision</span>
                         <h3 class="mt-4 text-xl">YouTube comments: ownership signals and channel screening</h3>
-                        <p class="mt-2 text-sm">Build weakly supervised classification and channel candidate rankings from 5,818,979 comments, using TF-IDF, behavioral features and SHAP to analyze pet-ownership language. Assistant review of 300 new comments yields 294 determinate labels and conditional weighted precision of 0.8982.</p>
+                        <p class="mt-2 text-sm">Identify pet-related signals in comments and combine their share with channel size to shortlist channels for review before an advertising pilot.</p>
                     </div><div class="mt-4 text-right"><span class="text-link">Read case</span></div></div>
                     <div class="number-decoration">02</div>
                 </a>
@@ -441,7 +445,7 @@
                     <div class="bento-content"><div class="flex-grow">
                         <span class="bento-tag">Customer Analytics</span>
                         <h3 class="mt-4 text-xl">Bank churn: patterns, explanations and service capacity</h3>
-                        <p class="mt-2 text-sm">Group analysis, model comparison and SHAP across 10,000 customers identify churn signals and inform service priorities. At the frozen threshold of 0.275, test recall is 78.39% and precision is 48.25%; capacity and cost comparisons guide follow-up planning.</p>
+                        <p class="mt-2 text-sm">Identify churn signals and compare service capacity with follow-up costs to prioritize customers for proactive contact and further review.</p>
                     </div><div class="mt-4 text-right"><span class="text-link">Read case</span></div></div>
                     <div class="number-decoration">03</div>
                 </a>
@@ -449,7 +453,7 @@
                     <div class="bento-content"><div class="flex-grow">
                         <span class="bento-tag">Risk Analytics</span>
                         <h3 class="mt-4 text-xl">First-order fraud: temporal evaluation and review proposals</h3>
-                        <p class="mt-2 text-sm">Analyze purchase timing, device and IP behavior across 138,376 first-order transactions, and compare class-imbalance methods. Forward validation and cost scenarios inform a tiered manual-review proposal using model scores and transaction signals.</p>
+                        <p class="mt-2 text-sm">Time-based validation found no test-set fraud at the selected decision threshold. Device, IP and transaction-timing signals inform a tiered manual-review proposal.</p>
                     </div><div class="mt-4 text-right"><span class="text-link">Read case</span></div></div>
                     <div class="number-decoration">04</div>
                 </a>
@@ -457,7 +461,7 @@
                     <div class="bento-content"><div class="flex-grow">
                         <span class="bento-tag">Financial Analytics</span>
                         <h3 class="mt-4 text-xl">LendingClub: the 9,004-loan sample</h3>
-                        <p class="mt-2 text-sm">Analyze default patterns in 9,004 historical loans, compare models with a loan-term rule, and design screening policies under asymmetric costs. Random Forest at the frozen threshold of 0.22 achieves 70.45% test recall and a 4.68% net simulated cost reduction.</p>
+                        <p class="mt-2 text-sm">Compare loan models with a simple loan-term rule under the costs of missed defaults and false alerts to inform review lists and screening thresholds.</p>
                     </div><div class="mt-4 text-right"><span class="text-link">Read case</span></div></div>
                     <div class="number-decoration">05</div>
                 </a>
@@ -465,7 +469,7 @@
                     <div class="bento-content"><div class="flex-grow">
                         <span class="bento-tag">Experiment Analysis</span>
                         <h3 class="mt-4 text-xl">A/B Testing: the Cookie Cats gate experiment</h3>
-                        <p class="mt-2 text-sm">Compare retention and engagement across 90,189 players, combining allocation checks, bootstrap estimates and power analysis. Seven-day retention is 0.82 percentage points lower in the level-40 group than the level-30 group, with a 95% interval of [−1.33, −0.31], informing gate and return-experience recommendations.</p>
+                        <p class="mt-2 text-sm">Seven-day retention was 0.82 percentage points lower in the level-40 group than in the level-30 group. Allocation checks qualify recommendations on gate placement and the return experience.</p>
                     </div><div class="mt-4 text-right"><span class="text-link">Read case</span></div></div>
                     <div class="number-decoration">06</div>
                 </a>
@@ -473,7 +477,7 @@
                     <div class="bento-content"><div class="flex-grow">
                         <span class="bento-tag">Spatial Analytics</span>
                         <h3 class="mt-4 text-xl">Healthy Home: spatial prediction and road mapping in Oakland</h3>
-                        <p class="mt-2 text-sm">Combine 18,219 observations, road networks and nested spatial evaluation to analyze pollutant patterns in Oakland. Random Forest achieves pooled NO₂ R² of 0.576017 under spatial-block evaluation. Relative prediction maps cover 628.74 km of roads, with area-level error analysis informing further sampling.</p>
+                        <p class="mt-2 text-sm">Evaluate pollutant predictions on held-out areas, then use relative road maps and area-level errors to identify where more observations are needed.</p>
                     </div><div class="mt-4 text-right"><span class="text-link">Read case</span></div></div>
                     <div class="number-decoration">07</div>
                 </a>
@@ -481,7 +485,7 @@
                     <div class="bento-content"><div class="flex-grow">
                         <span class="bento-tag">NLP · Topic Modeling</span>
                         <h3 class="mt-4 text-xl">Amazon watch reviews: clustering, topics and recommendations</h3>
-                        <p class="mt-2 text-sm">Prepare the review corpus from 960,872 raw records and analyze 858,037 modeled reviews with K-Means and LDA. The malfunction/returns topic averages 2.37 stars and covers 52.9% of modeled one-star reviews, informing product checks, clearer instructions and review monitoring.</p>
+                        <p class="mt-2 text-sm">Malfunctions and returns stand out in low-rated reviews. Clustering and topic analysis turn that feedback into recommendations for product checks, clearer instructions and review monitoring.</p>
                     </div><div class="mt-4 text-right"><span class="text-link">Read case</span></div></div>
                     <div class="number-decoration">08</div>
                 </a>
