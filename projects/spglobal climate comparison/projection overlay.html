@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>document.documentElement.classList.add('js');</script>
+  <title>长期配对情景与空间暴露 - 数据诗学</title>
+  <meta name="description" content="以 14 个模型比较两种长期情景的配对温差与超阈月数，结合人口、建成区和耕地分布分析空间暴露。通过校准敏感性和成员影响分析，将情景差异转化为候选地点核查顺序。">
+  <meta property="og:title" content="长期配对情景与空间暴露">
+  <meta property="og:description" content="以 14 个模型比较两种长期情景的配对温差与超阈月数，结合人口、建成区和耕地分布分析空间暴露。通过校准敏感性和成员影响分析，将情景差异转化为候选地点核查顺序。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://juyexiao.github.io/projects/spglobal%20climate%20comparison/projection%20overlay.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:description" content="以 14 个模型比较两种长期情景的配对温差与超阈月数，结合人口、建成区和耕地分布分析空间暴露。通过校准敏感性和成员影响分析，将情景差异转化为候选地点核查顺序。">
+  <link rel="canonical" href="https://juyexiao.github.io/projects/spglobal%20climate%20comparison/projection%20overlay.html">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&amp;family=Inter:wght@200;300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;700&amp;family=Noto+Sans+SC:wght@400;500;600&amp;family=Noto+Serif+SC:wght@500&amp;display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="../../assets/css/index.css">
+  <link rel="stylesheet" href="../../assets/css/project.css">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "长期配对情景与空间暴露", "description": "以 14 个模型比较两种长期情景的配对温差与超阈月数，结合人口、建成区和耕地分布分析空间暴露。通过校准敏感性和成员影响分析，将情景差异转化为候选地点核查顺序。", "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Juye Xiao"}}</script>
+</head>
+<body class="transition-colors duration-300 report-page">
+<div class="scroll-progress" id="scroll-progress"></div>
+<header class="navbar fixed top-0 left-0 right-0 z-50" id="navbar">
+<div class="container-main h-full flex items-center justify-between">
+<!-- Logo部分 -->
+<a class="navbar-logo" href="../../index.html#hero" id="navbar-logo">
+<!-- SVG Logo -->
+<svg class="logo-svg-nav" viewbox="0 0 40 40">
+<!-- 背景数据网格 -->
+<g class="grid-bg">
+<!-- 垂直线 -->
+<line class="grid-line-v" style="animation-delay: 0.1s, 0s" x1="8" x2="8" y1="0" y2="40"></line>
+<line class="grid-line-v" style="animation-delay: 0.2s, 0.5s" x1="16" x2="16" y1="0" y2="40"></line>
+<line class="grid-line-v" style="animation-delay: 0.3s, 1s" x1="24" x2="24" y1="0" y2="40"></line>
+<line class="grid-line-v" style="animation-delay: 0.4s, 1.5s" x1="32" x2="32" y1="0" y2="40"></line>
+<!-- 水平线 -->
+<line class="grid-line-h" style="animation-delay: 0.5s, 0s" x1="0" x2="40" y1="10" y2="10"></line>
+<line class="grid-line-h" style="animation-delay: 0.6s, 0.7s" x1="0" x2="40" y1="20" y2="20"></line>
+<line class="grid-line-h" style="animation-delay: 0.7s, 1.4s" x1="0" x2="40" y1="30" y2="30"></line>
+</g>
+<!-- 织梭动画线 -->
+<line class="weaver-line" id="weaverLine" x1="0" x2="40" y1="20" y2="20"></line>
+<!-- JX字母 -->
+<text class="logo-letters" id="logoLetters" text-anchor="middle" x="20" y="26">JX</text>
+</svg>
+<!-- 名字签名（悬停显示） -->
+<div class="logo-name">
+<div class="logo-name-text">Juye Xiao</div>
+<div class="logo-name-subtitle">Data Analyst</div>
+</div>
+</a>
+<nav class="hidden md:flex items-center space-x-8">
+<a class="nav-link" href="../../index.html#about">关于</a>
+<a class="nav-link" href="../../index.html#experience">经历</a>
+<a class="nav-link" href="../../index.html#education">教育</a>
+<a class="nav-link" href="../../index.html#projects">项目</a>
+<a class="nav-link" href="../../index.html#skills">技能</a>
+<a class="nav-link" href="../../index.html#contact">联系</a>
+</nav>
+<div class="flex items-center space-x-4">
+<button aria-label="切换主题" class="btn-secondary !p-2 !rounded-full" id="theme-toggle">
+<i class="block dark:hidden" data-lucide="sun"></i>
+<i class="hidden dark:block" data-lucide="moon"></i>
+</button>
+<button class="btn-secondary !p-2 !rounded-full" id="lang-toggle">
+<span class="font-bold text-sm">EN</span>
+</button>
+<button aria-controls="mobile-menu" aria-expanded="false" aria-label="打开菜单" class="btn-secondary !p-2 !rounded-full md:hidden" id="menu-toggle">
+<i class="menu-icon-open" data-lucide="menu"></i>
+<i class="menu-icon-close" data-lucide="x"></i>
+</button>
+</div>
+</div>
+<nav aria-label="移动端导航" class="mobile-menu md:hidden" id="mobile-menu">
+<a class="nav-link" href="../../index.html#about">关于</a>
+<a class="nav-link" href="../../index.html#experience">经历</a>
+<a class="nav-link" href="../../index.html#education">教育</a>
+<a class="nav-link" href="../../index.html#projects">项目</a>
+<a class="nav-link" href="../../index.html#skills">技能</a>
+<a class="nav-link" href="../../index.html#contact">联系</a>
+</nav>
+</header>
+<main class="container-main">
+  <section id="project-hero" class="section-padding report-hero">
+    <div class="section-eyebrow"><span class="section-kicker">Capstone · 情景与暴露</span></div>
+    <h1 class="hero-title">长期配对情景与空间暴露</h1>
+    <p class="subtitle report-standfirst">以 14 个模型比较两种长期情景的配对温差与超阈月数，结合人口、建成区和耕地分布分析空间暴露。通过校准敏感性和成员影响分析，将情景差异转化为候选地点核查顺序。</p>
+    <p class="reading-time">2026 · 分析更新</p>
+    <div class="hero-stats"><div class="hero-stat"><div class="hero-stat__num">14</div><div class="hero-stat__label">主模型集合</div></div><div class="hero-stat"><div class="hero-stat__num">2</div><div class="hero-stat__label">长期情景</div></div><div class="hero-stat"><div class="hero-stat__num">204 / 268</div><div class="hero-stat__label">近窗 ssp585：优先核查 / 基准条目</div></div></div>
+    <div class="report-actions"><a class="btn btn-primary" href="#content">开始阅读</a><a class="btn btn-secondary" href="../../index.html#projects">返回项目概览</a></div>
+  </section>
+<nav class="report-series" aria-label="系列阅读"><a class="report-series__link" href="spglobal climate comparison.html">S&amp;P Global Capstone：气候模型、预测与空间暴露</a><a class="report-series__link" href="model comparison.html">Capstone 专题：模型比较</a><a class="report-series__link" href="long series.html">Capstone 专题：长序列与短期预测</a><a class="report-series__link is-current" href="projection overlay.html">长期配对情景与空间暴露</a></nav>
+  <section id="content" class="section-padding report-layout">
+    <aside><nav class="project-toc" id="project-toc" aria-label="报告目录"><h3>目录</h3><ul id="toc-list"><li><a class="toc-link" href="#report-section-1">1. 情景与暴露评估摘要</a></li><li><a class="toc-link" href="#report-section-2">2. 情景分析用途</a></li><li><a class="toc-link" href="#report-section-3">3. 窗口与模型集合</a></li><li><a class="toc-link" href="#report-section-4">4. 超阈方法与分母</a></li><li><a class="toc-link" href="#report-section-5">5. 长期情景的配对温差与频度</a></li><li><a class="toc-link" href="#report-section-6">6. 校准敏感性与时间抽样</a></li><li><a class="toc-link" href="#report-section-7">7. 成员影响与单模型使用</a></li><li><a class="toc-link" href="#report-section-8">8. 资料核查与下一步验证</a></li><li><a class="toc-link" href="#report-section-9">9. 筛查用途</a></li><li><a class="toc-link" href="#report-section-10">10. 模型比较与空间订正验证</a></li><li><a class="toc-link" href="#report-section-11">11. 绝对频度与观测参照</a></li><li><a class="toc-link" href="#report-section-12">12. 候选地点与核查顺序</a></li><li><a class="toc-link" href="#report-section-13">13. 分层实施与检验</a></li></ul></nav></aside>
+    <article class="content-area report-body" id="report-body"><section id="report-section-1" class="section-padding section--editorial" data-section-num="01"><div class="section-header"><h2 class="section-title">1. 情景与暴露评估摘要</h2></div><div class="report-block" id="report-1-1">
+<p>本报告比较 2035–2044 与 2050–2059 年的两条气候情景，考察温度差异、超阈频度及其对校准和模型选择的敏感性。计算在每个模型内完成，再汇总模型分布，为后续人口和土地暴露筛查提供温度依据。</p>
+<p>近期窗口指 2035–2044 年，远期窗口指 2050–2059 年。两者的评估采用气候模型情景，短期时间序列趋势不外推到这些年份。主集合包含 14 个模型。CMCC-CM2-SR5 仅有未修订的 v1.0 数据，且存在版本相关的温度偏移异常，因此单独在包含全部 15 个模型的敏感性分析中检验其影响。</p>
+
+</div>
+<div class="report-block" id="report-1-2">
+<p>本报告将逐格温度与人口、建成区和耕地相结合，识别值得优先核查的候选地点。三类暴露分别计算贡献与名单稳定性，并用共同留出期评估订正误差，为居民、资产和农业资料的收集安排顺序。</p>
+
+</div></section><section id="report-section-2" class="section-padding section--editorial" data-section-num="02"><div class="section-header"><h2 class="section-title">2. 情景分析用途</h2></div><div class="report-block" id="report-2-1">
+<p>同一模型内的情景温差用于比较不同路径，绝对超阈频度则为后续地点核查提供参考。两类指标均逐模型计算，再汇总模型间分布。</p>
+
+</div></section><section id="report-section-3" class="section-padding section--editorial" data-section-num="03"><div class="section-header"><h2 class="section-title">3. 窗口与模型集合</h2></div><div class="report-block" id="report-3-1">
+<p>两个评估窗口为 2035–2044 年和 2050–2059 年，分别计算 ssp126 与 ssp585 情景。主集合包含 14 个模型，敏感性分析再加入 CMCC-CM2-SR5，共 15 个模型。投影使用 2000 年 2 月至 2024 年 12 月的观测作为参照。独立留出检验使用 2000–2013 年训练、2014–2024 年测试。</p>
+
+</div></section><section id="report-section-4" class="section-padding section--editorial" data-section-num="04"><div class="section-header"><h2 class="section-title">4. 超阈方法与分母</h2></div><div class="report-block" id="report-4-1">
+<p>观测采用 2000-02–2024-12 的 MODIS 白天地表温度 LST，模型采用 NEX-GDDP-CMIP6 的近地面气温 tas。MODIS 中心约 1 km 像元的晴空白天检索，与 0.25° 格子面积及全天平均 tas 的含义不同。分月订正量把模型均值对应到 LST 参照，不能消除全部物理量与采样差异。产品定义见 <a href="https://developers.google.com/earth-engine/datasets/catalog/MODIS_061_MOD11A1">MODIS</a> 和 <a href="https://developers.google.com/earth-engine/datasets/catalog/NASA_GDDP-CMIP6">NEX-GDDP-CMIP6</a>。</p>
+<p>空间汇总使用所提取的完整格子并集。人口和建成区采用 2020 年数据，耕地采用 2021 年土地覆盖数据。未来情景中，这些人口与土地分布保持不变，仅更新温度场。GHS 和 GPW 提供不同的人口空间分配，人口加权超阈频度相近时，暴露总量仍可能不同。</p>
+<div aria-label="数据表（可横向滚动）" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">区域</th>
+<th scope="col">格子数</th>
+<th scope="col">GHS 人口</th>
+<th scope="col">GPW 人口</th>
+<th scope="col">总面积 km²</th>
+<th scope="col">耕地 km²</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CA</td>
+<td>156</td>
+<td>1,715,658</td>
+<td>1,873,619</td>
+<td>95,308.62</td>
+<td>3,116.60</td>
+</tr>
+<tr>
+<td>XJ</td>
+<td>144</td>
+<td>44,870</td>
+<td>71,823</td>
+<td>87,977.18</td>
+<td>439.89</td>
+</tr>
+<tr>
+<td>TK</td>
+<td>144</td>
+<td>6,371,851</td>
+<td>3,273,523</td>
+<td>87,977.18</td>
+<td>15,228.79</td>
+</tr>
+<tr>
+<td>AU</td>
+<td>576</td>
+<td>2,372,152</td>
+<td>1,953,986</td>
+<td>365,561.48</td>
+<td>85,052.46</td>
+</tr>
+</tbody>
+</table></div>
+<p>按完整研究格子汇总人口和土地面积。人口取整仅供展示，计算使用原始小数。耕地面积为耕地比例乘逐格球面面积。</p>
+<p>每个格子以全期有效月温度的第 90 百分位数（P90）为阈值。观测和未来情景都只计入严格高于阈值的月份。先估计各日历月的超阈概率，再将十二个月的概率相加，得到该格子的年均超阈月数，记作 cᵢ，单位为月/年。</p>
+<p>用 wᵢ 表示第 i 个格子的人口数或相应土地面积。对每个模型分别计算以下两个指标，再汇总模型之间的分布。</p>
+<p><strong>加权年均超阈月数</strong>反映人口或土地所处位置的平均超阈频度，单位为月/年：</p>
+<div class="report-equation"><math aria-label="加权年均超阈月数：各格权重与超阈月数乘积之和，除以权重之和" display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mfrac><mrow><msub><mo>∑</mo><mi>i</mi></msub><msub><mi>w</mi><mi>i</mi></msub><msub><mi>c</mi><mi>i</mi></msub></mrow><mrow><msub><mo>∑</mo><mi>i</mi></msub><msub><mi>w</mi><mi>i</mi></msub></mrow></mfrac></math></div>
+<p><strong>超阈暴露总量</strong>同时计入超阈频度与暴露规模。人口总量的单位为人·月/年，土地总量的单位为 m²·月/年：</p>
+<div class="report-equation"><math aria-label="超阈暴露总量：各格权重与超阈月数乘积之和" display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><msub><mo>∑</mo><mi>i</mi></msub><msub><mi>w</mi><mi>i</mi></msub><msub><mi>c</mi><mi>i</mi></msub></mrow></math></div>
+<p>人口加权频度与面积加权频度之比，以及这一比值的倒数，都先在每个模型内计算，再取模型中位数。不能用表中两个频度中位数相除来替代这一步。</p>
+<p>TK 和 AU 各有一个“格子与日历月”组合缺少历史观测。观测与模型比较时都排除这些组合，并保持空间汇总范围固定。缺测对应的全年计数边界单独评估。超阈月数描述月均 LST 超过当地历史阈值的频度，不表示日度热浪天数。</p>
+
+</div>
+<div class="report-block" id="report-4-2">
+<p>加权年均超阈月数描述人口或土地所处位置的平均频度，超阈暴露总量进一步计入人口数或土地面积。两者的公式与单位见第 4 节。人口加权频度与面积加权频度的比值、以及这一比值的倒数，都应先在每个模型内计算，再汇总模型中位数。</p>
+
+</div></section><section id="report-section-5" class="section-padding section--editorial" data-section-num="05"><div class="section-header"><h2 class="section-title">5. 长期情景的配对温差与频度</h2></div><div class="report-block" id="report-5-1">
+<p>对同一个模型计算 ssp585−ssp126，再汇总差值。不能用单一情景内部的模型标准差直接判定配对差异是否存在。下表均为面积加权，方括号为模型 P10–P90，描述模型间的分布，不是置信区间。</p>
+<div aria-label="数据表（可横向滚动）" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">区域</th>
+<th scope="col">窗口</th>
+<th scope="col">温差 °C：中位数 [P10, P90]</th>
+<th scope="col">正向模型数（共 14 个）</th>
+<th scope="col">计数差 月/年：中位数 [P10, P90]</th>
+<th scope="col">正向模型数（共 14 个）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CA</td>
+<td>2035-2044</td>
+<td>0.517 [0.321, 0.773]</td>
+<td>14</td>
+<td>0.404 [-0.016, 0.706]</td>
+<td>12</td>
+</tr>
+<tr>
+<td>CA</td>
+<td>2050-2059</td>
+<td>0.972 [0.635, 1.430]</td>
+<td>14</td>
+<td>0.663 [0.464, 0.936]</td>
+<td>14</td>
+</tr>
+<tr>
+<td>XJ</td>
+<td>2035-2044</td>
+<td>0.547 [0.289, 0.949]</td>
+<td>14</td>
+<td>0.324 [0.124, 0.597]</td>
+<td>14</td>
+</tr>
+<tr>
+<td>XJ</td>
+<td>2050-2059</td>
+<td>1.140 [0.863, 1.756]</td>
+<td>14</td>
+<td>0.914 [0.618, 1.108]</td>
+<td>14</td>
+</tr>
+<tr>
+<td>TK</td>
+<td>2035-2044</td>
+<td>0.556 [0.213, 0.704]</td>
+<td>14</td>
+<td>0.518 [0.194, 0.740]</td>
+<td>14</td>
+</tr>
+<tr>
+<td>TK</td>
+<td>2050-2059</td>
+<td>0.968 [0.559, 1.557]</td>
+<td>14</td>
+<td>0.816 [0.357, 1.170]</td>
+<td>14</td>
+</tr>
+<tr>
+<td>AU</td>
+<td>2035-2044</td>
+<td>0.313 [-0.072, 0.583]</td>
+<td>11</td>
+<td>0.161 [-0.265, 0.349]</td>
+<td>10</td>
+</tr>
+<tr>
+<td>AU</td>
+<td>2050-2059</td>
+<td>0.833 [0.459, 1.408]</td>
+<td>14</td>
+<td>0.520 [0.001, 1.066]</td>
+<td>12</td>
+</tr>
+</tbody>
+</table></div>
+<p>在 2035–2044 年，CA、XJ、TK 的 14 个模型温差均为正，AU 有 11 个模型为正。到 2050–2059 年，四个区域的 14 个模型温差均为正。超阈月数差的一致性较低，AU 在近期窗口有 10 个模型为正。在全部 11 个窗口与压力设定中，面积加权配对计数差的中位数保持为正，但 AU 近期窗口的正向模型数最低降至 7 个。</p>
+<p>建议把配对情景差异用于比较不同路径下的评估需求，并保留模型范围。绝对频度另做校准敏感性检验。有跨模型、窗口和人口源支持的候选，再进入本地核查。后续检验同时比较温度分布与超阈频率，不只看均值。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：同模型情景差异及成员范围" class="figure-zoom" type="button"><img alt="同模型情景差异及成员范围" decoding="async" height="675" loading="lazy" src="figures/audit_revision_20260926/b2_paired_scenarios.png" width="1650"/></button><figcaption class="generated-alt-caption">同模型情景差异及成员范围</figcaption></figure>
+
+</div>
+<div class="report-block" id="report-5-2">
+<p>2035–2044 与 2050–2059 的评估采用气候模型情景，短期时间序列趋势不外推到这些年份。主集合包含 14 个模型。CMCC-CM2-SR5 仅有未修订的 v1.0 数据，且存在版本相关的温度偏移异常，因此单独在包含全部 15 个模型的敏感性分析中检验其影响。</p>
+
+</div></section><section id="report-section-6" class="section-padding section--editorial" data-section-num="06"><div class="section-header"><h2 class="section-title">6. 校准敏感性与时间抽样</h2></div><div class="report-block" id="report-6-1">
+<p>校准窗会改变部分方向。AU 近期窗口人口“未来−观测”由基准 −0.125 变为六个校准设定的 +0.028 至 +0.210 月/年。TK 人口与面积加权频度之比由 1.005 变为 0.931–0.979。XJ 在 2013 终点的订正设定下由 0.904 变为 1.025。CA 在这些校准窗下仍大于 1，但假设 −3 °C 平移后为 0.844。因此比值、排序和名单必须连同参数设定解释。</p>
+<p>人口计数的模型分布和共同时间重抽样范围如下。后者按 25 个完整日历年抽样 500 次，每次共同重估阈值与订正量、计算每模型最终指标，再取主集合的 14 个模型中位数。抽样过程中，未来十年的温度场保持固定。</p>
+<div aria-label="数据表（可横向滚动）" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">区域</th>
+<th scope="col">人口计数：中位数 [模型 P10, P90]</th>
+<th scope="col">共同时间抽样 2.5–97.5 分位</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CA</td>
+<td>2.231 [1.797, 2.632]</td>
+<td>1.937–2.405</td>
+</tr>
+<tr>
+<td>XJ</td>
+<td>1.773 [1.329, 2.397]</td>
+<td>1.447–2.102</td>
+</tr>
+<tr>
+<td>TK</td>
+<td>2.290 [1.970, 2.605]</td>
+<td>1.991–2.520</td>
+</tr>
+<tr>
+<td>AU</td>
+<td>0.943 [0.756, 1.316]</td>
+<td>0.794–1.286</td>
+</tr>
+</tbody>
+</table></div>
+<p>AU 只抽阈值的范围为 0.675–1.449，比共同变化的 0.794–1.286 更宽。参数共同变化可以抵消部分影响，不能预设传播后一定变宽。从 14 个模型扩展到 15 个模型的计数中位数最大变化为 0.118 月/年。逐一留出主模型的最大跨度为 0.261，范围为四区、两个时间窗口、两种情景和五种权重。</p>
+<p>用相同的 2022–2024 留出期比较不同校准终点时，AU 的人口加权 RMSE 中位数如下：</p>
+<div aria-label="数据表（可横向滚动）" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">校准终点</th>
+<th scope="col">人口加权 RMSE 中位数（°C）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2013</td>
+<td>3.617</td>
+</tr>
+<tr>
+<td>2019</td>
+<td>3.733</td>
+</tr>
+<tr>
+<td>2021</td>
+<td>3.613</td>
+</tr>
+</tbody>
+</table></div>
+<p>校准终点向后移动，误差没有单调下降。单次端点实验也不能确定未来误差范围。<a href="https://terra.nasa.gov/about/terras-orbit-changes">NASA Terra 轨道资料</a>提示需要检查观测时刻变化。它与晴空采样、区域变化及年际变率均是待区分的机制，后续可结合 Aqua、同位置同季节样本和过境时刻匹配进行检验。</p>
+<p>模型之间共享部分结构，因此不能把模型成员当作相互独立的观测来计算未来差异的统计显著性。建议将校准窗、人口源与成员影响分别列入评估记录。整年抽样未覆盖多年依赖与未来非平稳性，±1 °C 和 ±3 °C 只是压力设定。这些范围用于识别敏感候选，不表示完整未来预测覆盖率。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：近期窗口 ssp585 人口计数：三个同时重估阈值与订正量的校准窗及四种平移；点与线为主集合的 14 个模型中位数及 P10–P90" class="figure-zoom" type="button"><img alt="近期窗口 ssp585 人口计数：三个同时重估阈值与订正量的校准窗及四种平移；点与线为主集合的 14 个模型中位数及 P10–P90" decoding="async" height="1350" loading="lazy" src="figures/audit_revision_20260926/b3_population_sensitivity.png" width="1950"/></button><figcaption class="generated-alt-caption">近期窗口 ssp585 人口计数：三个同时重估阈值与订正量的校准窗及四种平移；点与线为主集合的 14 个模型中位数及 P10–P90</figcaption></figure>
+
+</div>
+<div class="report-block" id="report-6-2">
+<p>建议将校准窗、人口源与成员影响分别列入评估记录。整年抽样未覆盖多年依赖与未来非平稳性，±1 °C 和 ±3 °C 只是压力设定。这些范围用于识别敏感候选，不表示完整未来预测覆盖率。</p>
+
+</div></section><section id="report-section-7" class="section-padding section--editorial" data-section-num="07"><div class="section-header"><h2 class="section-title">7. 成员影响与单模型使用</h2></div><div class="report-block" id="report-7-1">
+<p>从 14 个模型扩展到 15 个模型后，最终计数中位数最大变化 0.118 月/年，逐一留出主模型最大跨度 0.261 月/年。两者覆盖四区、两个时间窗口、两种情景和五种权重，不能推出每个地点都不变。建议保留模型分布。模型间共享结构，不把成员当独立观测计算未来显著性。</p>
+
+</div></section><section id="report-section-8" class="section-padding section--editorial" data-section-num="08"><div class="section-header"><h2 class="section-title">8. 资料核查与下一步验证</h2></div><div class="report-block" id="report-8-1">
+<p>独立回算原始日表，2023–2024 相对 2000–2019 的最大日均有效点比例变化在 AU：0.03832664，即 3.832664 个百分点。比例接近不能证明采到同一组地点或天气，下一步需要同位置同季节与过境时刻匹配。后续空间安排见 <a href="spglobal climate comparison.html">项目综合报告</a>。</p>
+
+</div></section><section id="report-section-9" class="section-padding section--editorial" data-section-num="09"><div class="section-header"><h2 class="section-title">9. 筛查用途</h2></div><div class="report-block" id="report-9-1">
+<p>先按贡献及稳定性安排资料核查，再决定是否开展资产或农业细化评估。人口、建筑和耕地各自对应不同资料需求。</p>
+
+</div></section><section id="report-section-10" class="section-padding section--editorial" data-section-num="10"><div class="section-header"><h2 class="section-title">10. 模型比较与空间订正验证</h2></div><div class="report-block" id="report-10-1">
+<p>直接按 LST 与 tas 的 RMSE 排名，会把均值差和温度变化形态混在一起。先报告 bias，再用 cRMSE 描述去均值后的误差，辅以相关性和标准差比。历史名次附共同时间重抽样范围。</p>
+<div aria-label="数据表（可横向滚动）" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">区域</th>
+<th scope="col">点估计第一名</th>
+<th scope="col">cRMSE（°C）</th>
+<th scope="col">抽样 2.5–97.5 分位（°C）</th>
+<th scope="col">名次范围</th>
+<th scope="col">有效月数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CA</td>
+<td>MIROC6</td>
+<td>5.647</td>
+<td>5.232–6.011</td>
+<td>1–3</td>
+<td>69</td>
+</tr>
+<tr>
+<td>XJ</td>
+<td>GISS-E2-1-G</td>
+<td>3.249</td>
+<td>2.966–3.499</td>
+<td>1–9</td>
+<td>67</td>
+</tr>
+<tr>
+<td>TK</td>
+<td>TaiESM1</td>
+<td>4.409</td>
+<td>3.596–5.065</td>
+<td>1–5</td>
+<td>60</td>
+</tr>
+<tr>
+<td>AU</td>
+<td>GISS-E2-1-G</td>
+<td>6.173</td>
+<td>5.785–6.435</td>
+<td>1–7</td>
+<td>72</td>
+</tr>
+</tbody>
+</table></div>
+<p>计算范围：2015–2020、ssp585、主集合的 14 个模型。采用 2,000 次六整年有放回抽样，保留完整月历再应用共同缺测掩码。表列点估计第一名，并未证明它在新年份仍最优。CA 的名次也覆盖 1–3，四区不宜选一个通用“最佳 GCM”。</p>
+<p>两种订正方法使用相同的 2000–2013 训练期、2014–2024 留出期及有效观测月份。一种方法在每个格子估计订正量，另一种方法把区域订正量应用于局地气温。表中频率 MAE 衡量超阈概率的绝对误差，无量纲。</p>
+<div aria-label="数据表（可横向滚动）" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">区域</th>
+<th scope="col">订正方法</th>
+<th scope="col">人口加权格点 RMSE（°C）</th>
+<th scope="col">人口加权频率 MAE</th>
+<th scope="col">区域均值 RMSE（°C）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CA</td>
+<td>逐格订正</td>
+<td>3.295</td>
+<td>0.066</td>
+<td>3.246</td>
+</tr>
+<tr>
+<td>CA</td>
+<td>区域订正应用于局地气温</td>
+<td>5.787</td>
+<td>0.216</td>
+<td>3.242</td>
+</tr>
+<tr>
+<td>XJ</td>
+<td>逐格订正</td>
+<td>3.176</td>
+<td>0.059</td>
+<td>2.463</td>
+</tr>
+<tr>
+<td>XJ</td>
+<td>区域订正应用于局地气温</td>
+<td>4.313</td>
+<td>0.127</td>
+<td>2.484</td>
+</tr>
+<tr>
+<td>TK</td>
+<td>逐格订正</td>
+<td>3.611</td>
+<td>0.049</td>
+<td>3.267</td>
+</tr>
+<tr>
+<td>TK</td>
+<td>区域订正应用于局地气温</td>
+<td>4.669</td>
+<td>0.113</td>
+<td>3.281</td>
+</tr>
+<tr>
+<td>AU</td>
+<td>逐格订正</td>
+<td>2.860</td>
+<td>0.045</td>
+<td>2.965</td>
+</tr>
+<tr>
+<td>AU</td>
+<td>区域订正应用于局地气温</td>
+<td>4.388</td>
+<td>0.109</td>
+<td>2.843</td>
+</tr>
+</tbody>
+</table></div>
+<p>计算范围：主集合的 14 个模型中位数。逐点方法四区人口加权格点误差均较低，支持继续用它开展空间核查。AU 区域均值 RMSE 却由 2.843 升为 2.965 °C。不同层级回答不同问题。后续应在候选位置用独立观测核验频率和排序，不能用区域均值通过替代地点验证。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：共同观测、共同掩码下的两种订正方法" class="figure-zoom" type="button"><img alt="共同观测、共同掩码下的两种订正方法" decoding="async" height="675" loading="lazy" src="figures/audit_revision_20260926/b2_common_reference_validation.png" width="1650"/></button><figcaption class="generated-alt-caption">共同观测、共同掩码下的两种订正方法</figcaption></figure>
+
+</div></section><section id="report-section-11" class="section-padding section--editorial" data-section-num="11"><div class="section-header"><h2 class="section-title">11. 绝对频度与观测参照</h2></div><div class="report-block" id="report-11-1">
+<p>近期窗口 ssp585 的人口与面积加权频度之比中位数为 CA 1.153、XJ 0.904、TK 1.005、AU 0.777。它衡量人口所处格子的平均频度相对于区域面积平均的差别。CA 的人口集中于较高频度格子，AU 则较低。这一比值并不回答未来是否低于观测，也不等同绝对损失。</p>
+<div aria-label="数据表（可横向滚动）" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">区域</th>
+<th scope="col">面积加权 月/年</th>
+<th scope="col">人口加权 月/年</th>
+<th scope="col">人口与面积频度之比</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CA</td>
+<td>1.870 [1.644, 2.298]</td>
+<td>2.231 [1.797, 2.632]</td>
+<td>1.153 [1.096, 1.253]</td>
+</tr>
+<tr>
+<td>XJ</td>
+<td>1.950 [1.560, 2.334]</td>
+<td>1.773 [1.329, 2.397]</td>
+<td>0.904 [0.836, 1.026]</td>
+</tr>
+<tr>
+<td>TK</td>
+<td>2.244 [1.918, 2.666]</td>
+<td>2.290 [1.970, 2.605]</td>
+<td>1.005 [0.949, 1.062]</td>
+</tr>
+<tr>
+<td>AU</td>
+<td>1.204 [0.970, 1.491]</td>
+<td>0.943 [0.756, 1.316]</td>
+<td>0.777 [0.677, 0.916]</td>
+</tr>
+</tbody>
+</table></div>
+<p>计算范围：主集合的 14 个模型、中位数 [P10, P90]。面积加权超阈频度的次序为 TK &gt; XJ &gt; CA &gt; AU，人口加权频度的次序为 TK &gt; CA &gt; XJ &gt; AU，CA 与 XJ 交换位置。两种权重对应不同的空间分布，因此区域次序不同。</p>
+<p>TK 使用两套人口资料得到的加权超阈频度接近，但人口总量不同，使超阈暴露总量相差较大。</p>
+<div aria-label="数据表（可横向滚动）" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">人口资料</th>
+<th scope="col">加权频度（月/年）</th>
+<th scope="col">暴露总量（万人·月/年）</th>
+<th scope="col">人口（万人）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GHS</td>
+<td>2.290</td>
+<td>1459.45</td>
+<td>约 637</td>
+</tr>
+<tr>
+<td>GPW</td>
+<td>2.306</td>
+<td>754.92</td>
+<td>约 327</td>
+</tr>
+</tbody>
+</table></div>
+<p>开展实际调查前，需要同时核实人口总量及其空间分配。</p>
+<p>AU 人口加权观测为 1.069 月/年，订正历史模型中位数仅 0.534，近期窗口 ssp585 为 0.943。未来低于观测包含原有历史频率低估，不能解释成真实风险下降。人口和建成区加权的未来频度低于观测，面积和耕地加权的未来频度则高于观测：面积为 1.204 对 1.161，耕地为 1.188 对 1.177 月/年。建议人口、建筑与农业分别核查，并用独立资料检验暖季分布是否偏窄。</p>
+<p>在主集合的 14 个模型中，CA、XJ、TK 的四种权重在近期窗口 ssp585 下，未来超阈频度均高于观测。远期窗口也保持这一方向。AU 的模型一致性因权重和窗口而异：</p>
+<div aria-label="数据表（可横向滚动）" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">AU 的加权方式</th>
+<th scope="col">2035–2044 正向模型数（共 14 个）</th>
+<th scope="col">2050–2059 正向模型数（共 14 个）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>面积</td>
+<td>9</td>
+<td>14</td>
+</tr>
+<tr>
+<td>人口</td>
+<td>4</td>
+<td>13</td>
+</tr>
+<tr>
+<td>建成区</td>
+<td>5</td>
+<td>13</td>
+</tr>
+<tr>
+<td>耕地</td>
+<td>8</td>
+<td>14</td>
+</tr>
+</tbody>
+</table></div>
+
+</div>
+<div class="report-block" id="report-11-2">
+<p>TK 的研究框跨境。在完整格子并集内，GHS 人口约 93.4546% 位于伊朗。这一比例描述该研究框的人口份额，不是整个 TK 国家或地区的人口。国别分母与逐格汇总的相对差异不到 0.01%，来自像元边界部分覆盖与分区归约。</p>
+
+</div></section><section id="report-section-12" class="section-padding section--editorial" data-section-num="12"><div class="section-header"><h2 class="section-title">12. 候选地点与核查顺序</h2></div><div class="report-block" id="report-12-1">
+<p>人口、建成区和耕地分别形成候选名单。在每个模型内，以“暴露量×超阈频度”为格子评分，再取各模型评分的中位数。候选名额等于正暴露格子数的十分之一，向上取整。按评分从高到低选取，只保留正分数，并保留边界处的全部并列格子。并列判断前，评分取八位小数。</p>
+<p>优先核查名单还要求候选在六个校准设定、包含 15 个模型的集合，以及每次剔除一个主集合模型时都能保留。模型入选比例与共同时间抽样入选频率均需至少达到 80%，人口候选还需在 GPW 数据下保留。前十分位和 80% 阈值是本项目提出的核查排期规则。</p>
+<div aria-label="数据表（可横向滚动）" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">区域</th>
+<th scope="col">暴露层</th>
+<th scope="col">基准候选数</th>
+<th scope="col">优先核查数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CA</td>
+<td>人口</td>
+<td>14</td>
+<td>13</td>
+</tr>
+<tr>
+<td>CA</td>
+<td>建成区</td>
+<td>16</td>
+<td>15</td>
+</tr>
+<tr>
+<td>CA</td>
+<td>耕地</td>
+<td>11</td>
+<td>10</td>
+</tr>
+<tr>
+<td>XJ</td>
+<td>人口</td>
+<td>4</td>
+<td>3</td>
+</tr>
+<tr>
+<td>XJ</td>
+<td>建成区</td>
+<td>7</td>
+<td>6</td>
+</tr>
+<tr>
+<td>XJ</td>
+<td>耕地</td>
+<td>7</td>
+<td>6</td>
+</tr>
+<tr>
+<td>TK</td>
+<td>人口</td>
+<td>13</td>
+<td>5</td>
+</tr>
+<tr>
+<td>TK</td>
+<td>建成区</td>
+<td>13</td>
+<td>11</td>
+</tr>
+<tr>
+<td>TK</td>
+<td>耕地</td>
+<td>13</td>
+<td>11</td>
+</tr>
+<tr>
+<td>AU</td>
+<td>人口</td>
+<td>57</td>
+<td>49</td>
+</tr>
+<tr>
+<td>AU</td>
+<td>建成区</td>
+<td>57</td>
+<td>43</td>
+</tr>
+<tr>
+<td>AU</td>
+<td>耕地</td>
+<td>56</td>
+<td>32</td>
+</tr>
+</tbody>
+</table></div>
+<p>本表对应 2035–2044 年、ssp585 情景，共 268 个基准条目，其中 204 个进入优先核查名单。条目按“格子×暴露层”计数，同一地点可能在不同层重复出现。</p>
+<div aria-label="数据表（可横向滚动）" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">区域</th>
+<th scope="col">发现与解释</th>
+<th scope="col">拟实施的动作</th>
+<th scope="col">后续检验</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CA</td>
+<td>14 个人口候选与人口单独排序全部重合，稳定性可能由暴露集中驱动</td>
+<td>先核集中格子的占用、用途及资产点位</td>
+<td>用格内多位置观测检查中心像元代表性，并比较危害排序与贡献排序</td>
+</tr>
+<tr>
+<td>XJ</td>
+<td>只有 4 个人口基准候选，人口与面积加权频度之比随校准可跨过 1</td>
+<td>核实本地人口和耕地分配，保留敏感候选</td>
+<td>在共同观测支持下检查人口源、校准窗和生长季指标</td>
+</tr>
+<tr>
+<td>TK</td>
+<td>13 个人口候选时间入选率均为 1，GPW 却只保留 5 个</td>
+<td>优先解决两套人口资料的空间分配冲突</td>
+<td>对照本地统计和居民点位置，再重算贡献与名单</td>
+</tr>
+<tr>
+<td>AU</td>
+<td>部分人口候选对窗口和抽样敏感，最低入选率为 0.358</td>
+<td>纬度 −36.125、经度 146.625 格子保留待核，不承诺精确排位</td>
+<td>该格仅在 6 个校准设定中的 2 个设定下保留，先查温度频率与当地用途。农业另查作物、灌溉和生长季</td>
+</tr>
+</tbody>
+</table></div>
+<p>名单稳定说明在已测设定下持续入选。入选率不是地点受灾概率。人口用于安排居民资料核查，建成区用于核对资产用途与占用，耕地用于补作物及生长季资料。只有这些信息和独立观测支持时，才进一步建立损失或适应措施评估。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：近期窗口 ssp585 三层基准候选；颜色为 500 次共同整年抽样中的入选频率，不是受灾概率" class="figure-zoom" type="button"><img alt="近期窗口 ssp585 三层基准候选；颜色为 500 次共同整年抽样中的入选频率，不是受灾概率" decoding="async" height="2100" loading="lazy" src="figures/audit_revision_20260926/b3_candidate_sampling.png" width="1800"/></button><figcaption class="generated-alt-caption">近期窗口 ssp585 三层基准候选；颜色为 500 次共同整年抽样中的入选频率，不是受灾概率</figcaption></figure>
+
+</div></section><section id="report-section-13" class="section-padding section--editorial" data-section-num="13"><div class="section-header"><h2 class="section-title">13. 分层实施与检验</h2></div><div class="report-block" id="report-13-1">
+<p>人口层补居民点、活动和季节性占用，建成区层补资产轮廓、用途和占用，耕地层补作物、生长季和灌溉。优先核查规则用于安排有限调查资源。先复核来源敏感和临界格子，再用独立观测验证危害频率。损失函数及适应措施成本需要后续真实资料。</p>
+
+</div></section></article>
+  </section>
+<nav class="report-series" aria-label="系列阅读"><a class="report-series__link" href="spglobal climate comparison.html">S&amp;P Global Capstone：气候模型、预测与空间暴露</a><a class="report-series__link" href="model comparison.html">Capstone 专题：模型比较</a><a class="report-series__link" href="long series.html">Capstone 专题：长序列与短期预测</a><a class="report-series__link is-current" href="projection overlay.html">长期配对情景与空间暴露</a></nav>
+  <section id="related" class="section-padding"><div class="section-header"><h2 class="section-title">相关项目</h2></div><div class="grid md:grid-cols-2 gap-6"><a href="../healthy home/healthy home.html" class="related-project-card"><h3 class="related-project-title">Healthy Home：奥克兰空间预测与道路地图</h3><p class="related-project-description">结合 18,219 个观测点、道路网络与嵌套空间评价，分析奥克兰污染物分布。随机森林在区域分块评价中的 NO₂ 合并 R² 为 0.576017，道路相对预测图覆盖 628.74 km，并通过分区误差诊断提出补充观测方案。</p><span class="related-project-link">查看详情</span></a><a href="../lendingclub loan prediction/lendingclub loan prediction.html" class="related-project-card"><h3 class="related-project-title">LendingClub：9,004 笔贷款样本</h3><p class="related-project-description">从 9,004 笔历史贷款中分析违约分布，比较模型与期限规则，设计不对称成本下的筛查策略。Random Forest 冻结阈值 0.22，测试召回率 70.45%，净模拟成本降幅 4.68%。</p><span class="related-project-link">查看详情</span></a></div></section>
+</main>
+<script src="../../assets/js/logo.js"></script>
+<script src="../../assets/js/common.js"></script>
+<script src="../../assets/js/project.js"></script>
+<script src="../../assets/js/language-switcher.js"></script>
+</body>
+</html>

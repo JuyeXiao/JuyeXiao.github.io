@@ -366,92 +366,69 @@
                 <p class="subtitle mt-2">每个项目都是一次探索与发现之旅。</p>
             </div>
             <div class="bento-grid reveal stagger-children">
-                <!-- 大项目 -->
                 <a href="projects/spglobal climate comparison/spglobal climate comparison.html" class="bento-item" data-grid-col="8" data-grid-row="2">
-                    <div class="bento-content">
-                        <div class="flex-grow">
-                            <div class="flex justify-between items-start">
-                                <span class="bento-tag">气候风险分析</span>
-                            </div>
-                            <h3 class="mt-4 text-2xl">卫星地表温度与 CMIP6 气温：重做并审计 2022 年的 capstone</h3>
-                            <p class="mt-2 text-sm" style="color: var(--brown);">S&P Global 资助的哥大 capstone，团队项目（tech
-                                lead）。2026 年从原始数据源重建整条管线，扩到四个区域、15 个模型、两条情景：RMSE² 里 74% 到 97% 是皮温与气温的物理量差；当年那个 RMSE 冠军赢在未修订的数据版本。交付成果是一条经留出检验的分月偏差订正配方，把白天 LST 的 RMSE 中位数从 12.29–19.17 °C 压到
-                                2.36–3.78 °C。
-                            </p>
-                        </div>
-                        <div class="mt-4 text-right">
-                            <span class="text-link">查看详情</span>
-                        </div>
-                    </div>
+                    <div class="bento-content"><div class="flex-grow">
+                        <span class="bento-tag">气候与空间分析</span>
+                        <h3 class="mt-4 text-xl">S&amp;P Global Capstone：气候模型、预测与空间暴露</h3>
+                        <p class="mt-2 text-sm">在 2022 年 Capstone 基础上完成 2026 年重建分析，覆盖四个研究框、1,020 个格子，串联气候模型比较、短期预测、长期情景与空间暴露。2035–2044 年 ssp585 情景下，204 个格子×暴露层条目满足拟议优先核查规则。</p>
+                    </div><div class="mt-4 text-right"><span class="text-link">查看详情</span></div></div>
                     <div class="number-decoration">01</div>
                 </a>
-                <!-- 中项目 -->
                 <a href="projects/youtube comment analysis/youtube comment analysis.html" class="bento-item" data-grid-col="4" data-grid-row="2">
-                    <div class="bento-content">
-                        <div class="flex-grow">
-                            <span class="bento-tag">NLP · 弱监督</span>
-                            <h3 class="mt-4 text-xl">582万条YouTube评论里的宠物主识别</h3>
-                            <p class="mt-2 text-sm" style="color: var(--brown);">
-                                无真实标签时怎么做分类：弱监督标注 + 特征解耦 + 300 条人工标注验证。掩码模型一致性 AUC 0.91，以约 94% 精度圈出 4.5 万名高置信宠物主，并按宠物主受众占比为 3,858 个频道排名。
-                            </p>
-                        </div>
-                        <div class="mt-4 text-right">
-                            <span class="text-link">查看详情</span>
-                        </div>
-                    </div>
+                    <div class="bento-content"><div class="flex-grow">
+                        <span class="bento-tag">NLP · 弱监督</span>
+                        <h3 class="mt-4 text-xl">YouTube 评论：养宠文本信号与频道筛选</h3>
+                        <p class="mt-2 text-sm">对 5,818,979 条评论构建弱监督分类与频道候选排名，结合 TF-IDF、行为特征和 SHAP 分析养宠文本信号。300 条新评论经助手复核，294 条可判定，条件加权精确率为 0.8982。</p>
+                    </div><div class="mt-4 text-right"><span class="text-link">查看详情</span></div></div>
                     <div class="number-decoration">02</div>
                 </a>
-                <!-- 小项目 -->
-                <a href="projects/Bank Customer Churn Prediction/Bank Customer Churn Prediction.html"
-                    class="bento-item" data-grid-col="4">
-                    <div class="bento-content">
-                        <div class="flex-grow">
-                            <div class="flex justify-between items-start">
-                                <span class="bento-tag">客户分析</span>
-                            </div>
-                            <h3 class="mt-4 text-xl">银行客户流失预测与关键驱动因素分析</h3>
-                            <p class="mt-2 text-sm" style="color: var(--brown);">
-                                XGBoost+SMOTE，ROC-AUC 0.876。F2 阈值在训练集折外预测上调到 0.20，流失捕获率从 61% 提到 87%，并给出 C*≈3.7 的盈亏平衡成本比；持有 3–4 个产品的客户反而流失更多。</p>
-                        </div>
-                        <div class="mt-4 text-right">
-                            <span class="text-link">查看详情</span>
-                        </div>
-                    </div>
+                <a href="projects/Bank Customer Churn Prediction/Bank Customer Churn Prediction.html" class="bento-item" data-grid-col="4">
+                    <div class="bento-content"><div class="flex-grow">
+                        <span class="bento-tag">客户分析</span>
+                        <h3 class="mt-4 text-xl">银行客户流失：模式、解释与服务容量</h3>
+                        <p class="mt-2 text-sm">结合 10,000 名客户的分组分析、模型比较与 SHAP 解释，识别流失信号并设计服务优先级。冻结阈值 0.275 的测试召回率为 78.39%、精确率为 48.25%，进一步比较不同服务容量下的覆盖与成本。</p>
+                    </div><div class="mt-4 text-right"><span class="text-link">查看详情</span></div></div>
                     <div class="number-decoration">03</div>
                 </a>
-                <a href="projects/e-commerce fraud detection/e-commerce fraud detection.html" class="bento-item"
-                    data-grid-col="4">
-                    <div class="bento-content">
-                        <div class="flex-grow">
-                            <div class="flex justify-between items-start">
-                                <span class="bento-tag">风险控制</span>
-                            </div>
-                            <h3 class="mt-4 text-xl">电商首单欺诈检测</h3>
-                            <p class="mt-2 text-sm" style="color: var(--brown);">
-                                13.8 万笔首单交易、1.02% 欺诈率。拦截 0.53% 流量抓住 51.6% 欺诈、仅 2 个误报，损失降约 51%，并诚实证明这一运营点可由一条单规则复现、召回被数据锁死在 52%。</p>
-                        </div>
-                        <div class="mt-4 text-right">
-                            <span class="text-link">查看详情</span>
-                        </div>
-                    </div>
+                <a href="projects/e-commerce fraud detection/e-commerce fraud detection.html" class="bento-item" data-grid-col="4">
+                    <div class="bento-content"><div class="flex-grow">
+                        <span class="bento-tag">风险分析</span>
+                        <h3 class="mt-4 text-xl">电商首单欺诈：时间评估与审核建议</h3>
+                        <p class="mt-2 text-sm">围绕 138,376 笔首单交易，分析购买时序、设备与 IP 行为，比较不平衡处理方法。通过前向验证和成本情景评估，提出按模型分数与交易线索分级的人工审核方案。</p>
+                    </div><div class="mt-4 text-right"><span class="text-link">查看详情</span></div></div>
                     <div class="number-decoration">04</div>
                 </a>
-                <a href="projects/lendingclub loan prediction/lendingclub loan prediction.html"
-                    class="bento-item" data-grid-col="4">
-                    <div class="bento-content">
-                        <div class="flex-grow">
-                            <div class="flex justify-between items-start">
-                                <span class="bento-tag">金融分析</span>
-                            </div>
-                            <h3 class="mt-4 text-xl">LendingClub 贷款违约预测</h3>
-                            <p class="mt-2 text-sm" style="color: var(--brown);">
-                                9,004 笔 LendingClub 贷款、违约率 16.8%。漏判成本是误拒的 4.2 倍时，把阈值从 0.5 移到 0.16：抓住 74.9% 的违约，预期损失比全批放款低 26.5%（净口径 6.6%）；而一条 60 个月期限规则就拿走降幅大头。</p>
-                        </div>
-                        <div class="mt-4 text-right">
-                            <span class="text-link">查看详情</span>
-                        </div>
-                    </div>
+                <a href="projects/lendingclub loan prediction/lendingclub loan prediction.html" class="bento-item" data-grid-col="4">
+                    <div class="bento-content"><div class="flex-grow">
+                        <span class="bento-tag">金融分析</span>
+                        <h3 class="mt-4 text-xl">LendingClub：9,004 笔贷款样本</h3>
+                        <p class="mt-2 text-sm">从 9,004 笔历史贷款中分析违约分布，比较模型与期限规则，设计不对称成本下的筛查策略。Random Forest 冻结阈值 0.22，测试召回率 70.45%，净模拟成本降幅 4.68%。</p>
+                    </div><div class="mt-4 text-right"><span class="text-link">查看详情</span></div></div>
                     <div class="number-decoration">05</div>
+                </a>
+                <a href="projects/ab testing/ab testing.html" class="bento-item" data-grid-col="4">
+                    <div class="bento-content"><div class="flex-grow">
+                        <span class="bento-tag">实验分析</span>
+                        <h3 class="mt-4 text-xl">A/B Testing：Cookie Cats 关卡门实验</h3>
+                        <p class="mt-2 text-sm">比较 90,189 名玩家的留存与参与度，结合分流检验、自助法和统计功效评估关卡门位置。第 40 关组的 7 日留存比第 30 关组低 0.82 个百分点，95% 区间为 [−1.33, −0.31]，据此提出关卡与回访体验建议。</p>
+                    </div><div class="mt-4 text-right"><span class="text-link">查看详情</span></div></div>
+                    <div class="number-decoration">06</div>
+                </a>
+                <a href="projects/healthy home/healthy home.html" class="bento-item" data-grid-col="4">
+                    <div class="bento-content"><div class="flex-grow">
+                        <span class="bento-tag">空间数据分析</span>
+                        <h3 class="mt-4 text-xl">Healthy Home：奥克兰空间预测与道路地图</h3>
+                        <p class="mt-2 text-sm">结合 18,219 个观测点、道路网络与嵌套空间评价，分析奥克兰污染物分布。随机森林在区域分块评价中的 NO₂ 合并 R² 为 0.576017，道路相对预测图覆盖 628.74 km，并通过分区误差诊断提出补充观测方案。</p>
+                    </div><div class="mt-4 text-right"><span class="text-link">查看详情</span></div></div>
+                    <div class="number-decoration">07</div>
+                </a>
+                <a href="projects/amazon watch reviews/amazon watch reviews.html" class="bento-item" data-grid-col="4">
+                    <div class="bento-content"><div class="flex-grow">
+                        <span class="bento-tag">NLP · 主题建模</span>
+                        <h3 class="mt-4 text-xl">Amazon 手表评论：聚类、主题与改进建议</h3>
+                        <p class="mt-2 text-sm">从 960,872 条原始记录中整理评论语料，使用 K-Means 与 LDA 分析 858,037 条建模评论。故障／退货主题均分 2.37 星，覆盖建模一星评论的 52.9%，为产品排查、说明优化与评论监测提供线索。</p>
+                    </div><div class="mt-4 text-right"><span class="text-link">查看详情</span></div></div>
+                    <div class="number-decoration">08</div>
                 </a>
             </div>
         </section>

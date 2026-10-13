@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>document.documentElement.classList.add('js');</script>
+  <title>The Long Record (2000–2024): Four Regions and Spliced Model Runs - Data Poetics</title>
+  <meta name="description" content="Use 299 months of observations from 2000–2024 and five test windows to compare 12- and 24-month forecasts. Regional comparisons retain climatology baselines and identify TK Prophet and AU 24-month SARIMA as candidate methods, with trend and calibration diagnostics guiding further evaluation.">
+  <meta property="og:title" content="The Long Record (2000–2024): Four Regions and Spliced Model Runs">
+  <meta property="og:description" content="Use 299 months of observations from 2000–2024 and five test windows to compare 12- and 24-month forecasts. Regional comparisons retain climatology baselines and identify TK Prophet and AU 24-month SARIMA as candidate methods, with trend and calibration diagnostics guiding further evaluation.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://juyexiao.github.io/projects/spglobal%20climate%20comparison/long%20series-en.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:description" content="Use 299 months of observations from 2000–2024 and five test windows to compare 12- and 24-month forecasts. Regional comparisons retain climatology baselines and identify TK Prophet and AU 24-month SARIMA as candidate methods, with trend and calibration diagnostics guiding further evaluation.">
+  <link rel="canonical" href="https://juyexiao.github.io/projects/spglobal%20climate%20comparison/long%20series-en.html">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&amp;family=Inter:wght@200;300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;700&amp;family=Noto+Sans+SC:wght@400;500;600&amp;family=Noto+Serif+SC:wght@500&amp;display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="../../assets/css/index.css">
+  <link rel="stylesheet" href="../../assets/css/project.css">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "The Long Record (2000–2024): Four Regions and Spliced Model Runs", "description": "Use 299 months of observations from 2000–2024 and five test windows to compare 12- and 24-month forecasts. Regional comparisons retain climatology baselines and identify TK Prophet and AU 24-month SARIMA as candidate methods, with trend and calibration diagnostics guiding further evaluation.", "inLanguage": "en", "author": {"@type": "Person", "name": "Juye Xiao"}}</script>
+</head>
+<body class="transition-colors duration-300 report-page">
+<div class="scroll-progress" id="scroll-progress"></div>
+<header class="navbar fixed top-0 left-0 right-0 z-50" id="navbar">
+<div class="container-main h-full flex items-center justify-between">
+<!-- Logo Section -->
+<a class="navbar-logo" href="../../index-en.html#hero" id="navbar-logo">
+<!-- SVG Logo -->
+<svg class="logo-svg-nav" viewbox="0 0 40 40">
+<!-- Data Grid Background -->
+<g class="grid-bg">
+<!-- Vertical Lines -->
+<line class="grid-line-v" style="animation-delay: 0.1s, 0s" x1="8" x2="8" y1="0" y2="40"></line>
+<line class="grid-line-v" style="animation-delay: 0.2s, 0.5s" x1="16" x2="16" y1="0" y2="40"></line>
+<line class="grid-line-v" style="animation-delay: 0.3s, 1s" x1="24" x2="24" y1="0" y2="40"></line>
+<line class="grid-line-v" style="animation-delay: 0.4s, 1.5s" x1="32" x2="32" y1="0" y2="40"></line>
+<!-- Horizontal Lines -->
+<line class="grid-line-h" style="animation-delay: 0.5s, 0s" x1="0" x2="40" y1="10" y2="10"></line>
+<line class="grid-line-h" style="animation-delay: 0.6s, 0.7s" x1="0" x2="40" y1="20" y2="20"></line>
+<line class="grid-line-h" style="animation-delay: 0.7s, 1.4s" x1="0" x2="40" y1="30" y2="30"></line>
+</g>
+<!-- Weaver Animation Line -->
+<line class="weaver-line" id="weaverLine" x1="0" x2="40" y1="20" y2="20"></line>
+<!-- JX Letters -->
+<text class="logo-letters" id="logoLetters" text-anchor="middle" x="20" y="26">JX</text>
+</svg>
+<!-- Name Signature (Hover Display) -->
+<div class="logo-name">
+<div class="logo-name-text">Juye Xiao</div>
+<div class="logo-name-subtitle">Data Analyst</div>
+</div>
+</a>
+<nav class="hidden md:flex items-center space-x-8">
+<a class="nav-link" href="../../index-en.html#about">About</a>
+<a class="nav-link" href="../../index-en.html#experience">Experience</a>
+<a class="nav-link" href="../../index-en.html#education">Education</a>
+<a class="nav-link" href="../../index-en.html#projects">Projects</a>
+<a class="nav-link" href="../../index-en.html#skills">Skills</a>
+<a class="nav-link" href="../../index-en.html#contact">Contact</a>
+</nav>
+<div class="flex items-center space-x-4">
+<button aria-label="Toggle theme" class="btn-secondary !p-2 !rounded-full" id="theme-toggle">
+<i class="block dark:hidden" data-lucide="sun"></i>
+<i class="hidden dark:block" data-lucide="moon"></i>
+</button>
+<button class="btn-secondary !p-2 !rounded-full" id="lang-toggle">
+<span class="font-bold text-sm">中</span>
+</button>
+<button aria-controls="mobile-menu" aria-expanded="false" aria-label="Open menu" class="btn-secondary !p-2 !rounded-full md:hidden" id="menu-toggle">
+<i class="menu-icon-open" data-lucide="menu"></i>
+<i class="menu-icon-close" data-lucide="x"></i>
+</button>
+</div>
+</div>
+<nav aria-label="Mobile navigation" class="mobile-menu md:hidden" id="mobile-menu">
+<a class="nav-link" href="../../index-en.html#about">About</a>
+<a class="nav-link" href="../../index-en.html#experience">Experience</a>
+<a class="nav-link" href="../../index-en.html#education">Education</a>
+<a class="nav-link" href="../../index-en.html#projects">Projects</a>
+<a class="nav-link" href="../../index-en.html#skills">Skills</a>
+<a class="nav-link" href="../../index-en.html#contact">Contact</a>
+</nav>
+</header>
+<main class="container-main">
+  <section id="project-hero" class="section-padding report-hero">
+    <div class="section-eyebrow"><span class="section-kicker">Capstone · Long Series</span></div>
+    <h1 class="hero-title">The Long Record (2000–2024): Four Regions and Spliced Model Runs</h1>
+    <p class="subtitle report-standfirst">Use 299 months of observations from 2000–2024 and five test windows to compare 12- and 24-month forecasts. Regional comparisons retain climatology baselines and identify TK Prophet and AU 24-month SARIMA as candidate methods, with trend and calibration diagnostics guiding further evaluation.</p>
+    <p class="reading-time">Analysis updated in 2026</p>
+    <div class="hero-stats"><div class="hero-stat"><div class="hero-stat__num">299</div><div class="hero-stat__label">Months in the observation record</div></div><div class="hero-stat"><div class="hero-stat__num">5</div><div class="hero-stat__label">Test end years</div></div><div class="hero-stat"><div class="hero-stat__num">12 / 24</div><div class="hero-stat__label">Forecast horizons (months)</div></div></div>
+    <div class="report-actions"><a class="btn btn-primary" href="#content">Read report</a><a class="btn btn-secondary" href="../../index-en.html#projects">All projects</a></div>
+  </section>
+<nav class="report-series" aria-label="Series navigation"><a class="report-series__link" href="spglobal climate comparison-en.html">S&amp;P Global Capstone: climate models, forecasts and spatial exposure</a><a class="report-series__link" href="model comparison-en.html">Capstone study: model comparison</a><a class="report-series__link is-current" href="long series-en.html">Capstone study: long records and short-term forecasts</a><a class="report-series__link" href="projection overlay-en.html">Paired long-term scenarios and spatial exposure</a></nav>
+  <section id="content" class="section-padding report-layout">
+    <aside><nav class="project-toc" id="project-toc" aria-label="Report contents"><h3>Contents</h3><ul id="toc-list"><li><a class="toc-link" href="#report-section-1">1. Long-series analysis summary</a></li><li><a class="toc-link" href="#report-section-2">2. Uses of the longer record</a></li><li><a class="toc-link" href="#report-section-3">3. Extending both sides of the record</a></li><li><a class="toc-link" href="#report-section-4">4. Method: the splice, the gaps, and the test design</a></li><li><a class="toc-link" href="#report-section-5">5. Short-term forecasting by region and horizon</a></li><li><a class="toc-link" href="#report-section-6">6. Trends: what survives four checks</a></li><li><a class="toc-link" href="#report-section-7">7. Bias correction: long window, ensemble, lead time</a></li><li><a class="toc-link" href="#report-section-8">8. Model ensemble and data versions</a></li><li><a class="toc-link" href="#report-section-9">9. Further tests of forecasts and calibration</a></li></ul></nav></aside>
+    <article class="content-area report-body" id="report-body"><section id="report-section-1" class="section-padding section--editorial" data-section-num="01"><div class="section-header"><h2 class="section-title">1. Long-series analysis summary</h2></div><div class="report-block" id="report-1-1">
+<p>This report uses observation and model records spanning 2000–2024 to compare short-term forecasting methods, examine observed trends and assess bias-correction stability. Forecasts use five test windows and two horizons, with imputation and parameter selection confined to training. Calibration is assessed on a common recent holdout and under alternative windows and model ensembles.</p>
+<p>Short-term forecasting requires a choice by region and horizon. Monthly climatology remains the default comparison for CA and XJ; Prophet in TK and 24-month SARIMA in AU merit further validation. Long-term assessment uses differences paired within each climate model. Scenario temperature differences are easier to interpret directly than absolute exceedance counts, which respond to calibration windows and historical frequency bias.</p>
+
+</div></section><section id="report-section-2" class="section-padding section--editorial" data-section-num="02"><div class="section-header"><h2 class="section-title">2. Uses of the longer record</h2></div><div class="report-block" id="report-2-1">
+<p>A longer record permits comparisons across forecast windows, tests of trend endpoint sensitivity and checks of correction stability. Record length alone does not establish model suitability, and residual diagnostics cannot define a universal twenty-year minimum. Cell-level validation and exposure screening are presented in the <a href="projection overlay-en.html#report-section-1">scenario and spatial exposure report</a>.</p>
+
+</div></section><section id="report-section-3" class="section-padding section--editorial" data-section-num="03"><div class="section-header"><h2 class="section-title">3. Extending both sides of the record</h2></div><div class="report-block" id="report-3-1">
+<h3>3.1 Observations: 299 months per region</h3>
+<p>MODIS daytime land surface temperature now covers 2000-02 to 2024-12 in all four regions, 299 months each. The coverage rule (at least 50% of grid points per day, at least 10 valid days per month) costs a different amount in each:</p>
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">Region</th>
+<th scope="col">Valid months</th>
+<th scope="col">Masked</th>
+<th scope="col">Masked share</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CA</td>
+<td>286</td>
+<td>13</td>
+<td>4.3%</td>
+</tr>
+<tr>
+<td>XJ</td>
+<td>278</td>
+<td>21</td>
+<td>7.0%</td>
+</tr>
+<tr>
+<td>TK</td>
+<td>245</td>
+<td>54</td>
+<td>18.1%</td>
+</tr>
+<tr>
+<td>AU</td>
+<td>292</td>
+<td>7</td>
+<td>2.3%</td>
+</tr>
+</tbody>
+</table></div>
+<p>TK loses close to one month in five, and the losses concentrate in the cold season: 50 of its 54 masked months fall between December and March. That warm-season lean follows every TK figure in this report.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Twenty-five years of observations" class="figure-zoom" type="button"><img alt="Twenty-five years of observations" decoding="async" height="1500" loading="lazy" src="figures/long_series/ALL_obs_25yr.png" width="1634"/></button><figcaption><em>Monthly daytime land surface temperature in the four regions, with red rules marking months the coverage rule removes. The TK panel carries several times the density of the other three, and its losses arrive in clusters every winter. Any seasonal quantity for TK therefore needs its own caveat.</em></figcaption></figure>
+
+<h3>3.2 Consistency in the overlapping period</h3>
+<p>The six-year and long-record extractions both cover 2015–2020. Pairing originally observed months gives 69, 67, 60 and 72 months in CA, XJ, TK and AU. The maximum absolute difference is 0.0000 °C, correlation is 1.000000, and masked-month counts agree in every region. This supports consistent data definitions in the overlapping period.</p>
+<h3>3.3 Model series: historical joined to SSP</h3>
+<p>NEX-GDDP-CMIP6 distributes each model's SSP run from 2015 onward. Before that comes the historical run, which in CMIP6 is the simulation the SSP run continues from. Joining the two at 2014–2015 makes the model series as long as the observations.</p>
+<p>Two checks establish that the join is legitimate. All fifteen models carry the same ensemble-member label and the same file version on both sides, and every spliced series is 300 months long in every region. The seam itself is measured as the difference between the five-year climatologies of the same calendar month on either side. The other fourteen models sit at +0.28 ± 0.18 °C, a range of −0.15 to +0.50; CMCC-CM2-SR5 sits at −0.13 °C, 2.2 standard deviations away.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Annual means after splicing" class="figure-zoom" type="button"><img alt="Annual means after splicing" decoding="async" height="1036" loading="lazy" src="figures/long_series/ALL_splice_seam.png" width="1932"/></button><figcaption><em>Annual means by region: model tas as thin lines, observations in blue, the 2014–2015 seam dashed. The model lines run continuously through the seam with no step. The black line is CMCC-CM2-SR5, which sits above the rest of the field throughout without jumping at the join, and §8 explains why.</em></figcaption></figure>
+
+<hr/>
+
+</div></section><section id="report-section-4" class="section-padding section--editorial" data-section-num="04"><div class="section-header"><h2 class="section-title">4. Method: the splice, the gaps, and the test design</h2></div><div class="report-block" id="report-4-1">
+<p>Four decisions, each with its purpose, the alternatives, and what it costs.</p>
+<h3>4.1 The splice</h3>
+<h4>The goal</h4>
+<p>Give the model series a window as long as the observations.</p>
+<h4>The choice</h4>
+<p>The alternative is to use the SSP segment alone and confine the analysis to 2015 onward, which leaves a window of six to ten years. Joining the historical segment is legitimate only if both segments are the same simulation, so the ensemble-member label and the file version are checked model by model, and all fifteen agree.</p>
+<h4>The cost</h4>
+<p>The scenario branch begins only in 2015, so 2000–2014 is one line shared by all scenarios. Every long-window result in this report is therefore scenario-agnostic, and any comparison between scenarios still has to be made after 2015.</p>
+<h3>4.2 Missingness by use</h3>
+<p>Historical trend diagnostics compare original NaNs, interpolation and complete calendar months. Forecasting splits the test window before training-only filling and excludes originally missing test months from scoring. Correction and frequency comparisons retain original masks and the full calendar; dropping missing rows must not turn nonadjacent months into neighbors.</p>
+<h3>4.3 Forecast windows and aggregation</h3>
+<p>Monthly climatology predicts the training-period mean for each calendar month. Seasonal naive repeats the final 12 months of the training series. Lower root mean square error (RMSE) indicates closer agreement with observations.</p>
+<p>The five test end years are 2016, 2018, 2020, 2022 and 2024, each with a 12- and 24-month window looking backwards. Within each horizon all four methods are scored on identical originally observed months. The two horizons have different forecast origins. Splitting precedes training-only imputation and parameter selection, preventing future observations from influencing training.</p>
+<p>Full results and the two RMSE aggregations appear in §5.</p>
+<h3>4.4 Calibration and test split for the correction</h3>
+<h4>The goal</h4>
+<p>Measure how the correction behaves outside the window it was fitted on, over a span long enough to distinguish it from a climatology.</p>
+<h4>The procedure</h4>
+<p>Twelve monthly offsets are fitted on 2000–2013 and tested from 2014 onward, scoring 113 to 129 months per region. The same offsets are then fitted separately on two decades and compared directly in level and in shape.</p>
+<h4>The cost</h4>
+<p>The calibration period falls entirely inside the historical segment while the test period is mostly the SSP segment. This split tests whether offsets fitted in the historical segment transfer to the scenario segment.</p>
+<hr/>
+
+</div></section><section id="report-section-5" class="section-padding section--editorial" data-section-num="05"><div class="section-header"><h2 class="section-title">5. Short-term forecasting by region and horizon</h2></div><div class="report-block" id="report-5-1">
+<p>The table reports the arithmetic mean of five window RMSEs in °C. Scored months sum valid months across the windows; they are not a count of independent observations.</p>
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">Region</th>
+<th scope="col">Horizon (months)</th>
+<th scope="col">Climatology</th>
+<th scope="col">SARIMA</th>
+<th scope="col">Prophet</th>
+<th scope="col">Seasonal naive</th>
+<th scope="col">Scored months</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CA</td>
+<td>12</td>
+<td>2.033</td>
+<td>2.062</td>
+<td>2.211</td>
+<td>3.476</td>
+<td>57</td>
+</tr>
+<tr>
+<td>CA</td>
+<td>24</td>
+<td>2.636</td>
+<td>2.707</td>
+<td>2.960</td>
+<td>3.394</td>
+<td>116</td>
+</tr>
+<tr>
+<td>XJ</td>
+<td>12</td>
+<td>2.238</td>
+<td>2.226</td>
+<td>2.304</td>
+<td>2.273</td>
+<td>56</td>
+</tr>
+<tr>
+<td>XJ</td>
+<td>24</td>
+<td>2.028</td>
+<td>1.997</td>
+<td>2.076</td>
+<td>2.466</td>
+<td>113</td>
+</tr>
+<tr>
+<td>TK</td>
+<td>12</td>
+<td>2.409</td>
+<td>2.441</td>
+<td>2.259</td>
+<td>3.411</td>
+<td>52</td>
+</tr>
+<tr>
+<td>TK</td>
+<td>24</td>
+<td>2.727</td>
+<td>2.728</td>
+<td>2.604</td>
+<td>2.864</td>
+<td>104</td>
+</tr>
+<tr>
+<td>AU</td>
+<td>12</td>
+<td>3.077</td>
+<td>2.982</td>
+<td>2.895</td>
+<td>2.788</td>
+<td>58</td>
+</tr>
+<tr>
+<td>AU</td>
+<td>24</td>
+<td>2.631</td>
+<td>2.522</td>
+<td>2.584</td>
+<td>3.273</td>
+<td>117</td>
+</tr>
+</tbody>
+</table></div>
+<p>SARIMA compares 72 AICc candidates within each training window. Prophet uses yearly seasonality and linear growth.</p>
+<p>Climatology has lower mean-window RMSE than SARIMA in CA. In XJ, SARIMA reduces this error relative to climatology by about 0.012 °C for 12-month forecasts and 0.031 °C for 24-month forecasts. These small differences do not yet support the more complex method as the default, so both regions retain climatology.</p>
+<p>Prophet has the lowest mean-window RMSE in TK at both horizons, but wins overall in only 3 of the 5 windows at 12 months and 2 at 24 months. AU's 12-month seasonal naive wins overall in only 1 of the 5 windows. At 24 months, SARIMA wins overall in 2 windows and directly beats climatology in 4. Prophet in TK and 24-month SARIMA in AU therefore remain candidates to test at new forecast origins.</p>
+<p>Mean-window RMSE averages the RMSE calculated separately in each test window. Pooled RMSE combines squared errors across all scored months, takes their mean, then takes the square root. For AU's 12-month forecasts, this choice changes the relative order of Prophet and SARIMA.</p>
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">Method</th>
+<th scope="col">Mean-window RMSE (°C)</th>
+<th scope="col">Pooled RMSE (°C)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Prophet</td>
+<td>2.895</td>
+<td>3.086</td>
+</tr>
+<tr>
+<td>SARIMA</td>
+<td>2.982</td>
+<td>3.035</td>
+</tr>
+</tbody>
+</table></div>
+<p>Prophet has lower mean-window error, while SARIMA has lower pooled error. The aggregation method therefore needs to be specified before comparing models.</p>
+<p>MASE uses originally observed 12-month seasonal pairs in training for its denominator. MASE below 1 does not replace a direct test-period comparison with seasonal naive. Five windows establish neither statistical equivalence nor a universal twenty-year minimum for SARIMA.</p>
+<p>Next, add new test end years at each specified horizon, fixing the scoring mask and aggregation in advance. Track error differences, window wins and residuals before replacing the default baseline.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Window RMSE by region and horizon; mean-window and pooled statistics are reported separately" class="figure-zoom" type="button"><img alt="Window RMSE by region and horizon; mean-window and pooled statistics are reported separately" decoding="async" height="1927" loading="lazy" src="figures/audit_revision_20260926/forecast_window_rmse.png" width="1903"/></button><figcaption class="generated-alt-caption">Window RMSE by region and horizon; mean-window and pooled statistics are reported separately</figcaption></figure>
+
+</div></section><section id="report-section-6" class="section-padding section--editorial" data-section-num="06"><div class="section-header"><h2 class="section-title">6. Trends: what survives four checks</h2></div><div class="report-block" id="report-6-1">
+<p>The following trend diagnostics describe the observed LST record under the specified windows and missing-data treatments.</p>
+<p>Trend interpretation examines gap treatment, time endpoints, slope intervals and day–night records.</p>
+<h3>6.1 Gap treatment: two regions change verdict</h3>
+<p>CA returns no trend under all three treatments. XJ is significant only when the gaps are interpolated (p = 0.0150), against 0.0796 with gaps kept as NaN and 0.0656 on complete calendar months. TK is significant with gaps kept as NaN (0.0217) and interpolated (0.0016) but not on complete months (0.0630). AU is significant under all three.</p>
+<h3>6.2 Window endpoints: AU's significance comes from the last five years</h3>
+<p>Sen slopes by sub-window, with an asterisk for p &lt; 0.05: AU gives −0.89* over 2000–2024, +0.20 over 2000–2019, −1.22* over 2005–2024 and −1.25* over 2010–2024. Removing the last five years changes the sign and removes the significance. TK has the same shape, at +0.19 over 2000–2014 against −1.47* over 2010–2024.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Annual means by year" class="figure-zoom" type="button"><img alt="Annual means by year" decoding="async" height="1036" loading="lazy" src="figures/long_series/ALL_annual_means.png" width="1781"/></button><figcaption><em>Historical annual daytime LST means. Endpoint changes affect estimated slopes; the figure does not identify a cause or prove persistence beyond the record.</em></figcaption></figure>
+
+<h3>6.3 The slope intervals agree with the p-values</h3>
+<p>Theil-Sen 95% intervals are −0.058 [−0.360, +0.254] in CA, −0.302 [−0.615, +0.034] in XJ, −0.460 [−0.833, −0.077] in TK and −0.891 [−1.223, −0.556] in AU. TK and AU exclude zero, CA and XJ include it, each consistent with its own p-value.</p>
+<h3>6.4 Day–night records and mechanism testing</h3>
+<p>Night-time land surface temperature trends are +0.608 °C/decade in CA, +0.699 in XJ, +0.416 in TK and +0.266 in AU, all at p ≤ 0.002, opposite in sign to the day side.</p>
+<p>Day–night differences motivate checks of observation conditions and sampling. Terra timing changes are a candidate mechanism, not an established attribution. Night data use looser coverage rules. Aqua, matched locations and seasons, and observation-time matching can help distinguish explanations.</p>
+
+</div></section><section id="report-section-7" class="section-padding section--editorial" data-section-num="07"><div class="section-header"><h2 class="section-title">7. Bias correction: long window, ensemble, lead time</h2></div><div class="report-block" id="report-7-1">
+<p>Sections 7.1–7.3 evaluate regional means using 15 models. The common-holdout results for cell correction use the main 14-model ensemble and appear in synthesis Section 3. Lower ensemble-mean temperature RMSE does not justify averaging temperature before a nonlinear threshold.</p>
+<h3>7.1 Historical regional holdout</h3>
+<p>Fitted on 2000–2013 and tested from 2014 onward, with 159, 153, 132 and 163 calibration months and 127, 125, 113 and 129 scored test months:</p>
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">Correction</th>
+<th scope="col">CA</th>
+<th scope="col">XJ</th>
+<th scope="col">TK</th>
+<th scope="col">AU</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Raw tas, uncorrected</td>
+<td>13.71</td>
+<td>19.06</td>
+<td>16.37</td>
+<td>11.54</td>
+</tr>
+<tr>
+<td>Single regional constant</td>
+<td>6.69</td>
+<td>4.11</td>
+<td>5.81</td>
+<td>6.15</td>
+</tr>
+<tr>
+<td>Twelve monthly values</td>
+<td>3.23</td>
+<td>2.53</td>
+<td>3.44</td>
+<td>2.87</td>
+</tr>
+<tr>
+<td>Reference: observation-only climatology</td>
+<td>2.66</td>
+<td>1.94</td>
+<td>2.52</td>
+<td>2.61</td>
+</tr>
+</tbody>
+</table></div>
+<p>In °C, ensemble medians over the fifteen models except the last row. The monthly form beats a single constant in all four regions. Against the 2.36 to 3.78 °C the short-window analysis measured with a four-year fit and a two-year test, stretching the calibration to fourteen years and the test to eleven leaves the result comparable.</p>
+<p>Stretching the test window from two years to eleven leaves one other conclusion unchanged. A climatology of the observations still wins in all four regions: the corrected ensemble median takes 0 of 4, and so does the best single corrected model.</p>
+<h3>7.2 Ensemble-mean temperature RMSE</h3>
+<p>The table above corrects each model and takes the median, which answers how a typical corrected model behaves. The alternative averages the fifteen models first and corrects the average once:</p>
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">Region</th>
+<th scope="col">Corrected ensemble mean</th>
+<th scope="col">Median of per-model</th>
+<th scope="col">Observation climatology</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CA</td>
+<td>2.71</td>
+<td>3.23</td>
+<td>2.66</td>
+</tr>
+<tr>
+<td>XJ</td>
+<td>2.14</td>
+<td>2.53</td>
+<td>1.94</td>
+</tr>
+<tr>
+<td>TK</td>
+<td>2.83</td>
+<td>3.44</td>
+<td>2.52</td>
+</tr>
+<tr>
+<td>AU</td>
+<td>2.72</td>
+<td>2.87</td>
+<td>2.61</td>
+</tr>
+</tbody>
+</table></div>
+<p>Averaging first is more accurate in all four regions and narrows the gap to the observation climatology from 0.26–0.92 °C to 0.05–0.31 °C. Removing CMCC-CM2-SR5 from the ensemble changes the result by at most 0.02 °C, because its offset is close to constant and that is exactly what a monthly correction removes.</p>
+<h3>7.3 Historical offset differences</h3>
+<p>Fitting the same twelve monthly offsets separately on two decades and comparing them gives median level shifts of −0.84 °C in AU, −0.54 in TK, −0.38 in XJ and −0.19 in CA, with median shape correlations of 0.99, 0.87, 0.98 and 0.98. Against a seasonal range of 10.8 to 16.7 °C in the offset itself, the first three regions drift by a few percent of it.</p>
+<p>The largest single-month difference exposes the exception: 1.62 °C in XJ, 2.50 in AU, 2.90 in CA and 6.94 in TK. TK's cold-season offsets rest on very few years, which follows directly from the 50 cold-season masked months of §3.1.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Offsets fitted on two decades" class="figure-zoom" type="button"><img alt="Offsets fitted on two decades" decoding="async" height="1036" loading="lazy" src="figures/long_series/ALL_offset_drift.png" width="1784"/></button><figcaption><em>Historical offsets fitted on 2000–2009 and 2010–2019. Small mean shifts can still alter threshold counts and candidate lists; current sensitivity tests are in the synthesis.</em></figcaption></figure>
+
+<h3>7.4 Common holdout and calibration endpoints</h3>
+<p>Calibration windows change some directions. AU near-window population “future minus observed” moves from −0.125 under the baseline to +0.028 through +0.210 months/year across six calibration settings. TK population-to-area frequency ratios move from 1.005 to 0.931–0.979. XJ moves from 0.904 to 1.025 with the offset ending in 2013. CA stays above 1 under these calibration windows but reaches 0.844 under an assumed −3 °C shift. Ratios, rankings and lists must therefore be interpreted with their parameter settings.</p>
+<p>The table separates model spread from joint time-resampling ranges for population counts. The latter use 500 draws of 25 full calendar years. Each draw re-estimates thresholds and offsets together, computes final indicators by model, then takes the main 14-model median. The future ten-year fields remain fixed.</p>
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">Region</th>
+<th scope="col">Population count: median [model P10, P90]</th>
+<th scope="col">Joint time resampling 2.5th–97.5th percentiles</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CA</td>
+<td>2.231 [1.797, 2.632]</td>
+<td>1.937–2.405</td>
+</tr>
+<tr>
+<td>XJ</td>
+<td>1.773 [1.329, 2.397]</td>
+<td>1.447–2.102</td>
+</tr>
+<tr>
+<td>TK</td>
+<td>2.290 [1.970, 2.605]</td>
+<td>1.991–2.520</td>
+</tr>
+<tr>
+<td>AU</td>
+<td>0.943 [0.756, 1.316]</td>
+<td>0.794–1.286</td>
+</tr>
+</tbody>
+</table></div>
+<p>AU threshold-only resampling spans 0.675–1.449, wider than the joint 0.794–1.286 range. Joint parameter variation can offset some effects; propagation need not widen the interval. Moving from 14 to 15 models changes count medians by at most 0.118 months/year; the largest leave-one-model-out span is 0.261 across four regions, two windows, two scenarios and five weights.</p>
+<p>With the same 2022–2024 holdout, AU's median population-weighted RMSE varies with the calibration endpoint:</p>
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">Calibration endpoint</th>
+<th scope="col">Median population-weighted RMSE (°C)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2013</td>
+<td>3.617</td>
+</tr>
+<tr>
+<td>2019</td>
+<td>3.733</td>
+</tr>
+<tr>
+<td>2021</td>
+<td>3.613</td>
+</tr>
+</tbody>
+</table></div>
+<p>Moving the calibration endpoint later does not reduce error monotonically. A single endpoint experiment cannot establish future error bounds. <a href="https://terra.nasa.gov/about/terras-orbit-changes">NASA Terra orbit information</a> supports examining observation-time changes alongside clear-sky sampling, regional change and interannual variability. Aqua, matched locations and seasons, and overpass-time matching can help distinguish these candidate mechanisms.</p>
+<p>Record calibration windows, population sources and member influence separately. Whole-year resampling does not cover multiyear dependence or future nonstationarity; ±1 °C and ±3 °C shifts are stress settings. These ranges identify sensitive candidates rather than provide complete future predictive coverage.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Near-window ssp585 population counts: three windows jointly re-estimating threshold and offset, plus four shifts; main-14 median and P10–P90" class="figure-zoom" type="button"><img alt="Near-window ssp585 population counts: three windows jointly re-estimating threshold and offset, plus four shifts; main-14 median and P10–P90" decoding="async" height="1350" loading="lazy" src="figures/audit_revision_20260926/b3_population_sensitivity.png" width="1950"/></button><figcaption class="generated-alt-caption">Near-window ssp585 population counts: three windows jointly re-estimating threshold and offset, plus four shifts; main-14 median and P10–P90</figcaption></figure>
+
+</div></section><section id="report-section-8" class="section-padding section--editorial" data-section-num="08"><div class="section-header"><h2 class="section-title">8. Model ensemble and data versions</h2></div><div class="report-block" id="report-8-1">
+<p>CMCC-CM2-SR5 is available only as unrevised v1.0 data and has a temperature-offset anomaly in its historical and ssp585 periods. The main ensemble uses the other 14 models, with all 15 included in a separate sensitivity analysis. Its apparent RMSE advantage is not a model-selection criterion.</p>
+
+</div></section><section id="report-section-9" class="section-padding section--editorial" data-section-num="09"><div class="section-header"><h2 class="section-title">9. Further tests of forecasts and calibration</h2></div><div class="report-block" id="report-9-1">
+<p>Add test years to compare candidate forecasting methods with climatology on the same scored months. Calibration tests should examine mean error, exceedance frequency and window sensitivity together. Independent observations are still needed to distinguish Terra observation timing, clear-sky sampling and regional change; the trend diagnostics do not establish attribution.</p>
+
+</div></section></article>
+  </section>
+<nav class="report-series" aria-label="Series navigation"><a class="report-series__link" href="spglobal climate comparison-en.html">S&amp;P Global Capstone: climate models, forecasts and spatial exposure</a><a class="report-series__link" href="model comparison-en.html">Capstone study: model comparison</a><a class="report-series__link is-current" href="long series-en.html">Capstone study: long records and short-term forecasts</a><a class="report-series__link" href="projection overlay-en.html">Paired long-term scenarios and spatial exposure</a></nav>
+  <section id="related" class="section-padding"><div class="section-header"><h2 class="section-title">Related projects</h2></div><div class="grid md:grid-cols-2 gap-6"><a href="../healthy home/healthy home-en.html" class="related-project-card"><h3 class="related-project-title">Healthy Home: spatial prediction and road mapping in Oakland</h3><p class="related-project-description">Combine 18,219 observations, road networks and nested spatial evaluation to analyze pollutant patterns in Oakland. Random Forest achieves pooled NO₂ R² of 0.576017 under spatial-block evaluation. Relative prediction maps cover 628.74 km of roads, with area-level error analysis informing further sampling.</p><span class="related-project-link">Read case</span></a><a href="../lendingclub loan prediction/lendingclub loan prediction-en.html" class="related-project-card"><h3 class="related-project-title">LendingClub: the 9,004-loan sample</h3><p class="related-project-description">Analyze default patterns in 9,004 historical loans, compare models with a loan-term rule, and design screening policies under asymmetric costs. Random Forest at the frozen threshold of 0.22 achieves 70.45% test recall and a 4.68% net simulated cost reduction.</p><span class="related-project-link">Read case</span></a></div></section>
+</main>
+<script src="../../assets/js/logo.js"></script>
+<script src="../../assets/js/common.js"></script>
+<script src="../../assets/js/project.js"></script>
+<script src="../../assets/js/language-switcher.js"></script>
+</body>
+</html>

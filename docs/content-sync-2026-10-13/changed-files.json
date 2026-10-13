@@ -1,0 +1,745 @@
+{
+  "base_head": "cc90bef2faafd6ef1c723b8d1e2bce12c0b1a80e",
+  "files": [
+    {
+      "status": "modified",
+      "path": "README.md",
+      "sha256": "5385c72853c25afa2b72e0d2909f10dfa9d5ad8963aa8cea6dd925c718981e32"
+    },
+    {
+      "status": "modified",
+      "path": "assets/css/project.css",
+      "sha256": "56b4d939407da46f4e55cf107ab968afb0f378baf645cc1bb819f21e812cba72"
+    },
+    {
+      "status": "modified",
+      "path": "assets/js/language-switcher.js",
+      "sha256": "5b711efa7502d73b8dea3cd5f0b4130d9c5fe74d9e5f3cc8f9ae19df6928834f"
+    },
+    {
+      "status": "modified",
+      "path": "assets/js/project.js",
+      "sha256": "43ca6d5f11d657f8a206c26e9f1e311a2957263d623a7068cf3e503f262812ef"
+    },
+    {
+      "status": "new",
+      "path": "docs/content-sync-2026-10-13/DELIVERY.md",
+      "sha256": "9fe16ce847b4719463c6d769c29423704e33a93e884770e6157335e01eb2c390"
+    },
+    {
+      "status": "new",
+      "path": "docs/content-sync-2026-10-13/browser-layout-refresh.json",
+      "sha256": "28b21472a876428054da34048d75c2445a61346508db8849b9b11d59fc4d5e37"
+    },
+    {
+      "status": "new",
+      "path": "docs/content-sync-2026-10-13/browser-validation-ab-climate.json",
+      "sha256": "db27a9f62ef1a2ea5a383678e8cd55286e3f0e7f7577c7a242efeaf1cf9deff8"
+    },
+    {
+      "status": "new",
+      "path": "docs/content-sync-2026-10-13/browser-validation-bank-fraud-loan-youtube-healthy-amazon-loan-full-comparison-long-series-projection-home.json",
+      "sha256": "169e12428dca0b8e96a0c15ad472b574626e4adc7ff9891a76bf7ebb4c8555a1"
+    },
+    {
+      "status": "new",
+      "path": "docs/content-sync-2026-10-13/browser-validation.json",
+      "sha256": "1246a6f80519b3473abbda6b9e7b6c7253d9d19ba63bd6221bff3502f12420df"
+    },
+    {
+      "status": "new",
+      "path": "docs/content-sync-2026-10-13/changed-files.json",
+      "sha256": null,
+      "note": "This manifest cannot include its own recursive hash."
+    },
+    {
+      "status": "new",
+      "path": "docs/content-sync-2026-10-13/checker-manifest-capstone.json",
+      "sha256": "a6e36245cd14e88973d1e8a9161dcf486f42ba51cfeffdca28ffc15fd1d8d257"
+    },
+    {
+      "status": "new",
+      "path": "docs/content-sync-2026-10-13/checker-manifest-data.json",
+      "sha256": "395801819e92a2a6e1f8819cdc4a92f561168c9cbbd1471780926c3fbeb9647e"
+    },
+    {
+      "status": "new",
+      "path": "docs/content-sync-2026-10-13/checker-manifest.json",
+      "sha256": "a75afbe3028f08777d3556452af75842ea90acdc05460cb7cbb7ee951094f910"
+    },
+    {
+      "status": "new",
+      "path": "docs/content-sync-2026-10-13/content-validation.json",
+      "sha256": "39e8489a8b1fd2427d8b6c7a6ae699188f9b839339449beaff7dc7a98da7ab9e"
+    },
+    {
+      "status": "new",
+      "path": "docs/content-sync-2026-10-13/external-browser-links.json",
+      "sha256": "86042200dc87a919869803b71a83a5bef010d95804a5759642f58689df462186"
+    },
+    {
+      "status": "new",
+      "path": "docs/content-sync-2026-10-13/external-links.json",
+      "sha256": "588f39340492c85178e1f89a762e39225b29a89caebd1c096ffdf1369d6c892b"
+    },
+    {
+      "status": "new",
+      "path": "docs/content-sync-2026-10-13/final-scope.json",
+      "sha256": "bbfa608ce5a8d42cb66419ed410853e1d5e4dafdde63cdf9c45a257fa6177509"
+    },
+    {
+      "status": "new",
+      "path": "docs/content-sync-2026-10-13/page-catalog.md",
+      "sha256": "f069b0481eb60688500e579eb443f210906691aa743325bf6b8a9b507cf84ae6"
+    },
+    {
+      "status": "new",
+      "path": "docs/content-sync-2026-10-13/pre-final-page-hashes.json",
+      "sha256": "659224ff073842fc95f1f3cd9c2b8a3cea60812ffbbb86ae166904f25ae051c4"
+    },
+    {
+      "status": "new",
+      "path": "docs/content-sync-2026-10-13/render-ledger.json",
+      "sha256": "a1ca79a162b312e365fd9bca0fea53afbe54f6eadac64bdf9d9f36eca94aa9dc"
+    },
+    {
+      "status": "new",
+      "path": "docs/content-sync-2026-10-13/report-check-capstone.txt",
+      "sha256": "a91c38b8df658a1abd66a444594ad2b5b621f098b89fb372de16d58e0f49f934"
+    },
+    {
+      "status": "new",
+      "path": "docs/content-sync-2026-10-13/report-check-data.txt",
+      "sha256": "498d8ee6ce7c136ce966f0fa30f887976e2fc12ea5a7a12be00e8a0ec99541cc"
+    },
+    {
+      "status": "new",
+      "path": "docs/content-sync-2026-10-13/report-check.txt",
+      "sha256": "76459ae6dd72653bb686d6635a36e816d9a709d8a5105e382321b4cec484ff71"
+    },
+    {
+      "status": "new",
+      "path": "docs/content-sync-2026-10-13/repository-access.json",
+      "sha256": "3d49a098bfd7ffda7f3dd48c95fcc035349b4fbab7a7b542ea657d243ae632ab"
+    },
+    {
+      "status": "new",
+      "path": "docs/content-sync-2026-10-13/source-manifest.json",
+      "sha256": "863858ffa64ddcbd70f83d097f03a6d5eb91a613b2d7026d1cd3a8ba838d045e"
+    },
+    {
+      "status": "new",
+      "path": "docs/content-sync-2026-10-13/static-validation.json",
+      "sha256": "ff4c230e9ab55c7fb052c6a0c2f28ff0b978033a7c237f9f947d03aa03bc2aa4"
+    },
+    {
+      "status": "modified",
+      "path": "index-en.html",
+      "sha256": "3bd8c3fb55c4905f1a3b6bfdbe231b3765cb83ac87a4d6c5f571808e03f05329"
+    },
+    {
+      "status": "modified",
+      "path": "index.html",
+      "sha256": "4d1b872363d95c60e354f38b77350959289518af33714dd69c8bdfd22be465c1"
+    },
+    {
+      "status": "modified",
+      "path": "projects/Bank Customer Churn Prediction/Bank Customer Churn Prediction-en.html",
+      "sha256": "5054a6a79dfa36c2adf331b8cc6dd25f30b94f15d870a970b2d6236595858949"
+    },
+    {
+      "status": "modified",
+      "path": "projects/Bank Customer Churn Prediction/Bank Customer Churn Prediction.html",
+      "sha256": "de48b3b0bdc8eb352445dfc1d2d945c0bf1b51837b2752bfc83a27b13a08c615"
+    },
+    {
+      "status": "new",
+      "path": "projects/Bank Customer Churn Prediction/figures/report-display-20260924/confusion_matrix_threshold_comparison_0275.png",
+      "sha256": "b8d2de0474cddbe8faa65695fec0227411716f4d9c999c5e338fe44cea83635f"
+    },
+    {
+      "status": "new",
+      "path": "projects/Bank Customer Churn Prediction/figures/report-display-20260924/threshold_tuning_xgboost_0275.png",
+      "sha256": "05a0595edd60b0345a03f5d076d6aad128fe20df56af461d099126e1220acfa6"
+    },
+    {
+      "status": "new",
+      "path": "projects/Bank Customer Churn Prediction/figures/shap-current/dependence-Age.png",
+      "sha256": "c15861f8aaa1ea4c6a5dd220c0340c9ca8cb71a649448bae80ca21d639ca1af4"
+    },
+    {
+      "status": "new",
+      "path": "projects/Bank Customer Churn Prediction/figures/shap-current/dependence-IsActiveMember.png",
+      "sha256": "84d6836c6f09a478351adf042bad139281c2cd7c437db1a17a95e54a62f909af"
+    },
+    {
+      "status": "new",
+      "path": "projects/Bank Customer Churn Prediction/figures/shap-current/dependence-NumOfProducts.png",
+      "sha256": "710e754e1aabb9db17fdc95655ce86cfe551ff5fa0bd72fe303977872ce5982e"
+    },
+    {
+      "status": "new",
+      "path": "projects/Bank Customer Churn Prediction/figures/shap-current/dependence-Tenure.png",
+      "sha256": "f5c579c493d61e9893167246653c5b1219a2f0665bb2440fc837a5becc566e06"
+    },
+    {
+      "status": "new",
+      "path": "projects/Bank Customer Churn Prediction/figures/shap-current/global-shap.png",
+      "sha256": "2663989f711717a58ad5190462a7d12189dcd6bc8a5c17686f18353d0a8c7496"
+    },
+    {
+      "status": "new",
+      "path": "projects/Bank Customer Churn Prediction/figures/shap-current/local-explanations.png",
+      "sha256": "540a0a2e93b949f498d8cea8c0ab629a7062a3a59d9cb41f9d660e6f604b53b2"
+    },
+    {
+      "status": "new",
+      "path": "projects/Bank Customer Churn Prediction/figures/stage3-final/pr_curves_all_models.png",
+      "sha256": "ec97de80714543c225c8084d3e039468927dcd04e65af2a08d54286d4bad70ee"
+    },
+    {
+      "status": "new",
+      "path": "projects/Bank Customer Churn Prediction/figures/stage3-final/roc_curves_all_models.png",
+      "sha256": "4bea096d4167b71e1e78e949eec5a67b9dd402e6a5f6d86cc8208cb902c15e5f"
+    },
+    {
+      "status": "new",
+      "path": "projects/ab testing/ab testing-en.html",
+      "sha256": "103ce2f57caa49f882b5b50369063e98a7b62cdfe4a68f9f9919aa2bf82cfa51"
+    },
+    {
+      "status": "new",
+      "path": "projects/ab testing/ab testing.html",
+      "sha256": "cdd66dcfe34fafe3349454c753c338bf08a7eb9abbada4858c455b484dfb3f5f"
+    },
+    {
+      "status": "new",
+      "path": "projects/ab testing/figures/01_retention_by_group.png",
+      "sha256": "704b1da264b5cddf79d1b5a7042f1e68a4906917189f0d20166efcce3d578ae1"
+    },
+    {
+      "status": "new",
+      "path": "projects/ab testing/figures/02_bootstrap_retention7.png",
+      "sha256": "e6ec2b7456806bc44fba4ac6da33d7798f4237c60c194c42af6295e2c81a6aca"
+    },
+    {
+      "status": "new",
+      "path": "projects/ab testing/figures/03_mde_curve.png",
+      "sha256": "8320e04835b6a4bbc676f93346f066ab08ef441f8c09ffc40e0cde04bdb90e28"
+    },
+    {
+      "status": "new",
+      "path": "projects/ab testing/figures/04_gamerounds_distribution.png",
+      "sha256": "3226ed67ece7a96c73f7da0c915bdd3e0d5201b65d377dd90575b8595e90aefc"
+    },
+    {
+      "status": "new",
+      "path": "projects/ab testing/figures/05_clt_demo.png",
+      "sha256": "9eb012f9523d7a0649154ebdb7e5e6ea18eb0391557a0f27bf23cdcf8763259e"
+    },
+    {
+      "status": "new",
+      "path": "projects/amazon watch reviews/amazon watch reviews-en.html",
+      "sha256": "db8b12ebdb56346b019cdfcd78caddf701f3471f10a13f4bdd549c82ea4369f9"
+    },
+    {
+      "status": "new",
+      "path": "projects/amazon watch reviews/amazon watch reviews.html",
+      "sha256": "40f48b94ae7b9eb43f0499953850c25252e4b45a228092a2307c5ce0db07b4e0"
+    },
+    {
+      "status": "new",
+      "path": "projects/amazon watch reviews/figures/full_cluster_sizes_vs_sample.png",
+      "sha256": "948c807cecfe94890eaa026dcda50fe5b1c20e6cf6dd0b50531ff4bda27cbc5d"
+    },
+    {
+      "status": "new",
+      "path": "projects/amazon watch reviews/figures/full_length_composition_check.png",
+      "sha256": "0e1a10f3a1702da1eb758b2dc8a8c37bd521f68a79177924c361b1efaf17d972"
+    },
+    {
+      "status": "new",
+      "path": "projects/amazon watch reviews/figures/full_one_star_topic_mix.png",
+      "sha256": "35ca616164d21facac784e0908d375a048e936a6bc9478195ea5f0634a797a04"
+    },
+    {
+      "status": "new",
+      "path": "projects/amazon watch reviews/figures/full_stability_jaccard.png",
+      "sha256": "38afee0c0b7757d96360f50bb46d885fd0188784ffcb9a5bc0d8b56cae9e1c2b"
+    },
+    {
+      "status": "new",
+      "path": "projects/amazon watch reviews/figures/full_topic_star_rating.png",
+      "sha256": "4ffd588c990081aeef3ed06be3ae5d41007800bda25d10e0914fd9e8427cc255"
+    },
+    {
+      "status": "new",
+      "path": "projects/amazon watch reviews/figures/full_topic_trend_by_year.png",
+      "sha256": "92cc159d3ac72fe77a04317afeb73ddc6285165a2990881efc96530a85fdbfab"
+    },
+    {
+      "status": "new",
+      "path": "projects/amazon watch reviews/figures/sample_cluster_star_heatmap.png",
+      "sha256": "87b5ea6faa4c8cd42411ab30444a5bf57c56d087277ac4181a32b3affd40a0af"
+    },
+    {
+      "status": "new",
+      "path": "projects/amazon watch reviews/figures/sample_cluster_top_terms.png",
+      "sha256": "9cde6ace6177dafa5a32bfba0a563590107c39c2bee296bba248d6173c93e6af"
+    },
+    {
+      "status": "new",
+      "path": "projects/amazon watch reviews/figures/sample_cluster_topic_crosstab.png",
+      "sha256": "2fea8015566f80dab4ef7193abfeeecc929f7c6b5a1a5e885bbee2eefd4fd621"
+    },
+    {
+      "status": "new",
+      "path": "projects/amazon watch reviews/figures/sample_kmeans_elbow_silhouette.png",
+      "sha256": "afda4b8c1fc0b01a5c06d2e009342217e9c8d5db2b59338c037eb54bc2d2991f"
+    },
+    {
+      "status": "new",
+      "path": "projects/amazon watch reviews/figures/sample_lda_topic_selection.png",
+      "sha256": "b7ca5dc8b3efd3f85a391a6d0226dac88c4f035be7991845b01591951f524ec5"
+    },
+    {
+      "status": "new",
+      "path": "projects/amazon watch reviews/figures/sample_star_rating_distribution.png",
+      "sha256": "b7c94297a3a04093653fa7bfdd19eb84a8c32678a39be7b063f0f375b5f3829b"
+    },
+    {
+      "status": "new",
+      "path": "projects/amazon watch reviews/figures/sample_topic_star_rating.png",
+      "sha256": "6e724df93eccfac02f2f687cba8eb8488da87e2b3c68dc22f6667fc08cf39b25"
+    },
+    {
+      "status": "new",
+      "path": "projects/amazon watch reviews/figures/sample_topic_top_words.png",
+      "sha256": "40273026779106d0840709e1878e613adb3021fc91bdc3d999b3c443d67dd947"
+    },
+    {
+      "status": "new",
+      "path": "projects/amazon watch reviews/figures/sample_vs_population_marginals.png",
+      "sha256": "13b4e3ab77ae3144bbba344ceff98ddf5665343007434aebed8011011cc1e1ac"
+    },
+    {
+      "status": "modified",
+      "path": "projects/e-commerce fraud detection/e-commerce fraud detection-en.html",
+      "sha256": "453824b8c23082f8415168cb55642d55320a6d04df4b0790cebea6eddb1cd011"
+    },
+    {
+      "status": "modified",
+      "path": "projects/e-commerce fraud detection/e-commerce fraud detection.html",
+      "sha256": "219c48a9d8441dffb5190c303753b467b9f1e2b75e0ab3516629b5250e690278"
+    },
+    {
+      "status": "new",
+      "path": "projects/e-commerce fraud detection/figures/temporal/01_temporal_drift.png",
+      "sha256": "1e294ea5e96672cd59b74e7a968f0328407f39924619a32365cccd8d2044a011"
+    },
+    {
+      "status": "new",
+      "path": "projects/e-commerce fraud detection/figures/temporal/02_population_features.png",
+      "sha256": "c6bd1a2fc11612e8876296435ce8d1c8f9de6bbf9185ccb22ebcccc5215bafcc"
+    },
+    {
+      "status": "new",
+      "path": "projects/e-commerce fraud detection/figures/temporal/03_threshold_cost.png",
+      "sha256": "20121a0c1fe8e3f59ec6046e4b0874f96474062512c1832c88d0b8c0e3448299"
+    },
+    {
+      "status": "new",
+      "path": "projects/e-commerce fraud detection/figures/temporal/04_failure_diagnosis.png",
+      "sha256": "c01ce9456940bffab5bc7862324d839ffce8e39ecaf1087c434208ddda46a219"
+    },
+    {
+      "status": "new",
+      "path": "projects/healthy home/figures/current/03_distance_decay.png",
+      "sha256": "b280e6c13708b46c32e3cd96c7270cd56ae26c567457d6f784e3a338fb18d8d2"
+    },
+    {
+      "status": "new",
+      "path": "projects/healthy home/figures/current/06_leakage_by_model.png",
+      "sha256": "2abfa8ca877913e1c6bf24d115ec80c695ca5abeba761b993d119bb5af5c63af"
+    },
+    {
+      "status": "new",
+      "path": "projects/healthy home/figures/current/09_pred_vs_observed.png",
+      "sha256": "9d3d8fd1fce9e9faf902ed12257bdd4c931ab52ea6ae42c638bc88abc5b615df"
+    },
+    {
+      "status": "new",
+      "path": "projects/healthy home/figures/current/10_grade_distribution.png",
+      "sha256": "24fdbb2f496f1461182a29f3c63503ca0929104b58876e8ce6d76796f1ab73d1"
+    },
+    {
+      "status": "new",
+      "path": "projects/healthy home/figures/current/12_maps_static.png",
+      "sha256": "5a3a2b7ef9663637ed241671319986b0cf12fc1f28c8923d126f448ef91aae7e"
+    },
+    {
+      "status": "new",
+      "path": "projects/healthy home/figures/current/14_tract_association_en.png",
+      "sha256": "9bea7bb2cc66002979c23f7ea01aff467c3c62dad2d4f454dcdf0e7d98b69b50"
+    },
+    {
+      "status": "new",
+      "path": "projects/healthy home/figures/current/14_tract_association_zh.png",
+      "sha256": "dcc9075be1ffa6aa1d192caf247b1ea7249d3c08ff0e183e0cee3461f66b74d4"
+    },
+    {
+      "status": "new",
+      "path": "projects/healthy home/figures/current/15_zone_errors_en.png",
+      "sha256": "5f508b9f5d647ba14a7c4b432e1ef70178e191bfce65ffcee00eca6597c042e6"
+    },
+    {
+      "status": "new",
+      "path": "projects/healthy home/figures/current/15_zone_errors_zh.png",
+      "sha256": "07aed08cf0274f051494f018155742fd716aed099bcafd5c632ae242acd8b2ad"
+    },
+    {
+      "status": "new",
+      "path": "projects/healthy home/healthy home-en.html",
+      "sha256": "176cf0374e24352c38277ac2d9ace9d4c6933c2c48eb169bb9e792f875dcaf92"
+    },
+    {
+      "status": "new",
+      "path": "projects/healthy home/healthy home.html",
+      "sha256": "a9bbb46675c2fa284b6f77b4708fb4dec792763c1e253f4ba9447cbd0acd6abc"
+    },
+    {
+      "status": "new",
+      "path": "projects/lendingclub loan prediction/figures/full-data/additional-v1/capacity_comparison.png",
+      "sha256": "ed6f196a2979bf5a80fe953964c953d76087094adb4f130c44eeff4a5934776f"
+    },
+    {
+      "status": "new",
+      "path": "projects/lendingclub loan prediction/figures/full-data/additional-v1/paired_bootstrap.png",
+      "sha256": "85bcea20b4e4b5c48d070984846b3f4e6216a84cc863a4e3b085f2a849dc9b14"
+    },
+    {
+      "status": "new",
+      "path": "projects/lendingclub loan prediction/figures/full-data/additional-v1/shap_cases.png",
+      "sha256": "31e5eb485e5156bf747765d1e2d4191d18551a18116780aef227f799c4f25f93"
+    },
+    {
+      "status": "new",
+      "path": "projects/lendingclub loan prediction/figures/full-data/additional-v1/shap_global.png",
+      "sha256": "5eafef030d8e90cd5956bb86ecaf37a3dd013e4cbebf49be9ccc0d7685fe625d"
+    },
+    {
+      "status": "new",
+      "path": "projects/lendingclub loan prediction/figures/full-data/current-v1/cohort_default_by_vintage.png",
+      "sha256": "1445ea8b369c9572bacc561d8386a3a4994d2f6612591dcfd66d065d7542960e"
+    },
+    {
+      "status": "new",
+      "path": "projects/lendingclub loan prediction/figures/full-data/current-v1/eda_banded_risk_curves.png",
+      "sha256": "7a13ac06c90d00d69587c0dd727db36ae0af0515e5736cde8b2f1b5581922df9"
+    },
+    {
+      "status": "new",
+      "path": "projects/lendingclub loan prediction/figures/full-data/current-v1/eda_categorical_default_rates.png",
+      "sha256": "5041f5654baf660ce4fe65196c46a01a2f0529e639d85d15842392a4a3fc0879"
+    },
+    {
+      "status": "new",
+      "path": "projects/lendingclub loan prediction/figures/full-data/current-v1/eda_concentration.png",
+      "sha256": "a9b5623b3e3c44b21d8c6d999d4eae20c3ce39d13298df9ca14116eb19a8d409"
+    },
+    {
+      "status": "new",
+      "path": "projects/lendingclub loan prediction/figures/full-data/current-v1/eda_correlation_heatmap.png",
+      "sha256": "af9f32d2b4f44d4c9fe93f83bd75cbafb937b99191f7b50d11a51bc5b270a1fd"
+    },
+    {
+      "status": "new",
+      "path": "projects/lendingclub loan prediction/figures/full-data/current-v1/eda_numeric_top_effects.png",
+      "sha256": "c97ce7de809fbfacfbd7ccecccfc0e06b027db4f31752b5bc0810fd09acffc3a"
+    },
+    {
+      "status": "new",
+      "path": "projects/lendingclub loan prediction/figures/full-data/current-v1/review_queue_burden.png",
+      "sha256": "d7dbf56676c3bb2b847e065f83b3af7c8a904816d22f02928d7543e43af438fe"
+    },
+    {
+      "status": "new",
+      "path": "projects/lendingclub loan prediction/figures/full-data/current-v1/threshold_final_evaluation.png",
+      "sha256": "a1989b171504db65358b500021f62789031f73d2b23f89665263eb4c4ce4478a"
+    },
+    {
+      "status": "new",
+      "path": "projects/lendingclub loan prediction/figures/full-source-v1/cost_ratio_sensitivity.png",
+      "sha256": "d9dbb871527b80fda46fd99c31948978d6f50b5c50c0316dcac8de9d64b25fc8"
+    },
+    {
+      "status": "new",
+      "path": "projects/lendingclub loan prediction/figures/full-source-v1/default_rate_by_band.png",
+      "sha256": "081f3f45df588a3e694b2c92ad95b057679ace4c6c3e68b2acb6ab08eef2ee38"
+    },
+    {
+      "status": "new",
+      "path": "projects/lendingclub loan prediction/figures/full-source-v1/default_rate_by_categorical.png",
+      "sha256": "8c86e83abc2937242bf8f0103d7e739f104098a80c9eb2c6fcd7c3cb0c29da45"
+    },
+    {
+      "status": "new",
+      "path": "projects/lendingclub loan prediction/figures/full-source-v1/grade_and_state_concentration.png",
+      "sha256": "3f2f2f05959b62b5e88a5f23e9fb45ccb14c6d5cba15e04debc5ad493e48e727"
+    },
+    {
+      "status": "new",
+      "path": "projects/lendingclub loan prediction/figures/full-source-v1/policy_baseline_costs.png",
+      "sha256": "42192042e80d0855068deef2fd3506b1fd11220ff6732fa954aec8db308da56a"
+    },
+    {
+      "status": "new",
+      "path": "projects/lendingclub loan prediction/figures/full-source-v1/pr_curves.png",
+      "sha256": "df559096a3a2d700b6c879fca38490ccb616db7d0c49f37681245ab267b35566"
+    },
+    {
+      "status": "new",
+      "path": "projects/lendingclub loan prediction/figures/full-source-v1/review_queue_flag_rate.png",
+      "sha256": "1cacb89da9b264bafb4d3c4900f9613cedb7c4adfc8b5d2c894f6f7dde293dc0"
+    },
+    {
+      "status": "new",
+      "path": "projects/lendingclub loan prediction/figures/full-source-v1/shap_dependence.png",
+      "sha256": "bf1cf7aaff1bdde953e98d6b6f4095af9f3af9d0a5fb0931995448460af37026"
+    },
+    {
+      "status": "new",
+      "path": "projects/lendingclub loan prediction/figures/full-source-v1/shap_summary.png",
+      "sha256": "5f46e8090b3f356e7d81e8708d015886b16f89fc8d5e25b0eb4783166836e570"
+    },
+    {
+      "status": "new",
+      "path": "projects/lendingclub loan prediction/figures/full-source-v1/target_distribution.png",
+      "sha256": "16d09934c85b888c8d596eb847cb8e130de75ee2eadd02e0da35474f170ab415"
+    },
+    {
+      "status": "new",
+      "path": "projects/lendingclub loan prediction/figures/full-source-v1/threshold_confusion_roc.png",
+      "sha256": "be2d67c114e3a4c96223212eba5ff822cb023fc277e1ec012030e75b48715e37"
+    },
+    {
+      "status": "new",
+      "path": "projects/lendingclub loan prediction/full data-en.html",
+      "sha256": "20bac5c08a55d8be8d5326a789392f431fdf1806850a86d6e12206372489b1af"
+    },
+    {
+      "status": "new",
+      "path": "projects/lendingclub loan prediction/full data.html",
+      "sha256": "cae916134b3b9d412864302a302b164fb382c06530499f2ee002a3465f3ddcc7"
+    },
+    {
+      "status": "modified",
+      "path": "projects/lendingclub loan prediction/lendingclub loan prediction-en.html",
+      "sha256": "7fa54a25a3937513ed2726784cc80a3a6b76c6dce8738f4ac2b34f67d791c816"
+    },
+    {
+      "status": "modified",
+      "path": "projects/lendingclub loan prediction/lendingclub loan prediction.html",
+      "sha256": "177f3bc96a841f50d1489d3f5dbe100da0a3cc41020b32c3dc1570935d8361f1"
+    },
+    {
+      "status": "new",
+      "path": "projects/spglobal climate comparison/figures/audit_revision_20260926/b2_common_reference_validation.png",
+      "sha256": "3ef9d2b971198abad03a207bc354d0855753cac56eed6447ef1f4aa1e826a7d0"
+    },
+    {
+      "status": "new",
+      "path": "projects/spglobal climate comparison/figures/audit_revision_20260926/b2_paired_scenarios.png",
+      "sha256": "137bfa82fb3b4d3e074eb1cb901d6221bde164f63f5adc18a27b265f10450aca"
+    },
+    {
+      "status": "new",
+      "path": "projects/spglobal climate comparison/figures/audit_revision_20260926/b3_candidate_sampling.png",
+      "sha256": "44820d374ad838fc3d01410b189c27fbbf5482d74eb8f2282a9a98ed60b96f49"
+    },
+    {
+      "status": "new",
+      "path": "projects/spglobal climate comparison/figures/audit_revision_20260926/b3_population_sensitivity.png",
+      "sha256": "2f0a3c26b8a04081769d97d027eb2c07c29ed7fa2315aedb24199e5dfef3bad8"
+    },
+    {
+      "status": "new",
+      "path": "projects/spglobal climate comparison/figures/audit_revision_20260926/forecast_window_rmse.png",
+      "sha256": "45b24781ec8f4a9d367d4f0904832f30f88f774118ac31114109529c31be25c3"
+    },
+    {
+      "status": "new",
+      "path": "projects/spglobal climate comparison/figures/deep_dive/ALL_bias_vs_crmse.png",
+      "sha256": "3de1dbae63d999a09e60e6de03de4fdc6e3f7e793340f43ad478868aafefe866"
+    },
+    {
+      "status": "new",
+      "path": "projects/spglobal climate comparison/figures/deep_dive/ALL_daynight_bracket.png",
+      "sha256": "466e5fda3a253e0f8c41459da28a42b73f18b4e1e59aa07f385a925a06c59932"
+    },
+    {
+      "status": "new",
+      "path": "projects/spglobal climate comparison/figures/deep_dive/ALL_region_metric_boxplots.png",
+      "sha256": "3ca4bd93256f3b4fa5d8e3ec16589a6068e0923a73c996fa9c2afd1569caf208"
+    },
+    {
+      "status": "new",
+      "path": "projects/spglobal climate comparison/figures/deep_dive/CA_bias_share.png",
+      "sha256": "87e1e4c9d117766f045dc36193abae41ae39081ff7e3ea5635ae49d86e900f8d"
+    },
+    {
+      "status": "new",
+      "path": "projects/spglobal climate comparison/figures/deep_dive/CA_ensemble_envelope.png",
+      "sha256": "ad44134a7ef0297f271cc089d490c80629ab70822c6b9e337ddfba1f2b2748c5"
+    },
+    {
+      "status": "new",
+      "path": "projects/spglobal climate comparison/figures/deep_dive/CA_missingness_monthly.png",
+      "sha256": "e9b95fa4b3d509f52a29b160bc2166e171d00de18a6c55d7f262595f10545ffd"
+    },
+    {
+      "status": "new",
+      "path": "projects/spglobal climate comparison/figures/deep_dive/CA_qc_sensitivity.png",
+      "sha256": "eee036d09c3cb063c91d97a6ed38d50946e544326caff7cc48c0b1d8d2947a57"
+    },
+    {
+      "status": "new",
+      "path": "projects/spglobal climate comparison/figures/deep_dive/CA_spatial_variability.png",
+      "sha256": "02fee008c569ae3a43de0607e115cc29de2b3c6b0dbf2458f2baa40d78ea830e"
+    },
+    {
+      "status": "new",
+      "path": "projects/spglobal climate comparison/figures/deep_dive/XJ_rank_slope.png",
+      "sha256": "21a915242168860ed96e37690e79a2bb37d55c8710dde36d9d7cd91815bf04e5"
+    },
+    {
+      "status": "new",
+      "path": "projects/spglobal climate comparison/figures/long_series/ALL_annual_means.png",
+      "sha256": "dc4bff7a87dfea7e101e2558cc58f6c306ad1d32df7679aa53eac04a042f35e7"
+    },
+    {
+      "status": "new",
+      "path": "projects/spglobal climate comparison/figures/long_series/ALL_obs_25yr.png",
+      "sha256": "8edb74d32d7066a71cae83c05aa643a986656daeb4da33252420c45d67822855"
+    },
+    {
+      "status": "new",
+      "path": "projects/spglobal climate comparison/figures/long_series/ALL_offset_drift.png",
+      "sha256": "6653cf74ad5b8fe11c07df8440ba062d253610cc0e6a060c73b9c8009ae9985c"
+    },
+    {
+      "status": "new",
+      "path": "projects/spglobal climate comparison/figures/long_series/ALL_splice_seam.png",
+      "sha256": "1ba400a3abc06beb79aeb09cb7e413d4f922a69af618f15308b18336e09bd917"
+    },
+    {
+      "status": "new",
+      "path": "projects/spglobal climate comparison/long series-en.html",
+      "sha256": "068123857f2912ffe2b194762214183d6a8a61a7d1f64ec3dad3cf79c0f8f5d5"
+    },
+    {
+      "status": "new",
+      "path": "projects/spglobal climate comparison/long series.html",
+      "sha256": "75d94ca8ba2f091efebcd44dcd95188a5c7b2b1aedc60024c0c6ddebad3cb575"
+    },
+    {
+      "status": "new",
+      "path": "projects/spglobal climate comparison/model comparison-en.html",
+      "sha256": "b096cbf7eba4e30d54ebdf8516901e61d4812ba28313302328e976c5e113da02"
+    },
+    {
+      "status": "new",
+      "path": "projects/spglobal climate comparison/model comparison.html",
+      "sha256": "d2ebc118b92c55e42fcd115d9f472fcf068917bad71462cbe8977bafd1c87930"
+    },
+    {
+      "status": "new",
+      "path": "projects/spglobal climate comparison/projection overlay-en.html",
+      "sha256": "88a8f8aaaab49c96216a9595c182d92de1b1eb20801c3db0758709b12201cd99"
+    },
+    {
+      "status": "new",
+      "path": "projects/spglobal climate comparison/projection overlay.html",
+      "sha256": "fc4dc0a5b2ee77f23289adb2b66d0eba9d68e014db6ba22c2e59a6d39b67fd02"
+    },
+    {
+      "status": "modified",
+      "path": "projects/spglobal climate comparison/spglobal climate comparison-en.html",
+      "sha256": "4906c30438048a3b6f65e3623e7a3821281feab477a51a67002ba79cde847aca"
+    },
+    {
+      "status": "modified",
+      "path": "projects/spglobal climate comparison/spglobal climate comparison.html",
+      "sha256": "7be91207d951f1d6c88a72372db9fc6e4e083f7f200f1434e17b04e8abd6c321"
+    },
+    {
+      "status": "new",
+      "path": "projects/youtube comment analysis/figures/stage3-final/creator_concentration_lorenz.png",
+      "sha256": "15989e751efe590f86b36e5c621c8d356b43b1628b7265defe07da51c2f460bb"
+    },
+    {
+      "status": "new",
+      "path": "projects/youtube comment analysis/figures/stage3-final/creator_ranking_owner_share.png",
+      "sha256": "dd5fcdb60b7a154e20a75ffc6cc8bb528b601739a5010347d8375738e9cc7bc0"
+    },
+    {
+      "status": "new",
+      "path": "projects/youtube comment analysis/figures/stage3-final/feature_importance_xgb_gain.png",
+      "sha256": "ff33804d5c34a3d59af63588b0eb0467749b9d4961cd805535ec89ca05ca0639"
+    },
+    {
+      "status": "new",
+      "path": "projects/youtube comment analysis/figures/stage3-final/full_score_distribution.png",
+      "sha256": "a8f22314af302a10adedcf43fa30b0f832fade77fe9e52af586838ed944b4c5c"
+    },
+    {
+      "status": "new",
+      "path": "projects/youtube comment analysis/figures/stage3-final/language_mix_estimate.png",
+      "sha256": "3a1f505a87e35ad12b4bb882f875e645b69aadb866b8abff04277b7f2603ecf1"
+    },
+    {
+      "status": "new",
+      "path": "projects/youtube comment analysis/figures/stage3-final/lf_coverage_overlap.png",
+      "sha256": "4ca811fd1131270885729104c914644097ac464f952fd7cd5ed385058fb1218d"
+    },
+    {
+      "status": "new",
+      "path": "projects/youtube comment analysis/figures/stage3-final/shap_summary_beeswarm.png",
+      "sha256": "9f20acd0c46371da762ee5fd0e084543b27d11188fffc96b5cd06caa82728c17"
+    },
+    {
+      "status": "modified",
+      "path": "projects/youtube comment analysis/youtube comment analysis-en.html",
+      "sha256": "0d9d3be5e761a67a728f76e642058e0656980defdf4fc3e2b141b6b3aa9b3f19"
+    },
+    {
+      "status": "modified",
+      "path": "projects/youtube comment analysis/youtube comment analysis.html",
+      "sha256": "60d1684a92dbfe357aeec9264e6d2f36dd1ef891cd3639e012c56b1de83dfc9a"
+    },
+    {
+      "status": "new",
+      "path": "scripts/check_report_browser.py",
+      "sha256": "5ea8bfea87e73cdc319885021b6b81a2b5ea2bd7c9ae59360449a0d7c19b8133"
+    },
+    {
+      "status": "new",
+      "path": "scripts/check_report_links.py",
+      "sha256": "0d4dbf4b415aa6350d263a9854203899629dd91cf234234f5a77d01c1ffe2229"
+    },
+    {
+      "status": "new",
+      "path": "scripts/report_summaries.json",
+      "sha256": "c765dd53da01f7dd2cd7c499e26e8660adb02f1b40c74d1f10248918986ab17c"
+    },
+    {
+      "status": "new",
+      "path": "scripts/sync_reports.py",
+      "sha256": "44b9652467a2a6b92cbe9716c7c9c70c88efc895a0f5ca4e93e476566d14b3a8"
+    }
+  ],
+  "excluded_preexisting": [
+    ".frontend-dispatch/",
+    "AGENTS.md"
+  ]
+}

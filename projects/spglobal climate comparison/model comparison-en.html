@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>document.documentElement.classList.add('js');</script>
+  <title>Satellite land surface temperature against downscaled CMIP6 air temperature: four regions, 15 models, two scenarios - Data Poetics</title>
+  <meta name="description" content="Compare historical MODIS LST and NEX-GDDP-CMIP6 tas across four study boxes, accounting for variables, calendars and sampling. Diagnose errors across 15 models and assess rank uncertainty in the 14-model main ensemble to inform model selection and bias correction.">
+  <meta property="og:title" content="Satellite land surface temperature against downscaled CMIP6 air temperature: four regions, 15 models, two scenarios">
+  <meta property="og:description" content="Compare historical MODIS LST and NEX-GDDP-CMIP6 tas across four study boxes, accounting for variables, calendars and sampling. Diagnose errors across 15 models and assess rank uncertainty in the 14-model main ensemble to inform model selection and bias correction.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://juyexiao.github.io/projects/spglobal%20climate%20comparison/model%20comparison-en.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:description" content="Compare historical MODIS LST and NEX-GDDP-CMIP6 tas across four study boxes, accounting for variables, calendars and sampling. Diagnose errors across 15 models and assess rank uncertainty in the 14-model main ensemble to inform model selection and bias correction.">
+  <link rel="canonical" href="https://juyexiao.github.io/projects/spglobal%20climate%20comparison/model%20comparison-en.html">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&amp;family=Inter:wght@200;300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;700&amp;family=Noto+Sans+SC:wght@400;500;600&amp;family=Noto+Serif+SC:wght@500&amp;display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="../../assets/css/index.css">
+  <link rel="stylesheet" href="../../assets/css/project.css">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Satellite land surface temperature against downscaled CMIP6 air temperature: four regions, 15 models, two scenarios", "description": "Compare historical MODIS LST and NEX-GDDP-CMIP6 tas across four study boxes, accounting for variables, calendars and sampling. Diagnose errors across 15 models and assess rank uncertainty in the 14-model main ensemble to inform model selection and bias correction.", "inLanguage": "en", "author": {"@type": "Person", "name": "Juye Xiao"}}</script>
+</head>
+<body class="transition-colors duration-300 report-page">
+<div class="scroll-progress" id="scroll-progress"></div>
+<header class="navbar fixed top-0 left-0 right-0 z-50" id="navbar">
+<div class="container-main h-full flex items-center justify-between">
+<!-- Logo Section -->
+<a class="navbar-logo" href="../../index-en.html#hero" id="navbar-logo">
+<!-- SVG Logo -->
+<svg class="logo-svg-nav" viewbox="0 0 40 40">
+<!-- Data Grid Background -->
+<g class="grid-bg">
+<!-- Vertical Lines -->
+<line class="grid-line-v" style="animation-delay: 0.1s, 0s" x1="8" x2="8" y1="0" y2="40"></line>
+<line class="grid-line-v" style="animation-delay: 0.2s, 0.5s" x1="16" x2="16" y1="0" y2="40"></line>
+<line class="grid-line-v" style="animation-delay: 0.3s, 1s" x1="24" x2="24" y1="0" y2="40"></line>
+<line class="grid-line-v" style="animation-delay: 0.4s, 1.5s" x1="32" x2="32" y1="0" y2="40"></line>
+<!-- Horizontal Lines -->
+<line class="grid-line-h" style="animation-delay: 0.5s, 0s" x1="0" x2="40" y1="10" y2="10"></line>
+<line class="grid-line-h" style="animation-delay: 0.6s, 0.7s" x1="0" x2="40" y1="20" y2="20"></line>
+<line class="grid-line-h" style="animation-delay: 0.7s, 1.4s" x1="0" x2="40" y1="30" y2="30"></line>
+</g>
+<!-- Weaver Animation Line -->
+<line class="weaver-line" id="weaverLine" x1="0" x2="40" y1="20" y2="20"></line>
+<!-- JX Letters -->
+<text class="logo-letters" id="logoLetters" text-anchor="middle" x="20" y="26">JX</text>
+</svg>
+<!-- Name Signature (Hover Display) -->
+<div class="logo-name">
+<div class="logo-name-text">Juye Xiao</div>
+<div class="logo-name-subtitle">Data Analyst</div>
+</div>
+</a>
+<nav class="hidden md:flex items-center space-x-8">
+<a class="nav-link" href="../../index-en.html#about">About</a>
+<a class="nav-link" href="../../index-en.html#experience">Experience</a>
+<a class="nav-link" href="../../index-en.html#education">Education</a>
+<a class="nav-link" href="../../index-en.html#projects">Projects</a>
+<a class="nav-link" href="../../index-en.html#skills">Skills</a>
+<a class="nav-link" href="../../index-en.html#contact">Contact</a>
+</nav>
+<div class="flex items-center space-x-4">
+<button aria-label="Toggle theme" class="btn-secondary !p-2 !rounded-full" id="theme-toggle">
+<i class="block dark:hidden" data-lucide="sun"></i>
+<i class="hidden dark:block" data-lucide="moon"></i>
+</button>
+<button class="btn-secondary !p-2 !rounded-full" id="lang-toggle">
+<span class="font-bold text-sm">中</span>
+</button>
+<button aria-controls="mobile-menu" aria-expanded="false" aria-label="Open menu" class="btn-secondary !p-2 !rounded-full md:hidden" id="menu-toggle">
+<i class="menu-icon-open" data-lucide="menu"></i>
+<i class="menu-icon-close" data-lucide="x"></i>
+</button>
+</div>
+</div>
+<nav aria-label="Mobile navigation" class="mobile-menu md:hidden" id="mobile-menu">
+<a class="nav-link" href="../../index-en.html#about">About</a>
+<a class="nav-link" href="../../index-en.html#experience">Experience</a>
+<a class="nav-link" href="../../index-en.html#education">Education</a>
+<a class="nav-link" href="../../index-en.html#projects">Projects</a>
+<a class="nav-link" href="../../index-en.html#skills">Skills</a>
+<a class="nav-link" href="../../index-en.html#contact">Contact</a>
+</nav>
+</header>
+<main class="container-main">
+  <section id="project-hero" class="section-padding report-hero">
+    <div class="section-eyebrow"><span class="section-kicker">Capstone · Model Comparison</span></div>
+    <h1 class="hero-title">Satellite land surface temperature against downscaled CMIP6 air temperature: four regions, 15 models, two scenarios</h1>
+    <p class="subtitle report-standfirst">Compare historical MODIS LST and NEX-GDDP-CMIP6 tas across four study boxes, accounting for variables, calendars and sampling. Diagnose errors across 15 models and assess rank uncertainty in the 14-model main ensemble to inform model selection and bias correction.</p>
+    <p class="reading-time">Analysis updated in 2026</p>
+    <div class="hero-stats"><div class="hero-stat"><div class="hero-stat__num">2015–2020</div><div class="hero-stat__label">Comparison period</div></div><div class="hero-stat"><div class="hero-stat__num">15</div><div class="hero-stat__label">Diagnostic models</div></div><div class="hero-stat"><div class="hero-stat__num">14</div><div class="hero-stat__label">Rank-uncertainty ensemble</div></div></div>
+    <div class="report-actions"><a class="btn btn-primary" href="#content">Read report</a><a class="btn btn-secondary" href="../../index-en.html#projects">All projects</a></div>
+  </section>
+<nav class="report-series" aria-label="Series navigation"><a class="report-series__link" href="spglobal climate comparison-en.html">S&amp;P Global Capstone: climate models, forecasts and spatial exposure</a><a class="report-series__link is-current" href="model comparison-en.html">Capstone study: model comparison</a><a class="report-series__link" href="long series-en.html">Capstone study: long records and short-term forecasts</a><a class="report-series__link" href="projection overlay-en.html">Paired long-term scenarios and spatial exposure</a></nav>
+  <section id="content" class="section-padding report-layout">
+    <aside><nav class="project-toc" id="project-toc" aria-label="Report contents"><h3>Contents</h3><ul id="toc-list"><li><a class="toc-link" href="#report-section-1">1. Model comparison summary</a></li><li><a class="toc-link" href="#report-section-2">2. The sponsor&#x27;s question and where the answer is used</a></li><li><a class="toc-link" href="#report-section-3">3. Data and study regions</a></li><li><a class="toc-link" href="#report-section-4">4. Method: error decomposition, cleaning recipes, test design</a></li><li><a class="toc-link" href="#report-section-5">5. Observation quality and the aggregation rule</a></li><li><a class="toc-link" href="#report-section-6">6. Model comparison: offset dominance and rank resolution</a></li><li><a class="toc-link" href="#report-section-7">7. Regional contrasts and scenario choice</a></li><li><a class="toc-link" href="#report-section-8">8. Short-term forecasting by region and horizon</a></li><li><a class="toc-link" href="#report-section-9">9. The bias-correction recipe and its scope</a></li><li><a class="toc-link" href="#report-section-10">10. Method use and follow-up checks</a></li><li><a class="toc-link" href="#report-section-11">11. Spatial scope of the comparison</a></li></ul></nav></aside>
+    <article class="content-area report-body" id="report-body"><section id="report-section-1" class="section-padding section--editorial" data-section-num="01"><div class="section-header"><h2 class="section-title">1. Model comparison summary</h2></div><div class="report-block" id="report-1-1">
+<p>This report compares MODIS land surface temperature with near-surface air temperature from 15 climate models in four study regions during 2015–2020. It examines observation quality, differences between physical variables and bias correction. Error decomposition and day–night comparisons use the 15-model diagnostics; rank uncertainty uses 14 models after excluding a version anomaly. Short-term forecasts are evaluated across five test windows. See the <a href="spglobal climate comparison-en.html">project synthesis</a> for the combined assessment.</p>
+<p>The 2015–2020 diagnostics with 15 models attribute 74%–97% of regional median RMSE² to mean offset. This supports interpreting variable and sampling differences before cRMSE, correlation and amplitude. Current point-leading rank ranges are CA 1–3, XJ 1–9, TK 1–5 and AU 1–7, offering no universal winner. Retain climatology for short-term comparison and validate regional candidates; aggregate correction improvements do not replace site checks.</p>
+
+</div></section><section id="report-section-2" class="section-padding section--editorial" data-section-num="02"><div class="section-header"><h2 class="section-title">2. The sponsor&#x27;s question and where the answer is used</h2></div><div class="report-block" id="report-2-1">
+<p><strong>What the sponsor asked for.</strong> The project addendum of 14 October 2022 states the objective as monitoring and predicting climate-related hazards from the temporal and spatial data in satellite imagery, connecting those to economic data, and informing the risk assessments behind the products S&amp;P sells to its clients. What that placed on the analysis side was to collect and tidy the datasets and to <strong>quantify and analyze, per GCM, the difference between observational and derived spatial data in the MODIS and NEX-GDDP NASA databases</strong>, with California given as an example region. Two items were listed as business outcomes: collecting and preprocessing publicly available satellite imagery from NASA, and engineering a data pipeline catered toward modeling.</p>
+<p><strong>Who uses the answer.</strong> Putting climate model output onto specific parcels requires three operational answers first:</p>
+<ul>
+<li>which GCM to feed into a regional heat estimate;</li>
+<li>whether the scenarios have to be run separately, or one is enough;</li>
+<li>whether a grid-cell value can stand in for a specific location.</li>
+</ul>
+<p>Sections 6, 7 and 9 answer these three in turn, each with an uncertainty attached.</p>
+<p><strong>Scope.</strong> The report covers data collection, preprocessing and quantification of differences between observations and models. Long-term scenarios and their use in population and land exposure are described in the <a href="projection overlay-en.html#report-section-1">scenario and spatial exposure report</a>.</p>
+<hr/>
+
+</div></section><section id="report-section-3" class="section-padding section--editorial" data-section-num="03"><div class="section-header"><h2 class="section-title">3. Data and study regions</h2></div><div class="report-block" id="report-3-1">
+<h3>Two sources</h3>
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">Dataset</th>
+<th scope="col">Source and channel</th>
+<th scope="col">Volume</th>
+<th scope="col">Period</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MODIS land surface temperature</td>
+<td><a href="https://developers.google.com/earth-engine/datasets/catalog/MODIS_061_MOD11A1">MODIS/061/MOD11A1</a>, extracted point by point through Google Earth Engine at the native 1 km resolution, using <code>LST_Day_1km</code>, <code>LST_Night_1km</code> and the matching QC bands</td>
+<td>1020 grid-cell centers across four regions, daily</td>
+<td>2015–2020 for all four regions; CA also 2000–2024</td>
+</tr>
+<tr>
+<td>NEX-GDDP-CMIP6 near-surface air temperature (tas)</td>
+<td><a href="https://www.nccs.nasa.gov/services/data-collections/land-based-products/nex-gddp-cmip6">NASA NEX-GDDP-CMIP6</a>, 0.25° downscaled climate-model data</td>
+<td>15 models, 2 scenarios, 4 study regions</td>
+<td>2015–2020, daily</td>
+</tr>
+</tbody>
+</table></div>
+<p>Both inputs are public data products. MODIS provides satellite land surface temperature, and NEX-GDDP-CMIP6 provides downscaled climate-model data.</p>
+<p>The 15 models are CanESM5, CMCC-CM2-SR5, CMCC-ESM2, GISS-E2-1-G, HadGEM3-GC31-MM, INM-CM4-8, INM-CM5-0, KACE-1-0-G, KIOST-ESM, MIROC6, NESM3, NorESM2-LM, NorESM2-MM, TaiESM1 and UKESM1-0-LL. Scenarios are ssp126 and ssp585.</p>
+<h3>Four regions</h3>
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">Code</th>
+<th scope="col">Location</th>
+<th scope="col">Climate</th>
+<th scope="col">NEX 0.25° grid points</th>
+<th scope="col">Valid months (of 72)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CA</td>
+<td>Sierra National Forest, California, USA</td>
+<td>Montane Mediterranean</td>
+<td>156</td>
+<td>69</td>
+</tr>
+<tr>
+<td>XJ</td>
+<td>Southern Tarim Basin, Xinjiang, China</td>
+<td>Hyper-arid desert</td>
+<td>144</td>
+<td>67</td>
+</tr>
+<tr>
+<td>TK</td>
+<td>Cross-border Iran–Turkmenistan study box</td>
+<td>Arid continental</td>
+<td>144</td>
+<td>60</td>
+</tr>
+<tr>
+<td>AU</td>
+<td>Inland New South Wales, Australia</td>
+<td>Temperate to semi-arid (Southern Hemisphere)</td>
+<td>576</td>
+<td>72</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Sample points are the NEX 0.25° grid-cell centers.</strong> Generating them by the rule "grid-cell center inside the bounding box" matches the point counts region by region: CA 156, XJ 144, TK 144, AU 576. That fixes the identity of the sample, and every comparison below sits on the same set of locations.</p>
+<p>Valid month counts differ by region, and all 12 of TK's missing months fall in the cold season (8 in January to March, 4 in December). Its metrics therefore rest on a warm-season-leaning subset and are not on the same month set as the other three. Cross-region comparisons therefore need to account for the different observed-month sets.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Observations and models, four regions" class="figure-zoom" type="button"><img alt="Observations and models, four regions" decoding="async" height="1008" loading="lazy" src="figures/regions_overview.png" width="1611"/></button><figcaption><em>MODIS day LST (black) against tas from 15 models (thin lines, ssp585), monthly, 2015–2020. In all four panels the model lines sit wholly below the observations, with a spacing that varies by region. Section 6 takes that spacing apart.</em></figcaption></figure>
+
+<h3>Why LST has to be compared with tas</h3>
+<p>The CMIP variable name <code>tas</code> composes <code>t</code> (temperature) with <code>a</code> (air) and <code>s</code> (surface), and the file attributes carry <code>cell_methods: area: time: mean</code>, meaning an average over the cell area and over 24 hours. MODIS LST is point skin temperature at the instant of overpass, around 10:30 for the day pass and 22:30 for the night pass. These are not the same quantity.</p>
+<p>Within CMIP the variable of the same kind as LST is ts, the model's own skin temperature, but the NEX-GDDP-CMIP6 distribution list carries nine variables and ts is not among them. Observation and model were therefore never the same physical quantity, which is the root of every bias figure in this project and the reason the correction in Section 9 exists.</p>
+<h3>Why this record cannot be differenced against the 2022 extraction</h3>
+<p>The MODIS CSVs in the 2022 deliverables do not hold point values. Across 156 points on a given day, the median count of distinct values is 14 (minimum 0, maximum 18), so roughly eleven points share one number. That extraction used too coarse a <code>scale</code> and returned image-pyramid block means tens of kilometers wide, biasing the record cold by 3.78 °C. Seasonal shape survives intact: the old and new monthly series correlate at r = 0.9902, and their deseasonalized anomalies at r = 0.8394. The two records can therefore corroborate each other in timing but not in level. Subtracting a 2022 bias figure from one in this report measures the extraction settings.</p>
+<hr/>
+
+</div></section><section id="report-section-4" class="section-padding section--editorial" data-section-num="04"><div class="section-header"><h2 class="section-title">4. Method: error decomposition, cleaning recipes, test design</h2></div><div class="report-block" id="report-4-1">
+<p>Four method decisions, each with its goal, its alternatives and its cost.</p>
+<h3>4.1 Splitting RMSE into offset and shape</h3>
+<h4>The goal</h4>
+<p>Separate the systematic offset that two different physical quantities must have from the error a model makes in seasonal shape, so that any ranking sits on the second.</p>
+<h4>The choice</h4>
+<p>Two alternatives were on the table. A single RMSE, which is what 2022 used, mixes both terms into one number, so minimizing it amounts to minimizing the offset. Correlation ignores offset entirely, but it also fails to penalize amplitude error. This report uses the identity <code>rmse² = bias² + crmse²</code> and reports all three terms, adding the standard-deviation ratio and Taylor diagrams so that amplitude error stays visible.</p>
+<h4>The procedure</h4>
+<p>Per model, compute bias, cRMSE, correlation, standard-deviation ratio and interannual anomaly correlation, giving a 120-row metric table over four regions and two scenarios. Anomaly correlation is reported for completeness; it measures no skill here, because free-running GCMs are not initialized from observations and are not expected to track individual years.</p>
+<h4>The cost</h4>
+<p>cRMSE is sensitive to the observation cleaning recipe, and how sensitive varies by region (quantified in Section 6.6). Ranking by cRMSE obliges the report to disclose how the observations were aggregated.</p>
+<h3>4.2 Handling the 360-day calendar with cftime</h3>
+<h4>The goal</h4>
+<p>HadGEM3-GC31-MM, KACE-1-0-G and UKESM1-0-LL run on a 360-day calendar, so their time axes cannot be parsed as Gregorian dates.</p>
+<h4>The procedure</h4>
+<p>Files are opened through cftime throughout, and monthly aggregation groups on the first seven characters of the date string, never passing through a Gregorian parse.</p>
+<h4>The cost and the check</h4>
+<p>This step can be tested directly. For one combination (CA, ssp585, HadGEM3-GC31-MM), correct calendar handling gives a monthly RMSE of 8.4599 °C, while treating day <em>N</em> of the 360-day calendar as "2015-01-01 plus <em>N</em> days" gives 9.0725 °C. The value published in 2022 was 9.1046, which differs from the second figure by 0.0321, a gap consistent with a data revision. Only the three 360-day models are affected. A cross-model ranking built on a Gregorian parse is therefore unfair to those three by construction.</p>
+<h3>4.3 The observation cleaning recipe</h3>
+<h4>The goal</h4>
+<p>Cloud contamination makes LST missing on a daily basis. A monthly mean therefore depends on which days and which grid points enter it, and the aggregation rule has to be fixed in advance and published.</p>
+<h4>The choice</h4>
+<p>Two recipes. The <strong>2022-style average</strong> replaces the missing marker with NaN, averages however many valid points a day happens to have, then takes the monthly mean. The <strong>coverage rule</strong> screens by day first, discarding any day with valid points below 50%, then by month, setting a month to NaN if it holds fewer than 10 valid days. The first keeps every month at the price of mixing the cold, low-coverage subsample into the monthly mean; the second pays in missing months for monthly values built on comparable spatial sampling. Results below use the coverage rule, and Section 6.6 reports how the ranks move under the 2022-style average.</p>
+<h4>The procedure</h4>
+<p>The MOD11A1 QC bitmask is applied at extraction. Night series run on a relaxed threshold (at least 10% of points per day, at least 5 valid days per month) because night-time passing rates are much thinner, and night results are used qualitatively only.</p>
+<h4>The cost</h4>
+<p>The coverage rule masks 3 months in CA, 5 in XJ, 12 in TK and none in AU. All 12 of TK's fall in the cold season, leaving every TK metric with that warm-season lean.</p>
+<h3>4.4 Common time resampling and forecast scoring</h3>
+<p>Historical ranks restore the complete calendar, draw six whole years 2,000 times with common indices for every model, then apply the original shared valid-month mask. Forecast windows are split before training-only imputation and selection. All methods score identical originally observed test months. Rank and forecast results appear in Sections 6.5 and 8.</p>
+
+</div></section><section id="report-section-5" class="section-padding section--editorial" data-section-num="05"><div class="section-header"><h2 class="section-title">5. Observation quality and the aggregation rule</h2></div><div class="report-block" id="report-5-1">
+<p>Observation coverage, seasonal missingness and spatial variation affect the interpretation of model errors and rankings.</p>
+<h3>5.1 Daytime QC passes half the time; night-time passes an eighth to a third</h3>
+<p>Daytime passing rates are CA 66.40%, TK 59.50%, XJ 56.18% and AU 51.80%; night-time rates are AU 33.65%, TK 31.64%, CA 31.14% and XJ 12.69%. Night coverage is thinner than day coverage by 1.54× in AU up to 4.43× in XJ. Days with no valid observation anywhere in the region (out of 2192) number 136 in AU, 96 in TK, 47 in XJ and 34 in CA.</p>
+<p>Because the night sample is that thin, night series run on the relaxed threshold and stay qualitative, and Section 9.1 does not subtract one side of the bracket from the other.</p>
+<h3>5.2 Missingness is strongly seasonal, in the direction climate implies</h3>
+<p>Multi-year extremes of the daytime missing rate by calendar month run from 58% in January to 12% in August for CA, 61% in January to 20% in October for XJ, and 71% in December to 8% in September for TK. AU is the exception, staying between 42% and 54% all year with its peak in July, the Southern Hemisphere winter.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: CA monthly missingness" class="figure-zoom" type="button"><img alt="CA monthly missingness" decoding="async" height="501" loading="lazy" src="figures/deep_dive/CA_missingness_monthly.png" width="1385"/></button><figcaption><em>Monthly missing-observation rate for CA day and night LST after QC. High in winter, low in summer, with the night curve above the day curve throughout. Missingness here is itself a data product: because it is seasonally structured, no multi-year average over these observations is an equal-weight average, and cold months carry less weight than warm ones.</em></figcaption></figure>
+
+<h3>5.3 The coverage rule costs a different amount in each region</h3>
+<p>Masked months number 3 in CA, 5 in XJ, 12 in TK and 0 in AU, leaving 69, 67, 60 and 72 valid months respectively. Of TK's 12 masked months, 8 fall in January to March and 4 in December, all of them cold-season.</p>
+<p>The consequence is that every TK metric rests on a warm-season-leaning subset. Wherever a TK number appears alongside another region below, it should be read with that sentence attached.</p>
+<h3>5.4 The +0.88 °C shift belongs to the aggregation rule; the QC bitmask itself is worth −0.01 °C</h3>
+<p>Moving CA from the 2022-style average to the current recipe raises the monthly regional day LST by 0.88 °C. Almost all of that belongs to the aggregation rule. Holding the QC setting fixed and switching only from the 2022-style average to the coverage rule moves the mean by +0.91 °C, with 2019-11 moving +5.60 °C on its own; holding aggregation fixed and toggling only the QC bitmask moves the mean by −0.01 °C, with no month moving more than 0.24 °C.</p>
+<p>The mechanism is visible at the level of the raw file: the bitmask removes 877 of 227,933 valid point-days, while the coverage rule discards whole low-coverage days whose surviving pixels are cold.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: CA under three cleaning recipes" class="figure-zoom" type="button"><img alt="CA under three cleaning recipes" decoding="async" height="524" loading="lazy" src="figures/deep_dive/CA_qc_sensitivity.png" width="1784"/></button><figcaption><em>Monthly regional day LST for CA under three processing recipes. Two of the three lines nearly coincide (QC on and off under the same aggregation rule), while the third, the 2022-style average, sits systematically lower. <strong>Never quote a bias figure without its cleaning recipe, and note that the decisive part of the recipe is the aggregation rule rather than the QC switch.</strong> Subtracting two bias numbers computed under different recipes measures the processing difference.</em></figcaption></figure>
+
+<h3>5.5 The regional mean represents timing well and absolute level poorly</h3>
+<p>Correlation between a single point's series and the regional mean has a median of 0.981 in TK, 0.970 in AU, 0.963 in CA and 0.962 in XJ. Remove the seasonal cycle and those medians fall to 0.865, 0.835, 0.830 and 0.794: most of the original agreement was the annual cycle that every point shares. Per-point long-term means have a standard deviation of 4.20 °C in AU, 4.90 in TK, 8.00 in CA and 8.73 in XJ, and the daily cross-point standard deviation runs XJ 8.6, CA 8.3, TK 5.4, AU 4.6 °C.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: CA spatial variability" class="figure-zoom" type="button"><img alt="CA spatial variability" decoding="async" height="524" loading="lazy" src="figures/deep_dive/CA_spatial_variability.png" width="2083"/></button><figcaption><em>Per-point dispersion in CA: cross-point standard deviation of daily day LST at left (30-day rolling mean), the regional mean against the per-point range in the middle, and the distribution of per-point correlations with the regional mean at right. Since each model supplies exactly one regional-mean tas, this dispersion is also the dispersion of the per-point bias behind every bias figure in this report. <strong>A 0.25° cell is not a station value</strong>, and using it as one means accepting a 4.2 to 8.7 °C spread of per-point means.</em></figcaption></figure>
+
+<h3>5.6 Diurnal range sorts with aridity</h3>
+<p>Mean day-minus-night LST is 31.8 °C in XJ, 22.9 in TK, 18.7 in CA and 16.2 in AU. For CA the monthly climatology of that range runs from 23.5 °C in May down to 11.3 °C in January.</p>
+<p>This quantity sets the scale of the day-side bias: the same model tas necessarily sits further from day LST where the diurnal range is larger. All four numbers should be read as upper bounds, because the day and night series come from different QC subsamples and surviving night pixels favor clear nights.</p>
+<hr/>
+
+</div></section><section id="report-section-6" class="section-padding section--editorial" data-section-num="06"><div class="section-header"><h2 class="section-title">6. Model comparison: offset dominance and rank resolution</h2></div><div class="report-block" id="report-6-1">
+<h3>6.1 Every model's tas falls between night and day LST</h3>
+<p>Across four regions and 15 models each, the day-side bias is negative and the night-side bias positive in every case, 15 of 15. Median day-side bias is −19.0 °C in XJ, −15.8 in TK, −12.4 in CA and −10.8 in AU; median night-side bias is +12.7, +6.8, +6.6 and +5.3 °C.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: CA ensemble inside the envelope" class="figure-zoom" type="button"><img alt="CA ensemble inside the envelope" decoding="async" height="616" loading="lazy" src="figures/deep_dive/CA_ensemble_envelope.png" width="1396"/></button><figcaption><em>CA: MODIS day LST (solid black), night LST (dashed gray) and tas from 15 models (thin red, ssp585). Model lines run as a bundle between the two observed series. This sign relation confirms that the offset is a difference of physical quantities rather than model error, <strong>but it does not discriminate between models</strong>. Since tas is a 24-hour mean and day LST is skin temperature around noon, the relation is close to inevitable for any reasonable temperature series.</em></figcaption></figure>
+
+<h3>6.2 Offset accounts for 74% to 97% of squared error</h3>
+<p>Regional medians of bias² as a share of RMSE² are AU 74%, CA 79%, TK 90% and XJ 97%, and across all 60 region-model combinations the share spans 0.48 to 0.97.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: CA bias share" class="figure-zoom" type="button"><img alt="CA bias share" decoding="async" height="616" loading="lazy" src="figures/deep_dive/CA_bias_share.png" width="1280"/></button><figcaption><em>Share of RMSE² carried by bias², per model, in CA, with a regional median of 79%. This is the quantitative form of "choosing by RMSE is choosing by offset": offset takes 79% of the squared error in CA, and 97% in XJ, which leaves 3% there for models to compete over.</em></figcaption></figure>
+
+<h3>6.3 The choice of variable matters more than the choice of model</h3>
+<p>Cross-model spread within a month (largest minus smallest of the 15 values) averages 8.7 °C in CA, 8.0 in TK, 7.3 in AU and 7.1 in XJ, all smaller than the width of the day-night envelope. More than half of CA's 8.7 °C comes from one model: the other 14 span only 1.6 °C of bias, while CMCC-CM2-SR5 runs 4.9 °C warmer than the next one.</p>
+<p>Which variable and which cleaning recipe are used therefore matters more than which of the 15 models is picked.</p>
+<h3>6.4 Remove the offset and the two arid regions almost reverse</h3>
+<p>Switching from RMSE ranks to cRMSE ranks moves more models by at least five places in XJ and TK:</p>
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">Region</th>
+<th scope="col">Models moving at least 5 places (out of 15)</th>
+<th scope="col">Spearman correlation between rankings</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>XJ</td>
+<td>10</td>
+<td>−0.31</td>
+</tr>
+<tr>
+<td>TK</td>
+<td>9</td>
+<td>−0.27</td>
+</tr>
+<tr>
+<td>CA</td>
+<td>4</td>
+<td>0.66</td>
+</tr>
+<tr>
+<td>AU</td>
+<td>2</td>
+<td>0.76</td>
+</tr>
+</tbody>
+</table></div>
+<p>Negative rank correlations in XJ and TK show how strongly mean bias changes the ordering based on total error.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: XJ rank reshuffle" class="figure-zoom" type="button"><img alt="XJ rank reshuffle" decoding="async" height="877" loading="lazy" src="figures/deep_dive/XJ_rank_slope.png" width="901"/></button><figcaption><em>XJ: RMSE ranks including bias on the left axis, cRMSE ranks with bias removed on the right, one line per model. Ten models move five places or more and the rank correlation is negative. In this region an RMSE leaderboard and a cRMSE leaderboard are two incommensurable lists.</em></figcaption></figure>
+
+<h3>6.5 Rank ranges under common-calendar resampling</h3>
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">Region</th>
+<th scope="col">Point-estimate leader</th>
+<th scope="col">cRMSE (°C)</th>
+<th scope="col">Resampling 2.5th–97.5th percentiles (°C)</th>
+<th scope="col">Rank range</th>
+<th scope="col">Observed months</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CA</td>
+<td>MIROC6</td>
+<td>5.647</td>
+<td>5.232–6.011</td>
+<td>1–3</td>
+<td>69</td>
+</tr>
+<tr>
+<td>XJ</td>
+<td>GISS-E2-1-G</td>
+<td>3.249</td>
+<td>2.966–3.499</td>
+<td>1–9</td>
+<td>67</td>
+</tr>
+<tr>
+<td>TK</td>
+<td>TaiESM1</td>
+<td>4.409</td>
+<td>3.596–5.065</td>
+<td>1–5</td>
+<td>60</td>
+</tr>
+<tr>
+<td>AU</td>
+<td>GISS-E2-1-G</td>
+<td>6.173</td>
+<td>5.785–6.435</td>
+<td>1–7</td>
+<td>72</td>
+</tr>
+</tbody>
+</table></div>
+<p>Calculation scope: 2015–2020, ssp585, main 14 models, 2,000 whole-year resamples. Rows show point-estimate leaders; cRMSE and rank ranges are resampling 2.5th–97.5th percentiles. Short records and missingness leave ranks variable and do not establish a universally best model.</p>
+<h3>6.6 In XJ the ranking also depends on the cleaning recipe</h3>
+<p>Recomputing every cRMSE against the 2022-style average leaves XJ correlated with its original ordering at Spearman 0.721. Five models move three places or more, and first place changes from GISS-E2-1-G to TaiESM1. TK is stable by comparison: Spearman 0.936, one model moving three places or more, first place unchanged. In TK the coverage rule raises every cRMSE by roughly 1.4 °C without touching the order.</p>
+<p>In XJ, then, the answer to "which model is best" depends on how the clouds were screened and how the days were aggregated, so rankings need to specify the observation aggregation rule.</p>
+<h3>6.7 Model versions and the main ensemble</h3>
+<p>Unrevised CMCC-CM2-SR5 v1.0 data have a temperature-offset anomaly in the historical and ssp585 periods. Rank-uncertainty and scenario assessments use the other 14 models as the main ensemble, with all 15 included in sensitivity analysis. Its apparent RMSE advantage is not a model-selection criterion.</p>
+
+</div></section><section id="report-section-7" class="section-padding section--editorial" data-section-num="07"><div class="section-header"><h2 class="section-title">7. Regional contrasts and scenario choice</h2></div><div class="report-block" id="report-7-1">
+<h3>7.1 RMSE and cRMSE sort the four regions in nearly opposite orders</h3>
+<p>Median RMSE runs AU 12.61 &lt; CA 14.01 &lt; TK 16.63 &lt; XJ 19.32 °C. By cRMSE the order almost reverses: XJ 3.55 &lt; TK 5.24 &lt; AU 6.33 &lt; CA 6.44 °C. Correlation follows cRMSE, highest in XJ at 0.98, then TK 0.96, AU 0.94 and CA 0.92.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Regional metric distributions" class="figure-zoom" type="button"><img alt="Regional metric distributions" decoding="async" height="584" loading="lazy" src="figures/deep_dive/ALL_region_metric_boxplots.png" width="1933"/></button><figcaption><em>Metric distributions by region (ssp585, 15 models). By RMSE, XJ is the worst region; by cRMSE and correlation it is the best. One mechanism drives both: an arid surface runs much hotter than the air above it, which inflates the offset term. Aridity also means clear skies, which makes the seasonal cycle cleanest and pushes cRMSE down.</em></figcaption></figure>
+
+<p>This resolves what the 2022 record reported without explaining, namely one region showing high RMSE together with a high R². Both statements describe different terms of the same identity, each correct on its own, and they look contradictory only when treated as one number.</p>
+<h3>7.2 Historical point estimates and current rank ranges</h3>
+<p>The original 15-model figures describe regional error patterns. Current main-14 point leaders and rank ranges are given in §6.5; their order does not establish significant superiority.</p>
+<h3>7.3 Bias and cRMSE are two independent axes</h3>
+<p>Pooling all 60 region-model points, bias and cRMSE correlate at +0.88; within regions the correlation is −0.20 in CA, +0.39 in XJ, +0.56 in TK and −0.60 in AU. Pooled agreement comes from the aridity gradient entering both terms at once, so it describes a regional contrast and not a model-level relationship.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Bias against cRMSE" class="figure-zoom" type="button"><img alt="Bias against cRMSE" decoding="async" height="703" loading="lazy" src="figures/deep_dive/ALL_bias_vs_crmse.png" width="1095"/></button><figcaption><em>Bias on the horizontal axis, cRMSE on the vertical, colored by region. Four clusters separate horizontally (the regional effect) and each cluster is narrow vertically (the model effect). <strong>Knowing that a model has the smallest offset in a region says almost nothing about whether its shape is the best there.</strong> Shape can only be read off cRMSE, and cRMSE has to be read with the intervals from Section 6.5.</em></figcaption></figure>
+
+<p>On the Taylor diagrams each region forms its own cluster. Standard-deviation ratios are below 1 throughout, because the annual amplitude of daily mean air temperature is smaller than that of midday skin temperature. Pairing these two variables produces that gap; no model defect is involved. Cross-model range in correlation is 0.012 in XJ, 0.036 in TK, 0.044 in CA and 0.059 in AU, while the range in standard-deviation ratio is 0.121 in TK, 0.091 in CA, 0.086 in AU and 0.070 in XJ. Which region is "most dispersed" depends on which axis is read.</p>
+<h3>7.4 Historical scenario comparison and long-term use</h3>
+<p>Small historical scenario differences in 2015–2020 establish neither statistical equivalence nor interchangeability in future periods. Long-term reporting pairs ssp585−ssp126 within each model and retains both scenarios and their difference distribution; see the <a href="spglobal climate comparison-en.html">synthesis</a>.</p>
+
+</div></section><section id="report-section-8" class="section-padding section--editorial" data-section-num="08"><div class="section-header"><h2 class="section-title">8. Short-term forecasting by region and horizon</h2></div><div class="report-block" id="report-8-1">
+<p>Monthly climatology predicts the training-period mean for each calendar month. Seasonal naive repeats the final 12 months of the training series. Lower root mean square error (RMSE) indicates closer agreement with observations.</p>
+<p>The five test end years are 2016, 2018, 2020, 2022 and 2024, each with a 12- and 24-month window looking backwards. Within each horizon all four methods are scored on identical originally observed months. The two horizons have different forecast origins. Splitting precedes training-only imputation and parameter selection, preventing future observations from influencing training.</p>
+<p>The table reports the arithmetic mean of five window RMSEs in °C. Scored months sum valid months across the windows; they are not a count of independent observations.</p>
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">Region</th>
+<th scope="col">Horizon (months)</th>
+<th scope="col">Climatology</th>
+<th scope="col">SARIMA</th>
+<th scope="col">Prophet</th>
+<th scope="col">Seasonal naive</th>
+<th scope="col">Scored months</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CA</td>
+<td>12</td>
+<td>2.033</td>
+<td>2.062</td>
+<td>2.211</td>
+<td>3.476</td>
+<td>57</td>
+</tr>
+<tr>
+<td>CA</td>
+<td>24</td>
+<td>2.636</td>
+<td>2.707</td>
+<td>2.960</td>
+<td>3.394</td>
+<td>116</td>
+</tr>
+<tr>
+<td>XJ</td>
+<td>12</td>
+<td>2.238</td>
+<td>2.226</td>
+<td>2.304</td>
+<td>2.273</td>
+<td>56</td>
+</tr>
+<tr>
+<td>XJ</td>
+<td>24</td>
+<td>2.028</td>
+<td>1.997</td>
+<td>2.076</td>
+<td>2.466</td>
+<td>113</td>
+</tr>
+<tr>
+<td>TK</td>
+<td>12</td>
+<td>2.409</td>
+<td>2.441</td>
+<td>2.259</td>
+<td>3.411</td>
+<td>52</td>
+</tr>
+<tr>
+<td>TK</td>
+<td>24</td>
+<td>2.727</td>
+<td>2.728</td>
+<td>2.604</td>
+<td>2.864</td>
+<td>104</td>
+</tr>
+<tr>
+<td>AU</td>
+<td>12</td>
+<td>3.077</td>
+<td>2.982</td>
+<td>2.895</td>
+<td>2.788</td>
+<td>58</td>
+</tr>
+<tr>
+<td>AU</td>
+<td>24</td>
+<td>2.631</td>
+<td>2.522</td>
+<td>2.584</td>
+<td>3.273</td>
+<td>117</td>
+</tr>
+</tbody>
+</table></div>
+<p>SARIMA compares 72 AICc candidates within each training window. Prophet uses yearly seasonality and linear growth.</p>
+<p>Climatology has lower mean-window RMSE than SARIMA in CA. In XJ, SARIMA reduces this error relative to climatology by about 0.012 °C for 12-month forecasts and 0.031 °C for 24-month forecasts. These small differences do not yet support the more complex method as the default, so both regions retain climatology.</p>
+<p>Prophet has the lowest mean-window RMSE in TK at both horizons, but wins overall in only 3 of the 5 windows at 12 months and 2 at 24 months. AU's 12-month seasonal naive wins overall in only 1 of the 5 windows. At 24 months, SARIMA wins overall in 2 windows and directly beats climatology in 4. Prophet in TK and 24-month SARIMA in AU therefore remain candidates to test at new forecast origins.</p>
+<p>Mean-window RMSE averages the RMSE calculated separately in each test window. Pooled RMSE combines squared errors across all scored months, takes their mean, then takes the square root. For AU's 12-month forecasts, this choice changes the relative order of Prophet and SARIMA.</p>
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">Method</th>
+<th scope="col">Mean-window RMSE (°C)</th>
+<th scope="col">Pooled RMSE (°C)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Prophet</td>
+<td>2.895</td>
+<td>3.086</td>
+</tr>
+<tr>
+<td>SARIMA</td>
+<td>2.982</td>
+<td>3.035</td>
+</tr>
+</tbody>
+</table></div>
+<p>Prophet has lower mean-window error, while SARIMA has lower pooled error. The aggregation method therefore needs to be specified before comparing models.</p>
+<p>MASE uses originally observed 12-month seasonal pairs in training for its denominator. MASE below 1 does not replace a direct test-period comparison with seasonal naive. Five windows establish neither statistical equivalence nor a universal twenty-year minimum for SARIMA.</p>
+<p>Next, add new test end years at each specified horizon, fixing the scoring mask and aggregation in advance. Track error differences, window wins and residuals before replacing the default baseline.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Window RMSE by region and horizon; mean-window and pooled statistics are reported separately" class="figure-zoom" type="button"><img alt="Window RMSE by region and horizon; mean-window and pooled statistics are reported separately" decoding="async" height="1927" loading="lazy" src="figures/audit_revision_20260926/forecast_window_rmse.png" width="1903"/></button><figcaption class="generated-alt-caption">Window RMSE by region and horizon; mean-window and pooled statistics are reported separately</figcaption></figure>
+
+</div></section><section id="report-section-9" class="section-padding section--editorial" data-section-num="09"><div class="section-header"><h2 class="section-title">9. The bias-correction recipe and its scope</h2></div><div class="report-block" id="report-9-1">
+<p>Sections 6 and 7 point the same way: estimating the offset well is worth more than choosing among 15 models. This section tests whether that route works.</p>
+<h3>9.1 What the recipe rests on</h3>
+<p>Model tas falls between night and day LST in 15 of 15 cases in all four regions, running 10.8 to 19.0 °C below day LST and 5.3 to 12.7 °C above night LST as regional medians (Section 6.1). Because the sign and magnitude of that offset follow from a physical relation and vary systematically by region, the offset is estimable.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Day-night bracket, four regions" class="figure-zoom" type="button"><img alt="Day-night bracket, four regions" decoding="async" height="558" loading="lazy" src="figures/deep_dive/ALL_daynight_bracket.png" width="1129"/></button><figcaption><em>Ensemble-median bias by region: negative against day LST everywhere, positive against night LST everywhere, with the day-side gap widening with aridity. <strong>This structure is what the correction rests on</strong>, since the quantity to estimate is not which model is right but how much to add going from tas to day LST. Two limits apply: the bracket does not discriminate between models, and the two columns rest on different month sets, so they cannot be subtracted.</em></figcaption></figure>
+
+<h3>9.2 Holdout test: raw tas, then one constant, then twelve monthly values</h3>
+<p>Offsets are fitted on 2015–2018 and tested on 2019–2020. The valid-month counts are:</p>
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">Region</th>
+<th scope="col">Calibration months</th>
+<th scope="col">Test months</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CA</td>
+<td>46</td>
+<td>23</td>
+</tr>
+<tr>
+<td>XJ</td>
+<td>44</td>
+<td>23</td>
+</tr>
+<tr>
+<td>TK</td>
+<td>40</td>
+<td>20</td>
+</tr>
+<tr>
+<td>AU</td>
+<td>48</td>
+<td>24</td>
+</tr>
+</tbody>
+</table></div>
+<p>Median RMSE against daytime LST is:</p>
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">Form of correction</th>
+<th scope="col">CA</th>
+<th scope="col">XJ</th>
+<th scope="col">TK</th>
+<th scope="col">AU</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Raw tas, uncorrected</td>
+<td>13.37</td>
+<td>19.17</td>
+<td>15.89</td>
+<td>12.29</td>
+</tr>
+<tr>
+<td>One regional constant</td>
+<td>6.74</td>
+<td>3.67</td>
+<td>4.62</td>
+<td>6.54</td>
+</tr>
+<tr>
+<td>Twelve monthly values</td>
+<td>3.78</td>
+<td>2.36</td>
+<td>3.63</td>
+<td>2.51</td>
+</tr>
+<tr>
+<td>Reference: climatology of the observations</td>
+<td>3.08</td>
+<td>1.85</td>
+<td>2.80</td>
+<td>2.05</td>
+</tr>
+</tbody>
+</table></div>
+<p>Units are °C. Cells in the first three rows are medians over the 15 models; the last row involves no model at all. No intervals are attached: the test window is the two years 2019–2020, every cell comes from that single window, and Section 9.4 carries the limit into the usage constraints. The monthly form beats the single constant in all four regions by 1.0 to 4.0 °C. One regional constant already takes the apparent error from 12–19 °C down to the 3.7–6.7 °C range, which is where the return on correcting exceeds the return on model selection.</p>
+<h3>9.3 Climatology and free-running models</h3>
+<p>Observed monthly climatology has lower error in the original holdout. Free-running GCMs are not synchronized with actual year-specific weather, so monthly errors include differences between unaligned realizations. This is not a theorem that beating climatology is impossible. Compare distributions and pathway differences for future scenarios, and test short-term methods directly with rolling windows.</p>
+<h3>9.4 Local reference and scope</h3>
+<p>Monthly offsets require local observations. Findings do not directly transfer to locations without a usable satellite record; cross-location transfer needs separate validation. Current spatial common-holdout checks and candidate stability are in synthesis §3 and §8. Mean correction does not ensure accurate tail frequency.</p>
+
+</div></section><section id="report-section-10" class="section-padding section--editorial" data-section-num="10"><div class="section-header"><h2 class="section-title">10. Method use and follow-up checks</h2></div><div class="report-block" id="report-10-1">
+<p>This capstone connects model comparison, forecasting and spatial exposure screening to choose methods and sequence further assessment. It covers 1,020 cells in four study boxes, CA, XJ, TK and AU. These labels do not represent entire states or countries.</p>
+<p>Model–observation comparison starts with physical variables, calendars and sampling, then examines residual error. Cell-level correction lowers population-weighted cell RMSE in all four regions on a common holdout. It does not improve every regional mean or establish the accuracy of site risk rankings.</p>
+<p>Short-term forecasting requires a choice by region and horizon. Monthly climatology remains the default comparison for CA and XJ; Prophet in TK and 24-month SARIMA in AU merit further validation. Long-term assessment uses differences paired within each climate model. Scenario temperature differences are easier to interpret directly than absolute exceedance counts, which respond to calibration windows and historical frequency bias.</p>
+<p>Population, built surface and cropland each receive a separate verification list. For 2035–2044 under ssp585, 204 of 268 baseline cell–layer entries meet the proposed priority rule. The next step is to check local uses, population sources and independent temperature data before commissioning finer risk assessment.</p>
+
+</div></section><section id="report-section-11" class="section-padding section--editorial" data-section-num="11"><div class="section-header"><h2 class="section-title">11. Spatial scope of the comparison</h2></div><div class="report-block" id="report-11-1">
+<p>The observation-quality, night-sample and central-pixel diagnostics cover 2015–2020. All four regions are selected study boxes, so their metrics do not directly represent entire states or countries. Night-time data use looser coverage rules, and day–night differences also reflect sampling. The <a href="spglobal climate comparison-en.html">synthesis</a> presents cell-level correction and longer-record results; site applications still require independent observations.</p>
+
+</div></section></article>
+  </section>
+<nav class="report-series" aria-label="Series navigation"><a class="report-series__link" href="spglobal climate comparison-en.html">S&amp;P Global Capstone: climate models, forecasts and spatial exposure</a><a class="report-series__link is-current" href="model comparison-en.html">Capstone study: model comparison</a><a class="report-series__link" href="long series-en.html">Capstone study: long records and short-term forecasts</a><a class="report-series__link" href="projection overlay-en.html">Paired long-term scenarios and spatial exposure</a></nav>
+  <section id="related" class="section-padding"><div class="section-header"><h2 class="section-title">Related projects</h2></div><div class="grid md:grid-cols-2 gap-6"><a href="../healthy home/healthy home-en.html" class="related-project-card"><h3 class="related-project-title">Healthy Home: spatial prediction and road mapping in Oakland</h3><p class="related-project-description">Combine 18,219 observations, road networks and nested spatial evaluation to analyze pollutant patterns in Oakland. Random Forest achieves pooled NO₂ R² of 0.576017 under spatial-block evaluation. Relative prediction maps cover 628.74 km of roads, with area-level error analysis informing further sampling.</p><span class="related-project-link">Read case</span></a><a href="../lendingclub loan prediction/lendingclub loan prediction-en.html" class="related-project-card"><h3 class="related-project-title">LendingClub: the 9,004-loan sample</h3><p class="related-project-description">Analyze default patterns in 9,004 historical loans, compare models with a loan-term rule, and design screening policies under asymmetric costs. Random Forest at the frozen threshold of 0.22 achieves 70.45% test recall and a 4.68% net simulated cost reduction.</p><span class="related-project-link">Read case</span></a></div></section>
+</main>
+<script src="../../assets/js/logo.js"></script>
+<script src="../../assets/js/common.js"></script>
+<script src="../../assets/js/project.js"></script>
+<script src="../../assets/js/language-switcher.js"></script>
+</body>
+</html>

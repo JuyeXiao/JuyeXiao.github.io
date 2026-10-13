@@ -1,0 +1,99 @@
+[
+  {
+    "url": "https://aws.amazon.com/blogs/big-data/discovering-metadata-with-aws-lake-formation-part-1/",
+    "access": "anonymous GET; no account cookies",
+    "status": 200,
+    "final_url": "https://aws.amazon.com/blogs/big-data/discovering-metadata-with-aws-lake-formation-part-1/",
+    "bytes_read": 1280271,
+    "title": [
+      "Discovering metadata with AWS Lake Formation: Part 1 | AWS Big Data Blog"
+    ],
+    "result": "http-accessible"
+  },
+  {
+    "url": "https://developers.google.com/earth-engine/datasets/catalog/MODIS_061_MOD11A1",
+    "access": "anonymous GET; no account cookies",
+    "result": "network-failure-unverified",
+    "error": "<urlopen error [WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond>"
+  },
+  {
+    "url": "https://developers.google.com/earth-engine/datasets/catalog/NASA_GDDP-CMIP6",
+    "access": "anonymous GET; no account cookies",
+    "result": "network-failure-unverified",
+    "error": "<urlopen error [WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond>"
+  },
+  {
+    "url": "https://github.com/JuyeXiao",
+    "access": "anonymous GET; no account cookies",
+    "result": "network-failure-unverified",
+    "error": "<urlopen error [WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond>"
+  },
+  {
+    "url": "https://github.com/ryanschaub/Mobile-Games-A-B-Testing-with-Cookie-Cats",
+    "access": "anonymous GET; no account cookies",
+    "result": "network-failure-unverified",
+    "error": "<urlopen error [WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond>"
+  },
+  {
+    "url": "https://shap.readthedocs.io/en/latest/generated/shap.TreeExplainer.html",
+    "access": "anonymous GET; no account cookies",
+    "status": 200,
+    "final_url": "https://shap.readthedocs.io/en/latest/generated/shap.TreeExplainer.html",
+    "bytes_read": 53915,
+    "title": [
+      "shap.TreeExplainer &mdash; SHAP latest documentation"
+    ],
+    "result": "http-accessible"
+  },
+  {
+    "url": "https://terra.nasa.gov/about/terras-orbit-changes",
+    "access": "anonymous GET; no account cookies",
+    "result": "network-failure-unverified",
+    "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate has expired (_ssl.c:1032)>"
+  },
+  {
+    "url": "https://www.kaggle.com/datasets/mursideyarkin/mobile-games-ab-testing-cookie-cats",
+    "access": "anonymous GET; no account cookies",
+    "status": 200,
+    "final_url": "https://www.kaggle.com/datasets/mursideyarkin/mobile-games-ab-testing-cookie-cats",
+    "bytes_read": 11118,
+    "title": [
+      "Mobile Games A/B Testing - Cookie Cats | Kaggle"
+    ],
+    "result": "challenge-or-script-needs-browser-check"
+  },
+  {
+    "url": "https://www.kaggle.com/datasets/shubh0799/churn-modelling",
+    "access": "anonymous GET; no account cookies",
+    "status": 200,
+    "final_url": "https://www.kaggle.com/datasets/shubh0799/churn-modelling",
+    "bytes_read": 9918,
+    "title": [
+      "Churn Modelling | Kaggle"
+    ],
+    "result": "challenge-or-script-needs-browser-check"
+  },
+  {
+    "url": "https://www.kaggle.com/datasets/wordsforthewise/lending-club",
+    "access": "anonymous GET; no account cookies",
+    "status": 200,
+    "final_url": "https://www.kaggle.com/datasets/wordsforthewise/lending-club",
+    "bytes_read": 12472,
+    "title": [
+      "All Lending Club loan data | Kaggle"
+    ],
+    "result": "challenge-or-script-needs-browser-check"
+  },
+  {
+    "url": "https://www.nccs.nasa.gov/services/data-collections/land-based-products/nex-gddp-cmip6",
+    "access": "anonymous GET; no account cookies",
+    "result": "network-failure-unverified",
+    "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate has expired (_ssl.c:1032)>"
+  },
+  {
+    "url": "https://www.openstreetmap.org/",
+    "access": "anonymous GET; no account cookies",
+    "result": "network-failure-unverified",
+    "error": "<urlopen error [WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond>"
+  }
+]

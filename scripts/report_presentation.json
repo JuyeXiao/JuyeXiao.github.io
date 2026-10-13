@@ -1,0 +1,546 @@
+{
+  "loan": {
+    "zh": [
+      {
+        "before": "## 11 附录：环境与复现\n\n[分析 notebook](LendingClub%20Loan%20Prediction%20-%20full-source.ipynb) 的 30 个代码单元已顺序执行通过，来源协议为 `P08-full-source-v1`。结果、冻结策略、角色和逐行分数位于 [artifacts/full-source-v1/results.json](artifacts/full-source-v1/results.json)，图表位于 `figures/full-source-v1/`。执行与独立算术核验见[运行记录](../.scratch/analytical-integrity-audit-stage3/sessions/20260920T140000Z-sourceA/verification.json)。\n\n版本沿革与来源限制的历史记录见[新旧对比](新旧对比.md)。复现时从项目目录打开 notebook，使用仓库根的 uv 环境；运行会写入本项目的结果和图表目录。\n",
+        "after": ""
+      },
+      {
+        "before": "输入为 [loan-full-source-9004.csv](loan-full-source-9004.csv)，9,004 行、30 列；所有分析字段统一取自本地全量快照。日期和文件身份见[来源协议](full-source-protocol.json)。上游快照未获独立认证。缺失值共 319 个，其中就业年限 316 个、利用率 3 个；违约比例约 16.8%。",
+        "after": "输入贷款样本包含 9,004 行、30 列，分析字段统一取自同一全量快照。缺失值共 319 个，其中就业年限 316 个、利用率 3 个；违约比例约 16.8%。"
+      },
+      {
+        "before": "，角色文件见 [role-manifest.csv](artifacts/full-source-v1/role-manifest.csv)",
+        "after": ""
+      },
+      {
+        "before": "方向因模型而异。该比较保持已选参数不变、未重新调参，不能据此判断完整训练方案的普遍优劣。数值来自当前协议的 [ablation.csv](artifacts/full-source-v1/ablation.csv)。",
+        "after": "方向因模型而异。该比较保持已选参数不变、未重新调参，不能据此判断完整训练方案的普遍优劣。"
+      },
+      {
+        "before": "来源：[选择集指标](artifacts/full-source-v1/selection-metrics.csv)、[冻结测试指标](artifacts/full-source-v1/test-metrics.csv)。",
+        "after": ""
+      },
+      {
+        "before": "限制包括：历史队列和随机切分；测试集曾被查看；字段的真实审批可得性、上游快照身份、概率校准和时间外表现未独立验证；已完成贷款不代表拒贷人群；模拟损失不等于实际经营收益。就业年限缺失与不足一年共用编码，未验证该假设的影响。",
+        "after": "本次评价基于历史已完成贷款队列，采用随机切分和设定费用的离线模拟。后续可用新时间窗检验排序稳定性，并结合业务审批流程核对特征时点、就业年限编码和费用设定。"
+      }
+    ],
+    "en": [
+      {
+        "before": "## 11 Appendix: environment and reproduction\n\nAll 30 code cells of the [full-source notebook](LendingClub%20Loan%20Prediction%20-%20full-source.ipynb) completed sequentially under `P08-full-source-v1`. [artifacts/full-source-v1/results.json](artifacts/full-source-v1/results.json) accompanies frozen policies, roles and row-level scores; figures are in `figures/full-source-v1/`. See the [execution and arithmetic verification](../.scratch/analytical-integrity-audit-stage3/sessions/20260920T140000Z-sourceA/verification.json).\n\nVersion history is documented in the [change record](新旧对比.md). Open the notebook from its project directory with the repository uv environment; execution writes the project result and figure directories.\n",
+        "after": ""
+      },
+      {
+        "before": "[loan-full-source-9004.csv](loan-full-source-9004.csv) contains 9,004 rows and 30 columns. Every analytical field comes from the same local full-data snapshot. The [source protocol](full-source-protocol.json) binds file identity and dates. The upstream snapshot is not independently authenticated. There are 319 missing cells: 316 in employment length and three in utilization. About 16.8% of loans charged off.",
+        "after": "The loan sample contains 9,004 rows and 30 columns, with all analytical fields drawn from the same full-data snapshot. There are 319 missing cells: 316 in employment length and three in utilization. About 16.8% of loans charged off."
+      },
+      {
+        "before": "; see [role-manifest.csv](artifacts/full-source-v1/role-manifest.csv)",
+        "after": ""
+      },
+      {
+        "before": "The direction varies by model. Parameters remain fixed at their selected values, without retuning, so this comparison cannot establish general superiority of complete training procedures. Values come from the current protocol's [ablation.csv](artifacts/full-source-v1/ablation.csv).",
+        "after": "The direction varies by model. Parameters remain fixed at their selected values, without retuning, so this comparison cannot establish general superiority of complete training procedures."
+      },
+      {
+        "before": "Sources: [selection metrics](artifacts/full-source-v1/selection-metrics.csv) and [frozen test metrics](artifacts/full-source-v1/test-metrics.csv). ",
+        "after": ""
+      },
+      {
+        "before": "Limits include a historical cohort, random splitting and prior inspection of test data. Actual application-time availability, upstream snapshot identity, calibration and out-of-time performance remain independently unverified. Completed loans do not represent rejected applicants, and simulated loss is not realized business gain. Missing and short employment histories share an encoding; the effect of that assumption has not been tested.",
+        "after": "This evaluation uses a historical completed-loan cohort, random splits and offline simulations under specified costs. Further work can test ranking stability in new time windows and align feature timing, employment-history encoding and cost assumptions with the approval workflow."
+      }
+    ]
+  },
+  "youtube": {
+    "zh": [
+      {
+        "before": "## 10 附录：参数、环境、复现\n\n冻结模型与规则结果见 [W7 B14 结果](../.scratch/analytical-integrity-audit-stage3/sessions/20260920T052401Z-W7-W8/B14/results.json)。新样本有独立的[抽样与评价协议](../.scratch/analytical-integrity-audit-b13-refresh-20260920/protocol.json)、[评分记录](../.scratch/analytical-integrity-audit-b13-refresh-20260920/score-run.json)和[助手复核结果](../.scratch/analytical-integrity-audit-b13-refresh-20260920/assistant-review-results.json)。这些记录支持模型辅助评价，不构成人工验证。\n\n计算与上文七张图对应所链接的 [P15-v1 封存运行](../.scratch/analytical-integrity-audit-stage3/sessions/20260920T102343Z-closure/runs/P15-v1/run.json)。该次运行从干净内核顺序执行 36 个代码单元，用时 28.5 分钟。输入与图表的绑定核对、当前 notebook 的显示层差异见[版本记录](新旧对比.md)；运行来源与当前文件不具有相同的整文件身份。",
+        "after": ""
+      },
+      {
+        "before": "另取 300 条新评论做模型辅助复核，294 条可判定评论上的加权精确率为 0.8982、召回率为 0.4045，均未计算区间；该评价不是独立人工验证。",
+        "after": "另取 300 条新评论做助手复核，以其中 294 条可判定标签为参照，条件加权精确率为 0.8982、召回率为 0.4045。"
+      },
+      {
+        "before": "规则标签与助手标签都是文本代理，实际宠物主身份和购买行为没有独立真值。新样本评价限于过滤后的合格评论总体和 294 条可判定标签；模型辅助精确率 0.8982 没有区间。助手复核不是独立人工盲标。",
+        "after": "评价以规则标签和助手复核标签中的养宠文本信号为参照。新样本评价覆盖过滤后的合格评论总体，基于 294 条可判定标签，条件加权精确率点估计为 0.8982。"
+      },
+      {
+        "before": "行为特征沿用全语料聚合，用户级 `max` 会放大多评论用户。拉丁字母主导不等于英语，语言外推、未来用户、频道排名稳定性、校准与经营收益尚未验证。这些限制不妨碍把结果用于候选发现和试点设计，但限制了自动化决策与因果结论。",
+        "after": "行为特征按全语料聚合，用户级 `max` 更容易将多评论用户排在前面。后续验证可结合语言分层、用户评论数与频道排名稳定性，进一步改进候选发现和人工复核流程。"
+      },
+      {
+        "before": "## 9 实施建议与边界",
+        "after": "## 9 频道筛选与后续验证"
+      },
+      {
+        "before": "数据集由课程提供，不可公开获取：",
+        "after": "数据集由课程提供，包含"
+      },
+      {
+        "before": " 来源归属和公开可获取性沿用历史描述，本轮未外部复核。",
+        "after": ""
+      },
+      {
+        "before": "### 必要边界",
+        "after": "### 评价范围"
+      },
+      {
+        "before": "历史抽样执行来源仍未恢复。",
+        "after": ""
+      }
+    ],
+    "en": [
+      {
+        "before": "## 10 Appendix: parameters, environment, reproducibility\n\nThe frozen model's rule results are in [W7 B14 results](../.scratch/analytical-integrity-audit-stage3/sessions/20260920T052401Z-W7-W8/B14/results.json). The new sample has separate [sampling and evaluation protocol](../.scratch/analytical-integrity-audit-b13-refresh-20260920/protocol.json), [scoring record](../.scratch/analytical-integrity-audit-b13-refresh-20260920/score-run.json) and [assistant review results](../.scratch/analytical-integrity-audit-b13-refresh-20260920/assistant-review-results.json). These records support model-assisted evaluation. Human validation was not performed.\n\nThe computations and seven figures above correspond to the linked [archived P15-v1 run](../.scratch/analytical-integrity-audit-stage3/sessions/20260920T102343Z-closure/runs/P15-v1/run.json). That run executed 36 code cells sequentially from a fresh kernel in 28.5 minutes. The [version record](新旧对比.md) documents input and figure binding checks and the current notebook display changes; the executed source and current file have distinct whole-file identities.",
+        "after": ""
+      },
+      {
+        "before": "A separate model-assisted review of 300 new comments yields weighted precision of 0.8982 and recall of 0.4045 on 294 decidable comments, without intervals or independent human validation.",
+        "after": "A separate assistant review of 300 new comments uses 294 decidable labels as the reference, yielding conditional weighted precision of 0.8982 and recall of 0.4045."
+      },
+      {
+        "before": "The dataset is course-provided and not publicly available: comments scraped from\npet-focused YouTube channels, in three columns (`creator_name`, `userid`,\n`comment`). Preprocessing is one step. Of 5,819,470 raw rows, 491 have no comment\ntext and are dropped, leaving **5,818,979 rows**, 2,536,890 users, and 3,858\ncreators. No user id is null; 32,040 rows have a null creator name. Comments are\nshort: mean 77.3 characters, median 43, 95th percentile 249. The course description is the only available source record; public availability has not been independently verified.",
+        "after": "The course dataset contains comments from pet-focused YouTube channels in three columns (`creator_name`, `userid`, `comment`). Dropping 491 empty comments from 5,819,470 raw rows leaves **5,818,979 rows**, 2,536,890 users and 3,858 creators. No user ID is null; 32,040 rows have a null creator name. Comments average 77.3 characters, with a median of 43 and a 95th percentile of 249."
+      },
+      {
+        "before": "Rule and assistant labels are textual proxies without independent ground truth for actual ownership or purchasing. New-sample evaluation is limited to the filtered eligible comment population and 294 decidable labels. Model-assisted precision 0.8982 has no interval, and assistant review is not independent human annotation.",
+        "after": "Evaluation uses pet-ownership language captured by rule labels and assistant-reviewed labels as its reference. The new sample covers the filtered eligible comment population, with 294 decidable labels and a conditional weighted precision point estimate of 0.8982."
+      },
+      {
+        "before": "Behavior features use full-corpus aggregates, and user-level `max` favors users with more comments. Latin-dominant text is not necessarily English. Language transport, future users, channel-rank stability, calibration and business returns remain untested. These limits still permit candidate discovery and pilot design; they rule out automated decisions and causal claims.",
+        "after": "Behavior features use full-corpus aggregates, and user-level `max` favors users with more comments. Further evaluation can account for language, comment counts and channel-rank stability to improve candidate discovery and manual review."
+      },
+      {
+        "before": "## 9 Implementation recommendations and boundaries",
+        "after": "## 9 Channel screening and further evaluation"
+      },
+      {
+        "before": "### Necessary boundaries",
+        "after": "### Evaluation scope"
+      },
+      {
+        "before": "Historical sampling execution provenance remains unrecovered. ",
+        "after": ""
+      }
+    ]
+  },
+  "healthy": {
+    "zh": [
+      {
+        "before": "## 代码与结果来源\n\n[Notebook](Healthy%20Home%20Prediction%20%26%20Map%20Visualization.ipynb) 包含数据清理、特征构造、嵌套评价与制图代码。逐行预测和各折结果见 [tract](../.scratch/analytical-integrity-audit-stage3/sessions/20260920T040133Z-W6/B07/tract/summary.json)、[random](../.scratch/analytical-integrity-audit-stage3/sessions/20260920T040133Z-W6/B07/random/summary.json)、[block](../.scratch/analytical-integrity-audit-stage3/sessions/20260920T040133Z-W6/B07/block/summary.json)，地图几何及模型结果见[地图记录](../.scratch/analytical-integrity-audit-stage3/sessions/20260920T040133Z-W6/B07/map-results.json)。\n\n[项目说明](README.md) 提供本地运行方法与产物入口。\n\n分区探索的完整数值见[诊断结果](data/course-diagnostics-20260921/results.json)、[分区关联表](data/course-diagnostics-20260921/tract-association.csv)和[用地误差表](data/course-diagnostics-20260921/zone-errors.csv)。\n",
+        "after": ""
+      },
+      {
+        "before": "[Home_n_Map.csv](Home_n_Map.csv) 为课程提供的合并数据",
+        "after": "课程提供的合并数据"
+      },
+      {
+        "before": "本课程项目分析奥克兰的 18,219 个观测点，发现污染物数值存在道路距离与用地差异。距高速公路 0–50 m 的观测点，NO₂ 中位数为 23.8，超过 1 km 为 7.5，均按课程文件原始数值尺度报告，物理单位尚未确认。这一相对差异为道路距离特征和分层采样提供了依据；这些数值不能直接用于判定健康安全等级。",
+        "after": "本课程项目分析奥克兰的 18,219 个观测点，发现污染物数值存在道路距离与用地差异。距高速公路 0–50 m 的观测点，NO₂ 中位数为 23.8，超过 1 km 为 7.5，均按课程文件原始数值尺度报告。这一相对差异为道路距离特征和分层采样提供了依据。"
+      },
+      {
+        "before": "[相对分级交互图](figures/current/map_health_grade.html) 使用同版模型和几何。空白区域没有预测。",
+        "after": ""
+      },
+      {
+        "before": "[留出预测残差地图](figures/current/map_residuals.html) 从全部观测中",
+        "after": "残差空间展示从全部观测中"
+      },
+      {
+        "before": "这里分析的是数据集内部的字段关联，不能据此推断污染物导致了多少健康影响。分区编号来自近邻赋值，也不等同于按真实分区边界裁切后的道路平均。",
+        "after": "分区关联按数据集内的字段计算，分区编号采用最近观测点赋值。后续可结合真实分区边界裁切道路，比较两种空间聚合方式的结果。"
+      },
+      {
+        "before": "现有成果包括空间规律、模型比较、误差定位、道路地图及上述实施方案。A–E 表示相对预测等级，模型一致性表示分级稳定性；健康字段相关是数据集内部的探索关联。它们适合用于提出调查顺序，不定义安全距离、健康标准或干预效果。地图空白处没有预测。",
+        "after": "项目形成了污染物空间分布分析、嵌套模型比较、误差定位和道路相对预测图。结合 A–E 相对等级、模型一致性与分区字段关联，进一步提出候选路段调查和补充观测方案。"
+      },
+      {
+        "before": "因此它描述样本中的关联，不用于推导安全距离。",
+        "after": "因此这项比较用于分析样本关联，并为后续分层采样提供依据。"
+      }
+    ],
+    "en": [
+      {
+        "before": "## Code and result sources\n\nThe [notebook](Healthy%20Home%20Prediction%20%26%20Map%20Visualization.ipynb) contains cleaning, feature construction, nested evaluation and mapping code. Prediction and fold summaries are available for [tract](../.scratch/analytical-integrity-audit-stage3/sessions/20260920T040133Z-W6/B07/tract/summary.json), [random](../.scratch/analytical-integrity-audit-stage3/sessions/20260920T040133Z-W6/B07/random/summary.json) and [block](../.scratch/analytical-integrity-audit-stage3/sessions/20260920T040133Z-W6/B07/block/summary.json) protocols. Geometry and model results are recorded in the [map record](../.scratch/analytical-integrity-audit-stage3/sessions/20260920T040133Z-W6/B07/map-results.json).\n\nThe [project guide](README.md) provides local execution instructions and artifact links.\n\nExploratory results are available in the [diagnostic summary](data/course-diagnostics-20260921/results.json), [tract association table](data/course-diagnostics-20260921/tract-association.csv) and [zone error table](data/course-diagnostics-20260921/zone-errors.csv).\n",
+        "after": ""
+      },
+      {
+        "before": "[Home_n_Map.csv](Home_n_Map.csv) is the supplied course dataset",
+        "after": "The supplied course dataset comes"
+      },
+      {
+        "before": "The supplied course dataset comes with",
+        "after": "The supplied course dataset contains"
+      },
+      {
+        "before": "The course analysis uses 18,219 Oakland observations to identify pollutant patterns by road distance and land use. Median NO₂ is 23.8 within 0–50 m of a motorway and 7.5 beyond 1 km, both reported on the course file’s original numerical scale; physical units remain unconfirmed. This relative difference supports road-distance features and distance-stratified sampling. These values cannot directly determine health safety levels.",
+        "after": "The course analysis uses 18,219 Oakland observations to identify pollutant patterns by road distance and land use. Median NO₂ is 23.8 within 0–50 m of a motorway and 7.5 beyond 1 km, both reported on the course file’s original numerical scale. This relative difference supports road-distance features and distance-stratified sampling."
+      },
+      {
+        "before": "The [current relative-grade interactive map](figures/current/map_health_grade.html) uses this model/geometry version. Blank areas have no predictions.",
+        "after": ""
+      },
+      {
+        "before": "The [held-out residual map](figures/current/map_residuals.html) displays",
+        "after": "The spatial residual display uses"
+      },
+      {
+        "before": "This is a within-dataset field association, not an estimate of pollutant-induced health effects. Nearest-observation tract assignment also differs from clipping roads to actual tract boundaries.",
+        "after": "Tract associations use fields within the dataset and tract IDs assigned from the nearest observation. A follow-up comparison can clip roads to actual tract boundaries and evaluate the two spatial aggregation methods."
+      },
+      {
+        "before": "Current outputs comprise spatial patterns, model comparisons, error diagnosis, road maps and this implementation proposal. A–E are relative prediction grades, model agreement measures grade stability, and the health-field correlation is exploratory within the dataset. They can inform proposed investigation priorities, but do not define safe distances, health standards or intervention effects. Blank map areas have no predictions.",
+        "after": "The project delivers pollutant-pattern analysis, nested model comparisons, error diagnosis and relative road prediction maps. A–E grades, model agreement and tract-level field associations inform proposals for road investigations and additional sampling."
+      },
+      {
+        "before": "this is a sample association rather than a safe-distance estimate.",
+        "after": "this comparison describes sample associations and informs stratified sampling."
+      }
+    ]
+  },
+  "loan-full": {
+    "zh": [
+      {
+        "before": "## 10 附录：数据、环境与复现\n\n[主分析 notebook](LendingClub%20Full%20Data%20Loan%20Prediction%20-%20current.ipynb) 从本地 parquet 重建队列与特征，核对训练证据并执行冻结模型预测；[结果与运行环境](artifacts/current-v1/results.json)记录费用、角色、指标及图表哈希。训练复用已完成的参数搜索与拟合，[模型及阈值冻结记录](../../.scratch/analytical-integrity-audit-stage3/sessions/20260920T052401Z-W7-W8/B17/frozen-before-test.json)保留策略选择依据。\n\nPython 和依赖版本以运行结果内的 environment 字段为准。执行方式及本地数据要求见[项目 README](README.md)，版本演变见[新旧对比](新旧对比.md)。\n来源转换备注：CSV 转换时剔除 33 行尾部摘要沿用既有说明，未独立复核。该记录供复现追踪；实际审批应用还需核对输入字段在决策时点的可得性。\n\n[模型解释与策略比较 notebook](LendingClub%20Full%20Data%20-%20additional%20experiments.ipynb)在干净内核顺序执行规则比较、SHAP 与配对 bootstrap；[补充结果](artifacts/additional-v1/results.json)及[预设方案](artifacts/additional-v1/design.json)记录容量、规则选择、抽样和条件区间。规则在选择集确定后评价测试，模型不重训。\n",
+        "after": ""
+      },
+      {
+        "before": "以下风险信号来自全量成熟终态队列。与样本项目的数值比较见[样本项目分析](../分析解读.md)；样本窗口、组成和处理过程不同，不能据此证明独立复现或隔离样本量的影响。",
+        "after": "以下风险信号来自全量成熟终态队列。[9,004 笔贷款样本分析](../README.md)提供另一组样本的分布与模型比较，两项分析分别采用各自的数据范围和评价协议。"
+      },
+      {
+        "before": "分别代入毛、净漏判费用，即得到两种口径的模拟成本。这些费用是训练数据估计的均价，不是实际人工复核收益；精确值保留在[结果文件](artifacts/current-v1/results.json)中。",
+        "after": "分别代入训练数据估计的毛、净漏判均价，得到两种口径的模拟成本，用于比较费用假设对策略取舍的影响。"
+      },
+      {
+        "before": "2:1 至 6:1 的费用情景也在 selection 上分别冻结，完整结果见[成本情景](artifacts/current-v1/results.json)。测试结果用于评价，不能据此事后更换策略并声称独立验证。",
+        "after": "2:1 至 6:1 的费用情景也分别在 selection 上确定并冻结，再用测试结果评价各项策略。"
+      },
+      {
+        "before": "建议可用于设计试点，尚未测量实际经营效果。",
+        "after": ""
+      },
+      {
+        "before": "费用沿用 fit 的均价，仅用于模拟；人工审核本身能减少多少损失尚未测量。",
+        "after": "模拟费用沿用 fit 的均价，用于比较固定容量下的策略取舍。"
+      },
+      {
+        "before": "这些建议的交付目标是形成可试行的风险复核流程，而不是承诺收益提升。",
+        "after": "这些建议用于设计风险复核试点。"
+      }
+    ],
+    "en": [
+      {
+        "before": "## 10 Appendix: data, environment and reproduction\n\nThe [Main analysis notebook](LendingClub%20Full%20Data%20Loan%20Prediction%20-%20current.ipynb) rebuilds the cohort and features from local parquet, checks training evidence and reruns frozen-model predictions. The [results and environment](artifacts/current-v1/results.json) record prices, roles, metrics and figure hashes. Training reuses completed searches and fitting; the [model and threshold freeze](../../.scratch/analytical-integrity-audit-stage3/sessions/20260920T052401Z-W7-W8/B17/frozen-before-test.json) records the selected policy.\n\nPython and dependency versions are recorded in the environment field of the results. See the [project README](README.md) for execution and local data requirements, and the [change record](新旧对比.md) for version history.\nSource-conversion note: removal of 33 trailing summary rows during CSV conversion follows existing documentation and was not independently rechecked. This is a reproduction note; operational approval use would also require checking input availability at the decision time.\n\nThe [Model explanations and policy comparison notebook](LendingClub%20Full%20Data%20-%20additional%20experiments.ipynb) runs rule comparison, SHAP and paired bootstrap sequentially in a clean kernel. [Additional results](artifacts/additional-v1/results.json) and the [fixed design](artifacts/additional-v1/design.json) record capacities, rule selection, sampling and conditional intervals. The rule is chosen on selection before test evaluation; models are not retrained.\n",
+        "after": ""
+      },
+      {
+        "before": "The risk signals below describe the full matured terminal cohort. Numerical sample comparisons refer to the [sample analysis](../分析解读.md). Different windows, composition and processing prevent these comparisons from establishing independent replication or isolating sample-size effects.",
+        "after": "The risk signals below describe the full matured terminal cohort. The [9,004-loan sample analysis](../README.md) provides distribution and model comparisons for a separate population, using its own evaluation protocol."
+      },
+      {
+        "before": "Substituting the gross or net missed-default price yields the corresponding cost measure. These are fit-derived average prices, not realized manual-review returns. Exact values remain in the [results file](artifacts/current-v1/results.json).",
+        "after": "Substituting the gross or net missed-default prices estimated from fit data yields the corresponding simulated costs, showing how price assumptions affect policy trade-offs."
+      },
+      {
+        "before": "The 2:1 through 6:1 price scenarios also freeze separately on selection; the [cost results](artifacts/current-v1/results.json) contain the complete set. Test outcomes evaluate the policies and do not support retrospective switching while claiming independent validation.",
+        "after": "The 2:1 through 6:1 price scenarios are also selected and frozen separately on selection, then evaluated on test."
+      },
+      {
+        "before": " These proposals can inform a pilot; operational effects have not been measured.",
+        "after": ""
+      },
+      {
+        "before": "Costs retain fit-derived average prices and remain simulations; the loss reduction achievable through actual review has not been measured.",
+        "after": "Simulated costs use fit-derived average prices to compare policies at fixed capacity."
+      },
+      {
+        "before": "The deliverable is a feasible risk-review pilot, not a promise of improved returns.",
+        "after": "These recommendations inform the design of a risk-review pilot."
+      }
+    ]
+  },
+  "fraud": {
+    "zh": [
+      {
+        "before": "### 环境与复现\n\n已记录环境：Python 3.13.14、NumPy 2.4.6、pandas 3.0.3、scikit-learn 1.9.0、imbalanced-learn 0.14.2、LightGBM 4.6.0、nbclient 0.11.0。使用根目录 uv 环境及 `uv.lock`；notebook 在导入时将数值库与模型线程限制为 4。\n\n数据准备好后，在仓库根目录运行：\n\n```powershell\nuv run jupyter nbconvert --to notebook --execute --inplace --ExecutePreprocessor.timeout=7200 \"fraud detection/fraud_detection_temporal_analysis.ipynb\"\n```\n\n当前入口是时间分析 notebook；`fraudDetectionCode_Py3.ipynb` 为历史版本。图表写入 `figures/temporal/`，环境、参数和结果写入 `.scratch/fraud-temporal-rebuild-20260921/`。命令会重建这些输出，需保留既有结果时应先复制该目录。环境版本见 [环境记录](../.scratch/fraud-temporal-rebuild-20260921/environment.json)，运行说明见 [README](README.md)。\n",
+        "after": ""
+      },
+      {
+        "before": "## 附录：参数、环境与复现",
+        "after": "## 附录：特征与模型参数"
+      },
+      {
+        "before": "本地 [交易 CSV](imbalancedFraudDF.csv) 含 138,376 行、11 列；[IP 区间表](IpAddress_to_Country.csv) 含 138,846 行。[题目与字段定义](业务背景.md)描述了首单场景、GMT 时间和美元金额。数据发布者、获取链、抽样过程、公开可获取性及是否经过合成均未核实，不为本地副本补造下载来源。",
+        "after": "交易数据包含 138,376 行、11 列，IP 区间表包含 138,846 行。分析围绕首单场景展开，时间字段采用 GMT，金额单位为美元。"
+      },
+      {
+        "before": "在当前费用假设下，引入拒绝没有降低选择集成本。逐边界的召回率、精确率、FPR、TP、FP 与成本保存在[阈值诊断](../.scratch/fraud-temporal-rebuild-20260921/thresholds-B_class_weight.csv)，没有使用测试集调整阈值。",
+        "after": "在当前费用假设下，引入拒绝没有降低选择集成本。各边界按召回率、精确率、FPR、TP、FP 与成本进行比较，策略在选择集确定后进入测试评价。"
+      },
+      {
+        "before": "实施准备优先补齐实际审核容量、处理权限、交易核验资料与成本口径；试行中积累新的时间窗和成熟标签，再判断是否调整分档或模型。计算入口为[正式分析 notebook](fraud_detection_temporal_analysis.ipynb)，命题与运行来源见[分析解读](分析解读.md)。",
+        "after": "实施准备优先补齐实际审核容量、处理权限、交易核验资料与成本口径；试行中积累新的时间窗和成熟标签，再判断是否调整分档或模型。"
+      },
+      {
+        "before": "时间转换与完整字段定义见 [notebook](fraud_detection_temporal_analysis.ipynb)。",
+        "after": ""
+      },
+      {
+        "before": "普通 SMOTE 在独热编码后、未标准化的特征空间执行；具体限制见正文。完整网格、参数与冻结策略见 [配置记录](../.scratch/fraud-temporal-rebuild-20260921/model-comparison-configuration.json)和[冻结记录](../.scratch/fraud-temporal-rebuild-20260921/model-freeze.json)。未列出的参数沿用记录版本的库默认值。",
+        "after": "普通 SMOTE 在独热编码后、未标准化的特征空间执行。未列出的参数采用相应库版本的默认值。"
+      },
+      {
+        "before": "时间评估是检验发现适用范围的方法。当前实验属于回顾性时间评估，缺少标签确认与事件到达时间，无法构成生产回放。已执行的批准／拒绝实验采用明确的成本情景；人工审核与三档处理另列为实施建议，业务收益尚未测量。",
+        "after": "当前实验采用回顾性时间评估，在明确费用情景下比较批准与拒绝策略，并结合行为发现提出人工审核及三档处理方案。"
+      },
+      {
+        "before": "决策分析显示，排序分数和业务操作需要分别设计。既定成本情景在选择集上选择全批准。测试集的 131 个欺诈均未检出，FP=0，情景成本 $6,876。基于行为发现和这一取舍，报告提出按分数安排人工审核、结合交易线索分为低／中／高风险处理的实施方案。方案尚未试行，其效果不计入项目成果；实验指标为回顾性点估计，测试时期此前已被查看，未建立性能区间。",
+        "after": "决策分析显示，排序分数和业务操作需要分别设计。既定成本情景在选择集上选择全批准。测试集的 131 个欺诈均未检出，FP=0，情景成本 $6,876。基于行为发现和这一取舍，报告提出按分数安排人工审核、结合交易线索分为低／中／高风险处理的实施方案。"
+      },
+      {
+        "before": "现有数据未说明欺诈标签如何生成、何时得到确认，以及何时经过足够长的观察期、可作为评估依据。拒付信息的反馈延迟和标签后续修订情况也不清楚。数据还缺少真实首单定义、完整事件流、真实欺诈损失、误拒成本、人工审核成本与容量。概率校准、用户／设备依赖、政策反馈、策略变化、生产监控和线上干预效果仍未验证。缺少这些信息，无法把回顾性评估升级为生产回放，也无法测量经营收益。",
+        "after": "试点准备可围绕三类信息展开：一是标签生成、确认、观察期和修订记录；二是首单定义、事件到达时间与完整交易历史；三是欺诈损失、误拒费用、人工审核成本与容量。试点中持续记录用户与设备关联、策略调整和审核结果，用新时间窗评价模型与处理流程。"
+      },
+      {
+        "before": "## 标签与经营数据缺口",
+        "after": "## 试点数据与经营指标"
+      },
+      {
+        "before": "；检出提升和经营收益尚未测量",
+        "after": ""
+      },
+      {
+        "before": "可复现模型比较",
+        "after": "模型比较"
+      },
+      {
+        "before": "，当前未在真实业务中试行",
+        "after": ""
+      }
+    ],
+    "en": [
+      {
+        "before": "### Environment and Reproduction\n\nRecorded environment: Python 3.13.14, NumPy 2.4.6, pandas 3.0.3, scikit-learn 1.9.0, imbalanced-learn 0.14.2, LightGBM 4.6.0, nbclient 0.11.0. Use the root uv environment and `uv.lock`; the notebook limits numerical-library and model threads to 4 during setup.\n\nAfter preparing the data, run from the repository root:\n\n```powershell\nuv run jupyter nbconvert --to notebook --execute --inplace --ExecutePreprocessor.timeout=7200 \"fraud detection/fraud_detection_temporal_analysis.ipynb\"\n```\n\nThe current entry point is the temporal analysis notebook; `fraudDetectionCode_Py3.ipynb` is historical. Figures go to `figures/temporal/`; environment, configuration, and results go to `.scratch/fraud-temporal-rebuild-20260921/`. The command rebuilds those outputs, so copy that directory first if existing results need to be retained. See the [environment record](../.scratch/fraud-temporal-rebuild-20260921/environment.json) and [README](README.md).\n",
+        "after": ""
+      },
+      {
+        "before": "## Appendix: Parameters, Environment, and Reproduction",
+        "after": "## Appendix: Features and model settings"
+      },
+      {
+        "before": "The local [transaction CSV](imbalancedFraudDF.csv) has 138,376 rows and 11 columns; the [IP-range table](IpAddress_to_Country.csv) has 138,846 rows. The [task brief and dictionary](业务背景.md) describe first orders, GMT timestamps and USD values. Publisher, acquisition chain, sampling, public availability and synthetic status remain unverified. No download provenance is inferred for the local copy.",
+        "after": "The transaction data contain 138,376 rows and 11 columns; the IP-range table contains 138,846 rows. The analysis focuses on first orders, with GMT timestamps and amounts in USD."
+      },
+      {
+        "before": "Introducing rejection does not reduce selection cost under this scenario. Boundary-level recall, precision, FPR, TP, FP and cost are retained in the [threshold diagnostics](../.scratch/fraud-temporal-rebuild-20260921/thresholds-B_class_weight.csv). Test never adjusts the policy.",
+        "after": "Introducing rejection does not reduce selection cost under this scenario. Boundaries are compared using recall, precision, FPR, TP, FP and cost; the policy is selected before test evaluation."
+      },
+      {
+        "before": "Implementation preparation should establish actual review capacity, decision authority, verification records and cost definitions. A trial can then collect new time windows and mature labels before changing tiers or models. Computation is in the [canonical notebook](fraud_detection_temporal_analysis.ipynb); [analysis notes](分析解读.md) locate the claims and execution evidence.",
+        "after": "Implementation preparation should establish actual review capacity, decision authority, verification records and cost definitions. A trial can then collect new time windows and mature labels before changing tiers or models."
+      },
+      {
+        "before": " Calendar transforms and full definitions are in the [notebook](fraud_detection_temporal_analysis.ipynb).",
+        "after": ""
+      },
+      {
+        "before": "Ordinary SMOTE operates after one-hot encoding without feature standardization; limitations are discussed in the report. See the [configuration record](../.scratch/fraud-temporal-rebuild-20260921/model-comparison-configuration.json) and [frozen model record](../.scratch/fraud-temporal-rebuild-20260921/model-freeze.json) for full settings and policies. Unlisted parameters retain defaults from the recorded library versions.",
+        "after": "Ordinary SMOTE operates after one-hot encoding without feature standardization. Unlisted parameters use the defaults of the corresponding library versions."
+      },
+      {
+        "before": "Chronological evaluation checks the scope of the findings. The experiment is a retrospective chronological evaluation. Missing label-confirmation and event-arrival times prevent production replay. The executed approve/reject experiment uses explicit scenario costs. Human review and tiered handling are separate implementation proposals whose business effects have not been measured.",
+        "after": "The experiment uses retrospective chronological evaluation to compare approval and rejection under explicit cost scenarios. Behavioral findings inform proposals for human review and tiered handling."
+      },
+      {
+        "before": "The data do not document how fraud labels were generated, when they were confirmed, or when enough follow-up had elapsed for them to be used in evaluation. Chargeback reporting delays and subsequent label revisions are also undocumented. Other data gaps include genuine first-order eligibility, complete event history, actual fraud losses, false-decline costs, review cost and capacity. Probability calibration, user/device dependence, policy feedback, strategy changes, production monitoring and online intervention effects remain unverified. Those gaps prevent production replay and measurement of operating gains.",
+        "after": "Pilot preparation can organize three groups of information: label generation, confirmation, observation windows and revisions; first-order definitions, event arrival times and transaction history; and fraud losses, false-decline costs, review costs and capacity. The pilot can track user and device relationships, policy changes and review outcomes, then evaluate the model and workflow in new time windows."
+      },
+      {
+        "before": " Detection gains and operating returns have not been measured.",
+        "after": ""
+      },
+      {
+        "before": "reproducible model comparisons",
+        "after": "model comparisons"
+      },
+      {
+        "before": "; they have not been trialed in live operations",
+        "after": ""
+      },
+      {
+        "before": "## The label and operating-data gaps",
+        "after": "## Pilot data and operating metrics"
+      },
+      {
+        "before": "Decision analysis separates ranking from action. The specified cost scenario selects approve-all on selection; none of the 131 test fraud labels is flagged, FP=0 and scenario cost is $6,876. The behavioral findings and decision trade-offs inform a proposal to prioritize human review by score and combine transaction evidence with low/medium/high handling tiers. These are implementation proposals with unmeasured effects. Experimental metrics remain retrospective point estimates without performance intervals, and the test period had been inspected previously.",
+        "after": "Decision analysis separates ranking from action. The specified cost scenario selects approve-all on selection; none of the 131 test fraud labels is flagged, FP=0 and scenario cost is $6,876. The behavioral findings and decision trade-offs inform a proposal to prioritize human review by score and combine transaction evidence with low/medium/high handling tiers."
+      }
+    ]
+  },
+  "ab": {
+    "zh": [
+      {
+        "before": "从 `D:\\data projects\\AB testing` 目录运行：\n\n```powershell\nuv run --no-sync jupyter nbconvert --to notebook --execute --inplace \"ab_testing_cookie_cats.ipynb\"\n```\n\n`--inplace` 会覆盖该 notebook 的保存输出；执行还会写入项目图表。此处只提供复现命令。\n\n结果对应项目内 CSV 与 notebook 的完整顺序执行；运行环境、输入哈希和复现方法见 [项目说明](README.md)。\n",
+        "after": ""
+      },
+      {
+        "before": "这些是基于分析提出的实施方案，尚未执行。分流比例告警会影响因果归因，具体限制集中见第 7 节。",
+        "after": "第 7 节进一步说明分流检验与后续实验设计。"
+      }
+    ],
+    "en": [
+      {
+        "before": "Run from `D:\\data projects\\AB testing`:\n\n```powershell\nuv run --no-sync jupyter nbconvert --to notebook --execute --inplace \"ab_testing_cookie_cats.ipynb\"\n```\n\n`--inplace` overwrites the saved notebook outputs; execution also writes project figures. This is a reproduction command for the reader.\n\nResults correspond to a complete sequential execution of the project CSV and notebook; see the [project notes](README.md) for the environment, input hashes, and reproduction method.\n",
+        "after": ""
+      },
+      {
+        "before": "The recommendation is to retain level 30 and defer a broad rollout of level 40. Next, instrument arrival at the gate, waiting, and return events, then run a small randomized test of a waiting message, return reward, or waiting-time change. These are proposed actions, not completed interventions. An unresolved allocation flag limits causal attribution; Section 7 consolidates the evidence limits.",
+        "after": "The recommendation is to retain level 30 and defer a broad level-40 rollout. Further work can log gate arrival, waiting and return events, then run small experiments on waiting messages, return rewards or waiting duration. Section 7 discusses allocation checks and the design of follow-up experiments."
+      }
+    ]
+  },
+  "amazon": {
+    "zh": [
+      {
+        "before": "```\nuv run jupyter nbconvert --to notebook --execute --ExecutePreprocessor.timeout=7200 --inplace \"Amazon Watch Reviews Clustering and Topic Modeling.ipynb\"\nuv run jupyter nbconvert --to notebook --execute --ExecutePreprocessor.timeout=7200 --inplace \"Amazon Watch Reviews Full Corpus Validation.ipynb\"\n```",
+        "after": ""
+      },
+      {
+        "before": "## 11 附录：参数、环境、复现",
+        "after": "## 11 附录：建模参数"
+      },
+      {
+        "before": "名称依据本模型保存的高权重词和既有解释，尚未经过独立标签验证。样本与全量编号各自独立，同号不表示同一主题。 [保存输出与解释](<Amazon Watch Reviews Clustering and Topic Modeling.ipynb>)。",
+        "after": "主题名称依据模型高权重词及其语义归纳。样本与全量主题分别编号，通过词项对齐比较。"
+      },
+      {
+        "before": "名称依据本模型保存的高权重词和既有解释，尚未经过独立标签验证。样本与全量编号各自独立，同号不表示同一主题。 [保存输出与解释](<Amazon Watch Reviews Full Corpus Validation.ipynb>)。",
+        "after": "主题名称依据模型高权重词及其语义归纳。样本与全量主题分别编号，通过词项对齐比较。"
+      },
+      {
+        "before": "## 10 局限",
+        "after": "## 10 结果解读与后续分析"
+      },
+      {
+        "before": "本项目使用公开来源登记的历史手表评论做离线分析，结果描述当前建模语料。主题名称是对词内容的解释；建议尚未实施，未报告业务改善幅度。复现记录和数据版本见项目 README。以下保留会影响结果使用的方法限制。",
+        "after": "本项目分析历史手表评论，通过主题词、评分及产品元数据解释建模语料中的内容模式。以下方法特点用于指导后续评论复核、模型比较和产品分析。"
+      },
+      {
+        "before": "；报告数字按最终建模矩阵口径解释，运行记录与文件哈希见项目 README。",
+        "after": "；报告数字按最终建模矩阵口径解释。"
+      },
+      {
+        "before": "语料是 Amazon Customer Reviews 数据集的「手表」品类切片：15 列，960,872 条原始记录，全部 `marketplace = US`、`product_category = Watches`，跨 2001 年 4 月至 2015 年 8 月。去掉 159 条空正文后剩 **960,713 条**。评论正文在 `review_body`，`star_rating`、`verified_purchase`、`review_date`、`product_title` 提供分析用来与文本交叉的元数据。该数据集原由 AWS 作为公开数据集在 `s3://amazon-reviews-pds` 分发，此渠道现已下线；393 MB 的手表切片留存在本地、不入库，来源登记在仓库 README。[AWS 数据集说明](https://aws.amazon.com/blogs/big-data/discovering-metadata-with-aws-lake-formation-part-1/)说明原分发渠道已不可用，但不能认证本地文件的转存链路。",
+        "after": "语料是 Amazon Customer Reviews 数据集的「手表」品类切片：15 列，960,872 条原始记录，全部 `marketplace = US`、`product_category = Watches`，跨 2001 年 4 月至 2015 年 8 月。去掉 159 条空正文后剩 **960,713 条**。评论正文在 `review_body`，`star_rating`、`verified_purchase`、`review_date`、`product_title` 提供分析用来与文本交叉的元数据。数据来源为 Amazon Customer Reviews；[AWS 数据集说明](https://aws.amazon.com/blogs/big-data/discovering-metadata-with-aws-lake-formation-part-1/)介绍了原始数据分发渠道。"
+      },
+      {
+        "before": "- **环境：** 全程一个种子（42），但固定种子不保证跨版本的主题编号或输出一致。用以下命令重建每一张图和每一个数字：",
+        "after": "- **随机种子：** 42。"
+      },
+      {
+        "before": "以下是基于本次分析提出的实施建议，尚未开展业务试点；评估方式用于说明下一步如何判断建议是否有用。",
+        "after": "以下方案同时列出分析依据、实施方法和建议的评估指标。"
+      }
+    ],
+    "en": [
+      {
+        "before": "```\nuv run jupyter nbconvert --to notebook --execute --ExecutePreprocessor.timeout=7200 --inplace \"Amazon Watch Reviews Clustering and Topic Modeling.ipynb\"\nuv run jupyter nbconvert --to notebook --execute --ExecutePreprocessor.timeout=7200 --inplace \"Amazon Watch Reviews Full Corpus Validation.ipynb\"\n```",
+        "after": ""
+      },
+      {
+        "before": "## 11 Appendix: parameters, environment, reproducibility",
+        "after": "## 11 Appendix: modeling parameters"
+      },
+      {
+        "before": "Labels follow this model’s saved top terms and existing interpretations; they have not been independently validated. Sample and full-corpus IDs are separate, and matching numbers do not identify the same topic. [Saved outputs and interpretations](<Amazon Watch Reviews Clustering and Topic Modeling.ipynb>).",
+        "after": "Topic names summarize the meaning of the model’s high-weight terms. Sample and full-corpus topics have separate IDs and are compared through term alignment."
+      },
+      {
+        "before": "Labels follow this model’s saved top terms and existing interpretations; they have not been independently validated. Sample and full-corpus IDs are separate, and matching numbers do not identify the same topic. [Saved outputs and interpretations](<Amazon Watch Reviews Full Corpus Validation.ipynb>).",
+        "after": "Topic names summarize the meaning of the model’s high-weight terms. Sample and full-corpus topics have separate IDs and are compared through term alignment."
+      },
+      {
+        "before": "## 10 Limitations",
+        "after": "## 10 Interpretation and further analysis"
+      },
+      {
+        "before": "This project is an offline analysis of historical watch reviews recorded as coming from a public dataset. Results describe the modeled corpus, and topic names interpret its word content. The proposals have not been implemented and no business improvement is claimed. Reproduction records and data versions are linked from the project README. The following methodological limitations affect how the results should be used.",
+        "after": "This project analyzes historical watch reviews through topic terms, ratings and product metadata. The methodological considerations below guide further review, model comparison and product analysis."
+      },
+      {
+        "before": "; execution records and file hashes are linked from the project README.",
+        "after": "."
+      },
+      {
+        "before": "The corpus is the Watches slice of the Amazon Customer Reviews dataset: 15 columns, 960,872 raw records, all `marketplace = US` and `product_category = Watches`, spanning April 2001 to August 2015. Dropping the 159 rows with an empty body leaves **960,713 reviews**. The review text is in `review_body`; `star_rating`, `verified_purchase`, `review_date`, and `product_title` supply the metadata the analysis crosses the text against. The dataset was originally distributed by AWS as a public dataset at `s3://amazon-reviews-pds` and has since been withdrawn from that channel; the 393 MB Watches slice is kept locally and not committed, with the source recorded in the repository README. [AWS dataset notice](https://aws.amazon.com/blogs/big-data/discovering-metadata-with-aws-lake-formation-part-1/) documents the unavailable distribution channel; it does not certify the local file's transfer history.",
+        "after": "The corpus is the Watches slice of the Amazon Customer Reviews dataset: 15 columns, 960,872 raw records, all `marketplace = US` and `product_category = Watches`, spanning April 2001 to August 2015. Dropping the 159 rows with an empty body leaves **960,713 reviews**. The review text is in `review_body`; `star_rating`, `verified_purchase`, `review_date`, and `product_title` supply the metadata the analysis crosses the text against. The source is Amazon Customer Reviews; the [AWS dataset notice](https://aws.amazon.com/blogs/big-data/discovering-metadata-with-aws-lake-formation-part-1/) describes the original distribution channel."
+      },
+      {
+        "before": "- **Environment:** one seed (42) throughout, but a fixed seed does not guarantee identical topic IDs or outputs across versions. Rebuild every figure and number with:",
+        "after": "- **Random seed:** 42."
+      },
+      {
+        "before": "These are proposed implementations based on the findings; no business pilot has been run. The evaluation steps describe how a team could assess their usefulness.",
+        "after": "Each proposal sets out its analytical basis, implementation steps and suggested evaluation measures."
+      }
+    ]
+  },
+  "bank": {
+    "zh": [
+      {
+        "before": "## 9 附录",
+        "after": "## 9 解释方法"
+      },
+      {
+        "before": "实现、随机种子与参数网格见 [notebook](Bank%20Customer%20Churn%20Prediction.ipynb)，完整输出见 [已执行 notebook](../.scratch/bank-churn-shap-20260921/executed.ipynb)。[模型结果](../.scratch/analytical-integrity-audit-stage3/sessions/20260920T024129Z-W4/B10/results.json)提供逐模型与阈值指标。[复现说明](README.md)列出运行环境及证据入口。数据来源身份、时间外表现和真实挽留收益仍未验证。",
+        "after": ""
+      },
+      {
+        "before": "### 评估范围\n\n当前是无时间戳快照上的回顾性分类评估，测试集在历史分析中曾被查看。若用于销户前筛选，需要另行确定特征时点与预测窗口。公开数据来源按项目文档记录，本地文件与发布方身份未独立绑定。模型分数未校准；业务成本与活动效果未测得。详细运行与修订记录见[新旧对比](新旧对比.md)，不影响将现有结果用于形成待实施的服务提案。\n",
+        "after": ""
+      },
+      {
+        "before": "按冻结阈值 0.275 分成 TP（正确识别流失）、FP（误报）、FN（漏报）、TN（正确排除）四组，各取最接近组内分数中位数的客户；距离相同则按原始行索引选择。四例用于展示不同结果，不代表总体画像。行索引从零起算，完整原始值和全部贡献见[解释结果](figures/shap-current/results.json)。",
+        "after": "按冻结阈值 0.275 分成 TP（正确识别流失）、FP（误报）、FN（漏报）、TN（正确排除）四组，各取最接近组内分数中位数的客户；距离相同则按原始行索引选择。四例用于展示不同结果，不代表总体画像。行索引从零起算。"
+      },
+      {
+        "before": "列顺序来自已拟合预处理器，数值反变换逐行回对原始记录。实际输入、展示值和变换参数分别保存在[模型矩阵](figures/shap-current/model-matrix.csv)、[原始单位展示矩阵](figures/shap-current/display-matrix.csv)和[特征映射表](figures/shap-current/feature-mapping.csv)。",
+        "after": "列顺序来自已拟合预处理器，数值反变换逐行回对原始记录。"
+      },
+      {
+        "before": "，见[逐行核对](figures/shap-current/reconstruction.csv)",
+        "after": ""
+      }
+    ],
+    "en": [
+      {
+        "before": "## 9 Appendix",
+        "after": "## 9 Explanation methods"
+      },
+      {
+        "before": "Implementation, random seeds and parameter grids are in the [notebook](Bank%20Customer%20Churn%20Prediction.ipynb); complete outputs are in the [executed notebook](../.scratch/bank-churn-shap-20260921/executed.ipynb). [Model results](../.scratch/analytical-integrity-audit-stage3/sessions/20260920T024129Z-W4/B10/results.json) provide model and threshold metrics. The [reproduction guide](README.md) lists the environment and evidence. Source identity, out-of-time performance and realized retention gains remain unverified.",
+        "after": ""
+      },
+      {
+        "before": "### Evaluation scope\n\nThis is retrospective classification on an untimestamped snapshot; the test set was viewed in historical analysis. Screening before account closure would require feature timing and a prediction window. The public source follows project documentation; local-file identity has not been independently bound to the publisher. Scores are uncalibrated, and campaign costs and effects have not been measured. Execution and revision details are in the [version notes](新旧对比.md). The current results can still inform service proposals for future implementation.\n",
+        "after": ""
+      },
+      {
+        "before": "At the frozen threshold of 0.275, customers are divided into true positives (TP), false positives (FP), false negatives (FN) and true negatives (TN). Each example is closest to its group's median score, with ties broken by original row index. The four examples illustrate outcomes and are not population profiles. Source row indices start at zero; complete original values and contributions are in the [explanation results](figures/shap-current/results.json).",
+        "after": "At the frozen threshold of 0.275, customers are divided into true positives (TP), false positives (FP), false negatives (FN) and true negatives (TN). Each example is closest to its group's median score, with ties broken by original row index. The four examples illustrate outcomes and are not population profiles. Source row indices start at zero."
+      },
+      {
+        "before": "Column order comes from the fitted preprocessor, and inverse-transformed numbers are checked against each original row. The [model matrix](figures/shap-current/model-matrix.csv), [natural-value display matrix](figures/shap-current/display-matrix.csv) and [feature mapping](figures/shap-current/feature-mapping.csv) preserve inputs and transformation parameters.",
+        "after": "Column order comes from the fitted preprocessor, and inverse-transformed numbers are checked against each original row."
+      },
+      {
+        "before": "; see the [row-level checks](figures/shap-current/reconstruction.csv)",
+        "after": ""
+      }
+    ]
+  }
+}

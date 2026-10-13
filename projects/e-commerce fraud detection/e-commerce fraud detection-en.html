@@ -1,791 +1,639 @@
 <!DOCTYPE html>
-<html lang="en" class="light">
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <script>document.documentElement.classList.add('js');</script>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" href="../../favicon.svg" type="image/svg+xml" />
-  <title>E-commerce First-Transaction Fraud Detection: The Recall Ceiling and a Scale Artifact - Data Poetics</title>
-  <meta name="description" content="A machine learning analysis of 138,376 e-commerce first transactions: LightGBM+SMOTE flags 0.53% of traffic to catch 51.6% of fraud with 2 false positives, cutting value-weighted loss ~51%; a single interval&le;1s rule catches the exact same 146 cases, and recall is capped by the data at 52%." />
-
-  <!-- Same as homepage: Tailwind / fonts / icons / site styles -->
+  <title>First-Order Fraud: Behavioral Patterns, Models and Decision Trade-offs - Data Poetics</title>
+  <meta name="description" content="Analyze purchase timing, device and IP behavior across 138,376 first-order transactions, and compare class-imbalance methods. Forward validation and cost scenarios inform a tiered manual-review proposal using model scores and transaction signals.">
+  <meta property="og:title" content="First-Order Fraud: Behavioral Patterns, Models and Decision Trade-offs">
+  <meta property="og:description" content="Analyze purchase timing, device and IP behavior across 138,376 first-order transactions, and compare class-imbalance methods. Forward validation and cost scenarios inform a tiered manual-review proposal using model scores and transaction signals.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://juyexiao.github.io/projects/e-commerce%20fraud%20detection/e-commerce%20fraud%20detection-en.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:description" content="Analyze purchase timing, device and IP behavior across 138,376 first-order transactions, and compare class-imbalance methods. Forward validation and cost scenarios inform a tiered manual-review proposal using model scores and transaction signals.">
+  <link rel="canonical" href="https://juyexiao.github.io/projects/e-commerce%20fraud%20detection/e-commerce%20fraud%20detection-en.html">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+SC:wght@400;500;600&family=Noto+Serif+SC:wght@500&display=swap" rel="stylesheet" />
-  <script src="https://unpkg.com/lucide-react/dist/umd/lucide-react.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&amp;family=Inter:wght@200;300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;700&amp;family=Noto+Sans+SC:wght@400;500;600&amp;family=Noto+Serif+SC:wght@500&amp;display=swap" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest"></script>
-  <link rel="stylesheet" href="../../assets/css/index.css" />
-  <link rel="stylesheet" href="../../assets/css/project.css" />
-
-  <!-- Syntax highlight + chart lib (used on detail pages) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
-  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-
-  <style>
-    .dark table.performance-table thead tr {
-      background-color: rgba(64, 64, 64, 0.25) !important;
-    }
-    .dark .dark\:text-gray-300 {
-      color: var(--dark) !important;
-    }
-  </style>
+  <link rel="stylesheet" href="../../assets/css/index.css">
+  <link rel="stylesheet" href="../../assets/css/project.css">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "First-Order Fraud: Behavioral Patterns, Models and Decision Trade-offs", "description": "Analyze purchase timing, device and IP behavior across 138,376 first-order transactions, and compare class-imbalance methods. Forward validation and cost scenarios inform a tiered manual-review proposal using model scores and transaction signals.", "inLanguage": "en", "author": {"@type": "Person", "name": "Juye Xiao"}}</script>
 </head>
-<body class="transition-colors duration-300">
-  <div class="scroll-progress" id="scroll-progress"></div>
-
-  <!-- Top navigation (reuses homepage structure and styles) -->
-  <header id="navbar" class="navbar fixed top-0 left-0 right-0 z-50">
-    <div class="container-main h-full flex items-center justify-between">
-      <a href="../../index-en.html#hero" class="navbar-logo" id="navbar-logo">
-        <svg class="logo-svg-nav" viewBox="0 0 40 40">
-          <g class="grid-bg">
-            <line class="grid-line-v" x1="8" y1="0" x2="8" y2="40" style="animation-delay: 0.1s, 0s" />
-            <line class="grid-line-v" x1="16" y1="0" x2="16" y2="40" style="animation-delay: 0.2s, 0.5s" />
-            <line class="grid-line-v" x1="24" y1="0" x2="24" y2="40" style="animation-delay: 0.3s, 1s" />
-            <line class="grid-line-v" x1="32" y1="0" x2="32" y2="40" style="animation-delay: 0.4s, 1.5s" />
-            <line class="grid-line-h" x1="0" y1="10" x2="40" y2="10" style="animation-delay: 0.5s, 0s" />
-            <line class="grid-line-h" x1="0" y1="20" x2="40" y2="20" style="animation-delay: 0.6s, 0.7s" />
-            <line class="grid-line-h" x1="0" y1="30" x2="40" y2="30" style="animation-delay: 0.7s, 1.4s" />
-          </g>
-          <line class="weaver-line" id="weaverLine" x1="0" y1="20" x2="40" y2="20" />
-          <text class="logo-letters" id="logoLetters" x="20" y="26" text-anchor="middle">JX</text>
-        </svg>
-        <div class="logo-name">
-          <div class="logo-name-text">Juye Xiao</div>
-          <div class="logo-name-subtitle">Data Analyst</div>
-        </div>
-      </a>
-
-      <nav class="hidden md:flex items-center space-x-8">
-        <a href="../../index-en.html#about" class="nav-link">About</a>
-        <a href="../../index-en.html#experience" class="nav-link">Experience</a>
-        <a href="../../index-en.html#education" class="nav-link">Education</a>
-        <a href="../../index-en.html#projects" class="nav-link">Projects</a>
-        <a href="../../index-en.html#skills" class="nav-link">Skills</a>
-        <a href="../../index-en.html#contact" class="nav-link">Contact</a>
-      </nav>
-
-      <div class="flex items-center space-x-4">
-        <button id="theme-toggle" class="btn-secondary !p-2 !rounded-full" title="Toggle theme">
-          <i data-lucide="sun" class="block dark:hidden"></i>
-          <i data-lucide="moon" class="hidden dark:block"></i>
-        </button>
-        <button id="lang-toggle" class="btn-secondary !p-2 !rounded-full"><span class="font-bold text-sm">中</span></button>
-        <button id="menu-toggle" class="btn-secondary !p-2 !rounded-full md:hidden"
-          aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
-          <i data-lucide="menu" class="menu-icon-open"></i>
-          <i data-lucide="x" class="menu-icon-close"></i>
-        </button>
-      </div>
-    </div>
-    <nav id="mobile-menu" class="mobile-menu md:hidden" aria-label="Mobile navigation">
-      <a href="../../index-en.html#about" class="nav-link">About</a>
-      <a href="../../index-en.html#experience" class="nav-link">Experience</a>
-      <a href="../../index-en.html#education" class="nav-link">Education</a>
-      <a href="../../index-en.html#projects" class="nav-link">Projects</a>
-      <a href="../../index-en.html#skills" class="nav-link">Skills</a>
-      <a href="../../index-en.html#contact" class="nav-link">Contact</a>
-    </nav>
-  </header>
-
-  <main class="container-main">
-    <!-- Project hero -->
-    <section id="project-hero" class="section-padding" style="padding-top: calc(var(--space-xl) + 72px)">
-      <div class="grid md:grid-cols-2 gap-16 items-center w-full">
-        <div class="reveal">
-          <div class="section-eyebrow">
-            <span class="section-kicker">Case Study · Risk Control &amp; Imbalanced Classification</span>
-          </div>
-          <h1 class="hero-title mt-2">E-commerce First-Transaction Fraud Detection: The Recall Ceiling and a Scale Artifact</h1>
-          <p class="subtitle mt-4 max-w-xl">Two features carry all the signal, recall is capped near 52% by the data rather than the model, and the value-weighted loss falls about half. A one-line rule reproduces that operating point almost exactly; so the model's value is a graded score and a regime it must be monitored against, well short of incremental catch.</p>
-          <div class="reading-time">~13 min read<span class="sep">·</span>8 figures</div>
-
-          <div class="hero-stats">
-            <div class="hero-stat">
-              <div class="hero-stat__num">138K</div>
-              <div class="hero-stat__label">first transactions (fraud rate 1.02%)</div>
-            </div>
-            <div class="hero-stat">
-              <div class="hero-stat__num">−51%</div>
-              <div class="hero-stat__label">value-weighted fraud loss (CI 44–57%)</div>
-            </div>
-            <div class="hero-stat">
-              <div class="hero-stat__num">2</div>
-              <div class="hero-stat__label">false positives (in 27,393 legitimate)</div>
-            </div>
-          </div>
-
-          <div class="mt-8 flex items-center gap-4">
-            <a href="#content" class="btn btn-primary">Start reading</a>
-            <a href="../../index-en.html#projects" class="btn btn-secondary">Back to projects</a>
-          </div>
-        </div>
-        <aside class="reveal hero-stack">
-          <div class="hero-stack__label">Methods · Stack</div>
-          <ol class="hero-stack__list">
-            <li>
-              <span class="hero-stack__num">01</span>
-              <span class="hero-stack__name">LightGBM + SMOTE</span>
-              <span class="hero-stack__desc">Final model tuned on PR-AUC, test set 0.535</span>
-            </li>
-            <li>
-              <span class="hero-stack__num">02</span>
-              <span class="hero-stack__name">Leak-free CV pipeline</span>
-              <span class="hero-stack__desc">CountEncoder and SMOTE fit inside the training fold, 5-fold average precision</span>
-            </li>
-            <li>
-              <span class="hero-stack__num">03</span>
-              <span class="hero-stack__name">Out-of-fold threshold + cost sweep</span>
-              <span class="hero-stack__desc">Threshold selected at 0.59 on OOF predictions; penalty and fee both swept</span>
-            </li>
-            <li>
-              <span class="hero-stack__num">04</span>
-              <span class="hero-stack__name">One-rule baseline + time-split backtest</span>
-              <span class="hero-stack__desc">interval&le;1s rule as control; generalization tested under a time-ordered split</span>
-            </li>
-            <li>
-              <span class="hero-stack__num">05</span>
-              <span class="hero-stack__name">SHAP attribution</span>
-              <span class="hero-stack__desc">Signal concentrated in signup→purchase interval + device-sharing count</span>
-            </li>
-          </ol>
-          <div class="hero-stack__foot">Python · pandas · scikit-learn · lightgbm · imbalanced-learn · shap</div>
-        </aside>
-      </div>
-    </section>
-
-    <!-- Quick summary cards -->
-    <section id="quick-summary" class="section-padding">
-      <div class="grid md:grid-cols-3 gap-6">
-        <div class="summary-card">
-          <h3 class="summary-card-title">The Challenge</h3>
-          <p class="summary-card-content">A 1.02% imbalance (1,415 / 138,376) makes accuracy useless: predicting "legitimate" for everyone scores 98.98% and catches zero fraud. The two errors cost very differently: a miss is a bounded chargeback on a ~$38 order, a wrongful block is an expensive, diffuse first impression.</p>
-        </div>
-        <div class="summary-card">
-          <h3 class="summary-card-title">The Approach</h3>
-          <p class="summary-card-content">Four models compared under one leak-free protocol; PR-AUC ties at 0.535–0.541. LightGBM+SMOTE is chosen, and the threshold is set at 0.59 on out-of-fold training predictions, with the test set evaluated once.</p>
-        </div>
-        <div class="summary-card">
-          <h3 class="summary-card-title">The Value</h3>
-          <p class="summary-card-content">Flags 0.53% of traffic to catch 51.6% of fraud with only 2 false positives, cutting value-weighted loss $14,503 → $7,139, about 51%. A single interval≤1s rule catches the exact same 146 cases; so the model's value is a graded score and a backup signal, not incremental catch.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Main content: sticky TOC + body -->
-    <section id="content" class="section-padding">
-      <div class="grid md:grid-cols-12 gap-12">
-        <aside class="md:col-span-3">
-          <nav class="project-toc sticky top-24" id="project-toc">
-            <h3 class="text-xl font-semibold" style="color: var(--dark);">Contents</h3>
-            <ul class="mt-4 space-y-2" id="toc-list">
-              <li><a href="#summary" class="toc-link" data-section="summary">Executive Summary</a></li>
-              <li><a href="#data" class="toc-link" data-section="data">The Imbalanced Data</a></li>
-              <li><a href="#eda" class="toc-link" data-section="eda">The Two Signals</a></li>
-              <li><a href="#models" class="toc-link" data-section="models">The Scale Artifact</a></li>
-              <li><a href="#ceiling" class="toc-link" data-section="ceiling">The Recall Ceiling</a></li>
-              <li><a href="#cost" class="toc-link" data-section="cost">The Operating Point</a></li>
-              <li><a href="#rule" class="toc-link" data-section="rule">The One-Rule Baseline</a></li>
-              <li><a href="#backtest" class="toc-link" data-section="backtest">The Regime Shift</a></li>
-              <li><a href="#shap" class="toc-link" data-section="shap">The Two-Feature Model</a></li>
-              <li><a href="#deployment" class="toc-link" data-section="deployment">The Score Tiers</a></li>
-            </ul>
-          </nav>
-        </aside>
-
-        <div class="md:col-span-9 content-area">
-          <!-- Executive summary -->
-          <section id="summary" class="section-padding section--editorial" data-section-num="00">
-            <div class="section-header">
-              <div class="section-eyebrow">
-                <span class="section-num">00</span>
-                <span class="section-kicker">Executive Summary</span>
-              </div>
-              <h2 class="section-title">Executive Summary</h2>
-            </div>
-
-            <div class="space-y-6">
-              <div class="contact-info-card">
-                <p class="subtitle mb-4">An online electronics retailer must decide, on a new user's first transaction and in real time, whether it is fraud. The data holds 1,415 fraud cases in 138,376 transactions, a 1.02% rate. Two features do almost all the work: the signup-to-purchase interval, and the number of accounts sharing the buyer's device. The final model is LightGBM + SMOTE, tuned on PR-AUC.</p>
-
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">Four findings</h3>
-                <ul class="list-disc list-inside space-y-3 subtitle mb-6">
-                  <li><strong>Two features do the work; the third weighs nearly 4× less.</strong> Interval and device sharing score 2.52 and 2.42 in mean SHAP; the next feature reaches only 0.66. Age, value, source, and country carry no usable signal.</li>
-                  <li><strong>Recall holds at 52%; every threshold trades only precision.</strong> Half of fraud is perfectly separable and half is invisible to these features, so no model or threshold reaches past recall 0.52 here.</li>
-                  <li><strong>One rule catches the same 146; the model adds no catch at 0.59.</strong> Blocking purchases within one second of signup reproduces the operating point exactly, with zero false positives against the model's two.</li>
-                  <li><strong>Separable fraud lasts 13 days; a time-split model scores PR-AUC 0.005.</strong> All 739 instant purchases fall in the first 13 days of the timeline, leaving a model trained before them nothing to key on.</li>
-                </ul>
-
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">Results at a glance</h3>
-                <div class="overflow-x-auto">
-                  <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
-                    <thead>
-                      <tr class="bg-gray-100 dark:bg-gray-700/30">
-                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Item</th>
-                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Result</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Transactions analyzed</strong></td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">138,376 (1,415 fraud, 1.02%)</td>
-                      </tr>
-                      <tr>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Final model</strong></td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">LightGBM + SMOTE, tuned on PR-AUC</td>
-                      </tr>
-                      <tr>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Ranking quality (test)</strong></td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">PR-AUC 0.535, four models within noise</td>
-                      </tr>
-                      <tr>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Operating point (OOF threshold 0.59)</strong></td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">flags 0.53% of traffic, catches 146/283 (51.6%), 2 false positives</td>
-                      </tr>
-                      <tr>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Value-weighted fraud loss</strong></td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">$14,503 → $7,139, down 51% (95% CI 44–57%)</td>
-                      </tr>
-                      <tr>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>One-rule baseline</strong></td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">interval ≤ 1s catches the same 146 fraud cases, zero false positives</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <!-- The imbalanced data -->
-          <section id="data" class="section-padding section--editorial" data-section-num="01">
-            <div class="section-header">
-              <div class="section-eyebrow">
-                <span class="section-num">01</span>
-                <span class="section-kicker">The Data</span>
-              </div>
-              <h2 class="section-title">The Imbalanced Data</h2>
-            </div>
-
-            <div class="space-y-8">
-              <div class="contact-info-card">
-                <p class="subtitle mb-4"><strong>The cost is asymmetric, and every downstream choice follows from it.</strong> A missed fraud is a bounded, one-off loss: the goods ship and a chargeback follows, on an order averaging about $38. A blocked good customer is a different loss: the immediate decline is cheap, but acquiring a first-time buyer was expensive and a declined first purchase can end the relationship before it starts, a loss that is diffuse and hard to price. Because a blocked first transaction is costlier than a missed one, the system is tuned for high precision and evaluated on PR-AUC instead of accuracy.</p>
-                <p class="subtitle">The dataset is course-provided and semi-synthetic: two CSVs, a transaction table of 138,376 rows by 11 columns and an IP-range-to-country lookup. The data is clean: no missing values, no duplicate rows. The single dominant fact is the imbalance: fraud is 1,415 of 138,376 transactions, roughly one in 97. Only about 1,415 fraud examples exist to learn from, so the model can latch only onto signals that are strong and repeated, which is why it ends up relying on two features and ignoring the rest.</p>
-              </div>
-
-              <div class="note note--process">
-                <div class="note__label">Method · Why PR-AUC, and IP by interval join</div>
-                <div class="note__body">
-                  <p><strong>Accuracy fails.</strong> Predicting "legitimate" for everyone scores 98.98% accuracy and catches zero fraud, so evaluation uses precision, recall, and PR-AUC, which, unlike ROC-AUC, is sensitive to the rare class.</p>
-                  <p><strong>Efficient IP→country recovery.</strong> Scanning the lookup table per row is O(n·m); instead both tables are sorted and joined in one pass with <code>merge_asof</code>, backfilling to Unknown past an upper bound. That leaves 14.7% of rows unmapped, with the United States the largest mapped country at 53,023. Country is later dropped for the reason in the next section.</p>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <!-- The two signals -->
-          <section id="eda" class="section-padding section--editorial" data-section-num="02">
-            <div class="section-header">
-              <div class="section-eyebrow">
-                <span class="section-num">02</span>
-                <span class="section-kicker">Two Signals</span>
-              </div>
-              <h2 class="section-title">The Two Signals</h2>
-            </div>
-
-            <div class="space-y-8">
-              <p class="subtitle">With only 1,415 fraud cases, small differences in fraud rate are easy to over-read, so every categorical comparison is paired with a significance test; a pattern counts only if it is both significant and large enough to matter. Two features clear that bar; the rest do not.</p>
-
-              <p class="subtitle"><strong>Purchase speed is the dominant signal.</strong> Legitimate users take a median of about 60 days between signing up and their first purchase; fraud takes a median of one second. Every one of the 739 transactions completed within one second of signup is fraud, and those account for 52.2% of all fraud in the data. The other half of fraud is spread across normal-looking intervals, the first sign of the recall ceiling.</p>
-
-              <figure class="figure-editorial">
-                <img src="figures/eda_interval_speed.png" alt="Signup-to-purchase interval and fraud rate by speed" loading="lazy" decoding="async" />
-                <figcaption>Fraud collapses onto the shortest intervals (left); the fraud rate by speed band (right) is near-total for instant purchases and near the base rate everywhere else. The signal is a threshold on speed, not a gradient.</figcaption>
-              </figure>
-
-              <p class="subtitle"><strong>Device sharing is the second signal; amount is not one.</strong> A device tied to a single account is almost never fraud (0.35%); once three or more accounts share one, the fraud rate is 58%, the fraud-ring fingerprint. Amount is nearly identical across classes (fraud averages $37.87 against a legitimate $36.93): fraudsters transact at ordinary amounts on purpose, and any "flag large purchases" rule would miss them.</p>
-
-              <div class="overflow-x-auto">
-                <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
-                  <thead>
-                    <tr class="bg-gray-100 dark:bg-gray-700/30">
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Accounts on device</th>
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">Fraud rate</th>
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">Transactions</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">1 account</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.35%</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">130,212</td>
-                    </tr>
-                    <tr>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">2 or more</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">11.73%</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">8,164</td>
-                    </tr>
-                    <tr class="bg-green-50 dark:bg-green-900/20">
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>3 or more</strong></td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>58.19%</strong></td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">842</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-
-              <figure class="figure-editorial">
-                <img src="figures/eda_value_device.png" alt="Purchase value distribution by class and fraud rate by device sharing" loading="lazy" decoding="async" />
-                <figcaption>The purchase-value distributions sit on top of each other (left); amount carries nothing. The fraud rate climbs steeply with device sharing (right).</figcaption>
-              </figure>
-
-              <div class="note note--evidence">
-                <div class="note__label">Significance · What does not survive a test</div>
-                <div class="note__body">
-                  <p>Purchase value and demographics carry no signal. Among categorical fields, marketing source is not significant (chi-square p = 0.272) and weekend signup is not significant (p = 0.255). Browser and country reach significance (p = 0.007, p = 0.004) purely on sample size, with small spreads (browsers 0.86%–1.13%; larger countries 0.44%–1.91%). Country is therefore left out: the geographic signal is too weak to add over the noise it introduces.</p>
-                </div>
-              </div>
-
-              <figure class="figure-editorial">
-                <img src="figures/eda_source_browser.png" alt="Fraud rate by marketing source and browser" loading="lazy" decoding="async" />
-                <figcaption>Every bar sits close to the dashed overall-rate line, and the spreads that reach significance are operationally negligible: these fields are not modeling signal.</figcaption>
-              </figure>
-            </div>
-          </section>
-
-          <!-- The scale artifact -->
-          <section id="models" class="section-padding section--editorial" data-section-num="03">
-            <div class="section-header">
-              <div class="section-eyebrow">
-                <span class="section-num">03</span>
-                <span class="section-kicker">Model Bake-off</span>
-              </div>
-              <h2 class="section-title">The Scale Artifact</h2>
-            </div>
-
-            <div class="space-y-8">
-              <div class="contact-info-card">
-                <p class="subtitle">Three model families run the same leak-free flow: an 80/20 stratified split, device and IP sharing counts encoded with a <code>CountEncoder</code> fit on the training fold only, SMOTE placed inside the pipeline so synthetic samples never leak into a validation fold, and 5-fold CV scored on average precision. A fourth variant, LightGBM with <code>scale_pos_weight</code> and no resampling, tests whether SMOTE changes the ranking.</p>
-              </div>
-
-              <div class="overflow-x-auto">
-                <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
-                  <thead>
-                    <tr class="bg-gray-100 dark:bg-gray-700/30">
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Model (5-fold CV, SMOTE in-fold)</th>
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">PR-AUC</th>
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">sd</th>
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">ROC-AUC</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Logistic Regression</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.535</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.052</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.757</td>
-                    </tr>
-                    <tr>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Random Forest</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>0.541</strong></td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.049</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.762</td>
-                    </tr>
-                    <tr class="bg-green-50 dark:bg-green-900/20">
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>LightGBM (SMOTE)</strong></td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.540</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.050</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.758</td>
-                    </tr>
-                    <tr>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">LightGBM (class weight)</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>0.541</strong></td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.052</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>0.763</strong></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-
-              <p class="subtitle">All four land at PR-AUC 0.535 to 0.541, and the fold-to-fold standard deviation of about 0.05 is larger than any gap between models; they tie. Logistic regression matches the gradient-boosted models, because the signal lives in two features that every model finds; complexity buys nothing. The final model is LightGBM + SMOTE, chosen for speed and native handling of the feature types, tuned to <code>learning_rate 0.05</code>, <code>n_estimators 400</code>, <code>num_leaves 31</code>; on the test set at the default 0.5 cutoff it reads PR-AUC 0.535, ROC-AUC 0.764, precision 0.986, recall 0.516.</p>
-
-              <figure class="figure-editorial">
-                <img src="figures/calibration.png" alt="Calibration of the two imbalance strategies" loading="lazy" decoding="async" />
-                <figcaption>The SMOTE curve tracks the diagonal: its scores can be read as probabilities; the class-weight curve sits well above it, over-stating risk. Same ranking, different scale: and that scale is all that separates 98.6% precision from 34%.</figcaption>
-              </figure>
-
-              <div class="note note--caveat">
-                <div class="note__label">Artifact · 98.6% precision measures the threshold, not the model</div>
-                <div class="note__body">
-                  <p>The SMOTE model and the class-weight variant give the same ranking ability (PR-AUC 0.536), yet at the fixed 0.5 cutoff the SMOTE model shows 98.6% precision and the weighted model 34%. The difference is entirely score scale: the weighted model's mean predicted probability is 0.125, twelve times the true 1.02% rate; the SMOTE model's mean is 0.010, close to the real rate. Precision at 0.5 tells you where that threshold sits on the score distribution, not which model ranks better. The SMOTE model is kept because it is near-calibrated, which lets its scores be read as probabilities when section 09 turns them into tiers.</p>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <!-- The recall ceiling -->
-          <section id="ceiling" class="section-padding section--editorial" data-section-num="04">
-            <div class="section-header">
-              <div class="section-eyebrow">
-                <span class="section-num">04</span>
-                <span class="section-kicker">The Recall Ceiling</span>
-              </div>
-              <h2 class="section-title">The Recall Ceiling</h2>
-            </div>
-
-            <div class="space-y-8">
-              <p class="subtitle">The precision-recall curve holds precision near 1.0 up to recall 0.52, then falls off a cliff; recall stays flat at about 0.52 across every threshold while precision climbs; the threshold trades for precision, not recall. The score histogram explains why: predictions pile up near 0 or near 1, with almost nothing in between. The fraud near 1.0 is the instant-purchase half, trivially caught; the other half scores as low as legitimate traffic, and no threshold recovers it.</p>
-
-              <figure class="figure-editorial">
-                <img src="figures/threshold_pr.png" alt="Precision-recall curve and precision/recall against threshold" loading="lazy" decoding="async" />
-                <figcaption>The PR curve has a vertical drop at recall 0.52 (left); recall stays flat while only precision responds to the threshold (right). Past 0.52, moving the threshold trades false alarms for nothing extra in catch.</figcaption>
-              </figure>
-
-              <figure class="figure-editorial">
-                <img src="figures/score_distribution.png" alt="Predicted scores are bimodal" loading="lazy" decoding="async" />
-                <figcaption>On a log count axis, both classes cluster at the extremes with an almost empty middle. This bimodal score is why every threshold between the modes selects the same transactions.</figcaption>
-              </figure>
-
-              <div class="contact-info-card">
-                <p class="subtitle">This is the feature set's honest ceiling, a property of the data, not a defect of the model. On the test set the tuned model catches 146 of 283 fraud cases (51.6%), with 2 false positives among 27,393 legitimate transactions (confusion matrix TN 27,391 / FP 2 / FN 137 / TP 146). Half the fraud is perfectly separable and half is invisible to these features, so no threshold or model reaches past recall 0.52 here.</p>
-              </div>
-
-              <div class="note note--caveat">
-                <div class="note__label">Data caveat · Live recall is likely lower</div>
-                <div class="note__body">
-                  <p>This dataset is constructed so the instant-purchase and device-sharing patterns are unusually clean, which is why the top two features are so dominant and the instant-purchase cluster is 100% fraud. On live traffic these signals would be noisier, so real-world recall would likely be lower than 52%, not higher.</p>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <!-- The operating point -->
-          <section id="cost" class="section-padding section--editorial" data-section-num="05">
-            <div class="section-header">
-              <div class="section-eyebrow">
-                <span class="section-num">05</span>
-                <span class="section-kicker">Cost &amp; Threshold</span>
-              </div>
-              <h2 class="section-title">The Operating Point</h2>
-            </div>
-
-            <div class="space-y-8">
-              <p class="subtitle">The 0.5 threshold is not a business decision. A threshold scanned on the test set is optimized on the same data it is evaluated on, so the sweep runs on <strong>out-of-fold training predictions</strong>, and the test set is used once at the chosen threshold. The cost model prices a missed fraud at that row's purchase value plus a flat $15 chargeback fee, and a blocked good customer at a fixed penalty swept from $50 to $200; the $15 fee is itself an assumption, swept as well ($8, $15, $30).</p>
-
-              <div class="overflow-x-auto">
-                <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
-                  <thead>
-                    <tr class="bg-gray-100 dark:bg-gray-700/30">
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">False-positive penalty</th>
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">Threshold (OOF)</th>
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">Test cost</th>
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">Below do-nothing</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">$50</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.59</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">$7,039</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">51%</td>
-                    </tr>
-                    <tr class="bg-green-50 dark:bg-green-900/20">
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>$100</strong></td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.59</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">$7,139</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">51%</td>
-                    </tr>
-                    <tr>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">$200</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.59</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">$7,339</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">49%</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <p class="subtitle text-sm" style="opacity:.8;">Do-nothing baseline (approve everything) costs $14,503 on the test set. The chargeback-fee sweep ($8, $15, $30) also leaves the threshold at 0.59 and the reduction at 51%.</p>
-
-              <p class="subtitle">The threshold lands on a plateau at 0.59 under every cost assumption, because of the bimodal score of section 04: with scores piled near 0 and near 1, every threshold between the modes selects the same transactions, and the exact cost assumption is not a sensitive input. Evaluated once on the test set, that operating point flags 0.53% of traffic, catches 146 of 283 fraud cases (precision 0.986, recall 0.516, two false positives), and cuts the value-weighted loss from $14,503 to $7,139, a 51% reduction.</p>
-
-              <div class="note note--evidence">
-                <div class="note__label">Uncertainty · Bootstrap ×2,000</div>
-                <div class="note__body">
-                  <p>The test set holds only 283 fraud cases, and the headline carries real sampling noise. Bootstrapping the test set 2,000 times puts the cost reduction at 51% with a 95% interval of [44%, 57%], and recall at 51.6% with [45.6%, 57.4%]. The intervals are wide enough that the headline should be quoted as "about half" instead of a three-digit point estimate, but no plausible resample changes the decision the number supports.</p>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <!-- The one-rule baseline -->
-          <section id="rule" class="section-padding section--editorial" data-section-num="06">
-            <div class="section-header">
-              <div class="section-eyebrow">
-                <span class="section-num">06</span>
-                <span class="section-kicker">Single-Rule Baseline</span>
-              </div>
-              <h2 class="section-title">The One-Rule Baseline</h2>
-            </div>
-
-            <div class="space-y-8">
-              <p class="subtitle">The 51% reduction is measured against approving everything, which no operation actually does. The right comparison is against the simplest rule the exploration already handed us: purchases completed within one second of signup are all fraud; block them. An engineer could ship that in an afternoon. Before crediting the model with the reduction, it is worth checking how much of it this single rule already captures.</p>
-
-              <div class="overflow-x-auto">
-                <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
-                  <thead>
-                    <tr class="bg-gray-100 dark:bg-gray-700/30">
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Decision</th>
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">Precision</th>
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">Recall</th>
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">False positives</th>
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">Cost</th>
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">Below do-nothing</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr class="bg-green-50 dark:bg-green-900/20">
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Rule: interval ≤ 1s</strong></td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>1.000</strong></td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.516</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>0</strong></td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>$6,939</strong></td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>52%</strong></td>
-                    </tr>
-                    <tr>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Model at threshold 0.59</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.986</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.516</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">2</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">$7,139</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">51%</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <p class="subtitle text-sm" style="opacity:.8;">Same cost model, $100 false-positive penalty. Both catch the same 146 cases; the model adds zero catches the rule misses, and misses none the rule catches.</p>
-
-              <p class="subtitle">At this operating point, the rule and the model catch the same 146 fraud cases. The model adds no catch beyond the rule and misses none of the rule's; it is even slightly more expensive, because its two false positives are two more than the rule's zero. Everything the deployed model does here, a single <code>if</code> statement already does.</p>
-
-              <div class="note note--insight">
-                <div class="note__label">Insight · What the model still buys</div>
-                <div class="note__body">
-                  <p>The rule catches 146; the model catches the same 146. What the trained model still provides is not incremental catch: it is a graded score that could support other operating points or a review queue, and a second signal, device sharing, that this threshold happens not to need. A rule fixed at "one second" is brittle to the cutoff and blind to everything but speed; the model carries a calibrated probability and a fraud-ring signal in reserve. Shipping the rule first and the model behind it is a legitimate order, but any claim about the model's worth has to be made in those terms, not as extra fraud caught at the operating point.</p>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <!-- The regime shift -->
-          <section id="backtest" class="section-padding section--editorial" data-section-num="07">
-            <div class="section-header">
-              <div class="section-eyebrow">
-                <span class="section-num">07</span>
-                <span class="section-kicker">Time-Split Backtest</span>
-              </div>
-              <h2 class="section-title">The Regime Shift</h2>
-            </div>
-
-            <div class="space-y-8">
-              <p class="subtitle">Two things about the headline evaluation are kinder than production: the split is random, with training and test rows from the same period; and the sharing counts are computed over the whole training window, while a live system knows only the history before each transaction. The final configuration is re-run under a time-ordered 80/20 split, with counts computed two ways: the same training-window <code>CountEncoder</code>, and a causal count where each row sees only its own history, isolating drift from feature computation.</p>
-
-              <div class="overflow-x-auto">
-                <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
-                  <thead>
-                    <tr class="bg-gray-100 dark:bg-gray-700/30">
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Split</th>
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">PR-AUC</th>
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">ROC-AUC</th>
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">Precision @0.5</th>
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">Recall @0.5</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr class="bg-green-50 dark:bg-green-900/20">
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Random split (section 03 pipeline)</strong></td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>0.535</strong></td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>0.764</strong></td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>0.986</strong></td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>0.516</strong></td>
-                    </tr>
-                    <tr>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Time split, training-window counts</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.005</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.490</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.000</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.000</td>
-                    </tr>
-                    <tr>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Time split, causal counts</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.005</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.522</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.000</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.000</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-
-              <p class="subtitle">Under a time-ordered split the model collapses to chance: PR-AUC drops to 0.005, at the prevalence level, and ROC-AUC to about 0.5. Causal versus training-window counts makes no difference, so the collapse is not about feature computation; it is a regime change. Fraud thins from 1.16% in the first 80% of the timeline to 0.47% in the last 20%, and the separable cluster disappears entirely: all 739 instant purchases fall between January 1 and January 13, 2015, the late window contains none, and its fraud sits at normal-looking intervals with a median near 90 days.</p>
-
-              <div class="note note--caveat">
-                <div class="note__label">Caveat · The headline is conditional on the training-window regime</div>
-                <div class="note__body">
-                  <p>The learnable signature is a burst, not a constant; it occupies 13 days at the start of the data. The headline describes what the model catches when instant-purchase and device-farming bursts are present, not a quiet month. The abruptness is partly an artifact of the semi-synthetic construction, which planted all separable fraud in a 13-day window, so this split overstates how suddenly a real system would decay. On live traffic the practical defense is regime monitoring (the share of instant purchases and the device-sharing rate) with retraining triggers, in place of this particular split.</p>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <!-- The two-feature model -->
-          <section id="shap" class="section-padding section--editorial" data-section-num="08">
-            <div class="section-header">
-              <div class="section-eyebrow">
-                <span class="section-num">08</span>
-                <span class="section-kicker">What the Model Uses</span>
-              </div>
-              <h2 class="section-title">The Two-Feature Model</h2>
-            </div>
-
-            <div class="space-y-8">
-              <p class="subtitle">For the "explain it to a non-technical stakeholder" question, SHAP attributes each prediction to its features, computed on the final model over the test set, and confirms the exploration. The interval feature scores 2.517 and device sharing 2.420; the third-ranked feature, sex, is 0.664, nearly four times smaller. In plain terms the model asks two questions: how long the buyer waited (a short gap pushes hard toward fraud), and how many accounts share the device (a high count is the fraud-ring pattern). Everything else contributes a small fraction of the top two's weight and is better read as minor correlation than a real driver.</p>
-
-              <figure class="figure-editorial">
-                <img src="figures/shap_beeswarm.png" alt="SHAP summary (beeswarm)" loading="lazy" decoding="async" />
-                <figcaption>Short intervals and high device-sharing counts push toward fraud; everything else clusters at zero impact.</figcaption>
-              </figure>
-
-              <figure class="figure-editorial">
-                <img src="figures/shap_bar.png" alt="Mean absolute SHAP by feature" loading="lazy" decoding="async" />
-                <figcaption>Mean absolute SHAP by feature. The gap between the top two and the third is the whole story: this is a two-feature model.</figcaption>
-              </figure>
-
-              <div class="note note--caveat">
-                <div class="note__label">Caveat · The semi-synthetic warning at its sharpest</div>
-                <div class="note__body">
-                  <p>This dataset is constructed so that the instant-purchase and device-sharing patterns are unusually clean, which is why the top two features are so dominant and the instant-purchase cluster is 100% fraud. On live traffic these signals would be noisier, and real-world recall would likely be lower than the 52% seen here, not higher.</p>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <!-- The score tiers -->
-          <section id="deployment" class="section-padding section--editorial" data-section-num="09">
-            <div class="section-header">
-              <div class="section-eyebrow">
-                <span class="section-num">09</span>
-                <span class="section-kicker">Productionizing</span>
-              </div>
-              <h2 class="section-title">The Score Tiers</h2>
-            </div>
-
-            <div class="space-y-8">
-              <p class="subtitle">The score distribution should drive the policy, in place of a round-number cutoff. Binning the final model's test-set scores shows what an actual tiering looks like: three bands, only two of which carry weight.</p>
-
-              <div class="overflow-x-auto">
-                <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
-                  <thead>
-                    <tr class="bg-gray-100 dark:bg-gray-700/30">
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Tier</th>
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">Volume</th>
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">Fraud rate</th>
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">Fraud caught</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr class="bg-green-50 dark:bg-green-900/20">
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>High (≥ 0.7): decline + review</strong></td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.53%</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">100%</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">146</td>
-                    </tr>
-                    <tr>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Medium (0.3–0.7): step-up</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.01%</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0%</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0</td>
-                    </tr>
-                    <tr>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Low (&lt; 0.3): auto-approve</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">99.46%</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.5%</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">137</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-
-              <div class="note note--insight">
-                <div class="note__label">Insight · The middle tier is nearly empty</div>
-                <div class="note__body">
-                  <p>The high tier, 0.53% of traffic, 100% fraud in this sample, declines in real time and routes to manual review, catching 52% of all fraud with almost no false positives; section 06 showed a one-line rule reproduces it, so shipping the rule first and the model behind it is a legitimate rollout order. The low tier auto-approves with no friction, and this is where the missed half of fraud hides. The medium tier is nearly empty at four transactions: recovering some of the missed fraud means deliberately lowering the high-tier threshold into the low-precision region, a conscious trade, not a free tier.</p>
-                </div>
-              </div>
-
-              <div class="contact-info-card">
-                <h3 class="text-xl font-semibold mb-3" style="color: var(--dark);">Limits and next steps</h3>
-                <ul class="list-disc list-inside space-y-2 subtitle">
-                  <li><strong>The learnable signal is a regime.</strong> All separable fraud sits in a 13-day burst; deployment needs regime monitoring (the share of instant purchases and the device-sharing rate) and retraining triggers more than a better classifier.</li>
-                  <li><strong>The count features assume accumulated history.</strong> Device and IP counts are computed over the training window; the causal-count run in section 07 is the template for measuring that gap once stationary data exists.</li>
-                  <li><strong>Recall is feature-limited, not model-limited.</strong> Moving the ceiling requires new signals such as device fingerprinting, cross-user velocity, or payment-instrument intelligence, not a bigger model.</li>
-                  <li><strong>The data is semi-synthetic.</strong> On live traffic precision and recall should be monitored and the model retrained on confirmed labels from the manual-review queue.</li>
-                  <li><strong>Roll out behind an A/B test</strong> on a small traffic slice, tracking fraud caught, false-alarm rate, and first-purchase conversion before a full launch.</li>
-                </ul>
-              </div>
-            </div>
-          </section>
-        </div>
-      </div>
-    </section>
-
-    <!-- Related projects -->
-    <section id="related" class="section-padding">
-      <div class="section-header reveal">
-        <div class="section-eyebrow">
-          <span class="section-kicker">Continue Reading</span>
-        </div>
-        <h2 class="section-title">Related Projects</h2>
-      </div>
-      <div class="grid md:grid-cols-2 gap-6">
-        <a href="../lendingclub loan prediction/lendingclub loan prediction-en.html" class="related-project-card group cursor-pointer" style="text-decoration: none;">
-          <h3 class="related-project-title">LendingClub Loan Default Prediction</h3>
-          <p class="related-project-description">A threshold decision under a 4.2:1 cost asymmetry, where one term rule takes most of the reduction</p>
-          <div class="related-project-link">
-            <span>View details</span>
-            <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>
-          </div>
-        </a>
-        <a href="../youtube comment analysis/youtube comment analysis-en.html" class="related-project-card group cursor-pointer" style="text-decoration: none;">
-          <h3 class="related-project-title">Pet Owners in YouTube Comments</h3>
-          <p class="related-project-description">Weak supervision and 300 hand labels when there is no ground truth</p>
-          <div class="related-project-link">
-            <span>View details</span>
-            <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>
-          </div>
-        </a>
-      </div>
-    </section>
-  </main>
-
-  <!-- Footer scripts: Prism / local scripts / logo animation / detail-page logic -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
-  <script src="../../assets/js/logo.js"></script>
-  <script src="../../assets/js/common.js"></script>
-  <script src="../../assets/js/charts.js"></script>
-  <script src="../../assets/js/project.js"></script>
-
-  <!-- Language toggle functionality -->
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const langToggle = document.getElementById('lang-toggle');
-      if (langToggle) {
-        langToggle.addEventListener('click', function() {
-          localStorage.setItem('language', 'zh');
-          window.location.href = 'e-commerce fraud detection.html';
-        });
-      }
-    });
-  </script>
+<body class="transition-colors duration-300 report-page">
+<div class="scroll-progress" id="scroll-progress"></div>
+<header class="navbar fixed top-0 left-0 right-0 z-50" id="navbar">
+<div class="container-main h-full flex items-center justify-between">
+<!-- Logo Section -->
+<a class="navbar-logo" href="../../index-en.html#hero" id="navbar-logo">
+<!-- SVG Logo -->
+<svg class="logo-svg-nav" viewbox="0 0 40 40">
+<!-- Data Grid Background -->
+<g class="grid-bg">
+<!-- Vertical Lines -->
+<line class="grid-line-v" style="animation-delay: 0.1s, 0s" x1="8" x2="8" y1="0" y2="40"></line>
+<line class="grid-line-v" style="animation-delay: 0.2s, 0.5s" x1="16" x2="16" y1="0" y2="40"></line>
+<line class="grid-line-v" style="animation-delay: 0.3s, 1s" x1="24" x2="24" y1="0" y2="40"></line>
+<line class="grid-line-v" style="animation-delay: 0.4s, 1.5s" x1="32" x2="32" y1="0" y2="40"></line>
+<!-- Horizontal Lines -->
+<line class="grid-line-h" style="animation-delay: 0.5s, 0s" x1="0" x2="40" y1="10" y2="10"></line>
+<line class="grid-line-h" style="animation-delay: 0.6s, 0.7s" x1="0" x2="40" y1="20" y2="20"></line>
+<line class="grid-line-h" style="animation-delay: 0.7s, 1.4s" x1="0" x2="40" y1="30" y2="30"></line>
+</g>
+<!-- Weaver Animation Line -->
+<line class="weaver-line" id="weaverLine" x1="0" x2="40" y1="20" y2="20"></line>
+<!-- JX Letters -->
+<text class="logo-letters" id="logoLetters" text-anchor="middle" x="20" y="26">JX</text>
+</svg>
+<!-- Name Signature (Hover Display) -->
+<div class="logo-name">
+<div class="logo-name-text">Juye Xiao</div>
+<div class="logo-name-subtitle">Data Analyst</div>
+</div>
+</a>
+<nav class="hidden md:flex items-center space-x-8">
+<a class="nav-link" href="../../index-en.html#about">About</a>
+<a class="nav-link" href="../../index-en.html#experience">Experience</a>
+<a class="nav-link" href="../../index-en.html#education">Education</a>
+<a class="nav-link" href="../../index-en.html#projects">Projects</a>
+<a class="nav-link" href="../../index-en.html#skills">Skills</a>
+<a class="nav-link" href="../../index-en.html#contact">Contact</a>
+</nav>
+<div class="flex items-center space-x-4">
+<button aria-label="Toggle theme" class="btn-secondary !p-2 !rounded-full" id="theme-toggle">
+<i class="block dark:hidden" data-lucide="sun"></i>
+<i class="hidden dark:block" data-lucide="moon"></i>
+</button>
+<button class="btn-secondary !p-2 !rounded-full" id="lang-toggle">
+<span class="font-bold text-sm">中</span>
+</button>
+<button aria-controls="mobile-menu" aria-expanded="false" aria-label="Open menu" class="btn-secondary !p-2 !rounded-full md:hidden" id="menu-toggle">
+<i class="menu-icon-open" data-lucide="menu"></i>
+<i class="menu-icon-close" data-lucide="x"></i>
+</button>
+</div>
+</div>
+<nav aria-label="Mobile navigation" class="mobile-menu md:hidden" id="mobile-menu">
+<a class="nav-link" href="../../index-en.html#about">About</a>
+<a class="nav-link" href="../../index-en.html#experience">Experience</a>
+<a class="nav-link" href="../../index-en.html#education">Education</a>
+<a class="nav-link" href="../../index-en.html#projects">Projects</a>
+<a class="nav-link" href="../../index-en.html#skills">Skills</a>
+<a class="nav-link" href="../../index-en.html#contact">Contact</a>
+</nav>
+</header>
+<main class="container-main">
+  <section id="project-hero" class="section-padding report-hero">
+    <div class="section-eyebrow"><span class="section-kicker">Risk Analytics</span></div>
+    <h1 class="hero-title">First-Order Fraud: Behavioral Patterns, Models and Decision Trade-offs</h1>
+    <p class="subtitle report-standfirst">Analyze purchase timing, device and IP behavior across 138,376 first-order transactions, and compare class-imbalance methods. Forward validation and cost scenarios inform a tiered manual-review proposal using model scores and transaction signals.</p>
+    <p class="reading-time">Analysis updated in 2026</p>
+    <div class="hero-stats"><div class="hero-stat"><div class="hero-stat__num">138,376</div><div class="hero-stat__label">Historical transactions</div></div><div class="hero-stat"><div class="hero-stat__num">0.010121</div><div class="hero-stat__label">Selected model test AP</div></div><div class="hero-stat"><div class="hero-stat__num">0 / 131</div><div class="hero-stat__label">Detected / test fraud labels</div></div></div>
+    <div class="report-actions"><a class="btn btn-primary" href="#content">Read report</a><a class="btn btn-secondary" href="../../index-en.html#projects">All projects</a></div>
+  </section>
+
+  <section id="content" class="section-padding report-layout">
+    <aside><nav class="project-toc" id="project-toc" aria-label="Report contents"><h3>Contents</h3><ul id="toc-list"><li><a class="toc-link" href="#report-section-1">Executive summary</a></li><li><a class="toc-link" href="#report-section-2">The first-order analysis objective</a></li><li><a class="toc-link" href="#report-section-3">The transaction and label sources</a></li><li><a class="toc-link" href="#report-section-4">The fraud prevalence</a></li><li><a class="toc-link" href="#report-section-5">The transaction-time distributions</a></li><li><a class="toc-link" href="#report-section-6">The prediction-time features</a></li><li><a class="toc-link" href="#report-section-7">The temporal roles and forward validation</a></li><li><a class="toc-link" href="#report-section-8">The approval and rejection baselines</a></li><li><a class="toc-link" href="#report-section-9">The imbalance-treatment comparison</a></li><li><a class="toc-link" href="#report-section-10">The selection decision boundaries</a></li><li><a class="toc-link" href="#report-section-11">The frozen temporal test</a></li><li><a class="toc-link" href="#report-section-12">Behavioral subgroups and recognition differences</a></li><li><a class="toc-link" href="#report-section-13">Review prioritization and proposed three-tier handling</a></li><li><a class="toc-link" href="#report-section-14">Pilot data and operating metrics</a></li><li><a class="toc-link" href="#report-section-15">First-order risk findings and implementation priorities</a></li><li><a class="toc-link" href="#report-section-16">Appendix: Features and model settings</a></li></ul></nav></aside>
+    <article class="content-area report-body" id="report-body"><div class="report-block" id="report-intro-1">
+<p>An early rapid-purchase subgroup accounts for 52.23% of fraud labels. The analysis compares recognition across behaviors and periods, then develops proposals for review prioritization and three-tier handling.</p>
+
+</div><section id="report-section-1" class="section-padding section--editorial" data-section-num="01"><div class="section-header"><h2 class="section-title">Executive summary</h2></div><div class="report-block" id="report-1-1">
+<p>This project examines behavioral patterns in first-order fraud, compares model recognition, and considers how a risk team could allocate review effort and handle orders. The data contain 138,376 transactions and 1,415 fraud labels, with prevalence of 1.02%. All 739 purchases made within one second of signup carry fraud labels. This subgroup represents 52.23% of fraud labels and occurs in early January 2015.</p>
+<p>Recognition differs sharply across this historical subgroup and the remaining transactions. The fit-pool random diagnostic has AP=0.635206, falling to 0.006314 when the one-second subgroup is excluded. Chronological evaluation tests the scope of these patterns. Forward validation selects weighted LightGBM, with frozen temporal-test AP=0.010121 and ROC-AUC=0.595995. Ordinary SMOTE improves neither CV nor test AP over the no-SMOTE comparator in this experiment.</p>
+<p>Decision analysis separates ranking from action. The specified cost scenario selects approve-all on selection; none of the 131 test fraud labels is flagged, FP=0 and scenario cost is $6,876. The behavioral findings and decision trade-offs inform a proposal to prioritize human review by score and combine transaction evidence with low/medium/high handling tiers.</p>
+
+</div></section><section id="report-section-2" class="section-padding section--editorial" data-section-num="02"><div class="section-header"><h2 class="section-title">The first-order analysis objective</h2></div><div class="report-block" id="report-2-1">
+<p>The task places a risk decision after a new customer's first order is submitted and before shipment. The risk team needs to find suspicious transactions while limiting friction for legitimate orders. The analysis asks which behavioral subgroups contain fraud, what the imbalance treatments recognize, and how scores could assist review and order handling.</p>
+<p>Inputs include recorded signup and purchase times, value, account attributes, source, browser, and earlier device/IP transaction events. The binary <code>class</code> field supplies the fraud label. Each row is a recorded user transaction and user IDs are unique; the file cannot establish cross-account identity or genuine first-order eligibility.</p>
+<p>The experiment uses retrospective chronological evaluation to compare approval and rejection under explicit cost scenarios. Behavioral findings inform proposals for human review and tiered handling.</p>
+
+</div></section><section id="report-section-3" class="section-padding section--editorial" data-section-num="03"><div class="section-header"><h2 class="section-title">The transaction and label sources</h2></div><div class="report-block" id="report-3-1">
+<p>The transaction data contain 138,376 rows and 11 columns; the IP-range table contains 138,846 rows. The analysis focuses on first orders, with GMT timestamps and amounts in USD.</p>
+<p>Purchases span January 1 through December 16, 2015; signup dates end on August 18. Fields cover user ID, both timestamps, value, device, source, browser, sex, age, numeric IP and target. There are no missing values, duplicate rows or duplicate user IDs. Values range from $9 to $154 and ages from 18 to 76. Target values are zero and one, timestamps parse successfully, and purchases never precede signup. The original file is not purchase-time sorted; 780 rows belong to tied purchase timestamps.</p>
+<p>IP mapping first checks that lookup intervals do not overlap. <code>searchsorted</code> finds the greatest lower bound not exceeding each IP, followed by an upper-bound check. There are 20,291 unmapped rows, or 14.66%. Fractional values occur in 138,375 IP records; mapping retains the supplied numeric values, whose encoding provenance is unknown. Lookup results do not verify physical location. Country is descriptive only because lookup vintage is also unknown.</p>
+
+</div></section><section id="report-section-4" class="section-padding section--editorial" data-section-num="04"><div class="section-header"><h2 class="section-title">The fraud prevalence</h2></div><div class="report-block" id="report-4-1">
+<p>There are 1,415 fraud labels and 136,961 nonfraud labels, for overall prevalence of 1.02%. Approving every record would yield high accuracy, so accuracy does not select models. AP (average precision) measures ranking using precision weighted by recall increments, not trapezoidal PR area. ROC-AUC is auxiliary.</p>
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">Month</th>
+<th scope="col">n</th>
+<th scope="col">Fraud</th>
+<th scope="col">Prevalence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2015-01</td>
+<td>3,125</td>
+<td>751</td>
+<td>24.0320%</td>
+</tr>
+<tr>
+<td>2015-02</td>
+<td>6,187</td>
+<td>29</td>
+<td>0.4687%</td>
+</tr>
+<tr>
+<td>2015-03</td>
+<td>11,599</td>
+<td>54</td>
+<td>0.4656%</td>
+</tr>
+<tr>
+<td>2015-04</td>
+<td>15,896</td>
+<td>85</td>
+<td>0.5347%</td>
+</tr>
+<tr>
+<td>2015-05</td>
+<td>18,536</td>
+<td>93</td>
+<td>0.5017%</td>
+</tr>
+<tr>
+<td>2015-06</td>
+<td>18,160</td>
+<td>94</td>
+<td>0.5176%</td>
+</tr>
+<tr>
+<td>2015-07</td>
+<td>18,703</td>
+<td>96</td>
+<td>0.5133%</td>
+</tr>
+<tr>
+<td>2015-08</td>
+<td>17,908</td>
+<td>79</td>
+<td>0.4411%</td>
+</tr>
+<tr>
+<td>2015-09</td>
+<td>13,755</td>
+<td>71</td>
+<td>0.5162%</td>
+</tr>
+<tr>
+<td>2015-10</td>
+<td>9,412</td>
+<td>39</td>
+<td>0.4144%</td>
+</tr>
+<tr>
+<td>2015-11</td>
+<td>4,545</td>
+<td>18</td>
+<td>0.3960%</td>
+</tr>
+<tr>
+<td>2015-12</td>
+<td>550</td>
+<td>6</td>
+<td>1.0909%</td>
+</tr>
+</tbody>
+</table></div>
+<p>January's high prevalence reflects the observed sample composition. Subsequent months differ in volume and fraud count. December contains only 550 rows and 6 fraud labels; its prevalence fluctuation alone does not establish increasing risk. Role-specific prevalence accompanies the temporal protocol.</p>
+
+</div></section><section id="report-section-5" class="section-padding section--editorial" data-section-num="05"><div class="section-header"><h2 class="section-title">The transaction-time distributions</h2></div><div class="report-block" id="report-5-1">
+<p>All 739 purchases within one second of signup carry fraud labels. They occur from January 1 through January 13, 2015, and account for 52.23% of all fraud labels. None occurs in the forward-validation windows, selection or test. Random splitting distributes this early pattern into both training and validation and can repeatedly recognize the same historical structure.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Figure 1: Monthly prevalence, purchase interval and prior activity" class="figure-zoom" type="button"><img alt="Figure 1: Monthly prevalence, purchase interval and prior activity" decoding="async" height="1104" loading="lazy" src="figures/temporal/01_temporal_drift.png" width="1664"/></button><figcaption class="generated-alt-caption">Figure 1: Monthly prevalence, purchase interval and prior activity</figcaption></figure>
+<p>The disappearance of instant purchases, lengthening signup-to-purchase intervals and changes in prior-device activity are observable feature-distribution changes. Signups end in August while purchases continue into December, limiting interpretation of the later population. Monthly source, browser, age and amount distributions describe sample composition without identifying its generating mechanism.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Figure 2: Amount, age and source/browser composition" class="figure-zoom" type="button"><img alt="Figure 2: Amount, age and source/browser composition" decoding="async" height="1104" loading="lazy" src="figures/temporal/02_population_features.png" width="1664"/></button><figcaption class="generated-alt-caption">Figure 2: Amount, age and source/browser composition</figcaption></figure>
+<p>Population composition, feature drift and label-prevalence shift describe different phenomena. Concept or regime change concerns the conditional feature-label relationship. This analysis does not independently identify that mechanism or establish a change in fraud strategy.</p>
+<p>For review design, an extremely short purchase interval is an evidence-backed investigation cue. Its frequency, fraud prevalence and timing should be tracked together; the strong early association does not establish a permanent rejection rule.</p>
+
+</div></section><section id="report-section-6" class="section-padding section--editorial" data-section-num="06"><div class="section-header"><h2 class="section-title">The prediction-time features</h2></div><div class="report-block" id="report-6-1">
+<h3>The goal</h3>
+<p>Represent information observable at order submission and avoid treating future transaction volume as prior activity.</p>
+<h3>The feature contract</h3>
+<p>Numeric and calendar features are <code>log1p</code> signup-to-purchase interval, value, age, signup hour, purchase hour, signup weekend and purchase weekend. Device and IP counts include only strictly earlier purchase timestamps, excluding the current row and all simultaneous peers. One-hot vocabularies for sex, source and browser fit within each training fold; unseen categories are ignored.</p>
+<p>The raw dataframe remains unchanged and features are derived from copies. Repeating feature construction cannot re-encode sex destructively. User ID, raw device/IP identifiers, purchase date, target, country and full-window frequencies are excluded. Earlier unlabeled events during validation and test can update counts for later transactions without model refitting.</p>
+<h3>The cost</h3>
+<p>Counts describe events visible in this sampled file and cannot recover omitted production history. Collection latency and subsequent field revisions lack verification logs. No static-window frequency comparator is added, keeping the three imbalance methods on identical event-time features.</p>
+
+</div></section><section id="report-section-7" class="section-padding section--editorial" data-section-num="07"><div class="section-header"><h2 class="section-title">The temporal roles and forward validation</h2></div><div class="report-block" id="report-7-1">
+<h3>The goal</h3>
+<p>Make temporal generalization the primary protocol while separating model/parameter choice, decision selection and frozen evaluation.</p>
+<h3>The temporal split</h3>
+<p>Purchases are sorted chronologically. Approximately the earliest 80% form the early pool, which is split again at about 80% into fit and selection. Entire timestamp groups move together at boundaries.</p>
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">Role</th>
+<th scope="col">Start (GMT)</th>
+<th scope="col">End (GMT)</th>
+<th scope="col">n</th>
+<th scope="col">Fraud</th>
+<th scope="col">Prevalence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>fit</td>
+<td>2015-01-01 00:00:47</td>
+<td>2015-07-26 00:38:40</td>
+<td>88,560</td>
+<td>1180</td>
+<td>1.332430%</td>
+</tr>
+<tr>
+<td>selection</td>
+<td>2015-07-26 00:39:10</td>
+<td>2015-09-02 03:20:18</td>
+<td>22,140</td>
+<td>104</td>
+<td>0.469738%</td>
+</tr>
+<tr>
+<td>test</td>
+<td>2015-09-02 03:20:20</td>
+<td>2015-12-16 02:56:05</td>
+<td>27,676</td>
+<td>131</td>
+<td>0.473334%</td>
+</tr>
+</tbody>
+</table></div>
+<p>Five expanding folds within fit use unique timestamps; validation starts on March 16, 2015. Equal-weight mean fold AP selects the family and parameters. Fixed family and grid order resolves ties. Each family's best configuration is refitted on fit only, while selection chooses thresholds. Test evaluates all three predeclared frozen comparators and retains the CV-selected family.</p>
+<h3>The cost</h3>
+<p>A separate selection block reduces training data but separates decision choice from final evaluation. The time folds are not independent replicates, and their range is not a confidence interval. Prior full-data exploration prevents within-run isolation from restoring research-level blind-test independence.</p>
+
+</div></section><section id="report-section-8" class="section-padding section--editorial" data-section-num="08"><div class="section-header"><h2 class="section-title">The approval and rejection baselines</h2></div><div class="report-block" id="report-8-1">
+<p>Approve-all and reject-all are defined before model selection. Scenario cost sums purchase value plus $15 for each missed fraud and adds $100 per rejected nonfraud. Correct decisions have zero modeled incremental error cost. These retained assumptions are not measured fraud losses or customer lifetime value.</p>
+<p>On selection, approve-all costs $5,166 and reject-all $2,203,600, across 104 fraud and 22,036 nonfraud labels. No evidence supports imposing a minimum recall, review capacity or label-maturity delay. Precision is defined as zero when no transactions are flagged; TP/FP counts disclose the empty denominator.</p>
+
+</div></section><section id="report-section-9" class="section-padding section--editorial" data-section-num="09"><div class="section-header"><h2 class="section-title">The imbalance-treatment comparison</h2></div><div class="report-block" id="report-9-1">
+<h3>The goal</h3>
+<p>Test whether SMOTE improves temporal generalization under identical event-time features and evaluation roles.</p>
+<h3>The bounded comparison</h3>
+<p>The alternatives are no resampling, balanced training-fold class weights and ordinary SMOTE. Keeping LightGBM fixes the model family. Each method searches 200/400 trees, 31/63 leaves and learning rates of 0.05/0.1: eight configurations. Seed 42, four numerical threads and deterministic LightGBM settings are fixed. Encoding and sampling fit only on training folds. The comparison performs 120 fold fits and three fit-only refits.</p>
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">LightGBM</th>
+<th scope="col">CV AP</th>
+<th scope="col">Selection AP</th>
+<th scope="col">Test AP</th>
+<th scope="col">Test ROC-AUC</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>No SMOTE</td>
+<td>0.006945</td>
+<td>0.010352</td>
+<td>0.009879</td>
+<td>0.606678</td>
+</tr>
+<tr>
+<td>Class weights</td>
+<td>0.006991</td>
+<td>0.009761</td>
+<td>0.010121</td>
+<td>0.595995</td>
+</tr>
+<tr>
+<td>Ordinary SMOTE</td>
+<td>0.006854</td>
+<td>0.009009</td>
+<td>0.009025</td>
+<td>0.596598</td>
+</tr>
+</tbody>
+</table></div>
+<p>Class weights achieve the highest mean forward AP and select the formal model. Both no-SMOTE and weighted models choose 200 trees, 31 leaves and learning rate 0.05; SMOTE chooses 200 trees, 63 leaves and learning rate 0.05. SMOTE trails no-SMOTE by 0.000091 in mean CV AP and 0.000854 on frozen-test AP. No SMOTE gain is observed here, without establishing a universal ordering.</p>
+<h3>The cost</h3>
+<p>The fit audit generates 86,200 synthetic records. Fractional category indicators occur in 82.67% and fractional weekend flags in 46.34%. Each sex indicator is fractional in about 40.02% of synthetic rows; counts also become nonintegral. In unscaled minority-neighbor squared distances, age contributes about 25.60% and value about 23.51%, showing scale-sensitive geometry. This implementation is retained for the audit; selective scaling would change the comparison. SMOTENC, ADASYN and additional model families are outside this experiment.</p>
+
+</div></section><section id="report-section-10" class="section-padding section--editorial" data-section-num="10"><div class="section-header"><h2 class="section-title">The selection decision boundaries</h2></div><div class="report-block" id="report-10-1">
+<p>Threshold candidates cover every unique selection-score boundary plus explicit approve-all and reject-all decisions. With <code>score &gt;= threshold</code>, an interval <code>(lower, upper]</code> between adjacent scores gives identical selection flags. Every threshold above the maximum approves all. An interior decision would freeze its upper endpoint. Cost ties favor fewer rejections, and all minimum-cost candidates remain available.</p>
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">LightGBM</th>
+<th scope="col">Selection-equivalent region</th>
+<th scope="col">TP</th>
+<th scope="col">FP</th>
+<th scope="col">USD</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>No SMOTE</td>
+<td>t &gt; 0.180084241268662</td>
+<td>0</td>
+<td>0</td>
+<td>5,166</td>
+</tr>
+<tr>
+<td>Class weights</td>
+<td>t &gt; 0.7791207743942467</td>
+<td>0</td>
+<td>0</td>
+<td>5,166</td>
+</tr>
+<tr>
+<td>Ordinary SMOTE</td>
+<td>t &gt; 0.4444073573082704</td>
+<td>0</td>
+<td>0</td>
+<td>5,166</td>
+</tr>
+</tbody>
+</table></div>
+<p>All three methods choose approve-all, each with one minimum-cost operational decision. These regions describe selection equivalence. The frozen policy is the constant approve-all action, not a finite threshold that might reject future scores above the selection maximum. Optimized selection cost is measured on the same data used to choose the decision and is not independent performance evidence.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Figure 3: All selection decision boundaries and scenario cost" class="figure-zoom" type="button"><img alt="Figure 3: All selection decision boundaries and scenario cost" decoding="async" height="684" loading="lazy" src="figures/temporal/03_threshold_cost.png" width="1104"/></button><figcaption class="generated-alt-caption">Figure 3: All selection decision boundaries and scenario cost</figcaption></figure>
+<p>Introducing rejection does not reduce selection cost under this scenario. Boundaries are compared using recall, precision, FPR, TP, FP and cost; the policy is selected before test evaluation.</p>
+<p>This experiment compares direct approval and rejection; it does not simulate human review or its costs. The approve-all optimum means direct blocking has no cost advantage under these assumptions. Human review is a separate operating design, proposed in Section 12.</p>
+
+</div></section><section id="report-section-11" class="section-padding section--editorial" data-section-num="11"><div class="section-header"><h2 class="section-title">The frozen temporal test</h2></div><div class="report-block" id="report-11-1">
+<p>Before test scoring, the freeze record binds input hashes, the feature contract, parameters, model and encoding state, selection predictions and decision rules. One formal evaluation cell scores the test. All three comparator results are disclosed without selecting again from test rankings.</p>
+<p>Test contains 27,676 rows and 131 fraud labels, a prevalence of 0.47%. The formal weighted model has AP=0.010121 and ROC-AUC=0.595995. AP exceeds this window's prevalence, but the frozen decision catches no fraud. Ranking and decision value require separate assessment. In the table, TP counts detected fraud, FP false declines of nonfraud, FN missed fraud and TN correctly approved nonfraud; all are transaction counts.</p>
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">Decision</th>
+<th scope="col">TP</th>
+<th scope="col">FP</th>
+<th scope="col">FN</th>
+<th scope="col">TN</th>
+<th scope="col">Precision</th>
+<th scope="col">Recall</th>
+<th scope="col">USD</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>No SMOTE</td>
+<td>0</td>
+<td>0</td>
+<td>131</td>
+<td>27545</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>6,876</td>
+</tr>
+<tr>
+<td>Class weights</td>
+<td>0</td>
+<td>0</td>
+<td>131</td>
+<td>27545</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>6,876</td>
+</tr>
+<tr>
+<td>Ordinary SMOTE</td>
+<td>0</td>
+<td>0</td>
+<td>131</td>
+<td>27545</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>6,876</td>
+</tr>
+<tr>
+<td>Approve all</td>
+<td>0</td>
+<td>0</td>
+<td>131</td>
+<td>27545</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>6,876</td>
+</tr>
+<tr>
+<td>Reject all</td>
+<td>131</td>
+<td>27545</td>
+<td>0</td>
+<td>0</td>
+<td>0.004733</td>
+<td>1.000000</td>
+<td>2,754,500</td>
+</tr>
+<tr>
+<td>One-second rule (post hoc)</td>
+<td>0</td>
+<td>0</td>
+<td>131</td>
+<td>27545</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>6,876</td>
+</tr>
+</tbody>
+</table></div>
+<p>All three models, approve-all and the post-hoc one-second rule cost $6,876 in the scenario; reject-all costs $2,754,500. Constant baselines have AP equal to prevalence and ROC-AUC of 0.5. The one-second rule originated in full-data exploration and has no independent prospective validation.</p>
+
+</div></section><section id="report-section-12" class="section-padding section--editorial" data-section-num="12"><div class="section-header"><h2 class="section-title">Behavioral subgroups and recognition differences</h2></div><div class="report-block" id="report-12-1">
+<h3>Forward validation and score distributions</h3>
+<p>The first forward-validation window starts in March and already contains no one-second cases. Weighted-model AP in that fold is 0.005879 against prevalence of 0.005219, far below the high random diagnostic. Later folds fluctuate. This protocol cannot locate an initial deterioration date inside January, which has no validation fold. In the table, actual class 0 denotes nonfraud and class 1 denotes fraud.</p>
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">Role</th>
+<th scope="col">Class</th>
+<th scope="col">n</th>
+<th scope="col">Median score</th>
+<th scope="col">95% quantile</th>
+<th scope="col">Max score</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>selection</td>
+<td>0</td>
+<td>22036</td>
+<td>0.140408</td>
+<td>0.338314</td>
+<td>0.779121</td>
+</tr>
+<tr>
+<td>selection</td>
+<td>1</td>
+<td>104</td>
+<td>0.181593</td>
+<td>0.506664</td>
+<td>0.553474</td>
+</tr>
+<tr>
+<td>test</td>
+<td>0</td>
+<td>27545</td>
+<td>0.141390</td>
+<td>0.351660</td>
+<td>0.799658</td>
+</tr>
+<tr>
+<td>test</td>
+<td>1</td>
+<td>131</td>
+<td>0.173296</td>
+<td>0.524363</td>
+<td>0.659282</td>
+</tr>
+</tbody>
+</table></div>
+<p>The maximum nonfraud selection score exceeds the maximum fraud score, and both distributions overlap. Exhaustive boundary comparison finds that saved missed-fraud cost does not offset the added false-decline penalty, selecting approve-all. Test shows similar distributions and zero detection. This explanation leaves the frozen threshold rule unchanged.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Figure 4: Forward AP and formal-model score distributions" class="figure-zoom" type="button"><img alt="Figure 4: Forward AP and formal-model score distributions" decoding="async" height="614" loading="lazy" src="figures/temporal/04_failure_diagnosis.png" width="1662"/></button><figcaption class="generated-alt-caption">Figure 4: Forward AP and formal-model score distributions</figcaption></figure>
+<h3>Random and temporal diagnostics</h3>
+<p>Only the temporal fit pool is used. Both diagnostics fix the selected weighted-model parameters and use 70,848 training rows with 17,712 held out. The random split is stratified and the chronological split holds out the later block. No further tuning occurs in the diagnostic. The inherited parameters were selected through forward CV over the entire fit pool, so these diagnostic holdouts are not independent of parameter selection.</p>
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">Diagnostic subset</th>
+<th scope="col">n</th>
+<th scope="col">Fraud</th>
+<th scope="col">Prevalence</th>
+<th scope="col">AP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>random_fit_pool / all</td>
+<td>17,712</td>
+<td>236</td>
+<td>1.332430%</td>
+<td>0.635206</td>
+</tr>
+<tr>
+<td>random_fit_pool / noninstant</td>
+<td>17,567</td>
+<td>91</td>
+<td>0.518017%</td>
+<td>0.006314</td>
+</tr>
+<tr>
+<td>temporal_fit_pool / all</td>
+<td>17,712</td>
+<td>87</td>
+<td>0.491192%</td>
+<td>0.007848</td>
+</tr>
+</tbody>
+</table></div>
+<p>Of 236 random-holdout fraud labels, 145 belong to the one-second subgroup. Excluding them leaves 91 fraud labels and AP=0.006314. This supports the early, easily recognized subgroup as a contributor to high random AP. Differences in time, population, prevalence, training history and device sharing prevent attributing the entire gap to concept drift, SMOTE, one feature or fraud-strategy change.</p>
+
+</div></section><section id="report-section-13" class="section-padding section--editorial" data-section-num="13"><div class="section-header"><h2 class="section-title">Review prioritization and proposed three-tier handling</h2></div><div class="report-block" id="report-13-1">
+<p>The following implementation proposals draw on the behavioral analysis and model comparison. Scores determine where reviewers look first, while transaction evidence informs individual decisions. Scores are not calibrated fraud probabilities.</p>
+<h3>Human-review queue</h3>
+<p>At submission, log the score, signup-to-purchase interval, prior device/IP activity and existing transaction details. Start by recording a shadow queue without changing order status to check data arrival, score distributions and logging completeness. For a trial, review orders in descending score order within a capacity agreed by the business; order waiting time can break score ties. Display rapid purchasing and unusual sharing as investigation cues, without making either an automatic rejection trigger.</p>
+<p>Reviewers examine existing order and payment-verification records, account activity and device/IP links, then record a reason for their decision. Scores provide ordering, and verifiable transaction evidence supports case decisions. Shared devices or IPs can also occur in legitimate settings; further checks should address a specific concern.</p>
+<h3>Three-tier order handling</h3>
+<p>Low, medium and high denote proposed handling priorities, not calibrated probability bands. The business would set boundaries using selection-score distributions, actual review capacity and tolerance for false declines. Fixed probability cutoffs are not borrowed, and the current test is not used to tune them.</p>
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">Proposed tier</th>
+<th scope="col">Candidate routing basis</th>
+<th scope="col">Suggested action</th>
+<th scope="col">Outcome records</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Low risk</td>
+<td>Relatively low score and no additional verification cue in existing records</td>
+<td>Continue the existing standard process and retain sampled review</td>
+<td>Subsequent fraud labels, sample-review findings and order completion</td>
+</tr>
+<tr>
+<td>Medium risk</td>
+<td>Score in the review range or a behavioral cue requiring a check</td>
+<td>Add to the standard human-review queue and examine the order and related activity</td>
+<td>Review decision, reason, handling time and customer wait</td>
+</tr>
+<tr>
+<td>High risk</td>
+<td>Higher score accompanied by a verifiable anomaly</td>
+<td>Prioritize human review; shipment may be held under existing business authority, with human confirmation before release, further checks or rejection</td>
+<td>Final action, supporting evidence, cancellations/appeals and subsequent labels</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Trial records and adjustment</h3>
+<p>Before a trial, agree and version the routing rules, review owner, capacity, waiting-time limits and decision authority. Track review hit rate, fraud coverage, legitimate-order interventions, handling time and order completion by date and behavioral subgroup. Sampled review of the standard flow helps reveal cases missed outside the queue.</p>
+<p>Record label-confirmation and revision times alongside review outcomes. If queue yield, delays or false declines fall outside the business's acceptable range, reduce the queue or return to the existing process before adjusting from new records. The approve-all experiment remains a result under specified scenario costs, not an automatic-approval instruction. Review savings, detection gains and tier benefits remain to be measured.</p>
+
+</div></section><section id="report-section-14" class="section-padding section--editorial" data-section-num="14"><div class="section-header"><h2 class="section-title">Pilot data and operating metrics</h2></div><div class="report-block" id="report-14-1">
+<p>The protocol uses raw-preserving transformations, strictly prior counts, chronological validation, matched imbalance comparisons and complete score-boundary decisions. Model choice, threshold selection, frozen test and exploratory diagnosis have separate roles.</p>
+<p>Pilot preparation can organize three groups of information: label generation, confirmation, observation windows and revisions; first-order definitions, event arrival times and transaction history; and fraud losses, false-decline costs, review costs and capacity. The pilot can track user and device relationships, policy changes and review outcomes, then evaluate the model and workflow in new time windows.</p>
+<p>No performance interval has been established for the dependence structure and selection process; metrics are disclosed as point estimates. Additional tuning cannot remove limitations that require new data.</p>
+
+</div></section><section id="report-section-15" class="section-padding section--editorial" data-section-num="15"><div class="section-header"><h2 class="section-title">First-order risk findings and implementation priorities</h2></div><div class="report-block" id="report-15-1">
+<p>The analysis identifies a concentrated historical subgroup: 739 rapid purchases account for 52.23% of fraud labels and occur early in the data. Random-diagnostic AP is 0.635206, compared with 0.006314 after that subgroup is excluded. The aggregate random result therefore does not represent recognition of the remaining fraud cases. Behavioral subgroups and periods should be examined separately in risk analysis.</p>
+<p>The matched comparison selects weighted LightGBM; ordinary SMOTE shows no AP gain in this experiment. Frozen temporal-test AP is 0.010121, above the window's 0.47% prevalence but still weak. Under the specified costs, the selected approve-all decision catches none of 131 fraud labels among 27,676 test transactions and incurs $6,876 scenario cost. Zero detection describes this operating decision; it neither means that every score is uninformative nor demonstrates effective human review.</p>
+<p>The proposed application combines scores and behavioral cues to assist human review. Relative scores and verifiable concerns guide low/medium/high handling, with review outcomes, order effects and label revisions recorded over time. The deliverables are behavioral findings, model comparisons, decision trade-offs and a workflow suitable for a trial.</p>
+<p>Implementation preparation should establish actual review capacity, decision authority, verification records and cost definitions. A trial can then collect new time windows and mature labels before changing tiers or models.</p>
+
+</div></section><section id="report-section-16" class="section-padding section--editorial" data-section-num="16"><div class="section-header"><h2 class="section-title">Appendix: Features and model settings</h2></div><div class="report-block" id="report-16-1">
+<h3>Data and Features</h3>
+<ul>
+<li>Inputs: <code>imbalancedFraudDF.csv</code> and <code>IpAddress_to_Country.csv</code> in the project directory.</li>
+<li>Numeric features: interval_log, purchase_value, age, signup_hour, purchase_hour, signup_weekend, purchase_weekend, prior_device_count, prior_ip_count.</li>
+<li>Categorical features: sex, source, browser; OneHotEncoder(handle_unknown="ignore", sparse_output=False), with vocabulary fitted on the current training fold only.</li>
+<li>interval_log is log1p of seconds from signup to purchase. Prior device/IP counts include only transactions with strictly earlier purchase timestamps.</li>
+</ul>
+<h3>Models and Evaluation</h3>
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">Setting</th>
+<th scope="col">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Model families</td>
+<td>A_no_smote, B_class_weight, C_smote; all use LGBMClassifier</td>
+</tr>
+<tr>
+<td>Search grid</td>
+<td>n_estimators∈{200,400}; num_leaves∈{31,63}; learning_rate∈{0.05,0.1}</td>
+</tr>
+<tr>
+<td>Fixed parameters</td>
+<td>random_state=42; n_jobs=4; deterministic=True; force_col_wise=True</td>
+</tr>
+<tr>
+<td>Imbalance treatment</td>
+<td>A: no resampling; B: class_weight=balanced; C: ordinary SMOTE(random_state=42) within training folds</td>
+</tr>
+<tr>
+<td>Validation and selection</td>
+<td>Five expanding folds over fit unique timestamps; mean AP selects model and parameters; separate selection set chooses cost threshold</td>
+</tr>
+<tr>
+<td>Selected parameters</td>
+<td>A/B: 200 trees, 31 leaves, learning_rate=0.05; C: 200 trees, 63 leaves, learning_rate=0.05; champion B_class_weight</td>
+</tr>
+<tr>
+<td>Cost scenario</td>
+<td>FP=USD 100; FN=purchase_value+USD 15; cost ties favor fewer rejections</td>
+</tr>
+</tbody>
+</table></div>
+<p>Ordinary SMOTE operates after one-hot encoding without feature standardization. Unlisted parameters use the defaults of the corresponding library versions.</p>
+
+</div></section></article>
+  </section>
+
+  <section id="related" class="section-padding"><div class="section-header"><h2 class="section-title">Related projects</h2></div><div class="grid md:grid-cols-2 gap-6"><a href="../lendingclub loan prediction/lendingclub loan prediction-en.html" class="related-project-card"><h3 class="related-project-title">LendingClub: the 9,004-loan sample</h3><p class="related-project-description">Analyze default patterns in 9,004 historical loans, compare models with a loan-term rule, and design screening policies under asymmetric costs. Random Forest at the frozen threshold of 0.22 achieves 70.45% test recall and a 4.68% net simulated cost reduction.</p><span class="related-project-link">Read case</span></a><a href="../ab testing/ab testing-en.html" class="related-project-card"><h3 class="related-project-title">A/B Testing: the Cookie Cats gate experiment</h3><p class="related-project-description">Compare retention and engagement across 90,189 players, combining allocation checks, bootstrap estimates and power analysis. Seven-day retention is 0.82 percentage points lower in the level-40 group than the level-30 group, with a 95% interval of [−1.33, −0.31], informing gate and return-experience recommendations.</p><span class="related-project-link">Read case</span></a></div></section>
+</main>
+<script src="../../assets/js/logo.js"></script>
+<script src="../../assets/js/common.js"></script>
+<script src="../../assets/js/project.js"></script>
+<script src="../../assets/js/language-switcher.js"></script>
 </body>
 </html>

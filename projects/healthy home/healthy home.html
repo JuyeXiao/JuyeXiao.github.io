@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>document.documentElement.classList.add('js');</script>
+  <title>奥克兰污染物的嵌套空间评价与相对预测图 - 数据诗学</title>
+  <meta name="description" content="结合 18,219 个观测点、道路网络与嵌套空间评价，分析奥克兰污染物分布。随机森林在区域分块评价中的 NO₂ 合并 R² 为 0.576017，道路相对预测图覆盖 628.74 km，并通过分区误差诊断提出补充观测方案。">
+  <meta property="og:title" content="奥克兰污染物的嵌套空间评价与相对预测图">
+  <meta property="og:description" content="结合 18,219 个观测点、道路网络与嵌套空间评价，分析奥克兰污染物分布。随机森林在区域分块评价中的 NO₂ 合并 R² 为 0.576017，道路相对预测图覆盖 628.74 km，并通过分区误差诊断提出补充观测方案。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://juyexiao.github.io/projects/healthy%20home/healthy%20home.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:description" content="结合 18,219 个观测点、道路网络与嵌套空间评价，分析奥克兰污染物分布。随机森林在区域分块评价中的 NO₂ 合并 R² 为 0.576017，道路相对预测图覆盖 628.74 km，并通过分区误差诊断提出补充观测方案。">
+  <link rel="canonical" href="https://juyexiao.github.io/projects/healthy%20home/healthy%20home.html">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&amp;family=Inter:wght@200;300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;700&amp;family=Noto+Sans+SC:wght@400;500;600&amp;family=Noto+Serif+SC:wght@500&amp;display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="../../assets/css/index.css">
+  <link rel="stylesheet" href="../../assets/css/project.css">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "奥克兰污染物的嵌套空间评价与相对预测图", "description": "结合 18,219 个观测点、道路网络与嵌套空间评价，分析奥克兰污染物分布。随机森林在区域分块评价中的 NO₂ 合并 R² 为 0.576017，道路相对预测图覆盖 628.74 km，并通过分区误差诊断提出补充观测方案。", "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Juye Xiao"}}</script>
+</head>
+<body class="transition-colors duration-300 report-page">
+<div class="scroll-progress" id="scroll-progress"></div>
+<header class="navbar fixed top-0 left-0 right-0 z-50" id="navbar">
+<div class="container-main h-full flex items-center justify-between">
+<!-- Logo部分 -->
+<a class="navbar-logo" href="../../index.html#hero" id="navbar-logo">
+<!-- SVG Logo -->
+<svg class="logo-svg-nav" viewbox="0 0 40 40">
+<!-- 背景数据网格 -->
+<g class="grid-bg">
+<!-- 垂直线 -->
+<line class="grid-line-v" style="animation-delay: 0.1s, 0s" x1="8" x2="8" y1="0" y2="40"></line>
+<line class="grid-line-v" style="animation-delay: 0.2s, 0.5s" x1="16" x2="16" y1="0" y2="40"></line>
+<line class="grid-line-v" style="animation-delay: 0.3s, 1s" x1="24" x2="24" y1="0" y2="40"></line>
+<line class="grid-line-v" style="animation-delay: 0.4s, 1.5s" x1="32" x2="32" y1="0" y2="40"></line>
+<!-- 水平线 -->
+<line class="grid-line-h" style="animation-delay: 0.5s, 0s" x1="0" x2="40" y1="10" y2="10"></line>
+<line class="grid-line-h" style="animation-delay: 0.6s, 0.7s" x1="0" x2="40" y1="20" y2="20"></line>
+<line class="grid-line-h" style="animation-delay: 0.7s, 1.4s" x1="0" x2="40" y1="30" y2="30"></line>
+</g>
+<!-- 织梭动画线 -->
+<line class="weaver-line" id="weaverLine" x1="0" x2="40" y1="20" y2="20"></line>
+<!-- JX字母 -->
+<text class="logo-letters" id="logoLetters" text-anchor="middle" x="20" y="26">JX</text>
+</svg>
+<!-- 名字签名（悬停显示） -->
+<div class="logo-name">
+<div class="logo-name-text">Juye Xiao</div>
+<div class="logo-name-subtitle">Data Analyst</div>
+</div>
+</a>
+<nav class="hidden md:flex items-center space-x-8">
+<a class="nav-link" href="../../index.html#about">关于</a>
+<a class="nav-link" href="../../index.html#experience">经历</a>
+<a class="nav-link" href="../../index.html#education">教育</a>
+<a class="nav-link" href="../../index.html#projects">项目</a>
+<a class="nav-link" href="../../index.html#skills">技能</a>
+<a class="nav-link" href="../../index.html#contact">联系</a>
+</nav>
+<div class="flex items-center space-x-4">
+<button aria-label="切换主题" class="btn-secondary !p-2 !rounded-full" id="theme-toggle">
+<i class="block dark:hidden" data-lucide="sun"></i>
+<i class="hidden dark:block" data-lucide="moon"></i>
+</button>
+<button class="btn-secondary !p-2 !rounded-full" id="lang-toggle">
+<span class="font-bold text-sm">EN</span>
+</button>
+<button aria-controls="mobile-menu" aria-expanded="false" aria-label="打开菜单" class="btn-secondary !p-2 !rounded-full md:hidden" id="menu-toggle">
+<i class="menu-icon-open" data-lucide="menu"></i>
+<i class="menu-icon-close" data-lucide="x"></i>
+</button>
+</div>
+</div>
+<nav aria-label="移动端导航" class="mobile-menu md:hidden" id="mobile-menu">
+<a class="nav-link" href="../../index.html#about">关于</a>
+<a class="nav-link" href="../../index.html#experience">经历</a>
+<a class="nav-link" href="../../index.html#education">教育</a>
+<a class="nav-link" href="../../index.html#projects">项目</a>
+<a class="nav-link" href="../../index.html#skills">技能</a>
+<a class="nav-link" href="../../index.html#contact">联系</a>
+</nav>
+</header>
+<main class="container-main">
+  <section id="project-hero" class="section-padding report-hero">
+    <div class="section-eyebrow"><span class="section-kicker">空间数据分析</span></div>
+    <h1 class="hero-title">奥克兰污染物的嵌套空间评价与相对预测图</h1>
+    <p class="subtitle report-standfirst">结合 18,219 个观测点、道路网络与嵌套空间评价，分析奥克兰污染物分布。随机森林在区域分块评价中的 NO₂ 合并 R² 为 0.576017，道路相对预测图覆盖 628.74 km，并通过分区误差诊断提出补充观测方案。</p>
+    <p class="reading-time">2026 · 分析更新</p>
+    <div class="hero-stats"><div class="hero-stat"><div class="hero-stat__num">18,219</div><div class="hero-stat__label">清洗后课程观测点</div></div><div class="hero-stat"><div class="hero-stat__num">0.576017</div><div class="hero-stat__label">区域分块 RF NO₂ 合并 R²</div></div><div class="hero-stat"><div class="hero-stat__num">628.74 km</div><div class="hero-stat__label">道路相对预测覆盖</div></div></div>
+    <div class="report-actions"><a class="btn btn-primary" href="#content">开始阅读</a><a class="btn btn-secondary" href="../../index.html#projects">返回项目概览</a></div>
+  </section>
+
+  <section id="content" class="section-padding report-layout">
+    <aside><nav class="project-toc" id="project-toc" aria-label="报告目录"><h3>目录</h3><ul id="toc-list"><li><a class="toc-link" href="#report-section-1">概览</a></li><li><a class="toc-link" href="#report-section-2">摘要</a></li><li><a class="toc-link" href="#report-section-3">空间预测任务</a></li><li><a class="toc-link" href="#report-section-4">观测数据与路网</a></li><li><a class="toc-link" href="#report-section-5">道路距离与上下文特征</a></li><li><a class="toc-link" href="#report-section-6">嵌套空间评价</a></li><li><a class="toc-link" href="#report-section-7">污染物预测结果</a></li><li><a class="toc-link" href="#report-section-8">道路距离与污染物分布</a></li><li><a class="toc-link" href="#report-section-9">预测面与相对等级</a></li><li><a class="toc-link" href="#report-section-10">健康字段与预测值的分区关联</a></li><li><a class="toc-link" href="#report-section-11">分区误差与空间诊断</a></li><li><a class="toc-link" href="#report-section-12">项目结论与改进方向</a></li></ul></nav></aside>
+    <article class="content-area report-body" id="report-body"><div class="report-block" id="report-intro-1">
+<p>道路附近的污染物数值较高，跨区域预测更难。结合模型比较、分区关联和误差诊断，提出候选路段调查与补充观测方案。</p>
+
+</div><section id="report-section-1" class="section-padding section--editorial" data-section-num="01"><div class="section-header"><h2 class="section-title">概览</h2></div><div class="report-block" id="report-1-1">
+<div aria-label="数据表（可横向滚动）" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col"></th>
+<th scope="col"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>分区留出 · 随机森林合并 R²</td>
+<td>0.762083</td>
+</tr>
+<tr>
+<td>区域分块 · 随机森林合并 R²</td>
+<td>0.576017</td>
+</tr>
+<tr>
+<td>预测路段总长</td>
+<td>628.74 km</td>
+</tr>
+<tr>
+<td>预测点</td>
+<td>25,746</td>
+</tr>
+</tbody>
+</table></div>
+
+</div></section><section id="report-section-2" class="section-padding section--editorial" data-section-num="02"><div class="section-header"><h2 class="section-title">摘要</h2></div><div class="report-block" id="report-2-1">
+<p>本课程项目分析奥克兰的 18,219 个观测点，发现污染物数值存在道路距离与用地差异。距高速公路 0–50 m 的观测点，NO₂ 中位数为 23.8，超过 1 km 为 7.5，均按课程文件原始数值尺度报告。这一相对差异为道路距离特征和分层采样提供了依据。</p>
+<p>在本次候选模型及选择流程内，随机森林的分区留出表现优于直方图梯度提升模型，NO₂ 合并 R² 分别为 0.762083 和 0.730200。随机森林在随机点、人口普查分区和区域分块评价中的合并 R² 为 0.942353、0.762083、0.576017，表明新区域预测比已有观测范围内的补点更困难。工业区的 NO₂ 平均绝对误差为 4.283，高于住宅区的 2.219，因此是优先诊断对象。</p>
+<p>道路相对预测图覆盖 628.74 km，占中心线路网的 36.79%，包含 25,746 条线段。70 个分区的预测 NO₂ 与呼吸危害等级的秩相关为 0.707。结合这些结果，提出利用预测等级与模型一致性筛选调查候选、核查工业区误差、补充未覆盖区域观测的实施方案。</p>
+
+</div></section><section id="report-section-3" class="section-padding section--editorial" data-section-num="03"><div class="section-header"><h2 class="section-title">空间预测任务</h2></div><div class="report-block" id="report-3-1">
+<p>项目围绕三个问题展开：道路距离和周边环境能提供多少预测信息？模型在未参与训练的位置上表现如何？怎样把预测结果转成可比较的道路地图？</p>
+<p>以课程提供的数据集为分析对象，分别预测 NO₂、NO 和 PM₂.₅。随机点留出用于评价同一观测范围内的新点，人口普查分区留出检验未见分区，区域分块留出考察更连续的空间迁移。模型评价、地图绘制和误差诊断共同用于展示空间数据分析方法。</p>
+
+</div></section><section id="report-section-4" class="section-padding section--editorial" data-section-num="04"><div class="section-header"><h2 class="section-title">观测数据与路网</h2></div><div class="report-block" id="report-4-1">
+<p>课程提供的合并数据，包含 18,286 行、17 列，涵盖污染物、坐标、道路类别、用地分区和环境字段。删除用地分区、风速或温度缺失的记录后剩 18,222 行，去重后保留 18,219 行、70 个人口普查分区。</p>
+<p>NO（一氧化氮）的分布有较长的右尾。清洗时保留这些高值，不单凭数值较大将其删除，以便在分布图和模型误差中继续检查它们的影响。</p>
+<p>本地 OpenStreetMap 路网包含 22,137 条有向边。为避免反向边和重叠道路重复计长，先将几何投影到米制坐标系，再计算中心线并集，得到总长 1,709.21 km。观测点周围 50 m 内的路网长 591.19 km（34.59%），用于描述观测位置的空间覆盖。</p>
+<p>道路数据来自 <a href="https://www.openstreetmap.org/">OpenStreetMap</a>，适用 ODbL，© OpenStreetMap contributors。污染物分析使用课程文件的原始数值尺度。</p>
+
+</div></section><section id="report-section-5" class="section-padding section--editorial" data-section-num="05"><div class="section-header"><h2 class="section-title">道路距离与上下文特征</h2></div><div class="report-block" id="report-5-1">
+<p>构造到最近高速公路、主干道、次干道、三级道路、交通信号灯和停车标志的六个距离特征。使用米制投影与 <code>sjoin_nearest</code> 完成最近邻查询，观测点和预测中点共用 <code>build_features()</code>，保证计算定义一致。100 个抽查点的六列距离与逐个几何计算结果一致，最大绝对偏差为 0.00e+00 m。</p>
+<p>道路类别与用地分区采用独热编码，距离、风速、温度和人口密度保留为连续变量。训练矩阵和预测矩阵按相同列名与列序生成。</p>
+<p>观测位置最近道路的 OpenStreetMap 类别与文件 <code>road_type</code> 的一致率为 95.3%。其中 370 个观测在文件中标为次干道，而最近路网对象为主干道。预测线段采用所在中心线的道路类别，类别冲突的线段不分级。这个对照展示了空间连接后检查属性一致性的必要性。</p>
+
+</div></section><section id="report-section-6" class="section-padding section--editorial" data-section-num="06"><div class="section-header"><h2 class="section-title">嵌套空间评价</h2></div><div class="report-block" id="report-6-1">
+<p>三个协议分别为随机点、按人口普查分区编号分组和坐标区域分块，每个有 5 个外层折、内部 5 折。15 个外层、75 个内层划分追踪同一 18,219 行；外层测试行不参与内层参数、消融或最终折拟合。人口普查分区与区域分块协议分别保证同一组不会同时进入训练和测试。</p>
+<p>随机森林（RF）搜索 6 组参数，直方图梯度提升模型（HGB）搜索 4 组参数；先以全 18 列特征的内层折均 NO₂ R² 选参，再以 RF 的内层合并 R² 比较四种特征集合。NO₂ 选择迁移至其他污染物，HGB 使用同一 RF 所选特征集合。这个顺序控制实验规模，但没有为其他目标或 HGB 单独优化特征。参数和逐步特征选择都在外层训练内，合计 1,096 次真实拟合（包含最终地图选择与拟合）。不同划分对应不同空间预测任务，因此需要分别报告表现。</p>
+<div aria-label="数据表（可横向滚动）" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">NO₂ 协议/模型</th>
+<th scope="col" style="text-align:right">合并 R²</th>
+<th scope="col" style="text-align:right">合并 RMSE</th>
+<th scope="col" style="text-align:right">折均 R²</th>
+<th scope="col" style="text-align:right">折均 RMSE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>随机点 RF</td>
+<td style="text-align:right">0.942353</td>
+<td style="text-align:right">2.172108</td>
+<td style="text-align:right">0.942351</td>
+<td style="text-align:right">2.171479</td>
+</tr>
+<tr>
+<td>随机点 HGB</td>
+<td style="text-align:right">0.929712</td>
+<td style="text-align:right">2.398471</td>
+<td style="text-align:right">0.929712</td>
+<td style="text-align:right">2.398005</td>
+</tr>
+<tr>
+<td>分区留出 RF</td>
+<td style="text-align:right">0.762083</td>
+<td style="text-align:right">4.412728</td>
+<td style="text-align:right">0.732917</td>
+<td style="text-align:right">4.363567</td>
+</tr>
+<tr>
+<td>分区留出 HGB</td>
+<td style="text-align:right">0.730200</td>
+<td style="text-align:right">4.699105</td>
+<td style="text-align:right">0.675602</td>
+<td style="text-align:right">4.607487</td>
+</tr>
+<tr>
+<td>区域分块 RF</td>
+<td style="text-align:right">0.576017</td>
+<td style="text-align:right">5.890723</td>
+<td style="text-align:right">0.325321</td>
+<td style="text-align:right">5.817358</td>
+</tr>
+<tr>
+<td>区域分块 HGB</td>
+<td style="text-align:right">0.571771</td>
+<td style="text-align:right">5.920147</td>
+<td style="text-align:right">0.287463</td>
+<td style="text-align:right">5.834552</td>
+</tr>
+</tbody>
+</table></div>
+<p>合并指标将所有外层留出预测合在一起计算，折均指标则给每折相同权重。两种口径同时呈现，便于识别整体表现与折间差异。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：嵌套评价的协议与模型比较。" class="figure-zoom" type="button"><img alt="嵌套评价的协议与模型比较。" decoding="async" height="556" loading="lazy" src="figures/current/06_leakage_by_model.png" width="1044"/></button><figcaption class="generated-alt-caption">嵌套评价的协议与模型比较。</figcaption></figure>
+
+</div></section><section id="report-section-7" class="section-padding section--editorial" data-section-num="07"><div class="section-header"><h2 class="section-title">污染物预测结果</h2></div><div class="report-block" id="report-7-1">
+<div aria-label="数据表（可横向滚动）" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">分区留出评价</th>
+<th scope="col" style="text-align:right">合并 R²</th>
+<th scope="col" style="text-align:right">合并 RMSE</th>
+<th scope="col" style="text-align:right">折均 R²</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RF NO₂</td>
+<td style="text-align:right">0.762083</td>
+<td style="text-align:right">4.412728</td>
+<td style="text-align:right">0.732917</td>
+</tr>
+<tr>
+<td>RF NO</td>
+<td style="text-align:right">0.641059</td>
+<td style="text-align:right">12.695212</td>
+<td style="text-align:right">0.573470</td>
+</tr>
+<tr>
+<td>RF PM₂.₅</td>
+<td style="text-align:right">0.636052</td>
+<td style="text-align:right">2.091718</td>
+<td style="text-align:right">0.617723</td>
+</tr>
+<tr>
+<td>HGB NO₂</td>
+<td style="text-align:right">0.730200</td>
+<td style="text-align:right">4.699105</td>
+<td style="text-align:right">0.675602</td>
+</tr>
+<tr>
+<td>HGB NO</td>
+<td style="text-align:right">0.597631</td>
+<td style="text-align:right">13.441268</td>
+<td style="text-align:right">0.493323</td>
+</tr>
+<tr>
+<td>HGB PM₂.₅</td>
+<td style="text-align:right">0.606935</td>
+<td style="text-align:right">2.173781</td>
+<td style="text-align:right">0.567108</td>
+</tr>
+</tbody>
+</table></div>
+<p>在同一污染物上比较，随机森林的合并 R² 高于直方图梯度提升模型。不同污染物的数值尺度不同，RMSE 用于同一目标内比较。这里报告各次评价的点估计。</p>
+<p>地图另用全部观测数据完成最终选择，移除 pop_den；RF 为 300 棵、max_features=0.3、min_samples_leaf=5，HGB 为 max_iter=300、learning_rate=0.1、max_leaf_nodes=15。地图全数据拟合不是留出预测，不能把留出评价分数当作每个地图线段的准确率。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：分区留出预测与观测值的比较。" class="figure-zoom" type="button"><img alt="分区留出预测与观测值的比较。" decoding="async" height="719" loading="lazy" src="figures/current/09_pred_vs_observed.png" width="1844"/></button><figcaption class="generated-alt-caption">分区留出预测与观测值的比较。</figcaption></figure>
+<p>HGB 在预测面上的 NO 最小预测值为 −4.023089，未施加非负约束。后续可比较非负目标变换或约束模型，检查能否改善低值区域的预测。</p>
+
+</div></section><section id="report-section-8" class="section-padding section--editorial" data-section-num="08"><div class="section-header"><h2 class="section-title">道路距离与污染物分布</h2></div><div class="report-block" id="report-8-1">
+<p>将观测点按距高速公路的距离分组，检查污染物分布随距离的变化。NO₂ 中位数在 0–50 m 为 23.8，50–100 m 为 15.1，250–300 m 为 13.3，超过 1 km 为 7.5。近距离组的数值较高，说明道路距离适合作为建模候选特征。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：高速公路距离与三种污染物的观测分布，黑线为距离分箱后的中位数。" class="figure-zoom" type="button"><img alt="高速公路距离与三种污染物的观测分布，黑线为距离分箱后的中位数。" decoding="async" height="665" loading="lazy" src="figures/current/03_distance_decay.png" width="1841"/></button><figcaption class="generated-alt-caption">高速公路距离与三种污染物的观测分布，黑线为距离分箱后的中位数。</figcaption></figure>
+<p>这种分箱比较保留了原始观测分布，能同时展示趋势与离散程度。不同距离组还包含不同道路类别和周边环境，因此这项比较用于分析样本关联，并为后续分层采样提供依据。</p>
+
+</div></section><section id="report-section-9" class="section-padding section--editorial" data-section-num="09"><div class="section-header"><h2 class="section-title">预测面与相对等级</h2></div><div class="report-block" id="report-9-1">
+<p>在投影中心线并集上先与 300 m 多边形缓冲并集精确相交，再切段和取中点。缓冲使用每象限 32 段，overlay 容差 1e-6 m。HTML 地图与静态图均使用同一 25,746 条裁切几何，每段最长 50 m。300 m 用于控制空间外推范围。</p>
+<p>各中点使用同一最终六模型产生预测，按各污染物预测点五分位分级，再取最差级。A–E 从低到高表示相对预测水平，便于在同一地图上比较路段。zone/wind/temp/pop_den/GEOID 等上下文取自最近观测，这是为未观测位置补充上下文的近邻近似，pop_den 不进入最终选定模型。</p>
+<div aria-label="数据表（可横向滚动）" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">RF 等级</th>
+<th scope="col" style="text-align:right">长度 km</th>
+<th scope="col" style="text-align:right">预测面长度占比</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td style="text-align:right">67.070822</td>
+<td style="text-align:right">10.6675%</td>
+</tr>
+<tr>
+<td>B</td>
+<td style="text-align:right">102.663963</td>
+<td style="text-align:right">16.3286%</td>
+</tr>
+<tr>
+<td>C</td>
+<td style="text-align:right">120.732140</td>
+<td style="text-align:right">19.2023%</td>
+</tr>
+<tr>
+<td>D</td>
+<td style="text-align:right">157.425536</td>
+<td style="text-align:right">25.0384%</td>
+</tr>
+<tr>
+<td>E</td>
+<td style="text-align:right">180.844492</td>
+<td style="text-align:right">28.7631%</td>
+</tr>
+</tbody>
+</table></div>
+<p>长度之和为 628.74 km。RF/HGB 同级 69.92%，差不超过一级 96.44%，分母为 25,746 个预测点，不是公里。这个比较衡量更换模型后等级的稳定性。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：五级的长度分布。" class="figure-zoom" type="button"><img alt="五级的长度分布。" decoding="async" height="584" loading="lazy" src="figures/current/10_grade_distribution.png" width="922"/></button><figcaption class="generated-alt-caption">五级的长度分布。</figcaption></figure>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：观测位置与使用精确裁切线段的相对预测图。" class="figure-zoom" type="button"><img alt="观测位置与使用精确裁切线段的相对预测图。" decoding="async" height="666" loading="lazy" src="figures/current/12_maps_static.png" width="1773"/></button><figcaption class="generated-alt-caption">观测位置与使用精确裁切线段的相对预测图。</figcaption></figure>
+
+</div></section><section id="report-section-10" class="section-padding section--editorial" data-section-num="10"><div class="section-header"><h2 class="section-title">健康字段与预测值的分区关联</h2></div><div class="report-block" id="report-10-1">
+<p>将 <code>Respiratory_HI</code> 作为课程数据中的呼吸危害等级字段，探索它与污染物预测的关系。该字段不进入污染物模型，比较时每个人口普查分区仅保留一行。分区等级取观测记录的众数，低、中、高依次编码为 1、2、3，并用 Spearman 秩相关比较分区排序。</p>
+<p>预测面沿用课程分析的聚合方式：按最近观测借用的分区编号，将各预测点的 NO₂ 取算术平均。70 个分区的预测均值与呼吸危害等级的秩相关为 <strong>0.707</strong>。低、中、高三组分别有 10、16、44 个分区，组内分区预测均值的中位数为 <strong>7.547、10.908、14.644</strong>。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：不同呼吸危害等级下的分区平均预测值。每个散点代表一个人口普查分区。" class="figure-zoom" type="button"><img alt="不同呼吸危害等级下的分区平均预测值。每个散点代表一个人口普查分区。" decoding="async" height="629" loading="lazy" src="figures/current/14_tract_association_zh.png" width="977"/></button><figcaption class="generated-alt-caption">不同呼吸危害等级下的分区平均预测值。每个散点代表一个人口普查分区。</figcaption></figure>
+<p>观测点 NO₂ 按分区取均值时，秩相关为 0.839。将同一批观测位置的分区留出预测取均值，秩相关为 0.823。这些结果在本数据集中呈现同向排序，展示了分组聚合、序数变量处理和秩相关分析。预测面的相关系数较低，比较范围也从观测点变为道路中点。</p>
+<p>分区关联按数据集内的字段计算，分区编号采用最近观测点赋值。后续可结合真实分区边界裁切道路，比较两种空间聚合方式的结果。</p>
+
+</div></section><section id="report-section-11" class="section-padding section--editorial" data-section-num="11"><div class="section-header"><h2 class="section-title">分区误差与空间诊断</h2></div><div class="report-block" id="report-11-1">
+<p>使用随机森林在分区留出评价中的 NO₂ 预测诊断误差。残差定义为观测值减预测值，正值表示低估，负值表示高估。整体平均残差为 −0.381155，标准差为 4.396357，平均绝对误差为 2.969。</p>
+<div aria-label="数据表（可横向滚动）" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">用地分区</th>
+<th scope="col" style="text-align:right">观测数</th>
+<th scope="col" style="text-align:right">平均残差</th>
+<th scope="col" style="text-align:right">平均绝对误差</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>工业区</td>
+<td style="text-align:right">1,419</td>
+<td style="text-align:right">0.022</td>
+<td style="text-align:right">4.283</td>
+</tr>
+<tr>
+<td>混合区</td>
+<td style="text-align:right">3,485</td>
+<td style="text-align:right">-0.271</td>
+<td style="text-align:right">3.954</td>
+</tr>
+<tr>
+<td>商业区</td>
+<td style="text-align:right">3,218</td>
+<td style="text-align:right">-0.696</td>
+<td style="text-align:right">3.624</td>
+</tr>
+<tr>
+<td>开放空间</td>
+<td style="text-align:right">224</td>
+<td style="text-align:right">-1.982</td>
+<td style="text-align:right">3.008</td>
+</tr>
+<tr>
+<td>住宅区</td>
+<td style="text-align:right">9,873</td>
+<td style="text-align:right">-0.339</td>
+<td style="text-align:right">2.219</td>
+</tr>
+</tbody>
+</table></div>
+<p>工业区的平均残差接近零，但平均绝对误差最大，说明高估与低估相互抵消，不能只看平均残差。住宅区平均绝对误差较小。开放空间总体偏高估，但只有 224 个观测，解释时需要同时看样本量。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：不同用地分区的误差大小与方向，左图为平均绝对误差，右图为平均残差。" class="figure-zoom" type="button"><img alt="不同用地分区的误差大小与方向，左图为平均绝对误差，右图为平均残差。" decoding="async" height="624" loading="lazy" src="figures/current/15_zone_errors_zh.png" width="1635"/></button><figcaption class="generated-alt-caption">不同用地分区的误差大小与方向，左图为平均绝对误差，右图为平均残差。</figcaption></figure>
+<p>残差空间展示从全部观测中固定随机抽取 5,000 个点展示误差位置。分组表与指标使用全部 18,219 个点。下一步可优先检查工业区误差较大的路段，比较其道路类别、距离特征和观测值分布，再决定是否增加特征或调整模型。</p>
+
+</div></section><section id="report-section-12" class="section-padding section--editorial" data-section-num="12"><div class="section-header"><h2 class="section-title">项目结论与改进方向</h2></div><div class="report-block" id="report-12-1">
+<p>道路距离能帮助识别污染物的空间差异，模型的适用范围则取决于预测位置。近高速公路组的 NO₂ 中位数较高，说明距离包含与预测有关的信息；在本次选择流程内，RF 的分区留出表现优于 HGB，可作为主要制图模型，HGB 用于检查更换模型后的分级稳定性。这个比较支持当前选型，未单独证明某种算法机制是优势的原因。</p>
+<p>空间留出扩大后，RF 的 NO₂ 合并 R² 从随机点的 0.942353 降至区域分块的 0.576017，表明跨区域预测更困难。空间邻近性与区域特征分布变化是待检查的解释，目前未分别量化其影响。工业区 MAE 为 4.283，住宅区为 2.219，进一步指出了模型需要改进的位置。工业区平均残差接近零，是正负误差抵消的结果，不能代替绝对误差诊断。</p>
+<p>以下方案把现有发现转为调查与模型改进的行动安排。</p>
+<div aria-label="数据表（可横向滚动）" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">行动</th>
+<th scope="col">分析依据</th>
+<th scope="col">实施方法与预期交付</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>筛选优先调查路段</td>
+<td>RF/HGB 同级 69.92%，差不超过一级 96.44%；已有道路相对分级</td>
+<td>将两模型均给出较高等级的路段列为调查候选，结合观测覆盖安排顺序；分歧较大的路段进入模型核查清单。预期交付为带位置、两模型等级和覆盖信息的候选表。</td>
+</tr>
+<tr>
+<td>优先检查工业区误差</td>
+<td>工业区 MAE 高于住宅区，平均残差会掩盖局部偏差</td>
+<td>按绝对残差排序已有观测，检查道路类别、距离和高值分布。若发现现有特征覆盖不足，再评估补充交通或工业活动信息；预期交付为误差原因假设与针对性特征方案。</td>
+</tr>
+<tr>
+<td>分层补充观测</td>
+<td>近高速公路组数值较高，区域分块得分降低；地图仅覆盖部分路网</td>
+<td>兼顾道路距离、用地类别和现有覆盖，优先考虑工业区与未覆盖区域；为新区域预留整区测试集。预期交付为采样点位方案与空间评价设计。</td>
+</tr>
+<tr>
+<td>综合分区信息安排调查</td>
+<td>预测 NO₂ 与呼吸危害等级在 70 个分区的秩相关为 0.707</td>
+<td>将两项均较高的分区列为调查候选，再结合覆盖与误差确定顺序；正式确定点位前按真实分区边界复核近邻赋值。预期交付为分区调查优先级建议。</td>
+</tr>
+<tr>
+<td>检查低值预测并比较改进</td>
+<td>HGB 的 NO 预测出现 −4.023089</td>
+<td>比较非负目标变换或约束模型，在相同空间留出下同时检查整体误差和低值偏差。预期交付为处理前后的方法比较。</td>
+</tr>
+</tbody>
+</table></div>
+<p>项目形成了污染物空间分布分析、嵌套模型比较、误差定位和道路相对预测图。结合 A–E 相对等级、模型一致性与分区字段关联，进一步提出候选路段调查和补充观测方案。</p>
+
+</div></section></article>
+  </section>
+
+  <section id="related" class="section-padding"><div class="section-header"><h2 class="section-title">相关项目</h2></div><div class="grid md:grid-cols-2 gap-6"><a href="../spglobal climate comparison/spglobal climate comparison.html" class="related-project-card"><h3 class="related-project-title">S&amp;P Global Capstone：气候模型、预测与空间暴露</h3><p class="related-project-description">在 2022 年 Capstone 基础上完成 2026 年重建分析，覆盖四个研究框、1,020 个格子，串联气候模型比较、短期预测、长期情景与空间暴露。2035–2044 年 ssp585 情景下，204 个格子×暴露层条目满足拟议优先核查规则。</p><span class="related-project-link">查看详情</span></a><a href="../spglobal climate comparison/model comparison.html" class="related-project-card"><h3 class="related-project-title">Capstone 专题：模型比较</h3><p class="related-project-description">比较四个研究框中 MODIS LST 与 NEX-GDDP-CMIP6 tas 的历史表现，分析变量、日历和采样差异。以 15 个模型开展误差诊断，并在 14 个模型的主集合上评价排名不确定性，为后续模型选择与订正提供依据。</p><span class="related-project-link">查看详情</span></a></div></section>
+</main>
+<script src="../../assets/js/logo.js"></script>
+<script src="../../assets/js/common.js"></script>
+<script src="../../assets/js/project.js"></script>
+<script src="../../assets/js/language-switcher.js"></script>
+</body>
+</html>

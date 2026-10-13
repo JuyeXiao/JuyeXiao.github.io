@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>document.documentElement.classList.add('js');</script>
+  <title>Cookie Cats: does a later gate keep players longer? - Data Poetics</title>
+  <meta name="description" content="Compare retention and engagement across 90,189 players, combining allocation checks, bootstrap estimates and power analysis. Seven-day retention is 0.82 percentage points lower in the level-40 group than the level-30 group, with a 95% interval of [−1.33, −0.31], informing gate and return-experience recommendations.">
+  <meta property="og:title" content="Cookie Cats: does a later gate keep players longer?">
+  <meta property="og:description" content="Compare retention and engagement across 90,189 players, combining allocation checks, bootstrap estimates and power analysis. Seven-day retention is 0.82 percentage points lower in the level-40 group than the level-30 group, with a 95% interval of [−1.33, −0.31], informing gate and return-experience recommendations.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://juyexiao.github.io/projects/ab%20testing/ab%20testing-en.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:description" content="Compare retention and engagement across 90,189 players, combining allocation checks, bootstrap estimates and power analysis. Seven-day retention is 0.82 percentage points lower in the level-40 group than the level-30 group, with a 95% interval of [−1.33, −0.31], informing gate and return-experience recommendations.">
+  <link rel="canonical" href="https://juyexiao.github.io/projects/ab%20testing/ab%20testing-en.html">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&amp;family=Inter:wght@200;300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;700&amp;family=Noto+Sans+SC:wght@400;500;600&amp;family=Noto+Serif+SC:wght@500&amp;display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="../../assets/css/index.css">
+  <link rel="stylesheet" href="../../assets/css/project.css">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Cookie Cats: does a later gate keep players longer?", "description": "Compare retention and engagement across 90,189 players, combining allocation checks, bootstrap estimates and power analysis. Seven-day retention is 0.82 percentage points lower in the level-40 group than the level-30 group, with a 95% interval of [−1.33, −0.31], informing gate and return-experience recommendations.", "inLanguage": "en", "author": {"@type": "Person", "name": "Juye Xiao"}}</script>
+</head>
+<body class="transition-colors duration-300 report-page">
+<div class="scroll-progress" id="scroll-progress"></div>
+<header class="navbar fixed top-0 left-0 right-0 z-50" id="navbar">
+<div class="container-main h-full flex items-center justify-between">
+<!-- Logo Section -->
+<a class="navbar-logo" href="../../index-en.html#hero" id="navbar-logo">
+<!-- SVG Logo -->
+<svg class="logo-svg-nav" viewbox="0 0 40 40">
+<!-- Data Grid Background -->
+<g class="grid-bg">
+<!-- Vertical Lines -->
+<line class="grid-line-v" style="animation-delay: 0.1s, 0s" x1="8" x2="8" y1="0" y2="40"></line>
+<line class="grid-line-v" style="animation-delay: 0.2s, 0.5s" x1="16" x2="16" y1="0" y2="40"></line>
+<line class="grid-line-v" style="animation-delay: 0.3s, 1s" x1="24" x2="24" y1="0" y2="40"></line>
+<line class="grid-line-v" style="animation-delay: 0.4s, 1.5s" x1="32" x2="32" y1="0" y2="40"></line>
+<!-- Horizontal Lines -->
+<line class="grid-line-h" style="animation-delay: 0.5s, 0s" x1="0" x2="40" y1="10" y2="10"></line>
+<line class="grid-line-h" style="animation-delay: 0.6s, 0.7s" x1="0" x2="40" y1="20" y2="20"></line>
+<line class="grid-line-h" style="animation-delay: 0.7s, 1.4s" x1="0" x2="40" y1="30" y2="30"></line>
+</g>
+<!-- Weaver Animation Line -->
+<line class="weaver-line" id="weaverLine" x1="0" x2="40" y1="20" y2="20"></line>
+<!-- JX Letters -->
+<text class="logo-letters" id="logoLetters" text-anchor="middle" x="20" y="26">JX</text>
+</svg>
+<!-- Name Signature (Hover Display) -->
+<div class="logo-name">
+<div class="logo-name-text">Juye Xiao</div>
+<div class="logo-name-subtitle">Data Analyst</div>
+</div>
+</a>
+<nav class="hidden md:flex items-center space-x-8">
+<a class="nav-link" href="../../index-en.html#about">About</a>
+<a class="nav-link" href="../../index-en.html#experience">Experience</a>
+<a class="nav-link" href="../../index-en.html#education">Education</a>
+<a class="nav-link" href="../../index-en.html#projects">Projects</a>
+<a class="nav-link" href="../../index-en.html#skills">Skills</a>
+<a class="nav-link" href="../../index-en.html#contact">Contact</a>
+</nav>
+<div class="flex items-center space-x-4">
+<button aria-label="Toggle theme" class="btn-secondary !p-2 !rounded-full" id="theme-toggle">
+<i class="block dark:hidden" data-lucide="sun"></i>
+<i class="hidden dark:block" data-lucide="moon"></i>
+</button>
+<button class="btn-secondary !p-2 !rounded-full" id="lang-toggle">
+<span class="font-bold text-sm">中</span>
+</button>
+<button aria-controls="mobile-menu" aria-expanded="false" aria-label="Open menu" class="btn-secondary !p-2 !rounded-full md:hidden" id="menu-toggle">
+<i class="menu-icon-open" data-lucide="menu"></i>
+<i class="menu-icon-close" data-lucide="x"></i>
+</button>
+</div>
+</div>
+<nav aria-label="Mobile navigation" class="mobile-menu md:hidden" id="mobile-menu">
+<a class="nav-link" href="../../index-en.html#about">About</a>
+<a class="nav-link" href="../../index-en.html#experience">Experience</a>
+<a class="nav-link" href="../../index-en.html#education">Education</a>
+<a class="nav-link" href="../../index-en.html#projects">Projects</a>
+<a class="nav-link" href="../../index-en.html#skills">Skills</a>
+<a class="nav-link" href="../../index-en.html#contact">Contact</a>
+</nav>
+</header>
+<main class="container-main">
+  <section id="project-hero" class="section-padding report-hero">
+    <div class="section-eyebrow"><span class="section-kicker">Experiment Analysis</span></div>
+    <h1 class="hero-title">Cookie Cats: does a later gate keep players longer?</h1>
+    <p class="subtitle report-standfirst">Compare retention and engagement across 90,189 players, combining allocation checks, bootstrap estimates and power analysis. Seven-day retention is 0.82 percentage points lower in the level-40 group than the level-30 group, with a 95% interval of [−1.33, −0.31], informing gate and return-experience recommendations.</p>
+    <p class="reading-time">Analysis updated in 2026</p>
+    <div class="hero-stats"><div class="hero-stat"><div class="hero-stat__num">90,189</div><div class="hero-stat__label">Player records</div></div><div class="hero-stat"><div class="hero-stat__num">−0.82 pp</div><div class="hero-stat__label">7-day retention (40−30); 95% interval −1.33 to −0.31 pp</div></div><div class="hero-stat"><div class="hero-stat__num">0.0086</div><div class="hero-stat__label">Sample-ratio check p-value</div></div></div>
+    <div class="report-actions"><a class="btn btn-primary" href="#content">Read report</a><a class="btn btn-secondary" href="../../index-en.html#projects">All projects</a></div>
+  </section>
+
+  <section id="content" class="section-padding report-layout">
+    <aside><nav class="project-toc" id="project-toc" aria-label="Report contents"><h3>Contents</h3><ul id="toc-list"><li><a class="toc-link" href="#report-section-1">Executive summary</a></li><li><a class="toc-link" href="#report-section-2">At a glance</a></li><li><a class="toc-link" href="#report-section-3">1 The gate-placement experiment and its design</a></li><li><a class="toc-link" href="#report-section-4">2 Assignment integrity and the data</a></li><li><a class="toc-link" href="#report-section-5">3 Retention effects and their size</a></li><li><a class="toc-link" href="#report-section-6">4 Robustness under multiple comparisons and bootstrap</a></li><li><a class="toc-link" href="#report-section-7">5 Statistical power and the detectable effect</a></li><li><a class="toc-link" href="#report-section-8">6 Engagement volume as a secondary read</a></li><li><a class="toc-link" href="#report-section-9">7 The boundaries of this dataset</a></li><li><a class="toc-link" href="#report-section-10">8 The gating decision</a></li><li><a class="toc-link" href="#report-section-11">9 Appendix: the central limit theorem behind the test</a></li></ul></nav></aside>
+    <article class="content-area report-body" id="report-body"><div class="report-block" id="report-intro-1">
+<p>The level-40 group had 0.82 pp lower 7-day retention, with no clear improvement in day-1 retention or game rounds. The analysis recommends retaining level 30 and testing specific changes to the waiting and return experience.</p>
+
+</div><section id="report-section-1" class="section-padding section--editorial" data-section-num="01"><div class="section-header"><h2 class="section-title">Executive summary</h2></div><div class="report-block" id="report-1-1">
+<p>The product question is whether moving the progression gate from level 30 to level 40 merits rollout. This analysis uses 90,189 public player records to compare retention, check robustness, and examine game rounds.</p>
+<p>Seven-day retention was 18.20% in the level-40 group versus 19.02% in the level-30 group: a difference of −0.82 pp, with a 95% interval of [−1.33, −0.31] and p = 0.0016. Holm correction and a 10,000-sample bootstrap support the negative statistical difference. Day-1 retention and game rounds provide no clear evidence of improvement; neither establishes equivalence.</p>
+<p>The recommendation is to retain level 30 and defer a broad level-40 rollout. Further work can log gate arrival, waiting and return events, then run small experiments on waiting messages, return rewards or waiting duration. Section 7 discusses allocation checks and the design of follow-up experiments.</p>
+
+</div></section><section id="report-section-2" class="section-padding section--editorial" data-section-num="02"><div class="section-header"><h2 class="section-title">At a glance</h2></div><div class="report-block" id="report-2-1">
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col"></th>
+<th scope="col"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Installs randomized</td>
+<td>90,189 (44,700 control gate_30, 45,489 treatment gate_40)</td>
+</tr>
+<tr>
+<td>Primary / secondary metric</td>
+<td><code>retention_7</code> (7-day return) / <code>retention_1</code> (day-1 return)</td>
+</tr>
+<tr>
+<td>7-day retention change</td>
+<td>-0.82 pp (18.20% vs 19.02%), 95% CI [-1.33, -0.31] pp, p = 0.0016</td>
+</tr>
+<tr>
+<td>Day-1 retention change</td>
+<td>-0.59 pp, 95% CI [-1.24, +0.06] pp, p = 0.074, not significant</td>
+</tr>
+<tr>
+<td>Minimum detectable effect</td>
+<td>about 0.74 pp at the realized allocation ratio, a roughly 19% 7-day baseline, two-sided alpha 0.05, and 80% power</td>
+</tr>
+<tr>
+<td>SRM p-value</td>
+<td>0.0086, assignment-balance flag carried forward</td>
+</tr>
+<tr>
+<td>Data source</td>
+<td><code>cookie_cats.csv</code>, 90,189 rows, 5 fields, no missing values</td>
+</tr>
+</tbody>
+</table></div>
+
+</div></section><section id="report-section-3" class="section-padding section--editorial" data-section-num="03"><div class="section-header"><h2 class="section-title">1 The gate-placement experiment and its design</h2></div><div class="report-block" id="report-3-1">
+<p>Cookie Cats places a gate early in the game: a forced wait that blocks progress until it clears. The gate originally sat at level 30, and this experiment moved it to level 40 for a random half of new installs.</p>
+<p>Moving the gate may reduce early waiting or change players' motivation to return. These are possible explanations; the available fields compare retention and rounds but do not identify the psychological mechanism.</p>
+<ul>
+<li><strong>Unit of randomization:</strong> a new install, assigned once at install time to control (gate_30) or treatment (gate_40).</li>
+<li><strong>Primary metric:</strong> <code>retention_7</code>, return 7 days after install. This analysis uses it to assess later return. Revenue is unavailable, so its relationship with monetization cannot be tested.</li>
+<li><strong>Secondary metric:</strong> <code>retention_1</code>, return on day 1. It describes earlier return and does not substitute for a long-term value measure.</li>
+<li><strong>Decision rule:</strong> two-sided tests at alpha = 0.05. Both improvement and harm matter. This is the convention used for the public-data reanalysis, not evidence of original preregistration.</li>
+</ul>
+
+</div></section><section id="report-section-4" class="section-padding section--editorial" data-section-num="04"><div class="section-header"><h2 class="section-title">2 Assignment integrity and the data</h2></div><div class="report-block" id="report-4-1">
+<p>The public source is <a href="https://www.kaggle.com/datasets/mursideyarkin/mobile-games-ab-testing-cookie-cats">Mobile Games A/B Testing - Cookie Cats</a>, with the local copy obtained from a <a href="https://github.com/ryanschaub/Mobile-Games-A-B-Testing-with-Cookie-Cats">GitHub mirror</a>. Its 90,189 rows and five fields cover player ID, version, rounds over the first 14 days, and day-1 and day-7 retention.</p>
+<p>Player IDs are unique and there are no missing values. Rounds are heavily right-skewed: the median is 16 and the mean is near 52. The maximum of 49,854 is 16.84 times the next-highest value of 2,961. Retention comparisons therefore retain all players, while rounds receive a separate sensitivity analysis excluding the extreme account.</p>
+<p>Control and treatment contain 44,700 and 45,489 players. A chi-squared goodness-of-fit test against a 50/50 allocation gives χ² = 6.90 and p = 0.0086; the manual calculation agrees with SciPy. This check identifies unusual group counts. Section 7 explains the follow-up and implications for attribution.</p>
+
+</div></section><section id="report-section-5" class="section-padding section--editorial" data-section-num="05"><div class="section-header"><h2 class="section-title">3 Retention effects and their size</h2></div><div class="report-block" id="report-5-1">
+<p>Under the assumption of independent observations, the large success and failure counts in both arms support the normal approximation. A simple Wald difference interval is an alternative approximation, while this analysis uses Newcombe intervals to describe uncertainty in the difference.</p>
+<p>For each metric, H0 is that both groups share the same true retention rate, tested two-sided with a pooled two-proportion z-statistic. The hand calculation and <code>statsmodels.proportions_ztest</code> agree to six decimal places. That agreement guards against both a formula slip and a library misuse. Alongside the p-value, three quantities describe the size of the effect: the absolute difference with a 95% Newcombe interval, the relative lift, and Cohen's h.</p>
+<p>The z-test uses a pooled proportion variance under the null hypothesis of equal rates. The Newcombe difference interval is constructed from the separate Wilson intervals for the two arms. These constructions serve hypothesis testing and estimation of the difference respectively.</p>
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">metric</th>
+<th scope="col" style="text-align:right">control</th>
+<th scope="col" style="text-align:right">treatment</th>
+<th scope="col" style="text-align:right">abs. diff</th>
+<th scope="col" style="text-align:right">95% CI</th>
+<th scope="col" style="text-align:right">rel. lift</th>
+<th scope="col" style="text-align:right">z</th>
+<th scope="col" style="text-align:right">p</th>
+<th scope="col" style="text-align:right">Cohen's h</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>retention_1</td>
+<td style="text-align:right">44.82%</td>
+<td style="text-align:right">44.23%</td>
+<td style="text-align:right">-0.59 pp</td>
+<td style="text-align:right">[-1.24, +0.06]</td>
+<td style="text-align:right">-1.3%</td>
+<td style="text-align:right">-1.78</td>
+<td style="text-align:right">0.074</td>
+<td style="text-align:right">-0.012</td>
+</tr>
+<tr>
+<td><strong>retention_7</strong></td>
+<td style="text-align:right">19.02%</td>
+<td style="text-align:right">18.20%</td>
+<td style="text-align:right"><strong>-0.82 pp</strong></td>
+<td style="text-align:right"><strong>[-1.33, -0.31]</strong></td>
+<td style="text-align:right">-4.3%</td>
+<td style="text-align:right">-3.16</td>
+<td style="text-align:right"><strong>0.0016</strong></td>
+<td style="text-align:right">-0.021</td>
+</tr>
+</tbody>
+</table></div>
+<p>The 7-day retention difference is -0.82 pp, a 4.3% relative decline, with an interval entirely below zero. The day-1 estimate has the same direction (-0.59 pp), but its interval crosses zero: no significant difference was detected, and neither no change nor equivalence was established. Both absolute Cohen's h values are small, around 0.02. Commercial importance depends on install volume and operating metrics, not statistical significance alone.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Retention by group with 95% CI" class="figure-zoom" type="button"><img alt="Retention by group with 95% CI" decoding="async" height="647" loading="lazy" src="figures/01_retention_by_group.png" width="1330"/></button><figcaption class="generated-alt-caption">Retention by group with 95% CI</figcaption></figure>
+<p>These results support evaluating the full seven-day window: day-1 return alone may miss a difference visible at a later endpoint. They do not locate the onset of attrition or prove that waiting caused players to leave.</p>
+
+</div></section><section id="report-section-6" class="section-padding section--editorial" data-section-num="06"><div class="section-header"><h2 class="section-title">4 Robustness under multiple comparisons and bootstrap</h2></div><div class="report-block" id="report-6-1">
+<p>The primary/secondary labels and test family organize this reanalysis around the two retention endpoints, <code>retention_1</code> and <code>retention_7</code>. Engagement in section 6 is exploratory, considered separately and excluded from this correction; it cannot count as an additional confirmatory success. Two-sided testing covers both improvement and harm, avoiding the omission of one direction in a one-sided test.</p>
+<p>Testing two metrics creates two chances to cross p &lt; 0.05 by luck. Holm is more conservative than no adjustment and controls family-wise error across these two retention endpoints. The step-down correction leaves both conclusions intact: <code>retention_7</code> stays significant (adjusted p = 0.0031), and <code>retention_1</code> stays non-significant (0.074).</p>
+<p>A percentile bootstrap resamples the observed players within each arm 10,000 times; 99.9% of resampled differences are negative. This is a resampling proportion, not a posterior probability that the true effect is negative. The 95% percentile CI [-1.34, -0.32] pp and the analytic Newcombe interval have the same direction and nearby endpoints, but are not identical after rounding. Resampling avoids directly applying a normal approximation to the difference while retaining assumptions about the observed sample and within-arm sampling. It cannot correct potential assignment bias.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Bootstrap distribution of the 7-day retention difference" class="figure-zoom" type="button"><img alt="Bootstrap distribution of the 7-day retention difference" decoding="async" height="610" loading="lazy" src="figures/02_bootstrap_retention7.png" width="1180"/></button><figcaption class="generated-alt-caption">Bootstrap distribution of the 7-day retention difference</figcaption></figure>
+
+</div></section><section id="report-section-7" class="section-padding section--editorial" data-section-num="07"><div class="section-header"><h2 class="section-title">5 Statistical power and the detectable effect</h2></div><div class="report-block" id="report-7-1">
+<p>With the realized sample sizes and allocation ratio, a roughly 19% 7-day retention baseline, two-sided alpha = 0.05, and 80% power, the MDE is about 0.74 pp. This is a power calculation under specified conditions, not a hard boundary guaranteeing detection. The observed differences are 0.82 pp for day 7 and 0.59 pp for day 1. Day-1 retention has a different baseline, so the two percentage-point differences cannot be compared directly with the same MDE line. This comparison does not establish a smaller true day-1 effect or identify insufficient power as the cause of non-significance. The plotted curve assumes equal arm sizes; the reported single-point calculation uses the realized allocation ratio.</p>
+<p>Observed (post-hoc) power is deliberately not reported: it is a deterministic re-expression of the p-value and adds nothing. This MDE uses the realized sample sizes and observed baseline. It is a conditional design calculation, not evidence of advance planning or an explanation for day-1 non-significance. The curve also shows the cost of resolution: halving the detectable effect roughly quadruples the required sample.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Minimum detectable effect against sample size" class="figure-zoom" type="button"><img alt="Minimum detectable effect against sample size" decoding="async" height="802" loading="lazy" src="figures/03_mde_curve.png" width="1223"/></button><figcaption class="generated-alt-caption">Minimum detectable effect against sample size</figcaption></figure>
+
+</div></section><section id="report-section-8" class="section-padding section--editorial" data-section-num="08"><div class="section-header"><h2 class="section-title">6 Engagement volume as a secondary read</h2></div><div class="report-block" id="report-8-1">
+<p><code>sum_gamerounds</code> is the volume metric, heavily right-skewed and carrying the 49,854-round outlier. Because a mean-based test and a rank-based test can disagree here, both are run, and both are re-run with the single extreme account removed.</p>
+<p>The plotted distributions have similar shapes; treatment has a median of 16 rounds versus 17 for control. The Welch t-test gives p = 0.3759 for all accounts and 0.9495 after excluding the outlier. The account affects both the mean difference and its standard error, but neither test detects a significant difference. Mann-Whitney U gives p = 0.0502 and 0.0509, both above alpha = 0.05. For all accounts, the rank-biserial correlation is -0.0075 and the common-language effect is 0.4962, defined as P(treatment rounds &gt; control rounds) + 0.5 × P(ties). These tests and small observed effects do not establish engagement equivalence or settle its business value. The direction agrees with the retention finding, but the volume evidence is weak; the retention metrics carry the decision.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Distribution of game rounds" class="figure-zoom" type="button"><img alt="Distribution of game rounds" decoding="async" height="640" loading="lazy" src="figures/04_gamerounds_distribution.png" width="1180"/></button><figcaption class="generated-alt-caption">Distribution of game rounds</figcaption></figure>
+<h3>Method comparison and interpretation</h3>
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">Comparison</th>
+<th scope="col">Question</th>
+<th scope="col">Finding in this project</th>
+<th scope="col">Decision relevance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Two-proportion z-test and Newcombe interval</td>
+<td>Is the retention difference clear, and how uncertain is its size?</td>
+<td>The day-7 interval is below zero; the day-1 interval crosses zero</td>
+<td>Prioritize the day-7 evidence and report more than a p-value</td>
+</tr>
+<tr>
+<td>Raw p-values and Holm correction</td>
+<td>Does testing two retention endpoints change the inference?</td>
+<td>Adjusted day-7 p = 0.0031; day 1 remains non-significant</td>
+<td>The main finding does not depend on ignoring multiple comparisons</td>
+</tr>
+<tr>
+<td>Analytic interval and within-arm bootstrap</td>
+<td>Does another uncertainty estimator preserve the direction?</td>
+<td>Both day-7 intervals are negative with similar endpoints</td>
+<td>Supports stability across interval estimators, not independent-data validation</td>
+</tr>
+<tr>
+<td>Welch and Mann–Whitney U</td>
+<td>Do mean and rank comparisons support better engagement?</td>
+<td>Neither is significant at 0.05</td>
+<td>No reliable rounds improvement; MWU is not generally a median test</td>
+</tr>
+<tr>
+<td>Full sample and exclusion sensitivity</td>
+<td>Does one extreme account affect the inference?</td>
+<td>Welch p changes from 0.3759 to 0.9495; MWU is more stable</td>
+<td>Report means, distributions, and sensitivity; do not automatically label an extreme record erroneous</td>
+</tr>
+</tbody>
+</table></div>
+<p>This project demonstrates experimental analysis and statistical method selection. The methods compare different quantities, so a smaller p-value does not make a method better. The relevant question is what each method measures and whether its result changes the proposed action.</p>
+
+</div></section><section id="report-section-9" class="section-padding section--editorial" data-section-num="09"><div class="section-header"><h2 class="section-title">7 The boundaries of this dataset</h2></div><div class="report-block" id="report-9-1">
+<p>The project supports prioritizing options and planning a follow-up experiment. These limits identify the questions requiring additional data.</p>
+<ul>
+<li><strong>Allocation and attribution.</strong> SRM p = 0.0086 triggers a 0.01 threshold but not a 0.001 threshold. Unequal counts alone do not prove broken assignment. The larger treatment group also has lower retention, making differential inclusion an explanation to investigate. Original assignment logs and preregistration are unavailable, so causal attribution remains conditional on valid assignment. Holm and bootstrap cannot repair systematic bias. Implementation should include checks of assignment, exposure, and filtering records.</li>
+<li><strong>Behavioral mechanisms.</strong> Without install dates and gate events, the data cannot locate the onset of a difference or determine whether waiting caused players to leave. Different day-1 and day-7 results do not establish when a negative effect began.</li>
+<li><strong>Segmentation.</strong> Pre-experiment business attributes are unavailable. Selecting players by post-assignment rounds can introduce selection bias, so retention comparisons retain original assignment groups and rounds remain exploratory.</li>
+<li><strong>Business returns.</strong> Revenue, ARPU, and LTV are unavailable; player-count conversions illustrate scale only. Proposed changes are candidates for testing rather than features already shown to work.</li>
+</ul>
+
+</div></section><section id="report-section-10" class="section-padding section--editorial" data-section-num="10"><div class="section-header"><h2 class="section-title">8 The gating decision</h2></div><div class="report-block" id="report-10-1">
+<p><strong>Retain the level-30 gate and defer a broad rollout of level 40.</strong> The level-40 group has lower 7-day retention without clear improvements in day-1 retention or rounds. The next step is to locate behavior around the gate and test specific experience changes; Section 7 states the applicable limits.</p>
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">Action</th>
+<th scope="col">Evidence</th>
+<th scope="col">Implementation</th>
+<th scope="col">Evaluation criterion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Retain level 30</td>
+<td>Lower day-7 retention in level 40 with no clear engagement benefit</td>
+<td>Maintain the existing setting and defer broad rollout</td>
+<td>Revisit gate relocation only with a specific new hypothesis and experiment plan</td>
+</tr>
+<tr>
+<td>Instrument gate behavior</td>
+<td>Aggregate retention and rounds cannot locate the point of exit</td>
+<td>Log install, assignment, first gate arrival, waiting start and end, session end, and return times; distinguish exposure from assignment</td>
+<td>Distinguish leaving before arrival, leaving during waiting, and returning afterward; check event completeness in both groups</td>
+</tr>
+<tr>
+<td>Test the waiting experience at small scale</td>
+<td>Relocation offers no clear benefit and its mechanism remains unresolved</td>
+<td>Keep gate position fixed and randomly compare one change to messaging, return rewards, or waiting duration</td>
+<td>Specify the primary metric, acceptable decline, sample size, and stopping rule in advance; use day-7 retention as the proposed primary outcome</td>
+</tr>
+<tr>
+<td>Complete observation windows</td>
+<td>Day-1 and day-7 evidence differ</td>
+<td>Wait until each install cohort has seven days of follow-up; evaluating 14-day rounds requires that full window</td>
+<td>Use day 1 for early monitoring, without declaring equivalence or ending evaluation because it is non-significant</td>
+</tr>
+</tbody>
+</table></div>
+<p>Messaging, rewards, and duration changes are candidates whose effectiveness remains to be tested. Gate events help diagnose the experience; formal retention comparisons should retain original assignment groups rather than select only players who reach the gate. Changes involving purchases also need revenue and payment metrics.</p>
+<p>Future sample planning should start with the smallest business-relevant difference and the baseline for the chosen metric. The current MDE of about 0.74 pp applies to Section 5's sample and day-7 baseline; it is not an acceptable-loss threshold for a new experiment.</p>
+<h3>Install-volume illustration (supplement)</h3>
+<p>The table combines the observed difference with hypothetical daily installs to show how a sub-percentage-point difference scales to player counts. It assumes valid assignment and a stable difference. Totals accumulate day-7 returns across install cohorts, not daily active users or realized annual losses.</p>
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">Daily installs (hypothetical)</th>
+<th scope="col" style="text-align:right">Fewer returns per daily cohort</th>
+<th scope="col" style="text-align:right">Cumulative difference across 365 daily cohorts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10,000</td>
+<td style="text-align:right">82</td>
+<td style="text-align:right">29,935</td>
+</tr>
+<tr>
+<td>50,000</td>
+<td style="text-align:right">410</td>
+<td style="text-align:right">149,674</td>
+</tr>
+<tr>
+<td>100,000</td>
+<td style="text-align:right">820</td>
+<td style="text-align:right">299,347</td>
+</tr>
+</tbody>
+</table></div>
+<p>The conversion uses the unrounded proportion difference. Revenue and lifetime value are absent, so actual financial returns cannot be calculated.</p>
+
+</div></section><section id="report-section-11" class="section-padding section--editorial" data-section-num="11"><div class="section-header"><h2 class="section-title">9 Appendix: the central limit theorem behind the test</h2></div><div class="report-block" id="report-11-1">
+<p>The two-proportion z-test treats a sample proportion as approximately normal. That approximation is the central limit theorem at work. A reference array and independent samples of size 50 are drawn from the discrete uniform distribution on 1 to 6. Sample means are approximately normal around 3.5, with a standard deviation within 1% of the reference sigma / sqrt(n). This illustrates a normal approximation for sample means; it does not verify assignment or resolve SRM.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Central limit theorem demonstration" class="figure-zoom" type="button"><img alt="Central limit theorem demonstration" decoding="async" height="647" loading="lazy" src="figures/05_clt_demo.png" width="1480"/></button><figcaption class="generated-alt-caption">Central limit theorem demonstration</figcaption></figure>
+
+</div></section></article>
+  </section>
+
+  <section id="related" class="section-padding"><div class="section-header"><h2 class="section-title">Related projects</h2></div><div class="grid md:grid-cols-2 gap-6"><a href="../Bank Customer Churn Prediction/Bank Customer Churn Prediction-en.html" class="related-project-card"><h3 class="related-project-title">Bank churn: patterns, explanations and service capacity</h3><p class="related-project-description">Group analysis, model comparison and SHAP across 10,000 customers identify churn signals and inform service priorities. At the frozen threshold of 0.275, test recall is 78.39% and precision is 48.25%; capacity and cost comparisons guide follow-up planning.</p><span class="related-project-link">Read case</span></a><a href="../youtube comment analysis/youtube comment analysis-en.html" class="related-project-card"><h3 class="related-project-title">YouTube comments: ownership signals and channel screening</h3><p class="related-project-description">Build weakly supervised classification and channel candidate rankings from 5,818,979 comments, using TF-IDF, behavioral features and SHAP to analyze pet-ownership language. Assistant review of 300 new comments yields 294 determinate labels and conditional weighted precision of 0.8982.</p><span class="related-project-link">Read case</span></a></div></section>
+</main>
+<script src="../../assets/js/logo.js"></script>
+<script src="../../assets/js/common.js"></script>
+<script src="../../assets/js/project.js"></script>
+<script src="../../assets/js/language-switcher.js"></script>
+</body>
+</html>

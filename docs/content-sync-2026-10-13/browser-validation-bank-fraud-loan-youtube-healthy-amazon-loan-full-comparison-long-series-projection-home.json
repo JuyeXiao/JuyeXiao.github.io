@@ -1,0 +1,3294 @@
+{
+  "browser": "155.0.4283.45",
+  "pages": [
+    {
+      "path": "projects/Bank Customer Churn Prediction/Bank Customer Churn Prediction.html",
+      "key": "bank",
+      "language": "zh",
+      "sections": 11,
+      "views": [
+        {
+          "width": 1440,
+          "theme": "light",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\bank-zh-1440-light-hero.png",
+          "toc_target": "#report-section-11",
+          "toc_offset": 96.078125,
+          "table_scroll": {
+            "left": 0,
+            "width": 966,
+            "total": 966
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\bank-zh-1440-light-body.png",
+          "original_scroll": {
+            "x": 0,
+            "y": 0,
+            "width": 1320,
+            "totalWidth": 1320
+          },
+          "figures_opened": 14,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 1440,
+          "theme": "dark",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\bank-zh-1440-dark-hero.png",
+          "toc_target": "#report-section-11",
+          "toc_offset": 96.078125,
+          "table_scroll": {
+            "left": 0,
+            "width": 966,
+            "total": 966
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\bank-zh-1440-dark-body.png",
+          "original_scroll": {
+            "x": 0,
+            "y": 0,
+            "width": 1320,
+            "totalWidth": 1320
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 390,
+          "theme": "light",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\bank-zh-390-light-hero.png",
+          "toc_target": "#report-section-11",
+          "toc_offset": 95.5625,
+          "table_scroll": {
+            "left": 0,
+            "width": 358,
+            "total": 358
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\bank-zh-390-light-body.png",
+          "original_scroll": {
+            "x": 536,
+            "y": 18,
+            "width": 333,
+            "totalWidth": 869
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 390,
+          "theme": "dark",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\bank-zh-390-dark-hero.png",
+          "toc_target": "#report-section-11",
+          "toc_offset": 95.5625,
+          "table_scroll": {
+            "left": 0,
+            "width": 358,
+            "total": 358
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\bank-zh-390-dark-body.png",
+          "original_scroll": {
+            "x": 536,
+            "y": 18,
+            "width": 333,
+            "totalWidth": 869
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        }
+      ],
+      "interactions": {
+        "language_round_trip": true,
+        "related_navigation": "../lendingclub loan prediction/lendingclub loan prediction.html",
+        "logo_return": true
+      },
+      "page_errors": [],
+      "resource_failures": [
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.107.woff2",
+          "failure": "net::ERR_ABORTED"
+        }
+      ],
+      "status": "pass"
+    },
+    {
+      "path": "projects/e-commerce fraud detection/e-commerce fraud detection.html",
+      "key": "fraud",
+      "language": "zh",
+      "sections": 16,
+      "views": [
+        {
+          "width": 1440,
+          "theme": "light",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\fraud-zh-1440-light-hero.png",
+          "toc_target": "#report-section-16",
+          "toc_offset": 96.3125,
+          "table_scroll": {
+            "left": 0,
+            "width": 966,
+            "total": 966
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\fraud-zh-1440-light-body.png",
+          "original_scroll": {
+            "x": 344,
+            "y": 298,
+            "width": 1320,
+            "totalWidth": 1664
+          },
+          "figures_opened": 4,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 1440,
+          "theme": "dark",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\fraud-zh-1440-dark-hero.png",
+          "toc_target": "#report-section-16",
+          "toc_offset": 96.3125,
+          "table_scroll": {
+            "left": 0,
+            "width": 966,
+            "total": 966
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\fraud-zh-1440-dark-body.png",
+          "original_scroll": {
+            "x": 344,
+            "y": 298,
+            "width": 1320,
+            "totalWidth": 1664
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 390,
+          "theme": "light",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\fraud-zh-390-light-hero.png",
+          "toc_target": "#report-section-16",
+          "toc_offset": 96.09375,
+          "table_scroll": {
+            "left": 91,
+            "width": 358,
+            "total": 449
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\fraud-zh-390-light-body.png",
+          "original_scroll": {
+            "x": 1331,
+            "y": 442,
+            "width": 333,
+            "totalWidth": 1664
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 390,
+          "theme": "dark",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\fraud-zh-390-dark-hero.png",
+          "toc_target": "#report-section-16",
+          "toc_offset": 96.09375,
+          "table_scroll": {
+            "left": 91,
+            "width": 358,
+            "total": 449
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\fraud-zh-390-dark-body.png",
+          "original_scroll": {
+            "x": 1331,
+            "y": 442,
+            "width": 333,
+            "totalWidth": 1664
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        }
+      ],
+      "interactions": {
+        "language_round_trip": true,
+        "related_navigation": "../lendingclub loan prediction/lendingclub loan prediction.html",
+        "logo_return": true
+      },
+      "page_errors": [],
+      "resource_failures": [],
+      "status": "pass"
+    },
+    {
+      "path": "projects/lendingclub loan prediction/lendingclub loan prediction.html",
+      "key": "loan",
+      "language": "zh",
+      "sections": 13,
+      "views": [
+        {
+          "width": 1440,
+          "theme": "light",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\loan-zh-1440-light-hero.png",
+          "toc_target": "#report-section-13",
+          "toc_offset": 96.21875,
+          "table_scroll": {
+            "left": 0,
+            "width": 966,
+            "total": 966
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\loan-zh-1440-light-body.png",
+          "original_scroll": {
+            "x": 0,
+            "y": 0,
+            "width": 1320,
+            "totalWidth": 1320
+          },
+          "figures_opened": 11,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 1440,
+          "theme": "dark",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\loan-zh-1440-dark-hero.png",
+          "toc_target": "#report-section-13",
+          "toc_offset": 96.21875,
+          "table_scroll": {
+            "left": 0,
+            "width": 966,
+            "total": 966
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\loan-zh-1440-dark-body.png",
+          "original_scroll": {
+            "x": 0,
+            "y": 0,
+            "width": 1320,
+            "totalWidth": 1320
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 390,
+          "theme": "light",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\loan-zh-390-light-hero.png",
+          "toc_target": "#report-section-13",
+          "toc_offset": 95.703125,
+          "table_scroll": {
+            "left": 0,
+            "width": 358,
+            "total": 358
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\loan-zh-390-light-body.png",
+          "original_scroll": {
+            "x": 484,
+            "y": 0,
+            "width": 333,
+            "totalWidth": 817
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 390,
+          "theme": "dark",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\loan-zh-390-dark-hero.png",
+          "toc_target": "#report-section-13",
+          "toc_offset": 95.703125,
+          "table_scroll": {
+            "left": 0,
+            "width": 358,
+            "total": 358
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\loan-zh-390-dark-body.png",
+          "original_scroll": {
+            "x": 484,
+            "y": 0,
+            "width": 333,
+            "totalWidth": 817
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        }
+      ],
+      "interactions": {
+        "language_round_trip": true,
+        "series_navigation": "full data.html",
+        "related_navigation": "full data.html",
+        "logo_return": true
+      },
+      "page_errors": [],
+      "resource_failures": [
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.91.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.102.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.74.woff2",
+          "failure": "net::ERR_ABORTED"
+        }
+      ],
+      "status": "pass"
+    },
+    {
+      "path": "projects/youtube comment analysis/youtube comment analysis.html",
+      "key": "youtube",
+      "language": "zh",
+      "sections": 12,
+      "views": [
+        {
+          "width": 1440,
+          "theme": "light",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\youtube-zh-1440-light-hero.png",
+          "toc_target": "#report-section-12",
+          "toc_offset": 95.84375,
+          "table_scroll": {
+            "left": 0,
+            "width": 966,
+            "total": 966
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\youtube-zh-1440-light-body.png",
+          "original_scroll": {
+            "x": 0,
+            "y": 4,
+            "width": 1320,
+            "totalWidth": 1320
+          },
+          "figures_opened": 7,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 1440,
+          "theme": "dark",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\youtube-zh-1440-dark-hero.png",
+          "toc_target": "#report-section-12",
+          "toc_offset": 95.84375,
+          "table_scroll": {
+            "left": 0,
+            "width": 966,
+            "total": 966
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\youtube-zh-1440-dark-body.png",
+          "original_scroll": {
+            "x": 0,
+            "y": 4,
+            "width": 1320,
+            "totalWidth": 1320
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 390,
+          "theme": "light",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\youtube-zh-390-light-hero.png",
+          "toc_target": "#report-section-12",
+          "toc_offset": 95.921875,
+          "table_scroll": {
+            "left": 0,
+            "width": 358,
+            "total": 358
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\youtube-zh-390-light-body.png",
+          "original_scroll": {
+            "x": 629,
+            "y": 148,
+            "width": 333,
+            "totalWidth": 962
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 390,
+          "theme": "dark",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\youtube-zh-390-dark-hero.png",
+          "toc_target": "#report-section-12",
+          "toc_offset": 95.921875,
+          "table_scroll": {
+            "left": 0,
+            "width": 358,
+            "total": 358
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\youtube-zh-390-dark-body.png",
+          "original_scroll": {
+            "x": 629,
+            "y": 148,
+            "width": 333,
+            "totalWidth": 962
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        }
+      ],
+      "interactions": {
+        "language_round_trip": true,
+        "related_navigation": "../amazon watch reviews/amazon watch reviews.html",
+        "logo_return": true
+      },
+      "page_errors": [],
+      "resource_failures": [
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.100.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.104.woff2",
+          "failure": "net::ERR_ABORTED"
+        }
+      ],
+      "status": "pass"
+    },
+    {
+      "path": "projects/healthy home/healthy home.html",
+      "key": "healthy",
+      "language": "zh",
+      "sections": 13,
+      "views": [
+        {
+          "width": 1440,
+          "theme": "light",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\healthy-zh-1440-light-hero.png",
+          "toc_target": "#report-section-13",
+          "toc_offset": 95.828125,
+          "table_scroll": {
+            "left": 0,
+            "width": 966,
+            "total": 966
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\healthy-zh-1440-light-body.png",
+          "original_scroll": {
+            "x": 0,
+            "y": 0,
+            "width": 1320,
+            "totalWidth": 1320
+          },
+          "figures_opened": 7,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 1440,
+          "theme": "dark",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\healthy-zh-1440-dark-hero.png",
+          "toc_target": "#report-section-13",
+          "toc_offset": 95.828125,
+          "table_scroll": {
+            "left": 0,
+            "width": 966,
+            "total": 966
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\healthy-zh-1440-dark-body.png",
+          "original_scroll": {
+            "x": 0,
+            "y": 0,
+            "width": 1320,
+            "totalWidth": 1320
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 390,
+          "theme": "light",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\healthy-zh-390-light-hero.png",
+          "toc_target": "#report-section-13",
+          "toc_offset": 96.1875,
+          "table_scroll": {
+            "left": 0,
+            "width": 358,
+            "total": 358
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\healthy-zh-390-light-body.png",
+          "original_scroll": {
+            "x": 711,
+            "y": 0,
+            "width": 333,
+            "totalWidth": 1044
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 390,
+          "theme": "dark",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\healthy-zh-390-dark-hero.png",
+          "toc_target": "#report-section-13",
+          "toc_offset": 96.1875,
+          "table_scroll": {
+            "left": 0,
+            "width": 358,
+            "total": 358
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\healthy-zh-390-dark-body.png",
+          "original_scroll": {
+            "x": 711,
+            "y": 0,
+            "width": 333,
+            "totalWidth": 1044
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        }
+      ],
+      "interactions": {
+        "language_round_trip": true,
+        "related_navigation": "../spglobal climate comparison/spglobal climate comparison.html",
+        "logo_return": true
+      },
+      "page_errors": [],
+      "resource_failures": [
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.59.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.109.woff2",
+          "failure": "net::ERR_ABORTED"
+        }
+      ],
+      "status": "pass"
+    },
+    {
+      "path": "projects/amazon watch reviews/amazon watch reviews.html",
+      "key": "amazon",
+      "language": "zh",
+      "sections": 13,
+      "views": [
+        {
+          "width": 1440,
+          "theme": "light",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\amazon-zh-1440-light-hero.png",
+          "toc_target": "#report-section-13",
+          "toc_offset": 96.3125,
+          "table_scroll": {
+            "left": 0,
+            "width": 966,
+            "total": 966
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\amazon-zh-1440-light-body.png",
+          "original_scroll": {
+            "x": 0,
+            "y": 0,
+            "width": 1320,
+            "totalWidth": 1320
+          },
+          "figures_opened": 15,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 1440,
+          "theme": "dark",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\amazon-zh-1440-dark-hero.png",
+          "toc_target": "#report-section-13",
+          "toc_offset": 96.3125,
+          "table_scroll": {
+            "left": 0,
+            "width": 966,
+            "total": 966
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\amazon-zh-1440-dark-body.png",
+          "original_scroll": {
+            "x": 0,
+            "y": 0,
+            "width": 1320,
+            "totalWidth": 1320
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 390,
+          "theme": "light",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\amazon-zh-390-light-hero.png",
+          "toc_target": "#report-section-13",
+          "toc_offset": 96.328125,
+          "table_scroll": {
+            "left": 0,
+            "width": 358,
+            "total": 358
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\amazon-zh-390-light-body.png",
+          "original_scroll": {
+            "x": 704,
+            "y": 0,
+            "width": 333,
+            "totalWidth": 1037
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 390,
+          "theme": "dark",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\amazon-zh-390-dark-hero.png",
+          "toc_target": "#report-section-13",
+          "toc_offset": 96.328125,
+          "table_scroll": {
+            "left": 0,
+            "width": 358,
+            "total": 358
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\amazon-zh-390-dark-body.png",
+          "original_scroll": {
+            "x": 704,
+            "y": 0,
+            "width": 333,
+            "totalWidth": 1037
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        }
+      ],
+      "interactions": {
+        "language_round_trip": true,
+        "related_navigation": "../youtube comment analysis/youtube comment analysis.html",
+        "logo_return": true
+      },
+      "page_errors": [],
+      "resource_failures": [
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.43.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.27.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.106.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.35.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1pL7SUc.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.43.woff2",
+          "failure": "net::ERR_ABORTED"
+        }
+      ],
+      "status": "pass"
+    },
+    {
+      "path": "projects/lendingclub loan prediction/full data.html",
+      "key": "loan-full",
+      "language": "zh",
+      "sections": 12,
+      "views": [
+        {
+          "width": 1440,
+          "theme": "light",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\loan-full-zh-1440-light-hero.png",
+          "toc_target": "#report-section-12",
+          "toc_offset": 96.359375,
+          "table_scroll": {
+            "left": 0,
+            "width": 966,
+            "total": 966
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\loan-full-zh-1440-light-body.png",
+          "original_scroll": {
+            "x": 0,
+            "y": 0,
+            "width": 1320,
+            "totalWidth": 1320
+          },
+          "figures_opened": 12,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 1440,
+          "theme": "dark",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\loan-full-zh-1440-dark-hero.png",
+          "toc_target": "#report-section-12",
+          "toc_offset": 96.359375,
+          "table_scroll": {
+            "left": 0,
+            "width": 966,
+            "total": 966
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\loan-full-zh-1440-dark-body.png",
+          "original_scroll": {
+            "x": 0,
+            "y": 0,
+            "width": 1320,
+            "totalWidth": 1320
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 390,
+          "theme": "light",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\loan-full-zh-390-light-hero.png",
+          "toc_target": "#report-section-12",
+          "toc_offset": 96.265625,
+          "table_scroll": {
+            "left": 0,
+            "width": 358,
+            "total": 358
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\loan-full-zh-390-light-body.png",
+          "original_scroll": {
+            "x": 615,
+            "y": 0,
+            "width": 333,
+            "totalWidth": 948
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 390,
+          "theme": "dark",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\loan-full-zh-390-dark-hero.png",
+          "toc_target": "#report-section-12",
+          "toc_offset": 96.265625,
+          "table_scroll": {
+            "left": 0,
+            "width": 358,
+            "total": 358
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\loan-full-zh-390-dark-body.png",
+          "original_scroll": {
+            "x": 615,
+            "y": 0,
+            "width": 333,
+            "totalWidth": 948
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        }
+      ],
+      "interactions": {
+        "language_round_trip": true,
+        "series_navigation": "lendingclub loan prediction.html",
+        "related_navigation": "lendingclub loan prediction.html",
+        "logo_return": true
+      },
+      "page_errors": [],
+      "resource_failures": [
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.106.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.103.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.59.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.107.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwg.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.103.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.106.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.59.woff2",
+          "failure": "net::ERR_ABORTED"
+        }
+      ],
+      "status": "pass"
+    },
+    {
+      "path": "projects/spglobal climate comparison/model comparison.html",
+      "key": "comparison",
+      "language": "zh",
+      "sections": 11,
+      "views": [
+        {
+          "width": 1440,
+          "theme": "light",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\comparison-zh-1440-light-hero.png",
+          "toc_target": "#report-section-11",
+          "toc_offset": 95.796875,
+          "table_scroll": {
+            "left": 0,
+            "width": 966,
+            "total": 966
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\comparison-zh-1440-light-body.png",
+          "original_scroll": {
+            "x": 291,
+            "y": 202,
+            "width": 1320,
+            "totalWidth": 1611
+          },
+          "figures_opened": 11,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 1440,
+          "theme": "dark",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\comparison-zh-1440-dark-hero.png",
+          "toc_target": "#report-section-11",
+          "toc_offset": 95.796875,
+          "table_scroll": {
+            "left": 0,
+            "width": 966,
+            "total": 966
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\comparison-zh-1440-dark-body.png",
+          "original_scroll": {
+            "x": 291,
+            "y": 202,
+            "width": 1320,
+            "totalWidth": 1611
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 390,
+          "theme": "light",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\comparison-zh-390-light-hero.png",
+          "toc_target": "#report-section-11",
+          "toc_offset": 95.84375,
+          "table_scroll": {
+            "left": 91,
+            "width": 358,
+            "total": 449
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\comparison-zh-390-light-body.png",
+          "original_scroll": {
+            "x": 1278,
+            "y": 346,
+            "width": 333,
+            "totalWidth": 1611
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 390,
+          "theme": "dark",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\comparison-zh-390-dark-hero.png",
+          "toc_target": "#report-section-11",
+          "toc_offset": 95.84375,
+          "table_scroll": {
+            "left": 91,
+            "width": 358,
+            "total": 449
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\comparison-zh-390-dark-body.png",
+          "original_scroll": {
+            "x": 1278,
+            "y": 346,
+            "width": 333,
+            "totalWidth": 1611
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        }
+      ],
+      "interactions": {
+        "language_round_trip": true,
+        "series_navigation": "spglobal climate comparison.html",
+        "related_navigation": "../healthy home/healthy home.html",
+        "logo_return": true
+      },
+      "page_errors": [],
+      "resource_failures": [],
+      "status": "pass"
+    },
+    {
+      "path": "projects/spglobal climate comparison/long series.html",
+      "key": "long-series",
+      "language": "zh",
+      "sections": 9,
+      "views": [
+        {
+          "width": 1440,
+          "theme": "light",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\long-series-zh-1440-light-hero.png",
+          "toc_target": "#report-section-9",
+          "toc_offset": 95.671875,
+          "table_scroll": {
+            "left": 0,
+            "width": 966,
+            "total": 966
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\long-series-zh-1440-light-body.png",
+          "original_scroll": {
+            "x": 314,
+            "y": 694,
+            "width": 1320,
+            "totalWidth": 1634
+          },
+          "figures_opened": 6,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 1440,
+          "theme": "dark",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\long-series-zh-1440-dark-hero.png",
+          "toc_target": "#report-section-9",
+          "toc_offset": 95.671875,
+          "table_scroll": {
+            "left": 0,
+            "width": 966,
+            "total": 966
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\long-series-zh-1440-dark-body.png",
+          "original_scroll": {
+            "x": 314,
+            "y": 694,
+            "width": 1320,
+            "totalWidth": 1634
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 390,
+          "theme": "light",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\long-series-zh-390-light-hero.png",
+          "toc_target": "#report-section-9",
+          "toc_offset": 95.71875,
+          "table_scroll": {
+            "left": 91,
+            "width": 358,
+            "total": 449
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\long-series-zh-390-light-body.png",
+          "original_scroll": {
+            "x": 1301,
+            "y": 838,
+            "width": 333,
+            "totalWidth": 1634
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 390,
+          "theme": "dark",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\long-series-zh-390-dark-hero.png",
+          "toc_target": "#report-section-9",
+          "toc_offset": 95.71875,
+          "table_scroll": {
+            "left": 91,
+            "width": 358,
+            "total": 449
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\long-series-zh-390-dark-body.png",
+          "original_scroll": {
+            "x": 1301,
+            "y": 838,
+            "width": 333,
+            "totalWidth": 1634
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        }
+      ],
+      "interactions": {
+        "language_round_trip": true,
+        "series_navigation": "spglobal climate comparison.html",
+        "related_navigation": "../healthy home/healthy home.html",
+        "logo_return": true
+      },
+      "page_errors": [],
+      "resource_failures": [
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.100.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.104.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.59.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.104.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.103.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwg.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.101.woff2",
+          "failure": "net::ERR_ABORTED"
+        }
+      ],
+      "status": "pass"
+    },
+    {
+      "path": "projects/spglobal climate comparison/projection overlay.html",
+      "key": "projection",
+      "language": "zh",
+      "sections": 13,
+      "views": [
+        {
+          "width": 1440,
+          "theme": "light",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\projection-zh-1440-light-hero.png",
+          "toc_target": "#report-section-13",
+          "toc_offset": 96.15625,
+          "table_scroll": {
+            "left": 0,
+            "width": 966,
+            "total": 966
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\projection-zh-1440-light-body.png",
+          "original_scroll": {
+            "x": 330,
+            "y": 0,
+            "width": 1320,
+            "totalWidth": 1650
+          },
+          "figures_opened": 4,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 1440,
+          "theme": "dark",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\projection-zh-1440-dark-hero.png",
+          "toc_target": "#report-section-13",
+          "toc_offset": 96.15625,
+          "table_scroll": {
+            "left": 0,
+            "width": 966,
+            "total": 966
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\projection-zh-1440-dark-body.png",
+          "original_scroll": {
+            "x": 330,
+            "y": 0,
+            "width": 1320,
+            "totalWidth": 1650
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 390,
+          "theme": "light",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\projection-zh-390-light-hero.png",
+          "toc_target": "#report-section-13",
+          "toc_offset": 95.96875,
+          "table_scroll": {
+            "left": 315,
+            "width": 358,
+            "total": 673
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\projection-zh-390-light-body.png",
+          "original_scroll": {
+            "x": 1317,
+            "y": 13,
+            "width": 333,
+            "totalWidth": 1650
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 390,
+          "theme": "dark",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\projection-zh-390-dark-hero.png",
+          "toc_target": "#report-section-13",
+          "toc_offset": 95.96875,
+          "table_scroll": {
+            "left": 315,
+            "width": 358,
+            "total": 673
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\projection-zh-390-dark-body.png",
+          "original_scroll": {
+            "x": 1317,
+            "y": 13,
+            "width": 333,
+            "totalWidth": 1650
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        }
+      ],
+      "interactions": {
+        "language_round_trip": true,
+        "series_navigation": "spglobal climate comparison.html",
+        "related_navigation": "../healthy home/healthy home.html",
+        "logo_return": true
+      },
+      "page_errors": [],
+      "resource_failures": [
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.103.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwg.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.101.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.110.woff2",
+          "failure": "net::ERR_ABORTED"
+        }
+      ],
+      "status": "pass"
+    },
+    {
+      "path": "projects/Bank Customer Churn Prediction/Bank Customer Churn Prediction-en.html",
+      "key": "bank",
+      "language": "en",
+      "sections": 11,
+      "views": [
+        {
+          "width": 1440,
+          "theme": "light",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\bank-en-1440-light-hero.png",
+          "toc_target": "#report-section-11",
+          "toc_offset": 96.40625,
+          "table_scroll": {
+            "left": 0,
+            "width": 966,
+            "total": 966
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\bank-en-1440-light-body.png",
+          "original_scroll": {
+            "x": 0,
+            "y": 0,
+            "width": 1320,
+            "totalWidth": 1320
+          },
+          "figures_opened": 14,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 1440,
+          "theme": "dark",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\bank-en-1440-dark-hero.png",
+          "toc_target": "#report-section-11",
+          "toc_offset": 96.40625,
+          "table_scroll": {
+            "left": 0,
+            "width": 966,
+            "total": 966
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\bank-en-1440-dark-body.png",
+          "original_scroll": {
+            "x": 0,
+            "y": 0,
+            "width": 1320,
+            "totalWidth": 1320
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 390,
+          "theme": "light",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\bank-en-390-light-hero.png",
+          "toc_target": "#report-section-11",
+          "toc_offset": 96.046875,
+          "table_scroll": {
+            "left": 0,
+            "width": 358,
+            "total": 358
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\bank-en-390-light-body.png",
+          "original_scroll": {
+            "x": 536,
+            "y": 38,
+            "width": 333,
+            "totalWidth": 869
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 390,
+          "theme": "dark",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\bank-en-390-dark-hero.png",
+          "toc_target": "#report-section-11",
+          "toc_offset": 96.046875,
+          "table_scroll": {
+            "left": 0,
+            "width": 358,
+            "total": 358
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\bank-en-390-dark-body.png",
+          "original_scroll": {
+            "x": 536,
+            "y": 38,
+            "width": 333,
+            "totalWidth": 869
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        }
+      ],
+      "interactions": {
+        "language_round_trip": true,
+        "related_navigation": "../lendingclub loan prediction/lendingclub loan prediction-en.html",
+        "logo_return": true
+      },
+      "page_errors": [],
+      "resource_failures": [
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.105.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.102.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.59.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.108.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.113.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.110.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.106.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.27.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.111.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.112.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.110.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.109.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.106.woff2",
+          "failure": "net::ERR_ABORTED"
+        }
+      ],
+      "status": "pass"
+    },
+    {
+      "path": "projects/e-commerce fraud detection/e-commerce fraud detection-en.html",
+      "key": "fraud",
+      "language": "en",
+      "sections": 16,
+      "views": [
+        {
+          "width": 1440,
+          "theme": "light",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\fraud-en-1440-light-hero.png",
+          "toc_target": "#report-section-16",
+          "toc_offset": 95.59375,
+          "table_scroll": {
+            "left": 0,
+            "width": 966,
+            "total": 966
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\fraud-en-1440-light-body.png",
+          "original_scroll": {
+            "x": 344,
+            "y": 298,
+            "width": 1320,
+            "totalWidth": 1664
+          },
+          "figures_opened": 4,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 1440,
+          "theme": "dark",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\fraud-en-1440-dark-hero.png",
+          "toc_target": "#report-section-16",
+          "toc_offset": 95.59375,
+          "table_scroll": {
+            "left": 0,
+            "width": 966,
+            "total": 966
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\fraud-en-1440-dark-body.png",
+          "original_scroll": {
+            "x": 344,
+            "y": 298,
+            "width": 1320,
+            "totalWidth": 1664
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 390,
+          "theme": "light",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\fraud-en-390-light-hero.png",
+          "toc_target": "#report-section-16",
+          "toc_offset": 96.375,
+          "table_scroll": {
+            "left": 91,
+            "width": 358,
+            "total": 449
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\fraud-en-390-light-body.png",
+          "original_scroll": {
+            "x": 1331,
+            "y": 462,
+            "width": 333,
+            "totalWidth": 1664
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 390,
+          "theme": "dark",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\fraud-en-390-dark-hero.png",
+          "toc_target": "#report-section-16",
+          "toc_offset": 96.375,
+          "table_scroll": {
+            "left": 91,
+            "width": 358,
+            "total": 449
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\fraud-en-390-dark-body.png",
+          "original_scroll": {
+            "x": 1331,
+            "y": 462,
+            "width": 333,
+            "totalWidth": 1664
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        }
+      ],
+      "interactions": {
+        "language_round_trip": true,
+        "related_navigation": "../lendingclub loan prediction/lendingclub loan prediction-en.html",
+        "logo_return": true
+      },
+      "page_errors": [],
+      "resource_failures": [
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.108.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.111.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.107.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.108.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.112.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.110.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.113.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.111.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.109.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.106.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.112.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.113.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.116.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.107.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.27.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.103.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.105.woff2",
+          "failure": "net::ERR_ABORTED"
+        }
+      ],
+      "status": "pass"
+    },
+    {
+      "path": "projects/lendingclub loan prediction/lendingclub loan prediction-en.html",
+      "key": "loan",
+      "language": "en",
+      "sections": 13,
+      "views": [
+        {
+          "width": 1440,
+          "theme": "light",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\loan-en-1440-light-hero.png",
+          "toc_target": "#report-section-13",
+          "toc_offset": 96.015625,
+          "table_scroll": {
+            "left": 0,
+            "width": 966,
+            "total": 966
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\loan-en-1440-light-body.png",
+          "original_scroll": {
+            "x": 0,
+            "y": 0,
+            "width": 1320,
+            "totalWidth": 1320
+          },
+          "figures_opened": 11,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 1440,
+          "theme": "dark",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\loan-en-1440-dark-hero.png",
+          "toc_target": "#report-section-13",
+          "toc_offset": 96.015625,
+          "table_scroll": {
+            "left": 0,
+            "width": 966,
+            "total": 966
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\loan-en-1440-dark-body.png",
+          "original_scroll": {
+            "x": 0,
+            "y": 0,
+            "width": 1320,
+            "totalWidth": 1320
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 390,
+          "theme": "light",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\loan-en-390-light-hero.png",
+          "toc_target": "#report-section-13",
+          "toc_offset": 96.125,
+          "table_scroll": {
+            "left": 0,
+            "width": 358,
+            "total": 358
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\loan-en-390-light-body.png",
+          "original_scroll": {
+            "x": 484,
+            "y": 0,
+            "width": 333,
+            "totalWidth": 817
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 390,
+          "theme": "dark",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\loan-en-390-dark-hero.png",
+          "toc_target": "#report-section-13",
+          "toc_offset": 96.125,
+          "table_scroll": {
+            "left": 0,
+            "width": 358,
+            "total": 358
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\loan-en-390-dark-body.png",
+          "original_scroll": {
+            "x": 484,
+            "y": 0,
+            "width": 333,
+            "totalWidth": 817
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        }
+      ],
+      "interactions": {
+        "language_round_trip": true,
+        "series_navigation": "full data-en.html",
+        "related_navigation": "full data-en.html",
+        "logo_return": true
+      },
+      "page_errors": [],
+      "resource_failures": [],
+      "status": "pass"
+    },
+    {
+      "path": "projects/youtube comment analysis/youtube comment analysis-en.html",
+      "key": "youtube",
+      "language": "en",
+      "sections": 12,
+      "views": [
+        {
+          "width": 1440,
+          "theme": "light",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\youtube-en-1440-light-hero.png",
+          "toc_target": "#report-section-12",
+          "toc_offset": 96.046875,
+          "table_scroll": {
+            "left": 0,
+            "width": 966,
+            "total": 966
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\youtube-en-1440-light-body.png",
+          "original_scroll": {
+            "x": 0,
+            "y": 4,
+            "width": 1320,
+            "totalWidth": 1320
+          },
+          "figures_opened": 7,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 1440,
+          "theme": "dark",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\youtube-en-1440-dark-hero.png",
+          "toc_target": "#report-section-12",
+          "toc_offset": 96.046875,
+          "table_scroll": {
+            "left": 0,
+            "width": 966,
+            "total": 966
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\youtube-en-1440-dark-body.png",
+          "original_scroll": {
+            "x": 0,
+            "y": 4,
+            "width": 1320,
+            "totalWidth": 1320
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 390,
+          "theme": "light",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\youtube-en-390-light-hero.png",
+          "toc_target": "#report-section-12",
+          "toc_offset": 95.640625,
+          "table_scroll": {
+            "left": 0,
+            "width": 358,
+            "total": 358
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\youtube-en-390-light-body.png",
+          "original_scroll": {
+            "x": 629,
+            "y": 148,
+            "width": 333,
+            "totalWidth": 962
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 390,
+          "theme": "dark",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\youtube-en-390-dark-hero.png",
+          "toc_target": "#report-section-12",
+          "toc_offset": 95.640625,
+          "table_scroll": {
+            "left": 0,
+            "width": 358,
+            "total": 358
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\youtube-en-390-dark-body.png",
+          "original_scroll": {
+            "x": 629,
+            "y": 148,
+            "width": 333,
+            "totalWidth": 962
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        }
+      ],
+      "interactions": {
+        "language_round_trip": true,
+        "related_navigation": "../amazon watch reviews/amazon watch reviews-en.html",
+        "logo_return": true
+      },
+      "page_errors": [],
+      "resource_failures": [
+        {
+          "url": "http://127.0.0.1:8765/favicon.svg",
+          "failure": "net::ERR_ABORTED"
+        }
+      ],
+      "status": "pass"
+    },
+    {
+      "path": "projects/healthy home/healthy home-en.html",
+      "key": "healthy",
+      "language": "en",
+      "sections": 13,
+      "views": [
+        {
+          "width": 1440,
+          "theme": "light",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\healthy-en-1440-light-hero.png",
+          "toc_target": "#report-section-13",
+          "toc_offset": 95.671875,
+          "table_scroll": {
+            "left": 0,
+            "width": 966,
+            "total": 966
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\healthy-en-1440-light-body.png",
+          "original_scroll": {
+            "x": 0,
+            "y": 0,
+            "width": 1320,
+            "totalWidth": 1320
+          },
+          "figures_opened": 7,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 1440,
+          "theme": "dark",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\healthy-en-1440-dark-hero.png",
+          "toc_target": "#report-section-13",
+          "toc_offset": 95.671875,
+          "table_scroll": {
+            "left": 0,
+            "width": 966,
+            "total": 966
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\healthy-en-1440-dark-body.png",
+          "original_scroll": {
+            "x": 0,
+            "y": 0,
+            "width": 1320,
+            "totalWidth": 1320
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 390,
+          "theme": "light",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\healthy-en-390-light-hero.png",
+          "toc_target": "#report-section-13",
+          "toc_offset": 95.75,
+          "table_scroll": {
+            "left": 0,
+            "width": 358,
+            "total": 358
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\healthy-en-390-light-body.png",
+          "original_scroll": {
+            "x": 711,
+            "y": 0,
+            "width": 333,
+            "totalWidth": 1044
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 390,
+          "theme": "dark",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\healthy-en-390-dark-hero.png",
+          "toc_target": "#report-section-13",
+          "toc_offset": 95.75,
+          "table_scroll": {
+            "left": 0,
+            "width": 358,
+            "total": 358
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\healthy-en-390-dark-body.png",
+          "original_scroll": {
+            "x": 711,
+            "y": 0,
+            "width": 333,
+            "totalWidth": 1044
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        }
+      ],
+      "interactions": {
+        "language_round_trip": true,
+        "related_navigation": "../spglobal climate comparison/spglobal climate comparison-en.html",
+        "logo_return": true
+      },
+      "page_errors": [],
+      "resource_failures": [],
+      "status": "pass"
+    },
+    {
+      "path": "projects/amazon watch reviews/amazon watch reviews-en.html",
+      "key": "amazon",
+      "language": "en",
+      "sections": 13,
+      "views": [
+        {
+          "width": 1440,
+          "theme": "light",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\amazon-en-1440-light-hero.png",
+          "toc_target": "#report-section-13",
+          "toc_offset": 95.578125,
+          "table_scroll": {
+            "left": 0,
+            "width": 966,
+            "total": 966
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\amazon-en-1440-light-body.png",
+          "original_scroll": {
+            "x": 0,
+            "y": 0,
+            "width": 1320,
+            "totalWidth": 1320
+          },
+          "figures_opened": 15,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 1440,
+          "theme": "dark",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\amazon-en-1440-dark-hero.png",
+          "toc_target": "#report-section-13",
+          "toc_offset": 95.578125,
+          "table_scroll": {
+            "left": 0,
+            "width": 966,
+            "total": 966
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\amazon-en-1440-dark-body.png",
+          "original_scroll": {
+            "x": 0,
+            "y": 0,
+            "width": 1320,
+            "totalWidth": 1320
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 390,
+          "theme": "light",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\amazon-en-390-light-hero.png",
+          "toc_target": "#report-section-13",
+          "toc_offset": 96.4375,
+          "table_scroll": {
+            "left": 0,
+            "width": 358,
+            "total": 358
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\amazon-en-390-light-body.png",
+          "original_scroll": {
+            "x": 704,
+            "y": 0,
+            "width": 333,
+            "totalWidth": 1037
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 390,
+          "theme": "dark",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\amazon-en-390-dark-hero.png",
+          "toc_target": "#report-section-13",
+          "toc_offset": 96.4375,
+          "table_scroll": {
+            "left": 0,
+            "width": 358,
+            "total": 358
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\amazon-en-390-dark-body.png",
+          "original_scroll": {
+            "x": 704,
+            "y": 0,
+            "width": 333,
+            "totalWidth": 1037
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        }
+      ],
+      "interactions": {
+        "language_round_trip": true,
+        "related_navigation": "../youtube comment analysis/youtube comment analysis-en.html",
+        "logo_return": true
+      },
+      "page_errors": [],
+      "resource_failures": [],
+      "status": "pass"
+    },
+    {
+      "path": "projects/lendingclub loan prediction/full data-en.html",
+      "key": "loan-full",
+      "language": "en",
+      "sections": 12,
+      "views": [
+        {
+          "width": 1440,
+          "theme": "light",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\loan-full-en-1440-light-hero.png",
+          "toc_target": "#report-section-12",
+          "toc_offset": 95.78125,
+          "table_scroll": {
+            "left": 0,
+            "width": 966,
+            "total": 966
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\loan-full-en-1440-light-body.png",
+          "original_scroll": {
+            "x": 0,
+            "y": 0,
+            "width": 1320,
+            "totalWidth": 1320
+          },
+          "figures_opened": 12,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 1440,
+          "theme": "dark",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\loan-full-en-1440-dark-hero.png",
+          "toc_target": "#report-section-12",
+          "toc_offset": 95.78125,
+          "table_scroll": {
+            "left": 0,
+            "width": 966,
+            "total": 966
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\loan-full-en-1440-dark-body.png",
+          "original_scroll": {
+            "x": 0,
+            "y": 0,
+            "width": 1320,
+            "totalWidth": 1320
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 390,
+          "theme": "light",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\loan-full-en-390-light-hero.png",
+          "toc_target": "#report-section-12",
+          "toc_offset": 95.765625,
+          "table_scroll": {
+            "left": 0,
+            "width": 358,
+            "total": 358
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\loan-full-en-390-light-body.png",
+          "original_scroll": {
+            "x": 615,
+            "y": 0,
+            "width": 333,
+            "totalWidth": 948
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 390,
+          "theme": "dark",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\loan-full-en-390-dark-hero.png",
+          "toc_target": "#report-section-12",
+          "toc_offset": 95.765625,
+          "table_scroll": {
+            "left": 0,
+            "width": 358,
+            "total": 358
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\loan-full-en-390-dark-body.png",
+          "original_scroll": {
+            "x": 615,
+            "y": 0,
+            "width": 333,
+            "totalWidth": 948
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        }
+      ],
+      "interactions": {
+        "language_round_trip": true,
+        "series_navigation": "lendingclub loan prediction-en.html",
+        "related_navigation": "lendingclub loan prediction-en.html",
+        "logo_return": true
+      },
+      "page_errors": [],
+      "resource_failures": [
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.109.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.27.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.111.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.118.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.115.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.114.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.112.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.116.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.108.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.114.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.113.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.109.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.119.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.117.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.107.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.102.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.111.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.110.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.105.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.115.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.110.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.113.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.74.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.112.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.27.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.106.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.116.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.108.woff2",
+          "failure": "net::ERR_ABORTED"
+        }
+      ],
+      "status": "pass"
+    },
+    {
+      "path": "projects/spglobal climate comparison/model comparison-en.html",
+      "key": "comparison",
+      "language": "en",
+      "sections": 11,
+      "views": [
+        {
+          "width": 1440,
+          "theme": "light",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\comparison-en-1440-light-hero.png",
+          "toc_target": "#report-section-11",
+          "toc_offset": 96.140625,
+          "table_scroll": {
+            "left": 0,
+            "width": 966,
+            "total": 966
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\comparison-en-1440-light-body.png",
+          "original_scroll": {
+            "x": 291,
+            "y": 202,
+            "width": 1320,
+            "totalWidth": 1611
+          },
+          "figures_opened": 11,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 1440,
+          "theme": "dark",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\comparison-en-1440-dark-hero.png",
+          "toc_target": "#report-section-11",
+          "toc_offset": 96.140625,
+          "table_scroll": {
+            "left": 0,
+            "width": 966,
+            "total": 966
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\comparison-en-1440-dark-body.png",
+          "original_scroll": {
+            "x": 291,
+            "y": 202,
+            "width": 1320,
+            "totalWidth": 1611
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 390,
+          "theme": "light",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\comparison-en-390-light-hero.png",
+          "toc_target": "#report-section-11",
+          "toc_offset": 96.09375,
+          "table_scroll": {
+            "left": 91,
+            "width": 358,
+            "total": 449
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\comparison-en-390-light-body.png",
+          "original_scroll": {
+            "x": 1278,
+            "y": 346,
+            "width": 333,
+            "totalWidth": 1611
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 390,
+          "theme": "dark",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\comparison-en-390-dark-hero.png",
+          "toc_target": "#report-section-11",
+          "toc_offset": 96.09375,
+          "table_scroll": {
+            "left": 91,
+            "width": 358,
+            "total": 449
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\comparison-en-390-dark-body.png",
+          "original_scroll": {
+            "x": 1278,
+            "y": 346,
+            "width": 333,
+            "totalWidth": 1611
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        }
+      ],
+      "interactions": {
+        "language_round_trip": true,
+        "series_navigation": "spglobal climate comparison-en.html",
+        "related_navigation": "../healthy home/healthy home-en.html",
+        "logo_return": true
+      },
+      "page_errors": [],
+      "resource_failures": [
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.117.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.110.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.113.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.107.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.118.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.114.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.106.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.116.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.111.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.106.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.28.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.116.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.108.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.119.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.111.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.114.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.101.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.115.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.102.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.105.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.110.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.117.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.107.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.27.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.108.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.112.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.113.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.109.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.118.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.112.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.109.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.101.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.115.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa25L7SUc.woff2",
+          "failure": "net::ERR_ABORTED"
+        }
+      ],
+      "status": "pass"
+    },
+    {
+      "path": "projects/spglobal climate comparison/long series-en.html",
+      "key": "long-series",
+      "language": "en",
+      "sections": 9,
+      "views": [
+        {
+          "width": 1440,
+          "theme": "light",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\long-series-en-1440-light-hero.png",
+          "toc_target": "#report-section-9",
+          "toc_offset": 95.90625,
+          "table_scroll": {
+            "left": 0,
+            "width": 966,
+            "total": 966
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\long-series-en-1440-light-body.png",
+          "original_scroll": {
+            "x": 314,
+            "y": 694,
+            "width": 1320,
+            "totalWidth": 1634
+          },
+          "figures_opened": 6,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 1440,
+          "theme": "dark",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\long-series-en-1440-dark-hero.png",
+          "toc_target": "#report-section-9",
+          "toc_offset": 95.90625,
+          "table_scroll": {
+            "left": 0,
+            "width": 966,
+            "total": 966
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\long-series-en-1440-dark-body.png",
+          "original_scroll": {
+            "x": 314,
+            "y": 694,
+            "width": 1320,
+            "totalWidth": 1634
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 390,
+          "theme": "light",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\long-series-en-390-light-hero.png",
+          "toc_target": "#report-section-9",
+          "toc_offset": 95.71875,
+          "table_scroll": {
+            "left": 91,
+            "width": 358,
+            "total": 449
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\long-series-en-390-light-body.png",
+          "original_scroll": {
+            "x": 1301,
+            "y": 838,
+            "width": 333,
+            "totalWidth": 1634
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 390,
+          "theme": "dark",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\long-series-en-390-dark-hero.png",
+          "toc_target": "#report-section-9",
+          "toc_offset": 95.71875,
+          "table_scroll": {
+            "left": 91,
+            "width": 358,
+            "total": 449
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\long-series-en-390-dark-body.png",
+          "original_scroll": {
+            "x": 1301,
+            "y": 838,
+            "width": 333,
+            "totalWidth": 1634
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        }
+      ],
+      "interactions": {
+        "language_round_trip": true,
+        "series_navigation": "spglobal climate comparison-en.html",
+        "related_navigation": "../healthy home/healthy home-en.html",
+        "logo_return": true
+      },
+      "page_errors": [],
+      "resource_failures": [
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.114.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.110.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/l/font?kit=k3kxo84MPvpLmixcA63oeAL7Iqp5IZJF9bmaG9_F_4dvnCROR3dc8Dd6a2rvFtpbOhx81yxcvgl7asOkOvAptREi5017v_tIwjCo_lE&skey=cf0bb10b5602fdc3&v=v41",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/l/font?kit=k3kxo84MPvpLmixcA63oeAL7Iqp5IZJF9bmaG9_F_4dvnCROR3dc8Dd6a2rvFtpbOhx81yxcvgl7asOkOvAptREi5017v_tIwjCo_ks&skey=cf0bb10b5602fdc3&v=v41",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.115.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/l/font?kit=k3kxo84MPvpLmixcA63oeAL7Iqp5IZJF9bmaG9_F_4dvnCROR3dc8Dd6a2rvFtpbOhx81yxcvgl7asOkOvAptREi5017v_tIwjCo_lA&skey=cf0bb10b5602fdc3&v=v41",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/l/font?kit=k3kxo84MPvpLmixcA63oeAL7Iqp5IZJF9bmaG9_F_4dvnCROR3dc8Dd6a2rvFtpbOhx81yxcvgl7asOkOvAptREi5017v_tIwjCo_ko&skey=cf0bb10b5602fdc3&v=v41",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.119.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/l/font?kit=k3kxo84MPvpLmixcA63oeAL7Iqp5IZJF9bmaG9_F_4dvnCROR3dc8Dd6a2rvFtpbOhx81yxcvgl7asOkOvAptREi5017v_tIwjCo_kg&skey=cf0bb10b5602fdc3&v=v41",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.105.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.113.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.116.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/l/font?kit=k3kxo84MPvpLmixcA63oeAL7Iqp5IZJF9bmaG9_F_4dvnCROR3dc8Dd6a2rvFtpbOhx81yxcvgl7asOkOvAptREi5017v_tIwjCo_lc&skey=cf0bb10b5602fdc3&v=v41",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/l/font?kit=k3kxo84MPvpLmixcA63oeAL7Iqp5IZJF9bmaG9_F_4dvnCROR3dc8Dd6a2rvFtpbOhx81yxcvgl7asOkOvAptREi5017v_tIwjCo_k4&skey=cf0bb10b5602fdc3&v=v41",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.106.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.27.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.112.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.111.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/l/font?kit=k3kxo84MPvpLmixcA63oeAL7Iqp5IZJF9bmaG9_F_4dvnCROR3dc8Dd6a2rvFtpbOhx81yxcvgl7asOkOvAptREi5017v_tIwjCo_lY&skey=cf0bb10b5602fdc3&v=v41",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.108.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.118.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/l/font?kit=k3kxo84MPvpLmixcA63oeAL7Iqp5IZJF9bmaG9_F_4dvnCROR3dc8Dd6a2rvFtpbOhx81yxcvgl7asOkOvAptREi5017v_tIwjCo_kM&skey=cf0bb10b5602fdc3&v=v41",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/l/font?kit=k3kxo84MPvpLmixcA63oeAL7Iqp5IZJF9bmaG9_F_4dvnCROR3dc8Dd6a2rvFtpbOhx81yxcvgl7asOkOvAptREi5017v_tIwjCo_lQ&skey=cf0bb10b5602fdc3&v=v41",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.117.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/l/font?kit=k3kxo84MPvpLmixcA63oeAL7Iqp5IZJF9bmaG9_F_4dvnCROR3dc8Dd6a2rvFtpbOhx81yxcvgl7asOkOvAptREi5017v_tIwjCo_lU&skey=cf0bb10b5602fdc3&v=v41",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.109.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/l/font?kit=k3kxo84MPvpLmixcA63oeAL7Iqp5IZJF9bmaG9_F_4dvnCROR3dc8Dd6a2rvFtpbOhx81yxcvgl7asOkOvAptREi5017v_tIwjCo_j4&skey=cf0bb10b5602fdc3&v=v41",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/l/font?kit=k3kxo84MPvpLmixcA63oeAL7Iqp5IZJF9bmaG9_F_4dvnCROR3dc8Dd6a2rvFtpbOhx81yxcvgl7asOkOvAptREi5017v_tIwjCo_lM&skey=cf0bb10b5602fdc3&v=v41",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/l/font?kit=k3kxo84MPvpLmixcA63oeAL7Iqp5IZJF9bmaG9_F_4dvnCROR3dc8Dd6a2rvFtpbOhx81yxcvgl7asOkOvAptREi5017v_tIwjCo_kk&skey=cf0bb10b5602fdc3&v=v41",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.47.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/l/font?kit=k3kxo84MPvpLmixcA63oeAL7Iqp5IZJF9bmaG9_F_4dvnCROR3dc8Dd6a2rvFtpbOhx81yxcvgl7asOkOvAptREi5017v_tIwjCo_k8&skey=cf0bb10b5602fdc3&v=v41",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/l/font?kit=UcCB3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuDyfU5NJeWUdIOjBeTGiXZdDD2M&skey=c491285d6722e4fa&v=v20",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/l/font?kit=tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYXHKPxDcwg&skey=48ad01c60053c2ae&v=v24",
+          "failure": "net::ERR_ABORTED"
+        }
+      ],
+      "status": "pass"
+    },
+    {
+      "path": "projects/spglobal climate comparison/projection overlay-en.html",
+      "key": "projection",
+      "language": "en",
+      "sections": 13,
+      "views": [
+        {
+          "width": 1440,
+          "theme": "light",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\projection-en-1440-light-hero.png",
+          "toc_target": "#report-section-13",
+          "toc_offset": 95.859375,
+          "table_scroll": {
+            "left": 0,
+            "width": 966,
+            "total": 966
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\projection-en-1440-light-body.png",
+          "original_scroll": {
+            "x": 330,
+            "y": 0,
+            "width": 1320,
+            "totalWidth": 1650
+          },
+          "figures_opened": 4,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 1440,
+          "theme": "dark",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\projection-en-1440-dark-hero.png",
+          "toc_target": "#report-section-13",
+          "toc_offset": 95.859375,
+          "table_scroll": {
+            "left": 0,
+            "width": 966,
+            "total": 966
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\projection-en-1440-dark-body.png",
+          "original_scroll": {
+            "x": 330,
+            "y": 0,
+            "width": 1320,
+            "totalWidth": 1650
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 390,
+          "theme": "light",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\projection-en-390-light-hero.png",
+          "toc_target": "#report-section-13",
+          "toc_offset": 95.828125,
+          "table_scroll": {
+            "left": 315,
+            "width": 358,
+            "total": 673
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\projection-en-390-light-body.png",
+          "original_scroll": {
+            "x": 1317,
+            "y": 33,
+            "width": 333,
+            "totalWidth": 1650
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 390,
+          "theme": "dark",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\projection-en-390-dark-hero.png",
+          "toc_target": "#report-section-13",
+          "toc_offset": 95.828125,
+          "table_scroll": {
+            "left": 315,
+            "width": 358,
+            "total": 673
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\projection-en-390-dark-body.png",
+          "original_scroll": {
+            "x": 1317,
+            "y": 33,
+            "width": 333,
+            "totalWidth": 1650
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        }
+      ],
+      "interactions": {
+        "language_round_trip": true,
+        "series_navigation": "spglobal climate comparison-en.html",
+        "related_navigation": "../healthy home/healthy home-en.html",
+        "logo_return": true
+      },
+      "page_errors": [],
+      "resource_failures": [
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.116.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.107.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.27.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.114.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.111.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.106.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.106.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.108.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.118.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.112.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.107.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.110.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.119.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.117.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.104.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.115.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.102.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.118.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.116.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.112.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.117.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.114.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.111.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.113.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.115.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.109.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.105.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.59.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.113.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.27.woff2",
+          "failure": "net::ERR_ABORTED"
+        }
+      ],
+      "status": "pass"
+    },
+    {
+      "path": "index.html",
+      "key": "home",
+      "language": "zh",
+      "views": [
+        {
+          "width": 1440,
+          "theme": "light",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\home-zh-1440-light-hero.png"
+        },
+        {
+          "width": 1440,
+          "theme": "dark",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\home-zh-1440-dark-hero.png"
+        },
+        {
+          "width": 390,
+          "theme": "light",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\home-zh-390-light-hero.png"
+        },
+        {
+          "width": 390,
+          "theme": "dark",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\home-zh-390-dark-hero.png"
+        }
+      ],
+      "interactions": {
+        "language_round_trip": true,
+        "mobile_menu": true
+      },
+      "page_errors": [],
+      "resource_failures": [],
+      "status": "pass"
+    },
+    {
+      "path": "index-en.html",
+      "key": "home",
+      "language": "en",
+      "views": [
+        {
+          "width": 1440,
+          "theme": "light",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\home-en-1440-light-hero.png"
+        },
+        {
+          "width": 1440,
+          "theme": "dark",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\home-en-1440-dark-hero.png"
+        },
+        {
+          "width": 390,
+          "theme": "light",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\home-en-390-light-hero.png"
+        },
+        {
+          "width": 390,
+          "theme": "dark",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\home-en-390-dark-hero.png"
+        }
+      ],
+      "interactions": {
+        "language_round_trip": true,
+        "mobile_menu": true
+      },
+      "page_errors": [],
+      "resource_failures": [],
+      "status": "pass"
+    }
+  ]
+}

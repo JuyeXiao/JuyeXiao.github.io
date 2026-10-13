@@ -1,0 +1,625 @@
+# report_check 结果
+
+文件: 16 份 | 硬项违规: 0 | advisory: 296 | 退出码: 0
+coverage: complete for declared scope; strict=False；C7/C8 仅结构，不验证数字语义或事实。
+
+| group | file-or-pair | check | status | reason |
+|---|---|---|---|---|
+| bank | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\Bank Customer Churn Prediction\Bank Customer Churn Prediction.html | INPUT | pass | accepted; lang=zh; format=html |
+| bank | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\Bank Customer Churn Prediction\Bank Customer Churn Prediction.html | C1 | pass | executed; hard=0; advisory=0 |
+| bank | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\Bank Customer Churn Prediction\Bank Customer Churn Prediction.html | C2 | pass | executed; hard=0; advisory=0 |
+| bank | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\Bank Customer Churn Prediction\Bank Customer Churn Prediction.html | C3 | pass | executed; hard=0; advisory=3; 待语境复核 |
+| bank | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\Bank Customer Churn Prediction\Bank Customer Churn Prediction.html | C4 | not_applicable | 语言范围: zh |
+| bank | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\Bank Customer Churn Prediction\Bank Customer Churn Prediction.html | C5 | pass | executed; hard=0; advisory=2; 待语境复核 |
+| bank | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\Bank Customer Churn Prediction\Bank Customer Churn Prediction.html | C6 | pass | executed; hard=0; advisory=0 |
+| bank | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\Bank Customer Churn Prediction\Bank Customer Churn Prediction.html | C9 | pass | executed; hard=0; advisory=0 |
+| bank | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\Bank Customer Churn Prediction\Bank Customer Churn Prediction.html | C10 | pass | executed; hard=0; advisory=12; 待语境复核 |
+| bank | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\Bank Customer Churn Prediction\Bank Customer Churn Prediction.html | C11 | not_applicable | 语言范围: zh |
+| bank | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\Bank Customer Churn Prediction\Bank Customer Churn Prediction.html | C12 | not_applicable | 语言范围: zh |
+| bank | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\Bank Customer Churn Prediction\Bank Customer Churn Prediction.html | C7.nav | pass | executed; hard=0; advisory=0 |
+| bank | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\Bank Customer Churn Prediction\Bank Customer Churn Prediction-en.html | INPUT | pass | accepted; lang=en; format=html |
+| bank | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\Bank Customer Churn Prediction\Bank Customer Churn Prediction-en.html | C1 | not_applicable | 语言范围: en |
+| bank | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\Bank Customer Churn Prediction\Bank Customer Churn Prediction-en.html | C2 | pass | executed; hard=0; advisory=0 |
+| bank | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\Bank Customer Churn Prediction\Bank Customer Churn Prediction-en.html | C3 | pass | executed; hard=0; advisory=0 |
+| bank | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\Bank Customer Churn Prediction\Bank Customer Churn Prediction-en.html | C4 | pass | executed; hard=0; advisory=0 |
+| bank | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\Bank Customer Churn Prediction\Bank Customer Churn Prediction-en.html | C5 | not_applicable | 语言范围: en |
+| bank | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\Bank Customer Churn Prediction\Bank Customer Churn Prediction-en.html | C6 | pass | executed; hard=0; advisory=2; 待语境复核 |
+| bank | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\Bank Customer Churn Prediction\Bank Customer Churn Prediction-en.html | C9 | pass | executed; hard=0; advisory=0 |
+| bank | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\Bank Customer Churn Prediction\Bank Customer Churn Prediction-en.html | C10 | pass | executed; hard=0; advisory=2; 待语境复核 |
+| bank | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\Bank Customer Churn Prediction\Bank Customer Churn Prediction-en.html | C11 | pass | executed; hard=0; advisory=2; 待语境复核 |
+| bank | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\Bank Customer Churn Prediction\Bank Customer Churn Prediction-en.html | C12 | pass | executed; hard=0; advisory=0 |
+| bank | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\Bank Customer Churn Prediction\Bank Customer Churn Prediction-en.html | C7.nav | pass | executed; hard=0; advisory=0 |
+| bank | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\Bank Customer Churn Prediction\Bank Customer Churn Prediction-en.html <-> (en/md missing) | C7 | not_applicable | 单文件/单语或未要求该配对；缺 en/md |
+| bank | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\Bank Customer Churn Prediction\Bank Customer Churn Prediction.html <-> (zh/md missing) | C7 | not_applicable | 单文件/单语或未要求该配对；缺 zh/md |
+| bank | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\Bank Customer Churn Prediction\Bank Customer Churn Prediction-en.html <-> C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\Bank Customer Churn Prediction\Bank Customer Churn Prediction.html | C8 | pass | executed; hard=0; advisory=0 |
+| fraud | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\e-commerce fraud detection\e-commerce fraud detection.html | INPUT | pass | accepted; lang=zh; format=html |
+| fraud | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\e-commerce fraud detection\e-commerce fraud detection.html | C1 | pass | executed; hard=0; advisory=0 |
+| fraud | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\e-commerce fraud detection\e-commerce fraud detection.html | C2 | pass | executed; hard=0; advisory=0 |
+| fraud | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\e-commerce fraud detection\e-commerce fraud detection.html | C3 | pass | executed; hard=0; advisory=0 |
+| fraud | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\e-commerce fraud detection\e-commerce fraud detection.html | C4 | not_applicable | 语言范围: zh |
+| fraud | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\e-commerce fraud detection\e-commerce fraud detection.html | C5 | pass | executed; hard=0; advisory=1; 待语境复核 |
+| fraud | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\e-commerce fraud detection\e-commerce fraud detection.html | C6 | pass | executed; hard=0; advisory=1; 待语境复核 |
+| fraud | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\e-commerce fraud detection\e-commerce fraud detection.html | C9 | pass | executed; hard=0; advisory=0 |
+| fraud | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\e-commerce fraud detection\e-commerce fraud detection.html | C10 | pass | executed; hard=0; advisory=13; 待语境复核 |
+| fraud | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\e-commerce fraud detection\e-commerce fraud detection.html | C11 | not_applicable | 语言范围: zh |
+| fraud | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\e-commerce fraud detection\e-commerce fraud detection.html | C12 | not_applicable | 语言范围: zh |
+| fraud | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\e-commerce fraud detection\e-commerce fraud detection.html | C7.nav | pass | executed; hard=0; advisory=0 |
+| fraud | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\e-commerce fraud detection\e-commerce fraud detection-en.html | INPUT | pass | accepted; lang=en; format=html |
+| fraud | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\e-commerce fraud detection\e-commerce fraud detection-en.html | C1 | not_applicable | 语言范围: en |
+| fraud | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\e-commerce fraud detection\e-commerce fraud detection-en.html | C2 | pass | executed; hard=0; advisory=0 |
+| fraud | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\e-commerce fraud detection\e-commerce fraud detection-en.html | C3 | pass | executed; hard=0; advisory=0 |
+| fraud | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\e-commerce fraud detection\e-commerce fraud detection-en.html | C4 | pass | executed; hard=0; advisory=0 |
+| fraud | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\e-commerce fraud detection\e-commerce fraud detection-en.html | C5 | not_applicable | 语言范围: en |
+| fraud | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\e-commerce fraud detection\e-commerce fraud detection-en.html | C6 | pass | executed; hard=0; advisory=1; 待语境复核 |
+| fraud | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\e-commerce fraud detection\e-commerce fraud detection-en.html | C9 | pass | executed; hard=0; advisory=0 |
+| fraud | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\e-commerce fraud detection\e-commerce fraud detection-en.html | C10 | pass | executed; hard=0; advisory=6; 待语境复核 |
+| fraud | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\e-commerce fraud detection\e-commerce fraud detection-en.html | C11 | pass | executed; hard=0; advisory=1; 待语境复核 |
+| fraud | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\e-commerce fraud detection\e-commerce fraud detection-en.html | C12 | pass | executed; hard=0; advisory=0 |
+| fraud | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\e-commerce fraud detection\e-commerce fraud detection-en.html | C7.nav | pass | executed; hard=0; advisory=0 |
+| fraud | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\e-commerce fraud detection\e-commerce fraud detection-en.html <-> (en/md missing) | C7 | not_applicable | 单文件/单语或未要求该配对；缺 en/md |
+| fraud | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\e-commerce fraud detection\e-commerce fraud detection.html <-> (zh/md missing) | C7 | not_applicable | 单文件/单语或未要求该配对；缺 zh/md |
+| fraud | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\e-commerce fraud detection\e-commerce fraud detection-en.html <-> C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\e-commerce fraud detection\e-commerce fraud detection.html | C8 | pass | executed; hard=0; advisory=0 |
+| loan | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction\lendingclub loan prediction.html | INPUT | pass | accepted; lang=zh; format=html |
+| loan | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction\lendingclub loan prediction.html | C1 | pass | executed; hard=0; advisory=0 |
+| loan | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction\lendingclub loan prediction.html | C2 | pass | executed; hard=0; advisory=0 |
+| loan | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction\lendingclub loan prediction.html | C3 | pass | executed; hard=0; advisory=0 |
+| loan | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction\lendingclub loan prediction.html | C4 | not_applicable | 语言范围: zh |
+| loan | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction\lendingclub loan prediction.html | C5 | pass | executed; hard=0; advisory=4; 待语境复核 |
+| loan | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction\lendingclub loan prediction.html | C6 | pass | executed; hard=0; advisory=0 |
+| loan | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction\lendingclub loan prediction.html | C9 | pass | executed; hard=0; advisory=0 |
+| loan | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction\lendingclub loan prediction.html | C10 | pass | executed; hard=0; advisory=16; 待语境复核 |
+| loan | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction\lendingclub loan prediction.html | C11 | not_applicable | 语言范围: zh |
+| loan | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction\lendingclub loan prediction.html | C12 | not_applicable | 语言范围: zh |
+| loan | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction\lendingclub loan prediction.html | C7.nav | pass | executed; hard=0; advisory=0 |
+| loan | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction\lendingclub loan prediction-en.html | INPUT | pass | accepted; lang=en; format=html |
+| loan | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction\lendingclub loan prediction-en.html | C1 | not_applicable | 语言范围: en |
+| loan | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction\lendingclub loan prediction-en.html | C2 | pass | executed; hard=0; advisory=0 |
+| loan | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction\lendingclub loan prediction-en.html | C3 | pass | executed; hard=0; advisory=0 |
+| loan | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction\lendingclub loan prediction-en.html | C4 | pass | executed; hard=0; advisory=0 |
+| loan | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction\lendingclub loan prediction-en.html | C5 | not_applicable | 语言范围: en |
+| loan | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction\lendingclub loan prediction-en.html | C6 | pass | executed; hard=0; advisory=0 |
+| loan | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction\lendingclub loan prediction-en.html | C9 | pass | executed; hard=0; advisory=0 |
+| loan | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction\lendingclub loan prediction-en.html | C10 | pass | executed; hard=0; advisory=16; 待语境复核 |
+| loan | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction\lendingclub loan prediction-en.html | C11 | pass | executed; hard=0; advisory=1; 待语境复核 |
+| loan | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction\lendingclub loan prediction-en.html | C12 | pass | executed; hard=0; advisory=0 |
+| loan | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction\lendingclub loan prediction-en.html | C7.nav | pass | executed; hard=0; advisory=0 |
+| loan | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction\lendingclub loan prediction-en.html <-> (en/md missing) | C7 | not_applicable | 单文件/单语或未要求该配对；缺 en/md |
+| loan | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction\lendingclub loan prediction.html <-> (zh/md missing) | C7 | not_applicable | 单文件/单语或未要求该配对；缺 zh/md |
+| loan | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction\lendingclub loan prediction-en.html <-> C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction\lendingclub loan prediction.html | C8 | pass | executed; hard=0; advisory=0 |
+| youtube | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\youtube comment analysis\youtube comment analysis.html | INPUT | pass | accepted; lang=zh; format=html |
+| youtube | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\youtube comment analysis\youtube comment analysis.html | C1 | pass | executed; hard=0; advisory=0 |
+| youtube | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\youtube comment analysis\youtube comment analysis.html | C2 | pass | executed; hard=0; advisory=0 |
+| youtube | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\youtube comment analysis\youtube comment analysis.html | C3 | pass | executed; hard=0; advisory=0 |
+| youtube | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\youtube comment analysis\youtube comment analysis.html | C4 | not_applicable | 语言范围: zh |
+| youtube | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\youtube comment analysis\youtube comment analysis.html | C5 | pass | executed; hard=0; advisory=1; 待语境复核 |
+| youtube | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\youtube comment analysis\youtube comment analysis.html | C6 | pass | executed; hard=0; advisory=0 |
+| youtube | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\youtube comment analysis\youtube comment analysis.html | C9 | pass | executed; hard=0; advisory=0 |
+| youtube | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\youtube comment analysis\youtube comment analysis.html | C10 | pass | executed; hard=0; advisory=16; 待语境复核 |
+| youtube | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\youtube comment analysis\youtube comment analysis.html | C11 | not_applicable | 语言范围: zh |
+| youtube | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\youtube comment analysis\youtube comment analysis.html | C12 | not_applicable | 语言范围: zh |
+| youtube | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\youtube comment analysis\youtube comment analysis.html | C7.nav | pass | executed; hard=0; advisory=0 |
+| youtube | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\youtube comment analysis\youtube comment analysis-en.html | INPUT | pass | accepted; lang=en; format=html |
+| youtube | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\youtube comment analysis\youtube comment analysis-en.html | C1 | not_applicable | 语言范围: en |
+| youtube | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\youtube comment analysis\youtube comment analysis-en.html | C2 | pass | executed; hard=0; advisory=0 |
+| youtube | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\youtube comment analysis\youtube comment analysis-en.html | C3 | pass | executed; hard=0; advisory=0 |
+| youtube | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\youtube comment analysis\youtube comment analysis-en.html | C4 | pass | executed; hard=0; advisory=0 |
+| youtube | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\youtube comment analysis\youtube comment analysis-en.html | C5 | not_applicable | 语言范围: en |
+| youtube | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\youtube comment analysis\youtube comment analysis-en.html | C6 | pass | executed; hard=0; advisory=1; 待语境复核 |
+| youtube | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\youtube comment analysis\youtube comment analysis-en.html | C9 | pass | executed; hard=0; advisory=0 |
+| youtube | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\youtube comment analysis\youtube comment analysis-en.html | C10 | pass | executed; hard=0; advisory=2; 待语境复核 |
+| youtube | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\youtube comment analysis\youtube comment analysis-en.html | C11 | pass | executed; hard=0; advisory=1; 待语境复核 |
+| youtube | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\youtube comment analysis\youtube comment analysis-en.html | C12 | pass | executed; hard=0; advisory=0 |
+| youtube | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\youtube comment analysis\youtube comment analysis-en.html | C7.nav | pass | executed; hard=0; advisory=0 |
+| youtube | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\youtube comment analysis\youtube comment analysis-en.html <-> (en/md missing) | C7 | not_applicable | 单文件/单语或未要求该配对；缺 en/md |
+| youtube | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\youtube comment analysis\youtube comment analysis.html <-> (zh/md missing) | C7 | not_applicable | 单文件/单语或未要求该配对；缺 zh/md |
+| youtube | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\youtube comment analysis\youtube comment analysis-en.html <-> C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\youtube comment analysis\youtube comment analysis.html | C8 | pass | executed; hard=0; advisory=0 |
+| ab | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\ab testing\ab testing.html | INPUT | pass | accepted; lang=zh; format=html |
+| ab | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\ab testing\ab testing.html | C1 | pass | executed; hard=0; advisory=0 |
+| ab | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\ab testing\ab testing.html | C2 | pass | executed; hard=0; advisory=0 |
+| ab | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\ab testing\ab testing.html | C3 | pass | executed; hard=0; advisory=0 |
+| ab | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\ab testing\ab testing.html | C4 | not_applicable | 语言范围: zh |
+| ab | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\ab testing\ab testing.html | C5 | pass | executed; hard=0; advisory=1; 待语境复核 |
+| ab | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\ab testing\ab testing.html | C6 | pass | executed; hard=0; advisory=1; 待语境复核 |
+| ab | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\ab testing\ab testing.html | C9 | pass | executed; hard=0; advisory=0 |
+| ab | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\ab testing\ab testing.html | C10 | pass | executed; hard=0; advisory=4; 待语境复核 |
+| ab | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\ab testing\ab testing.html | C11 | not_applicable | 语言范围: zh |
+| ab | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\ab testing\ab testing.html | C12 | not_applicable | 语言范围: zh |
+| ab | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\ab testing\ab testing.html | C7.nav | pass | executed; hard=0; advisory=0 |
+| ab | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\ab testing\ab testing-en.html | INPUT | pass | accepted; lang=en; format=html |
+| ab | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\ab testing\ab testing-en.html | C1 | not_applicable | 语言范围: en |
+| ab | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\ab testing\ab testing-en.html | C2 | pass | executed; hard=0; advisory=0 |
+| ab | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\ab testing\ab testing-en.html | C3 | pass | executed; hard=0; advisory=0 |
+| ab | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\ab testing\ab testing-en.html | C4 | pass | executed; hard=0; advisory=0 |
+| ab | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\ab testing\ab testing-en.html | C5 | not_applicable | 语言范围: en |
+| ab | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\ab testing\ab testing-en.html | C6 | pass | executed; hard=0; advisory=0 |
+| ab | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\ab testing\ab testing-en.html | C9 | pass | executed; hard=0; advisory=8; 待语境复核 |
+| ab | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\ab testing\ab testing-en.html | C10 | pass | executed; hard=0; advisory=0 |
+| ab | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\ab testing\ab testing-en.html | C11 | pass | executed; hard=0; advisory=3; 待语境复核 |
+| ab | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\ab testing\ab testing-en.html | C12 | pass | executed; hard=0; advisory=0 |
+| ab | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\ab testing\ab testing-en.html | C7.nav | pass | executed; hard=0; advisory=0 |
+| ab | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\ab testing\ab testing-en.html <-> (en/md missing) | C7 | not_applicable | 单文件/单语或未要求该配对；缺 en/md |
+| ab | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\ab testing\ab testing.html <-> (zh/md missing) | C7 | not_applicable | 单文件/单语或未要求该配对；缺 zh/md |
+| ab | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\ab testing\ab testing-en.html <-> C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\ab testing\ab testing.html | C8 | pass | executed; hard=0; advisory=0 |
+| healthy | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\healthy home\healthy home.html | INPUT | pass | accepted; lang=zh; format=html |
+| healthy | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\healthy home\healthy home.html | C1 | pass | executed; hard=0; advisory=0 |
+| healthy | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\healthy home\healthy home.html | C2 | pass | executed; hard=0; advisory=0 |
+| healthy | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\healthy home\healthy home.html | C3 | pass | executed; hard=0; advisory=0 |
+| healthy | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\healthy home\healthy home.html | C4 | not_applicable | 语言范围: zh |
+| healthy | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\healthy home\healthy home.html | C5 | pass | executed; hard=0; advisory=4; 待语境复核 |
+| healthy | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\healthy home\healthy home.html | C6 | pass | executed; hard=0; advisory=1; 待语境复核 |
+| healthy | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\healthy home\healthy home.html | C9 | pass | executed; hard=0; advisory=0 |
+| healthy | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\healthy home\healthy home.html | C10 | pass | executed; hard=0; advisory=14; 待语境复核 |
+| healthy | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\healthy home\healthy home.html | C11 | not_applicable | 语言范围: zh |
+| healthy | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\healthy home\healthy home.html | C12 | not_applicable | 语言范围: zh |
+| healthy | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\healthy home\healthy home.html | C7.nav | pass | executed; hard=0; advisory=0 |
+| healthy | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\healthy home\healthy home-en.html | INPUT | pass | accepted; lang=en; format=html |
+| healthy | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\healthy home\healthy home-en.html | C1 | not_applicable | 语言范围: en |
+| healthy | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\healthy home\healthy home-en.html | C2 | pass | executed; hard=0; advisory=0 |
+| healthy | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\healthy home\healthy home-en.html | C3 | pass | executed; hard=0; advisory=0 |
+| healthy | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\healthy home\healthy home-en.html | C4 | pass | executed; hard=0; advisory=0 |
+| healthy | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\healthy home\healthy home-en.html | C5 | not_applicable | 语言范围: en |
+| healthy | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\healthy home\healthy home-en.html | C6 | pass | executed; hard=0; advisory=0 |
+| healthy | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\healthy home\healthy home-en.html | C9 | pass | executed; hard=0; advisory=0 |
+| healthy | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\healthy home\healthy home-en.html | C10 | pass | executed; hard=0; advisory=0 |
+| healthy | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\healthy home\healthy home-en.html | C11 | pass | executed; hard=0; advisory=1; 待语境复核 |
+| healthy | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\healthy home\healthy home-en.html | C12 | pass | executed; hard=0; advisory=0 |
+| healthy | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\healthy home\healthy home-en.html | C7.nav | pass | executed; hard=0; advisory=0 |
+| healthy | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\healthy home\healthy home-en.html <-> (en/md missing) | C7 | not_applicable | 单文件/单语或未要求该配对；缺 en/md |
+| healthy | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\healthy home\healthy home.html <-> (zh/md missing) | C7 | not_applicable | 单文件/单语或未要求该配对；缺 zh/md |
+| healthy | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\healthy home\healthy home-en.html <-> C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\healthy home\healthy home.html | C8 | pass | executed; hard=0; advisory=0 |
+| amazon | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\amazon watch reviews\amazon watch reviews.html | INPUT | pass | accepted; lang=zh; format=html |
+| amazon | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\amazon watch reviews\amazon watch reviews.html | C1 | pass | executed; hard=0; advisory=0 |
+| amazon | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\amazon watch reviews\amazon watch reviews.html | C2 | pass | executed; hard=0; advisory=0 |
+| amazon | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\amazon watch reviews\amazon watch reviews.html | C3 | pass | executed; hard=0; advisory=0 |
+| amazon | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\amazon watch reviews\amazon watch reviews.html | C4 | not_applicable | 语言范围: zh |
+| amazon | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\amazon watch reviews\amazon watch reviews.html | C5 | pass | executed; hard=0; advisory=20; 待语境复核 |
+| amazon | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\amazon watch reviews\amazon watch reviews.html | C6 | pass | executed; hard=0; advisory=0 |
+| amazon | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\amazon watch reviews\amazon watch reviews.html | C9 | pass | executed; hard=0; advisory=0 |
+| amazon | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\amazon watch reviews\amazon watch reviews.html | C10 | pass | executed; hard=0; advisory=16; 待语境复核 |
+| amazon | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\amazon watch reviews\amazon watch reviews.html | C11 | not_applicable | 语言范围: zh |
+| amazon | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\amazon watch reviews\amazon watch reviews.html | C12 | not_applicable | 语言范围: zh |
+| amazon | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\amazon watch reviews\amazon watch reviews.html | C7.nav | pass | executed; hard=0; advisory=0 |
+| amazon | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\amazon watch reviews\amazon watch reviews-en.html | INPUT | pass | accepted; lang=en; format=html |
+| amazon | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\amazon watch reviews\amazon watch reviews-en.html | C1 | not_applicable | 语言范围: en |
+| amazon | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\amazon watch reviews\amazon watch reviews-en.html | C2 | pass | executed; hard=0; advisory=0 |
+| amazon | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\amazon watch reviews\amazon watch reviews-en.html | C3 | pass | executed; hard=0; advisory=0 |
+| amazon | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\amazon watch reviews\amazon watch reviews-en.html | C4 | pass | executed; hard=0; advisory=0 |
+| amazon | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\amazon watch reviews\amazon watch reviews-en.html | C5 | not_applicable | 语言范围: en |
+| amazon | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\amazon watch reviews\amazon watch reviews-en.html | C6 | pass | executed; hard=0; advisory=0 |
+| amazon | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\amazon watch reviews\amazon watch reviews-en.html | C9 | pass | executed; hard=0; advisory=0 |
+| amazon | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\amazon watch reviews\amazon watch reviews-en.html | C10 | pass | executed; hard=0; advisory=16; 待语境复核 |
+| amazon | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\amazon watch reviews\amazon watch reviews-en.html | C11 | pass | executed; hard=0; advisory=2; 待语境复核 |
+| amazon | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\amazon watch reviews\amazon watch reviews-en.html | C12 | pass | executed; hard=0; advisory=0 |
+| amazon | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\amazon watch reviews\amazon watch reviews-en.html | C7.nav | pass | executed; hard=0; advisory=0 |
+| amazon | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\amazon watch reviews\amazon watch reviews-en.html <-> (en/md missing) | C7 | not_applicable | 单文件/单语或未要求该配对；缺 en/md |
+| amazon | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\amazon watch reviews\amazon watch reviews.html <-> (zh/md missing) | C7 | not_applicable | 单文件/单语或未要求该配对；缺 zh/md |
+| amazon | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\amazon watch reviews\amazon watch reviews-en.html <-> C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\amazon watch reviews\amazon watch reviews.html | C8 | pass | executed; hard=0; advisory=0 |
+| loan-full | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction\full data.html | INPUT | pass | accepted; lang=zh; format=html |
+| loan-full | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction\full data.html | C1 | pass | executed; hard=0; advisory=0 |
+| loan-full | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction\full data.html | C2 | pass | executed; hard=0; advisory=0 |
+| loan-full | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction\full data.html | C3 | pass | executed; hard=0; advisory=0 |
+| loan-full | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction\full data.html | C4 | not_applicable | 语言范围: zh |
+| loan-full | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction\full data.html | C5 | pass | executed; hard=0; advisory=9; 待语境复核 |
+| loan-full | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction\full data.html | C6 | pass | executed; hard=0; advisory=0 |
+| loan-full | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction\full data.html | C9 | pass | executed; hard=0; advisory=7; 待语境复核 |
+| loan-full | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction\full data.html | C10 | pass | executed; hard=0; advisory=16; 待语境复核 |
+| loan-full | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction\full data.html | C11 | not_applicable | 语言范围: zh |
+| loan-full | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction\full data.html | C12 | not_applicable | 语言范围: zh |
+| loan-full | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction\full data.html | C7.nav | pass | executed; hard=0; advisory=0 |
+| loan-full | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction\full data-en.html | INPUT | pass | accepted; lang=en; format=html |
+| loan-full | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction\full data-en.html | C1 | not_applicable | 语言范围: en |
+| loan-full | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction\full data-en.html | C2 | pass | executed; hard=0; advisory=0 |
+| loan-full | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction\full data-en.html | C3 | pass | executed; hard=0; advisory=0 |
+| loan-full | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction\full data-en.html | C4 | pass | executed; hard=0; advisory=0 |
+| loan-full | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction\full data-en.html | C5 | not_applicable | 语言范围: en |
+| loan-full | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction\full data-en.html | C6 | pass | executed; hard=0; advisory=0 |
+| loan-full | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction\full data-en.html | C9 | pass | executed; hard=0; advisory=8; 待语境复核 |
+| loan-full | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction\full data-en.html | C10 | pass | executed; hard=0; advisory=5; 待语境复核 |
+| loan-full | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction\full data-en.html | C11 | pass | executed; hard=0; advisory=1; 待语境复核 |
+| loan-full | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction\full data-en.html | C12 | pass | executed; hard=0; advisory=0 |
+| loan-full | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction\full data-en.html | C7.nav | pass | executed; hard=0; advisory=0 |
+| loan-full | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction\full data-en.html <-> (en/md missing) | C7 | not_applicable | 单文件/单语或未要求该配对；缺 en/md |
+| loan-full | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction\full data.html <-> (zh/md missing) | C7 | not_applicable | 单文件/单语或未要求该配对；缺 zh/md |
+| loan-full | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction\full data-en.html <-> C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction\full data.html | C8 | pass | executed; hard=0; advisory=0 |
+| bank | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\Bank Customer Churn Prediction\Bank Customer Churn Prediction.html | C13 | pass | executed image references; hard=0; advisory=0 |
+| bank | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\Bank Customer Churn Prediction\Bank Customer Churn Prediction-en.html | C13 | pass | executed image references; hard=0; advisory=0 |
+| fraud | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\e-commerce fraud detection\e-commerce fraud detection.html | C13 | pass | executed image references; hard=0; advisory=0 |
+| fraud | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\e-commerce fraud detection\e-commerce fraud detection-en.html | C13 | pass | executed image references; hard=0; advisory=0 |
+| loan | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction\lendingclub loan prediction.html | C13 | pass | executed image references; hard=0; advisory=0 |
+| loan | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction\lendingclub loan prediction-en.html | C13 | pass | executed image references; hard=0; advisory=0 |
+| youtube | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\youtube comment analysis\youtube comment analysis.html | C13 | pass | executed image references; hard=0; advisory=0 |
+| youtube | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\youtube comment analysis\youtube comment analysis-en.html | C13 | pass | executed image references; hard=0; advisory=0 |
+| ab | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\ab testing\ab testing.html | C13 | pass | executed image references; hard=0; advisory=0 |
+| ab | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\ab testing\ab testing-en.html | C13 | pass | executed image references; hard=0; advisory=0 |
+| healthy | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\healthy home\healthy home.html | C13 | pass | executed image references; hard=0; advisory=0 |
+| healthy | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\healthy home\healthy home-en.html | C13 | pass | executed image references; hard=0; advisory=0 |
+| amazon | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\amazon watch reviews\amazon watch reviews.html | C13 | pass | executed image references; hard=0; advisory=0 |
+| amazon | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\amazon watch reviews\amazon watch reviews-en.html | C13 | pass | executed image references; hard=0; advisory=0 |
+| loan-full | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction\full data.html | C13 | pass | executed image references; hard=0; advisory=0 |
+| loan-full | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction\full data-en.html | C13 | pass | executed image references; hard=0; advisory=0 |
+| * | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\ab testing, C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\amazon watch reviews, C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\Bank Customer Churn Prediction, C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\e-commerce fraud detection, C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\healthy home, C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction, C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\youtube comment analysis | C13.orphans | pass | executed across accepted files; hard=0; advisory=55 |
+
+覆盖计数: pass=177, fail=0, skipped=0, not_applicable=56
+pass 表示该项已执行且无 hard；reason 中 advisory 数量仍需语境判断，strict 会计入退出码。
+
+## bank / C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\Bank Customer Churn Prediction\Bank Customer Churn Prediction.html（zh/html）
+
+| 检查 | 行 | 片段 | 说明 |
+|---|---|---|---|
+| C3 | 342 | P 为精确率，R 为召回率，均以 0 至 1 的比例代入，F₂ 无量纲。F₂ 偏重召回；这一权重不代表已核实的真实误判… | 术语「量纲」→ 尺度/口径/单位（按语义选）；severity=advisory; source=global; 被误当尺度/口径/单位使用，fraud zh 曾 5+ 处（2026-07，data projects 仓库）；适用范围：科学上的量纲/无量纲可合法使用；仅在把量纲误作尺度、统计口径或单位的项目语境下建议改写。 |
+| C3 | 384 | FP 为误报人数，FN 为漏报人数。把一次误报损失设为 1 个成本单位，C 表示一次漏报相对一次误报的假设成本倍数，无… | 术语「量纲」→ 尺度/口径/单位（按语义选）；severity=advisory; source=global; 被误当尺度/口径/单位使用，fraud zh 曾 5+ 处（2026-07，data projects 仓库）；适用范围：科学上的量纲/无量纲可合法使用；仅在把量纲误作尺度、统计口径或单位的项目语境下建议改写。 |
+| C3 | 427 | 年龄贡献并非随年龄单调增加。下表以全部 2,500 名测试客户分组，贡献单位为原始对数几率（raw log-odds）… | 术语「量纲」→ 尺度/口径/单位（按语义选）；severity=advisory; source=global; 被误当尺度/口径/单位使用，fraud zh 曾 5+ 处（2026-07，data projects 仓库）；适用范围：科学上的量纲/无量纲可合法使用；仅在把量纲误作尺度、统计口径或单位的项目语境下建议改写。 |
+| C5 | 134 | 阈值从 0.5 降至选择集确定的 0.275，名单由 459 人扩大到 827 人，多覆盖 93 个流失标签，同时增加… | 句内 3 个全角逗号（≥3），建议拆句 |
+| C5 | 592 | 在本测试样本中，阈值 0.5 的名单为 459 人，精确率 66.67%、召回率 60.12%，适合用作人工服务容量较… | 句内 3 个全角逗号（≥3），建议拆句 |
+| C10 | 392 | 值变量使用原始单 | 出现 2 次（行 392, 426），跨节重述改回指 |
+| C10 | 392 | 分数负贡献降低分 | 出现 2 次（行 392, 602），跨节重述改回指 |
+| C10 | 392 | 变量使用原始单位 | 出现 2 次（行 392, 426），跨节重述改回指 |
+| C10 | 92 | 型比较与SHAP | 出现 2 次（行 92, 101），跨节重述改回指 |
+| C10 | 392 | 失分数负贡献降低 | 出现 2 次（行 392, 602），跨节重述改回指 |
+| C10 | 392 | 数值变量使用原始 | 出现 2 次（行 392, 426），跨节重述改回指 |
+| C10 | 392 | 数负贡献降低分数 | 出现 2 次（行 392, 602），跨节重述改回指 |
+| C10 | 92 | 模型比较与SHA | 出现 2 次（行 92, 101），跨节重述改回指 |
+| C10 | 92 | 比较与SHAP解 | 出现 2 次（行 92, 101），跨节重述改回指 |
+| C10 | 392 | 流失分数负贡献降 | 出现 2 次（行 392, 602），跨节重述改回指 |
+| C10 | 275 | 特征按流失与否的 | 出现 2 次（行 275, 276），跨节重述改回指 |
+| C10 | 92 | 较与SHAP解释 | 出现 2 次（行 92, 101），跨节重述改回指 |
+
+## bank / C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\Bank Customer Churn Prediction\Bank Customer Churn Prediction-en.html（en/html）
+
+| 检查 | 行 | 片段 | 说明 |
+|---|---|---|---|
+| C6 | 132 | 句长 [13, 12, 14, 12, 14] | 连续 5 句长度相近，节奏单调 |
+| C6 | 335 | 句长 [15, 13, 15, 13, 15] | 连续 5 句长度相近，节奏单调 |
+| C10 | 392 | churn score and negative contributions lower | 出现 2 次（行 392, 602），跨节重述改回指 |
+| C10 | 392 | score and negative contributions lower it. | 出现 2 次（行 392, 602），跨节重述改回指 |
+| C11 | 138 | 连续 3 句以 “the” 开头 | 同型开头连排 |
+| C11 | 596 | 连续 3 句以 “the” 开头 | 同型开头连排 |
+
+## fraud / C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\e-commerce fraud detection\e-commerce fraud detection.html（zh/html）
+
+| 检查 | 行 | 片段 | 说明 |
+|---|---|---|---|
+| C5 | 360 | 表中 TP 为检出的欺诈，FP 为误拒的非欺诈，FN 为漏判的欺诈，TN 为正确批准的非欺诈，均以交易条数计 | 句内 4 个全角逗号（≥3），建议拆句 |
+| C6 | 219 | 句长 [34, 33, 29, 31, 29] | 连续 5 句长度相近，节奏单调 |
+| C10 | 218 | 严格早于当前购买 | 出现 2 次（行 218, 586），跨节重述改回指 |
+| C10 | 218 | 于当前购买时间的 | 出现 2 次（行 218, 586），跨节重述改回指 |
+| C10 | 104 | 册后不超过一秒的 | 出现 2 次（行 104, 207），跨节重述改回指 |
+| C10 | 218 | 前购买时间的交易 | 出现 2 次（行 218, 586），跨节重述改回指 |
+| C10 | 313 | 平均交叉验证AP | 出现 2 次（行 313, 313），跨节重述改回指 |
+| C10 | 218 | 当前购买时间的交 | 出现 2 次（行 218, 586），跨节重述改回指 |
+| C10 | 218 | 性别sex渠道s | 出现 2 次（行 218, 585），跨节重述改回指 |
+| C10 | 218 | 早于当前购买时间 | 出现 2 次（行 218, 586），跨节重述改回指 |
+| C10 | 218 | 格早于当前购买时 | 出现 2 次（行 218, 586），跨节重述改回指 |
+| C10 | 104 | 注册后不超过一秒 | 出现 2 次（行 104, 207），跨节重述改回指 |
+| C10 | 313 | 的平均交叉验证A | 出现 2 次（行 313, 313），跨节重述改回指 |
+| C10 | 104 | 笔注册后不超过一 | 出现 2 次（行 104, 207），跨节重述改回指 |
+| C10 | 105 | 类别权重Ligh | 出现 2 次（行 105, 576），跨节重述改回指 |
+
+## fraud / C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\e-commerce fraud detection\e-commerce fraud detection-en.html（en/html）
+
+| 检查 | 行 | 片段 | 说明 |
+|---|---|---|---|
+| C6 | 441 | 段落字数 [406, 411, 433, 396] | 连续 4 段长度趋同 |
+| C10 | 218 | age signup hour purchase hour signup | 出现 2 次（行 218, 584），跨节重述改回指 |
+| C10 | 104 | one second of signup carry fraud | 出现 2 次（行 104, 207），跨节重述改回指 |
+| C10 | 104 | second of signup carry fraud labels. | 出现 2 次（行 104, 207），跨节重述改回指 |
+| C10 | 218 | signup hour purchase hour signup weekend | 出现 2 次（行 218, 584），跨节重述改回指 |
+| C10 | 218 | value age signup hour purchase hour | 出现 2 次（行 218, 584），跨节重述改回指 |
+| C10 | 104 | within one second of signup carry | 出现 2 次（行 104, 207），跨节重述改回指 |
+| C11 | 106 | 连续 5 句以 “the” 开头 | 同型开头连排 |
+
+## loan / C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction\lendingclub loan prediction.html（zh/html）
+
+| 检查 | 行 | 片段 | 说明 |
+|---|---|---|---|
+| C5 | 135 | 基于这些结果，建议保留简单规则作为比较基线，将模型分数用于复核优先级试点，并围绕期限、信用等级和偿债压力设计核查清单 | 句内 3 个全角逗号（≥3），建议拆句 |
+| C5 | 145 | 在约 9,000 行数据的两组比较中，利率的 Cohen's d 为 0.73，利用率为 0.31，其余表列效应量较小 | 句内 3 个全角逗号（≥3），建议拆句 |
+| C5 | 412 | 因此，捕获违约带来的模拟节省减少，误标更容易抵消节省，净降幅低于毛降幅 | 句内 3 个全角逗号（≥3），建议拆句 |
+| C5 | 426 | 基于这些结果，建议保留简单规则作为比较基线，将模型分数用于复核优先级试点，并围绕期限、信用等级和偿债压力设计核查清单 | 句内 3 个全角逗号（≥3），建议拆句 |
+| C10 | 101 | 利用率上的风险分 | 出现 3 次（行 101, 132, 425），跨节重述改回指 |
+| C10 | 101 | 用率上的风险分层 | 出现 3 次（行 101, 132, 425），跨节重述改回指 |
+| C10 | 101 | 相近的毛模拟成本 | 出现 3 次（行 101, 132, 425），跨节重述改回指 |
+| C10 | 132 | 贷款期限信用等级 | 出现 3 次（行 132, 425, 432），跨节重述改回指 |
+| C10 | 101 | 风险覆盖误标负担 | 出现 3 次（行 101, 135, 426），跨节重述改回指 |
+| C10 | 132 | est能捕获更多 | 出现 2 次（行 132, 425），跨节重述改回指 |
+| C10 | 92 | rest冻结阈值 | 出现 2 次（行 92, 94），跨节重述改回指 |
+| C10 | 257 | rest的选择集 | 出现 2 次（行 257, 293），跨节重述改回指 |
+| C10 | 132 | rest能捕获更 | 出现 2 次（行 132, 425），跨节重述改回指 |
+| C10 | 132 | st能捕获更多违 | 出现 2 次（行 132, 425），跨节重述改回指 |
+| C10 | 132 | t能捕获更多违约 | 出现 2 次（行 132, 425），跨节重述改回指 |
+| C10 | 132 | 三类分类模型与简 | 出现 2 次（行 132, 425），跨节重述改回指 |
+| C10 | 132 | 上的风险分层并比 | 出现 2 次（行 132, 425），跨节重述改回指 |
+| C10 | 132 | 下的降幅差异也表 | 出现 2 次（行 132, 425），跨节重述改回指 |
+| C10 | 139 | 不包含实际复核资 | 出现 2 次（行 139, 258），跨节重述改回指 |
+| C10 | - | （另有 204 条未列出） | C10 每份只列命中最多的前 15 条；计数封顶，不可直接当降噪读数 |
+
+## loan / C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction\lendingclub loan prediction-en.html（en/html）
+
+| 检查 | 行 | 片段 | 说明 |
+|---|---|---|---|
+| C10 | 135 | a checklist around term grade and | 出现 2 次（行 135, 426），跨节重述改回指 |
+| C10 | 132 | a similar gross simulated cost result | 出现 2 次（行 132, 425），跨节重述改回指 |
+| C10 | 135 | actual costs. recording risk coverage false | 出现 2 次（行 135, 426），跨节重述改回指 |
+| C10 | 135 | added model complexity is worthwhile. the | 出现 2 次（行 135, 426），跨节重述改回指 |
+| C10 | 132 | advantage. the term rule delivers a | 出现 2 次（行 132, 425），跨节重述改回指 |
+| C10 | 132 | also shows that policy choice depends | 出现 2 次（行 132, 425），跨节重述改回指 |
+| C10 | 132 | analysis identifies risk segmentation by loan | 出现 2 次（行 132, 425），跨节重述改回指 |
+| C10 | 135 | and actual costs. recording risk coverage | 出现 2 次（行 135, 426），跨节重述改回指 |
+| C10 | 135 | and build a checklist around term | 出现 2 次（行 135, 426），跨节重述改回指 |
+| C10 | 132 | and compares three classifiers with simple | 出现 2 次（行 132, 425），跨节重述改回指 |
+| C10 | 132 | and net reductions also shows that | 出现 2 次（行 132, 425），跨节重述改回指 |
+| C10 | 135 | and repayment burden. thresholds should reflect | 出现 2 次（行 135, 426），跨节重述改回指 |
+| C10 | 135 | and review outcomes would help determine | 出现 2 次（行 135, 426），跨节重述改回指 |
+| C10 | 132 | and revolving utilization and compares three | 出现 2 次（行 132, 425），跨节重述改回指 |
+| C10 | 132 | approval rules. random forest captures more | 出现 2 次（行 132, 425），跨节重述改回指 |
+| C10 | - | （另有 94 条未列出） | C10 每份只列命中最多的前 15 条；计数封顶，不可直接当降噪读数 |
+| C11 | 425 | 连续 3 句以 “the” 开头 | 同型开头连排 |
+
+## youtube / C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\youtube comment analysis\youtube comment analysis.html（zh/html）
+
+| 检查 | 行 | 片段 | 说明 |
+|---|---|---|---|
+| C5 | 139 | 本分析从评论文本识别养宠信号，用于安排频道候选复核： 在各频道已观测评论者中，用户在该频道的最高评论分数达到或超过阈值… | 句内 3 个全角逗号（≥3），建议拆句 |
+| C10 | 105 | RF使用较小样本 | 出现 2 次（行 105, 211），跨节重述改回指 |
+| C10 | 104 | 先用可解释规则构 | 出现 2 次（行 104, 140），跨节重述改回指 |
+| C10 | 101 | 养宠相关文本信号 | 出现 2 次（行 101, 104），跨节重述改回指 |
+| C10 | 107 | 出现在一个创作者 | 出现 2 次（行 107, 147），跨节重述改回指 |
+| C10 | 104 | 则构造弱监督标签 | 出现 2 次（行 104, 140），跨节重述改回指 |
+| C10 | 105 | 受限词表XGBo | 出现 2 次（行 105, 323），跨节重述改回指 |
+| C10 | 107 | 只出现在一个创作 | 出现 2 次（行 107, 147），跨节重述改回指 |
+| C10 | 104 | 可解释规则构造弱 | 出现 2 次（行 104, 140），跨节重述改回指 |
+| C10 | 107 | 户只出现在一个创 | 出现 2 次（行 107, 147），跨节重述改回指 |
+| C10 | 92 | 条件加权精确率为 | 出现 2 次（行 92, 106），跨节重述改回指 |
+| C10 | 107 | 现在一个创作者下 | 出现 2 次（行 107, 147），跨节重述改回指 |
+| C10 | 104 | 用可解释规则构造 | 出现 2 次（行 104, 140），跨节重述改回指 |
+| C10 | 107 | 用户只出现在一个 | 出现 2 次（行 107, 147），跨节重述改回指 |
+| C10 | 107 | 的用户只出现在一 | 出现 2 次（行 107, 147），跨节重述改回指 |
+| C10 | 104 | 规则构造弱监督标 | 出现 2 次（行 104, 140），跨节重述改回指 |
+| C10 | - | （另有 2 条未列出） | C10 每份只列命中最多的前 15 条；计数封顶，不可直接当降噪读数 |
+
+## youtube / C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\youtube comment analysis\youtube comment analysis-en.html（en/html）
+
+| 检查 | 行 | 片段 | 说明 |
+|---|---|---|---|
+| C6 | 198 | 句长 [13, 13, 12, 12, 12] | 连续 5 句长度相近，节奏单调 |
+| C10 | 333 | each user s maximum comment score | 出现 2 次（行 333, 343），跨节重述改回指 |
+| C10 | 105 | rf uses a smaller sample so | 出现 2 次（行 105, 223），跨节重述改回指 |
+| C11 | 141 | 连续 5 句以 “the” 开头 | 同型开头连排 |
+
+## ab / C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\ab testing\ab testing.html（zh/html）
+
+| 检查 | 行 | 片段 | 说明 |
+|---|---|---|---|
+| C5 | 212 | 逐步向下校正后， retention_7 仍显著（校正后 p = 0.0031）， retention_1 仍不显著（… | 句内 3 个全角逗号（≥3），建议拆句 |
+| C6 | 276 | 句长 [28, 27, 27, 31, 30] | 连续 5 句长度相近，节奏单调 |
+| C10 | 101 | 局数未显示明确改 | 出现 2 次（行 101, 280），跨节重述改回指 |
+| C10 | 101 | 数未显示明确改善 | 出现 2 次（行 101, 280），跨节重述改回指 |
+| C10 | 101 | 日留存和游戏局数 | 出现 2 次（行 101, 105），跨节重述改回指 |
+| C10 | 101 | 次日留存和游戏局 | 出现 2 次（行 101, 105），跨节重述改回指 |
+
+## ab / C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\ab testing\ab testing-en.html（en/html）
+
+| 检查 | 行 | 片段 | 说明 |
+|---|---|---|---|
+| C9 | 155 | Decision rule: two-sided tests at alpha = 0.05. Both improv… | 对偶句式共 8 处（配额 ≤6），削到只留关键对比 |
+| C9 | 206 | The 7-day retention difference is -0.82 pp, a 4.3% relative… | 对偶句式共 8 处（配额 ≤6），削到只留关键对比 |
+| C9 | 213 | A percentile bootstrap resamples the observed players withi… | 对偶句式共 8 处（配额 ≤6），削到只留关键对比 |
+| C9 | 217 | With the realized sample sizes and allocation ratio, a roug… | 对偶句式共 8 处（配额 ≤6），削到只留关键对比 |
+| C9 | 218 | Observed (post-hoc) power is deliberately not reported: it … | 对偶句式共 8 处（配额 ≤6），削到只留关键对比 |
+| C9 | 276 | Business returns. Revenue, ARPU, and LTV are unavailable; p… | 对偶句式共 8 处（配额 ≤6），削到只留关键对比 |
+| C9 | 317 | Messaging, rewards, and duration changes are candidates who… | 对偶句式共 8 处（配额 ≤6），削到只留关键对比 |
+| C9 | 320 | The table combines the observed difference with hypothetica… | 对偶句式共 8 处（配额 ≤6），削到只留关键对比 |
+| C11 | 101 | 连续 3 句以 “the” 开头 | 同型开头连排 |
+| C11 | 223 | 连续 3 句以 “the” 开头 | 同型开头连排 |
+| C11 | 268 | 连续 3 句以 “the” 开头 | 同型开头连排 |
+
+## healthy / C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\healthy home\healthy home.html（zh/html）
+
+| 检查 | 行 | 片段 | 说明 |
+|---|---|---|---|
+| C5 | 132 | 距高速公路 0–50 m 的观测点，NO₂ 中位数为 23.8，超过 1 km 为 7.5，均按课程文件原始数值尺度报告 | 句内 3 个全角逗号（≥3），建议拆句 |
+| C5 | 143 | 为避免反向边和重叠道路重复计长，先将几何投影到米制坐标系，再计算中心线并集，得到总长 1,709.21 km | 句内 3 个全角逗号（≥3），建议拆句 |
+| C5 | 365 | 工业区的平均残差接近零，但平均绝对误差最大，说明高估与低估相互抵消，不能只看平均残差 | 句内 3 个全角逗号（≥3），建议拆句 |
+| C5 | 370 | 在本次选择流程内，RF 的分区留出表现优于 HGB，可作为主要制图模型，HGB 用于检查更换模型后的分级稳定性 | 句内 3 个全角逗号（≥3），建议拆句 |
+| C6 | 318 | 句长 [26, 28, 29, 26, 26] | 连续 5 句长度相近，节奏单调 |
+| C10 | 133 | 方图梯度提升模型 | 出现 3 次（行 133, 153, 261），跨节重述改回指 |
+| C10 | 133 | 直方图梯度提升模 | 出现 3 次（行 133, 153, 261），跨节重述改回指 |
+| C10 | 134 | 与呼吸危害等级的 | 出现 2 次（行 134, 316），跨节重述改回指 |
+| C10 | 133 | 于直方图梯度提升 | 出现 2 次（行 133, 261），跨节重述改回指 |
+| C10 | 133 | 分区留出表现优于 | 出现 2 次（行 133, 370），跨节重述改回指 |
+| C10 | 92 | 区域分块评价中的 | 出现 2 次（行 92, 133），跨节重述改回指 |
+| C10 | 134 | 危害等级的秩相关 | 出现 2 次（行 134, 316），跨节重述改回指 |
+| C10 | 134 | 吸危害等级的秩相 | 出现 2 次（行 134, 316），跨节重述改回指 |
+| C10 | 134 | 呼吸危害等级的秩 | 出现 2 次（行 134, 316），跨节重述改回指 |
+| C10 | 134 | 害等级的秩相关为 | 出现 2 次（行 134, 316），跨节重述改回指 |
+| C10 | 101 | 提出候选路段调查 | 出现 2 次（行 101, 409），跨节重述改回指 |
+| C10 | 133 | 的分区留出表现优 | 出现 2 次（行 133, 370），跨节重述改回指 |
+| C10 | 92 | 路相对预测图覆盖 | 出现 2 次（行 92, 134），跨节重述改回指 |
+| C10 | 92 | 道路相对预测图覆 | 出现 2 次（行 92, 134），跨节重述改回指 |
+
+## healthy / C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\healthy home\healthy home-en.html（en/html）
+
+| 检查 | 行 | 片段 | 说明 |
+|---|---|---|---|
+| C11 | 371 | 连续 3 句以 “the” 开头 | 同型开头连排 |
+
+## amazon / C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\amazon watch reviews\amazon watch reviews.html（zh/html）
+
+| 检查 | 行 | 片段 | 说明 |
+|---|---|---|---|
+| C5 | 144 | 全量结果中，均星最低的主题提供评论复核线索：故障/退货主题均分 2.37 星，比次低主题低约 1.4 星，占建模语料一… | 句内 3 个全角逗号（≥3），建议拆句 |
+| C5 | 144 | 结论上信任主题多于信任硬分区：具体簇跨样本与全量以 top-term Jaccard 0.60 至 0.67 复现，而… | 句内 3 个全角逗号（≥3），建议拆句 |
+| C5 | 148 | 面对一份评论语料，卖家或品类经理想知道买家到底在写什么，好把质量改进和营销对准真实关切，而不是靠猜 | 句内 3 个全角逗号（≥3），建议拆句 |
+| C5 | 151 | 语料是 Amazon Customer Reviews 数据集的「手表」品类切片：15 列，960,872 条原始记录… | 句内 3 个全角逗号（≥3），建议拆句 |
+| C5 | 154 | 另有 9.0% 的正文完全重复，多是「Love it」式的短好评，按保留原始记录的分析假设处理，评论真实性未独立核实 | 句内 3 个全角逗号（≥3），建议拆句 |
+| C5 | 169 | 一个预处理函数，在全量 notebook 里逐字复用以保证两次运行可比：它把每条正文转小写，剥掉 HTML 残留（ 1… | 句内 6 个全角逗号（≥3），建议拆句 |
+| C5 | 173 | 因为计数矩阵和 TF-IDF 矩阵建自同一批词，二者的相近主题提供内部一致性证据，但共享的词袋表示也带来共同限制，不能… | 句内 3 个全角逗号（≥3），建议拆句 |
+| C5 | 187 | K=7 下，其中四个簇（约占建模语料 53%）是按形容词和长度而非按主语切分的泛化好评：一个「good」领头的簇、一个… | 句内 3 个全角逗号（≥3），建议拆句 |
+| C5 | 202 | held-out perplexity（留出集上的困惑度）在 80% 的文档上拟合、在另 20% 上打分，奖励原始预测… | 句内 3 个全角逗号（≥3），建议拆句 |
+| C5 | 202 | c_v coherence（主题连贯性）是一个在真实文本上滑动窗口统计词共现的分数，它通过词共现提供主题可解释性的代理… | 句内 3 个全角逗号（≥3），建议拆句 |
+| C5 | 282 | 把 min_df 从 20 提到 200 以匹配大 20 倍的语料后，词表落在 3,723 词，其中 75.2% 已出… | 句内 3 个全角逗号（≥3），建议拆句 |
+| C5 | 282 | K=5、7、9 的 sanity 检查让余弦轮廓系数保持在 0.0099 至 0.0142，与样本呈现的同样是一片平地… | 句内 3 个全角逗号（≥3），建议拆句 |
+| C5 | 285 | 轮廓系数在 0.01 附近，提示分离度弱（样本上 full K-Means 与 MiniBatchKMeans 只在 … | 句内 3 个全角逗号（≥3），建议拆句 |
+| C5 | 292 | 具体簇以 Jaccard 0.60 至 0.67 保住，而对齐后的簇占比存在变化，所以报告引用主题级份额，用分区描述词… | 句内 3 个全角逗号（≥3），建议拆句 |
+| C5 | 304 | 在全量的十个主题里，故障/退货主题（top 词 time、work、one、battery、back、day）是那个要… | 句内 3 个全角逗号（≥3），建议拆句 |
+| C5 | 361 | 第一次买 Invicta 手表，可这块不动指针，很糟糕……」（权重 0.99，1 星） | 句内 3 个全角逗号（≥3），建议拆句 |
+| C5 | 367 | 在建模语料的 80,553 条一星评论（占语料 9.4%）里， 52.9% 以故障/退货主题为主导主题，而该主题的全语… | 句内 3 个全角逗号（≥3），建议拆句 |
+| C5 | 371 | 在 202 个至少有 300 条建模评论的产品里，故障主题份额最高的十个坐在 24.6% 至 39.9% ，是 11.… | 句内 3 个全角逗号（≥3），建议拆句 |
+| C5 | 416 | 2008 至 2015 年间，短的「设置与读表」主题从约 15% 降到 9%，泛化性价比好评从约 10% 升到 16%… | 句内 4 个全角逗号（≥3），建议拆句 |
+| C5 | 454 | 簇有可解释的词内容，但真实分群标签未核实，同时呈现主题与情感差异，确切占比也随设定变化 | 句内 3 个全角逗号（≥3），建议拆句 |
+| C10 | 144 | 价比好评趋势较平 | 出现 3 次（行 144, 300, 420），跨节重述改回指 |
+| C10 | 206 | 常佩戴与他人称赞 | 出现 3 次（行 206, 262, 273），跨节重述改回指 |
+| C10 | 144 | 性价比好评趋势较 | 出现 3 次（行 144, 300, 420），跨节重述改回指 |
+| C10 | 92 | 故障退货主题均分 | 出现 3 次（行 92, 101, 144），跨节重述改回指 |
+| C10 | 206 | 日常佩戴与他人称 | 出现 3 次（行 206, 262, 273），跨节重述改回指 |
+| C10 | 143 | 走时电池表带尺寸 | 出现 3 次（行 143, 298, 429），跨节重述改回指 |
+| C10 | 142 | DA根据词频计数 | 出现 2 次（行 142, 270），跨节重述改回指 |
+| C10 | 142 | LDA根据词频计 | 出现 2 次（行 142, 270），跨节重述改回指 |
+| C10 | 144 | LED硅胶水钻款 | 出现 2 次（行 144, 371），跨节重述改回指 |
+| C10 | 169 | LTK英文停用词 | 出现 2 次（行 169, 465），跨节重述改回指 |
+| C10 | 169 | NLTK英文停用 | 出现 2 次（行 169, 465），跨节重述改回指 |
+| C10 | 102 | hm匈牙利算法按 | 出现 2 次（行 102, 285），跨节重述改回指 |
+| C10 | 102 | ithm匈牙利算 | 出现 2 次（行 102, 285），跨节重述改回指 |
+| C10 | 102 | m匈牙利算法按t | 出现 2 次（行 102, 285），跨节重述改回指 |
+| C10 | 285 | op词有较高重叠 | 出现 2 次（行 285, 286），跨节重述改回指 |
+| C10 | - | （另有 103 条未列出） | C10 每份只列命中最多的前 15 条；计数封顶，不可直接当降噪读数 |
+
+## amazon / C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\amazon watch reviews\amazon watch reviews-en.html（en/html）
+
+| 检查 | 行 | 片段 | 说明 |
+|---|---|---|---|
+| C10 | 210 | and are compared through term alignment. | 出现 2 次（行 210, 306），跨节重述改回指 |
+| C10 | 210 | and full-corpus topics have separate ids | 出现 2 次（行 210, 306），跨节重述改回指 |
+| C10 | 209 | and tentative labels topic names summarize | 出现 2 次（行 209, 305），跨节重述改回指 |
+| C10 | 102 | by top-term jaccard with the hungarian | 出现 2 次（行 102, 285），跨节重述改回指 |
+| C10 | 285 | clusters have relatively high top-term overlap | 出现 2 次（行 285, 286），跨节重述改回指 |
+| C10 | 285 | concrete clusters have relatively high top-term | 出现 2 次（行 285, 286），跨节重述改回指 |
+| C10 | 210 | full-corpus topics have separate ids and | 出现 2 次（行 210, 306），跨节重述改回指 |
+| C10 | 210 | have separate ids and are compared | 出现 2 次（行 210, 306），跨节重述改回指 |
+| C10 | 210 | high-weight terms. sample and full-corpus topics | 出现 2 次（行 210, 306），跨节重述改回指 |
+| C10 | 210 | ids and are compared through term | 出现 2 次（行 210, 306），跨节重述改回指 |
+| C10 | 209 | ids and tentative labels topic names | 出现 2 次（行 209, 305），跨节重述改回指 |
+| C10 | 300 | is nearly flat in the long-review | 出现 2 次（行 300, 420），跨节重述改回指 |
+| C10 | 209 | labels topic names summarize the meaning | 出现 2 次（行 209, 305），跨节重述改回指 |
+| C10 | 416 | may miss a small emerging theme | 出现 2 次（行 416, 459），跨节重述改回指 |
+| C10 | 263 | mean and verified share by topic. | 出现 2 次（行 263, 357），跨节重述改回指 |
+| C10 | - | （另有 22 条未列出） | C10 每份只列命中最多的前 15 条；计数封顶，不可直接当降噪读数 |
+| C11 | 288 | 连续 3 句以 “the” 开头 | 同型开头连排 |
+| C11 | 414 | 连续 3 句以 “the” 开头 | 同型开头连排 |
+
+## loan-full / C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction\full data.html（zh/html）
+
+| 检查 | 行 | 片段 | 说明 |
+|---|---|---|---|
+| C5 | 133 | 结果显示，等级 A 至 G 的违约率从 5.6% 升至 39.8%，60 个月贷款的违约率为 25.7%，高于 36 … | 句内 3 个全角逗号（≥3），建议拆句 |
+| C5 | 133 | 不过，当前阈值会标记 44.34% 的贷款，较大的误标量使策略在毛费用下节省 7.63% 的模拟成本，在净费用下却增加… | 句内 3 个全角逗号（≥3），建议拆句 |
+| C5 | 133 | 在固定 10% 容量下，LightGBM 的命中率为 37.88%，高于等级规则的 32.38%，差异的 95% 区间… | 句内 3 个全角逗号（≥3），建议拆句 |
+| C5 | 133 | 据此，建议先将模型用于容量受限的人工复核排序，结合等级、期限与信用负担设置检查重点，再根据漏判、误标和人工成本选择阈值 | 句内 3 个全角逗号（≥3），建议拆句 |
+| C5 | 197 | 因此，这一步先检查原始 151 列，排除包含后续还款和贷款结局的信息，再处理缺失值、类别变量和衍生特征 | 句内 3 个全角逗号（≥3），建议拆句 |
+| C5 | 238 | 树模型可表达非线性与交互，这是合理的方法解释，第 7 节用 SHAP 解释模型输出，但尚未通过消融确定排序增益具体来自… | 句内 3 个全角逗号（≥3），建议拆句 |
+| C5 | 405 | 模型标记了 120,374 笔贷款，其中 30,304 笔最终违约，标记人群的违约率为 25.17% ，约为整体的 1… | 句内 3 个全角逗号（≥3），建议拆句 |
+| C5 | 419 | 误标的正常贷款（FP，分数 0.565） ：细分等级、近期银行卡开户间隔和 FICO 推高分数，但该笔贷款最终正常还款… | 句内 3 个全角逗号（≥3），建议拆句 |
+| C5 | 420 | 漏判的违约贷款（FN，分数 0.386） ：近 24 个月开户数、近期银行卡开户间隔等贡献压低分数，尽管仍有部分正向贡… | 句内 3 个全角逗号（≥3），建议拆句 |
+| C9 | 162 | 与 9,004 笔贷款的样本项目相比，本项目的分析样本约为其 89 倍。以下对照用于说明风险模式的方向和幅度，不是同一… | 对偶句式共 7 处（配额 ≤6），削到只留关键对比 |
+| C9 | 197 | 贷款违约预测只能使用作出决策时已经知道的信息。因此，这一步先检查原始 151 列，排除包含后续还款和贷款结局的信息，再… | 对偶句式共 7 处（配额 ≤6），削到只留关键对比 |
+| C9 | 238 | LightGBM 的测试 AP 比 Logistic 高约 0.0164，比 Random Forest 高约 0.0… | 对偶句式共 7 处（配额 ≤6），削到只留关键对比 |
+| C9 | 279 | 在 27,147 笔的相同队列中，LightGBM 比等级规则多识别 1,492 笔违约，比 Logistic 多识别… | 对偶句式共 7 处（配额 ≤6），削到只留关键对比 |
+| C9 | 281 | 本比较按批次分数排名取固定数量，阈值会随批次分布变化；它与主协议固定 0.46 阈值、追求较高召回的策略不同。10% … | 对偶句式共 7 处（配额 ≤6），削到只留关键对比 |
+| C9 | 416 | 以下四个样本按原阈值 0.46 分为 TP、FP、FN、TN，在固定抽样中各取接近本组分数中位数的一笔，避免只挑符合叙… | 对偶句式共 7 处（配额 ≤6），削到只留关键对比 |
+| C9 | 424 | 等级与细分等级等相关字段可能分摊贡献，类别目标编码也会影响解释口径。测试窗全部为 36 个月贷款，但背景样本含其他期限… | 对偶句式共 7 处（配额 ≤6），削到只留关键对比 |
+| C10 | 132 | AP解释模型输出 | 出现 2 次（行 132, 238），跨节重述改回指 |
+| C10 | 132 | HAP解释模型输 | 出现 2 次（行 132, 238），跨节重述改回指 |
+| C10 | 132 | SHAP解释模型 | 出现 2 次（行 132, 238），跨节重述改回指 |
+| C10 | 317 | 常贷款笔数每笔误 | 出现 2 次（行 317, 408），跨节重述改回指 |
+| C10 | 419 | 期银行卡开户间隔 | 出现 2 次（行 419, 420），跨节重述改回指 |
+| C10 | 317 | 标正常贷款笔数每 | 出现 2 次（行 317, 408），跨节重述改回指 |
+| C10 | 133 | 标记人群的违约率 | 出现 2 次（行 133, 405），跨节重述改回指 |
+| C10 | 133 | 模拟成本在净费用 | 出现 2 次（行 133, 320），跨节重述改回指 |
+| C10 | 317 | 款笔数每笔误标费 | 出现 2 次（行 317, 408），跨节重述改回指 |
+| C10 | 317 | 正常贷款笔数每笔 | 出现 2 次（行 317, 408），跨节重述改回指 |
+| C10 | 132 | 用SHAP解释模 | 出现 2 次（行 132, 238），跨节重述改回指 |
+| C10 | 317 | 用误标正常贷款笔 | 出现 2 次（行 317, 408），跨节重述改回指 |
+| C10 | 317 | 笔数每笔误标费用 | 出现 2 次（行 317, 408），跨节重述改回指 |
+| C10 | 101 | 等级期限与信用负 | 出现 2 次（行 101, 133），跨节重述改回指 |
+| C10 | 101 | 级期限与信用负担 | 出现 2 次（行 101, 133），跨节重述改回指 |
+| C10 | - | （另有 5 条未列出） | C10 每份只列命中最多的前 15 条；计数封顶，不可直接当降噪读数 |
+
+## loan-full / C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\lendingclub loan prediction\full data-en.html（en/html）
+
+| 检查 | 行 | 片段 | 说明 |
+|---|---|---|---|
+| C9 | 162 | The analysis sample is approximately 89 times the size of t… | 对偶句式共 8 处（配额 ≤6），削到只留关键对比 |
+| C9 | 197 | A default predictor must use information available when a d… | 对偶句式共 8 处（配额 ≤6），削到只留关键对比 |
+| C9 | 238 | LightGBM improves test AP by approximately 0.0164 over Logi… | 对偶句式共 8 处（配额 ≤6），削到只留关键对比 |
+| C9 | 279 | Within the same 27,147-loan queue, LightGBM identifies 1,49… | 对偶句式共 8 处（配额 ≤6），削到只留关键对比 |
+| C9 | 281 | Fixed-volume ranking produces a threshold that varies with … | 对偶句式共 8 处（配额 ≤6），削到只留关键对比 |
+| C9 | 411 | Thresholds must reflect the objective. A threshold of 0.46 … | 对偶句式共 8 处（配额 ≤6），削到只留关键对比 |
+| C9 | 416 | Four cases use the existing 0.46 threshold to define TP, FP… | 对偶句式共 8 处（配额 ≤6），削到只留关键对比 |
+| C9 | 424 | Correlated inputs such as grade and subgrade may share attr… | 对偶句式共 8 处（配额 ≤6），削到只留关键对比 |
+| C10 | 317 | default false flags cost per false | 出现 2 次（行 317, 408），跨节重述改回指 |
+| C10 | 317 | false flags cost per false flag | 出现 2 次（行 317, 408），跨节重述改回指 |
+| C10 | 132 | logistic regression random forest and lightgbm | 出现 2 次（行 132, 202），跨节重述改回指 |
+| C10 | 419 | months since the most recent bankcard | 出现 2 次（行 419, 420），跨节重述改回指 |
+| C10 | 419 | since the most recent bankcard account | 出现 2 次（行 419, 420），跨节重述改回指 |
+| C11 | 404 | 连续 5 句以 “the” 开头 | 同型开头连排 |
+
+## 项目级（跨输入组）
+
+| 检查 | 行 | 片段 | 说明 |
+|---|---|---|---|
+| C13 | - | figures/breakeven_cost_ratio.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/confusion_matrix_threshold_comparison.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/confusion_matrix_xgboost.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/feature_importance_comparison.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/gridsearch_lr_heatmap.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/pr_curves_all_models.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/roc_curves_all_models.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/shap_dependence_age.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/shap_dependence_tenure.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/SHAP_Global_Feature_Insights.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/SHAP_Local_Explanation_for_a_High-Risk_Customer.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/SHAP_Local_Explanation_for_a_Low-Risk_Customer.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/threshold_tuning_xgboost.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/calibration.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/eda_interval_speed.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/eda_source_browser.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/eda_value_device.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/score_distribution.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/shap_bar.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/shap_beeswarm.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/threshold_pr.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/correlation_heatmap.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/cost_ratio_sensitivity.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/default_rate_by_band.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/default_rate_by_categorical.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/grade_and_state_concentration.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/numeric_distributions_by_status.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/policy_baseline_costs.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/pr_curves.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/review_queue_flag_rate.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/shap_dependence.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/shap_summary.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/target_distribution.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/threshold_confusion_roc.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/threshold_tuning.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/ablation_masked_vs_full_vocab.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/comment_length_distribution.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/comments_per_user_distribution.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/confusion_matrix_tau_f1.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/creator_concentration_lorenz.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/creator_ranking_owner_share.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/feature_importance_xgb_gain.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/full_score_distribution.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/language_mix_estimate.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/lda_topic_prevalence.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/lf_coverage_overlap.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/owner_segments.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/precision_by_score_bin_human.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/roc_pr_curves_rule_agreement.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/shap_summary_beeswarm.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/threshold_tuning_rule_agreement.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/user_activity_powerlaw_loglog.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/user_loyalty_creators_per_user.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/user_value_tiers.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/validation_precision_by_stratum.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+

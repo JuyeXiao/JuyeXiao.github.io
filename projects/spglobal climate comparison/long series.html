@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>document.documentElement.classList.add('js');</script>
+  <title>长记录（2000–2024）：四区域观测与拼接模型序列 - 数据诗学</title>
+  <meta name="description" content="基于 2000–2024 年共 299 个月的观测记录，使用五个测试窗口比较 12 与 24 个月预测。按区域选择月气候态基线，并识别 TK 的 Prophet 与 AU 24 个月 SARIMA 候选方法，结合趋势和校准诊断安排后续检验。">
+  <meta property="og:title" content="长记录（2000–2024）：四区域观测与拼接模型序列">
+  <meta property="og:description" content="基于 2000–2024 年共 299 个月的观测记录，使用五个测试窗口比较 12 与 24 个月预测。按区域选择月气候态基线，并识别 TK 的 Prophet 与 AU 24 个月 SARIMA 候选方法，结合趋势和校准诊断安排后续检验。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://juyexiao.github.io/projects/spglobal%20climate%20comparison/long%20series.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:description" content="基于 2000–2024 年共 299 个月的观测记录，使用五个测试窗口比较 12 与 24 个月预测。按区域选择月气候态基线，并识别 TK 的 Prophet 与 AU 24 个月 SARIMA 候选方法，结合趋势和校准诊断安排后续检验。">
+  <link rel="canonical" href="https://juyexiao.github.io/projects/spglobal%20climate%20comparison/long%20series.html">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&amp;family=Inter:wght@200;300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;700&amp;family=Noto+Sans+SC:wght@400;500;600&amp;family=Noto+Serif+SC:wght@500&amp;display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="../../assets/css/index.css">
+  <link rel="stylesheet" href="../../assets/css/project.css">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "长记录（2000–2024）：四区域观测与拼接模型序列", "description": "基于 2000–2024 年共 299 个月的观测记录，使用五个测试窗口比较 12 与 24 个月预测。按区域选择月气候态基线，并识别 TK 的 Prophet 与 AU 24 个月 SARIMA 候选方法，结合趋势和校准诊断安排后续检验。", "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Juye Xiao"}}</script>
+</head>
+<body class="transition-colors duration-300 report-page">
+<div class="scroll-progress" id="scroll-progress"></div>
+<header class="navbar fixed top-0 left-0 right-0 z-50" id="navbar">
+<div class="container-main h-full flex items-center justify-between">
+<!-- Logo部分 -->
+<a class="navbar-logo" href="../../index.html#hero" id="navbar-logo">
+<!-- SVG Logo -->
+<svg class="logo-svg-nav" viewbox="0 0 40 40">
+<!-- 背景数据网格 -->
+<g class="grid-bg">
+<!-- 垂直线 -->
+<line class="grid-line-v" style="animation-delay: 0.1s, 0s" x1="8" x2="8" y1="0" y2="40"></line>
+<line class="grid-line-v" style="animation-delay: 0.2s, 0.5s" x1="16" x2="16" y1="0" y2="40"></line>
+<line class="grid-line-v" style="animation-delay: 0.3s, 1s" x1="24" x2="24" y1="0" y2="40"></line>
+<line class="grid-line-v" style="animation-delay: 0.4s, 1.5s" x1="32" x2="32" y1="0" y2="40"></line>
+<!-- 水平线 -->
+<line class="grid-line-h" style="animation-delay: 0.5s, 0s" x1="0" x2="40" y1="10" y2="10"></line>
+<line class="grid-line-h" style="animation-delay: 0.6s, 0.7s" x1="0" x2="40" y1="20" y2="20"></line>
+<line class="grid-line-h" style="animation-delay: 0.7s, 1.4s" x1="0" x2="40" y1="30" y2="30"></line>
+</g>
+<!-- 织梭动画线 -->
+<line class="weaver-line" id="weaverLine" x1="0" x2="40" y1="20" y2="20"></line>
+<!-- JX字母 -->
+<text class="logo-letters" id="logoLetters" text-anchor="middle" x="20" y="26">JX</text>
+</svg>
+<!-- 名字签名（悬停显示） -->
+<div class="logo-name">
+<div class="logo-name-text">Juye Xiao</div>
+<div class="logo-name-subtitle">Data Analyst</div>
+</div>
+</a>
+<nav class="hidden md:flex items-center space-x-8">
+<a class="nav-link" href="../../index.html#about">关于</a>
+<a class="nav-link" href="../../index.html#experience">经历</a>
+<a class="nav-link" href="../../index.html#education">教育</a>
+<a class="nav-link" href="../../index.html#projects">项目</a>
+<a class="nav-link" href="../../index.html#skills">技能</a>
+<a class="nav-link" href="../../index.html#contact">联系</a>
+</nav>
+<div class="flex items-center space-x-4">
+<button aria-label="切换主题" class="btn-secondary !p-2 !rounded-full" id="theme-toggle">
+<i class="block dark:hidden" data-lucide="sun"></i>
+<i class="hidden dark:block" data-lucide="moon"></i>
+</button>
+<button class="btn-secondary !p-2 !rounded-full" id="lang-toggle">
+<span class="font-bold text-sm">EN</span>
+</button>
+<button aria-controls="mobile-menu" aria-expanded="false" aria-label="打开菜单" class="btn-secondary !p-2 !rounded-full md:hidden" id="menu-toggle">
+<i class="menu-icon-open" data-lucide="menu"></i>
+<i class="menu-icon-close" data-lucide="x"></i>
+</button>
+</div>
+</div>
+<nav aria-label="移动端导航" class="mobile-menu md:hidden" id="mobile-menu">
+<a class="nav-link" href="../../index.html#about">关于</a>
+<a class="nav-link" href="../../index.html#experience">经历</a>
+<a class="nav-link" href="../../index.html#education">教育</a>
+<a class="nav-link" href="../../index.html#projects">项目</a>
+<a class="nav-link" href="../../index.html#skills">技能</a>
+<a class="nav-link" href="../../index.html#contact">联系</a>
+</nav>
+</header>
+<main class="container-main">
+  <section id="project-hero" class="section-padding report-hero">
+    <div class="section-eyebrow"><span class="section-kicker">Capstone · 长序列</span></div>
+    <h1 class="hero-title">长记录（2000–2024）：四区域观测与拼接模型序列</h1>
+    <p class="subtitle report-standfirst">基于 2000–2024 年共 299 个月的观测记录，使用五个测试窗口比较 12 与 24 个月预测。按区域选择月气候态基线，并识别 TK 的 Prophet 与 AU 24 个月 SARIMA 候选方法，结合趋势和校准诊断安排后续检验。</p>
+    <p class="reading-time">2026 · 分析更新</p>
+    <div class="hero-stats"><div class="hero-stat"><div class="hero-stat__num">299</div><div class="hero-stat__label">观测记录月份</div></div><div class="hero-stat"><div class="hero-stat__num">5</div><div class="hero-stat__label">测试结束年</div></div><div class="hero-stat"><div class="hero-stat__num">12 / 24</div><div class="hero-stat__label">预测长度（月）</div></div></div>
+    <div class="report-actions"><a class="btn btn-primary" href="#content">开始阅读</a><a class="btn btn-secondary" href="../../index.html#projects">返回项目概览</a></div>
+  </section>
+<nav class="report-series" aria-label="系列阅读"><a class="report-series__link" href="spglobal climate comparison.html">S&amp;P Global Capstone：气候模型、预测与空间暴露</a><a class="report-series__link" href="model comparison.html">Capstone 专题：模型比较</a><a class="report-series__link is-current" href="long series.html">Capstone 专题：长序列与短期预测</a><a class="report-series__link" href="projection overlay.html">长期配对情景与空间暴露</a></nav>
+  <section id="content" class="section-padding report-layout">
+    <aside><nav class="project-toc" id="project-toc" aria-label="报告目录"><h3>目录</h3><ul id="toc-list"><li><a class="toc-link" href="#report-section-1">1. 长序列分析摘要</a></li><li><a class="toc-link" href="#report-section-2">2. 长序列的检验用途</a></li><li><a class="toc-link" href="#report-section-3">3. 数据两侧补齐与身份核验</a></li><li><a class="toc-link" href="#report-section-4">4. 方法：拼接口径、缺测口径与检验安排</a></li><li><a class="toc-link" href="#report-section-5">5. 短期预测的区域与长度选择</a></li><li><a class="toc-link" href="#report-section-6">6. 趋势：四道检验之后剩下什么</a></li><li><a class="toc-link" href="#report-section-7">7. 偏差订正：长窗、集合口径与前置期</a></li><li><a class="toc-link" href="#report-section-8">8. 模型集合与数据版本</a></li><li><a class="toc-link" href="#report-section-9">9. 预测与校准的后续检验</a></li></ul></nav></aside>
+    <article class="content-area report-body" id="report-body"><section id="report-section-1" class="section-padding section--editorial" data-section-num="01"><div class="section-header"><h2 class="section-title">1. 长序列分析摘要</h2></div><div class="report-block" id="report-1-1">
+<p>本报告利用 2000–2024 年的观测与模型序列，比较短期预测方法、检验观测趋势，并评估偏差订正的稳定性。预测比较采用五个测试窗口和两种预测长度，缺测填补与参数选择限定在训练期内。校准检验使用相同的近期留出数据，并考察校准窗口与模型集合的影响。</p>
+<p>短期预测需要按区域和预测长度选择方法。CA、XJ 继续以月气候态为默认基线，TK 的 Prophet 和 AU 的 24 个月 SARIMA 则作为待进一步验证的候选。长期评估采用同一模型内配对的多模型情景。情景温差相对容易解释，而绝对超阈月数还受校准窗口和历史频率偏差影响。</p>
+
+</div></section><section id="report-section-2" class="section-padding section--editorial" data-section-num="02"><div class="section-header"><h2 class="section-title">2. 长序列的检验用途</h2></div><div class="report-block" id="report-2-1">
+<p>较长记录可以用于比较不同预测窗口、检验趋势对时间端点的敏感性，以及评估订正参数的稳定性。记录长度本身不证明某个模型更适合，也不能从残差检验推出二十年的通用数据下限。逐格验证与暴露筛查见<a href="projection overlay.html#report-section-1">情景与空间暴露报告</a>。</p>
+
+</div></section><section id="report-section-3" class="section-padding section--editorial" data-section-num="03"><div class="section-header"><h2 class="section-title">3. 数据两侧补齐与身份核验</h2></div><div class="report-block" id="report-3-1">
+<h3>3.1 观测：四区各 299 个月</h3>
+<p>四个区域的 MODIS 白天地表温度都提取到 2000-02 至 2024-12，各 299 个月。覆盖率规则（每日至少 50% 的格点、每月至少 10 个有效日）的代价逐区不同：</p>
+<div aria-label="数据表（可横向滚动）" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">区域</th>
+<th scope="col">有效月</th>
+<th scope="col">屏蔽月</th>
+<th scope="col">屏蔽率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CA</td>
+<td>286</td>
+<td>13</td>
+<td>4.3%</td>
+</tr>
+<tr>
+<td>XJ</td>
+<td>278</td>
+<td>21</td>
+<td>7.0%</td>
+</tr>
+<tr>
+<td>TK</td>
+<td>245</td>
+<td>54</td>
+<td>18.1%</td>
+</tr>
+<tr>
+<td>AU</td>
+<td>292</td>
+<td>7</td>
+<td>2.3%</td>
+</tr>
+</tbody>
+</table></div>
+<p>TK 每五个月丢掉近一个，且屏蔽月集中在冷季：54 个里有 50 个落在 12 月至 3 月。这层暖季偏斜跟随 TK 的每一个指标。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：四区域 25 年观测序列" class="figure-zoom" type="button"><img alt="四区域 25 年观测序列" decoding="async" height="1500" loading="lazy" src="figures/long_series/ALL_obs_25yr.png" width="1634"/></button><figcaption><em>四个区域的月度白天地表温度，红色竖线为被覆盖率规则屏蔽的月份。TK 那一排的红线密度是其余三区的数倍，且成簇出现在每年冬季。这决定了后文凡涉及 TK 的季节性量都要单独说明。</em></figcaption></figure>
+
+<h3>3.2 重叠时段的一致性</h3>
+<p>2015–2020 年同时被六年序列与长序列覆盖。按原始有效月份逐月配对，CA、XJ、TK、AU 分别有 69、67、60、72 个月。两次提取的最大绝对差为 0.0000 °C，相关系数为 1.000000，屏蔽月数也逐区相同，支持在重叠时段使用一致的数据口径。</p>
+<h3>3.3 历史模拟与情景模拟的衔接</h3>
+<p>NEX-GDDP-CMIP6 从 2015 年起分发 SSP 段，之前是各模型的 historical 段，在 CMIP6 里后者正是前者的续跑来源。在 2014 年与 2015 年 处接上，模型序列就与观测记录等长。</p>
+<p>拼接的合法性有两道核验。15 个模型在接缝两侧的集合成员标签与文件版本逐一相同（全部 15 个模型），拼后四个区域每个模型都是 300 个月。接缝本身用两侧各五年的同月气候态之差衡量。其余 14 个模型为 +0.28 ± 0.18 °C（范围 −0.15 到  +0.50）。CMCC-CM2-SR5 为 −0.13 °C，离群 2.2 个标准差。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：拼接后的年均值" class="figure-zoom" type="button"><img alt="拼接后的年均值" decoding="async" height="1036" loading="lazy" src="figures/long_series/ALL_splice_seam.png" width="1932"/></button><figcaption><em>四个区域的年均值：模型 tas 为细线，观测为蓝线，虚线为 2014 年与 2015 年 的接缝。模型线在接缝处连续，没有出现台阶。黑色那条是 CMCC-CM2-SR5，它整体高于其余模型，在接缝处并未跳变，第 8 节给出这条的解释。</em></figcaption></figure>
+
+<hr/>
+
+</div></section><section id="report-section-4" class="section-padding section--editorial" data-section-num="04"><div class="section-header"><h2 class="section-title">4. 方法：拼接口径、缺测口径与检验安排</h2></div><div class="report-block" id="report-4-1">
+<p>四个决策，逐个交代目标、备选与代价。</p>
+<h3>4.1 拼接口径</h3>
+<h4>目标</h4>
+<p>让模型序列覆盖与观测同长的窗口。</p>
+<h4>选型</h4>
+<p>备选是只用 SSP 段并把分析限制在 2015 年之后，那样窗口仍是六年到十年。接 historical 段的前提是两段属于同一个模拟，所以逐模型核验集合成员标签与文件版本，全部一致才纳入。</p>
+<h4>代价</h4>
+<p>情景分支只从 2015 年开始，2000–2014 这一段对所有情景是同一条线。因此本报告的长窗结论不区分情景，凡涉及情景的比较仍只能在 2015 年之后做。</p>
+<h3>4.2 缺测与用途</h3>
+<p>趋势诊断保留原始 NaN、插值和完整日历月三种历史比较。预测必须先切测试窗，再只用训练期信息填补。原始测试缺测不参与评分。订正及频率比较保留原始有效掩码和完整月历，不能先 dropna 再把相邻行当相邻月份。</p>
+<h3>4.3 预测窗口与汇总</h3>
+<p>月气候态以训练期各日历月的多年平均值作为预测，季节朴素法则重复训练期最后 12 个月的值。RMSE（均方根误差）越低，表示预测与观测的偏差越小。</p>
+<p>预测检验包含五个测试结束年：2016、2018、2020、2022 和 2024。每个结束年分别向前取 12 个月和 24 个月作为测试窗口。对同一种预测长度，四种方法在完全相同的原始有效观测月份上评分。两种预测长度的起点不同。训练与测试先分开，缺测填补和参数选择只使用训练数据，避免未来观测影响训练。</p>
+<p>完整结果与两种 RMSE 区别见 §5。</p>
+<h3>4.4 订正配方的校准与检验划分</h3>
+<h4>目标</h4>
+<p>检验配方在离开拟合窗之后的表现，窗口要足够长才能与月气候态分开。</p>
+<h4>做法</h4>
+<p>在 2000–2013 上拟合十二个月的订正量，在 2014 年之后检验，各区计分 113 到 129 个月。另用两个十年分别拟合同一组订正量，直接比较它们的水平与廓形。</p>
+<h4>代价</h4>
+<p>校准段完全落在 historical 段内，检验段以 SSP 段为主。这一划分用于检验历史时段估计的订正量能否用于情景时段。</p>
+<hr/>
+
+</div></section><section id="report-section-5" class="section-padding section--editorial" data-section-num="05"><div class="section-header"><h2 class="section-title">5. 短期预测的区域与长度选择</h2></div><div class="report-block" id="report-5-1">
+<p>下表为五个窗口 RMSE 的算术平均，单位 °C。评分月数是五窗有效月数之和，不是独立样本量。</p>
+<div aria-label="数据表（可横向滚动）" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">区域</th>
+<th scope="col">预测长度（月）</th>
+<th scope="col">月气候态</th>
+<th scope="col">SARIMA</th>
+<th scope="col">Prophet</th>
+<th scope="col">季节朴素法</th>
+<th scope="col">评分月数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CA</td>
+<td>12</td>
+<td>2.033</td>
+<td>2.062</td>
+<td>2.211</td>
+<td>3.476</td>
+<td>57</td>
+</tr>
+<tr>
+<td>CA</td>
+<td>24</td>
+<td>2.636</td>
+<td>2.707</td>
+<td>2.960</td>
+<td>3.394</td>
+<td>116</td>
+</tr>
+<tr>
+<td>XJ</td>
+<td>12</td>
+<td>2.238</td>
+<td>2.226</td>
+<td>2.304</td>
+<td>2.273</td>
+<td>56</td>
+</tr>
+<tr>
+<td>XJ</td>
+<td>24</td>
+<td>2.028</td>
+<td>1.997</td>
+<td>2.076</td>
+<td>2.466</td>
+<td>113</td>
+</tr>
+<tr>
+<td>TK</td>
+<td>12</td>
+<td>2.409</td>
+<td>2.441</td>
+<td>2.259</td>
+<td>3.411</td>
+<td>52</td>
+</tr>
+<tr>
+<td>TK</td>
+<td>24</td>
+<td>2.727</td>
+<td>2.728</td>
+<td>2.604</td>
+<td>2.864</td>
+<td>104</td>
+</tr>
+<tr>
+<td>AU</td>
+<td>12</td>
+<td>3.077</td>
+<td>2.982</td>
+<td>2.895</td>
+<td>2.788</td>
+<td>58</td>
+</tr>
+<tr>
+<td>AU</td>
+<td>24</td>
+<td>2.631</td>
+<td>2.522</td>
+<td>2.584</td>
+<td>3.273</td>
+<td>117</td>
+</tr>
+</tbody>
+</table></div>
+<p>SARIMA 在每个训练窗口内比较 72 个 AICc 候选，Prophet 使用年季节性和线性趋势。</p>
+<p>CA 的月气候态平均 RMSE 低于 SARIMA。XJ 的 SARIMA 相比月气候态，在 12 个月预测中降低约 0.012 °C，在 24 个月预测中降低约 0.031 °C。现有差距不足以支持默认采用更复杂的方法，因此两区先保留月气候态基线。</p>
+<p>TK 的 Prophet 在两种预测长度下都有最低的平均 RMSE，但在 5 个窗口中，12 个月预测只有 3 个窗口总体胜出，24 个月预测只有 2 个。AU 的 12 个月季节朴素法也只在 5 个窗口中的 1 个窗口总体胜出。AU 的 24 个月 SARIMA 在 2 个窗口总体胜出，与月气候态直接比较则在 4 个窗口误差更低。因此，TK 的 Prophet 与 AU 的 24 个月 SARIMA 应作为候选，在新的预测起点继续检验。</p>
+<p>窗口平均 RMSE 与合并 RMSE 是两种不同的汇总方式。前者先计算每个测试窗口的 RMSE，再取算术平均。后者汇总所有评分月份的平方误差，计算平均值后再开方。AU 的 12 个月预测说明，两种汇总方式会改变 Prophet 与 SARIMA 的相对次序。</p>
+<div aria-label="数据表（可横向滚动）" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">方法</th>
+<th scope="col">窗口平均 RMSE（°C）</th>
+<th scope="col">合并 RMSE（°C）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Prophet</td>
+<td>2.895</td>
+<td>3.086</td>
+</tr>
+<tr>
+<td>SARIMA</td>
+<td>2.982</td>
+<td>3.035</td>
+</tr>
+</tbody>
+</table></div>
+<p>按窗口平均，Prophet 的误差较低。按合并误差，SARIMA 的误差较低，因此模型比较需要事先明确汇总方式。</p>
+<p>MASE 的分母使用训练期原始有效的 12 个月季节配对。MASE 小于 1 不能替代与测试期季节朴素法的直接比较。五个窗口也不足以证明方法统计等价，或推导出 SARIMA 必须使用二十年数据的通用要求。</p>
+<p>后续按相同的预测长度增加测试结束年，并预先固定评分月份和汇总方式。记录误差差值、各窗口的比较结果与残差，待改善能够持续时再考虑替换默认基线。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：四区、两种预测长度的逐窗 RMSE；窗口平均与逐月合并指标分开报告" class="figure-zoom" type="button"><img alt="四区、两种预测长度的逐窗 RMSE；窗口平均与逐月合并指标分开报告" decoding="async" height="1927" loading="lazy" src="figures/audit_revision_20260926/forecast_window_rmse.png" width="1903"/></button><figcaption class="generated-alt-caption">四区、两种预测长度的逐窗 RMSE；窗口平均与逐月合并指标分开报告</figcaption></figure>
+
+</div></section><section id="report-section-6" class="section-padding section--editorial" data-section-num="06"><div class="section-header"><h2 class="section-title">6. 趋势：四道检验之后剩下什么</h2></div><div class="report-block" id="report-6-1">
+<p>以下趋势诊断针对指定时间窗口和缺测处理下的观测 LST 记录。</p>
+<p>趋势解释依次考察缺测处理、时间端点、斜率区间和日夜记录。</p>
+<h3>6.1 缺测口径：两个区域的判决随口径翻转</h3>
+<p>CA 在三种口径下都是无趋势。XJ 只在插值口径下显著（p = 0.0150），保留 NaN 为 0.0796、仅完整日历月为 0.0656。TK 在保留 NaN（0.0217）与插值（0.0016）下显著，仅完整日历月为 0.0630。AU 三种口径全部显著。</p>
+<h3>6.2 窗口端点：AU 的显著性由最后五年带出</h3>
+<p>Sen 斜率按子窗计算，星号表示 p &lt; 0.05：AU 在 2000–2024 为 −0.89*、2000–2019 为 +0.20、2005–2024 为 −1.22*、2010–2024 为 −1.25*。去掉最后五年，趋势换号且不显著。TK 是同一形态，2000–2014 为 +0.19，2010–2024 为 −1.47*。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：四区域年均值" class="figure-zoom" type="button"><img alt="四区域年均值" decoding="async" height="1036" loading="lazy" src="figures/long_series/ALL_annual_means.png" width="1781"/></button><figcaption><em>历史白天 LST 年均值。窗口端点影响斜率估计。该图不能识别成因或证明记录之外的持续性。</em></figcaption></figure>
+
+<h3>6.3 斜率区间与 p 值一致</h3>
+<p>Theil–Sen 95% 区间为 CA −0.058 [−0.360, +0.254]、XJ −0.302 [−0.615, +0.034]、TK −0.460 [−0.833, −0.077]、AU −0.891 [−1.223, −0.556]。TK 与 AU 的区间排除零，CA 与 XJ 的区间含零，与各自的 p 值一致。</p>
+<h3>6.4 日夜记录与机制检验</h3>
+<p>夜间地表温度的趋势为 CA +0.608、XJ +0.699、TK +0.416、AU +0.266 °C/decade，四个区域的 p 值都不超过 0.002，方向与白天相反。</p>
+<p>日夜差别提示应检查观测条件与采样。Terra 时刻变化是候选机制，现有分析没有完成归因。夜间使用更宽松覆盖规则，需以 Aqua、同位置同季节和观测时刻匹配进一步区分。</p>
+
+</div></section><section id="report-section-7" class="section-padding section--editorial" data-section-num="07"><div class="section-header"><h2 class="section-title">7. 偏差订正：长窗、集合口径与前置期</h2></div><div class="report-block" id="report-7-1">
+<p>第 7.1 至 7.3 节分析区域均值，使用 15 个模型。逐格订正采用主集合的 14 个模型，共同留出结果见综合报告第 3 节。集合均温的 RMSE 较低，不能据此在计算超阈频度时先平均温度再应用非线性阈值。</p>
+<h3>7.1 历史区域留出</h3>
+<p>在 2000–2013 上拟合、2014 年之后检验，各区校准月为 CA 159、XJ 153、TK 132、AU 163，计分月为 127、125、113、129。</p>
+<div aria-label="数据表（可横向滚动）" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">订正形式</th>
+<th scope="col">CA</th>
+<th scope="col">XJ</th>
+<th scope="col">TK</th>
+<th scope="col">AU</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>原始 tas，不订正</td>
+<td>13.71</td>
+<td>19.06</td>
+<td>16.37</td>
+<td>11.54</td>
+</tr>
+<tr>
+<td>单一区域常数</td>
+<td>6.69</td>
+<td>4.11</td>
+<td>5.81</td>
+<td>6.15</td>
+</tr>
+<tr>
+<td>十二个月值（分月订正）</td>
+<td>3.23</td>
+<td>2.53</td>
+<td>3.44</td>
+<td>2.87</td>
+</tr>
+<tr>
+<td>参照：只用观测的月气候态</td>
+<td>2.66</td>
+<td>1.94</td>
+<td>2.52</td>
+<td>2.61</td>
+</tr>
+</tbody>
+</table></div>
+<p>单位为 °C，除末行外均为 15 个模型的集合中位数。分月订正在四个区域都胜过单一常数。与四年拟合、两年检验得到的 2.36 到 3.78 °C 相比，把校准段拉到十四年、检验段拉到十一年之后结果相当。</p>
+<p>同时，把检验窗从两年拉到十一年不改变另一条结论。观测自身的月气候态在四个区域仍然全部胜出：四个区域中，订正后集合中位数与最佳单模型均未胜出。</p>
+<h3>7.2 集合均温的 RMSE</h3>
+<p>上表的做法是逐模型订正再取中位数，它回答的是「一个典型的订正后模型有多准」。另一种口径是先把 15 个模型平均、再对集合平均做一次订正：</p>
+<div aria-label="数据表（可横向滚动）" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">区域</th>
+<th scope="col">集合平均订正</th>
+<th scope="col">逐模型订正的中位数</th>
+<th scope="col">观测气候态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CA</td>
+<td>2.71</td>
+<td>3.23</td>
+<td>2.66</td>
+</tr>
+<tr>
+<td>XJ</td>
+<td>2.14</td>
+<td>2.53</td>
+<td>1.94</td>
+</tr>
+<tr>
+<td>TK</td>
+<td>2.83</td>
+<td>3.44</td>
+<td>2.52</td>
+</tr>
+<tr>
+<td>AU</td>
+<td>2.72</td>
+<td>2.87</td>
+<td>2.61</td>
+</tr>
+</tbody>
+</table></div>
+<p>先平均再订正在四个区域都更准，并把与观测气候态的差距从 0.26 到 0.92 °C 收窄到 0.05 到 0.31 °C。把 CMCC-CM2-SR5 从集合里剔除，结果最多改变 0.02 °C：它的偏移接近常数，正是分月订正要减掉的东西。</p>
+<h3>7.3 历史 订正量 差异</h3>
+<p>用两个十年分别拟合同一组十二个月订正量，再比较：均值之差的中位数为 AU −0.84、TK −0.54、XJ −0.38、CA −0.19 °C，十二个月廓形的相关中位数为 AU 0.99、CA 0.98、XJ 0.98、TK 0.87。对照订正量自身的季节跨度 10.8 到 16.7 °C，前三个区域的漂移只占其中几个百分点。</p>
+<p>单月最大差揭示例外：XJ 1.62、AU 2.50、CA 2.90，而 TK 是 6.94 °C。TK 的冷季月订正量建立在极少的有效年上，这是第 3.1 节那 50 个冷季屏蔽月的直接后果。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：两个十年的订正量" class="figure-zoom" type="button"><img alt="两个十年的订正量" decoding="async" height="1036" loading="lazy" src="figures/long_series/ALL_offset_drift.png" width="1784"/></button><figcaption><em>历史 2000–2009 与 2010–2019 分月订正量。均值移动较小也可能改变超阈计数与名单。敏感性见综合报告。</em></figcaption></figure>
+
+<h3>7.4 共同留出与校准终点</h3>
+<p>校准窗会改变部分方向。AU 近期窗口人口“未来−观测”由基准 −0.125 变为六个校准设定的 +0.028 至 +0.210 月/年。TK 人口与面积加权频度之比由 1.005 变为 0.931–0.979。XJ 在 2013 终点的订正设定下由 0.904 变为 1.025。CA 在这些校准窗下仍大于 1，但假设 −3 °C 平移后为 0.844。因此比值、排序和名单必须连同参数设定解释。</p>
+<p>人口计数的模型分布和共同时间重抽样范围如下。后者按 25 个完整日历年抽样 500 次，每次共同重估阈值与订正量、计算每模型最终指标，再取主集合的 14 个模型中位数。抽样过程中，未来十年的温度场保持固定。</p>
+<div aria-label="数据表（可横向滚动）" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">区域</th>
+<th scope="col">人口计数：中位数 [模型 P10, P90]</th>
+<th scope="col">共同时间抽样 2.5–97.5 分位</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CA</td>
+<td>2.231 [1.797, 2.632]</td>
+<td>1.937–2.405</td>
+</tr>
+<tr>
+<td>XJ</td>
+<td>1.773 [1.329, 2.397]</td>
+<td>1.447–2.102</td>
+</tr>
+<tr>
+<td>TK</td>
+<td>2.290 [1.970, 2.605]</td>
+<td>1.991–2.520</td>
+</tr>
+<tr>
+<td>AU</td>
+<td>0.943 [0.756, 1.316]</td>
+<td>0.794–1.286</td>
+</tr>
+</tbody>
+</table></div>
+<p>AU 只抽阈值的范围为 0.675–1.449，比共同变化的 0.794–1.286 更宽。参数共同变化可以抵消部分影响，不能预设传播后一定变宽。从 14 个模型扩展到 15 个模型的计数中位数最大变化为 0.118 月/年。逐一留出主模型的最大跨度为 0.261，范围为四区、两个时间窗口、两种情景和五种权重。</p>
+<p>用相同的 2022–2024 留出期比较不同校准终点时，AU 的人口加权 RMSE 中位数如下：</p>
+<div aria-label="数据表（可横向滚动）" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">校准终点</th>
+<th scope="col">人口加权 RMSE 中位数（°C）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2013</td>
+<td>3.617</td>
+</tr>
+<tr>
+<td>2019</td>
+<td>3.733</td>
+</tr>
+<tr>
+<td>2021</td>
+<td>3.613</td>
+</tr>
+</tbody>
+</table></div>
+<p>校准终点向后移动，误差没有单调下降。单次端点实验也不能确定未来误差范围。<a href="https://terra.nasa.gov/about/terras-orbit-changes">NASA Terra 轨道资料</a>提示需要检查观测时刻变化。它与晴空采样、区域变化及年际变率均是待区分的机制，后续可结合 Aqua、同位置同季节样本和过境时刻匹配进行检验。</p>
+<p>建议将校准窗、人口源与成员影响分别列入评估记录。整年抽样未覆盖多年依赖与未来非平稳性，±1 °C 和 ±3 °C 只是压力设定。这些范围用于识别敏感候选，不表示完整未来预测覆盖率。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：近期窗口 ssp585 人口计数：三个同时重估阈值与订正量的校准窗及四种平移；点与线为主集合的 14 个模型中位数及 P10–P90" class="figure-zoom" type="button"><img alt="近期窗口 ssp585 人口计数：三个同时重估阈值与订正量的校准窗及四种平移；点与线为主集合的 14 个模型中位数及 P10–P90" decoding="async" height="1350" loading="lazy" src="figures/audit_revision_20260926/b3_population_sensitivity.png" width="1950"/></button><figcaption class="generated-alt-caption">近期窗口 ssp585 人口计数：三个同时重估阈值与订正量的校准窗及四种平移；点与线为主集合的 14 个模型中位数及 P10–P90</figcaption></figure>
+
+</div></section><section id="report-section-8" class="section-padding section--editorial" data-section-num="08"><div class="section-header"><h2 class="section-title">8. 模型集合与数据版本</h2></div><div class="report-block" id="report-8-1">
+<p>CMCC-CM2-SR5 仅有未修订的 v1.0 数据，在 historical 与 ssp585 时段存在温度偏移异常。主集合使用其余 14 个模型，并单独报告包含全部 15 个模型的敏感性结果。该模型的表观 RMSE 优势不能作为选择模型的依据。</p>
+
+</div></section><section id="report-section-9" class="section-padding section--editorial" data-section-num="09"><div class="section-header"><h2 class="section-title">9. 预测与校准的后续检验</h2></div><div class="report-block" id="report-9-1">
+<p>短期预测应继续增加测试年份，在相同评分月份上比较候选方法与月气候态基线。校准检验需同时关注均值误差、超阈频度及窗口敏感性。Terra 观测时刻、晴空采样和区域变化的影响仍需通过独立观测区分，现有趋势诊断不构成归因。</p>
+
+</div></section></article>
+  </section>
+<nav class="report-series" aria-label="系列阅读"><a class="report-series__link" href="spglobal climate comparison.html">S&amp;P Global Capstone：气候模型、预测与空间暴露</a><a class="report-series__link" href="model comparison.html">Capstone 专题：模型比较</a><a class="report-series__link is-current" href="long series.html">Capstone 专题：长序列与短期预测</a><a class="report-series__link" href="projection overlay.html">长期配对情景与空间暴露</a></nav>
+  <section id="related" class="section-padding"><div class="section-header"><h2 class="section-title">相关项目</h2></div><div class="grid md:grid-cols-2 gap-6"><a href="../healthy home/healthy home.html" class="related-project-card"><h3 class="related-project-title">Healthy Home：奥克兰空间预测与道路地图</h3><p class="related-project-description">结合 18,219 个观测点、道路网络与嵌套空间评价，分析奥克兰污染物分布。随机森林在区域分块评价中的 NO₂ 合并 R² 为 0.576017，道路相对预测图覆盖 628.74 km，并通过分区误差诊断提出补充观测方案。</p><span class="related-project-link">查看详情</span></a><a href="../lendingclub loan prediction/lendingclub loan prediction.html" class="related-project-card"><h3 class="related-project-title">LendingClub：9,004 笔贷款样本</h3><p class="related-project-description">从 9,004 笔历史贷款中分析违约分布，比较模型与期限规则，设计不对称成本下的筛查策略。Random Forest 冻结阈值 0.22，测试召回率 70.45%，净模拟成本降幅 4.68%。</p><span class="related-project-link">查看详情</span></a></div></section>
+</main>
+<script src="../../assets/js/logo.js"></script>
+<script src="../../assets/js/common.js"></script>
+<script src="../../assets/js/project.js"></script>
+<script src="../../assets/js/language-switcher.js"></script>
+</body>
+</html>

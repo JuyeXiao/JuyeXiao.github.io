@@ -1,0 +1,206 @@
+{
+  "website_head": "cc90bef2faafd6ef1c723b8d1e2bce12c0b1a80e",
+  "scope": "This presentation follow-up only; the prior content-sync manifest is historical evidence.",
+  "files": [
+    {
+      "path": "projects/Bank Customer Churn Prediction/Bank Customer Churn Prediction.html",
+      "status": "modified",
+      "sha256": "26a0d5b848cbd33b191e3d1f077790716a384707c1c9a79390c6c051b39cc497"
+    },
+    {
+      "path": "projects/e-commerce fraud detection/e-commerce fraud detection.html",
+      "status": "modified",
+      "sha256": "77b011451983613a94a6afda957848aaeadba709ca9d1a45e010c4f1888ca505"
+    },
+    {
+      "path": "projects/lendingclub loan prediction/lendingclub loan prediction.html",
+      "status": "modified",
+      "sha256": "867a67d8ea96818bc94decb73bc87d35b965b3ffa58875bf154b6c55dfdd6613"
+    },
+    {
+      "path": "projects/youtube comment analysis/youtube comment analysis.html",
+      "status": "modified",
+      "sha256": "0ebfc5649615e953280a76cff2cdbb564a6f9ef7b39d3dffaa7abd7980cb6389"
+    },
+    {
+      "path": "projects/ab testing/ab testing.html",
+      "status": "modified",
+      "sha256": "dce0220f71c0d799eb7bc6c23d6c7ce5030022829fe177ffccc4896cb4a20ddf"
+    },
+    {
+      "path": "projects/healthy home/healthy home.html",
+      "status": "modified",
+      "sha256": "40dde4a6a992fabda3b5b87ce99e1cd07bd7a2bb187a29da38c6119659405867"
+    },
+    {
+      "path": "projects/amazon watch reviews/amazon watch reviews.html",
+      "status": "modified",
+      "sha256": "9e71dd7f645d28893fa020e44c5ce7c8b06cd1333772dd18ae8ca55231b269e6"
+    },
+    {
+      "path": "projects/lendingclub loan prediction/full data.html",
+      "status": "modified",
+      "sha256": "5c650363267bf618a2bc728307f32f24bfe7e0e090da430a361e963390346d95"
+    },
+    {
+      "path": "projects/spglobal climate comparison/spglobal climate comparison.html",
+      "status": "modified",
+      "sha256": "9e7a51855af25f3cfc7bd4a6fe6e877faf771d5e8ab25f47ffe6884ac7c5cdc0"
+    },
+    {
+      "path": "projects/spglobal climate comparison/model comparison.html",
+      "status": "modified",
+      "sha256": "490ec1f5741f6cdcd5b4a36416774dc941c57bbbf584d67001fb3e27a8dd47f4"
+    },
+    {
+      "path": "projects/spglobal climate comparison/long series.html",
+      "status": "modified",
+      "sha256": "4652b99c47b57cac8bcff5f93a75bdeea50bba91588fb5d2f46be950559f173f"
+    },
+    {
+      "path": "projects/spglobal climate comparison/projection overlay.html",
+      "status": "modified",
+      "sha256": "598e806949ca452565de40f00e84758931cd26969e6bd3411e5ef1332456fb2c"
+    },
+    {
+      "path": "projects/Bank Customer Churn Prediction/Bank Customer Churn Prediction-en.html",
+      "status": "modified",
+      "sha256": "dd84bf1c073227c0157011ea8d45de6a02bc71e8afcde27c1d06371ab8897a69"
+    },
+    {
+      "path": "projects/e-commerce fraud detection/e-commerce fraud detection-en.html",
+      "status": "modified",
+      "sha256": "41388060573e6612840330cbccf60013fc5668f61b71b49cf14e897292c0213e"
+    },
+    {
+      "path": "projects/lendingclub loan prediction/lendingclub loan prediction-en.html",
+      "status": "modified",
+      "sha256": "a330331f2d8b8d600d1a611aad3dfa7ac0add12773233d2c5db5d9eb947a8232"
+    },
+    {
+      "path": "projects/youtube comment analysis/youtube comment analysis-en.html",
+      "status": "modified",
+      "sha256": "5fcf4a322acbcb8b484d14c5f77c0bfa802c4a54696ffd67f36476ce5ebbdce1"
+    },
+    {
+      "path": "projects/ab testing/ab testing-en.html",
+      "status": "modified",
+      "sha256": "4fe882642dab149cd4ac4376c67ffeb0b8dd4f4248933d604d15739ca9be81a0"
+    },
+    {
+      "path": "projects/healthy home/healthy home-en.html",
+      "status": "modified",
+      "sha256": "2128aac7b52f4cf2f655b3b8cbdcf8d31a087f8f93a1d733b1d7cdddb2c15348"
+    },
+    {
+      "path": "projects/amazon watch reviews/amazon watch reviews-en.html",
+      "status": "modified",
+      "sha256": "7ad60b8edd26b4792e849d7c456e2c996c76917728214123d390ad76cfad7012"
+    },
+    {
+      "path": "projects/lendingclub loan prediction/full data-en.html",
+      "status": "modified",
+      "sha256": "d3213cdfb28a6e13c6a22460ea3c58c15c8c7c0ed6e17a875d21c727df9db74e"
+    },
+    {
+      "path": "projects/spglobal climate comparison/spglobal climate comparison-en.html",
+      "status": "modified",
+      "sha256": "9cd41a28ee63bdb463b2aadc3fccd30de128645d386523675f427cb881bb8fc1"
+    },
+    {
+      "path": "projects/spglobal climate comparison/model comparison-en.html",
+      "status": "modified",
+      "sha256": "fa4c9d06abb03d0a78292d69401c459aa6550258090f5fa02a805e1349a7b93d"
+    },
+    {
+      "path": "projects/spglobal climate comparison/long series-en.html",
+      "status": "modified",
+      "sha256": "0c0dd729b3083bdc7bc65e84685d9dee03c660a7fb40e9284802970a2aab154a"
+    },
+    {
+      "path": "projects/spglobal climate comparison/projection overlay-en.html",
+      "status": "modified",
+      "sha256": "8a64e9e06677c3b24b50ff76910b813195ae1d17feb3ff371d9ec5dfdafb1e50"
+    },
+    {
+      "path": "index.html",
+      "status": "modified",
+      "sha256": "ea8bc10f5cbd28d0dd04113e02f7da4354f4c81e436ed3f1760f1a9566d485f1"
+    },
+    {
+      "path": "index-en.html",
+      "status": "modified",
+      "sha256": "c639e409a65fd1e35c392ad2d8a2dece7703dc149fb23b82c99762e0be4d3a5e"
+    },
+    {
+      "path": "scripts/sync_reports.py",
+      "status": "modified",
+      "sha256": "2c8ba3b1186e05bd322cd33ed03f9049591dbb89a60e669457aad5b60228766e"
+    },
+    {
+      "path": "scripts/report_summaries.json",
+      "status": "modified",
+      "sha256": "151d376d6c1d07b068385c6a116ecd2347445f8c885993bd5ff90fc57b15278c"
+    },
+    {
+      "path": "scripts/check_report_browser.py",
+      "status": "modified",
+      "sha256": "87bafb465b789babdd9b437abe099a1978eafb56c7542e5048cd959a69d5a60f"
+    },
+    {
+      "path": "README.md",
+      "status": "modified",
+      "sha256": "15bd40e3bcbc7d5ea580fd70472d8cb4aa73b0aa799d9b6b5072baeab9960628"
+    },
+    {
+      "path": "scripts/report_presentation.json",
+      "status": "added",
+      "sha256": "67b3ea251afa23532252380eee24ddfa593ec0d0df2c31697d0c335592b5b4ac"
+    },
+    {
+      "path": "docs/portfolio-presentation-2026-10-13/before-hashes.json",
+      "status": "added",
+      "sha256": "598397d3fc5163245e846b462974f7692ac4e6142261dd2c7f84119703dd007f"
+    },
+    {
+      "path": "docs/portfolio-presentation-2026-10-13/browser-validation.json",
+      "status": "added",
+      "sha256": "93f6cb2f2c40c941db8396e10d6407c328eefb2e504208e40417aafefe0a702f"
+    },
+    {
+      "path": "docs/portfolio-presentation-2026-10-13/content-validation.json",
+      "status": "added",
+      "sha256": "4a28f46a62a59657c67923007e7832ed18556a3b8a923d3df23b3b895631e859"
+    },
+    {
+      "path": "docs/portfolio-presentation-2026-10-13/DELIVERY.md",
+      "status": "added",
+      "sha256": "6f18376e89b112f5a9b34dfaafdbddf06800847c44731714080129a429e3807c"
+    },
+    {
+      "path": "docs/portfolio-presentation-2026-10-13/render-ledger.json",
+      "status": "added",
+      "sha256": "d38c1951c8fc661b9e36e34a493b8ac56ae3c95ccf7f2c54d2604a292a2992c8"
+    },
+    {
+      "path": "docs/portfolio-presentation-2026-10-13/report-check-capstone.txt",
+      "status": "added",
+      "sha256": "d8dac46c0283de324c8b345116e74d143b3223bfcbba7a6f31ae280c133c7ceb"
+    },
+    {
+      "path": "docs/portfolio-presentation-2026-10-13/report-check-data.txt",
+      "status": "added",
+      "sha256": "e07d4362f2b126211b4794efcfec740db20d9ed7e6683343fb554b00d5c3d649"
+    },
+    {
+      "path": "docs/portfolio-presentation-2026-10-13/static-validation.json",
+      "status": "added",
+      "sha256": "05cf36e1eac3898bbc10c4848218ff4a187229e850a2c3670a8746b49477473a"
+    }
+  ],
+  "self_excluded": "docs/portfolio-presentation-2026-10-13/changed-files.json",
+  "staged": false,
+  "committed": false,
+  "pushed": false,
+  "deployed": false
+}

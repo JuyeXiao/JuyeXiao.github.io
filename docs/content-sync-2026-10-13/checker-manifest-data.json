@@ -1,0 +1,148 @@
+{
+  "groups": [
+    {
+      "id": "bank",
+      "documents": [
+        {
+          "path": "C:\\Users\\xjy19\\Desktop\\JuyeXiao.github.io\\projects\\Bank Customer Churn Prediction\\Bank Customer Churn Prediction.html",
+          "lang": "zh",
+          "format": "html"
+        },
+        {
+          "path": "C:\\Users\\xjy19\\Desktop\\JuyeXiao.github.io\\projects\\Bank Customer Churn Prediction\\Bank Customer Churn Prediction-en.html",
+          "lang": "en",
+          "format": "html"
+        }
+      ],
+      "required_checks": [
+        "C8"
+      ]
+    },
+    {
+      "id": "fraud",
+      "documents": [
+        {
+          "path": "C:\\Users\\xjy19\\Desktop\\JuyeXiao.github.io\\projects\\e-commerce fraud detection\\e-commerce fraud detection.html",
+          "lang": "zh",
+          "format": "html"
+        },
+        {
+          "path": "C:\\Users\\xjy19\\Desktop\\JuyeXiao.github.io\\projects\\e-commerce fraud detection\\e-commerce fraud detection-en.html",
+          "lang": "en",
+          "format": "html"
+        }
+      ],
+      "required_checks": [
+        "C8"
+      ]
+    },
+    {
+      "id": "loan",
+      "documents": [
+        {
+          "path": "C:\\Users\\xjy19\\Desktop\\JuyeXiao.github.io\\projects\\lendingclub loan prediction\\lendingclub loan prediction.html",
+          "lang": "zh",
+          "format": "html"
+        },
+        {
+          "path": "C:\\Users\\xjy19\\Desktop\\JuyeXiao.github.io\\projects\\lendingclub loan prediction\\lendingclub loan prediction-en.html",
+          "lang": "en",
+          "format": "html"
+        }
+      ],
+      "required_checks": [
+        "C8"
+      ]
+    },
+    {
+      "id": "youtube",
+      "documents": [
+        {
+          "path": "C:\\Users\\xjy19\\Desktop\\JuyeXiao.github.io\\projects\\youtube comment analysis\\youtube comment analysis.html",
+          "lang": "zh",
+          "format": "html"
+        },
+        {
+          "path": "C:\\Users\\xjy19\\Desktop\\JuyeXiao.github.io\\projects\\youtube comment analysis\\youtube comment analysis-en.html",
+          "lang": "en",
+          "format": "html"
+        }
+      ],
+      "required_checks": [
+        "C8"
+      ]
+    },
+    {
+      "id": "ab",
+      "documents": [
+        {
+          "path": "C:\\Users\\xjy19\\Desktop\\JuyeXiao.github.io\\projects\\ab testing\\ab testing.html",
+          "lang": "zh",
+          "format": "html"
+        },
+        {
+          "path": "C:\\Users\\xjy19\\Desktop\\JuyeXiao.github.io\\projects\\ab testing\\ab testing-en.html",
+          "lang": "en",
+          "format": "html"
+        }
+      ],
+      "required_checks": [
+        "C8"
+      ]
+    },
+    {
+      "id": "healthy",
+      "documents": [
+        {
+          "path": "C:\\Users\\xjy19\\Desktop\\JuyeXiao.github.io\\projects\\healthy home\\healthy home.html",
+          "lang": "zh",
+          "format": "html"
+        },
+        {
+          "path": "C:\\Users\\xjy19\\Desktop\\JuyeXiao.github.io\\projects\\healthy home\\healthy home-en.html",
+          "lang": "en",
+          "format": "html"
+        }
+      ],
+      "required_checks": [
+        "C8"
+      ]
+    },
+    {
+      "id": "amazon",
+      "documents": [
+        {
+          "path": "C:\\Users\\xjy19\\Desktop\\JuyeXiao.github.io\\projects\\amazon watch reviews\\amazon watch reviews.html",
+          "lang": "zh",
+          "format": "html"
+        },
+        {
+          "path": "C:\\Users\\xjy19\\Desktop\\JuyeXiao.github.io\\projects\\amazon watch reviews\\amazon watch reviews-en.html",
+          "lang": "en",
+          "format": "html"
+        }
+      ],
+      "required_checks": [
+        "C8"
+      ]
+    },
+    {
+      "id": "loan-full",
+      "documents": [
+        {
+          "path": "C:\\Users\\xjy19\\Desktop\\JuyeXiao.github.io\\projects\\lendingclub loan prediction\\full data.html",
+          "lang": "zh",
+          "format": "html"
+        },
+        {
+          "path": "C:\\Users\\xjy19\\Desktop\\JuyeXiao.github.io\\projects\\lendingclub loan prediction\\full data-en.html",
+          "lang": "en",
+          "format": "html"
+        }
+      ],
+      "required_checks": [
+        "C8"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>document.documentElement.classList.add('js');</script>
+  <title>Paired long-term scenarios and spatial exposure - Data Poetics</title>
+  <meta name="description" content="Compare paired temperature differences and exceedance months across two long-term scenarios using 14 models, then combine population, built surface and cropland to assess spatial exposure. Calibration sensitivity and member-influence analysis inform the order of candidate-site checks.">
+  <meta property="og:title" content="Paired long-term scenarios and spatial exposure">
+  <meta property="og:description" content="Compare paired temperature differences and exceedance months across two long-term scenarios using 14 models, then combine population, built surface and cropland to assess spatial exposure. Calibration sensitivity and member-influence analysis inform the order of candidate-site checks.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://juyexiao.github.io/projects/spglobal%20climate%20comparison/projection%20overlay-en.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:description" content="Compare paired temperature differences and exceedance months across two long-term scenarios using 14 models, then combine population, built surface and cropland to assess spatial exposure. Calibration sensitivity and member-influence analysis inform the order of candidate-site checks.">
+  <link rel="canonical" href="https://juyexiao.github.io/projects/spglobal%20climate%20comparison/projection%20overlay-en.html">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&amp;family=Inter:wght@200;300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;700&amp;family=Noto+Sans+SC:wght@400;500;600&amp;family=Noto+Serif+SC:wght@500&amp;display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="../../assets/css/index.css">
+  <link rel="stylesheet" href="../../assets/css/project.css">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Paired long-term scenarios and spatial exposure", "description": "Compare paired temperature differences and exceedance months across two long-term scenarios using 14 models, then combine population, built surface and cropland to assess spatial exposure. Calibration sensitivity and member-influence analysis inform the order of candidate-site checks.", "inLanguage": "en", "author": {"@type": "Person", "name": "Juye Xiao"}}</script>
+</head>
+<body class="transition-colors duration-300 report-page">
+<div class="scroll-progress" id="scroll-progress"></div>
+<header class="navbar fixed top-0 left-0 right-0 z-50" id="navbar">
+<div class="container-main h-full flex items-center justify-between">
+<!-- Logo Section -->
+<a class="navbar-logo" href="../../index-en.html#hero" id="navbar-logo">
+<!-- SVG Logo -->
+<svg class="logo-svg-nav" viewbox="0 0 40 40">
+<!-- Data Grid Background -->
+<g class="grid-bg">
+<!-- Vertical Lines -->
+<line class="grid-line-v" style="animation-delay: 0.1s, 0s" x1="8" x2="8" y1="0" y2="40"></line>
+<line class="grid-line-v" style="animation-delay: 0.2s, 0.5s" x1="16" x2="16" y1="0" y2="40"></line>
+<line class="grid-line-v" style="animation-delay: 0.3s, 1s" x1="24" x2="24" y1="0" y2="40"></line>
+<line class="grid-line-v" style="animation-delay: 0.4s, 1.5s" x1="32" x2="32" y1="0" y2="40"></line>
+<!-- Horizontal Lines -->
+<line class="grid-line-h" style="animation-delay: 0.5s, 0s" x1="0" x2="40" y1="10" y2="10"></line>
+<line class="grid-line-h" style="animation-delay: 0.6s, 0.7s" x1="0" x2="40" y1="20" y2="20"></line>
+<line class="grid-line-h" style="animation-delay: 0.7s, 1.4s" x1="0" x2="40" y1="30" y2="30"></line>
+</g>
+<!-- Weaver Animation Line -->
+<line class="weaver-line" id="weaverLine" x1="0" x2="40" y1="20" y2="20"></line>
+<!-- JX Letters -->
+<text class="logo-letters" id="logoLetters" text-anchor="middle" x="20" y="26">JX</text>
+</svg>
+<!-- Name Signature (Hover Display) -->
+<div class="logo-name">
+<div class="logo-name-text">Juye Xiao</div>
+<div class="logo-name-subtitle">Data Analyst</div>
+</div>
+</a>
+<nav class="hidden md:flex items-center space-x-8">
+<a class="nav-link" href="../../index-en.html#about">About</a>
+<a class="nav-link" href="../../index-en.html#experience">Experience</a>
+<a class="nav-link" href="../../index-en.html#education">Education</a>
+<a class="nav-link" href="../../index-en.html#projects">Projects</a>
+<a class="nav-link" href="../../index-en.html#skills">Skills</a>
+<a class="nav-link" href="../../index-en.html#contact">Contact</a>
+</nav>
+<div class="flex items-center space-x-4">
+<button aria-label="Toggle theme" class="btn-secondary !p-2 !rounded-full" id="theme-toggle">
+<i class="block dark:hidden" data-lucide="sun"></i>
+<i class="hidden dark:block" data-lucide="moon"></i>
+</button>
+<button class="btn-secondary !p-2 !rounded-full" id="lang-toggle">
+<span class="font-bold text-sm">中</span>
+</button>
+<button aria-controls="mobile-menu" aria-expanded="false" aria-label="Open menu" class="btn-secondary !p-2 !rounded-full md:hidden" id="menu-toggle">
+<i class="menu-icon-open" data-lucide="menu"></i>
+<i class="menu-icon-close" data-lucide="x"></i>
+</button>
+</div>
+</div>
+<nav aria-label="Mobile navigation" class="mobile-menu md:hidden" id="mobile-menu">
+<a class="nav-link" href="../../index-en.html#about">About</a>
+<a class="nav-link" href="../../index-en.html#experience">Experience</a>
+<a class="nav-link" href="../../index-en.html#education">Education</a>
+<a class="nav-link" href="../../index-en.html#projects">Projects</a>
+<a class="nav-link" href="../../index-en.html#skills">Skills</a>
+<a class="nav-link" href="../../index-en.html#contact">Contact</a>
+</nav>
+</header>
+<main class="container-main">
+  <section id="project-hero" class="section-padding report-hero">
+    <div class="section-eyebrow"><span class="section-kicker">Capstone · Scenarios &amp; Exposure</span></div>
+    <h1 class="hero-title">Paired long-term scenarios and spatial exposure</h1>
+    <p class="subtitle report-standfirst">Compare paired temperature differences and exceedance months across two long-term scenarios using 14 models, then combine population, built surface and cropland to assess spatial exposure. Calibration sensitivity and member-influence analysis inform the order of candidate-site checks.</p>
+    <p class="reading-time">Analysis updated in 2026</p>
+    <div class="hero-stats"><div class="hero-stat"><div class="hero-stat__num">14</div><div class="hero-stat__label">Main model ensemble</div></div><div class="hero-stat"><div class="hero-stat__num">2</div><div class="hero-stat__label">Long-term scenarios</div></div><div class="hero-stat"><div class="hero-stat__num">204 / 268</div><div class="hero-stat__label">Near-window ssp585: priority / baseline entries</div></div></div>
+    <div class="report-actions"><a class="btn btn-primary" href="#content">Read report</a><a class="btn btn-secondary" href="../../index-en.html#projects">All projects</a></div>
+  </section>
+<nav class="report-series" aria-label="Series navigation"><a class="report-series__link" href="spglobal climate comparison-en.html">S&amp;P Global Capstone: climate models, forecasts and spatial exposure</a><a class="report-series__link" href="model comparison-en.html">Capstone study: model comparison</a><a class="report-series__link" href="long series-en.html">Capstone study: long records and short-term forecasts</a><a class="report-series__link is-current" href="projection overlay-en.html">Paired long-term scenarios and spatial exposure</a></nav>
+  <section id="content" class="section-padding report-layout">
+    <aside><nav class="project-toc" id="project-toc" aria-label="Report contents"><h3>Contents</h3><ul id="toc-list"><li><a class="toc-link" href="#report-section-1">1. Scenario and exposure assessment summary</a></li><li><a class="toc-link" href="#report-section-2">2. Uses of scenario analysis</a></li><li><a class="toc-link" href="#report-section-3">3. Windows and ensembles</a></li><li><a class="toc-link" href="#report-section-4">4. Exceedance method and denominators</a></li><li><a class="toc-link" href="#report-section-5">5. Paired temperature and frequency differences in long-term scenarios</a></li><li><a class="toc-link" href="#report-section-6">6. Calibration sensitivity and time resampling</a></li><li><a class="toc-link" href="#report-section-7">7. Member influence and single-model use</a></li><li><a class="toc-link" href="#report-section-8">8. Data checks and next validation</a></li><li><a class="toc-link" href="#report-section-9">9. Screening purpose</a></li><li><a class="toc-link" href="#report-section-10">10. Model comparison and spatial correction validation</a></li><li><a class="toc-link" href="#report-section-11">11. Absolute frequency and observed reference</a></li><li><a class="toc-link" href="#report-section-12">12. Candidate locations and verification sequence</a></li><li><a class="toc-link" href="#report-section-13">13. Layer-specific implementation and testing</a></li></ul></nav></aside>
+    <article class="content-area report-body" id="report-body"><section id="report-section-1" class="section-padding section--editorial" data-section-num="01"><div class="section-header"><h2 class="section-title">1. Scenario and exposure assessment summary</h2></div><div class="report-block" id="report-1-1">
+<p>This report compares two climate scenarios for 2035–2044 and 2050–2059, examining temperature differences, exceedance frequency and sensitivity to calibration and model choice. Calculations are completed within each model before summarizing model distributions, providing the temperature basis for population and land-exposure screening.</p>
+<p>The near window is 2035–2044 and the far window is 2050–2059. Both assessments use climate-model scenarios without extrapolating a short-term time-series trend. The main ensemble contains 14 models. CMCC-CM2-SR5 is available only as unrevised v1.0 data and has a version-related temperature-offset anomaly. Its influence is tested separately in a sensitivity analysis including all 15 models.</p>
+
+</div>
+<div class="report-block" id="report-1-2">
+<p>This report combines cell-level temperature with population, built surface and cropland to identify locations for priority checks. Contributions and list stability are calculated separately for the three exposure layers, while a common holdout evaluates correction error. The resulting lists guide the collection of resident, asset and agricultural data.</p>
+
+</div></section><section id="report-section-2" class="section-padding section--editorial" data-section-num="02"><div class="section-header"><h2 class="section-title">2. Uses of scenario analysis</h2></div><div class="report-block" id="report-2-1">
+<p>Temperature differences compare pathways; absolute exceedance frequency informs conditional follow-up checks. Pairing and counting are performed within each model.</p>
+
+</div></section><section id="report-section-3" class="section-padding section--editorial" data-section-num="03"><div class="section-header"><h2 class="section-title">3. Windows and ensembles</h2></div><div class="report-block" id="report-3-1">
+<p>Windows are 2035–2044 and 2050–2059 under ssp126 and ssp585. The main ensemble has 14 models; all 15 including CMCC form a sensitivity. Production uses February 2000–December 2024, while independent validation trains on 2000–2013 and tests on 2014–2024.</p>
+
+</div></section><section id="report-section-4" class="section-padding section--editorial" data-section-num="04"><div class="section-header"><h2 class="section-title">4. Exceedance method and denominators</h2></div><div class="report-block" id="report-4-1">
+<p>Observations are MODIS daytime land surface temperature (LST), February 2000–December 2024; model input is NEX-GDDP-CMIP6 near-surface air temperature (tas). A clear-sky daytime retrieval at an approximately 1 km central pixel differs from the area and daily mean represented by a 0.25° tas cell. Monthly offsets align model means to the LST reference without removing all variable and sampling differences. Product definitions: <a href="https://developers.google.com/earth-engine/datasets/catalog/MODIS_061_MOD11A1">MODIS</a> and <a href="https://developers.google.com/earth-engine/datasets/catalog/NASA_GDDP-CMIP6">NEX-GDDP-CMIP6</a>.</p>
+<p>Spatial totals use the union of the full extracted cells. Population and built surface use 2020 data, and cropland uses 2021 land cover. These population and land distributions stay fixed in future scenarios while temperature changes. GHS and GPW allocate population differently, so similar population-weighted frequencies can accompany different exposure totals.</p>
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">Region</th>
+<th scope="col">Cells</th>
+<th scope="col">GHS people</th>
+<th scope="col">GPW people</th>
+<th scope="col">Total area km²</th>
+<th scope="col">Cropland km²</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CA</td>
+<td>156</td>
+<td>1,715,658</td>
+<td>1,873,619</td>
+<td>95,308.62</td>
+<td>3,116.60</td>
+</tr>
+<tr>
+<td>XJ</td>
+<td>144</td>
+<td>44,870</td>
+<td>71,823</td>
+<td>87,977.18</td>
+<td>439.89</td>
+</tr>
+<tr>
+<td>TK</td>
+<td>144</td>
+<td>6,371,851</td>
+<td>3,273,523</td>
+<td>87,977.18</td>
+<td>15,228.79</td>
+</tr>
+<tr>
+<td>AU</td>
+<td>576</td>
+<td>2,372,152</td>
+<td>1,953,986</td>
+<td>365,561.48</td>
+<td>85,052.46</td>
+</tr>
+</tbody>
+</table></div>
+<p>Population and land area are summed over the full study cells. Population is rounded only for display; calculations retain the original decimals. Cropland area is the cropland fraction multiplied by each cell’s spherical area.</p>
+<p>Each cell uses the 90th percentile (P90) of all its valid monthly temperatures as its threshold. Both observations and future scenarios count only months strictly above that threshold. Exceedance probabilities are estimated separately for each calendar month and then summed across the twelve months. The result, cᵢ, is the cell's annual mean number of exceedance months, measured in months/year.</p>
+<p>Let wᵢ be the population or relevant land area in cell i. Both indicators below are calculated within each model before summarizing their distribution across models.</p>
+<p><strong>Weighted annual exceedance frequency</strong> describes the average frequency at the locations occupied by people or land. Its unit is months/year:</p>
+<div class="report-equation"><math aria-label="Weighted annual exceedance frequency: sum of weight times exceedance months divided by sum of weights" display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mfrac><mrow><msub><mo>∑</mo><mi>i</mi></msub><msub><mi>w</mi><mi>i</mi></msub><msub><mi>c</mi><mi>i</mi></msub></mrow><mrow><msub><mo>∑</mo><mi>i</mi></msub><msub><mi>w</mi><mi>i</mi></msub></mrow></mfrac></math></div>
+<p><strong>Total exceedance exposure</strong> includes both frequency and exposure size. Population totals use people·months/year, and land totals use m²·months/year:</p>
+<div class="report-equation"><math aria-label="Total exceedance exposure: sum of weight times exceedance months" display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><msub><mo>∑</mo><mi>i</mi></msub><msub><mi>w</mi><mi>i</mi></msub><msub><mi>c</mi><mi>i</mi></msub></mrow></math></div>
+<p>The ratio of population-weighted to area-weighted frequency, and its reciprocal, are calculated within each model before taking the model median. Dividing the two frequency medians in a table would give a different statistic.</p>
+<p>One cell–calendar-month combination in each of TK and AU has no historical observation. Both observations and models exclude these combinations on the same reference support, while the spatial aggregation remains fixed. Full-year missing-data bounds are assessed separately. The metric describes monthly mean LST exceedances of a local historical threshold, not days in a heatwave.</p>
+
+</div>
+<div class="report-block" id="report-4-2">
+<p>Weighted annual exceedance frequency describes the average frequency at population or land locations. Total exceedance exposure additionally includes population size or land area. Section 4 gives the formulas and units. Both the population-to-area frequency ratio and its reciprocal must be calculated within each model before summarizing the model median.</p>
+
+</div></section><section id="report-section-5" class="section-padding section--editorial" data-section-num="05"><div class="section-header"><h2 class="section-title">5. Paired temperature and frequency differences in long-term scenarios</h2></div><div class="report-block" id="report-5-1">
+<p>Calculate ssp585−ssp126 within each model before summarizing. Model spread inside one scenario cannot by itself determine whether paired differences exist. All entries below are area-weighted. Brackets show model P10–P90, not confidence intervals.</p>
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">Region</th>
+<th scope="col">Window</th>
+<th scope="col">Temperature °C: median [P10, P90]</th>
+<th scope="col">Positive models (out of 14)</th>
+<th scope="col">Count months/year: median [P10, P90]</th>
+<th scope="col">Positive models (out of 14)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CA</td>
+<td>2035-2044</td>
+<td>0.517 [0.321, 0.773]</td>
+<td>14</td>
+<td>0.404 [-0.016, 0.706]</td>
+<td>12</td>
+</tr>
+<tr>
+<td>CA</td>
+<td>2050-2059</td>
+<td>0.972 [0.635, 1.430]</td>
+<td>14</td>
+<td>0.663 [0.464, 0.936]</td>
+<td>14</td>
+</tr>
+<tr>
+<td>XJ</td>
+<td>2035-2044</td>
+<td>0.547 [0.289, 0.949]</td>
+<td>14</td>
+<td>0.324 [0.124, 0.597]</td>
+<td>14</td>
+</tr>
+<tr>
+<td>XJ</td>
+<td>2050-2059</td>
+<td>1.140 [0.863, 1.756]</td>
+<td>14</td>
+<td>0.914 [0.618, 1.108]</td>
+<td>14</td>
+</tr>
+<tr>
+<td>TK</td>
+<td>2035-2044</td>
+<td>0.556 [0.213, 0.704]</td>
+<td>14</td>
+<td>0.518 [0.194, 0.740]</td>
+<td>14</td>
+</tr>
+<tr>
+<td>TK</td>
+<td>2050-2059</td>
+<td>0.968 [0.559, 1.557]</td>
+<td>14</td>
+<td>0.816 [0.357, 1.170]</td>
+<td>14</td>
+</tr>
+<tr>
+<td>AU</td>
+<td>2035-2044</td>
+<td>0.313 [-0.072, 0.583]</td>
+<td>11</td>
+<td>0.161 [-0.265, 0.349]</td>
+<td>10</td>
+</tr>
+<tr>
+<td>AU</td>
+<td>2050-2059</td>
+<td>0.833 [0.459, 1.408]</td>
+<td>14</td>
+<td>0.520 [0.001, 1.066]</td>
+<td>12</td>
+</tr>
+</tbody>
+</table></div>
+<p>For 2035–2044, temperature differences are positive in all 14 models for CA, XJ and TK, and in 11 models for AU. For 2050–2059, all 14 models have positive temperature differences in every region. Exceedance-count differences are less consistent: 10 models are positive in near-window AU. Median area-weighted paired count differences remain positive across all 11 window and stress settings, but the number of positive models in near-window AU falls to 7 in one setting.</p>
+<p>Use paired differences to compare assessment needs under different pathways, retaining member ranges. Test calibration sensitivity separately for absolute frequency. Candidates supported across models, windows and population sources can then proceed to local checks. Further validation should examine distributions and exceedance frequencies as well as means.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Within-model scenario differences and member ranges" class="figure-zoom" type="button"><img alt="Within-model scenario differences and member ranges" decoding="async" height="675" loading="lazy" src="figures/audit_revision_20260926/b2_paired_scenarios.png" width="1650"/></button><figcaption class="generated-alt-caption">Within-model scenario differences and member ranges</figcaption></figure>
+
+</div>
+<div class="report-block" id="report-5-2">
+<p>The 2035–2044 and 2050–2059 assessments use climate-model scenarios without extrapolating a short-term time-series trend. The main ensemble contains 14 models. CMCC-CM2-SR5 is available only as unrevised v1.0 data and has a version-related temperature-offset anomaly. Its influence is tested separately in a sensitivity analysis including all 15 models.</p>
+
+</div></section><section id="report-section-6" class="section-padding section--editorial" data-section-num="06"><div class="section-header"><h2 class="section-title">6. Calibration sensitivity and time resampling</h2></div><div class="report-block" id="report-6-1">
+<p>Calibration windows change some directions. AU near-window population “future minus observed” moves from −0.125 under the baseline to +0.028 through +0.210 months/year across six calibration settings. TK population-to-area frequency ratios move from 1.005 to 0.931–0.979. XJ moves from 0.904 to 1.025 with the offset ending in 2013. CA stays above 1 under these calibration windows but reaches 0.844 under an assumed −3 °C shift. Ratios, rankings and lists must therefore be interpreted with their parameter settings.</p>
+<p>The table separates model spread from joint time-resampling ranges for population counts. The latter use 500 draws of 25 full calendar years. Each draw re-estimates thresholds and offsets together, computes final indicators by model, then takes the main 14-model median. The future ten-year fields remain fixed.</p>
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">Region</th>
+<th scope="col">Population count: median [model P10, P90]</th>
+<th scope="col">Joint time resampling 2.5th–97.5th percentiles</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CA</td>
+<td>2.231 [1.797, 2.632]</td>
+<td>1.937–2.405</td>
+</tr>
+<tr>
+<td>XJ</td>
+<td>1.773 [1.329, 2.397]</td>
+<td>1.447–2.102</td>
+</tr>
+<tr>
+<td>TK</td>
+<td>2.290 [1.970, 2.605]</td>
+<td>1.991–2.520</td>
+</tr>
+<tr>
+<td>AU</td>
+<td>0.943 [0.756, 1.316]</td>
+<td>0.794–1.286</td>
+</tr>
+</tbody>
+</table></div>
+<p>AU threshold-only resampling spans 0.675–1.449, wider than the joint 0.794–1.286 range. Joint parameter variation can offset some effects; propagation need not widen the interval. Moving from 14 to 15 models changes count medians by at most 0.118 months/year; the largest leave-one-model-out span is 0.261 across four regions, two windows, two scenarios and five weights.</p>
+<p>With the same 2022–2024 holdout, AU's median population-weighted RMSE varies with the calibration endpoint:</p>
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">Calibration endpoint</th>
+<th scope="col">Median population-weighted RMSE (°C)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2013</td>
+<td>3.617</td>
+</tr>
+<tr>
+<td>2019</td>
+<td>3.733</td>
+</tr>
+<tr>
+<td>2021</td>
+<td>3.613</td>
+</tr>
+</tbody>
+</table></div>
+<p>Moving the calibration endpoint later does not reduce error monotonically. A single endpoint experiment cannot establish future error bounds. <a href="https://terra.nasa.gov/about/terras-orbit-changes">NASA Terra orbit information</a> supports examining observation-time changes alongside clear-sky sampling, regional change and interannual variability. Aqua, matched locations and seasons, and overpass-time matching can help distinguish these candidate mechanisms.</p>
+<p>Models share some structures, so their members cannot be treated as independent observations in significance tests of future differences. Record calibration windows, population sources and member influence separately. Whole-year resampling does not cover multiyear dependence or future nonstationarity; ±1 °C and ±3 °C shifts are stress settings. These ranges identify sensitive candidates rather than provide complete future predictive coverage.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Near-window ssp585 population counts: three windows jointly re-estimating threshold and offset, plus four shifts; main-14 median and P10–P90" class="figure-zoom" type="button"><img alt="Near-window ssp585 population counts: three windows jointly re-estimating threshold and offset, plus four shifts; main-14 median and P10–P90" decoding="async" height="1350" loading="lazy" src="figures/audit_revision_20260926/b3_population_sensitivity.png" width="1950"/></button><figcaption class="generated-alt-caption">Near-window ssp585 population counts: three windows jointly re-estimating threshold and offset, plus four shifts; main-14 median and P10–P90</figcaption></figure>
+
+</div>
+<div class="report-block" id="report-6-2">
+<p>Record calibration windows, population sources and member influence separately. Whole-year resampling does not cover multiyear dependence or future nonstationarity; ±1 °C and ±3 °C shifts are stress settings. These ranges identify sensitive candidates rather than provide complete future predictive coverage.</p>
+
+</div></section><section id="report-section-7" class="section-padding section--editorial" data-section-num="07"><div class="section-header"><h2 class="section-title">7. Member influence and single-model use</h2></div><div class="report-block" id="report-7-1">
+<p>Maximum changes are 0.118 months/year for 14→15 count medians and a 0.261 span for leave-one-model-out ensembles, across four regions, two windows, two scenarios and five weights. They do not establish unchanged sites. Retain member distributions; shared model structures preclude treating members as independent observations for future significance.</p>
+
+</div></section><section id="report-section-8" class="section-padding section--editorial" data-section-num="08"><div class="section-header"><h2 class="section-title">8. Data checks and next validation</h2></div><div class="report-block" id="report-8-1">
+<p>Independent recomputation from raw daily tables finds the largest change in mean daily valid-point fraction between 2023–2024 and 2000–2019 in AU: 0.03832664, or 3.832664 percentage points. Similar fractions do not prove identical locations or weather were sampled. Next checks require matched locations, seasons and observation times. Spatial follow-up is in the <a href="spglobal climate comparison-en.html">project synthesis</a>.</p>
+
+</div></section><section id="report-section-9" class="section-padding section--editorial" data-section-num="09"><div class="section-header"><h2 class="section-title">9. Screening purpose</h2></div><div class="report-block" id="report-9-1">
+<p>Sequence data verification using contributions and stability before deciding on detailed asset or agricultural assessments. Population, buildings and cropland have distinct data needs.</p>
+
+</div></section><section id="report-section-10" class="section-padding section--editorial" data-section-num="10"><div class="section-header"><h2 class="section-title">10. Model comparison and spatial correction validation</h2></div><div class="report-block" id="report-10-1">
+<p>Ranking tas against LST by raw RMSE mixes mean differences with differences in temporal shape. Report bias first, then centered RMSE (cRMSE), correlation and the standard-deviation ratio. Attach shared time-resampling ranges to historical ranks.</p>
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">Region</th>
+<th scope="col">Point-estimate leader</th>
+<th scope="col">cRMSE (°C)</th>
+<th scope="col">Resampling 2.5th–97.5th percentiles (°C)</th>
+<th scope="col">Rank range</th>
+<th scope="col">Observed months</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CA</td>
+<td>MIROC6</td>
+<td>5.647</td>
+<td>5.232–6.011</td>
+<td>1–3</td>
+<td>69</td>
+</tr>
+<tr>
+<td>XJ</td>
+<td>GISS-E2-1-G</td>
+<td>3.249</td>
+<td>2.966–3.499</td>
+<td>1–9</td>
+<td>67</td>
+</tr>
+<tr>
+<td>TK</td>
+<td>TaiESM1</td>
+<td>4.409</td>
+<td>3.596–5.065</td>
+<td>1–5</td>
+<td>60</td>
+</tr>
+<tr>
+<td>AU</td>
+<td>GISS-E2-1-G</td>
+<td>6.173</td>
+<td>5.785–6.435</td>
+<td>1–7</td>
+<td>72</td>
+</tr>
+</tbody>
+</table></div>
+<p>Calculation scope: 2015–2020, ssp585, main 14-model ensemble. The 2,000 resamples draw six whole years with replacement and apply a common missing-data mask after restoring the calendar. These are point-estimate leaders, not proven winners in new years. Even CA spans ranks 1–3, offering no basis for a universal best GCM.</p>
+<p>Both correction methods use the same 2000–2013 training period, 2014–2024 holdout and observed-month masks. One estimates an offset for each cell; the other applies a regional offset to local tas. Frequency MAE is the absolute error in exceedance probability and is dimensionless.</p>
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">Region</th>
+<th scope="col">Correction method</th>
+<th scope="col">Population-weighted cell RMSE (°C)</th>
+<th scope="col">Population-weighted frequency MAE</th>
+<th scope="col">Regional mean RMSE (°C)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CA</td>
+<td>Cell correction</td>
+<td>3.295</td>
+<td>0.066</td>
+<td>3.246</td>
+</tr>
+<tr>
+<td>CA</td>
+<td>Regional correction applied to local tas</td>
+<td>5.787</td>
+<td>0.216</td>
+<td>3.242</td>
+</tr>
+<tr>
+<td>XJ</td>
+<td>Cell correction</td>
+<td>3.176</td>
+<td>0.059</td>
+<td>2.463</td>
+</tr>
+<tr>
+<td>XJ</td>
+<td>Regional correction applied to local tas</td>
+<td>4.313</td>
+<td>0.127</td>
+<td>2.484</td>
+</tr>
+<tr>
+<td>TK</td>
+<td>Cell correction</td>
+<td>3.611</td>
+<td>0.049</td>
+<td>3.267</td>
+</tr>
+<tr>
+<td>TK</td>
+<td>Regional correction applied to local tas</td>
+<td>4.669</td>
+<td>0.113</td>
+<td>3.281</td>
+</tr>
+<tr>
+<td>AU</td>
+<td>Cell correction</td>
+<td>2.860</td>
+<td>0.045</td>
+<td>2.965</td>
+</tr>
+<tr>
+<td>AU</td>
+<td>Regional correction applied to local tas</td>
+<td>4.388</td>
+<td>0.109</td>
+<td>2.843</td>
+</tr>
+</tbody>
+</table></div>
+<p>Calculation scope: medians across the main 14 models. Lower population-weighted cell error in every region supports using cell correction for further spatial checks. AU regional mean RMSE nevertheless rises from 2.843 to 2.965 °C. The two levels answer different questions. Independent observations at candidate locations should next test frequency and ranking; an aggregate error check cannot establish site validity.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Two correction methods using common observations and masks" class="figure-zoom" type="button"><img alt="Two correction methods using common observations and masks" decoding="async" height="675" loading="lazy" src="figures/audit_revision_20260926/b2_common_reference_validation.png" width="1650"/></button><figcaption class="generated-alt-caption">Two correction methods using common observations and masks</figcaption></figure>
+
+</div></section><section id="report-section-11" class="section-padding section--editorial" data-section-num="11"><div class="section-header"><h2 class="section-title">11. Absolute frequency and observed reference</h2></div><div class="report-block" id="report-11-1">
+<p>Near-window ssp585 median population-to-area frequency ratios are 1.153 in CA, 0.904 in XJ, 1.005 in TK and 0.777 in AU. They compare mean frequency where people are located with the area-weighted regional mean. Population is concentrated in higher-frequency cells in CA and lower-frequency cells in AU. This ratio does not say whether the future is below observations or quantify loss.</p>
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">Region</th>
+<th scope="col">Area-weighted months/year</th>
+<th scope="col">Population-weighted months/year</th>
+<th scope="col">Population-to-area frequency ratio</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CA</td>
+<td>1.870 [1.644, 2.298]</td>
+<td>2.231 [1.797, 2.632]</td>
+<td>1.153 [1.096, 1.253]</td>
+</tr>
+<tr>
+<td>XJ</td>
+<td>1.950 [1.560, 2.334]</td>
+<td>1.773 [1.329, 2.397]</td>
+<td>0.904 [0.836, 1.026]</td>
+</tr>
+<tr>
+<td>TK</td>
+<td>2.244 [1.918, 2.666]</td>
+<td>2.290 [1.970, 2.605]</td>
+<td>1.005 [0.949, 1.062]</td>
+</tr>
+<tr>
+<td>AU</td>
+<td>1.204 [0.970, 1.491]</td>
+<td>0.943 [0.756, 1.316]</td>
+<td>0.777 [0.677, 0.916]</td>
+</tr>
+</tbody>
+</table></div>
+<p>Calculation scope: main 14 models, median [P10, P90]. Current area-weighted counts order TK &gt; XJ &gt; CA &gt; AU; population-weighted counts order TK &gt; CA &gt; XJ &gt; AU. CA and XJ exchange positions under the current cell-level, per-model calculation. The two weights describe different spatial distributions and therefore produce different regional orderings.</p>
+<p>The two population sources give similar population-weighted exceedance frequencies in TK, but different population totals produce substantially different exposure totals.</p>
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">Population source</th>
+<th scope="col">Weighted frequency (months/year)</th>
+<th scope="col">Exposure (million people·months/year)</th>
+<th scope="col">Population (millions)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GHS</td>
+<td>2.290</td>
+<td>14.5945</td>
+<td>About 6.37</td>
+</tr>
+<tr>
+<td>GPW</td>
+<td>2.306</td>
+<td>7.5492</td>
+<td>About 3.27</td>
+</tr>
+</tbody>
+</table></div>
+<p>Both total population and its spatial allocation require local verification before field assessment.</p>
+<p>AU observed population-weighted frequency is 1.069 months/year, versus a corrected historical model median of only 0.534 and a near-window ssp585 value of 0.943. Being below observations therefore includes existing historical frequency underestimation and cannot be read as a real reduction in risk. Future population- and built-weighted counts are below observations, while area and cropland counts are above: 1.204 versus 1.161 for area, and 1.188 versus 1.177 months/year for cropland. Check residents, buildings and agriculture separately, using independent data to examine the narrow modeled warm-season distribution.</p>
+<p>In CA, XJ and TK, all 14 main-ensemble models place future exceedance frequency above observations for all four weights under near-window ssp585. This direction also holds in the far window. Agreement in AU depends on the weight and window:</p>
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">AU weighting</th>
+<th scope="col">Positive models, 2035–2044 (out of 14)</th>
+<th scope="col">Positive models, 2050–2059 (out of 14)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Area</td>
+<td>9</td>
+<td>14</td>
+</tr>
+<tr>
+<td>Population</td>
+<td>4</td>
+<td>13</td>
+</tr>
+<tr>
+<td>Built surface</td>
+<td>5</td>
+<td>13</td>
+</tr>
+<tr>
+<td>Cropland</td>
+<td>8</td>
+<td>14</td>
+</tr>
+</tbody>
+</table></div>
+
+</div>
+<div class="report-block" id="report-11-2">
+<p>The TK study box crosses borders. About 93.4546% of its GHS population lies in Iran on the current full-cell union. This is a share of the study box, not of an entire country or region. Country-union and cell-sum denominators differ by less than 0.01% because partial-pixel coverage is handled in separate polygon reductions.</p>
+
+</div></section><section id="report-section-12" class="section-padding section--editorial" data-section-num="12"><div class="section-header"><h2 class="section-title">12. Candidate locations and verification sequence</h2></div><div class="report-block" id="report-12-1">
+<p>Population, built surface and cropland receive separate candidate lists. Within each model, cells are scored by exposure times exceedance frequency, then the median score across models is taken. The quota is one tenth of positive-exposure cells, rounded up. Selection proceeds from the highest score, retaining only positive scores and all ties at the boundary after rounding scores to eight decimal places.</p>
+<p>Priority candidates must also be retained under all six calibration settings, the 15-model ensemble and every ensemble formed by leaving out one main-ensemble model. Both model selection share and joint time-resampling selection frequency must be at least 80%. Population candidates must additionally survive the switch to GPW. The top-decile and 80% thresholds are proposed scheduling rules for this project.</p>
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">Region</th>
+<th scope="col">Exposure layer</th>
+<th scope="col">Baseline candidates</th>
+<th scope="col">Priority candidates</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CA</td>
+<td>Population</td>
+<td>14</td>
+<td>13</td>
+</tr>
+<tr>
+<td>CA</td>
+<td>Built surface</td>
+<td>16</td>
+<td>15</td>
+</tr>
+<tr>
+<td>CA</td>
+<td>Cropland</td>
+<td>11</td>
+<td>10</td>
+</tr>
+<tr>
+<td>XJ</td>
+<td>Population</td>
+<td>4</td>
+<td>3</td>
+</tr>
+<tr>
+<td>XJ</td>
+<td>Built surface</td>
+<td>7</td>
+<td>6</td>
+</tr>
+<tr>
+<td>XJ</td>
+<td>Cropland</td>
+<td>7</td>
+<td>6</td>
+</tr>
+<tr>
+<td>TK</td>
+<td>Population</td>
+<td>13</td>
+<td>5</td>
+</tr>
+<tr>
+<td>TK</td>
+<td>Built surface</td>
+<td>13</td>
+<td>11</td>
+</tr>
+<tr>
+<td>TK</td>
+<td>Cropland</td>
+<td>13</td>
+<td>11</td>
+</tr>
+<tr>
+<td>AU</td>
+<td>Population</td>
+<td>57</td>
+<td>49</td>
+</tr>
+<tr>
+<td>AU</td>
+<td>Built surface</td>
+<td>57</td>
+<td>43</td>
+</tr>
+<tr>
+<td>AU</td>
+<td>Cropland</td>
+<td>56</td>
+<td>32</td>
+</tr>
+</tbody>
+</table></div>
+<p>For 2035–2044 under ssp585, the table contains 268 baseline entries, of which 204 qualify for priority checks. Entries count cell–layer combinations, so one location can occur in more than one layer.</p>
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">Region</th>
+<th scope="col">Finding and explanation</th>
+<th scope="col">Proposed action</th>
+<th scope="col">Subsequent test</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CA</td>
+<td>All 14 population candidates overlap the population-only ranking; concentrated exposure may drive stability</td>
+<td>Check occupancy, uses and asset locations in concentrated cells first</td>
+<td>Use multiple within-cell observations to test central-pixel representativeness; compare hazard and contribution ranks</td>
+</tr>
+<tr>
+<td>XJ</td>
+<td>Only 4 baseline population candidates; calibration can move the population ratio across 1</td>
+<td>Verify local population and cropland allocation, retaining sensitive candidates</td>
+<td>Compare population sources, calibration windows and growing-season metrics on common observation support</td>
+</tr>
+<tr>
+<td>TK</td>
+<td>All 13 population candidates have time selection frequency 1, yet GPW retains only 5</td>
+<td>Resolve spatial allocation conflicts between the population sources first</td>
+<td>Compare local statistics and settlement locations, then recompute contributions and lists</td>
+</tr>
+<tr>
+<td>AU</td>
+<td>Some population candidates respond to windows and resampling; the lowest selection frequency is 0.358</td>
+<td>Retain the cell at latitude −36.125, longitude 146.625 for checking without promising its exact rank</td>
+<td>It survives only 2 of the 6 calibration settings; check temperature frequency and local use, and separately obtain crop, irrigation and growing-season data</td>
+</tr>
+</tbody>
+</table></div>
+<p>List stability means continued selection under the tested settings; selection frequency is not a disaster probability. Population lists organize resident-data checks, built-surface lists guide asset-use and occupancy checks, and cropland lists guide crop and season data collection. Loss or adaptation assessments require those inputs and independent observations.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Near-window ssp585 baseline candidates by layer; color shows selection frequency in 500 joint whole-year draws, not disaster probability" class="figure-zoom" type="button"><img alt="Near-window ssp585 baseline candidates by layer; color shows selection frequency in 500 joint whole-year draws, not disaster probability" decoding="async" height="2100" loading="lazy" src="figures/audit_revision_20260926/b3_candidate_sampling.png" width="1800"/></button><figcaption class="generated-alt-caption">Near-window ssp585 baseline candidates by layer; color shows selection frequency in 500 joint whole-year draws, not disaster probability</figcaption></figure>
+
+</div></section><section id="report-section-13" class="section-padding section--editorial" data-section-num="13"><div class="section-header"><h2 class="section-title">13. Layer-specific implementation and testing</h2></div><div class="report-block" id="report-13-1">
+<p>Add settlements, activity and seasonal occupancy for population; asset footprints, uses and occupancy for built surface; crops, growing seasons and irrigation for cropland. The priority rule sequences limited survey resources. Resolve source-sensitive and boundary cells, then validate hazard frequency with independent observations. Loss functions and adaptation costs require subsequent real-world data.</p>
+
+</div></section></article>
+  </section>
+<nav class="report-series" aria-label="Series navigation"><a class="report-series__link" href="spglobal climate comparison-en.html">S&amp;P Global Capstone: climate models, forecasts and spatial exposure</a><a class="report-series__link" href="model comparison-en.html">Capstone study: model comparison</a><a class="report-series__link" href="long series-en.html">Capstone study: long records and short-term forecasts</a><a class="report-series__link is-current" href="projection overlay-en.html">Paired long-term scenarios and spatial exposure</a></nav>
+  <section id="related" class="section-padding"><div class="section-header"><h2 class="section-title">Related projects</h2></div><div class="grid md:grid-cols-2 gap-6"><a href="../healthy home/healthy home-en.html" class="related-project-card"><h3 class="related-project-title">Healthy Home: spatial prediction and road mapping in Oakland</h3><p class="related-project-description">Combine 18,219 observations, road networks and nested spatial evaluation to analyze pollutant patterns in Oakland. Random Forest achieves pooled NO₂ R² of 0.576017 under spatial-block evaluation. Relative prediction maps cover 628.74 km of roads, with area-level error analysis informing further sampling.</p><span class="related-project-link">Read case</span></a><a href="../lendingclub loan prediction/lendingclub loan prediction-en.html" class="related-project-card"><h3 class="related-project-title">LendingClub: the 9,004-loan sample</h3><p class="related-project-description">Analyze default patterns in 9,004 historical loans, compare models with a loan-term rule, and design screening policies under asymmetric costs. Random Forest at the frozen threshold of 0.22 achieves 70.45% test recall and a 4.68% net simulated cost reduction.</p><span class="related-project-link">Read case</span></a></div></section>
+</main>
+<script src="../../assets/js/logo.js"></script>
+<script src="../../assets/js/common.js"></script>
+<script src="../../assets/js/project.js"></script>
+<script src="../../assets/js/language-switcher.js"></script>
+</body>
+</html>

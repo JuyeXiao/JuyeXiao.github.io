@@ -1,727 +1,614 @@
 <!DOCTYPE html>
-<html lang="zh-CN" class="light">
+<html lang="zh-CN">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <script>document.documentElement.classList.add('js');</script>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" href="../../favicon.svg" type="image/svg+xml" />
-  <title>银行客户流失预测与关键驱动因素 - 数据诗学</title>
-  <meta name="description" content="对 10,000 名零售银行客户的机器学习分析：XGBoost+SMOTE 达到 ROC-AUC 0.876（95% CI [0.858, 0.892]）/ PR-AUC 0.727，阈值在训练集折外预测上按 F2 调到 0.20，把流失捕获率从 61% 提升到 87%，并给出 C*≈3.7 的盈亏平衡成本比。" />
-
-  <!-- 与首页一致：Tailwind / 字体 / 图标 / 站点样式 -->
+  <title>银行客户流失：从客户模式到服务行动 - 数据诗学</title>
+  <meta name="description" content="结合 10,000 名客户的分组分析、模型比较与 SHAP 解释，识别流失信号并设计服务优先级。冻结阈值 0.275 的测试召回率为 78.39%、精确率为 48.25%，进一步比较不同服务容量下的覆盖与成本。">
+  <meta property="og:title" content="银行客户流失：从客户模式到服务行动">
+  <meta property="og:description" content="结合 10,000 名客户的分组分析、模型比较与 SHAP 解释，识别流失信号并设计服务优先级。冻结阈值 0.275 的测试召回率为 78.39%、精确率为 48.25%，进一步比较不同服务容量下的覆盖与成本。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://juyexiao.github.io/projects/Bank%20Customer%20Churn%20Prediction/Bank%20Customer%20Churn%20Prediction.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:description" content="结合 10,000 名客户的分组分析、模型比较与 SHAP 解释，识别流失信号并设计服务优先级。冻结阈值 0.275 的测试召回率为 78.39%、精确率为 48.25%，进一步比较不同服务容量下的覆盖与成本。">
+  <link rel="canonical" href="https://juyexiao.github.io/projects/Bank%20Customer%20Churn%20Prediction/Bank%20Customer%20Churn%20Prediction.html">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+SC:wght@400;500;600&family=Noto+Serif+SC:wght@500&display=swap" rel="stylesheet" />
-  <script src="https://unpkg.com/lucide-react/dist/umd/lucide-react.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&amp;family=Inter:wght@200;300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;700&amp;family=Noto+Sans+SC:wght@400;500;600&amp;family=Noto+Serif+SC:wght@500&amp;display=swap" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest"></script>
-  <link rel="stylesheet" href="../../assets/css/index.css" />
-  <link rel="stylesheet" href="../../assets/css/project.css" />
-
-  <!-- 代码高亮 + 图表库（详情页常用） -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
-  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-
-  <style>
-    .dark table.performance-table thead tr {
-      background-color: rgba(64, 64, 64, 0.25) !important;
-    }
-    .dark .dark\:text-gray-300 {
-      color: var(--dark) !important;
-    }
-  </style>
+  <link rel="stylesheet" href="../../assets/css/index.css">
+  <link rel="stylesheet" href="../../assets/css/project.css">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "银行客户流失：从客户模式到服务行动", "description": "结合 10,000 名客户的分组分析、模型比较与 SHAP 解释，识别流失信号并设计服务优先级。冻结阈值 0.275 的测试召回率为 78.39%、精确率为 48.25%，进一步比较不同服务容量下的覆盖与成本。", "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Juye Xiao"}}</script>
 </head>
-<body class="transition-colors duration-300">
-  <div class="scroll-progress" id="scroll-progress"></div>
+<body class="transition-colors duration-300 report-page">
+<div class="scroll-progress" id="scroll-progress"></div>
+<header class="navbar fixed top-0 left-0 right-0 z-50" id="navbar">
+<div class="container-main h-full flex items-center justify-between">
+<!-- Logo部分 -->
+<a class="navbar-logo" href="../../index.html#hero" id="navbar-logo">
+<!-- SVG Logo -->
+<svg class="logo-svg-nav" viewbox="0 0 40 40">
+<!-- 背景数据网格 -->
+<g class="grid-bg">
+<!-- 垂直线 -->
+<line class="grid-line-v" style="animation-delay: 0.1s, 0s" x1="8" x2="8" y1="0" y2="40"></line>
+<line class="grid-line-v" style="animation-delay: 0.2s, 0.5s" x1="16" x2="16" y1="0" y2="40"></line>
+<line class="grid-line-v" style="animation-delay: 0.3s, 1s" x1="24" x2="24" y1="0" y2="40"></line>
+<line class="grid-line-v" style="animation-delay: 0.4s, 1.5s" x1="32" x2="32" y1="0" y2="40"></line>
+<!-- 水平线 -->
+<line class="grid-line-h" style="animation-delay: 0.5s, 0s" x1="0" x2="40" y1="10" y2="10"></line>
+<line class="grid-line-h" style="animation-delay: 0.6s, 0.7s" x1="0" x2="40" y1="20" y2="20"></line>
+<line class="grid-line-h" style="animation-delay: 0.7s, 1.4s" x1="0" x2="40" y1="30" y2="30"></line>
+</g>
+<!-- 织梭动画线 -->
+<line class="weaver-line" id="weaverLine" x1="0" x2="40" y1="20" y2="20"></line>
+<!-- JX字母 -->
+<text class="logo-letters" id="logoLetters" text-anchor="middle" x="20" y="26">JX</text>
+</svg>
+<!-- 名字签名（悬停显示） -->
+<div class="logo-name">
+<div class="logo-name-text">Juye Xiao</div>
+<div class="logo-name-subtitle">Data Analyst</div>
+</div>
+</a>
+<nav class="hidden md:flex items-center space-x-8">
+<a class="nav-link" href="../../index.html#about">关于</a>
+<a class="nav-link" href="../../index.html#experience">经历</a>
+<a class="nav-link" href="../../index.html#education">教育</a>
+<a class="nav-link" href="../../index.html#projects">项目</a>
+<a class="nav-link" href="../../index.html#skills">技能</a>
+<a class="nav-link" href="../../index.html#contact">联系</a>
+</nav>
+<div class="flex items-center space-x-4">
+<button aria-label="切换主题" class="btn-secondary !p-2 !rounded-full" id="theme-toggle">
+<i class="block dark:hidden" data-lucide="sun"></i>
+<i class="hidden dark:block" data-lucide="moon"></i>
+</button>
+<button class="btn-secondary !p-2 !rounded-full" id="lang-toggle">
+<span class="font-bold text-sm">EN</span>
+</button>
+<button aria-controls="mobile-menu" aria-expanded="false" aria-label="打开菜单" class="btn-secondary !p-2 !rounded-full md:hidden" id="menu-toggle">
+<i class="menu-icon-open" data-lucide="menu"></i>
+<i class="menu-icon-close" data-lucide="x"></i>
+</button>
+</div>
+</div>
+<nav aria-label="移动端导航" class="mobile-menu md:hidden" id="mobile-menu">
+<a class="nav-link" href="../../index.html#about">关于</a>
+<a class="nav-link" href="../../index.html#experience">经历</a>
+<a class="nav-link" href="../../index.html#education">教育</a>
+<a class="nav-link" href="../../index.html#projects">项目</a>
+<a class="nav-link" href="../../index.html#skills">技能</a>
+<a class="nav-link" href="../../index.html#contact">联系</a>
+</nav>
+</header>
+<main class="container-main">
+  <section id="project-hero" class="section-padding report-hero">
+    <div class="section-eyebrow"><span class="section-kicker">客户分析</span></div>
+    <h1 class="hero-title">银行客户流失：从客户模式到服务行动</h1>
+    <p class="subtitle report-standfirst">结合 10,000 名客户的分组分析、模型比较与 SHAP 解释，识别流失信号并设计服务优先级。冻结阈值 0.275 的测试召回率为 78.39%、精确率为 48.25%，进一步比较不同服务容量下的覆盖与成本。</p>
+    <p class="reading-time">2026 · 分析更新</p>
+    <div class="hero-stats"><div class="hero-stat"><div class="hero-stat__num">10,000</div><div class="hero-stat__label">客户记录</div></div><div class="hero-stat"><div class="hero-stat__num">0.275</div><div class="hero-stat__label">选择集冻结阈值</div></div><div class="hero-stat"><div class="hero-stat__num">78.39%</div><div class="hero-stat__label">测试召回率；95% 区间 74.8%–81.8%</div></div></div>
+    <div class="report-actions"><a class="btn btn-primary" href="#content">开始阅读</a><a class="btn btn-secondary" href="../../index.html#projects">返回项目概览</a></div>
+  </section>
 
-  <!-- 顶部导航（完全复用首页结构与样式） -->
-  <header id="navbar" class="navbar fixed top-0 left-0 right-0 z-50">
-    <div class="container-main h-full flex items-center justify-between">
-      <a href="../../index.html#hero" class="navbar-logo" id="navbar-logo">
-        <svg class="logo-svg-nav" viewBox="0 0 40 40">
-          <g class="grid-bg">
-            <line class="grid-line-v" x1="8" y1="0" x2="8" y2="40" style="animation-delay: 0.1s, 0s" />
-            <line class="grid-line-v" x1="16" y1="0" x2="16" y2="40" style="animation-delay: 0.2s, 0.5s" />
-            <line class="grid-line-v" x1="24" y1="0" x2="24" y2="40" style="animation-delay: 0.3s, 1s" />
-            <line class="grid-line-v" x1="32" y1="0" x2="32" y2="40" style="animation-delay: 0.4s, 1.5s" />
-            <line class="grid-line-h" x1="0" y1="10" x2="40" y2="10" style="animation-delay: 0.5s, 0s" />
-            <line class="grid-line-h" x1="0" y1="20" x2="40" y2="20" style="animation-delay: 0.6s, 0.7s" />
-            <line class="grid-line-h" x1="0" y1="30" x2="40" y2="30" style="animation-delay: 0.7s, 1.4s" />
-          </g>
-          <line class="weaver-line" id="weaverLine" x1="0" y1="20" x2="40" y2="20" />
-          <text class="logo-letters" id="logoLetters" x="20" y="26" text-anchor="middle">JX</text>
-        </svg>
-        <div class="logo-name">
-          <div class="logo-name-text">Juye Xiao</div>
-          <div class="logo-name-subtitle">Data Analyst</div>
-        </div>
-      </a>
+  <section id="content" class="section-padding report-layout">
+    <aside><nav class="project-toc" id="project-toc" aria-label="报告目录"><h3>目录</h3><ul id="toc-list"><li><a class="toc-link" href="#report-section-1">概览</a></li><li><a class="toc-link" href="#report-section-2">摘要</a></li><li><a class="toc-link" href="#report-section-3">1 界定流失问题</a></li><li><a class="toc-link" href="#report-section-4">2 检查数据质量</a></li><li><a class="toc-link" href="#report-section-5">3 读分组流失率</a></li><li><a class="toc-link" href="#report-section-6">4 准备建模特征</a></li><li><a class="toc-link" href="#report-section-7">5 对比四个模型</a></li><li><a class="toc-link" href="#report-section-8">6 设定阈值与成本</a></li><li><a class="toc-link" href="#report-section-9">7 模型预测依据与业务解释</a></li><li><a class="toc-link" href="#report-section-10">8 落地行动</a></li><li><a class="toc-link" href="#report-section-11">9 解释方法</a></li></ul></nav></aside>
+    <article class="content-area report-body" id="report-body"><div class="report-block" id="report-intro-1">
+<p>产品数与活跃状态揭示优先排查人群；模型比较与 SHAP 解释筛选依据；阈值权衡把风险识别转成名单容量与服务方案。</p>
 
-      <nav class="hidden md:flex items-center space-x-8">
-        <a href="../../index.html#about" class="nav-link">关于</a>
-        <a href="../../index.html#experience" class="nav-link">经历</a>
-        <a href="../../index.html#education" class="nav-link">教育</a>
-        <a href="../../index.html#projects" class="nav-link">项目</a>
-        <a href="../../index.html#skills" class="nav-link">技能</a>
-        <a href="../../index.html#contact" class="nav-link">联系</a>
-      </nav>
+</div><section id="report-section-1" class="section-padding section--editorial" data-section-num="01"><div class="section-header"><h2 class="section-title">概览</h2></div><div class="report-block" id="report-1-1">
+<div aria-label="数据表（可横向滚动）" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col"></th>
+<th scope="col"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>选择集阈值</td>
+<td>0.275</td>
+</tr>
+<tr>
+<td>测试召回率</td>
+<td>78.39%</td>
+</tr>
+<tr>
+<td>测试精确率</td>
+<td>48.25%</td>
+</tr>
+<tr>
+<td>扩大名单多覆盖流失标签</td>
+<td>93</td>
+</tr>
+</tbody>
+</table></div>
 
-      <div class="flex items-center space-x-4">
-        <button id="theme-toggle" class="btn-secondary !p-2 !rounded-full" title="切换主题">
-          <i data-lucide="sun" class="block dark:hidden"></i>
-          <i data-lucide="moon" class="hidden dark:block"></i>
-        </button>
-        <button id="lang-toggle" class="btn-secondary !p-2 !rounded-full"><span class="font-bold text-sm">EN</span></button>
-        <button id="menu-toggle" class="btn-secondary !p-2 !rounded-full md:hidden"
-          aria-label="打开菜单" aria-expanded="false" aria-controls="mobile-menu">
-          <i data-lucide="menu" class="menu-icon-open"></i>
-          <i data-lucide="x" class="menu-icon-close"></i>
-        </button>
-      </div>
-    </div>
-    <nav id="mobile-menu" class="mobile-menu md:hidden" aria-label="移动端导航">
-      <a href="../../index.html#about" class="nav-link">关于</a>
-      <a href="../../index.html#experience" class="nav-link">经历</a>
-      <a href="../../index.html#education" class="nav-link">教育</a>
-      <a href="../../index.html#projects" class="nav-link">项目</a>
-      <a href="../../index.html#skills" class="nav-link">技能</a>
-      <a href="../../index.html#contact" class="nav-link">联系</a>
-    </nav>
-  </header>
+</div></section><section id="report-section-2" class="section-padding section--editorial" data-section-num="02"><div class="section-header"><h2 class="section-title">摘要</h2></div><div class="report-block" id="report-2-1">
+<p>产品数量与流失呈明显的非线性关系：两个产品组流失率为 7.6%，三个产品组为 82.7%；非活跃客户为 26.9%，活跃客户为 14.3%。这些差异指向产品匹配与服务使用障碍两条优先排查线索。年龄与地区差异可进一步指导需求访谈和区域服务复核。</p>
+<p>树模型的测试排序表现优于线性与距离基线，XGBoost+SMOTE 的 ROC-AUC 为 0.8706、AP 为 0.7215，随机森林也是有竞争力的参照。SHAP 显示年龄和产品数对当前模型分数贡献较大；正确与错误预测案例说明，解释分数形成过程有助于定位模型局限。</p>
+<p>阈值从 0.5 降至选择集确定的 0.275，名单由 459 人扩大到 827 人，多覆盖 93 个流失标签，同时增加 275 个误报。项目据此提出按服务容量选择名单、先排查产品匹配和使用障碍、再评估服务方案的实施路径。</p>
 
-  <main class="container-main">
-    <!-- 项目头部 -->
-    <section id="project-hero" class="section-padding" style="padding-top: calc(var(--space-xl) + 72px)">
-      <div class="grid md:grid-cols-2 gap-16 items-center w-full">
-        <div class="reveal">
-          <div class="section-eyebrow">
-            <span class="section-kicker">Case Study · 客户分析与留存</span>
-          </div>
-          <h1 class="hero-title mt-2">银行客户流失预测与关键驱动因素</h1>
-          <p class="subtitle mt-4 max-w-xl">一份含 10,000 名客户的横截面数据里，两成已经流失。给每位客户排出风险次序，解释每个预测，以及为什么把阈值从 0.5 降到 0.20 是划算的。</p>
-          <div class="reading-time">约 14 分钟阅读<span class="sep">·</span>17 张图表</div>
+</div></section><section id="report-section-3" class="section-padding section--editorial" data-section-num="03"><div class="section-header"><h2 class="section-title">1 界定流失问题</h2></div><div class="report-block" id="report-3-1">
+<p>本项目围绕客户挽留的三个决策问题展开：哪些客户特征组合值得优先调查，什么方法能更好地区分流失标签，以及有限服务容量下如何选择候选名单。</p>
+<p>分析依次使用分组统计发现模式、模型对照比较分类方法、SHAP 解释预测与误判，最终提出产品匹配排查、非活跃客户服务指导和分层需求研究方案。</p>
 
-          <div class="hero-stats">
-            <div class="hero-stat">
-              <div class="hero-stat__num">10K</div>
-              <div class="hero-stat__label">零售客户（流失率 20.4%）</div>
-            </div>
-            <div class="hero-stat">
-              <div class="hero-stat__num">87%</div>
-              <div class="hero-stat__label">流失捕获率 @ 阈值 0.20</div>
-            </div>
-            <div class="hero-stat">
-              <div class="hero-stat__num">0.876</div>
-              <div class="hero-stat__label">ROC-AUC（测试集）</div>
-            </div>
-          </div>
+</div></section><section id="report-section-4" class="section-padding section--editorial" data-section-num="04"><div class="section-header"><h2 class="section-title">2 检查数据质量</h2></div><div class="report-block" id="report-4-1">
+<p>文档记录的数据来源为 Kaggle 公开数据集 <a href="https://www.kaggle.com/datasets/shubh0799/churn-modelling">Churn Modelling</a>，10,000 行 × 14 列，无缺失值。目标变量 <code>Exited</code> 记录客户是否已流失，流失率 20.4%（2,037 人）。行号、客户号、姓氏三列作为标识符在建模前剔除。</p>
+<p>四比一的类不平衡使召回率和 PR-AUC 成为重要补充；本项目比较 SMOTE 与类权重，但不代表所有不平衡任务都必须重采样。永远预测留存的模型也有 79.6% 准确率，却无法识别流失客户，因此准确率必须结合少数类指标解读。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：目标分布：留存与流失客户的数量" class="figure-zoom" type="button"><img alt="目标分布：留存与流失客户的数量" decoding="async" height="680" loading="lazy" src="figures/target_distribution.png" width="869"/></button><figcaption class="generated-alt-caption">目标分布：留存与流失客户的数量</figcaption></figure>
+<p>保存的相关性热图中，数值特征的两两线性相关总体较弱，年龄与 Exited 正相关、活跃状态负相关。两两相关不能排除编码后设计矩阵的共线性，也不能替代因果识别。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：相关性矩阵：数值特征与目标变量" class="figure-zoom" type="button"><img alt="相关性矩阵：数值特征与目标变量" decoding="async" height="1171" loading="lazy" src="figures/correlation_heatmap.png" width="1309"/></button><figcaption class="generated-alt-caption">相关性矩阵：数值特征与目标变量</figcaption></figure>
 
-          <div class="mt-8 flex items-center gap-4">
-            <a href="#content" class="btn btn-primary">开始阅读</a>
-            <a href="../../index.html#projects" class="btn btn-secondary">返回项目概览</a>
-          </div>
-        </div>
-        <aside class="reveal hero-stack">
-          <div class="hero-stack__label">Methods · 技术栈</div>
-          <ol class="hero-stack__list">
-            <li>
-              <span class="hero-stack__num">01</span>
-              <span class="hero-stack__name">XGBoost + SMOTE</span>
-              <span class="hero-stack__desc">两个排序指标双第一，ROC-AUC 0.876 / PR-AUC 0.727</span>
-            </li>
-            <li>
-              <span class="hero-stack__num">02</span>
-              <span class="hero-stack__name">同协议四模型对比</span>
-              <span class="hero-stack__desc">imblearn 流水线，SMOTE 只作用于训练折，5 折 GridSearchCV</span>
-            </li>
-            <li>
-              <span class="hero-stack__num">03</span>
-              <span class="hero-stack__name">F2 阈值调优</span>
-              <span class="hero-stack__desc">训练集折外预测上选定 0.20，捕获率 61% → 87%</span>
-            </li>
-            <li>
-              <span class="hero-stack__num">04</span>
-              <span class="hero-stack__name">盈亏平衡 + Bootstrap CI</span>
-              <span class="hero-stack__desc">不编造成本，只算比值 C*≈3.7；头条数字带 95% 区间</span>
-            </li>
-            <li>
-              <span class="hero-stack__num">05</span>
-              <span class="hero-stack__name">SHAP 三方交叉验证</span>
-              <span class="hero-stack__desc">SHAP × RF 不纯度 × XGB gain，头部特征一致</span>
-            </li>
-          </ol>
-          <div class="hero-stack__foot">Python · pandas · scikit-learn · xgboost · imbalanced-learn · shap</div>
-        </aside>
-      </div>
-    </section>
+</div></section><section id="report-section-5" class="section-padding section--editorial" data-section-num="05"><div class="section-header"><h2 class="section-title">3 读分组流失率</h2></div><div class="report-block" id="report-5-1">
+<p>箱线图和计数图比较的是分布形状。下面的表把各分组变量背后的精确流失率与组规模列出来，便于结合样本量判断分组差异。</p>
+<div aria-label="数据表（可横向滚动）" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">分组</th>
+<th scope="col">类别</th>
+<th scope="col" style="text-align:right">客户数</th>
+<th scope="col" style="text-align:right">流失数</th>
+<th scope="col" style="text-align:right">流失率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>地区</td>
+<td>德国</td>
+<td style="text-align:right">2,509</td>
+<td style="text-align:right">814</td>
+<td style="text-align:right"><strong>32.4%</strong></td>
+</tr>
+<tr>
+<td>地区</td>
+<td>法国</td>
+<td style="text-align:right">5,014</td>
+<td style="text-align:right">810</td>
+<td style="text-align:right">16.2%</td>
+</tr>
+<tr>
+<td>地区</td>
+<td>西班牙</td>
+<td style="text-align:right">2,477</td>
+<td style="text-align:right">413</td>
+<td style="text-align:right">16.7%</td>
+</tr>
+<tr>
+<td>活跃状态</td>
+<td>非活跃</td>
+<td style="text-align:right">4,849</td>
+<td style="text-align:right">1,302</td>
+<td style="text-align:right"><strong>26.9%</strong></td>
+</tr>
+<tr>
+<td>活跃状态</td>
+<td>活跃</td>
+<td style="text-align:right">5,151</td>
+<td style="text-align:right">735</td>
+<td style="text-align:right">14.3%</td>
+</tr>
+<tr>
+<td>产品数</td>
+<td>1 个</td>
+<td style="text-align:right">5,084</td>
+<td style="text-align:right">1,409</td>
+<td style="text-align:right">27.7%</td>
+</tr>
+<tr>
+<td>产品数</td>
+<td>2 个</td>
+<td style="text-align:right">4,590</td>
+<td style="text-align:right">348</td>
+<td style="text-align:right">7.6%</td>
+</tr>
+<tr>
+<td>产品数</td>
+<td>3 个</td>
+<td style="text-align:right">266</td>
+<td style="text-align:right">220</td>
+<td style="text-align:right"><strong>82.7%</strong></td>
+</tr>
+<tr>
+<td>产品数</td>
+<td>4 个</td>
+<td style="text-align:right">60</td>
+<td style="text-align:right">60</td>
+<td style="text-align:right"><strong>100%</strong></td>
+</tr>
+<tr>
+<td>年龄段</td>
+<td>18–29</td>
+<td style="text-align:right">1,641</td>
+<td style="text-align:right">124</td>
+<td style="text-align:right">7.6%</td>
+</tr>
+<tr>
+<td>年龄段</td>
+<td>30–39</td>
+<td style="text-align:right">4,346</td>
+<td style="text-align:right">473</td>
+<td style="text-align:right">10.9%</td>
+</tr>
+<tr>
+<td>年龄段</td>
+<td>40–49</td>
+<td style="text-align:right">2,618</td>
+<td style="text-align:right">806</td>
+<td style="text-align:right">30.8%</td>
+</tr>
+<tr>
+<td>年龄段</td>
+<td>50–59</td>
+<td style="text-align:right">869</td>
+<td style="text-align:right">487</td>
+<td style="text-align:right"><strong>56.0%</strong></td>
+</tr>
+<tr>
+<td>年龄段</td>
+<td>60–92</td>
+<td style="text-align:right">526</td>
+<td style="text-align:right">147</td>
+<td style="text-align:right">27.9%</td>
+</tr>
+<tr>
+<td>性别</td>
+<td>女</td>
+<td style="text-align:right">4,543</td>
+<td style="text-align:right">1,139</td>
+<td style="text-align:right">25.1%</td>
+</tr>
+<tr>
+<td>性别</td>
+<td>男</td>
+<td style="text-align:right">5,457</td>
+<td style="text-align:right">898</td>
+<td style="text-align:right">16.5%</td>
+</tr>
+</tbody>
+</table></div>
+<p>产品数的分组流失率差异较大：两个产品组为 7.6%，三个产品组超过八成，四个产品的 60 人全部流失。3 个及以上产品组只占总量的 3.3%，人数较少。这些样本比率不证明两个产品是安全配置，或减少产品数能降低流失。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：数值特征按流失与否的箱线图" class="figure-zoom" type="button"><img alt="数值特征按流失与否的箱线图" decoding="async" height="1249" loading="lazy" src="figures/boxplot_numerical_vs_exited.png" width="2437"/></button><figcaption class="generated-alt-caption">数值特征按流失与否的箱线图</figcaption></figure>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：分类特征按流失与否的计数图" class="figure-zoom" type="button"><img alt="分类特征按流失与否的计数图" decoding="async" height="1249" loading="lazy" src="figures/countplot_categorical_vs_exited.png" width="2450"/></button><figcaption class="generated-alt-caption">分类特征按流失与否的计数图</figcaption></figure>
+<p>箱线图里，年龄把两组分得最开：流失客户中位约 45 岁、留存约 35 岁。计数图里，德国只占客户的四分之一，流失人数却与法国相当；是否持卡的组间差异较小，活跃状态有较明显的组间差异，未比较全部分类特征的预测效力。</p>
 
-    <!-- 简要摘要卡片 -->
-    <section id="quick-summary" class="section-padding">
-      <div class="grid md:grid-cols-3 gap-6">
-        <div class="summary-card">
-          <h3 class="summary-card-title">业务挑战</h3>
-          <p class="summary-card-content">20.4% 的客户流失，再获取成本高于挽留成本。漏掉一个流失客户丢的是整段客户关系，误报一个只是多发一份挽留优惠，两类错误代价悬殊，目标是在客户离开前把高风险的人挑出来。</p>
-        </div>
-        <div class="summary-card">
-          <h3 class="summary-card-title">解决方案</h3>
-          <p class="summary-card-content">四个分类器在同一套协议下调参对比，XGBoost 两个排序指标双第一；再把决策阈值在训练集折外预测上按 F2 最优调到 0.20。</p>
-        </div>
-        <div class="summary-card">
-          <h3 class="summary-card-title">商业价值</h3>
-          <p class="summary-card-content">测试集 509 名流失客户抓到 442 人（87%）；只要流失客户价值超过约 3.7 份挽留优惠成本，激进的运营点就更省钱。</p>
-        </div>
-      </div>
-    </section>
+</div></section><section id="report-section-6" class="section-padding section--editorial" data-section-num="06"><div class="section-header"><h2 class="section-title">4 准备建模特征</h2></div><div class="report-block" id="report-6-1">
+<p>采用 seed=42 的分层 75/25 外层切分；7,500 行外层训练中再留 1,500 行选择集，6,000 行用于拟合与 CV。选择行和测试行不进入预处理、SMOTE 或超参数拟合。Geography 独热、Gender 编码、数值标准化均按训练折 fit，再应用于相应留出折。独热编码避免给地区赋予大小顺序，标准化便于 KNN 的距离计算与 LR 的正则化。普通 SMOTE 在编码后的空间插值，合成类别组合的合理性没有额外验证。最终拟合只使用 6,000 行，不在选阈值后合并选择集重拟合。这样保持模型分数与选择阈值的对应关系，代价是减少拟合样本。</p>
 
-    <!-- 主体内容：左侧目录 + 右侧正文 -->
-    <section id="content" class="section-padding">
-      <div class="grid md:grid-cols-12 gap-12">
-        <aside class="md:col-span-3">
-          <nav class="project-toc sticky top-24" id="project-toc">
-            <h3 class="text-xl font-semibold" style="color: var(--dark);">目录</h3>
-            <ul class="mt-4 space-y-2" id="toc-list">
-              <li><a href="#summary" class="toc-link" data-section="summary">执行摘要</a></li>
-              <li><a href="#data" class="toc-link" data-section="data">数据与分组流失率</a></li>
-              <li><a href="#models" class="toc-link" data-section="models">模型对比</a></li>
-              <li><a href="#threshold" class="toc-link" data-section="threshold">阈值调优</a></li>
-              <li><a href="#cost" class="toc-link" data-section="cost">成本盈亏平衡</a></li>
-              <li><a href="#shap" class="toc-link" data-section="shap">客户为什么走</a></li>
-              <li><a href="#actions" class="toc-link" data-section="actions">行动计划</a></li>
-            </ul>
-          </nav>
-        </aside>
+</div></section><section id="report-section-7" class="section-padding section--editorial" data-section-num="07"><div class="section-header"><h2 class="section-title">5 对比四个模型</h2></div><div class="report-block" id="report-7-1">
+<p>五组模型搜索以 5 折 ROC-AUC 选参，共 200 次交叉验证拟合及 5 次最优配置重拟合。下表按固定测试分数计算，默认分类阈值为 0.5；AP 指 average precision；PR 曲线图例中的 PR-AUC 采用相同定义。</p>
+<div aria-label="数据表（可横向滚动）" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">模型</th>
+<th scope="col" style="text-align:right">ROC-AUC</th>
+<th scope="col" style="text-align:right">AP</th>
+<th scope="col" style="text-align:right">精确率</th>
+<th scope="col" style="text-align:right">召回率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LR</td>
+<td style="text-align:right">0.7873</td>
+<td style="text-align:right">0.4815</td>
+<td style="text-align:right">0.3964</td>
+<td style="text-align:right">0.7328</td>
+</tr>
+<tr>
+<td>KNN</td>
+<td style="text-align:right">0.8045</td>
+<td style="text-align:right">0.5305</td>
+<td style="text-align:right">0.4086</td>
+<td style="text-align:right">0.7250</td>
+</tr>
+<tr>
+<td>RF</td>
+<td style="text-align:right">0.8661</td>
+<td style="text-align:right">0.6934</td>
+<td style="text-align:right">0.5997</td>
+<td style="text-align:right">0.6739</td>
+</tr>
+<tr>
+<td>XGBoost+SMOTE</td>
+<td style="text-align:right">0.8706</td>
+<td style="text-align:right">0.7215</td>
+<td style="text-align:right">0.6667</td>
+<td style="text-align:right">0.6012</td>
+</tr>
+<tr>
+<td>XGBoost+类权重</td>
+<td style="text-align:right">0.8709</td>
+<td style="text-align:right">0.7230</td>
+<td style="text-align:right">0.5268</td>
+<td style="text-align:right">0.7328</td>
+</tr>
+</tbody>
+</table></div>
+<p>LR、KNN 与 RF 提供了线性、距离和树模型参照。两组 XGBoost 的测试排序点估计高于这些参照，但没有计算效率最优的证据。类权重和 SMOTE 的点估计接近，未进行差额区间或等效检验。阈值分析以 XGBoost+SMOTE 为预先指定的参考模型，测试排序不用于更换参考模型。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：四个主模型的测试 ROC 曲线。" class="figure-zoom" type="button"><img alt="四个主模型的测试 ROC 曲线。" decoding="async" height="819" loading="lazy" src="figures/stage3-final/roc_curves_all_models.png" width="1036"/></button><figcaption class="generated-alt-caption">四个主模型的测试 ROC 曲线。</figcaption></figure>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：同一测试集的 PR 曲线，AP 随标签基率变化。" class="figure-zoom" type="button"><img alt="同一测试集的 PR 曲线，AP 随标签基率变化。" decoding="async" height="819" loading="lazy" src="figures/stage3-final/pr_curves_all_models.png" width="1036"/></button><figcaption class="generated-alt-caption">同一测试集的 PR 曲线，AP 随标签基率变化。</figcaption></figure>
+<p>产品数和年龄的分组差异呈非线性，树模型能够用分裂与交互表达这类模式。这为树模型优于当前线性与距离基线提供了合理解释；本项目没有通过单独消融实验量化这些模式带来的增益。随机森林已有较强表现，XGBoost 的优势应结合复杂度与使用需求判断；类权重结果接近，也说明 SMOTE 不是唯一可行方案。</p>
 
-        <div class="md:col-span-9 content-area">
-          <!-- 执行摘要 -->
-          <section id="summary" class="section-padding section--editorial" data-section-num="00">
-            <div class="section-header">
-              <div class="section-eyebrow">
-                <span class="section-num">00</span>
-                <span class="section-kicker">Executive Summary</span>
-              </div>
-              <h2 class="section-title">执行摘要</h2>
-            </div>
+</div></section><section id="report-section-8" class="section-padding section--editorial" data-section-num="08"><div class="section-header"><h2 class="section-title">6 设定阈值与成本</h2></div><div class="report-block" id="report-8-1">
+<p>选择集用 F₂ 最大值确定阈值 0.275，随后冻结模型与阈值。</p>
+<blockquote>
+<p>F₂ = 5 × P × R / (4 × P + R)</p>
+</blockquote>
+<p>P 为精确率，R 为召回率，均以 0 至 1 的比例代入，F₂ 无量纲。F₂ 偏重召回；这一权重不代表已核实的真实误判成本比。</p>
+<div aria-label="数据表（可横向滚动）" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">固定阈值</th>
+<th scope="col" style="text-align:right">TP</th>
+<th scope="col" style="text-align:right">FP</th>
+<th scope="col" style="text-align:right">FN</th>
+<th scope="col" style="text-align:right">TN</th>
+<th scope="col" style="text-align:right">标记人数</th>
+<th scope="col" style="text-align:right">精确率</th>
+<th scope="col" style="text-align:right">召回率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.5</td>
+<td style="text-align:right">306</td>
+<td style="text-align:right">153</td>
+<td style="text-align:right">203</td>
+<td style="text-align:right">1,838</td>
+<td style="text-align:right">459</td>
+<td style="text-align:right">66.67%</td>
+<td style="text-align:right">60.12%</td>
+</tr>
+<tr>
+<td>0.275</td>
+<td style="text-align:right">399</td>
+<td style="text-align:right">428</td>
+<td style="text-align:right">110</td>
+<td style="text-align:right">1,563</td>
+<td style="text-align:right">827</td>
+<td style="text-align:right">48.25%</td>
+<td style="text-align:right">78.39%</td>
+</tr>
+</tbody>
+</table></div>
+<p>两个冻结策略采用以下假设损失比较：</p>
+<blockquote>
+<p>L = FP + C × FN</p>
+<p>C* = (428 − 153) / (203 − 110) = 2.956989</p>
+</blockquote>
+<p>FP 为误报人数，FN 为漏报人数。把一次误报损失设为 1 个成本单位，C 表示一次漏报相对一次误报的假设成本倍数，无量纲；L 是归一化总损失，不是货币金额。C* 是两条策略损失线的交点。C 高于 2.956989 时，阈值 0.275 的模拟损失低于阈值 0.5；这里比较既有策略，不在测试集上重新选阈值。</p>
+<p>固定预测的 2,000 次 bootstrap 给出 95% 区间：ROC-AUC [0.852,0.888]、AP [0.685,0.757]、召回 [0.748,0.818]、精确率 [0.448,0.515]。区间不覆盖重新训练、选择变化或未来人群。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：选择集阈值曲线，冻结阈值为 0.275。测试标签不参与选择。" class="figure-zoom" type="button"><img alt="选择集阈值曲线，冻结阈值为 0.275。测试标签不参与选择。" decoding="async" height="819" loading="lazy" src="figures/report-display-20260924/threshold_tuning_xgboost_0275.png" width="1218"/></button><figcaption class="generated-alt-caption">选择集阈值曲线，冻结阈值为 0.275。测试标签不参与选择。</figcaption></figure>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：冻结阈值 0.5 与 0.275 的测试混淆矩阵。" class="figure-zoom" type="button"><img alt="冻结阈值 0.5 与 0.275 的测试混淆矩阵。" decoding="async" height="584" loading="lazy" src="figures/report-display-20260924/confusion_matrix_threshold_comparison_0275.png" width="1784"/></button><figcaption class="generated-alt-caption">冻结阈值 0.5 与 0.275 的测试混淆矩阵。</figcaption></figure>
+<p>业务上最直接的差异是容量：降低阈值增加 368 个候选联系对象，其中多覆盖 93 个流失标签，并增加 275 个误报。这为“少量精准联系”与“扩大覆盖”提供了可比较的工作量，而非一个适用于所有成本条件的最优阈值。</p>
 
-            <div class="space-y-6">
-              <div class="contact-info-card">
-                <p class="subtitle mb-4">一份零售银行的客户数据里，10,000 名客户中 20.4% 已经流失。流失客户的再获取成本高于挽留成本，所以这份分析的目标是在客户离开前把高风险的人挑出来。四个分类器在同一套协议下训练调参，XGBoost 在留出测试集上排序质量最优。这是一份横截面快照，回答谁会流失，而非何时。</p>
+</div></section><section id="report-section-9" class="section-padding section--editorial" data-section-num="09"><div class="section-header"><h2 class="section-title">7 模型预测依据与业务解释</h2></div><div class="report-block" id="report-9-1">
+<h3>模型预测依据：从输入到贡献</h3>
+<p>TreeSHAP 解释固定 XGBoost+SMOTE 对全部测试客户的分数：正贡献提高流失分数，负贡献降低分数；图中数值变量使用原始单位。全局图比较影响大小，依赖图展示非线性，局部图对照正确与错误预测。输入映射与输出还原方法见附录。</p>
+<p>基准 log-odds 为 0.010007，对应分数约 0.5025。它来自拟合树的训练路径计数，包含 SMOTE 后的训练分布。它不是总体流失率，也不是测试客户的平均预测概率。以下贡献依赖这套模型与基准；模型分数尚未经过概率校准。</p>
+<h3>全局贡献与特征依赖</h3>
+<p>按测试客户的平均绝对 SHAP 值排序，前五项如下。数值单位为 log-odds，不是解释了多少比例的流失，也不是业务效益占比。地区按三个独热列分别统计，未将其合成一个地区排名。</p>
+<div aria-label="数据表（可横向滚动）" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">特征</th>
+<th scope="col" style="text-align:right">平均绝对 SHAP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>年龄（Age）</td>
+<td style="text-align:right">0.896</td>
+</tr>
+<tr>
+<td>产品数（NumOfProducts）</td>
+<td style="text-align:right">0.776</td>
+</tr>
+<tr>
+<td>任期（Tenure）</td>
+<td style="text-align:right">0.426</td>
+</tr>
+<tr>
+<td>活跃状态（IsActiveMember）</td>
+<td style="text-align:right">0.395</td>
+</tr>
+<tr>
+<td>性别（Gender）</td>
+<td style="text-align:right">0.297</td>
+</tr>
+</tbody>
+</table></div>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：全部测试客户的全局 SHAP：横轴为有符号贡献，颜色为特征值，数值变量使用原始单位。" class="figure-zoom" type="button"><img alt="全部测试客户的全局 SHAP：横轴为有符号贡献，颜色为特征值，数值变量使用原始单位。" decoding="async" height="1016" loading="lazy" src="figures/shap-current/global-shap.png" width="1236"/></button><figcaption class="generated-alt-caption">全部测试客户的全局 SHAP：横轴为有符号贡献，颜色为特征值，数值变量使用原始单位。</figcaption></figure>
+<p>年龄贡献并非随年龄单调增加。下表以全部 2,500 名测试客户分组，贡献单位为原始对数几率（raw log-odds），无量纲。</p>
+<div aria-label="数据表（可横向滚动）" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">年龄组（岁）</th>
+<th scope="col" style="text-align:right">测试客户数</th>
+<th scope="col" style="text-align:right">平均 SHAP 贡献</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>18–29</td>
+<td style="text-align:right">423</td>
+<td style="text-align:right">−1.239</td>
+</tr>
+<tr>
+<td>30–39</td>
+<td style="text-align:right">1,080</td>
+<td style="text-align:right">−0.862</td>
+</tr>
+<tr>
+<td>40–49</td>
+<td style="text-align:right">664</td>
+<td style="text-align:right">0.425</td>
+</tr>
+<tr>
+<td>50–59</td>
+<td style="text-align:right">217</td>
+<td style="text-align:right">1.421</td>
+</tr>
+<tr>
+<td>60–92</td>
+<td style="text-align:right">116</td>
+<td style="text-align:right">0.400</td>
+</tr>
+</tbody>
+</table></div>
+<p>50–59 岁组平均贡献最高，60–92 岁组回落；这描述本模型在这些客户上的贡献分布。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：年龄依赖：每点为一名测试客户，折线为同一年龄的平均贡献；横轴为岁。" class="figure-zoom" type="button"><img alt="年龄依赖：每点为一名测试客户，折线为同一年龄的平均贡献；横轴为岁。" decoding="async" height="720" loading="lazy" src="figures/shap-current/dependence-Age.png" width="1280"/></button><figcaption class="generated-alt-caption">年龄依赖：每点为一名测试客户，折线为同一年龄的平均贡献；横轴为岁。</figcaption></figure>
+<p>产品数分组采用同一批测试客户与 raw log-odds 贡献口径。</p>
+<div aria-label="数据表（可横向滚动）" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">产品数（个）</th>
+<th scope="col" style="text-align:right">测试客户数</th>
+<th scope="col" style="text-align:right">平均 SHAP 贡献</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td style="text-align:right">1,284</td>
+<td style="text-align:right">0.287</td>
+</tr>
+<tr>
+<td>2</td>
+<td style="text-align:right">1,138</td>
+<td style="text-align:right">−1.178</td>
+</tr>
+<tr>
+<td>3</td>
+<td style="text-align:right">62</td>
+<td style="text-align:right">2.783</td>
+</tr>
+<tr>
+<td>4</td>
+<td style="text-align:right">16</td>
+<td style="text-align:right">3.663</td>
+</tr>
+</tbody>
+</table></div>
+<p>三个和四个产品组贡献较高，但样本较少。两个产品组平均为负，不能据此推导增减产品会降低流失。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：产品数依赖：显示各客户贡献与每个产品数的平均贡献，少数组需结合样本量阅读。" class="figure-zoom" type="button"><img alt="产品数依赖：显示各客户贡献与每个产品数的平均贡献，少数组需结合样本量阅读。" decoding="async" height="720" loading="lazy" src="figures/shap-current/dependence-NumOfProducts.png" width="1280"/></button><figcaption class="generated-alt-caption">产品数依赖：显示各客户贡献与每个产品数的平均贡献，少数组需结合样本量阅读。</figcaption></figure>
+<p>非活跃和活跃客户的平均贡献分别为 0.340 和 −0.448，样本量为 1,224 和 1,276。任期的平均绝对贡献排在第三。各原始整数取值组的平均贡献均为负，约在 −0.595 至 −0.163 之间，且不呈单调关系。其较大绝对贡献应结合包含 SMOTE 的训练基准理解；类别与离散变量的插值可能影响模型解释，尚未做单独对照量化。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：活跃状态依赖：0 为非活跃，1 为活跃；纵轴为对该模型分数的贡献。" class="figure-zoom" type="button"><img alt="活跃状态依赖：0 为非活跃，1 为活跃；纵轴为对该模型分数的贡献。" decoding="async" height="720" loading="lazy" src="figures/shap-current/dependence-IsActiveMember.png" width="1280"/></button><figcaption class="generated-alt-caption">活跃状态依赖：0 为非活跃，1 为活跃；纵轴为对该模型分数的贡献。</figcaption></figure>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：任期依赖：横轴保留来源取值；负贡献表示相对模型基准降低分数，并非任期的因果保护效应。" class="figure-zoom" type="button"><img alt="任期依赖：横轴保留来源取值；负贡献表示相对模型基准降低分数，并非任期的因果保护效应。" decoding="async" height="720" loading="lazy" src="figures/shap-current/dependence-Tenure.png" width="1280"/></button><figcaption class="generated-alt-caption">任期依赖：横轴保留来源取值；负贡献表示相对模型基准降低分数，并非任期的因果保护效应。</figcaption></figure>
+<h3>局部解释：正确预测与错误预测</h3>
+<p>按冻结阈值 0.275 分成 TP（正确识别流失）、FP（误报）、FN（漏报）、TN（正确排除）四组，各取最接近组内分数中位数的客户；距离相同则按原始行索引选择。四例用于展示不同结果，不代表总体画像。行索引从零起算。</p>
+<div aria-label="数据表（可横向滚动）" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">结果组</th>
+<th scope="col" style="text-align:right">原始行索引</th>
+<th scope="col" style="text-align:right">实际标签</th>
+<th scope="col" style="text-align:right">模型分数</th>
+<th scope="col" style="text-align:right">组内人数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TP</td>
+<td style="text-align:right">6928</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0.727</td>
+<td style="text-align:right">399</td>
+</tr>
+<tr>
+<td>FP</td>
+<td style="text-align:right">3217</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0.424</td>
+<td style="text-align:right">428</td>
+</tr>
+<tr>
+<td>FN</td>
+<td style="text-align:right">1452</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0.160</td>
+<td style="text-align:right">110</td>
+</tr>
+<tr>
+<td>TN</td>
+<td style="text-align:right">2766</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0.089</td>
+<td style="text-align:right">1,563</td>
+</tr>
+</tbody>
+</table></div>
+<p>正确识别例中，48 岁对应的贡献为 +1.101，非活跃贡献 +0.421。任期取值 0 的贡献为 −0.409；所有贡献与基准共同还原分数 0.727。</p>
+<p>误报例为 56 岁活跃客户：年龄贡献 +1.559、活跃贡献 −0.951，最终分数 0.424 仍高于阈值，但实际标签为留存。</p>
+<p>漏报例的年龄、活跃状态和收入贡献为负，分数 0.160 低于阈值，实际标签却为流失。解释能说明分数如何组成，也能帮助分析错误，并不保证预测正确。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：四类客户的局部贡献：红色提高分数，蓝色降低分数；每个面板保留全部 12 列，基准与贡献之和还原 log-odds。" class="figure-zoom" type="button"><img alt="四类客户的局部贡献：红色提高分数，蓝色降低分数；每个面板保留全部 12 列，基准与贡献之和还原 log-odds。" decoding="async" height="1887" loading="lazy" src="figures/shap-current/local-explanations.png" width="2696"/></button><figcaption class="generated-alt-caption">四类客户的局部贡献：红色提高分数，蓝色降低分数；每个面板保留全部 12 列，基准与贡献之和还原 log-odds。</figcaption></figure>
+<h3>可能的业务解释</h3>
+<p>产品组合可能反映服务需求、账户阶段或产品匹配情况；活跃状态可能关联服务使用和客户参与。当前数据和 SHAP 都不能确认这些机制。年龄与地区适合用于检查模型在哪些人群上产生不同分数，不足以单独决定优惠或触达。因此，下一步把这些线索转成产品匹配、使用障碍和服务流程的排查方案，具体见行动表。</p>
 
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">四个驱动因素</h3>
-                <ul class="list-disc list-inside space-y-3 subtitle mb-6">
-                  <li><strong>年龄。</strong>五十岁段流失率 56%，是所有年龄段最高；风险从 40 岁起爬升，65 岁后回落。流失客户中位年龄约 45 岁，留存约 35 岁。</li>
-                  <li><strong>产品数。</strong>持有三个产品的客户流失率 82.7%，四个产品的 60 人全部流失；两个产品最安全，仅 7.6%。</li>
-                  <li><strong>活跃状态。</strong>非活跃客户流失率 26.9%，活跃客户 14.3%，近乎两倍，且是可提前观察到的行为信号。</li>
-                  <li><strong>地区。</strong>德国客户流失率 32.4%，约为法国 16.2% 与西班牙 16.7% 的两倍。</li>
-                </ul>
+</div></section><section id="report-section-10" class="section-padding section--editorial" data-section-num="10"><div class="section-header"><h2 class="section-title">8 落地行动</h2></div><div class="report-block" id="report-10-1">
+<p>分析给出的优先级是：先从产品匹配和非活跃客户的使用障碍开展服务排查，再结合年龄需求与地区流程定位具体问题。下表列出建议的实施分工与反馈指标，用于判断方案是否值得继续。</p>
+<div aria-label="数据表（可横向滚动）" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">分析依据与目标人群</th>
+<th scope="col">建议行动</th>
+<th scope="col">建议负责角色</th>
+<th scope="col">观察指标与下一步决策</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>三个及以上产品组流失比例较高、样本较少</td>
+<td>先复核产品组合、开通顺序与服务记录，再访谈产品是否重复、费用是否清楚、功能是否匹配需求；不直接要求客户减少产品</td>
+<td>产品经理与客户服务</td>
+<td>记录重复配置、费用理解和需求不匹配的反馈占比；反复出现的问题进入产品说明或服务流程改进清单</td>
+</tr>
+<tr>
+<td>非活跃客户流失比例较高</td>
+<td>设计简短原因问询，区分不会使用、服务障碍、需求减少等反馈；按原因提供操作指导或问题解决</td>
+<td>客户运营与客户服务</td>
+<td>有效回复率、障碍解决率、后续使用情况及拒绝联系率；优先保留能解决明确问题的服务方式</td>
+</tr>
+<tr>
+<td>中高年龄段差异明显，但并非年龄越大流失越多</td>
+<td>将年龄与产品、活跃状态结合，开展分层需求访谈，检查沟通方式和服务适配；年龄只用于需求研究</td>
+<td>用户研究与产品经理</td>
+<td>分层记录需求主题、服务满意度与问题类型；据反馈调整说明和服务方式，不仅凭年龄分配优惠</td>
+</tr>
+<tr>
+<td>德国组流失比例高于法国和西班牙</td>
+<td>对照各地区客户构成、产品组合、费用说明和服务流程，定位可改进环节</td>
+<td>区域运营与分析人员</td>
+<td>比较相近客户组的反馈与流程问题；优先修复具体服务问题，地区差异不直接解释为地区效应</td>
+</tr>
+</tbody>
+</table></div>
+<h3>按服务容量选择候选名单</h3>
+<p>在本测试样本中，阈值 0.5 的名单为 459 人，精确率 66.67%、召回率 60.12%，适合用作人工服务容量较紧时的候选方案；阈值 0.275 的名单为 827 人，精确率 48.25%、召回率 78.39%，适合用作能够承受更多联系、重视覆盖时的候选方案。扩大名单意味着多联系 368 人、多覆盖 93 个流失标签，同时多出 275 个误报。这里比较的是历史标签覆盖与工作量，名单不是已挽留人数。</p>
+<h3>建议执行顺序与交付物</h3>
+<p>先制作产品组合与活跃状态的排查清单、统一访谈问题和反馈分类表；由产品与运营共同确认服务容量，选定候选名单方案。局部 SHAP 可辅助客服准备问题，例如优先询问产品使用与服务障碍；实际沟通仍依据客户反馈。</p>
+<p>随后试行服务指导或问题解决方案，记录触达、反馈、处理结果与客户体验。若继续评估留存效果，应预先约定观察窗口和对照方式，比较增量留存及净成本。建议形成排查清单、名单容量方案和服务试行评估表。</p>
+<p>数据为横截面快照，解读分组差异与模型结果时需结合产品小组样本量和误判情况。</p>
 
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">结果速览</h3>
-                <div class="overflow-x-auto">
-                  <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
-                    <thead>
-                      <tr class="bg-gray-100 dark:bg-gray-700/30">
-                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">项目</th>
-                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">结果</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>分析对象</strong></td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">10,000 名客户（流失 2,037 人，占 20.4%）</td>
-                      </tr>
-                      <tr>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>最终模型</strong></td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">XGBoost + SMOTE，5 折网格搜索按 ROC-AUC 调参</td>
-                      </tr>
-                      <tr>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>排序质量（测试集）</strong></td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">ROC-AUC 0.876（95% CI [0.858, 0.892]），PR-AUC 0.727</td>
-                      </tr>
-                      <tr>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>流失客户捕获率</strong></td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">调优阈值 0.20 下 87%；默认阈值 0.5 下 61%</td>
-                      </tr>
-                      <tr>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>盈亏平衡成本比</strong></td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">C* = 3.7（漏判成本超过误报成本 3.7 倍时，调优阈值更优）</td>
-                      </tr>
-                      <tr>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>主要驱动因素</strong></td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">年龄、活跃状态、产品数、地区</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </section>
+</div></section><section id="report-section-11" class="section-padding section--editorial" data-section-num="11"><div class="section-header"><h2 class="section-title">9 解释方法</h2></div><div class="report-block" id="report-11-1">
+<h3>解释计算与输入对应</h3>
+<p>解释对象为固定的 XGBoost+SMOTE 模型及全部 2,500 个测试客户。模型实际接收 12 列：Geography 的 France、Germany、Spain 三个独热列，Gender 编码列，以及 CreditScore、Age、Tenure、Balance、NumOfProducts、HasCrCard、IsActiveMember、EstimatedSalary 八个标准化数值列。Gender 的编码为 Female=0、Male=1；地区列为相应类别的 0/1 指示值。图中数值变量显示原始值，年龄以岁、产品数以个计；余额和收入保留来源数值，不指定数据未说明的币种。任期保留数据集记录尺度。</p>
+<p>列顺序来自已拟合预处理器，数值反变换逐行回对原始记录。</p>
+<p>采用 <a href="https://shap.readthedocs.io/en/latest/generated/shap.TreeExplainer.html">TreeSHAP</a> 的 tree_path_dependent 方式解释原始 log-odds（对数优势）。基准值加各列 SHAP 贡献等于模型 log-odds，再经 sigmoid 转为模型分数。全部测试行的最大还原误差分别为 2.86×10⁻⁶ 和 3.28×10⁻⁷。正贡献提高该模型的流失分数，负贡献降低分数。</p>
 
-          <!-- 数据与分组流失率 -->
-          <section id="data" class="section-padding section--editorial" data-section-num="01">
-            <div class="section-header">
-              <div class="section-eyebrow">
-                <span class="section-num">01</span>
-                <span class="section-kicker">Data &amp; EDA</span>
-              </div>
-              <h2 class="section-title">数据与分组流失率</h2>
-            </div>
+</div></section></article>
+  </section>
 
-            <div class="space-y-8">
-              <div class="contact-info-card">
-                <p class="subtitle">数据来自 Kaggle 公开数据集 Churn Modelling，10,000 行 × 14 列，无缺失值。目标变量记录客户是否已流失，流失率 20.4%（2,037 人）；行号、客户号、姓氏三列是标识符，建模前剔除。四比一的类不平衡决定两件下游的事：训练需要重采样或类权重，评估要看 PR-AUC 与召回率：一个永远预测"留存"的模型准确率就有 79.6%，却一个流失客户也认不出。数据按 75/25 分层划分（<code>random_state=42</code>），编码器与标准化器只在训练集上拟合，把评估数据挡在建模决策之外。</p>
-              </div>
-
-              <div class="figure-grid">
-                <figure class="figure-editorial">
-                  <img src="figures/target_distribution.png" alt="流失标签分布" loading="lazy" decoding="async" />
-                  <figcaption>目标分布：10,000 名客户中 2,037 人流失（20.4%），构成中度类别不平衡。</figcaption>
-                </figure>
-                <figure class="figure-editorial">
-                  <img src="figures/correlation_heatmap.png" alt="特征相关性矩阵" loading="lazy" decoding="async" />
-                  <figcaption>相关性矩阵：特征间相关性弱、无多重共线性；年龄对目标正相关、活跃状态负相关。</figcaption>
-                </figure>
-              </div>
-
-              <p class="subtitle">箱线图和计数图比较的是分布形状，下面这张表把每个驱动因素背后的精确流失率与组规模列出来，让后面每一条结论都带得上自己的 n。</p>
-
-              <div class="overflow-x-auto">
-                <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
-                  <thead>
-                    <tr class="bg-gray-100 dark:bg-gray-700/30">
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">分组</th>
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">类别</th>
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">客户数</th>
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">流失率</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr class="bg-green-50 dark:bg-green-900/20">
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">地区</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">德国</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">2,509</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>32.4%</strong></td>
-                    </tr>
-                    <tr>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">地区</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">法国 / 西班牙</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">5,014 / 2,477</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">16.2% / 16.7%</td>
-                    </tr>
-                    <tr>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">活跃状态</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">非活跃 / 活跃</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">4,849 / 5,151</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>26.9%</strong> / 14.3%</td>
-                    </tr>
-                    <tr>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">产品数</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">1 / 2 个</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">5,084 / 4,590</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">27.7% / 7.6%</td>
-                    </tr>
-                    <tr class="bg-green-50 dark:bg-green-900/20">
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">产品数</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">3 / 4 个</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">266 / 60</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>82.7%</strong> / <strong>100%</strong></td>
-                    </tr>
-                    <tr>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">年龄段</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">40–49 / 50–59 / 60–92</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">2,618 / 869 / 526</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">30.8% / <strong>56.0%</strong> / 27.9%</td>
-                    </tr>
-                    <tr>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">性别</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">女 / 男</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">4,543 / 5,457</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">25.1% / 16.5%</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-
-              <p class="subtitle">哪个变量把两组分得最开？产品数。两个产品是最安全的配置，持有三个产品的客户超过八成流失、四个产品的 60 人全部离开，不过 3 个及以上产品的客户只占总量的 3.3%，比率极端、人数不多。年龄段的剖面是非单调的：五十岁段 56.0% 是峰值，不是"越老越危险"。</p>
-
-              <div class="figure-grid">
-                <figure class="figure-editorial">
-                  <img src="figures/boxplot_numerical_vs_exited.png" alt="数值特征按流失与否的箱线图" loading="lazy" decoding="async" />
-                  <figcaption>数值特征按流失状态的箱线图：年龄把两组分得最开，流失客户中位约 45 岁 vs 留存约 35 岁。</figcaption>
-                </figure>
-                <figure class="figure-editorial">
-                  <img src="figures/countplot_categorical_vs_exited.png" alt="分类特征按流失与否的计数图" loading="lazy" decoding="async" />
-                  <figcaption>分类特征计数图：德国只占客户的四分之一，流失人数却与法国相当；是否持卡几乎不带信号，活跃状态是最强的分类信号。</figcaption>
-                </figure>
-              </div>
-            </div>
-          </section>
-
-          <!-- 模型对比 -->
-          <section id="models" class="section-padding section--editorial" data-section-num="02">
-            <div class="section-header">
-              <div class="section-eyebrow">
-                <span class="section-num">02</span>
-                <span class="section-kicker">Model Bake-off</span>
-              </div>
-              <h2 class="section-title">同协议下的模型对比</h2>
-            </div>
-
-            <div class="space-y-8">
-              <div class="contact-info-card">
-                <p class="subtitle">三个基线模型（逻辑回归、KNN、随机森林）先看未调参的交叉验证 ROC-AUC，再和 XGBoost 一起统一调参：SMOTE 置于交叉验证管线内，只作用于训练折、从不碰验证折，所以 CV 分数不虚高；<code>GridSearchCV</code> 5 折，按 ROC-AUC 选参。20% 的类不平衡下，准确率奖励忽略少数类的模型；ROC-AUC 衡量的是把流失客户排在留存客户之前的整体能力，与阈值无关。</p>
-              </div>
-
-              <div class="overflow-x-auto">
-                <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
-                  <thead>
-                    <tr class="bg-gray-100 dark:bg-gray-700/30">
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">模型</th>
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">准确率</th>
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">精确率</th>
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">召回率</th>
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">F1</th>
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">ROC-AUC</th>
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">PR-AUC</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr class="bg-green-50 dark:bg-green-900/20">
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>XGBoost + SMOTE</strong></td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.8544</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.6507</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.6149</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.6323</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>0.8757</strong></td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>0.7265</strong></td>
-                    </tr>
-                    <tr>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">随机森林</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.8440</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.6042</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.6778</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.6389</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.8681</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.7002</td>
-                    </tr>
-                    <tr>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">KNN</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.7388</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.4184</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.7250</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.5306</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.8078</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.5277</td>
-                    </tr>
-                    <tr>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">逻辑回归</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.7160</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.3945</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.7387</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.5144</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.7900</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.4801</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-
-              <p class="subtitle">准确率把正确预测计在一起、偏向多数类；精确率、召回率、F1 描述默认 0.5 阈值下的流失类；ROC-AUC 与 PR-AUC 衡量与阈值无关的排序质量，其中 PR-AUC 更严，因为它聚焦 20% 的少数类，无技能基线约 0.20。</p>
-
-              <div class="figure-grid">
-                <figure class="figure-editorial">
-                  <img src="figures/roc_curves_all_models.png" alt="四模型 ROC 曲线" loading="lazy" decoding="async" />
-                  <figcaption>四模型 ROC 曲线：XGBoost 与随机森林明显领先。</figcaption>
-                </figure>
-                <figure class="figure-editorial">
-                  <img src="figures/pr_curves_all_models.png" alt="四模型精确率-召回率曲线" loading="lazy" decoding="async" />
-                  <figcaption>四模型精确率-召回率曲线：XGBoost PR-AUC 0.727 领先，远高于 0.20 的无技能基线。</figcaption>
-                </figure>
-              </div>
-
-              <p class="subtitle">推荐 XGBoost：两个排序指标都是第一，而月度风险评分靠的就是排序能力。逻辑回归和 KNN 的高召回是拿大量误报换的，精确率约 0.4 意味着每十个被联系的客户里六个是浪费。随机森林在 0.5 阈值下召回和 F1 还略高一点，但阈值训练之后可以调，排序质量不能。</p>
-
-              <div class="figure-grid">
-                <figure class="figure-editorial">
-                  <img src="figures/gridsearch_lr_heatmap.png" alt="逻辑回归网格搜索热图" loading="lazy" decoding="async" />
-                  <figcaption>逻辑回归网格搜索热图：展示同一套 5 折调参协议如何在超参数网格上选优。</figcaption>
-                </figure>
-                <figure class="figure-editorial">
-                  <img src="figures/confusion_matrix_xgboost.png" alt="XGBoost 混淆矩阵（默认阈值）" loading="lazy" decoding="async" />
-                  <figcaption>XGBoost 混淆矩阵（默认 0.5 阈值）：精确率与召回率相对均衡的基线状态。</figcaption>
-                </figure>
-              </div>
-
-              <div class="note note--evidence">
-                <div class="note__label">Ablation · 结论不依赖 SMOTE</div>
-                <div class="note__body">
-                  <p>类不平衡的两个标准答案是 SMOTE 合成过采样，或让模型对少数类加权。把同一套 XGBoost 网格里的 SMOTE 换成 <code>scale_pos_weight=3.91</code> 对照，两者几乎打平：CV ROC-AUC 0.8579 对 0.8568，测试 ROC-AUC 0.8711 对 0.8757，测试 PR-AUC 0.7249 对 0.7265。每个差距都远小于下一节置信区间的宽度，所以这份分析的结论不取决于 SMOTE 本身；保留 SMOTE 管线，只因后续调参与归因全部建在它上面。</p>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <!-- 阈值调优 -->
-          <section id="threshold" class="section-padding section--editorial" data-section-num="03">
-            <div class="section-header">
-              <div class="section-eyebrow">
-                <span class="section-num">03</span>
-                <span class="section-kicker">Threshold Tuning</span>
-              </div>
-              <h2 class="section-title">阈值调优</h2>
-            </div>
-
-            <div class="space-y-8">
-              <p class="subtitle">默认 0.5 阈值把两种错误当成同样代价，实际不是：漏判一个流失客户损失整段客户关系，误报只浪费一次挽留 offer。用 F2 分数扫描候选阈值，它把召回权重放到精确率的两倍。阈值只在训练数据上选：用 5 折交叉验证在训练集上产出折外预测概率，F2 扫描跑在这些概率上，选中的阈值再一次性用到测试集。把阈值选在测试集上，等于让评估数据渗进建模决策，会高估运营点。训练集折外最优阈值是 <strong>0.20</strong>。</p>
-
-              <div class="overflow-x-auto">
-                <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
-                  <thead>
-                    <tr class="bg-gray-100 dark:bg-gray-700/30">
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">运营点</th>
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">阈值</th>
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">精确率</th>
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">召回率</th>
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">F2</th>
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">标记客户数</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">默认</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.50</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.6507</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.6149</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.6218</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">481</td>
-                    </tr>
-                    <tr class="bg-green-50 dark:bg-green-900/20">
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>F2 最优（训练集折外选定）</strong></td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.20</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.4070</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.8684</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.7079</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">1,086</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-
-              <div class="figure-grid">
-                <figure class="figure-editorial">
-                  <img src="figures/threshold_tuning_xgboost.png" alt="阈值扫描：精确率、召回率与 F2" loading="lazy" decoding="async" />
-                  <figcaption>训练集折外预测上的阈值扫描：F2 在 0.20 附近取到最大值，这是召回优先的运营点。</figcaption>
-                </figure>
-                <figure class="figure-editorial">
-                  <img src="figures/confusion_matrix_threshold_comparison.png" alt="0.50 与 0.20 阈值下的混淆矩阵对比" loading="lazy" decoding="async" />
-                  <figcaption>0.50 与 0.20 阈值下的混淆矩阵对比：阈值降低后假阴从 196 减到 67，代价是假阳从 168 升到 644。</figcaption>
-                </figure>
-              </div>
-
-              <div class="contact-info-card">
-                <p class="subtitle">阈值降到 0.20 后，测试集 509 名流失客户里抓到 442 人，默认阈值只有约 313 人；联系名单从 481 人扩到 1,086 人。测试集 F2（0.708）与训练估计（0.696）接近，说明在训练折上选出的运营点能迁移到未见数据。这笔账值不值取决于优惠成本与客户价值；预算固定时，阈值可以沿精确率-召回率曲线任意设，这正是选排序能力最强那个模型的原因。</p>
-              </div>
-            </div>
-          </section>
-
-          <!-- 成本盈亏平衡 -->
-          <section id="cost" class="section-padding section--editorial" data-section-num="04">
-            <div class="section-header">
-              <div class="section-eyebrow">
-                <span class="section-num">04</span>
-                <span class="section-kicker">Break-even Analysis</span>
-              </div>
-              <h2 class="section-title">成本盈亏平衡分析</h2>
-            </div>
-
-            <div class="space-y-8">
-              <p class="subtitle">F2 只是"更看重召回"的代理，真正的目标是成本。这份数据没有成本字段（客户价值、offer 成本、挽留成功率），所以不去编造，只假设一个量：成本比 C，等于漏判一个流失客户的成本除以浪费一次挽留 offer 的成本，并只比较两类错误。0.5 阈值造成 168 次误报、196 次漏判；0.20 阈值造成 644 次误报、67 次漏判。令两类错误的总成本相等，解出盈亏平衡比 <strong>C* = 3.7</strong>：漏判成本超过误报成本 3.7 倍时，调优阈值的总错判成本更低。不假设任何货币金额，所以这个结论对任何成本比满足该条件的银行都成立。</p>
-
-              <figure class="figure-editorial">
-                <img src="figures/breakeven_cost_ratio.png" alt="成本最优阈值随成本比变化" loading="lazy" decoding="async" />
-                <figcaption>成本最优阈值随成本比变化：流失客户相对优惠越贵，成本最优阈值越低。</figcaption>
-              </figure>
-
-              <div class="note note--insight">
-                <div class="note__label">Insight · 结论对任何符合比值的银行都成立</div>
-                <div class="note__body">
-                  <p>零售银行里，一个流失客户关系的价值是单份挽留优惠的很多倍，任何现实中的比值都远高于 3.7，所以激进的运营点是划算的。全程不假设任何绝对金额，所以结论对任何符合这个比值的银行都成立。（SMOTE 扭曲了概率校准，所以运营阈值用经验扫描确定，而非教科书的 1/(1+C) 公式。）</p>
-                </div>
-              </div>
-
-              <div class="note note--evidence">
-                <div class="note__label">Uncertainty · Bootstrap 95% CI（×2,000）</div>
-                <div class="note__body">
-                  <p>头条数字是单一测试集（2,500 名客户）上的点估计。对测试集做 2,000 次有放回重抽、模型不重训，区间只反映测试集的抽样噪声：ROC-AUC 0.876 [0.858, 0.892]；PR-AUC 0.727 [0.690, 0.762]；0.20 阈值下召回率 0.868 [0.838, 0.897]；精确率 0.407 [0.377, 0.436]。召回率区间很窄，"捕获约 87% 流失客户"不靠某一次幸运的划分；但 ROC-AUC 区间包住了随机森林的点估计 0.868。XGBoost 两个排序指标都领先，可这点领先落在测试集噪声之内，所以模型选择靠的是它在两个指标上都排第一、外加阈值可调，而不是一个统计上分得开的差距。</p>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <!-- 客户为什么走 -->
-          <section id="shap" class="section-padding section--editorial" data-section-num="05">
-            <div class="section-header">
-              <div class="section-eyebrow">
-                <span class="section-num">05</span>
-                <span class="section-kicker">Why Customers Leave</span>
-              </div>
-              <h2 class="section-title">客户为什么走：SHAP 归因</h2>
-            </div>
-
-            <div class="space-y-8">
-              <p class="subtitle">风险分只告诉挽留团队该给谁打电话，不告诉他们该说什么。SHAP 给每个特征在每个预测上一个带符号的贡献，逐个客户地显示哪些特征把预测推高、哪些推低。为排除单一模型的伪影，SHAP 排序与随机森林不纯度重要性、XGBoost gain 重要性交叉核对，三者的前五名一致，年龄和产品数稳居前二。</p>
-
-              <div class="figure-grid">
-                <figure class="figure-editorial">
-                  <img src="figures/SHAP_Global_Feature_Insights.png" alt="SHAP 全局特征归因" loading="lazy" decoding="async" />
-                  <figcaption>SHAP 全局重要性摘要：年龄、活跃状态、产品数排在最前。</figcaption>
-                </figure>
-                <figure class="figure-editorial">
-                  <img src="figures/feature_importance_comparison.png" alt="三种重要性度量对比" loading="lazy" decoding="async" />
-                  <figcaption>随机森林不纯度、XGBoost gain、SHAP 三种重要性对照：头部特征一致，结论不取决于用哪种方法算。</figcaption>
-                </figure>
-              </div>
-
-              <p class="subtitle"><strong>年龄的形状。</strong>依赖图给头条驱动因素一个形状：年龄的贡献约在 40 岁过零，50 到 60 岁到峰值（最高约 +2 log-odds），65 岁后回落、约 67 岁转为负向。这与分组表里的非单调剖面吻合（四十岁段 30.8%、五十岁段 56.0%、60 岁以上 27.9%），模型从数据里学到的是同一条曲线，不是"越老越危险"这么简单的规则。</p>
-
-              <div class="figure-grid">
-                <figure class="figure-editorial">
-                  <img src="figures/shap_dependence_age.png" alt="年龄的 SHAP 依赖图" loading="lazy" decoding="async" />
-                  <figcaption>年龄的 SHAP 依赖图：约 40 岁过零，50–60 到峰值，65 岁后回落、约 67 岁转负。</figcaption>
-                </figure>
-                <figure class="figure-editorial">
-                  <img src="figures/shap_dependence_tenure.png" alt="在网年限的 SHAP 依赖图" loading="lazy" decoding="async" />
-                  <figcaption>在网年限的 SHAP 依赖图：小幅、几乎一致的保护性贡献（约以 −0.3 为中心），是稳定器不是驱动因素。</figcaption>
-                </figure>
-              </div>
-
-              <p class="subtitle"><strong>在网年限的调和。</strong>箱线图里流失与留存客户的在网年限几乎分不开，可它按平均绝对 SHAP 值排到第四。依赖图解释了原因：模型给每个客户小幅、几乎一致的保护性贡献（绝对值都不超过 0.9），在 0 到 10 年范围里没有明显趋势；这些小值在"绝对值均值"排序里积少成多，所以在网年限是稳定器，不是驱动因素，四个驱动因素的叙事不变。</p>
-
-              <p class="subtitle"><strong>两个客户的解释。</strong>力图取测试集里预测概率的两个极端。最高风险客户（流失概率 0.998）同时集齐每个主要驱动因素：4 个产品、远高于平均的年龄、非活跃、高于平均的余额、身在德国，只有短在网年限微弱反向拉，远不足以扭转。这类客户该排在呼叫清单最前，谈话主题应是精简产品组合。最低风险客户（流失概率 0.005）是镜像：2 个产品、年轻、活跃、零余额、高信用分。</p>
-
-              <div class="figure-grid">
-                <figure class="figure-editorial">
-                  <img src="figures/SHAP_Local_Explanation_for_a_High-Risk_Customer.png" alt="高风险客户的 SHAP 力图" loading="lazy" decoding="async" />
-                  <figcaption>高风险客户的 SHAP 力图（流失概率 0.998）：所有主要驱动因素同向叠加。</figcaption>
-                </figure>
-                <figure class="figure-editorial">
-                  <img src="figures/SHAP_Local_Explanation_for_a_Low-Risk_Customer.png" alt="低风险客户的 SHAP 力图" loading="lazy" decoding="async" />
-                  <figcaption>低风险客户的 SHAP 力图（流失概率 0.005）：各因素同向拉低风险。</figcaption>
-                </figure>
-              </div>
-            </div>
-          </section>
-
-          <!-- 行动计划 -->
-          <section id="actions" class="section-padding section--editorial" data-section-num="06">
-            <div class="section-header">
-              <div class="section-eyebrow">
-                <span class="section-num">06</span>
-                <span class="section-kicker">Action Plan</span>
-              </div>
-              <h2 class="section-title">落地行动</h2>
-            </div>
-
-            <div class="space-y-8">
-              <p class="subtitle">四个驱动因素在 EDA、三种重要性、SHAP 之间一致，风险画像因此很具体：过了 40 岁、已经变得不活跃的客户，若同时持有高余额或身在德国，风险更高。以下把结论落成四项行动。</p>
-
-              <div class="overflow-x-auto">
-                <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
-                  <thead>
-                    <tr class="bg-gray-100 dark:bg-gray-700/30">
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">举措</th>
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">做什么</th>
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">分析依据</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>月度风险评分</strong></td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">用 XGBoost 在调优阈值给每位客户打分，通话前把每人前三个 SHAP 因子交给服务团队。</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">四个候选中排序质量最优（ROC-AUC 0.876，95% CI [0.858, 0.892]）；调优阈值下捕获 87% 的流失客户。</td>
-                    </tr>
-                    <tr>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>再激活运动</strong></td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">对中高风险区间的非活跃客户，给加息、免年费或一次咨询。</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">非活跃客户流失率 26.9%，活跃客户 14.3%；非活跃是 SHAP 前三驱动之一。</td>
-                    </tr>
-                    <tr>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>组合精简回访</strong></td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">联系持有 3 个及以上产品的客户做一次精简评估；销售激励奖励贴合客户的组合，而非产品数量。</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">产品数在三种重要性视角里都排第二；3 个产品流失率 82.7%，4 个产品 100%。</td>
-                    </tr>
-                    <tr>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>德国市场审查</strong></td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">做竞品分析，并收集德国客户与网点员工的反馈。</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">德国流失率 32.4%，约为法国、西班牙的两倍。</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-
-              <div class="note note--caveat">
-                <div class="note__label">Caveat · 决策阈值是业务设置，不是常数</div>
-                <div class="note__body">
-                  <p>在训练折上选定的 F2 最优阈值 0.20，测试集上捕获 87% 的流失客户（默认阈值 61%），精确率 41%。它在总错判成本上胜过默认阈值的条件，是漏判成本超过误报成本 3.7 倍。合适的运营点由 offer 成本、活动容量、客户价值共同决定，这些一变就该复核。</p>
-                </div>
-              </div>
-
-              <div class="contact-info-card">
-                <h3 class="text-xl font-semibold mb-3" style="color: var(--dark);">后续与复现</h3>
-                <p class="subtitle">后续：用对照组 A/B 测试挽留 offer，量化对流失的真实影响；季度重训模型，营销经济性变化时复核阈值；把风险分与 SHAP 因子推进 CRM，让网点员工直接看到。notebook 全程单一随机种子 42，可在本地完整重跑（<code>uv run jupyter nbconvert --to notebook --execute</code>），图表输出到 <code>figures/</code>。</p>
-              </div>
-            </div>
-          </section>
-        </div>
-      </div>
-    </section>
-
-    <!-- 相关项目 -->
-    <section id="related" class="section-padding">
-      <div class="section-header reveal">
-        <div class="section-eyebrow">
-          <span class="section-kicker">Continue Reading</span>
-        </div>
-        <h2 class="section-title">相关项目</h2>
-      </div>
-      <div class="grid md:grid-cols-2 gap-6">
-        <a href="../lendingclub loan prediction/lendingclub loan prediction.html" class="related-project-card group cursor-pointer" style="text-decoration: none;">
-          <h3 class="related-project-title">LendingClub 贷款违约预测</h3>
-          <p class="related-project-description">成本 4.2:1 不对称下的阈值决策，抓住 74.9% 违约</p>
-          <div class="related-project-link">
-            <span>查看详情</span>
-            <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>
-          </div>
-        </a>
-        <a href="../youtube comment analysis/youtube comment analysis.html" class="related-project-card group cursor-pointer" style="text-decoration: none;">
-          <h3 class="related-project-title">YouTube 评论宠物主识别</h3>
-          <p class="related-project-description">同为"排序能力 + 运营点"框架下的弱监督分类</p>
-          <div class="related-project-link">
-            <span>查看详情</span>
-            <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>
-          </div>
-        </a>
-      </div>
-    </section>
-  </main>
-
-  <!-- 底部脚本：Prism / 本地脚本 / Logo动画 / 详情页逻辑 -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
-  <script src="../../assets/js/logo.js"></script>
-  <script src="../../assets/js/common.js"></script>
-  <script src="../../assets/js/charts.js"></script>
-  <script src="../../assets/js/project.js"></script>
-
-  <!-- Language toggle functionality -->
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const langToggle = document.getElementById('lang-toggle');
-      if (langToggle) {
-        langToggle.addEventListener('click', function() {
-          localStorage.setItem('language', 'en');
-          window.location.href = 'Bank Customer Churn Prediction-en.html';
-        });
-      }
-    });
-  </script>
+  <section id="related" class="section-padding"><div class="section-header"><h2 class="section-title">相关项目</h2></div><div class="grid md:grid-cols-2 gap-6"><a href="../lendingclub loan prediction/lendingclub loan prediction.html" class="related-project-card"><h3 class="related-project-title">LendingClub：9,004 笔贷款样本</h3><p class="related-project-description">从 9,004 笔历史贷款中分析违约分布，比较模型与期限规则，设计不对称成本下的筛查策略。Random Forest 冻结阈值 0.22，测试召回率 70.45%，净模拟成本降幅 4.68%。</p><span class="related-project-link">查看详情</span></a><a href="../ab testing/ab testing.html" class="related-project-card"><h3 class="related-project-title">A/B Testing：Cookie Cats 关卡门实验</h3><p class="related-project-description">比较 90,189 名玩家的留存与参与度，结合分流检验、自助法和统计功效评估关卡门位置。第 40 关组的 7 日留存比第 30 关组低 0.82 个百分点，95% 区间为 [−1.33, −0.31]，据此提出关卡与回访体验建议。</p><span class="related-project-link">查看详情</span></a></div></section>
+</main>
+<script src="../../assets/js/logo.js"></script>
+<script src="../../assets/js/common.js"></script>
+<script src="../../assets/js/project.js"></script>
+<script src="../../assets/js/language-switcher.js"></script>
 </body>
 </html>

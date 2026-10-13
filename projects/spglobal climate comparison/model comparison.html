@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>document.documentElement.classList.add('js');</script>
+  <title>卫星地表温度与降尺度 CMIP6 气温的可比性：四区域、15 个模型、两个情景 - 数据诗学</title>
+  <meta name="description" content="比较四个研究框中 MODIS LST 与 NEX-GDDP-CMIP6 tas 的历史表现，分析变量、日历和采样差异。以 15 个模型开展误差诊断，并在 14 个模型的主集合上评价排名不确定性，为后续模型选择与订正提供依据。">
+  <meta property="og:title" content="卫星地表温度与降尺度 CMIP6 气温的可比性：四区域、15 个模型、两个情景">
+  <meta property="og:description" content="比较四个研究框中 MODIS LST 与 NEX-GDDP-CMIP6 tas 的历史表现，分析变量、日历和采样差异。以 15 个模型开展误差诊断，并在 14 个模型的主集合上评价排名不确定性，为后续模型选择与订正提供依据。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://juyexiao.github.io/projects/spglobal%20climate%20comparison/model%20comparison.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:description" content="比较四个研究框中 MODIS LST 与 NEX-GDDP-CMIP6 tas 的历史表现，分析变量、日历和采样差异。以 15 个模型开展误差诊断，并在 14 个模型的主集合上评价排名不确定性，为后续模型选择与订正提供依据。">
+  <link rel="canonical" href="https://juyexiao.github.io/projects/spglobal%20climate%20comparison/model%20comparison.html">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&amp;family=Inter:wght@200;300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;700&amp;family=Noto+Sans+SC:wght@400;500;600&amp;family=Noto+Serif+SC:wght@500&amp;display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="../../assets/css/index.css">
+  <link rel="stylesheet" href="../../assets/css/project.css">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "卫星地表温度与降尺度 CMIP6 气温的可比性：四区域、15 个模型、两个情景", "description": "比较四个研究框中 MODIS LST 与 NEX-GDDP-CMIP6 tas 的历史表现，分析变量、日历和采样差异。以 15 个模型开展误差诊断，并在 14 个模型的主集合上评价排名不确定性，为后续模型选择与订正提供依据。", "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Juye Xiao"}}</script>
+</head>
+<body class="transition-colors duration-300 report-page">
+<div class="scroll-progress" id="scroll-progress"></div>
+<header class="navbar fixed top-0 left-0 right-0 z-50" id="navbar">
+<div class="container-main h-full flex items-center justify-between">
+<!-- Logo部分 -->
+<a class="navbar-logo" href="../../index.html#hero" id="navbar-logo">
+<!-- SVG Logo -->
+<svg class="logo-svg-nav" viewbox="0 0 40 40">
+<!-- 背景数据网格 -->
+<g class="grid-bg">
+<!-- 垂直线 -->
+<line class="grid-line-v" style="animation-delay: 0.1s, 0s" x1="8" x2="8" y1="0" y2="40"></line>
+<line class="grid-line-v" style="animation-delay: 0.2s, 0.5s" x1="16" x2="16" y1="0" y2="40"></line>
+<line class="grid-line-v" style="animation-delay: 0.3s, 1s" x1="24" x2="24" y1="0" y2="40"></line>
+<line class="grid-line-v" style="animation-delay: 0.4s, 1.5s" x1="32" x2="32" y1="0" y2="40"></line>
+<!-- 水平线 -->
+<line class="grid-line-h" style="animation-delay: 0.5s, 0s" x1="0" x2="40" y1="10" y2="10"></line>
+<line class="grid-line-h" style="animation-delay: 0.6s, 0.7s" x1="0" x2="40" y1="20" y2="20"></line>
+<line class="grid-line-h" style="animation-delay: 0.7s, 1.4s" x1="0" x2="40" y1="30" y2="30"></line>
+</g>
+<!-- 织梭动画线 -->
+<line class="weaver-line" id="weaverLine" x1="0" x2="40" y1="20" y2="20"></line>
+<!-- JX字母 -->
+<text class="logo-letters" id="logoLetters" text-anchor="middle" x="20" y="26">JX</text>
+</svg>
+<!-- 名字签名（悬停显示） -->
+<div class="logo-name">
+<div class="logo-name-text">Juye Xiao</div>
+<div class="logo-name-subtitle">Data Analyst</div>
+</div>
+</a>
+<nav class="hidden md:flex items-center space-x-8">
+<a class="nav-link" href="../../index.html#about">关于</a>
+<a class="nav-link" href="../../index.html#experience">经历</a>
+<a class="nav-link" href="../../index.html#education">教育</a>
+<a class="nav-link" href="../../index.html#projects">项目</a>
+<a class="nav-link" href="../../index.html#skills">技能</a>
+<a class="nav-link" href="../../index.html#contact">联系</a>
+</nav>
+<div class="flex items-center space-x-4">
+<button aria-label="切换主题" class="btn-secondary !p-2 !rounded-full" id="theme-toggle">
+<i class="block dark:hidden" data-lucide="sun"></i>
+<i class="hidden dark:block" data-lucide="moon"></i>
+</button>
+<button class="btn-secondary !p-2 !rounded-full" id="lang-toggle">
+<span class="font-bold text-sm">EN</span>
+</button>
+<button aria-controls="mobile-menu" aria-expanded="false" aria-label="打开菜单" class="btn-secondary !p-2 !rounded-full md:hidden" id="menu-toggle">
+<i class="menu-icon-open" data-lucide="menu"></i>
+<i class="menu-icon-close" data-lucide="x"></i>
+</button>
+</div>
+</div>
+<nav aria-label="移动端导航" class="mobile-menu md:hidden" id="mobile-menu">
+<a class="nav-link" href="../../index.html#about">关于</a>
+<a class="nav-link" href="../../index.html#experience">经历</a>
+<a class="nav-link" href="../../index.html#education">教育</a>
+<a class="nav-link" href="../../index.html#projects">项目</a>
+<a class="nav-link" href="../../index.html#skills">技能</a>
+<a class="nav-link" href="../../index.html#contact">联系</a>
+</nav>
+</header>
+<main class="container-main">
+  <section id="project-hero" class="section-padding report-hero">
+    <div class="section-eyebrow"><span class="section-kicker">Capstone · 模型比较</span></div>
+    <h1 class="hero-title">卫星地表温度与降尺度 CMIP6 气温的可比性：四区域、15 个模型、两个情景</h1>
+    <p class="subtitle report-standfirst">比较四个研究框中 MODIS LST 与 NEX-GDDP-CMIP6 tas 的历史表现，分析变量、日历和采样差异。以 15 个模型开展误差诊断，并在 14 个模型的主集合上评价排名不确定性，为后续模型选择与订正提供依据。</p>
+    <p class="reading-time">2026 · 分析更新</p>
+    <div class="hero-stats"><div class="hero-stat"><div class="hero-stat__num">2015–2020</div><div class="hero-stat__label">比较时段</div></div><div class="hero-stat"><div class="hero-stat__num">15</div><div class="hero-stat__label">误差诊断模型</div></div><div class="hero-stat"><div class="hero-stat__num">14</div><div class="hero-stat__label">排名不确定性主集合</div></div></div>
+    <div class="report-actions"><a class="btn btn-primary" href="#content">开始阅读</a><a class="btn btn-secondary" href="../../index.html#projects">返回项目概览</a></div>
+  </section>
+<nav class="report-series" aria-label="系列阅读"><a class="report-series__link" href="spglobal climate comparison.html">S&amp;P Global Capstone：气候模型、预测与空间暴露</a><a class="report-series__link is-current" href="model comparison.html">Capstone 专题：模型比较</a><a class="report-series__link" href="long series.html">Capstone 专题：长序列与短期预测</a><a class="report-series__link" href="projection overlay.html">长期配对情景与空间暴露</a></nav>
+  <section id="content" class="section-padding report-layout">
+    <aside><nav class="project-toc" id="project-toc" aria-label="报告目录"><h3>目录</h3><ul id="toc-list"><li><a class="toc-link" href="#report-section-1">1. 模型比较摘要</a></li><li><a class="toc-link" href="#report-section-2">2. 出资方问题与使用场景</a></li><li><a class="toc-link" href="#report-section-3">3. 数据与研究区</a></li><li><a class="toc-link" href="#report-section-4">4. 方法：误差分解、清洗配方与检验安排</a></li><li><a class="toc-link" href="#report-section-5">5. 观测质量与聚合口径</a></li><li><a class="toc-link" href="#report-section-6">6. 模型对比：偏移主导与名次分辨率</a></li><li><a class="toc-link" href="#report-section-7">7. 区域差异与情景选择</a></li><li><a class="toc-link" href="#report-section-8">8. 短期预测的区域与长度选择</a></li><li><a class="toc-link" href="#report-section-9">9. 偏差订正配方与适用边界</a></li><li><a class="toc-link" href="#report-section-10">10. 方法使用与后续核查</a></li><li><a class="toc-link" href="#report-section-11">11. 空间适用范围</a></li></ul></nav></aside>
+    <article class="content-area report-body" id="report-body"><section id="report-section-1" class="section-padding section--editorial" data-section-num="01"><div class="section-header"><h2 class="section-title">1. 模型比较摘要</h2></div><div class="report-block" id="report-1-1">
+<p>本报告比较 2015–2020 年四个研究区的 MODIS 地表温度与 15 个气候模型的近地面气温，分析观测质量、物理量差异和偏差订正。误差分解与日夜对照采用 15 模型诊断，排名不确定性采用排除版本异常模型后的 14 模型集合。短期预测另用五个测试窗口比较，综合应用见<a href="spglobal climate comparison.html">项目综合报告</a>。</p>
+<p>在 2015–2020 年的 15 模型诊断中，均值偏移占区域 RMSE² 中位数的 74%–97%。这一分解支持先解释物理量和采样差异，再比较 cRMSE、相关性和幅度。当前历史排名的点估计第一名覆盖 CA 1–3、XJ 1–9、TK 1–5、AU 1–7 名。这些范围不支持跨区域选择一个通用的最佳模型。短期方法保留气候态基线，并分区检验候选。空间订正的均值改善不能替代地点核验。</p>
+
+</div></section><section id="report-section-2" class="section-padding section--editorial" data-section-num="02"><div class="section-header"><h2 class="section-title">2. 出资方问题与使用场景</h2></div><div class="report-block" id="report-2-1">
+<p><strong>赞助方的表述</strong>：2022 年 10 月 14 日的项目修订书写明的目标是：用卫星影像的时间与空间数据监测并预测气候变化相关的灾害，把它们与经济数据连接起来，用于 S&amp;P 向客户销售的产品的风险评估。落到学生这一侧的要求是采集与整理数据集，并<strong>按 GCM 逐个量化和分析 MODIS 与 NEX-GDDP 两个 NASA 数据库中观测数据与派生数据的差异</strong>，区域举例为加利福尼亚。列为业务成果的两条是：从 NASA 站点采集与预处理公开卫星影像，以及搭建面向建模的数据管线。</p>
+<p><strong>结论的使用方</strong>：风险评估产品要把气候模型输出落到具体地块上，需要先回答三个操作性问题：</p>
+<ul>
+<li>该选哪个 GCM 作为区域热状况的输入。</li>
+<li>要不要按情景分别计算，还是一条情景够用。</li>
+<li>模型给出的格点值能不能当作某个具体位置的值。</li>
+</ul>
+<p>本报告对这三个问题各给一个带不确定度的答案，分别在第 6、7、9 节。</p>
+<p><strong>研究范围</strong>：本报告覆盖数据采集、预处理，以及观测与模型差异的量化。长期情景和人口、土地暴露的应用见<a href="projection overlay.html#report-section-1">情景与空间暴露报告</a>。</p>
+<hr/>
+
+</div></section><section id="report-section-3" class="section-padding section--editorial" data-section-num="03"><div class="section-header"><h2 class="section-title">3. 数据与研究区</h2></div><div class="report-block" id="report-3-1">
+<h3>两个数据源</h3>
+<div aria-label="数据表（可横向滚动）" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">数据集</th>
+<th scope="col">来源与获取通道</th>
+<th scope="col">规模</th>
+<th scope="col">时间范围</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MODIS 地表温度</td>
+<td><a href="https://developers.google.com/earth-engine/datasets/catalog/MODIS_061_MOD11A1">MODIS/061/MOD11A1</a>，经 Google Earth Engine 逐点提取，1 km 原生分辨率，取 <code>LST_Day_1km</code>、<code>LST_Night_1km</code> 与对应 QC 波段</td>
+<td>四区域共 1020 个格点中心，日频</td>
+<td>2015–2020 全部四区；CA 另有 2000–2024</td>
+</tr>
+<tr>
+<td>NEX-GDDP-CMIP6 近地面气温 tas</td>
+<td><a href="https://www.nccs.nasa.gov/services/data-collections/land-based-products/nex-gddp-cmip6">NASA NEX-GDDP-CMIP6</a>，0.25° 降尺度气候模型数据</td>
+<td>15 个模型、2 种情景、4 个研究区</td>
+<td>2015–2020，日频</td>
+</tr>
+</tbody>
+</table></div>
+<p>观测和模型均采用公开数据产品。MODIS 提供卫星地表温度，NEX-GDDP-CMIP6 提供降尺度气候模型数据。</p>
+<p>15 个模型为 CanESM5、CMCC-CM2-SR5、CMCC-ESM2、GISS-E2-1-G、HadGEM3-GC31-MM、INM-CM4-8、INM-CM5-0、KACE-1-0-G、KIOST-ESM、MIROC6、NESM3、NorESM2-LM、NorESM2-MM、TaiESM1、UKESM1-0-LL。两条情景为 ssp126 与 ssp585。</p>
+<h3>四个区域</h3>
+<div aria-label="数据表（可横向滚动）" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">代码</th>
+<th scope="col">位置</th>
+<th scope="col">气候</th>
+<th scope="col">NEX 0.25° 格点数</th>
+<th scope="col">有效月数（共 72）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CA</td>
+<td>Sierra National Forest, California, USA</td>
+<td>山地地中海气候</td>
+<td>156</td>
+<td>69</td>
+</tr>
+<tr>
+<td>XJ</td>
+<td>塔里木盆地南缘，新疆</td>
+<td>极端干旱荒漠</td>
+<td>144</td>
+<td>67</td>
+</tr>
+<tr>
+<td>TK</td>
+<td>伊朗—土库曼斯坦跨境研究框</td>
+<td>干旱大陆性</td>
+<td>144</td>
+<td>60</td>
+</tr>
+<tr>
+<td>AU</td>
+<td>新南威尔士内陆，澳大利亚</td>
+<td>温带至半干旱（南半球）</td>
+<td>576</td>
+<td>72</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>采样点就是 NEX 的 0.25° 格点中心。</strong> 按“格点中心落在 bbox 内”这条规则生成，四区域点数逐一吻合 CA 156、XJ 144、TK 144、AU 576。这一步确定了样本的身份，后续所有对比都落在同一批位置上。</p>
+<p>有效月数逐区不同，且 TK 的 12 个缺月全部落在冷季（8 个在 1–3 月，4 个在 12 月）。它的指标因此建立在偏向暖半年的子集上，跨区比较时不与其余三区处在同一组月份上。跨区比较因此需要同时考虑有效月份的差异。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：四区域观测与模型月度序列" class="figure-zoom" type="button"><img alt="四区域观测与模型月度序列" decoding="async" height="1008" loading="lazy" src="figures/regions_overview.png" width="1611"/></button><figcaption><em>四个区域的 MODIS 白天 LST（黑线）与 15 个模型的 tas（细线，ssp585），2015–2020 月度。四张图里模型线全部整体低于观测线，间距按区域拉开：这就是第 6 节要拆开的那个偏移。</em></figcaption></figure>
+
+<h3>为什么只能拿 LST 比 tas</h3>
+<p>CMIP 变量名 <code>tas</code> 是 <code>t</code>（temperature）+ <code>a</code>（air）+ <code>s</code>（surface）的组合，文件属性写明 <code>cell_methods: area: time: mean</code>，即格子面积平均加 24 小时时间平均。MODIS LST 是过境瞬间的点位皮温，白天过境约 10:30、夜间约 22:30。两者不是同一个量。</p>
+<p>CMIP 里与 LST 同类的变量是 ts（模式自己的皮温），但 NEX-GDDP-CMIP6 的分发清单只有九个变量，ts 不在其中。观测与模型从一开始就不是同一个物理量，这是全项目 bias 的根子，也是第 9 节那条订正配方存在的理由。</p>
+<h3>与 2022 年那份观测记录不可直接相减</h3>
+<p>2022 年交付物里的 MODIS CSV 不是点值。156 个点在同一天的不同取值中位数只有 14 个（最少 0、最多 18），约十一个点共用一个数。原因是当年的逐点提取用了过粗的 scale，取回的是几十公里的影像金字塔块均值，后果是系统性偏冷 3.78 °C。季节形状不受影响：新旧两条月度序列相关 r = 0.9902，去掉季节循环后的距平相关 r = 0.8394。所以两份记录在时间形状上可以互相印证，在绝对水平上不能。拿 2022 年的 bias 数值与本报告的相减，减出来的是提取口径。</p>
+<hr/>
+
+</div></section><section id="report-section-4" class="section-padding section--editorial" data-section-num="04"><div class="section-header"><h2 class="section-title">4. 方法：误差分解、清洗配方与检验安排</h2></div><div class="report-block" id="report-4-1">
+<p>四个方法决策，逐个交代目标、备选与代价。</p>
+<h3>4.1 把 RMSE 拆成偏移与形状两项</h3>
+<h4>目标</h4>
+<p>把“两个物理量之间应然的系统性偏移”与“模型对季节形状的刻画误差”分开，让排序落在后者上。</p>
+<h4>选型</h4>
+<p>备选有两个。单一 RMSE 是 2022 年的做法，它把两项混在一个数里，最小化它等于最小化偏移。相关系数对偏移完全不敏感，但它同时也不惩罚振幅错误。本报告用恒等式 <code>rmse² = bias² + crmse²</code> 同时报告三项，再加标准差比与 Taylor 图，让振幅误差可见。</p>
+<h4>做法</h4>
+<p>逐模型算 bias、cRMSE、相关系数、标准差比、年际距平相关，四区域两情景共 120 行指标表。距平相关一列作为完备性报告，不作能力度量：自由运行的 GCM 不从观测初始化，本来就不该逐年匹配观测。</p>
+<h4>代价</h4>
+<p>cRMSE 对观测的清洗配方敏感，敏感程度逐区不同（第 6.6 节给出量化）。用 cRMSE 排序，就得同时披露观测是怎么聚合的。</p>
+<h3>4.2 按 cftime 处理 360 天历</h3>
+<h4>目标</h4>
+<p>HadGEM3-GC31-MM、KACE-1-0-G、UKESM1-0-LL 三个模型使用 360 天历，它们的时间轴不能按公历解析。</p>
+<h4>做法</h4>
+<p>全程用 cftime 打开文件，月度聚合按日期字符串前七位分组，不经过公历解析。</p>
+<h4>代价与验证</h4>
+<p>这一步可以直接检验：同一组合（CA 区域、ssp585 情景、HadGEM3-GC31-MM 模型）在正确日历处理下月度 RMSE 为 8.4599 °C。若把 360 天历的第 N 天当作“2015-01-01 加 N 天”，得 9.0725 °C。2022 年发布的锚点是 9.1046，与后者差 0.0321，差值落在数据修订的量级内。这个日历处理只影响三个 360 天历模型，其余十二个不受影响，所以按公历解析的跨模型排名对这三个从构造上就不公平。</p>
+<h3>4.3 观测的清洗配方</h3>
+<h4>目标</h4>
+<p>云污染使 LST 逐日缺测，月均值取决于当月哪些日子、哪些格点被算进去。聚合规则必须先定下来并公开。</p>
+<h4>选型</h4>
+<p>本报告比较两种月度聚合规则。2022 式平均将缺测标记替换为 NaN，先对每天的有效点取平均，再计算月均值。它保留全部月份，但会纳入低覆盖日中偏冷的观测子样本。</p>
+<p>覆盖率规则先检查每日有效点数，不足全部点位的 50% 时剔除该日。随后检查每月有效日数，不足 10 天时将该月设为缺测。它减少了可用月份，使保留下来的月均值建立在较一致的空间采样上。本报告采用这一规则，并在第 6.6 节检验聚合规则对排名的影响。</p>
+<h4>做法</h4>
+<p>提取时施加 MOD11A1 的 QC 位掩码。夜间序列走一套放宽的阈值（每日至少 10% 的点、每月至少 5 个有效日），因为夜间通过率较低，因此夜间结果只作定性使用。</p>
+<h4>代价</h4>
+<p>覆盖率规则屏蔽的月数为 CA 3、XJ 5、TK 12、AU 0。TK 那 12 个月全在冷季，它的所有指标都带这层暖季偏斜。</p>
+<h3>4.4 共同时间抽样与预测评分</h3>
+<p>历史排名恢复完整月历后，每次抽取六个整年，共 2,000 次。所有模型共享索引，再应用共同的原始有效观测月份。短期预测先切窗，再仅用训练数据填补和选参。所有方法在同一组原始有效测试月上计分。排名与预测结果分别见第 6.5 节和第 8 节。</p>
+
+</div></section><section id="report-section-5" class="section-padding section--editorial" data-section-num="05"><div class="section-header"><h2 class="section-title">5. 观测质量与聚合口径</h2></div><div class="report-block" id="report-5-1">
+<p>观测的覆盖率、季节性缺测与空间差异，会影响模型误差及排名的解释。</p>
+<h3>5.1 白天 QC 通过率过半，夜间只有八分之一到三分之一</h3>
+<p>白天通过率为 CA 66.40%、TK 59.50%、XJ 56.18%、AU 51.80%。夜间为 AU 33.65%、TK 31.64%、CA 31.14%、XJ 12.69%。夜间比白天薄 1.54 倍（AU）到 4.43 倍（XJ）。整日无任何有效观测的天数（共 2192 天）为 AU 136、TK 96、XJ 47、CA 34。</p>
+<p>夜间样本这么薄，是夜间序列走放宽阈值并只作定性使用的原因，也是第 9.1 节不把日夜两侧 bias 相减的原因。</p>
+<h3>5.2 缺测有强季节性，方向与气候一致</h3>
+<p>白天缺测率的多年同月极值为：CA 一月 58% 到八月 12%；XJ 一月 61% 到十月 20%；TK 十二月 71% 到九月 8%。AU 是唯一例外，全年在 42% 到 54% 之间，峰值落在南半球冬季的七月。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：CA 逐月缺测率" class="figure-zoom" type="button"><img alt="CA 逐月缺测率" decoding="async" height="501" loading="lazy" src="figures/deep_dive/CA_missingness_monthly.png" width="1385"/></button><figcaption><em>CA 白天与夜间 LST 的逐月缺测率，QC 之后。冬季高、夏季低，夜间一条始终在白天之上。缺测在这份数据里本身就是一个数据产品：它按季节分布，所以任何“多年平均”都不是等权平均，冷季的权重低于暖季。</em></figcaption></figure>
+
+<h3>5.3 覆盖率规则的代价逐区不同</h3>
+<p>屏蔽月数为 CA 3、XJ 5、TK 12、AU 0，有效月数为 CA 69、XJ 67、TK 60、AU 72。TK 的 12 个屏蔽月里 8 个在 1–3 月、4 个在 12 月，全部落在冷季。</p>
+<p>后果是 TK 的每个指标都建立在暖季偏斜的子集上。比较 TK 与其他区域时，需要考虑这一季节性样本差异。</p>
+<h3>5.4 +0.88 °C 属于聚合规则，QC 位掩码本身只值 −0.01 °C</h3>
+<p>把 CA 从 2022 式平均换到当前配方，月均白天 LST 上移 0.88 °C。这个位移几乎全部来自聚合规则：固定 QC 设置、只把 2022 式平均换成覆盖率规则，月均值移动 +0.91 °C，2019-11 单月移动 +5.60 °C；反过来固定聚合规则、只开关 QC 位掩码，月均值只移动 −0.01 °C，单月最大 0.24 °C。</p>
+<p>机制在原始文件层面可见：位掩码只剔掉 227,933 个有效点-日里的 877 个，而覆盖率规则整日整日地丢弃低覆盖日，那些日子存活的像元偏冷。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：CA 三种清洗配方" class="figure-zoom" type="button"><img alt="CA 三种清洗配方" decoding="async" height="524" loading="lazy" src="figures/deep_dive/CA_qc_sensitivity.png" width="1784"/></button><figcaption><em>CA 月度区域白天 LST 在三种处理配方下的结果。三条线里两条几乎重合（QC 开与关，同一聚合规则），第三条（2022 式平均）系统性偏低。<strong>引用任何 bias 数字必须带清洗配方，而配方里起决定作用的是聚合规则，不是 QC 开关。</strong> 两份口径不同的 bias 数字相减，减出来的是处理差异。</em></figcaption></figure>
+
+<h3>5.5 区域均值在时间上有代表性，在绝对水平上没有</h3>
+<p>逐点序列与区域均值的相关中位数为 TK 0.981、AU 0.970、CA 0.963、XJ 0.962。去掉季节循环后掉到 TK 0.865、AU 0.835、CA 0.830、XJ 0.794：原来那个高相关大半是所有点共享的年循环。逐点长期均值的标准差为 AU 4.20、TK 4.90、CA 8.00、XJ 8.73 °C，日均跨点标准差为 XJ 8.6、CA 8.3、TK 5.4、AU 4.6 °C。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：CA 空间变异" class="figure-zoom" type="button"><img alt="CA 空间变异" decoding="async" height="524" loading="lazy" src="figures/deep_dive/CA_spatial_variability.png" width="2083"/></button><figcaption><em>CA 的逐点离散度：左为日尺度跨点标准差（30 天滑动平均），中为区域均值与逐点极值范围，右为逐点与区域均值的相关分布。由于每个模型只提供一条区域均值 tas，图中这个离散度同时就是本报告所有 bias 数字背后的逐点 bias 离散度。<strong>0.25° 格子不是站点值</strong>：把它当站点值用，先要接受 4.2 到 8.7 °C 的逐点均值散布。</em></figcaption></figure>
+
+<h3>5.6 日夜温差按干旱度排序</h3>
+<p>日夜温差均值为 XJ 31.8、TK 22.9、CA 18.7、AU 16.2 °C。CA 的月气候态极值是五月 23.5 °C 到一月 11.3 °C。</p>
+<p>这个量决定了白天一侧 bias 的尺度：同一个模型的 tas，在日夜温差大的区域自然离白天 LST 更远。四个数都应读作上界，因为日夜两条序列来自不同的 QC 子样本，存活的夜间像元偏向晴夜。</p>
+<hr/>
+
+</div></section><section id="report-section-6" class="section-padding section--editorial" data-section-num="06"><div class="section-header"><h2 class="section-title">6. 模型对比：偏移主导与名次分辨率</h2></div><div class="report-block" id="report-6-1">
+<h3>6.1 15 个模型的 tas 全部落在夜间与白天 LST 之间</h3>
+<p>四个区域各 15 个模型，白天一侧全部为负偏差、夜间一侧全部为正偏差，15 个模型全部满足这一关系。白天一侧的 bias 中位数为 XJ −19.0、TK −15.8、CA −12.4、AU −10.8 °C。夜间一侧为 XJ +12.7、TK +6.8、CA +6.6、AU +5.3 °C。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：CA 模型集合与日夜包络" class="figure-zoom" type="button"><img alt="CA 模型集合与日夜包络" decoding="async" height="616" loading="lazy" src="figures/deep_dive/CA_ensemble_envelope.png" width="1396"/></button><figcaption><em>CA：MODIS 白天 LST（黑实线）、夜间 LST（灰虚线）与 15 个模型的 tas（红细线，ssp585）。模型线成束落在两条观测线之间。这个符号关系确认了偏移是物理量差而非模型误差，<strong>但它不区分模型</strong>：tas 是 24 小时均值、白天 LST 是正午前后的皮温，符号关系对任何合理的温度序列都近乎必然。</em></figcaption></figure>
+
+<h3>6.2 偏移占平方误差的 74% 到 97%</h3>
+<p>bias² 占 RMSE² 的区域中位数为 AU 74%、CA 79%、TK 90%、XJ 97%，全部 60 个区域-模型组合跨 0.48 到 0.97。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：CA bias 占比" class="figure-zoom" type="button"><img alt="CA bias 占比" decoding="async" height="616" loading="lazy" src="figures/deep_dive/CA_bias_share.png" width="1280"/></button><figcaption><em>CA 逐模型的 bias² 占 RMSE² 的比重，区域中位数 79%。这就是“按 RMSE 选模型等于按偏移选模型”的定量形式：在 CA，79% 的平方误差被偏移占去。在 XJ 这个比重是 97%，留给模型竞争的只剩 3%。</em></figcaption></figure>
+
+<h3>6.3 变量的选择比模型的选择重要</h3>
+<p>跨模型逐月离散度（同一月份上 15 个模型的最大值减最小值）的均值为 CA 8.7、TK 8.0、AU 7.3、XJ 7.1 °C，小于日夜包络的宽度。CA 那 8.7 °C 里还有一大半由一个模型贡献：其余 14 个模型的 bias 只跨 1.6 °C，而 CMCC-CM2-SR5 比第二名暖 4.9 °C。</p>
+<p>换句话说，选哪个变量与哪个清洗配方，比在 15 个模型之间挑选影响更大。</p>
+<h3>6.4 去掉偏移，两个干旱区的名次几乎反转</h3>
+<p>从 RMSE 排名换成 cRMSE 排名后，名次移动至少 5 位的模型数量在 XJ 和 TK 较多：</p>
+<div aria-label="数据表（可横向滚动）" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">区域</th>
+<th scope="col">移动至少 5 位的模型数（共 15 个）</th>
+<th scope="col">两套排名的 Spearman 相关</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>XJ</td>
+<td>10</td>
+<td>−0.31</td>
+</tr>
+<tr>
+<td>TK</td>
+<td>9</td>
+<td>−0.27</td>
+</tr>
+<tr>
+<td>CA</td>
+<td>4</td>
+<td>0.66</td>
+</tr>
+<tr>
+<td>AU</td>
+<td>2</td>
+<td>0.76</td>
+</tr>
+</tbody>
+</table></div>
+<p>XJ 和 TK 的排名相关为负，说明均值偏差会显著改变按总误差得到的模型次序。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：XJ 名次重排" class="figure-zoom" type="button"><img alt="XJ 名次重排" decoding="async" height="877" loading="lazy" src="figures/deep_dive/XJ_rank_slope.png" width="901"/></button><figcaption><em>XJ：左轴为含 bias 的 RMSE 名次，右轴为去 bias 的 cRMSE 名次，连线为同一模型。10 个模型移动 5 名以上，Spearman 相关为负。在这个区域，一份 RMSE 排行榜与一份 cRMSE 排行榜是两份互不通约的名单。</em></figcaption></figure>
+
+<h3>6.5 共同日历抽样后的名次范围</h3>
+<div aria-label="数据表（可横向滚动）" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">区域</th>
+<th scope="col">点估计第一名</th>
+<th scope="col">cRMSE（°C）</th>
+<th scope="col">抽样 2.5–97.5 分位（°C）</th>
+<th scope="col">名次范围</th>
+<th scope="col">有效月数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CA</td>
+<td>MIROC6</td>
+<td>5.647</td>
+<td>5.232–6.011</td>
+<td>1–3</td>
+<td>69</td>
+</tr>
+<tr>
+<td>XJ</td>
+<td>GISS-E2-1-G</td>
+<td>3.249</td>
+<td>2.966–3.499</td>
+<td>1–9</td>
+<td>67</td>
+</tr>
+<tr>
+<td>TK</td>
+<td>TaiESM1</td>
+<td>4.409</td>
+<td>3.596–5.065</td>
+<td>1–5</td>
+<td>60</td>
+</tr>
+<tr>
+<td>AU</td>
+<td>GISS-E2-1-G</td>
+<td>6.173</td>
+<td>5.785–6.435</td>
+<td>1–7</td>
+<td>72</td>
+</tr>
+</tbody>
+</table></div>
+<p>计算范围：2015–2020、ssp585、主集合的 14 个模型、2,000 次整年抽样。表列点估计第一名。cRMSE 范围和名次范围均为 2.5–97.5 抽样分位。短记录及缺测使名次有变化，不应选跨区通用最优模型。</p>
+<h3>6.6 XJ 的名次还依赖观测的清洗配方</h3>
+<p>把 cRMSE 全部改用 2022 式平均重算，XJ 与原排序的 Spearman 只有 0.721。5 个模型移动 3 名以上，第一名从 GISS-E2-1-G 换成 TaiESM1。TK 则稳健：Spearman 0.936，只有 1 个模型移动 3 名以上，第一名不变。覆盖率规则在 TK 把每个 cRMSE 抬高约 1.4 °C，但不动名次。</p>
+<p>在 XJ，“哪个模型最好”这个问题的答案取决于云筛与聚合规则的选择。因此，排名必须同时说明观测的聚合规则。</p>
+<h3>6.7 模型版本与主集合</h3>
+<p>CMCC-CM2-SR5 的未修订 v1.0 数据在 historical 和 ssp585 时段存在温度偏移异常。排名不确定性和情景评估的主集合使用其余 14 个模型，并在包含全部 15 个模型的敏感性分析中检查该异常对结果的影响。它的表观 RMSE 优势不能作为择模依据。</p>
+
+</div></section><section id="report-section-7" class="section-padding section--editorial" data-section-num="07"><div class="section-header"><h2 class="section-title">7. 区域差异与情景选择</h2></div><div class="report-block" id="report-7-1">
+<h3>7.1 RMSE 与 cRMSE 把四个区域排成近乎相反的顺序</h3>
+<p>RMSE 中位数为 AU 12.61 &lt; CA 14.01 &lt; TK 16.63 &lt; XJ 19.32 °C。cRMSE 中位数几乎完全反序：XJ 3.55 &lt; TK 5.24 &lt; AU 6.33 &lt; CA 6.44 °C。相关系数中位数与 cRMSE 同向，XJ 最高 0.98，其后 TK 0.96、AU 0.94、CA 0.92。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：四区域指标分布" class="figure-zoom" type="button"><img alt="四区域指标分布" decoding="async" height="584" loading="lazy" src="figures/deep_dive/ALL_region_metric_boxplots.png" width="1933"/></button><figcaption><em>四个区域的指标分布（ssp585，15 个模型）。左侧按 RMSE，XJ 最差；换成 cRMSE 与相关系数，XJ 最好。机制是同一个：干旱区皮温与气温的差距大，推高 RMSE 的偏移项。同样因为干旱，晴空少云使季节循环最干净，cRMSE 因此被压低。</em></figcaption></figure>
+
+<p>这条正好解释了 2022 年记录里那个没能解释的现象：同一个区域“RMSE 高而 R² 也高”。两句话说的是同一个恒等式的两项，各自都对，放在一起显得矛盾只是因为它们被当成了一个数。</p>
+<h3>7.2 历史点估计与当前排名范围</h3>
+<p>15 模型图用于比较区域间的误差形态。主集合的 14 个模型领先者及名次范围见第 6.5 节，不能把点估计顺序解释成显著优胜。</p>
+<h3>7.3 bias 与 cRMSE 是两根独立的轴</h3>
+<p>60 个区域-模型点合起来算，bias 与 cRMSE 的相关是  +0.88。分区看则是 CA −0.20、XJ +0.39、TK +0.56、AU −0.60。合并后的高相关来自干旱度梯度同时出现在两项里，它反映的是区域差异而非模型层面的关联。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：bias 与 cRMSE" class="figure-zoom" type="button"><img alt="bias 与 cRMSE" decoding="async" height="703" loading="lazy" src="figures/deep_dive/ALL_bias_vs_crmse.png" width="1095"/></button><figcaption><em>横轴 bias、纵轴 cRMSE，颜色分区域。四团点沿横轴分开（区域效应），团内沿纵轴分布很窄（模型效应）。<strong>一个模型在某区偏移最小，几乎不告诉你它在该区形状最好。</strong> 要知道形状，只能看 cRMSE，而 cRMSE 要带第 6.5 节的区间读。</em></figcaption></figure>
+
+<p>在 Taylor 图上，四个区域各自聚成一团。标准差比全部小于 1，因为日均气温的年振幅本来就小于正午皮温的年振幅。这是变量配对的性质，不算任何单个模型的缺陷。相关系数的跨模型极差为 XJ 0.012、TK 0.036、CA 0.044、AU 0.059，标准差比的极差为 TK 0.121、CA 0.091、AU 0.086、XJ 0.070。“哪个区域最离散”取决于看哪根轴。</p>
+<h3>7.4 历史情景比较与长期使用</h3>
+<p>2015–2020 两情景历史差异较小，不能据此证明统计等价或未来可以互换。长期报告按同模型计算 ssp585−ssp126，并列两情景及差值分布，详见<a href="spglobal climate comparison.html">综合报告</a>。</p>
+
+</div></section><section id="report-section-8" class="section-padding section--editorial" data-section-num="08"><div class="section-header"><h2 class="section-title">8. 短期预测的区域与长度选择</h2></div><div class="report-block" id="report-8-1">
+<p>月气候态以训练期各日历月的多年平均值作为预测，季节朴素法则重复训练期最后 12 个月的值。RMSE（均方根误差）越低，表示预测与观测的偏差越小。</p>
+<p>预测检验包含五个测试结束年：2016、2018、2020、2022 和 2024。每个结束年分别向前取 12 个月和 24 个月作为测试窗口。对同一种预测长度，四种方法在完全相同的原始有效观测月份上评分。两种预测长度的起点不同。训练与测试先分开，缺测填补和参数选择只使用训练数据，避免未来观测影响训练。</p>
+<p>下表为五个窗口 RMSE 的算术平均，单位 °C。评分月数是五窗有效月数之和，不是独立样本量。</p>
+<div aria-label="数据表（可横向滚动）" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">区域</th>
+<th scope="col">预测长度（月）</th>
+<th scope="col">月气候态</th>
+<th scope="col">SARIMA</th>
+<th scope="col">Prophet</th>
+<th scope="col">季节朴素法</th>
+<th scope="col">评分月数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CA</td>
+<td>12</td>
+<td>2.033</td>
+<td>2.062</td>
+<td>2.211</td>
+<td>3.476</td>
+<td>57</td>
+</tr>
+<tr>
+<td>CA</td>
+<td>24</td>
+<td>2.636</td>
+<td>2.707</td>
+<td>2.960</td>
+<td>3.394</td>
+<td>116</td>
+</tr>
+<tr>
+<td>XJ</td>
+<td>12</td>
+<td>2.238</td>
+<td>2.226</td>
+<td>2.304</td>
+<td>2.273</td>
+<td>56</td>
+</tr>
+<tr>
+<td>XJ</td>
+<td>24</td>
+<td>2.028</td>
+<td>1.997</td>
+<td>2.076</td>
+<td>2.466</td>
+<td>113</td>
+</tr>
+<tr>
+<td>TK</td>
+<td>12</td>
+<td>2.409</td>
+<td>2.441</td>
+<td>2.259</td>
+<td>3.411</td>
+<td>52</td>
+</tr>
+<tr>
+<td>TK</td>
+<td>24</td>
+<td>2.727</td>
+<td>2.728</td>
+<td>2.604</td>
+<td>2.864</td>
+<td>104</td>
+</tr>
+<tr>
+<td>AU</td>
+<td>12</td>
+<td>3.077</td>
+<td>2.982</td>
+<td>2.895</td>
+<td>2.788</td>
+<td>58</td>
+</tr>
+<tr>
+<td>AU</td>
+<td>24</td>
+<td>2.631</td>
+<td>2.522</td>
+<td>2.584</td>
+<td>3.273</td>
+<td>117</td>
+</tr>
+</tbody>
+</table></div>
+<p>SARIMA 在每个训练窗口内比较 72 个 AICc 候选，Prophet 使用年季节性和线性趋势。</p>
+<p>CA 的月气候态平均 RMSE 低于 SARIMA。XJ 的 SARIMA 相比月气候态，在 12 个月预测中降低约 0.012 °C，在 24 个月预测中降低约 0.031 °C。现有差距不足以支持默认采用更复杂的方法，因此两区先保留月气候态基线。</p>
+<p>TK 的 Prophet 在两种预测长度下都有最低的平均 RMSE，但在 5 个窗口中，12 个月预测只有 3 个窗口总体胜出，24 个月预测只有 2 个。AU 的 12 个月季节朴素法也只在 5 个窗口中的 1 个窗口总体胜出。AU 的 24 个月 SARIMA 在 2 个窗口总体胜出，与月气候态直接比较则在 4 个窗口误差更低。因此，TK 的 Prophet 与 AU 的 24 个月 SARIMA 应作为候选，在新的预测起点继续检验。</p>
+<p>窗口平均 RMSE 与合并 RMSE 是两种不同的汇总方式。前者先计算每个测试窗口的 RMSE，再取算术平均。后者汇总所有评分月份的平方误差，计算平均值后再开方。AU 的 12 个月预测说明，两种汇总方式会改变 Prophet 与 SARIMA 的相对次序。</p>
+<div aria-label="数据表（可横向滚动）" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">方法</th>
+<th scope="col">窗口平均 RMSE（°C）</th>
+<th scope="col">合并 RMSE（°C）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Prophet</td>
+<td>2.895</td>
+<td>3.086</td>
+</tr>
+<tr>
+<td>SARIMA</td>
+<td>2.982</td>
+<td>3.035</td>
+</tr>
+</tbody>
+</table></div>
+<p>按窗口平均，Prophet 的误差较低。按合并误差，SARIMA 的误差较低，因此模型比较需要事先明确汇总方式。</p>
+<p>MASE 的分母使用训练期原始有效的 12 个月季节配对。MASE 小于 1 不能替代与测试期季节朴素法的直接比较。五个窗口也不足以证明方法统计等价，或推导出 SARIMA 必须使用二十年数据的通用要求。</p>
+<p>后续按相同的预测长度增加测试结束年，并预先固定评分月份和汇总方式。记录误差差值、各窗口的比较结果与残差，待改善能够持续时再考虑替换默认基线。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：四区、两种预测长度的逐窗 RMSE；窗口平均与逐月合并指标分开报告" class="figure-zoom" type="button"><img alt="四区、两种预测长度的逐窗 RMSE；窗口平均与逐月合并指标分开报告" decoding="async" height="1927" loading="lazy" src="figures/audit_revision_20260926/forecast_window_rmse.png" width="1903"/></button><figcaption class="generated-alt-caption">四区、两种预测长度的逐窗 RMSE；窗口平均与逐月合并指标分开报告</figcaption></figure>
+
+</div></section><section id="report-section-9" class="section-padding section--editorial" data-section-num="09"><div class="section-header"><h2 class="section-title">9. 偏差订正配方与适用边界</h2></div><div class="report-block" id="report-9-1">
+<p>第 6、7 节的结论合起来指向同一件事：与其在 15 个模型之间挑选，不如把那个偏移估准。本节检验这条路走不走得通。</p>
+<h3>9.1 配方的物理依据</h3>
+<p>模型 tas 落在夜间与白天 LST 之间，四个区域的 15 个模型均满足这一关系。白天一侧偏冷 10.8 到 19.0 °C，夜间一侧偏暖 5.3 到 12.7 °C（中位数，见第 6.1 节）。既然偏移的符号与量级由物理关系决定并按区域系统性变化，它就是可估计的。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：四区域日夜夹逼" class="figure-zoom" type="button"><img alt="四区域日夜夹逼" decoding="async" height="558" loading="lazy" src="figures/deep_dive/ALL_daynight_bracket.png" width="1129"/></button><figcaption><em>四个区域的集合中位 bias：对白天 LST 全为负，对夜间 LST 全为正，缺口按干旱度拉开。<strong>这个结构就是订正配方的依据</strong>：需要估计的不是“哪个模型对”，而是“从 tas 到白天 LST 要加多少”。两点限制：夹逼不区分模型，两列建立在不同的月份集上，不能直接相减。</em></figcaption></figure>
+
+<h3>9.2 留出检验：原始 tas → 单一常数 → 十二个月值</h3>
+<p>在 2015–2018 年拟合订正量，并在 2019–2020 年检验。各区域用于校准和检验的有效月数如下：</p>
+<div aria-label="数据表（可横向滚动）" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">区域</th>
+<th scope="col">校准月数</th>
+<th scope="col">检验月数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CA</td>
+<td>46</td>
+<td>23</td>
+</tr>
+<tr>
+<td>XJ</td>
+<td>44</td>
+<td>23</td>
+</tr>
+<tr>
+<td>TK</td>
+<td>40</td>
+<td>20</td>
+</tr>
+<tr>
+<td>AU</td>
+<td>48</td>
+<td>24</td>
+</tr>
+</tbody>
+</table></div>
+<p>对白天 LST 的 RMSE 中位数为：</p>
+<div aria-label="数据表（可横向滚动）" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">订正形式</th>
+<th scope="col">CA</th>
+<th scope="col">XJ</th>
+<th scope="col">TK</th>
+<th scope="col">AU</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>原始 tas，不订正</td>
+<td>13.37</td>
+<td>19.17</td>
+<td>15.89</td>
+<td>12.29</td>
+</tr>
+<tr>
+<td>单一区域常数</td>
+<td>6.74</td>
+<td>3.67</td>
+<td>4.62</td>
+<td>6.54</td>
+</tr>
+<tr>
+<td>十二个月值（分月订正）</td>
+<td>3.78</td>
+<td>2.36</td>
+<td>3.63</td>
+<td>2.51</td>
+</tr>
+<tr>
+<td>参照：只用观测的月气候态</td>
+<td>3.08</td>
+<td>1.85</td>
+<td>2.80</td>
+<td>2.05</td>
+</tr>
+</tbody>
+</table></div>
+<p>单位为 °C。前三行每格是 15 个模型的中位数，最后一行不含模型。这里没有给区间：检验窗只有 2019–2020 两年，每格都是单个窗口的结果，第 9.4 节把这条限制写进了使用约束。分月订正在四个区域都胜过单一常数，优势 1.0 到 4.0 °C。一个区域常数就能把表观误差从 12 到 19 °C 压到 3.7 到 6.7 °C 的量级，这是订正相对于挑模型的性价比所在。</p>
+<h3>9.3 月气候态与自由运行模型</h3>
+<p>原留出中，观测月气候态的误差较低。自由运行 GCM 不与实际逐年天气同步，因此这些逐月误差含未对齐实现之间的差异。这不是“数学上不可能胜过气候态”的定理。未来情景宜比较分布与路径差异，短期方法用独立滚动窗直接比较。</p>
+<h3>9.4 本地参照与用途边界</h3>
+<p>分月订正量需要当地观测来估计。没有可用卫星记录的地点不能直接套用本地校准结论，跨地点迁移需要另做验证。当前空间共同留出和候选稳定性见综合报告 第 3 节和第 8 节。均值订正不保证尾部频率准确。</p>
+
+</div></section><section id="report-section-10" class="section-padding section--editorial" data-section-num="10"><div class="section-header"><h2 class="section-title">10. 方法使用与后续核查</h2></div><div class="report-block" id="report-10-1">
+<p>本项目结合模型比较、预测方法选择与空间暴露筛查，为后续气候评估提出计算方法和资料收集建议。研究覆盖 CA、XJ、TK、AU 四个研究框，共 1,020 个格子。各区域简称指研究框，不代表整个州或国家。</p>
+<p>模型与观测比较时，应先处理物理量、日历和采样差异，再比较剩余误差。逐点订正在共同留出期降低了四区人口加权格点 RMSE，但没有让所有区域均值都更准确，也没有验证地点风险排名。</p>
+<p>短期预测需要按区域和预测长度选择方法。CA、XJ 继续以月气候态为默认基线，TK 的 Prophet 和 AU 的 24 个月 SARIMA 则作为待进一步验证的候选。长期评估采用同一模型内配对的多模型情景。情景温差相对容易解释，而绝对超阈月数还受校准窗口和历史频率偏差影响。</p>
+<p>人口、建成区、耕地分别形成核查名单。2035–2044 年的 ssp585 情景下，268 个基准“格子×层”条目中有 204 个满足本次提出的优先核查规则。下一步先核地点用途、人口来源和独立温度资料，再决定是否投入更细的风险评估。</p>
+
+</div></section><section id="report-section-11" class="section-padding section--editorial" data-section-num="11"><div class="section-header"><h2 class="section-title">11. 空间适用范围</h2></div><div class="report-block" id="report-11-1">
+<p>观测质量、夜间样本和中心像元代表性的诊断覆盖 2015–2020 年。四个区域均为选定研究框，指标不能直接推广到整个州或国家。夜间数据采用较宽松的覆盖率规则，日夜差异还受采样影响。逐格订正与更长序列的结果见<a href="spglobal climate comparison.html">综合报告</a>，地点应用仍需独立观测验证。</p>
+
+</div></section></article>
+  </section>
+<nav class="report-series" aria-label="系列阅读"><a class="report-series__link" href="spglobal climate comparison.html">S&amp;P Global Capstone：气候模型、预测与空间暴露</a><a class="report-series__link is-current" href="model comparison.html">Capstone 专题：模型比较</a><a class="report-series__link" href="long series.html">Capstone 专题：长序列与短期预测</a><a class="report-series__link" href="projection overlay.html">长期配对情景与空间暴露</a></nav>
+  <section id="related" class="section-padding"><div class="section-header"><h2 class="section-title">相关项目</h2></div><div class="grid md:grid-cols-2 gap-6"><a href="../healthy home/healthy home.html" class="related-project-card"><h3 class="related-project-title">Healthy Home：奥克兰空间预测与道路地图</h3><p class="related-project-description">结合 18,219 个观测点、道路网络与嵌套空间评价，分析奥克兰污染物分布。随机森林在区域分块评价中的 NO₂ 合并 R² 为 0.576017，道路相对预测图覆盖 628.74 km，并通过分区误差诊断提出补充观测方案。</p><span class="related-project-link">查看详情</span></a><a href="../lendingclub loan prediction/lendingclub loan prediction.html" class="related-project-card"><h3 class="related-project-title">LendingClub：9,004 笔贷款样本</h3><p class="related-project-description">从 9,004 笔历史贷款中分析违约分布，比较模型与期限规则，设计不对称成本下的筛查策略。Random Forest 冻结阈值 0.22，测试召回率 70.45%，净模拟成本降幅 4.68%。</p><span class="related-project-link">查看详情</span></a></div></section>
+</main>
+<script src="../../assets/js/logo.js"></script>
+<script src="../../assets/js/common.js"></script>
+<script src="../../assets/js/project.js"></script>
+<script src="../../assets/js/language-switcher.js"></script>
+</body>
+</html>

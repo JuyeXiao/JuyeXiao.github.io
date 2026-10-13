@@ -1,727 +1,614 @@
 <!DOCTYPE html>
-<html lang="en" class="light">
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <script>document.documentElement.classList.add('js');</script>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" href="../../favicon.svg" type="image/svg+xml" />
-  <title>Bank Customer Churn: Prediction and Key Drivers - Data Poetics</title>
-  <meta name="description" content="A machine learning analysis of 10,000 retail banking customers: XGBoost+SMOTE reaches ROC-AUC 0.876 (95% CI [0.858, 0.892]) / PR-AUC 0.727, the threshold is tuned to 0.20 on out-of-fold training predictions, lifting churn capture from 61% to 87%, with a C*≈3.7 break-even cost ratio." />
-
-  <!-- Same as homepage: Tailwind / fonts / icons / site styles -->
+  <title>Bank customer churn: from customer patterns to service action - Data Poetics</title>
+  <meta name="description" content="Group analysis, model comparison and SHAP across 10,000 customers identify churn signals and inform service priorities. At the frozen threshold of 0.275, test recall is 78.39% and precision is 48.25%; capacity and cost comparisons guide follow-up planning.">
+  <meta property="og:title" content="Bank customer churn: from customer patterns to service action">
+  <meta property="og:description" content="Group analysis, model comparison and SHAP across 10,000 customers identify churn signals and inform service priorities. At the frozen threshold of 0.275, test recall is 78.39% and precision is 48.25%; capacity and cost comparisons guide follow-up planning.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://juyexiao.github.io/projects/Bank%20Customer%20Churn%20Prediction/Bank%20Customer%20Churn%20Prediction-en.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:description" content="Group analysis, model comparison and SHAP across 10,000 customers identify churn signals and inform service priorities. At the frozen threshold of 0.275, test recall is 78.39% and precision is 48.25%; capacity and cost comparisons guide follow-up planning.">
+  <link rel="canonical" href="https://juyexiao.github.io/projects/Bank%20Customer%20Churn%20Prediction/Bank%20Customer%20Churn%20Prediction-en.html">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+SC:wght@400;500;600&family=Noto+Serif+SC:wght@500&display=swap" rel="stylesheet" />
-  <script src="https://unpkg.com/lucide-react/dist/umd/lucide-react.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&amp;family=Inter:wght@200;300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;700&amp;family=Noto+Sans+SC:wght@400;500;600&amp;family=Noto+Serif+SC:wght@500&amp;display=swap" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest"></script>
-  <link rel="stylesheet" href="../../assets/css/index.css" />
-  <link rel="stylesheet" href="../../assets/css/project.css" />
-
-  <!-- Syntax highlight + chart lib (used on detail pages) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
-  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-
-  <style>
-    .dark table.performance-table thead tr {
-      background-color: rgba(64, 64, 64, 0.25) !important;
-    }
-    .dark .dark\:text-gray-300 {
-      color: var(--dark) !important;
-    }
-  </style>
+  <link rel="stylesheet" href="../../assets/css/index.css">
+  <link rel="stylesheet" href="../../assets/css/project.css">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Bank customer churn: from customer patterns to service action", "description": "Group analysis, model comparison and SHAP across 10,000 customers identify churn signals and inform service priorities. At the frozen threshold of 0.275, test recall is 78.39% and precision is 48.25%; capacity and cost comparisons guide follow-up planning.", "inLanguage": "en", "author": {"@type": "Person", "name": "Juye Xiao"}}</script>
 </head>
-<body class="transition-colors duration-300">
-  <div class="scroll-progress" id="scroll-progress"></div>
+<body class="transition-colors duration-300 report-page">
+<div class="scroll-progress" id="scroll-progress"></div>
+<header class="navbar fixed top-0 left-0 right-0 z-50" id="navbar">
+<div class="container-main h-full flex items-center justify-between">
+<!-- Logo Section -->
+<a class="navbar-logo" href="../../index-en.html#hero" id="navbar-logo">
+<!-- SVG Logo -->
+<svg class="logo-svg-nav" viewbox="0 0 40 40">
+<!-- Data Grid Background -->
+<g class="grid-bg">
+<!-- Vertical Lines -->
+<line class="grid-line-v" style="animation-delay: 0.1s, 0s" x1="8" x2="8" y1="0" y2="40"></line>
+<line class="grid-line-v" style="animation-delay: 0.2s, 0.5s" x1="16" x2="16" y1="0" y2="40"></line>
+<line class="grid-line-v" style="animation-delay: 0.3s, 1s" x1="24" x2="24" y1="0" y2="40"></line>
+<line class="grid-line-v" style="animation-delay: 0.4s, 1.5s" x1="32" x2="32" y1="0" y2="40"></line>
+<!-- Horizontal Lines -->
+<line class="grid-line-h" style="animation-delay: 0.5s, 0s" x1="0" x2="40" y1="10" y2="10"></line>
+<line class="grid-line-h" style="animation-delay: 0.6s, 0.7s" x1="0" x2="40" y1="20" y2="20"></line>
+<line class="grid-line-h" style="animation-delay: 0.7s, 1.4s" x1="0" x2="40" y1="30" y2="30"></line>
+</g>
+<!-- Weaver Animation Line -->
+<line class="weaver-line" id="weaverLine" x1="0" x2="40" y1="20" y2="20"></line>
+<!-- JX Letters -->
+<text class="logo-letters" id="logoLetters" text-anchor="middle" x="20" y="26">JX</text>
+</svg>
+<!-- Name Signature (Hover Display) -->
+<div class="logo-name">
+<div class="logo-name-text">Juye Xiao</div>
+<div class="logo-name-subtitle">Data Analyst</div>
+</div>
+</a>
+<nav class="hidden md:flex items-center space-x-8">
+<a class="nav-link" href="../../index-en.html#about">About</a>
+<a class="nav-link" href="../../index-en.html#experience">Experience</a>
+<a class="nav-link" href="../../index-en.html#education">Education</a>
+<a class="nav-link" href="../../index-en.html#projects">Projects</a>
+<a class="nav-link" href="../../index-en.html#skills">Skills</a>
+<a class="nav-link" href="../../index-en.html#contact">Contact</a>
+</nav>
+<div class="flex items-center space-x-4">
+<button aria-label="Toggle theme" class="btn-secondary !p-2 !rounded-full" id="theme-toggle">
+<i class="block dark:hidden" data-lucide="sun"></i>
+<i class="hidden dark:block" data-lucide="moon"></i>
+</button>
+<button class="btn-secondary !p-2 !rounded-full" id="lang-toggle">
+<span class="font-bold text-sm">中</span>
+</button>
+<button aria-controls="mobile-menu" aria-expanded="false" aria-label="Open menu" class="btn-secondary !p-2 !rounded-full md:hidden" id="menu-toggle">
+<i class="menu-icon-open" data-lucide="menu"></i>
+<i class="menu-icon-close" data-lucide="x"></i>
+</button>
+</div>
+</div>
+<nav aria-label="Mobile navigation" class="mobile-menu md:hidden" id="mobile-menu">
+<a class="nav-link" href="../../index-en.html#about">About</a>
+<a class="nav-link" href="../../index-en.html#experience">Experience</a>
+<a class="nav-link" href="../../index-en.html#education">Education</a>
+<a class="nav-link" href="../../index-en.html#projects">Projects</a>
+<a class="nav-link" href="../../index-en.html#skills">Skills</a>
+<a class="nav-link" href="../../index-en.html#contact">Contact</a>
+</nav>
+</header>
+<main class="container-main">
+  <section id="project-hero" class="section-padding report-hero">
+    <div class="section-eyebrow"><span class="section-kicker">Customer Analytics</span></div>
+    <h1 class="hero-title">Bank customer churn: from customer patterns to service action</h1>
+    <p class="subtitle report-standfirst">Group analysis, model comparison and SHAP across 10,000 customers identify churn signals and inform service priorities. At the frozen threshold of 0.275, test recall is 78.39% and precision is 48.25%; capacity and cost comparisons guide follow-up planning.</p>
+    <p class="reading-time">Analysis updated in 2026</p>
+    <div class="hero-stats"><div class="hero-stat"><div class="hero-stat__num">10,000</div><div class="hero-stat__label">Customer records</div></div><div class="hero-stat"><div class="hero-stat__num">0.275</div><div class="hero-stat__label">Frozen selection threshold</div></div><div class="hero-stat"><div class="hero-stat__num">78.39%</div><div class="hero-stat__label">Test recall; 95% interval 74.8%–81.8%</div></div></div>
+    <div class="report-actions"><a class="btn btn-primary" href="#content">Read report</a><a class="btn btn-secondary" href="../../index-en.html#projects">All projects</a></div>
+  </section>
 
-  <!-- Top navigation (reuses homepage structure and styles) -->
-  <header id="navbar" class="navbar fixed top-0 left-0 right-0 z-50">
-    <div class="container-main h-full flex items-center justify-between">
-      <a href="../../index-en.html#hero" class="navbar-logo" id="navbar-logo">
-        <svg class="logo-svg-nav" viewBox="0 0 40 40">
-          <g class="grid-bg">
-            <line class="grid-line-v" x1="8" y1="0" x2="8" y2="40" style="animation-delay: 0.1s, 0s" />
-            <line class="grid-line-v" x1="16" y1="0" x2="16" y2="40" style="animation-delay: 0.2s, 0.5s" />
-            <line class="grid-line-v" x1="24" y1="0" x2="24" y2="40" style="animation-delay: 0.3s, 1s" />
-            <line class="grid-line-v" x1="32" y1="0" x2="32" y2="40" style="animation-delay: 0.4s, 1.5s" />
-            <line class="grid-line-h" x1="0" y1="10" x2="40" y2="10" style="animation-delay: 0.5s, 0s" />
-            <line class="grid-line-h" x1="0" y1="20" x2="40" y2="20" style="animation-delay: 0.6s, 0.7s" />
-            <line class="grid-line-h" x1="0" y1="30" x2="40" y2="30" style="animation-delay: 0.7s, 1.4s" />
-          </g>
-          <line class="weaver-line" id="weaverLine" x1="0" y1="20" x2="40" y2="20" />
-          <text class="logo-letters" id="logoLetters" x="20" y="26" text-anchor="middle">JX</text>
-        </svg>
-        <div class="logo-name">
-          <div class="logo-name-text">Juye Xiao</div>
-          <div class="logo-name-subtitle">Data Analyst</div>
-        </div>
-      </a>
+  <section id="content" class="section-padding report-layout">
+    <aside><nav class="project-toc" id="project-toc" aria-label="Report contents"><h3>Contents</h3><ul id="toc-list"><li><a class="toc-link" href="#report-section-1">At a glance</a></li><li><a class="toc-link" href="#report-section-2">Executive summary</a></li><li><a class="toc-link" href="#report-section-3">1 Framing the churn problem</a></li><li><a class="toc-link" href="#report-section-4">2 Checking the data</a></li><li><a class="toc-link" href="#report-section-5">3 Reading churn by group</a></li><li><a class="toc-link" href="#report-section-6">4 Preparing the features</a></li><li><a class="toc-link" href="#report-section-7">5 Comparing four models</a></li><li><a class="toc-link" href="#report-section-8">6 Setting the threshold and its cost</a></li><li><a class="toc-link" href="#report-section-9">7 Model prediction basis and business interpretation</a></li><li><a class="toc-link" href="#report-section-10">8 Acting on the findings</a></li><li><a class="toc-link" href="#report-section-11">9 Explanation methods</a></li></ul></nav></aside>
+    <article class="content-area report-body" id="report-body"><div class="report-block" id="report-intro-1">
+<p>Product count and activity identify priority groups for investigation; model comparisons and SHAP explain screening decisions; threshold tradeoffs translate risk scores into list capacity and service proposals.</p>
 
-      <nav class="hidden md:flex items-center space-x-8">
-        <a href="../../index-en.html#about" class="nav-link">About</a>
-        <a href="../../index-en.html#experience" class="nav-link">Experience</a>
-        <a href="../../index-en.html#education" class="nav-link">Education</a>
-        <a href="../../index-en.html#projects" class="nav-link">Projects</a>
-        <a href="../../index-en.html#skills" class="nav-link">Skills</a>
-        <a href="../../index-en.html#contact" class="nav-link">Contact</a>
-      </nav>
+</div><section id="report-section-1" class="section-padding section--editorial" data-section-num="01"><div class="section-header"><h2 class="section-title">At a glance</h2></div><div class="report-block" id="report-1-1">
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col"></th>
+<th scope="col"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>selection threshold</td>
+<td>0.275</td>
+</tr>
+<tr>
+<td>test recall</td>
+<td>78.39%</td>
+</tr>
+<tr>
+<td>test precision</td>
+<td>48.25%</td>
+</tr>
+<tr>
+<td>additional churn labels covered</td>
+<td>93</td>
+</tr>
+</tbody>
+</table></div>
 
-      <div class="flex items-center space-x-4">
-        <button id="theme-toggle" class="btn-secondary !p-2 !rounded-full" title="Toggle theme">
-          <i data-lucide="sun" class="block dark:hidden"></i>
-          <i data-lucide="moon" class="hidden dark:block"></i>
-        </button>
-        <button id="lang-toggle" class="btn-secondary !p-2 !rounded-full"><span class="font-bold text-sm">中</span></button>
-        <button id="menu-toggle" class="btn-secondary !p-2 !rounded-full md:hidden"
-          aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
-          <i data-lucide="menu" class="menu-icon-open"></i>
-          <i data-lucide="x" class="menu-icon-close"></i>
-        </button>
-      </div>
-    </div>
-    <nav id="mobile-menu" class="mobile-menu md:hidden" aria-label="Mobile navigation">
-      <a href="../../index-en.html#about" class="nav-link">About</a>
-      <a href="../../index-en.html#experience" class="nav-link">Experience</a>
-      <a href="../../index-en.html#education" class="nav-link">Education</a>
-      <a href="../../index-en.html#projects" class="nav-link">Projects</a>
-      <a href="../../index-en.html#skills" class="nav-link">Skills</a>
-      <a href="../../index-en.html#contact" class="nav-link">Contact</a>
-    </nav>
-  </header>
+</div></section><section id="report-section-2" class="section-padding section--editorial" data-section-num="02"><div class="section-header"><h2 class="section-title">Executive summary</h2></div><div class="report-block" id="report-2-1">
+<p>Product count has a clear nonlinear association with churn: the rate is 7.6% for customers with two products and 82.7% for those with three. Inactive customers have a rate of 26.9%, compared with 14.3% for active customers. These differences prioritize investigation of product fit and barriers to service use. Age and geography differences provide further leads for needs interviews and regional service reviews.</p>
+<p>Tree models outperform the linear and distance baselines on test ranking metrics. XGBoost+SMOTE achieves ROC-AUC 0.8706 and AP 0.7215, with random forest also a competitive reference. SHAP identifies age and product count as major contributors to this model's scores. Correct and incorrect examples show how explaining score formation helps identify model limitations.</p>
+<p>Reducing the threshold from 0.5 to the selection-set cutoff of 0.275 expands the list from 459 to 827 customers, covering 93 additional churn labels while adding 275 false positives. The proposed implementation path matches the list to service capacity, investigates product fit and usage barriers, and then evaluates service proposals.</p>
 
-  <main class="container-main">
-    <!-- Project hero -->
-    <section id="project-hero" class="section-padding" style="padding-top: calc(var(--space-xl) + 72px)">
-      <div class="grid md:grid-cols-2 gap-16 items-center w-full">
-        <div class="reveal">
-          <div class="section-eyebrow">
-            <span class="section-kicker">Case Study · Customer Analytics &amp; Retention</span>
-          </div>
-          <h1 class="hero-title mt-2">Bank Customer Churn: Prediction and Key Drivers</h1>
-          <p class="subtitle mt-4 max-w-xl">One in five customers in this 10,000-customer snapshot has already churned. Rank each customer by risk, explain every prediction, and see why moving the threshold from 0.5 to 0.20 pays off.</p>
-          <div class="reading-time">~14 min read<span class="sep">·</span>17 figures</div>
+</div></section><section id="report-section-3" class="section-padding section--editorial" data-section-num="03"><div class="section-header"><h2 class="section-title">1 Framing the churn problem</h2></div><div class="report-block" id="report-3-1">
+<p>This project addresses three retention decisions: which customer patterns warrant investigation, which methods better distinguish churn labels, and how to choose a candidate list within service capacity.</p>
+<p>Grouped statistics identify patterns, model comparisons evaluate classification methods, and SHAP explains predictions and mistakes. The resulting proposals cover product-fit reviews, service guidance for inactive customers and segmented needs research.</p>
 
-          <div class="hero-stats">
-            <div class="hero-stat">
-              <div class="hero-stat__num">10K</div>
-              <div class="hero-stat__label">retail customers (churn rate 20.4%)</div>
-            </div>
-            <div class="hero-stat">
-              <div class="hero-stat__num">87%</div>
-              <div class="hero-stat__label">churn caught @ threshold 0.20</div>
-            </div>
-            <div class="hero-stat">
-              <div class="hero-stat__num">0.876</div>
-              <div class="hero-stat__label">ROC-AUC (test set)</div>
-            </div>
-          </div>
+</div></section><section id="report-section-4" class="section-padding section--editorial" data-section-num="04"><div class="section-header"><h2 class="section-title">2 Checking the data</h2></div><div class="report-block" id="report-4-1">
+<p>The documented source is the public Kaggle dataset <a href="https://www.kaggle.com/datasets/shubh0799/churn-modelling">Churn Modeling</a>, 10,000 rows by 14 columns, with no missing values. The target <code>Exited</code> records whether a customer has churned, at a rate of 20.4% (2,037 customers). Row number, customer id, and surname are dropped as identifiers before modeling.</p>
+<p>The four-to-one class imbalance makes recall and PR-AUC useful complements to accuracy. This project compares SMOTE with class weighting; imbalance alone does not require resampling. Always predicting retention gives 79.6% accuracy while detecting no churners, so accuracy needs to be read alongside minority-class metrics.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Target distribution: retained versus churned customer counts" class="figure-zoom" type="button"><img alt="Target distribution: retained versus churned customer counts" decoding="async" height="680" loading="lazy" src="figures/target_distribution.png" width="869"/></button><figcaption class="generated-alt-caption">Target distribution: retained versus churned customer counts</figcaption></figure>
+<p>The saved correlation heatmap shows generally weak pairwise linear correlations among numerical features, with age positively and activity negatively associated with Exited. Pairwise correlations do not rule out collinearity in the encoded design matrix or establish causality.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Correlation matrix of numerical features against the target" class="figure-zoom" type="button"><img alt="Correlation matrix of numerical features against the target" decoding="async" height="1171" loading="lazy" src="figures/correlation_heatmap.png" width="1309"/></button><figcaption class="generated-alt-caption">Correlation matrix of numerical features against the target</figcaption></figure>
 
-          <div class="mt-8 flex items-center gap-4">
-            <a href="#content" class="btn btn-primary">Start reading</a>
-            <a href="../../index-en.html#projects" class="btn btn-secondary">Back to projects</a>
-          </div>
-        </div>
-        <aside class="reveal hero-stack">
-          <div class="hero-stack__label">Methods · Stack</div>
-          <ol class="hero-stack__list">
-            <li>
-              <span class="hero-stack__num">01</span>
-              <span class="hero-stack__name">XGBoost + SMOTE</span>
-              <span class="hero-stack__desc">First on both ranking metrics, ROC-AUC 0.876 / PR-AUC 0.727</span>
-            </li>
-            <li>
-              <span class="hero-stack__num">02</span>
-              <span class="hero-stack__name">Four models, one protocol</span>
-              <span class="hero-stack__desc">imblearn pipeline, SMOTE on training folds only, 5-fold GridSearchCV</span>
-            </li>
-            <li>
-              <span class="hero-stack__num">03</span>
-              <span class="hero-stack__name">F2 threshold tuning</span>
-              <span class="hero-stack__desc">Selected at 0.20 on out-of-fold training predictions, capture 61% → 87%</span>
-            </li>
-            <li>
-              <span class="hero-stack__num">04</span>
-              <span class="hero-stack__name">Break-even + bootstrap CI</span>
-              <span class="hero-stack__desc">No invented costs, only the ratio C*≈3.7; headline numbers carry 95% intervals</span>
-            </li>
-            <li>
-              <span class="hero-stack__num">05</span>
-              <span class="hero-stack__name">SHAP triangulated</span>
-              <span class="hero-stack__desc">SHAP × RF impurity × XGB gain agree on the top features</span>
-            </li>
-          </ol>
-          <div class="hero-stack__foot">Python · pandas · scikit-learn · xgboost · imbalanced-learn · shap</div>
-        </aside>
-      </div>
-    </section>
+</div></section><section id="report-section-5" class="section-padding section--editorial" data-section-num="05"><div class="section-header"><h2 class="section-title">3 Reading churn by group</h2></div><div class="report-block" id="report-5-1">
+<p>The boxplots and countplots compare shapes. The table below adds the exact churn rate and group size for each group variable, so that group differences can be read alongside their sample sizes.</p>
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">Group</th>
+<th scope="col">Category</th>
+<th scope="col" style="text-align:right">Customers</th>
+<th scope="col" style="text-align:right">Churners</th>
+<th scope="col" style="text-align:right">Churn rate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Geography</td>
+<td>Germany</td>
+<td style="text-align:right">2,509</td>
+<td style="text-align:right">814</td>
+<td style="text-align:right"><strong>32.4%</strong></td>
+</tr>
+<tr>
+<td>Geography</td>
+<td>France</td>
+<td style="text-align:right">5,014</td>
+<td style="text-align:right">810</td>
+<td style="text-align:right">16.2%</td>
+</tr>
+<tr>
+<td>Geography</td>
+<td>Spain</td>
+<td style="text-align:right">2,477</td>
+<td style="text-align:right">413</td>
+<td style="text-align:right">16.7%</td>
+</tr>
+<tr>
+<td>Activity</td>
+<td>Inactive</td>
+<td style="text-align:right">4,849</td>
+<td style="text-align:right">1,302</td>
+<td style="text-align:right"><strong>26.9%</strong></td>
+</tr>
+<tr>
+<td>Activity</td>
+<td>Active</td>
+<td style="text-align:right">5,151</td>
+<td style="text-align:right">735</td>
+<td style="text-align:right">14.3%</td>
+</tr>
+<tr>
+<td>Products</td>
+<td>1</td>
+<td style="text-align:right">5,084</td>
+<td style="text-align:right">1,409</td>
+<td style="text-align:right">27.7%</td>
+</tr>
+<tr>
+<td>Products</td>
+<td>2</td>
+<td style="text-align:right">4,590</td>
+<td style="text-align:right">348</td>
+<td style="text-align:right">7.6%</td>
+</tr>
+<tr>
+<td>Products</td>
+<td>3</td>
+<td style="text-align:right">266</td>
+<td style="text-align:right">220</td>
+<td style="text-align:right"><strong>82.7%</strong></td>
+</tr>
+<tr>
+<td>Products</td>
+<td>4</td>
+<td style="text-align:right">60</td>
+<td style="text-align:right">60</td>
+<td style="text-align:right"><strong>100%</strong></td>
+</tr>
+<tr>
+<td>Age band</td>
+<td>18–29</td>
+<td style="text-align:right">1,641</td>
+<td style="text-align:right">124</td>
+<td style="text-align:right">7.6%</td>
+</tr>
+<tr>
+<td>Age band</td>
+<td>30–39</td>
+<td style="text-align:right">4,346</td>
+<td style="text-align:right">473</td>
+<td style="text-align:right">10.9%</td>
+</tr>
+<tr>
+<td>Age band</td>
+<td>40–49</td>
+<td style="text-align:right">2,618</td>
+<td style="text-align:right">806</td>
+<td style="text-align:right">30.8%</td>
+</tr>
+<tr>
+<td>Age band</td>
+<td>50–59</td>
+<td style="text-align:right">869</td>
+<td style="text-align:right">487</td>
+<td style="text-align:right"><strong>56.0%</strong></td>
+</tr>
+<tr>
+<td>Age band</td>
+<td>60–92</td>
+<td style="text-align:right">526</td>
+<td style="text-align:right">147</td>
+<td style="text-align:right">27.9%</td>
+</tr>
+<tr>
+<td>Gender</td>
+<td>Female</td>
+<td style="text-align:right">4,543</td>
+<td style="text-align:right">1,139</td>
+<td style="text-align:right">25.1%</td>
+</tr>
+<tr>
+<td>Gender</td>
+<td>Male</td>
+<td style="text-align:right">5,457</td>
+<td style="text-align:right">898</td>
+<td style="text-align:right">16.5%</td>
+</tr>
+</tbody>
+</table></div>
+<p>Churn rates differ substantially by product count: 7.6% for two products, more than four in five for three products, and all 60 customers for four products. The 3-plus group is only 3.3% of the base. These sample rates do not establish two products as a safe configuration or show that reducing product count reduces churn.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Boxplots of numerical features by churn" class="figure-zoom" type="button"><img alt="Boxplots of numerical features by churn" decoding="async" height="1249" loading="lazy" src="figures/boxplot_numerical_vs_exited.png" width="2437"/></button><figcaption class="generated-alt-caption">Boxplots of numerical features by churn</figcaption></figure>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Countplots of categorical features by churn" class="figure-zoom" type="button"><img alt="Countplots of categorical features by churn" decoding="async" height="1249" loading="lazy" src="figures/countplot_categorical_vs_exited.png" width="2450"/></button><figcaption class="generated-alt-caption">Countplots of categorical features by churn</figcaption></figure>
+<p>In the boxplots, age separates the two groups most clearly: the median churner is about 45, the median retained customer about 35. In the countplots, Germany holds a quarter of the customers yet produces about as many churners as France; card-ownership groups differ little, while activity groups differ more visibly; this is not a predictive comparison of all categorical features.</p>
 
-    <!-- Quick summary cards -->
-    <section id="quick-summary" class="section-padding">
-      <div class="grid md:grid-cols-3 gap-6">
-        <div class="summary-card">
-          <h3 class="summary-card-title">The Challenge</h3>
-          <p class="summary-card-content">20.4% of customers have churned, and replacing a lost customer costs more than keeping one. A miss forfeits the whole relationship; a false alarm only wastes a retention offer; the two errors cost very differently. The task is to flag the high-risk ones before they leave.</p>
-        </div>
-        <div class="summary-card">
-          <h3 class="summary-card-title">The Approach</h3>
-          <p class="summary-card-content">Four classifiers tuned under one protocol; XGBoost leads on both ranking metrics. The decision threshold is then set to the F2-optimal 0.20 on out-of-fold training predictions.</p>
-        </div>
-        <div class="summary-card">
-          <h3 class="summary-card-title">The Value</h3>
-          <p class="summary-card-content">Catches 442 of the 509 test-set churners (87%); as long as a churner is worth more than about 3.7 retention offers, the aggressive operating point is cheaper.</p>
-        </div>
-      </div>
-    </section>
+</div></section><section id="report-section-6" class="section-padding section--editorial" data-section-num="06"><div class="section-header"><h2 class="section-title">4 Preparing the features</h2></div><div class="report-block" id="report-6-1">
+<p>The outer split is stratified 75/25 with seed 42. Of 7,500 outer-training rows, 1,500 form selection and 6,000 support fitting and CV. Selection/test rows do not fit preprocessing, SMOTE or hyperparameters. Geography one-hot encoding, Gender encoding and numeric scaling fit per training fold and transform its held-out fold. One-hot encoding avoids an ordering of countries; scaling supports KNN distances and LR regularization. Ordinary SMOTE interpolates in the encoded space, and the plausibility of synthetic category combinations has not been separately validated. Only 6,000 rows enter the final fit. Keeping selection rows out after threshold choice preserves the relationship between the fitted model’s scores and the cutoff, at the cost of fewer fitting rows.</p>
 
-    <!-- Main content: sticky TOC + body -->
-    <section id="content" class="section-padding">
-      <div class="grid md:grid-cols-12 gap-12">
-        <aside class="md:col-span-3">
-          <nav class="project-toc sticky top-24" id="project-toc">
-            <h3 class="text-xl font-semibold" style="color: var(--dark);">Contents</h3>
-            <ul class="mt-4 space-y-2" id="toc-list">
-              <li><a href="#summary" class="toc-link" data-section="summary">Executive Summary</a></li>
-              <li><a href="#data" class="toc-link" data-section="data">Data &amp; Churn by Group</a></li>
-              <li><a href="#models" class="toc-link" data-section="models">Model Bake-off</a></li>
-              <li><a href="#threshold" class="toc-link" data-section="threshold">Threshold Tuning</a></li>
-              <li><a href="#cost" class="toc-link" data-section="cost">Break-even Analysis</a></li>
-              <li><a href="#shap" class="toc-link" data-section="shap">Why Customers Leave</a></li>
-              <li><a href="#actions" class="toc-link" data-section="actions">Action Plan</a></li>
-            </ul>
-          </nav>
-        </aside>
+</div></section><section id="report-section-7" class="section-padding section--editorial" data-section-num="07"><div class="section-header"><h2 class="section-title">5 Comparing four models</h2></div><div class="report-block" id="report-7-1">
+<p>The five searches use five-fold ROC-AUC for parameter selection, with 200 cross-validation fits and five best-configuration refits. The table evaluates fixed test scores at threshold 0.5; AP means average precision; the PR-curve legend uses PR-AUC for this same measure.</p>
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">Model</th>
+<th scope="col" style="text-align:right">ROC-AUC</th>
+<th scope="col" style="text-align:right">AP</th>
+<th scope="col" style="text-align:right">Precision</th>
+<th scope="col" style="text-align:right">Recall</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LR</td>
+<td style="text-align:right">0.7873</td>
+<td style="text-align:right">0.4815</td>
+<td style="text-align:right">0.3964</td>
+<td style="text-align:right">0.7328</td>
+</tr>
+<tr>
+<td>KNN</td>
+<td style="text-align:right">0.8045</td>
+<td style="text-align:right">0.5305</td>
+<td style="text-align:right">0.4086</td>
+<td style="text-align:right">0.7250</td>
+</tr>
+<tr>
+<td>RF</td>
+<td style="text-align:right">0.8661</td>
+<td style="text-align:right">0.6934</td>
+<td style="text-align:right">0.5997</td>
+<td style="text-align:right">0.6739</td>
+</tr>
+<tr>
+<td>XGBoost+SMOTE</td>
+<td style="text-align:right">0.8706</td>
+<td style="text-align:right">0.7215</td>
+<td style="text-align:right">0.6667</td>
+<td style="text-align:right">0.6012</td>
+</tr>
+<tr>
+<td>XGBoost+class weight</td>
+<td style="text-align:right">0.8709</td>
+<td style="text-align:right">0.7230</td>
+<td style="text-align:right">0.5268</td>
+<td style="text-align:right">0.7328</td>
+</tr>
+</tbody>
+</table></div>
+<p>LR, KNN and RF provide linear, distance-based and tree-based reference models. Both XGBoost configurations have higher test ranking point estimates, but computational efficiency was not compared. Weighted/SMOTE point estimates are close, without a difference interval or equivalence test. Threshold analysis uses XGBoost+SMOTE as the prespecified reference model; test rankings do not change that choice.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Test ROC curves for the four primary models." class="figure-zoom" type="button"><img alt="Test ROC curves for the four primary models." decoding="async" height="819" loading="lazy" src="figures/stage3-final/roc_curves_all_models.png" width="1036"/></button><figcaption class="generated-alt-caption">Test ROC curves for the four primary models.</figcaption></figure>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: PR curves on the same test; AP depends on label prevalence." class="figure-zoom" type="button"><img alt="PR curves on the same test; AP depends on label prevalence." decoding="async" height="819" loading="lazy" src="figures/stage3-final/pr_curves_all_models.png" width="1036"/></button><figcaption class="generated-alt-caption">PR curves on the same test; AP depends on label prevalence.</figcaption></figure>
+<p>Product-count and age patterns are nonlinear, and tree splits and interactions can represent such patterns. This is a plausible explanation for the tree models outperforming the current linear and distance baselines; no isolated ablation has quantified the gain from these patterns. Random forest is already competitive, so XGBoost should be considered alongside complexity and usage needs. Similar class-weighted results also show that SMOTE is not the only viable approach.</p>
 
-        <div class="md:col-span-9 content-area">
-          <!-- Executive summary -->
-          <section id="summary" class="section-padding section--editorial" data-section-num="00">
-            <div class="section-header">
-              <div class="section-eyebrow">
-                <span class="section-num">00</span>
-                <span class="section-kicker">Executive Summary</span>
-              </div>
-              <h2 class="section-title">Executive Summary</h2>
-            </div>
+</div></section><section id="report-section-8" class="section-padding section--editorial" data-section-num="08"><div class="section-header"><h2 class="section-title">6 Setting the threshold and its cost</h2></div><div class="report-block" id="report-8-1">
+<p>The maximum selection F₂ determines threshold 0.275, after which the model and threshold are frozen.</p>
+<blockquote>
+<p>F₂ = 5 × P × R / (4 × P + R)</p>
+</blockquote>
+<p>P is precision and R is recall, both entered as proportions from 0 to 1. F₂ is dimensionless and favors recall; its weighting does not specify an established real-world cost ratio.</p>
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">Fixed threshold</th>
+<th scope="col" style="text-align:right">TP</th>
+<th scope="col" style="text-align:right">FP</th>
+<th scope="col" style="text-align:right">FN</th>
+<th scope="col" style="text-align:right">TN</th>
+<th scope="col" style="text-align:right">Flags</th>
+<th scope="col" style="text-align:right">Precision</th>
+<th scope="col" style="text-align:right">Recall</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.5</td>
+<td style="text-align:right">306</td>
+<td style="text-align:right">153</td>
+<td style="text-align:right">203</td>
+<td style="text-align:right">1,838</td>
+<td style="text-align:right">459</td>
+<td style="text-align:right">66.67%</td>
+<td style="text-align:right">60.12%</td>
+</tr>
+<tr>
+<td>0.275</td>
+<td style="text-align:right">399</td>
+<td style="text-align:right">428</td>
+<td style="text-align:right">110</td>
+<td style="text-align:right">1,563</td>
+<td style="text-align:right">827</td>
+<td style="text-align:right">48.25%</td>
+<td style="text-align:right">78.39%</td>
+</tr>
+</tbody>
+</table></div>
+<p>The two frozen policies are compared under this assumed loss:</p>
+<blockquote>
+<p>L = FP + C × FN</p>
+<p>C* = (428 − 153) / (203 − 110) = 2.956989</p>
+</blockquote>
+<p>FP counts false positives and FN counts false negatives. One false positive costs 1 normalized unit. C is the assumed cost of one false negative relative to one false positive and is dimensionless; L is total normalized loss, not a currency amount. C* is the intersection of the two policy loss lines. Above 2.956989, threshold 0.275 has lower simulated loss than 0.5. This compares existing policies without selecting a new threshold on test.</p>
+<p>The 2,000 fixed-prediction bootstrap resamples give 95% intervals of ROC-AUC [0.852,0.888], AP [0.685,0.757], recall [0.748,0.818] and precision [0.448,0.515]. They omit refitting, selection variation and future populations.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Selection threshold curve with the frozen cutoff of 0.275. Test labels do not choose the cutoff." class="figure-zoom" type="button"><img alt="Selection threshold curve with the frozen cutoff of 0.275. Test labels do not choose the cutoff." decoding="async" height="819" loading="lazy" src="figures/report-display-20260924/threshold_tuning_xgboost_0275.png" width="1218"/></button><figcaption class="generated-alt-caption">Selection threshold curve with the frozen cutoff of 0.275. Test labels do not choose the cutoff.</figcaption></figure>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Test confusion matrices at frozen thresholds 0.5 and 0.275." class="figure-zoom" type="button"><img alt="Test confusion matrices at frozen thresholds 0.5 and 0.275." decoding="async" height="584" loading="lazy" src="figures/report-display-20260924/confusion_matrix_threshold_comparison_0275.png" width="1784"/></button><figcaption class="generated-alt-caption">Test confusion matrices at frozen thresholds 0.5 and 0.275.</figcaption></figure>
+<p>The direct operational difference is capacity: the lower threshold adds 368 potential contacts, covering 93 additional churn labels while adding 275 false positives. This quantifies the workload of a smaller, more precise list versus broader coverage, rather than identifying an optimum for every cost setting.</p>
 
-            <div class="space-y-6">
-              <div class="contact-info-card">
-                <p class="subtitle mb-4">In this retail-bank dataset, 20.4% of 10,000 customers have already churned. Replacing a lost customer costs more than keeping one, so the goal is to flag the high-risk ones while there is still time to act. Four classifiers are trained and tuned under one protocol, and XGBoost ranks churners best on the held-out test set. This is a cross-sectional snapshot: it answers who churns, not when.</p>
+</div></section><section id="report-section-9" class="section-padding section--editorial" data-section-num="09"><div class="section-header"><h2 class="section-title">7 Model prediction basis and business interpretation</h2></div><div class="report-block" id="report-9-1">
+<h3>Model prediction basis: from inputs to contributions</h3>
+<p>TreeSHAP explains the fixed XGBoost+SMOTE scores for all test customers: positive contributions raise the churn score and negative contributions lower it. Numeric plots use source units. Global plots compare contribution magnitude, dependence plots show nonlinearity, and local plots contrast correct and incorrect predictions. Input mapping and score reconstruction are documented in the appendix.</p>
+<p>The baseline log-odds is 0.010007, corresponding to a score of about 0.5025. It uses fitted-tree training path counts, including the SMOTE training distribution. It is neither population churn prevalence nor the average test prediction. Contributions depend on this model and baseline; its output scores have not been probability-calibrated.</p>
+<h3>Global contributions and feature dependence</h3>
+<p>The five largest mean absolute SHAP values over test customers are below. Their unit is log-odds, not the proportion of churn explained or a share of business value. Geography is evaluated as three separate indicators, without an aggregated geography rank.</p>
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">Feature</th>
+<th scope="col" style="text-align:right">Mean absolute SHAP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Age</td>
+<td style="text-align:right">0.896</td>
+</tr>
+<tr>
+<td>NumOfProducts</td>
+<td style="text-align:right">0.776</td>
+</tr>
+<tr>
+<td>Tenure</td>
+<td style="text-align:right">0.426</td>
+</tr>
+<tr>
+<td>IsActiveMember</td>
+<td style="text-align:right">0.395</td>
+</tr>
+<tr>
+<td>Gender</td>
+<td style="text-align:right">0.297</td>
+</tr>
+</tbody>
+</table></div>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Global SHAP across all test customers: horizontal position is signed contribution; color shows feature values, with numeric features in source units." class="figure-zoom" type="button"><img alt="Global SHAP across all test customers: horizontal position is signed contribution; color shows feature values, with numeric features in source units." decoding="async" height="1016" loading="lazy" src="figures/shap-current/global-shap.png" width="1236"/></button><figcaption class="generated-alt-caption">Global SHAP across all test customers: horizontal position is signed contribution; color shows feature values, with numeric features in source units.</figcaption></figure>
+<p>Age contributions are not monotonic. The table groups all 2,500 test customers; contributions are measured in dimensionless raw log-odds.</p>
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">Age group (years)</th>
+<th scope="col" style="text-align:right">Test customers</th>
+<th scope="col" style="text-align:right">Mean SHAP contribution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>18–29</td>
+<td style="text-align:right">423</td>
+<td style="text-align:right">−1.239</td>
+</tr>
+<tr>
+<td>30–39</td>
+<td style="text-align:right">1,080</td>
+<td style="text-align:right">−0.862</td>
+</tr>
+<tr>
+<td>40–49</td>
+<td style="text-align:right">664</td>
+<td style="text-align:right">0.425</td>
+</tr>
+<tr>
+<td>50–59</td>
+<td style="text-align:right">217</td>
+<td style="text-align:right">1.421</td>
+</tr>
+<tr>
+<td>60–92</td>
+<td style="text-align:right">116</td>
+<td style="text-align:right">0.400</td>
+</tr>
+</tbody>
+</table></div>
+<p>The 50–59 group has the highest mean contribution, followed by a decline at ages 60–92. These values describe this model on these customers.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Age dependence: each dot is a test customer; the line is the mean contribution at each observed age, measured in years." class="figure-zoom" type="button"><img alt="Age dependence: each dot is a test customer; the line is the mean contribution at each observed age, measured in years." decoding="async" height="720" loading="lazy" src="figures/shap-current/dependence-Age.png" width="1280"/></button><figcaption class="generated-alt-caption">Age dependence: each dot is a test customer; the line is the mean contribution at each observed age, measured in years.</figcaption></figure>
+<p>Product groups use the same test customers and raw log-odds contribution scale.</p>
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">Product count</th>
+<th scope="col" style="text-align:right">Test customers</th>
+<th scope="col" style="text-align:right">Mean SHAP contribution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td style="text-align:right">1,284</td>
+<td style="text-align:right">0.287</td>
+</tr>
+<tr>
+<td>2</td>
+<td style="text-align:right">1,138</td>
+<td style="text-align:right">−1.178</td>
+</tr>
+<tr>
+<td>3</td>
+<td style="text-align:right">62</td>
+<td style="text-align:right">2.783</td>
+</tr>
+<tr>
+<td>4</td>
+<td style="text-align:right">16</td>
+<td style="text-align:right">3.663</td>
+</tr>
+</tbody>
+</table></div>
+<p>The three- and four-product groups have high contributions but small samples. The negative mean for two products does not establish an effect of adding or removing a product.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Product-count dependence: customer contributions and means by product count; interpret the minority groups alongside sample sizes." class="figure-zoom" type="button"><img alt="Product-count dependence: customer contributions and means by product count; interpret the minority groups alongside sample sizes." decoding="async" height="720" loading="lazy" src="figures/shap-current/dependence-NumOfProducts.png" width="1280"/></button><figcaption class="generated-alt-caption">Product-count dependence: customer contributions and means by product count; interpret the minority groups alongside sample sizes.</figcaption></figure>
+<p>Inactive and active customers have mean contributions of 0.340 and −0.448, with 1,224 and 1,276 customers. Tenure ranks third, yet the mean contribution at every observed integer value is negative, ranging approximately from −0.595 to −0.163, without a monotonic pattern. Its large absolute contribution should be read against the training baseline that includes SMOTE. Interpolation of categorical and discrete variables may affect explanations; no separate comparison has quantified that effect.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Activity dependence: 0 denotes inactive and 1 active; the vertical axis measures contribution to this model's score." class="figure-zoom" type="button"><img alt="Activity dependence: 0 denotes inactive and 1 active; the vertical axis measures contribution to this model's score." decoding="async" height="720" loading="lazy" src="figures/shap-current/dependence-IsActiveMember.png" width="1280"/></button><figcaption class="generated-alt-caption">Activity dependence: 0 denotes inactive and 1 active; the vertical axis measures contribution to this model's score.</figcaption></figure>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Tenure dependence in source values: negative contributions lower the score relative to the model baseline; they do not establish a causal protective effect." class="figure-zoom" type="button"><img alt="Tenure dependence in source values: negative contributions lower the score relative to the model baseline; they do not establish a causal protective effect." decoding="async" height="720" loading="lazy" src="figures/shap-current/dependence-Tenure.png" width="1280"/></button><figcaption class="generated-alt-caption">Tenure dependence in source values: negative contributions lower the score relative to the model baseline; they do not establish a causal protective effect.</figcaption></figure>
+<h3>Local explanations: correct and incorrect predictions</h3>
+<p>At the frozen threshold of 0.275, customers are divided into true positives (TP), false positives (FP), false negatives (FN) and true negatives (TN). Each example is closest to its group's median score, with ties broken by original row index. The four examples illustrate outcomes and are not population profiles. Source row indices start at zero.</p>
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">Outcome group</th>
+<th scope="col" style="text-align:right">Source row index</th>
+<th scope="col" style="text-align:right">Actual label</th>
+<th scope="col" style="text-align:right">Model score</th>
+<th scope="col" style="text-align:right">Group size</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TP</td>
+<td style="text-align:right">6928</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0.727</td>
+<td style="text-align:right">399</td>
+</tr>
+<tr>
+<td>FP</td>
+<td style="text-align:right">3217</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0.424</td>
+<td style="text-align:right">428</td>
+</tr>
+<tr>
+<td>FN</td>
+<td style="text-align:right">1452</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0.160</td>
+<td style="text-align:right">110</td>
+</tr>
+<tr>
+<td>TN</td>
+<td style="text-align:right">2766</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0.089</td>
+<td style="text-align:right">1,563</td>
+</tr>
+</tbody>
+</table></div>
+<p>In the true-positive example, age 48 contributes +1.101, inactivity +0.421 and tenure 0 contributes −0.409; all contributions and the baseline reconstruct a score of 0.727.</p>
+<p>The false-positive example is an active customer aged 56: age contributes +1.559 and activity −0.951. The final score of 0.424 exceeds the threshold despite a retention label.</p>
+<p>In the false-negative example, age, activity and salary make negative contributions, giving a score of 0.160 below the threshold despite a churn label. An explanation describes how a score is formed and helps inspect mistakes; it does not make the prediction correct.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Local contributions for four outcome groups: red raises and blue lowers the score; all 12 columns are retained in each panel and contributions plus the baseline reconstruct log-odds." class="figure-zoom" type="button"><img alt="Local contributions for four outcome groups: red raises and blue lowers the score; all 12 columns are retained in each panel and contributions plus the baseline reconstruct log-odds." decoding="async" height="1887" loading="lazy" src="figures/shap-current/local-explanations.png" width="2696"/></button><figcaption class="generated-alt-caption">Local contributions for four outcome groups: red raises and blue lowers the score; all 12 columns are retained in each panel and contributions plus the baseline reconstruct log-odds.</figcaption></figure>
+<h3>Possible business explanations</h3>
+<p>Product combinations may reflect service needs, account lifecycle or product fit; activity may relate to service usage and engagement. Neither this dataset nor SHAP confirms those mechanisms. Age and geography can help audit score differences across customer groups, but do not independently justify incentives or outreach. These clues lead to the product-fit, usage-barrier and service-process proposals in the action table below.</p>
 
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">Four drivers</h3>
-                <ul class="list-disc list-inside space-y-3 subtitle mb-6">
-                  <li><strong>Age.</strong> The fifties band churns at 56%, the highest of any age band; risk climbs from 40 and falls back after 65. The median churner is about 45, the median retained customer about 35.</li>
-                  <li><strong>Product count.</strong> Three-product customers churn at 82.7% and all 60 four-product customers left; two products is safest at 7.6%.</li>
-                  <li><strong>Activity.</strong> Inactive customers churn at 26.9% against 14.3% for active ones, nearly double, and a behavior the bank can see early.</li>
-                  <li><strong>Geography.</strong> German customers churn at 32.4%, roughly double France at 16.2% and Spain at 16.7%.</li>
-                </ul>
+</div></section><section id="report-section-10" class="section-padding section--editorial" data-section-num="10"><div class="section-header"><h2 class="section-title">8 Acting on the findings</h2></div><div class="report-block" id="report-10-1">
+<p>The proposed priority is to investigate product fit and usage barriers among inactive customers, then use age-related needs and regional processes to locate specific issues. The table below proposes responsibilities and feedback measures to help decide whether to continue each approach.</p>
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">Finding and target group</th>
+<th scope="col">Proposed action</th>
+<th scope="col">Suggested owner</th>
+<th scope="col">Feedback measures and next decision</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>High churn rates in the small groups with three or more products</td>
+<td>Review product combinations, opening sequence and service records; interview customers about duplication, fee clarity and fit with their needs, without prescribing fewer products</td>
+<td>Product manager and customer service</td>
+<td>Track feedback on duplication, fee understanding and unmet needs; recurring issues enter the product-information or service-process improvement list</td>
+</tr>
+<tr>
+<td>Higher churn rate among inactive customers</td>
+<td>Use a short inquiry to distinguish usability difficulties, service barriers and reduced needs; provide guidance or problem resolution according to the response</td>
+<td>Customer operations and customer service</td>
+<td>Track useful response rate, barrier resolution, subsequent use and contact refusal; retain service approaches that solve specific problems</td>
+</tr>
+<tr>
+<td>Marked age-group differences without a monotonic increase</td>
+<td>Combine age with product and activity information for segmented needs interviews; examine communication and service fit, using age for needs research</td>
+<td>User research and product manager</td>
+<td>Record needs, satisfaction and issue types by segment; adapt guidance and service rather than allocating incentives by age alone</td>
+</tr>
+<tr>
+<td>Higher churn rate in Germany than France or Spain</td>
+<td>Compare customer mix, product combinations, fee communication and service processes across regions</td>
+<td>Regional operations and analysts</td>
+<td>Compare feedback and process issues among similar customer groups; address specific service problems without treating geography as a causal effect</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Match a candidate list to service capacity</h3>
+<p>In this test sample, threshold 0.5 flags 459 customers with precision 66.67% and recall 60.12%, making it a candidate when staff capacity is tighter. Threshold 0.275 flags 827 customers with precision 48.25% and recall 78.39%, making it a candidate when more contacts are feasible and coverage matters more. Expanding the list adds 368 contacts, covers 93 additional churn labels and adds 275 false positives. This compares historical label coverage and workload; flagged customers are not retained customers.</p>
+<h3>Proposed sequence and deliverables</h3>
+<p>Start with a product-and-activity review list, consistent interview questions and a feedback classification sheet. Product and operations teams agree on service capacity and a candidate list policy. Local SHAP can help prepare questions about product use or service barriers; customer responses guide the conversation.</p>
+<p>Next, trial service guidance or problem resolution and record contact, feedback, resolution and customer experience. If retention effects are evaluated, predefine the observation window and comparison method to measure incremental retention and net cost. Prepare a review list, a capacity-based list proposal and a service-trial evaluation sheet.</p>
+<p>The data is a cross-sectional snapshot; group differences and model results should be interpreted alongside small product-group sizes and prediction errors.</p>
 
-                <h3 class="text-xl font-semibold mb-4" style="color: var(--dark);">Results at a glance</h3>
-                <div class="overflow-x-auto">
-                  <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
-                    <thead>
-                      <tr class="bg-gray-100 dark:bg-gray-700/30">
-                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Item</th>
-                        <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Result</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Customers analyzed</strong></td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">10,000 (2,037 churned, 20.4%)</td>
-                      </tr>
-                      <tr>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Final model</strong></td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">XGBoost + SMOTE, tuned by 5-fold grid search on ROC-AUC</td>
-                      </tr>
-                      <tr>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Ranking quality (test set)</strong></td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">ROC-AUC 0.876 (95% CI [0.858, 0.892]), PR-AUC 0.727</td>
-                      </tr>
-                      <tr>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Churners caught</strong></td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">87% at the tuned threshold 0.20, versus 61% at 0.5</td>
-                      </tr>
-                      <tr>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Break-even cost ratio</strong></td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">C* = 3.7 (tuned threshold wins once a miss costs more than 3.7 wasted offers)</td>
-                      </tr>
-                      <tr>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Drivers</strong></td>
-                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Age, activity, product count, geography</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </section>
+</div></section><section id="report-section-11" class="section-padding section--editorial" data-section-num="11"><div class="section-header"><h2 class="section-title">9 Explanation methods</h2></div><div class="report-block" id="report-11-1">
+<h3>Explanation computation and input mapping</h3>
+<p>The explanation covers the fixed XGBoost+SMOTE model and all 2,500 test customers. The classifier receives 12 columns: three Geography indicators for France, Germany and Spain, an encoded Gender column, and eight standardized numeric columns: CreditScore, Age, Tenure, Balance, NumOfProducts, HasCrCard, IsActiveMember and EstimatedSalary. Gender uses Female=0 and Male=1; geography columns are 0/1 category indicators. Numeric plots show source values, with age in years and product count in units. Balance and salary retain source values without assuming a currency; tenure retains the recorded scale.</p>
+<p>Column order comes from the fitted preprocessor, and inverse-transformed numbers are checked against each original row.</p>
+<p><a href="https://shap.readthedocs.io/en/latest/generated/shap.TreeExplainer.html">TreeSHAP</a> uses tree_path_dependent explanations of raw log-odds. The baseline plus signed contributions reconstructs the model margin; sigmoid maps it to the model score. Across all test rows, maximum reconstruction errors are 2.86×10⁻⁶ for margins and 3.28×10⁻⁷ for scores. Positive contributions raise this model's churn score and negative contributions lower it.</p>
 
-          <!-- Data & churn by group -->
-          <section id="data" class="section-padding section--editorial" data-section-num="01">
-            <div class="section-header">
-              <div class="section-eyebrow">
-                <span class="section-num">01</span>
-                <span class="section-kicker">Data &amp; EDA</span>
-              </div>
-              <h2 class="section-title">Data &amp; Churn by Group</h2>
-            </div>
+</div></section></article>
+  </section>
 
-            <div class="space-y-8">
-              <div class="contact-info-card">
-                <p class="subtitle">The data comes from the public Kaggle Churn Modeling dataset, 10,000 rows by 14 columns, with no missing values. The target records whether a customer has churned, at 20.4% (2,037 customers); row number, customer id, and surname are identifiers, dropped before modeling. The four-to-one imbalance settles two choices: training needs resampling or class weighting, and evaluation leans on PR-AUC and recall; a model that always predicts "stays" is already 79.6% accurate while catching no churner at all. The data is split 75/25 with stratification (<code>random_state=42</code>), and the encoders and scaler are fit on the training set only, keeping the evaluation data out of every modeling decision.</p>
-              </div>
-
-              <div class="figure-grid">
-                <figure class="figure-editorial">
-                  <img src="figures/target_distribution.png" alt="Target distribution" loading="lazy" decoding="async" />
-                  <figcaption>Target distribution: 2,037 of 10,000 customers churned (20.4%), a moderate class imbalance.</figcaption>
-                </figure>
-                <figure class="figure-editorial">
-                  <img src="figures/correlation_heatmap.png" alt="Correlation matrix of features" loading="lazy" decoding="async" />
-                  <figcaption>Correlation matrix: feature-to-feature correlations are weak with no multicollinearity; age correlates positively with the target, activity negatively.</figcaption>
-                </figure>
-              </div>
-
-              <p class="subtitle">The boxplots and countplots compare shapes; the table below adds the exact churn rate and group size behind each driver, giving every claim in the findings its n.</p>
-
-              <div class="overflow-x-auto">
-                <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
-                  <thead>
-                    <tr class="bg-gray-100 dark:bg-gray-700/30">
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Group</th>
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Category</th>
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">Customers</th>
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">Churn rate</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr class="bg-green-50 dark:bg-green-900/20">
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Geography</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Germany</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">2,509</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>32.4%</strong></td>
-                    </tr>
-                    <tr>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Geography</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">France / Spain</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">5,014 / 2,477</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">16.2% / 16.7%</td>
-                    </tr>
-                    <tr>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Activity</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Inactive / Active</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">4,849 / 5,151</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>26.9%</strong> / 14.3%</td>
-                    </tr>
-                    <tr>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Products</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">1 / 2</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">5,084 / 4,590</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">27.7% / 7.6%</td>
-                    </tr>
-                    <tr class="bg-green-50 dark:bg-green-900/20">
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Products</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">3 / 4</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">266 / 60</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>82.7%</strong> / <strong>100%</strong></td>
-                    </tr>
-                    <tr>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Age band</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">40–49 / 50–59 / 60–92</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">2,618 / 869 / 526</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">30.8% / <strong>56.0%</strong> / 27.9%</td>
-                    </tr>
-                    <tr>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Gender</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Female / Male</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">4,543 / 5,457</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">25.1% / 16.5%</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-
-              <p class="subtitle">Which variable splits the two groups most sharply? Product count. Two products is the safe configuration; more than four in five three-product customers churn, and all 60 four-product customers left, though the 3-plus group is only 3.3% of the base, so the rate is extreme and the volume small. The age profile is non-monotonic: the fifties band at 56.0% is the peak, not "older is riskier."</p>
-
-              <div class="figure-grid">
-                <figure class="figure-editorial">
-                  <img src="figures/boxplot_numerical_vs_exited.png" alt="Boxplots of numerical features by churn" loading="lazy" decoding="async" />
-                  <figcaption>Boxplots of numerical features by churn: age separates the two groups most clearly, the median churner about 45 vs about 35 retained.</figcaption>
-                </figure>
-                <figure class="figure-editorial">
-                  <img src="figures/countplot_categorical_vs_exited.png" alt="Countplots of categorical features by churn" loading="lazy" decoding="async" />
-                  <figcaption>Countplots of categorical features: Germany holds a quarter of customers yet produces about as many churners as France; card ownership carries little signal, activity is the strongest.</figcaption>
-                </figure>
-              </div>
-            </div>
-          </section>
-
-          <!-- Model bake-off -->
-          <section id="models" class="section-padding section--editorial" data-section-num="02">
-            <div class="section-header">
-              <div class="section-eyebrow">
-                <span class="section-num">02</span>
-                <span class="section-kicker">Model Bake-off</span>
-              </div>
-              <h2 class="section-title">Comparing Four Models</h2>
-            </div>
-
-            <div class="space-y-8">
-              <div class="contact-info-card">
-                <p class="subtitle">The three baseline models (logistic regression, KNN, random forest) are first read at their untuned cross-validation ROC-AUC, then tuned alongside XGBoost under one protocol: SMOTE sits inside the cross-validation pipeline and touches only the training folds, never the validation folds, keeping the CV scores honest; <code>GridSearchCV</code> runs 5-fold, scored by ROC-AUC. At a 20% imbalance, accuracy rewards models that ignore the minority; ROC-AUC measures how well a model ranks churners ahead of non-churners, independent of any threshold.</p>
-              </div>
-
-              <div class="overflow-x-auto">
-                <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
-                  <thead>
-                    <tr class="bg-gray-100 dark:bg-gray-700/30">
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Model</th>
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">Accuracy</th>
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">Precision</th>
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">Recall</th>
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">F1</th>
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">ROC-AUC</th>
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">PR-AUC</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr class="bg-green-50 dark:bg-green-900/20">
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>XGBoost + SMOTE</strong></td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.8544</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.6507</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.6149</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.6323</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>0.8757</strong></td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200"><strong>0.7265</strong></td>
-                    </tr>
-                    <tr>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Random forest</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.8440</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.6042</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.6778</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.6389</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.8681</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.7002</td>
-                    </tr>
-                    <tr>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">KNN</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.7388</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.4184</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.7250</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.5306</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.8078</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.5277</td>
-                    </tr>
-                    <tr>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Logistic regression</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.7160</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.3945</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.7387</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.5144</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.7900</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.4801</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-
-              <p class="subtitle">Accuracy flatters the majority class; precision, recall, and F1 describe the churn class at the default 0.5 threshold; ROC-AUC and PR-AUC measure threshold-free ranking quality, and PR-AUC is the stricter of the two because it concentrates on the 20% minority, where the no-skill baseline is about 0.20.</p>
-
-              <div class="figure-grid">
-                <figure class="figure-editorial">
-                  <img src="figures/roc_curves_all_models.png" alt="ROC curves for the four models" loading="lazy" decoding="async" />
-                  <figcaption>ROC curves for the four models: XGBoost and random forest lead clearly.</figcaption>
-                </figure>
-                <figure class="figure-editorial">
-                  <img src="figures/pr_curves_all_models.png" alt="Precision-recall curves for the four models" loading="lazy" decoding="async" />
-                  <figcaption>Precision-recall curves: XGBoost leads at PR-AUC 0.727, well above the 0.20 no-skill baseline.</figcaption>
-                </figure>
-              </div>
-
-              <p class="subtitle">XGBoost is recommended: first on both ranking metrics, and monthly risk scoring rests on ranking quality. Logistic regression and KNN buy their higher recall by flagging loyal customers: at about 0.4 precision, six of every ten contacts are wasted. Random forest edges XGBoost on recall and F1 at 0.5, but a threshold can be adjusted after training and ranking quality cannot.</p>
-
-              <div class="figure-grid">
-                <figure class="figure-editorial">
-                  <img src="figures/gridsearch_lr_heatmap.png" alt="Logistic regression grid search heatmap" loading="lazy" decoding="async" />
-                  <figcaption>Logistic regression grid-search heatmap: how the shared 5-fold protocol selects the optimum across the hyperparameter grid.</figcaption>
-                </figure>
-                <figure class="figure-editorial">
-                  <img src="figures/confusion_matrix_xgboost.png" alt="XGBoost confusion matrix (default threshold)" loading="lazy" decoding="async" />
-                  <figcaption>XGBoost confusion matrix at the default 0.5 threshold: the baseline with precision and recall relatively balanced.</figcaption>
-                </figure>
-              </div>
-
-              <div class="note note--evidence">
-                <div class="note__label">Ablation · The conclusions do not depend on SMOTE</div>
-                <div class="note__body">
-                  <p>Class imbalance has two standard answers: SMOTE oversampling, or weighting the minority class. Swapping SMOTE for <code>scale_pos_weight=3.91</code> in the same XGBoost grid leaves the two nearly tied: CV ROC-AUC 0.8579 vs 0.8568, test ROC-AUC 0.8711 vs 0.8757, test PR-AUC 0.7249 vs 0.7265. Every gap is far smaller than the confidence intervals in the next section, so the conclusions do not depend on SMOTE itself; the pipeline stays only because all downstream tuning and attribution build on it.</p>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <!-- Threshold tuning -->
-          <section id="threshold" class="section-padding section--editorial" data-section-num="03">
-            <div class="section-header">
-              <div class="section-eyebrow">
-                <span class="section-num">03</span>
-                <span class="section-kicker">Threshold Tuning</span>
-              </div>
-              <h2 class="section-title">Setting the Threshold</h2>
-            </div>
-
-            <div class="space-y-8">
-              <p class="subtitle">The default 0.5 threshold treats both errors as equally costly, but they are not: a missed churner costs the whole relationship, a false alarm one retention offer. An F2 sweep scores each candidate threshold, weighting recall twice as heavily as precision. The threshold is selected on the training data alone: 5-fold cross-validation produces out-of-fold predicted probabilities on the training set, the F2 sweep runs on those, and the winning threshold is applied once to the test set; selecting on the test set would let the evaluation data leak into a modeling decision and overstate the operating point. The out-of-fold optimum is <strong>0.20</strong>.</p>
-
-              <div class="overflow-x-auto">
-                <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
-                  <thead>
-                    <tr class="bg-gray-100 dark:bg-gray-700/30">
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Operating point</th>
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">Threshold</th>
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">Precision</th>
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">Recall</th>
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">F2</th>
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right">Customers flagged</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Default</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.50</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.6507</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.6149</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.6218</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">481</td>
-                    </tr>
-                    <tr class="bg-green-50 dark:bg-green-900/20">
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>F2-optimal (chosen on training OOF)</strong></td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.20</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.4070</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.8684</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">0.7079</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-right dark:text-gray-200">1,086</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-
-              <div class="figure-grid">
-                <figure class="figure-editorial">
-                  <img src="figures/threshold_tuning_xgboost.png" alt="Precision, recall, and F2 versus threshold" loading="lazy" decoding="async" />
-                  <figcaption>The threshold sweep on out-of-fold training predictions: F2 peaks near 0.20, the recall-first operating point.</figcaption>
-                </figure>
-                <figure class="figure-editorial">
-                  <img src="figures/confusion_matrix_threshold_comparison.png" alt="Confusion matrices at thresholds 0.50 and 0.20" loading="lazy" decoding="async" />
-                  <figcaption>Confusion matrices at 0.50 vs 0.20: false negatives fall from 196 to 67, at the cost of false positives rising from 168 to 644.</figcaption>
-                </figure>
-              </div>
-
-              <div class="contact-info-card">
-                <p class="subtitle">At 0.20 the model catches 442 of the 509 test-set churners instead of about 313, and the contact list grows from 481 to 1,086. The test-set F2 (0.708) is close to the training estimate (0.696), so the operating point chosen on the training folds transfers to unseen data. Whether that trade pays off depends on offer cost against customer value; when campaign capacity is fixed, the threshold can sit anywhere on the precision-recall curve, which is exactly why the model with the strongest ranking is chosen.</p>
-              </div>
-            </div>
-          </section>
-
-          <!-- Break-even analysis -->
-          <section id="cost" class="section-padding section--editorial" data-section-num="04">
-            <div class="section-header">
-              <div class="section-eyebrow">
-                <span class="section-num">04</span>
-                <span class="section-kicker">Break-even Analysis</span>
-              </div>
-              <h2 class="section-title">Break-even Analysis</h2>
-            </div>
-
-            <div class="space-y-8">
-              <p class="subtitle">F2 is only a proxy for "weight recall more"; the real objective is cost. The data has no cost fields (customer value, offer cost, campaign success rate), so nothing is invented; this section assumes one quantity, the cost ratio C, the cost of a missed churner divided by the cost of a wasted retention offer, and compares only the two errors. The 0.5 threshold produces 168 false alarms and 196 misses; the 0.20 threshold produces 644 false alarms and 67 misses. Solving for the break-even gives <strong>C* = 3.7</strong>: the tuned threshold has lower total error cost whenever missing a churner costs more than 3.7 times a wasted offer. No currency figure is assumed, so the conclusion holds for any bank whose cost ratio clears that bar.</p>
-
-              <figure class="figure-editorial">
-                <img src="figures/breakeven_cost_ratio.png" alt="Cost-optimal threshold versus cost ratio" loading="lazy" decoding="async" />
-                <figcaption>Cost-optimal threshold versus cost ratio: the more a churner costs relative to an offer, the lower the cost-optimal threshold.</figcaption>
-              </figure>
-
-              <div class="note note--insight">
-                <div class="note__label">Insight · Holds for any bank clearing the ratio</div>
-                <div class="note__body">
-                  <p>In a retail bank, a churned relationship is worth many times a single retention offer, so any realistic ratio is far above 3.7 and the aggressive operating point pays off. No absolute currency figure is assumed, so the conclusion holds for any bank clearing that ratio. (SMOTE distorts probability calibration, so the operating threshold is set by empirical sweep rather than the textbook 1/(1+C) formula.)</p>
-                </div>
-              </div>
-
-              <div class="note note--evidence">
-                <div class="note__label">Uncertainty · Bootstrap 95% CI (×2,000)</div>
-                <div class="note__body">
-                  <p>The headline numbers are point estimates on one test set of 2,500 customers. Resampling it 2,000 times with replacement, without refitting the model, gives intervals that reflect test-set sampling noise only: ROC-AUC 0.876 [0.858, 0.892]; PR-AUC 0.727 [0.690, 0.762]; recall at 0.20 is 0.868 [0.838, 0.897]; precision 0.407 [0.377, 0.436]. The recall interval is narrow: "about 87% of churners caught" does not rest on one lucky split, but the ROC-AUC interval contains random forest's point estimate of 0.868. XGBoost leads on both ranking metrics, yet the lead falls inside test-set noise, so the model choice rests on ranking first on both metrics plus threshold flexibility, not on a statistically separated gap.</p>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <!-- Why customers leave -->
-          <section id="shap" class="section-padding section--editorial" data-section-num="05">
-            <div class="section-header">
-              <div class="section-eyebrow">
-                <span class="section-num">05</span>
-                <span class="section-kicker">Why Customers Leave</span>
-              </div>
-              <h2 class="section-title">Why Customers Leave: SHAP Attribution</h2>
-            </div>
-
-            <div class="space-y-8">
-              <p class="subtitle">A risk score tells the retention team who to call, not what to say. SHAP assigns each feature a signed contribution to each prediction, showing customer by customer which features push the prediction up and which push it down. To rule out single-model artifacts, the SHAP ranking is cross-checked against the random forest's impurity importances and XGBoost's gain importances; the top five agree across all three, with age and product count in the top two.</p>
-
-              <div class="figure-grid">
-                <figure class="figure-editorial">
-                  <img src="figures/SHAP_Global_Feature_Insights.png" alt="SHAP global importance summary" loading="lazy" decoding="async" />
-                  <figcaption>SHAP global importance summary: age, activity, and product count rank at the top.</figcaption>
-                </figure>
-                <figure class="figure-editorial">
-                  <img src="figures/feature_importance_comparison.png" alt="Three importance measures compared" loading="lazy" decoding="async" />
-                  <figcaption>Random forest impurity, XGBoost gain, and SHAP compared: the top features agree, so the story does not depend on the method.</figcaption>
-                </figure>
-              </div>
-
-              <p class="subtitle"><strong>The shape of age.</strong> The dependence plot gives the headline driver a shape: the contribution of age crosses zero around 40, peaks between 50 and 60 at up to +2 log-odds, and declines after 65, turning negative near 67. That matches the non-monotonic profile in the group table (30.8% in the forties, 56.0% in the fifties, 27.9% past 60); the model has learned the same curve from the data, not a simple "older is riskier" rule.</p>
-
-              <div class="figure-grid">
-                <figure class="figure-editorial">
-                  <img src="figures/shap_dependence_age.png" alt="SHAP dependence plot for age" loading="lazy" decoding="async" />
-                  <figcaption>SHAP dependence plot for age: crosses zero around 40, peaks at 50–60, declines after 65, turning negative near 67.</figcaption>
-                </figure>
-                <figure class="figure-editorial">
-                  <img src="figures/shap_dependence_tenure.png" alt="SHAP dependence plot for tenure" loading="lazy" decoding="async" />
-                  <figcaption>SHAP dependence plot for tenure: a small, almost uniformly protective contribution (centered near −0.3): a stabilizer, not a driver.</figcaption>
-                </figure>
-              </div>
-
-              <p class="subtitle"><strong>Reconciling tenure.</strong> In the boxplots tenure barely separates churners from non-churners, yet it ranks fourth by mean absolute SHAP. The dependence plot shows why: the model assigns each customer a small, almost uniformly protective contribution (none beyond about −0.9), with no strong trend across the 0-to-10-year range; those small values on every customer add up in a mean-of-absolute-values ranking. Tenure ranks as a stabilizer, not a driver, and the four-driver story stands.</p>
-
-              <p class="subtitle"><strong>Two customers, explained.</strong> The force plots take the two extremes of the test set by predicted probability. The highest-risk customer (churn probability 0.998) combines every major driver at once: 4 products, an age well above average, inactive, an above-average balance, and located in Germany; only a short tenure pulls the other way, far too weakly to matter; customers with this profile belong at the top of the call list, and the conversation should be about simplifying the product portfolio. The lowest-risk customer (churn probability 0.005) is the mirror image: 2 products, young, active, zero balance, high credit score.</p>
-
-              <div class="figure-grid">
-                <figure class="figure-editorial">
-                  <img src="figures/SHAP_Local_Explanation_for_a_High-Risk_Customer.png" alt="SHAP force plot for a high-risk customer" loading="lazy" decoding="async" />
-                  <figcaption>SHAP force plot for a high-risk customer (churn probability 0.998): every major driver stacks the same way.</figcaption>
-                </figure>
-                <figure class="figure-editorial">
-                  <img src="figures/SHAP_Local_Explanation_for_a_Low-Risk_Customer.png" alt="SHAP force plot for a low-risk customer" loading="lazy" decoding="async" />
-                  <figcaption>SHAP force plot for a low-risk customer (churn probability 0.005): every factor pulls risk down.</figcaption>
-                </figure>
-              </div>
-            </div>
-          </section>
-
-          <!-- Action plan -->
-          <section id="actions" class="section-padding section--editorial" data-section-num="06">
-            <div class="section-header">
-              <div class="section-eyebrow">
-                <span class="section-num">06</span>
-                <span class="section-kicker">Action Plan</span>
-              </div>
-              <h2 class="section-title">Acting on the Findings</h2>
-            </div>
-
-            <div class="space-y-8">
-              <p class="subtitle">The four drivers agree across EDA, the three importance views, and SHAP, so the risk profile is specific: customers past 40 who have gone inactive, more so when they hold a large balance or bank in Germany. The findings turn into four actions.</p>
-
-              <div class="overflow-x-auto">
-                <table class="w-full border-collapse border border-gray-300 dark:border-gray-600 performance-table">
-                  <thead>
-                    <tr class="bg-gray-100 dark:bg-gray-700/30">
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Initiative</th>
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">What to do</th>
-                      <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left">Basis in the analysis</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Monthly risk scoring</strong></td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Score every customer with XGBoost at the tuned threshold; give service teams each customer's top three SHAP factors before a call.</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Best ranking quality of the four candidates (ROC-AUC 0.876, 95% CI [0.858, 0.892]); 87% of churners caught at the tuned threshold.</td>
-                    </tr>
-                    <tr>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Re-engagement campaign</strong></td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Target inactive customers in the medium-to-high risk band with a bonus rate, a fee waiver, or a consultation.</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Inactive customers churn at 26.9% vs 14.3% for active; inactivity is a top-three SHAP driver.</td>
-                    </tr>
-                    <tr>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>Portfolio review</strong></td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Contact customers holding three or more products for a simplification review; reward sales on combinations that fit the customer, not product count.</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Product count ranks second across all three importance views; three products churn at 82.7%, four at 100%.</td>
-                    </tr>
-                    <tr>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200"><strong>German market review</strong></td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Run competitor analysis and collect feedback from German customers and branch staff.</td>
-                      <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 dark:text-gray-200">Germany churns at 32.4%, roughly double France and Spain.</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-
-              <div class="note note--caveat">
-                <div class="note__label">Caveat · The threshold is a business setting, not a constant</div>
-                <div class="note__body">
-                  <p>The F2-optimal threshold of 0.20, selected on the training folds, catches 87% of churners on the test set (61% at the default) at a precision of 41%. It beats the default on total error cost whenever missing a churner costs more than 3.7 times a wasted offer. The right operating point follows from offer cost, campaign capacity, and customer value, and should be revisited when those change.</p>
-                </div>
-              </div>
-
-              <div class="contact-info-card">
-                <h3 class="text-xl font-semibold mb-3" style="color: var(--dark);">Next steps &amp; reproducibility</h3>
-                <p class="subtitle">Next: A/B-test the retention offers against a control group to measure the realized effect on churn; retrain quarterly and recheck the threshold when campaign economics change; push the risk score and SHAP factors into the CRM so branch staff can see them. The notebook runs on one seed (42) and reproduces end-to-end locally (<code>uv run jupyter nbconvert --to notebook --execute</code>), writing figures to <code>figures/</code>.</p>
-              </div>
-            </div>
-          </section>
-        </div>
-      </div>
-    </section>
-
-    <!-- Related projects -->
-    <section id="related" class="section-padding">
-      <div class="section-header reveal">
-        <div class="section-eyebrow">
-          <span class="section-kicker">Continue Reading</span>
-        </div>
-        <h2 class="section-title">Related Projects</h2>
-      </div>
-      <div class="grid md:grid-cols-2 gap-6">
-        <a href="../lendingclub loan prediction/lendingclub loan prediction-en.html" class="related-project-card group cursor-pointer" style="text-decoration: none;">
-          <h3 class="related-project-title">LendingClub Loan Default Prediction</h3>
-          <p class="related-project-description">A threshold decision under a 4.2:1 cost asymmetry, catching 74.9% of defaults</p>
-          <div class="related-project-link">
-            <span>View details</span>
-            <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>
-          </div>
-        </a>
-        <a href="../youtube comment analysis/youtube comment analysis-en.html" class="related-project-card group cursor-pointer" style="text-decoration: none;">
-          <h3 class="related-project-title">Pet Owners in YouTube Comments</h3>
-          <p class="related-project-description">Weak-supervised classification under the same ranking + operating-point frame</p>
-          <div class="related-project-link">
-            <span>View details</span>
-            <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>
-          </div>
-        </a>
-      </div>
-    </section>
-  </main>
-
-  <!-- Footer scripts: Prism / local scripts / logo animation / detail-page logic -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
-  <script src="../../assets/js/logo.js"></script>
-  <script src="../../assets/js/common.js"></script>
-  <script src="../../assets/js/charts.js"></script>
-  <script src="../../assets/js/project.js"></script>
-
-  <!-- Language toggle functionality -->
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const langToggle = document.getElementById('lang-toggle');
-      if (langToggle) {
-        langToggle.addEventListener('click', function() {
-          localStorage.setItem('language', 'zh');
-          window.location.href = 'Bank Customer Churn Prediction.html';
-        });
-      }
-    });
-  </script>
+  <section id="related" class="section-padding"><div class="section-header"><h2 class="section-title">Related projects</h2></div><div class="grid md:grid-cols-2 gap-6"><a href="../lendingclub loan prediction/lendingclub loan prediction-en.html" class="related-project-card"><h3 class="related-project-title">LendingClub: the 9,004-loan sample</h3><p class="related-project-description">Analyze default patterns in 9,004 historical loans, compare models with a loan-term rule, and design screening policies under asymmetric costs. Random Forest at the frozen threshold of 0.22 achieves 70.45% test recall and a 4.68% net simulated cost reduction.</p><span class="related-project-link">Read case</span></a><a href="../ab testing/ab testing-en.html" class="related-project-card"><h3 class="related-project-title">A/B Testing: the Cookie Cats gate experiment</h3><p class="related-project-description">Compare retention and engagement across 90,189 players, combining allocation checks, bootstrap estimates and power analysis. Seven-day retention is 0.82 percentage points lower in the level-40 group than the level-30 group, with a 95% interval of [−1.33, −0.31], informing gate and return-experience recommendations.</p><span class="related-project-link">Read case</span></a></div></section>
+</main>
+<script src="../../assets/js/logo.js"></script>
+<script src="../../assets/js/common.js"></script>
+<script src="../../assets/js/project.js"></script>
+<script src="../../assets/js/language-switcher.js"></script>
 </body>
 </html>

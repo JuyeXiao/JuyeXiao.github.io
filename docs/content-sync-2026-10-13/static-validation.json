@@ -1,0 +1,25 @@
+{
+  "status": "pass",
+  "report_pages": 24,
+  "body_blocks": 312,
+  "figure_references": 202,
+  "unique_figures": 96,
+  "local_links_checked": 1222,
+  "external_article_links": [
+    "https://aws.amazon.com/blogs/big-data/discovering-metadata-with-aws-lake-formation-part-1/",
+    "https://developers.google.com/earth-engine/datasets/catalog/MODIS_061_MOD11A1",
+    "https://developers.google.com/earth-engine/datasets/catalog/NASA_GDDP-CMIP6",
+    "https://github.com/JuyeXiao",
+    "https://github.com/ryanschaub/Mobile-Games-A-B-Testing-with-Cookie-Cats",
+    "https://shap.readthedocs.io/en/latest/generated/shap.TreeExplainer.html",
+    "https://terra.nasa.gov/about/terras-orbit-changes",
+    "https://www.kaggle.com/datasets/mursideyarkin/mobile-games-ab-testing-cookie-cats",
+    "https://www.kaggle.com/datasets/shubh0799/churn-modelling",
+    "https://www.kaggle.com/datasets/wordsforthewise/lending-club",
+    "https://www.nccs.nasa.gov/services/data-collections/land-based-products/nex-gddp-cmip6",
+    "https://www.openstreetmap.org/"
+  ],
+  "source_reports_unchanged": true,
+  "protected_files_unchanged": true,
+  "failures": []
+}

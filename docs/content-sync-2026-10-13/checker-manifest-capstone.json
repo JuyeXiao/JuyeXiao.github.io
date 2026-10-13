@@ -1,0 +1,76 @@
+{
+  "groups": [
+    {
+      "id": "climate",
+      "documents": [
+        {
+          "path": "C:\\Users\\xjy19\\Desktop\\JuyeXiao.github.io\\projects\\spglobal climate comparison\\spglobal climate comparison.html",
+          "lang": "zh",
+          "format": "html"
+        },
+        {
+          "path": "C:\\Users\\xjy19\\Desktop\\JuyeXiao.github.io\\projects\\spglobal climate comparison\\spglobal climate comparison-en.html",
+          "lang": "en",
+          "format": "html"
+        }
+      ],
+      "required_checks": [
+        "C8"
+      ]
+    },
+    {
+      "id": "comparison",
+      "documents": [
+        {
+          "path": "C:\\Users\\xjy19\\Desktop\\JuyeXiao.github.io\\projects\\spglobal climate comparison\\model comparison.html",
+          "lang": "zh",
+          "format": "html"
+        },
+        {
+          "path": "C:\\Users\\xjy19\\Desktop\\JuyeXiao.github.io\\projects\\spglobal climate comparison\\model comparison-en.html",
+          "lang": "en",
+          "format": "html"
+        }
+      ],
+      "required_checks": [
+        "C8"
+      ]
+    },
+    {
+      "id": "long-series",
+      "documents": [
+        {
+          "path": "C:\\Users\\xjy19\\Desktop\\JuyeXiao.github.io\\projects\\spglobal climate comparison\\long series.html",
+          "lang": "zh",
+          "format": "html"
+        },
+        {
+          "path": "C:\\Users\\xjy19\\Desktop\\JuyeXiao.github.io\\projects\\spglobal climate comparison\\long series-en.html",
+          "lang": "en",
+          "format": "html"
+        }
+      ],
+      "required_checks": [
+        "C8"
+      ]
+    },
+    {
+      "id": "projection",
+      "documents": [
+        {
+          "path": "C:\\Users\\xjy19\\Desktop\\JuyeXiao.github.io\\projects\\spglobal climate comparison\\projection overlay.html",
+          "lang": "zh",
+          "format": "html"
+        },
+        {
+          "path": "C:\\Users\\xjy19\\Desktop\\JuyeXiao.github.io\\projects\\spglobal climate comparison\\projection overlay-en.html",
+          "lang": "en",
+          "format": "html"
+        }
+      ],
+      "required_checks": [
+        "C8"
+      ]
+    }
+  ]
+}

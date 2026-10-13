@@ -1,0 +1,597 @@
+{
+  "browser": "155.0.4283.45",
+  "pages": [
+    {
+      "path": "projects/ab testing/ab testing.html",
+      "key": "ab",
+      "language": "zh",
+      "sections": 11,
+      "views": [
+        {
+          "width": 1440,
+          "theme": "light",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\ab-zh-1440-light-hero.png",
+          "toc_target": "#report-section-11",
+          "toc_offset": 96.015625,
+          "table_scroll": {
+            "left": 0,
+            "width": 966,
+            "total": 966
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\ab-zh-1440-light-body.png",
+          "original_scroll": {
+            "x": 10,
+            "y": 0,
+            "width": 1320,
+            "totalWidth": 1330
+          },
+          "figures_opened": 5,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 1440,
+          "theme": "dark",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\ab-zh-1440-dark-hero.png",
+          "toc_target": "#report-section-11",
+          "toc_offset": 96.015625,
+          "table_scroll": {
+            "left": 0,
+            "width": 966,
+            "total": 966
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\ab-zh-1440-dark-body.png",
+          "original_scroll": {
+            "x": 10,
+            "y": 0,
+            "width": 1320,
+            "totalWidth": 1330
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 390,
+          "theme": "light",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\ab-zh-390-light-hero.png",
+          "toc_target": "#report-section-11",
+          "toc_offset": 96.484375,
+          "table_scroll": {
+            "left": 0,
+            "width": 358,
+            "total": 358
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\ab-zh-390-light-body.png",
+          "original_scroll": {
+            "x": 997,
+            "y": 0,
+            "width": 333,
+            "totalWidth": 1330
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 390,
+          "theme": "dark",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\ab-zh-390-dark-hero.png",
+          "toc_target": "#report-section-11",
+          "toc_offset": 96.484375,
+          "table_scroll": {
+            "left": 0,
+            "width": 358,
+            "total": 358
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\ab-zh-390-dark-body.png",
+          "original_scroll": {
+            "x": 997,
+            "y": 0,
+            "width": 333,
+            "totalWidth": 1330
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        }
+      ],
+      "interactions": {
+        "language_round_trip": true,
+        "related_navigation": "../Bank Customer Churn Prediction/Bank Customer Churn Prediction.html",
+        "logo_return": true
+      },
+      "page_errors": [],
+      "resource_failures": [],
+      "status": "pass"
+    },
+    {
+      "path": "projects/spglobal climate comparison/spglobal climate comparison.html",
+      "key": "climate",
+      "language": "zh",
+      "sections": 9,
+      "views": [
+        {
+          "width": 1440,
+          "theme": "light",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\climate-zh-1440-light-hero.png",
+          "toc_target": "#report-section-9",
+          "toc_offset": 96.40625,
+          "table_scroll": {
+            "left": 0,
+            "width": 966,
+            "total": 966
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\climate-zh-1440-light-body.png",
+          "original_scroll": {
+            "x": 330,
+            "y": 0,
+            "width": 1320,
+            "totalWidth": 1650
+          },
+          "figures_opened": 5,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 1440,
+          "theme": "dark",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\climate-zh-1440-dark-hero.png",
+          "toc_target": "#report-section-9",
+          "toc_offset": 96.40625,
+          "table_scroll": {
+            "left": 0,
+            "width": 966,
+            "total": 966
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\climate-zh-1440-dark-body.png",
+          "original_scroll": {
+            "x": 330,
+            "y": 0,
+            "width": 1320,
+            "totalWidth": 1650
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 390,
+          "theme": "light",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\climate-zh-390-light-hero.png",
+          "toc_target": "#report-section-9",
+          "toc_offset": 95.84375,
+          "table_scroll": {
+            "left": 315,
+            "width": 358,
+            "total": 673
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\climate-zh-390-light-body.png",
+          "original_scroll": {
+            "x": 1317,
+            "y": 13,
+            "width": 333,
+            "totalWidth": 1650
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 390,
+          "theme": "dark",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\climate-zh-390-dark-hero.png",
+          "toc_target": "#report-section-9",
+          "toc_offset": 95.84375,
+          "table_scroll": {
+            "left": 315,
+            "width": 358,
+            "total": 673
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\climate-zh-390-dark-body.png",
+          "original_scroll": {
+            "x": 1317,
+            "y": 13,
+            "width": 333,
+            "totalWidth": 1650
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        }
+      ],
+      "interactions": {
+        "language_round_trip": true,
+        "series_navigation": "model comparison.html",
+        "related_navigation": "../healthy home/healthy home.html",
+        "logo_return": true
+      },
+      "page_errors": [],
+      "resource_failures": [
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.103.woff2",
+          "failure": "net::ERR_ABORTED"
+        }
+      ],
+      "status": "pass"
+    },
+    {
+      "path": "projects/ab testing/ab testing-en.html",
+      "key": "ab",
+      "language": "en",
+      "sections": 11,
+      "views": [
+        {
+          "width": 1440,
+          "theme": "light",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\ab-en-1440-light-hero.png",
+          "toc_target": "#report-section-11",
+          "toc_offset": 96.3125,
+          "table_scroll": {
+            "left": 0,
+            "width": 966,
+            "total": 966
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\ab-en-1440-light-body.png",
+          "original_scroll": {
+            "x": 10,
+            "y": 0,
+            "width": 1320,
+            "totalWidth": 1330
+          },
+          "figures_opened": 5,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 1440,
+          "theme": "dark",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\ab-en-1440-dark-hero.png",
+          "toc_target": "#report-section-11",
+          "toc_offset": 96.3125,
+          "table_scroll": {
+            "left": 0,
+            "width": 966,
+            "total": 966
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\ab-en-1440-dark-body.png",
+          "original_scroll": {
+            "x": 10,
+            "y": 0,
+            "width": 1320,
+            "totalWidth": 1330
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 390,
+          "theme": "light",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\ab-en-390-light-hero.png",
+          "toc_target": "#report-section-11",
+          "toc_offset": 95.75,
+          "table_scroll": {
+            "left": 0,
+            "width": 358,
+            "total": 358
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\ab-en-390-light-body.png",
+          "original_scroll": {
+            "x": 997,
+            "y": 0,
+            "width": 333,
+            "totalWidth": 1330
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 390,
+          "theme": "dark",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\ab-en-390-dark-hero.png",
+          "toc_target": "#report-section-11",
+          "toc_offset": 95.75,
+          "table_scroll": {
+            "left": 0,
+            "width": 358,
+            "total": 358
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\ab-en-390-dark-body.png",
+          "original_scroll": {
+            "x": 997,
+            "y": 0,
+            "width": 333,
+            "totalWidth": 1330
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        }
+      ],
+      "interactions": {
+        "language_round_trip": true,
+        "related_navigation": "../Bank Customer Churn Prediction/Bank Customer Churn Prediction-en.html",
+        "logo_return": true
+      },
+      "page_errors": [],
+      "resource_failures": [
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.111.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.113.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.115.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.117.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.112.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.108.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.103.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.114.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.110.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.118.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.117.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.116.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.115.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.118.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.102.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.116.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.119.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.113.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.114.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.107.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.112.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.27.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.106.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.109.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notosanssc/v41/k3kXo84MPvpLmixcA63oeALhLOCT-xWNm8Hqd37g1OkDRZe7lR4sg1IzSy-MNbE9VH8V.100.woff2",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/notoserifsc/v36/H4cyBXePl9DZ0Xe7gG9cyOj7uK2-n-D2rd4FY7SwqyWqm5Tjb17qLDam6T2isIOpAN0AzDc6KDF2jLlrDm0HbsE.107.woff2",
+          "failure": "net::ERR_ABORTED"
+        }
+      ],
+      "status": "pass"
+    },
+    {
+      "path": "projects/spglobal climate comparison/spglobal climate comparison-en.html",
+      "key": "climate",
+      "language": "en",
+      "sections": 9,
+      "views": [
+        {
+          "width": 1440,
+          "theme": "light",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\climate-en-1440-light-hero.png",
+          "toc_target": "#report-section-9",
+          "toc_offset": 96.109375,
+          "table_scroll": {
+            "left": 0,
+            "width": 966,
+            "total": 966
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\climate-en-1440-light-body.png",
+          "original_scroll": {
+            "x": 330,
+            "y": 0,
+            "width": 1320,
+            "totalWidth": 1650
+          },
+          "figures_opened": 5,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 1440,
+          "theme": "dark",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\climate-en-1440-dark-hero.png",
+          "toc_target": "#report-section-9",
+          "toc_offset": 96.109375,
+          "table_scroll": {
+            "left": 0,
+            "width": 966,
+            "total": 966
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\climate-en-1440-dark-body.png",
+          "original_scroll": {
+            "x": 330,
+            "y": 0,
+            "width": 1320,
+            "totalWidth": 1650
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 390,
+          "theme": "light",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\climate-en-390-light-hero.png",
+          "toc_target": "#report-section-9",
+          "toc_offset": 96.265625,
+          "table_scroll": {
+            "left": 315,
+            "width": 358,
+            "total": 673
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\climate-en-390-light-body.png",
+          "original_scroll": {
+            "x": 1317,
+            "y": 33,
+            "width": 333,
+            "totalWidth": 1650
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        },
+        {
+          "width": 390,
+          "theme": "dark",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\climate-en-390-dark-hero.png",
+          "toc_target": "#report-section-9",
+          "toc_offset": 96.265625,
+          "table_scroll": {
+            "left": 315,
+            "width": 358,
+            "total": 673
+          },
+          "body_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\climate-en-390-dark-body.png",
+          "original_scroll": {
+            "x": 1317,
+            "y": 33,
+            "width": 333,
+            "totalWidth": 1650
+          },
+          "figures_opened": 1,
+          "keyboard_open_close": true
+        }
+      ],
+      "interactions": {
+        "language_round_trip": true,
+        "series_navigation": "model comparison-en.html",
+        "related_navigation": "../healthy home/healthy home-en.html",
+        "logo_return": true
+      },
+      "page_errors": [],
+      "resource_failures": [],
+      "status": "pass"
+    }
+  ]
+}

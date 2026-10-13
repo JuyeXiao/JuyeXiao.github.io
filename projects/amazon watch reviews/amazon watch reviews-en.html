@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>document.documentElement.classList.add('js');</script>
+  <title>Amazon watch review analysis: from clustering and topic modeling to practical recommendations - Data Poetics</title>
+  <meta name="description" content="Prepare the review corpus from 960,872 raw records and analyze 858,037 modeled reviews with K-Means and LDA. The malfunction/returns topic averages 2.37 stars and covers 52.9% of modeled one-star reviews, informing product checks, clearer instructions and review monitoring.">
+  <meta property="og:title" content="Amazon watch review analysis: from clustering and topic modeling to practical recommendations">
+  <meta property="og:description" content="Prepare the review corpus from 960,872 raw records and analyze 858,037 modeled reviews with K-Means and LDA. The malfunction/returns topic averages 2.37 stars and covers 52.9% of modeled one-star reviews, informing product checks, clearer instructions and review monitoring.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://juyexiao.github.io/projects/amazon%20watch%20reviews/amazon%20watch%20reviews-en.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:description" content="Prepare the review corpus from 960,872 raw records and analyze 858,037 modeled reviews with K-Means and LDA. The malfunction/returns topic averages 2.37 stars and covers 52.9% of modeled one-star reviews, informing product checks, clearer instructions and review monitoring.">
+  <link rel="canonical" href="https://juyexiao.github.io/projects/amazon%20watch%20reviews/amazon%20watch%20reviews-en.html">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&amp;family=Inter:wght@200;300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;700&amp;family=Noto+Sans+SC:wght@400;500;600&amp;family=Noto+Serif+SC:wght@500&amp;display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="../../assets/css/index.css">
+  <link rel="stylesheet" href="../../assets/css/project.css">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Amazon watch review analysis: from clustering and topic modeling to practical recommendations", "description": "Prepare the review corpus from 960,872 raw records and analyze 858,037 modeled reviews with K-Means and LDA. The malfunction/returns topic averages 2.37 stars and covers 52.9% of modeled one-star reviews, informing product checks, clearer instructions and review monitoring.", "inLanguage": "en", "author": {"@type": "Person", "name": "Juye Xiao"}}</script>
+</head>
+<body class="transition-colors duration-300 report-page">
+<div class="scroll-progress" id="scroll-progress"></div>
+<header class="navbar fixed top-0 left-0 right-0 z-50" id="navbar">
+<div class="container-main h-full flex items-center justify-between">
+<!-- Logo Section -->
+<a class="navbar-logo" href="../../index-en.html#hero" id="navbar-logo">
+<!-- SVG Logo -->
+<svg class="logo-svg-nav" viewbox="0 0 40 40">
+<!-- Data Grid Background -->
+<g class="grid-bg">
+<!-- Vertical Lines -->
+<line class="grid-line-v" style="animation-delay: 0.1s, 0s" x1="8" x2="8" y1="0" y2="40"></line>
+<line class="grid-line-v" style="animation-delay: 0.2s, 0.5s" x1="16" x2="16" y1="0" y2="40"></line>
+<line class="grid-line-v" style="animation-delay: 0.3s, 1s" x1="24" x2="24" y1="0" y2="40"></line>
+<line class="grid-line-v" style="animation-delay: 0.4s, 1.5s" x1="32" x2="32" y1="0" y2="40"></line>
+<!-- Horizontal Lines -->
+<line class="grid-line-h" style="animation-delay: 0.5s, 0s" x1="0" x2="40" y1="10" y2="10"></line>
+<line class="grid-line-h" style="animation-delay: 0.6s, 0.7s" x1="0" x2="40" y1="20" y2="20"></line>
+<line class="grid-line-h" style="animation-delay: 0.7s, 1.4s" x1="0" x2="40" y1="30" y2="30"></line>
+</g>
+<!-- Weaver Animation Line -->
+<line class="weaver-line" id="weaverLine" x1="0" x2="40" y1="20" y2="20"></line>
+<!-- JX Letters -->
+<text class="logo-letters" id="logoLetters" text-anchor="middle" x="20" y="26">JX</text>
+</svg>
+<!-- Name Signature (Hover Display) -->
+<div class="logo-name">
+<div class="logo-name-text">Juye Xiao</div>
+<div class="logo-name-subtitle">Data Analyst</div>
+</div>
+</a>
+<nav class="hidden md:flex items-center space-x-8">
+<a class="nav-link" href="../../index-en.html#about">About</a>
+<a class="nav-link" href="../../index-en.html#experience">Experience</a>
+<a class="nav-link" href="../../index-en.html#education">Education</a>
+<a class="nav-link" href="../../index-en.html#projects">Projects</a>
+<a class="nav-link" href="../../index-en.html#skills">Skills</a>
+<a class="nav-link" href="../../index-en.html#contact">Contact</a>
+</nav>
+<div class="flex items-center space-x-4">
+<button aria-label="Toggle theme" class="btn-secondary !p-2 !rounded-full" id="theme-toggle">
+<i class="block dark:hidden" data-lucide="sun"></i>
+<i class="hidden dark:block" data-lucide="moon"></i>
+</button>
+<button class="btn-secondary !p-2 !rounded-full" id="lang-toggle">
+<span class="font-bold text-sm">中</span>
+</button>
+<button aria-controls="mobile-menu" aria-expanded="false" aria-label="Open menu" class="btn-secondary !p-2 !rounded-full md:hidden" id="menu-toggle">
+<i class="menu-icon-open" data-lucide="menu"></i>
+<i class="menu-icon-close" data-lucide="x"></i>
+</button>
+</div>
+</div>
+<nav aria-label="Mobile navigation" class="mobile-menu md:hidden" id="mobile-menu">
+<a class="nav-link" href="../../index-en.html#about">About</a>
+<a class="nav-link" href="../../index-en.html#experience">Experience</a>
+<a class="nav-link" href="../../index-en.html#education">Education</a>
+<a class="nav-link" href="../../index-en.html#projects">Projects</a>
+<a class="nav-link" href="../../index-en.html#skills">Skills</a>
+<a class="nav-link" href="../../index-en.html#contact">Contact</a>
+</nav>
+</header>
+<main class="container-main">
+  <section id="project-hero" class="section-padding report-hero">
+    <div class="section-eyebrow"><span class="section-kicker">NLP · Topic Modeling</span></div>
+    <h1 class="hero-title">Amazon watch review analysis: from clustering and topic modeling to practical recommendations</h1>
+    <p class="subtitle report-standfirst">Prepare the review corpus from 960,872 raw records and analyze 858,037 modeled reviews with K-Means and LDA. The malfunction/returns topic averages 2.37 stars and covers 52.9% of modeled one-star reviews, informing product checks, clearer instructions and review monitoring.</p>
+    <p class="reading-time">Analysis updated in 2026</p>
+    <div class="hero-stats"><div class="hero-stat"><div class="hero-stat__num">960,713</div><div class="hero-stat__label">Nonempty reviews; 960,872 raw records</div></div><div class="hero-stat"><div class="hero-stat__num">858,037</div><div class="hero-stat__label">Final modeling reviews</div></div><div class="hero-stat"><div class="hero-stat__num">2.37</div><div class="hero-stat__label">Mean stars for malfunction/returns topic</div></div></div>
+    <div class="report-actions"><a class="btn btn-primary" href="#content">Read report</a><a class="btn btn-secondary" href="../../index-en.html#projects">All projects</a></div>
+  </section>
+
+  <section id="content" class="section-padding report-layout">
+    <aside><nav class="project-toc" id="project-toc" aria-label="Report contents"><h3>Contents</h3><ul id="toc-list"><li><a class="toc-link" href="#report-section-1">At a glance</a></li><li><a class="toc-link" href="#report-section-2">Executive summary</a></li><li><a class="toc-link" href="#report-section-3">1 The business question and its data</a></li><li><a class="toc-link" href="#report-section-4">2 Corpus profile and a sample that matches it</a></li><li><a class="toc-link" href="#report-section-5">3 Preprocessing and a shared vocabulary</a></li><li><a class="toc-link" href="#report-section-6">4 Cluster count and the K-Means partition</a></li><li><a class="toc-link" href="#report-section-7">5 Topic count and the LDA topics</a></li><li><a class="toc-link" href="#report-section-8">6 Two unsupervised views and their agreement</a></li><li><a class="toc-link" href="#report-section-9">7 Stability and occupancy at full scale</a></li><li><a class="toc-link" href="#report-section-10">8 The pain point and the review-behavior trend</a></li><li><a class="toc-link" href="#report-section-11">9 Themes and the actions they support</a></li><li><a class="toc-link" href="#report-section-12">10 Interpretation and further analysis</a></li><li><a class="toc-link" href="#report-section-13">11 Appendix: modeling parameters</a></li></ul></nav></aside>
+    <article class="content-area report-body" id="report-body"><div class="report-block" id="report-intro-1">
+<p>Using 960,713 nonempty US watch reviews, this project compares K-Means clustering and LDA topic modeling to identify functional and fit concerns, gifting occasions, and changes in review content. In the full modeling corpus, the malfunction/returns topic averages 2.37 stars and accounts for 52.9% of one-star reviews. Topic, rating, and trend analyses inform proposed actions for quality review, clearer product information, gift-oriented merchandising tests, and review monitoring.</p>
+<p><strong>Methods:</strong> K-Means on TF-IDF and LDA on word counts · a 50k seeded sample selects the recipe, 858k reviews provide scale comparisons · no clear silhouette or elbow optimum; cluster content supports K=7, while T=10 is the smaller end of the c_v coherence plateau and held-out perplexity does not favor more topics · sample-to-full alignment by top-term Jaccard with the Hungarian algorithm · metadata cross-tabs against star rating, verified purchase, and year.
+<strong>Stack:</strong> Python · pandas · scikit-learn · gensim · NLTK · matplotlib.</p>
+
+</div><section id="report-section-1" class="section-padding section--editorial" data-section-num="01"><div class="section-header"><h2 class="section-title">At a glance</h2></div><div class="report-block" id="report-1-1">
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">Metric</th>
+<th scope="col">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>US watch reviews with a body (2001 to 2015)</td>
+<td>960,713</td>
+</tr>
+<tr>
+<td>Final modeling corpus after length and zero-vector filtering</td>
+<td>858,037</td>
+</tr>
+<tr>
+<td>Mean stars of the malfunction/returns topic</td>
+<td>2.37</td>
+</tr>
+<tr>
+<td>One-star reviews landing on that topic</td>
+<td>52.9%</td>
+</tr>
+<tr>
+<td>Mean top-term Jaccard, sample vs full clusters</td>
+<td>0.52</td>
+</tr>
+<tr>
+<td>Cosine silhouette (clusters are weakly separated)</td>
+<td>~0.01</td>
+</tr>
+</tbody>
+</table></div>
+
+</div></section><section id="report-section-2" class="section-padding section--editorial" data-section-num="02"><div class="section-header"><h2 class="section-title">Executive summary</h2></div><div class="report-block" id="report-2-1">
+<p>This is an unsupervised read of 960,713 US watch reviews (2001 to 2015) with two complementary models: K-Means on TF-IDF for hard groups, and LDA on word counts for soft, overlapping topics. The recipe is selected on a seeded 50,000-review sample; 858,170 full-corpus reviews pass the length threshold, and 858,037 remain for fitting and scale comparisons after zero-vector removal.</p>
+<p>On the sample, neither the cosine silhouette nor the elbow selects a cluster count (the silhouette is near 0.01 and inertia has no clear elbow). K*=7 is chosen from interpretable cluster content; T*=10 is the smaller topic count on the coherence plateau, while perplexity does not favor adding topics. Under a large mass of generic praise, three concrete themes recur in both models and line up with a star rating the text models never saw: timekeeping and battery, band and sizing, and gifting.</p>
+<p>The lowest-rated full-corpus topic provides a review-triage signal: a malfunction/returns topic averages 2.37 stars, roughly 1.4 below the next-lowest topic, and holds 52.9% of modeled one-star reviews. High topic shares occur in LED, silicone, and rhinestone product-title groups; their low-price positioning is unverified. The time trend is sensitive to review-length selection: value praise is nearly flat within long reviews, but this descriptive check cannot rule out changing preferences. Trust the themes over the hard partition: the concrete clusters reproduce at top-term Jaccard 0.60 to 0.67 while the partition itself stays weakly separated, so the report distinguishes sample clusters, full-corpus dominant-topic shares, and mean topic weights rather than treating them as interchangeable.</p>
+<p>These findings support proposals for functional-issue triage, clearer sizing and operating instructions, gift-oriented merchandising tests, and review-trend monitoring.</p>
+
+</div></section><section id="report-section-3" class="section-padding section--editorial" data-section-num="03"><div class="section-header"><h2 class="section-title">1 The business question and its data</h2></div><div class="report-block" id="report-3-1">
+<p>A seller or category manager looking at a review corpus wants to know what buyers actually write about, so that quality work and merchandising can be aimed at real concerns instead of guesses. Watch reviews make that hard in a specific way: they are short, and about six in ten are five-star, so there is no clean, separable customer segmentation waiting to be found. The useful question is narrower, and it has three parts. What structure does the text actually contain? How much of it is real signal or an artifact of a few high-frequency filler words? And which metadata does that structure line up with: star rating, verified purchase, year of review?</p>
+<p>Nothing in the data carries a topic label or a segment label; the work is therefore unsupervised throughout. Two models look at the same corpus from different angles, and a structure that both recover is more credible than one that only one of them reports.</p>
+<h3>The data</h3>
+<p>The corpus is the Watches slice of the Amazon Customer Reviews dataset: 15 columns, 960,872 raw records, all <code>marketplace = US</code> and <code>product_category = Watches</code>, spanning April 2001 to August 2015. Dropping the 159 rows with an empty body leaves <strong>960,713 reviews</strong>. The review text is in <code>review_body</code>; <code>star_rating</code>, <code>verified_purchase</code>, <code>review_date</code>, and <code>product_title</code> supply the metadata the analysis crosses the text against. The source is Amazon Customer Reviews; the <a href="https://aws.amazon.com/blogs/big-data/discovering-metadata-with-aws-lake-formation-part-1/">AWS dataset notice</a> describes the original distribution channel.</p>
+
+</div></section><section id="report-section-4" class="section-padding section--editorial" data-section-num="04"><div class="section-header"><h2 class="section-title">2 Corpus profile and a sample that matches it</h2></div><div class="report-block" id="report-4-1">
+<p>Four facts about the corpus shape everything downstream. Ratings are J-shaped: <strong>59.5%</strong> are five-star, with a secondary bump of <strong>8.9%</strong> at one star. <strong>86.5%</strong> of reviews are verified purchases. The median body length is 149 characters; the random sample has a median of about 14 content stems after cleaning. And <strong>9.0%</strong> of review bodies are exact duplicates, mostly short praise like "Love it", retained under the original-record policy; review authenticity is not independently verified.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Star rating distribution" class="figure-zoom" type="button"><img alt="Star rating distribution" decoding="async" height="614" loading="lazy" src="figures/sample_star_rating_distribution.png" width="1037"/></button><figcaption><em>Figure 1. The distribution is J-shaped: a tall five-star bar, a low middle, and a secondary lift at one star. A mean rating hides this shape, which is why the analysis works with the mix instead of the average.</em></figcaption></figure>
+
+<h3>Why the sample has to be random</h3>
+<p>The file is sorted by date descending, which puts the first 1,000 rows on a single day (2015-08-31) instead of a spread across the corpus. A head-of-file slice therefore covers only one day. Method selection uses a seeded random draw of 50,000 reviews, and the plotted star-rating, verified-purchase, and year margins are close to those of the corpus.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Sample versus population margins" class="figure-zoom" type="button"><img alt="Sample versus population margins" decoding="async" height="594" loading="lazy" src="figures/sample_vs_population_marginals.png" width="1927"/></button><figcaption><em>Figure 2. Star rating, verified share, and year, for the 50,000-review sample against the full population. The three margins track closely. This descriptive check does not establish unbiased joint distributions or topic estimates, or representativeness of all buyers.</em></figcaption></figure>
+
+<blockquote>
+<p><strong>Interpretation.</strong> The structure worth finding is the handful of concrete complaints underneath the praise. A large block of generic five-star text will dominate any unsupervised grouping; the analysis is built to read what sits beneath it.</p>
+</blockquote>
+
+</div></section><section id="report-section-5" class="section-padding section--editorial" data-section-num="05"><div class="section-header"><h2 class="section-title">3 Preprocessing and a shared vocabulary</h2></div><div class="report-block" id="report-5-1">
+<h3>The goal</h3>
+<p>Turn raw review text into one matrix both models can read, without paying for tokenization twice or letting the two models see different words.</p>
+<h3>Cleaning and the modeling scope</h3>
+<p>One preprocessing function, reused verbatim in the full-corpus notebook so the two runs are comparable, lowercases each body, strips HTML residue (<strong>13.7%</strong> of sample bodies carry a tag or character entity such as <code>&lt;br /&gt;</code> or <code>&amp;#34;</code>), keeps alphabetic tokens of at least three letters, drops NLTK English stopwords, and Snowball-stems what remains. A review enters the modeling corpus only if it has <strong>at least three content stems</strong>; this is an analysis threshold, not evidence that shorter text contains no information. That scope removes <strong>10.8%</strong> of the sample, and what it removes is the shortest, happiest text: the dropped reviews average 4.53 stars against 4.09 for the kept ones. Modeling also removes zero vectors after vocabulary pruning, leaving 44,592 sample reviews; full-corpus results below use their own final-matrix scope.</p>
+<h3>Counts first, TF-IDF derived</h3>
+<p><code>CountVectorizer(min_df=20, max_df=0.5)</code> fits the vocabulary once, at <strong>2,800 terms</strong>. The <code>max_df=0.5</code> cutoff removes <code>watch</code> itself, a term above the document-frequency threshold, so this analysis does not add a separate domain stopword list. TF-IDF is then derived from that same count matrix with <code>TfidfTransformer(sublinear_tf=True, norm="l2")</code>. Word counts preserve the token-occurrence interpretation of LDA, and the code applies ordinary K-Means to L2-normalized TF-IDF; it has no additional centroid-normalization step and should not be described as spherical K-Means. Fitting counts first and deriving TF-IDF lets both models share one vocabulary, which is what makes their agreement in section 6 meaningful.</p>
+<blockquote>
+<p><strong>Interpretation.</strong> The two models share a vocabulary. Because the count matrix and the TF-IDF matrix are built from the same terms, shared themes provide internal consistency evidence, but the shared bag-of-words representation also imposes common limits and does not verify topic labels.</p>
+</blockquote>
+<h3>The cost</h3>
+<p>The three-stem floor trades coverage for signal. It discards 10.8% of reviews, and those reviews are not random: they are disproportionately short five-star praise. The gifting and value themes below are therefore measured on a corpus that excludes some of the shortest, highest-rated reviews.</p>
+
+</div></section><section id="report-section-6" class="section-padding section--editorial" data-section-num="06"><div class="section-header"><h2 class="section-title">4 Cluster count and the K-Means partition</h2></div><div class="report-block" id="report-6-1">
+<h3>The goal</h3>
+<p>Split the reviews into hard groups of similar text, and decide how many groups from evidence instead of by decree.</p>
+<h3>Choosing K</h3>
+<p>The sweep runs K from 2 to 15 and looks at two things: inertia (the elbow) and the cosine silhouette on a 10,000-review subsample. Neither gives a clean answer. The silhouette runs from 0.0106 to 0.0164 and generally rises with local fluctuations, without a distinct optimum, and inertia falls by less than 4% across the whole range with no knee. Short, positive review text does not carve into well-separated balls, and K has to be a modeling choice.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Cluster-count metrics" class="figure-zoom" type="button"><img alt="Cluster-count metrics" decoding="async" height="656" loading="lazy" src="figures/sample_kmeans_elbow_silhouette.png" width="1790"/></button><figcaption><em>Figure 3. Inertia (left) bends smoothly with no knee; the silhouette (right) sits near 0.01 and generally rises with small local fluctuations. The scores vary little across the scan and show weak separation; neither curve provides a distinct optimum.</em></figcaption></figure>
+
+<p>K*=7 is chosen for interpretable cluster content; the reading that smaller K merges concrete themes into praise remains exploratory and is not validated against independent labels. Neither metric contradicts the choice, and neither makes it; content settles it.</p>
+<h3>The seven clusters</h3>
+<p>At K=7, four of the clusters (about 53% of the modeled corpus) are generic praise separated by adjective and length instead of subject: a "good"-led cluster, a "great"-led cluster, a "nice"-led cluster, and a long-narrative cluster (30.1%) that touches price, looks, and caveats at once. The other three carry a real subject: <strong>timekeeping and battery</strong> (22.0%), <strong>band and sizing</strong> (13.8%), and <strong>gifting</strong> (11.1%). Those three are what the rest of the analysis tracks.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Cluster top terms" class="figure-zoom" type="button"><img alt="Cluster top terms" decoding="async" height="925" loading="lazy" src="figures/sample_cluster_top_terms.png" width="2385"/></button><figcaption><em>Figure 4. Top terms by centroid weight for each cluster. Clusters 4, 5, and 6 read as band/sizing, gifting, and timekeeping/battery; the rest are praise graded by adjective.</em></figcaption></figure>
+
+<h3>Do the clusters mean anything?</h3>
+<p>Clustering used only the text. Crossing the clusters with star rating, which they never saw, is the first test of whether they mean more than shared words.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Star mix and mean star by cluster" class="figure-zoom" type="button"><img alt="Star mix and mean star by cluster" decoding="async" height="614" loading="lazy" src="figures/sample_cluster_star_heatmap.png" width="1927"/></button><figcaption><em>Figure 5. Star-rating mix within each cluster (left) and mean star per cluster (right). Gifting is the happiest cluster at 4.79 stars, timekeeping and battery the least happy at 3.73, with band and sizing below the corpus mean at 3.96.</em></figcaption></figure>
+
+<blockquote>
+<p><strong>Interpretation.</strong> What separates the clusters is subject and sentiment, not a clean geometry. The text-only groups sort themselves by a rating they never saw, from 4.79 stars for gifting down to 3.73 for timekeeping and battery, and that alignment is the first evidence the groups carry meaning beyond word co-occurrence.</p>
+</blockquote>
+
+</div></section><section id="report-section-7" class="section-padding section--editorial" data-section-num="07"><div class="section-header"><h2 class="section-title">5 Topic count and the LDA topics</h2></div><div class="report-block" id="report-7-1">
+<h3>The goal</h3>
+<p>Recover soft, overlapping topics, where a review can belong to several at once, and choose how many the same way K was chosen: sweep and score.</p>
+<h3>Choosing T</h3>
+<p>Two scores, because they disagree in an instructive way. Held-out perplexity, fit on 80% of documents and scored on the other 20%, rewards raw predictive fit, and here it keeps worsening as topics are added (839 at T=4 to 983 at T=15). On its own it would push toward very few, generic topics. c_v coherence, a sliding-window co-occurrence score over the actual texts, provides a proxy for topic interpretability through word co-occurrence, and it climbs to a 0.5226 to 0.5266 plateau at T=10 to 12 before falling at T=15. T*=10 takes the plateau at its cheaper end.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Topic-count selection" class="figure-zoom" type="button"><img alt="Topic-count selection" decoding="async" height="645" loading="lazy" src="figures/sample_lda_topic_selection.png" width="1192"/></button><figcaption><em>Figure 6. Held-out perplexity (gray, lower is better fit) and c_v coherence (red, higher means greater measured coherence). They pull in opposite directions; coherence peaks near T=10 to 12, where the topics are still nameable.</em></figcaption></figure>
+
+<h3>The ten topics</h3>
+<p>LDA is fit on <code>Xc</code>, the count matrix, to retain the token-occurrence interpretation of the model. At T=10 the topics are all nameable: value-for-money praise (13.8% dominant), band-and-battery durability (15.9%), gift and fit (13.1%), compliments and everyday wear (11.8%), ordering/shipping/returns (10.6%), plus case-and-build, digital features, color, dial and hands, and time-setting.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: LDA topic top terms" class="figure-zoom" type="button"><img alt="LDA topic top terms" decoding="async" height="916" loading="lazy" src="figures/sample_topic_top_words.png" width="2685"/></button><figcaption><em>Figure 7. Top terms per topic, fit on word counts. The high-weight words support tentative topic names; coherence does not establish label validity.</em></figcaption></figure>
+
+<p><strong>Sample-model topic IDs and tentative labels</strong></p>
+<p>Topic names summarize the meaning of the model’s high-weight terms. Sample and full-corpus topics have separate IDs and are compared through term alignment.</p>
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">ID</th>
+<th scope="col">Tentative label and saved stems</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>Case and build: look, case, like, wrist, band, movement, one, make, strap, face, size, feel</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Digital features: easi, read, time, light, use, featur, water, great, like, function, digit, casio</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Color and finish: color, like, gold, look, face, pictur, realli, band, love, silver, white, one</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Ordering, shipping and returns: amazon, order, purchas, return, ship, receiv, product, arriv, time, work, buy, one</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Value-for-money praise: look, good, price, great, qualiti, nice, like, recommend, product, well, would, realli</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Band and battery durability: band, one, year, replac, use, get, strap, work, last, batteri, time, wear</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Gift and fit: love, wrist, gift, big, size, bought, look, small, like, fit, perfect, nice</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Dial and hands: hand, time, day, second, light, look, see, dial, date, read, hour, dark</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Setting the time: time, set, one, work, clock, get, day, use, instruct, button, batteri, keep</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Compliments and everyday wear: love, great, wear, look, one, get, compliment, time, price, mani, lot, casual</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Topics against star rating</h3>
+<p>The same reality check as for clusters. Every topic below the corpus mean is a concern topic and every praise topic sits above it: durability, ordering and returns, dial and hands, and time-setting at the bottom (3.45 to 3.65 stars), compliments at the top (4.83). The verified split is small but sensible, with the case-and-build topic lowest at about 76%.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Mean star and verified share by topic" class="figure-zoom" type="button"><img alt="Mean star and verified share by topic" decoding="async" height="614" loading="lazy" src="figures/sample_topic_star_rating.png" width="1936"/></button><figcaption><em>Figure 8. Mean star by topic (red below the corpus mean) and verified share by topic. Concern topics cluster below the mean; praise topics above it.</em></figcaption></figure>
+
+<blockquote>
+<p><strong>Interpretation.</strong> Durability and time-setting have relatively low sample topic means, supporting priority review of functional descriptions. Color and appearance are not the highest-rated topics; mean differences do not establish that appearance problems are irrelevant or that functional improvements would be effective.</p>
+</blockquote>
+
+</div></section><section id="report-section-8" class="section-padding section--editorial" data-section-num="08"><div class="section-header"><h2 class="section-title">6 Two unsupervised views and their agreement</h2></div><div class="report-block" id="report-8-1">
+<p>K-Means assigns each review to one cluster using distances between TF-IDF vectors; LDA estimates a mixture of topics from word counts. Similar content groupings provide evidence of internal consistency. The row-normalized cross-tab shows the distribution of dominant LDA topics within each cluster. A review’s dominant topic is its highest-weight topic, used here for the summary; LDA retains the full topic mixture.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Cluster versus topic agreement" class="figure-zoom" type="button"><img alt="Cluster versus topic agreement" decoding="async" height="734" loading="lazy" src="figures/sample_cluster_topic_crosstab.png" width="1245"/></button><figcaption><em>Figure 9. Rows on the vertical axis are K-Means clusters; columns on the horizontal axis are dominant LDA topics. Each axis follows its own numeric IDs. Cell values are percentages within a cluster, rounded to whole percentages; darker red means a larger share. Read across a row to locate its main topics, then compare rows: cluster 0 places 54% in topic 4, while cluster 5 places 43% and 28% in topics 6 and 9. These local correspondences provide internal consistency clues, without establishing a one-to-one match or independently validating clustering quality.</em></figcaption></figure>
+
+<p>The "good"-praise cluster puts 54% of its reviews on the value-praise topic; the gifting cluster splits between gift/fit (43%) and compliments (28%); band and sizing concentrates on durability (41%) plus the sizing half of gift/fit (20%); timekeeping and battery spreads over time-setting (25%) and durability (21%).</p>
+<blockquote>
+<p><strong>Interpretation.</strong> The agreement is between two different geometries, with neither model checking itself. K-Means hard groups and LDA soft topic distributions recover related content. This is internal consistency evidence and does not rule out effects of the shared representation or model choices.</p>
+</blockquote>
+
+</div></section><section id="report-section-9" class="section-padding section--editorial" data-section-num="09"><div class="section-header"><h2 class="section-title">7 Stability and occupancy at full scale</h2></div><div class="report-block" id="report-9-1">
+<h3>The goal</h3>
+<p>Check whether the 50k recipe holds on the full corpus, and read the numbers the report should quote, without re-searching K or T.</p>
+<h3>The recipe transfers</h3>
+<p>On all 960k reviews, 89.3% clear the three-stem bar, leaving <strong>858,170</strong> after the length threshold; zero-vector removal leaves 858,037 reviews in the final modeling matrix. With <code>min_df</code> raised from 20 to 200 to match the 20-times-larger corpus, the vocabulary lands at 3,723 terms, of which <strong>75.2%</strong> already appear in the sample vocabulary, and <code>watch</code> is again removed by <code>max_df</code>. A K=5, 7, 9 sanity check keeps the cosine silhouette between 0.0099 and 0.0142, the same flat picture the sample showed, so K*=7 stays a defensible operating point chosen for interpretability, since no metric selects it.</p>
+<p>Fitting settings differ: final sample LDA uses batch_size=2048 and max_iter=20, versus batch_size=8192 and max_iter=5 at full scale; clustering also changes from KMeans to MiniBatchKMeans. For T selection, vocabulary is fitted on all modeled sample texts before the 80/20 LDA fit/perplexity split, and c_v coherence uses all sample texts. This is not an independently held-out validation of the entire pipeline.</p>
+<h3>Clusters and topics realign</h3>
+<p>Silhouettes near 0.01 indicate weak separation (full K-Means and MiniBatchKMeans agree at only ARI 0.286 on the sample); the validation aligns each full-corpus cluster to its sample counterpart by top-term Jaccard with the Hungarian algorithm, instead of expecting an identical partition. The clusters match at mean Jaccard <strong>0.522</strong>: all three concrete clusters have relatively high top-term overlap (band/sizing 0.67, gifting 0.60, timekeeping 0.60), and the weakest matches (0.25 and 0.33) are both generic-praise clusters whose boundaries were fuzzy on the sample too.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Cluster stability and occupancy" class="figure-zoom" type="button"><img alt="Cluster stability and occupancy" decoding="async" height="674" loading="lazy" src="figures/full_cluster_sizes_vs_sample.png" width="1934"/></button><figcaption><em>Figure 10. Aligned top-term Jaccard per cluster (left) and cluster occupancy, sample against full (right). Concrete clusters have relatively high top-term overlap; the two concern-cluster shares change (timekeeping 22% to 14%, band/sizing 14% to 19%).</em></figcaption></figure>
+
+<p>Aligned cluster shares also change. This comparison does not track individual review assignments or isolate the contributions of corpus, vocabulary, and algorithm changes, so it cannot attribute the change to borderline reviews switching clusters. The topics realign at a softer mean Jaccard of <strong>0.333</strong>, indicating limited word-content overlap across settings. The algorithm assigns a counterpart to every topic; this does not establish semantic stability. The weakest match (0.14) pairs with the full-corpus malfunction/returns topic, whose high-weight reviews support that label, but it does not establish that 960k reviews improve topic quality over the 50k sample.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Topic stability, sample versus full" class="figure-zoom" type="button"><img alt="Topic stability, sample versus full" decoding="async" height="885" loading="lazy" src="figures/full_stability_jaccard.png" width="1141"/></button><figcaption><em>Figure 11. Aligned top-term Jaccard for the ten topics. Overlap is lower than for clusters; algorithmic pairing does not establish that every topic has reproduced stably.</em></figcaption></figure>
+
+<blockquote>
+<p><strong>Interpretation.</strong> Some concrete clusters retain similar high-weight words; stability of all topics has not been established. The concrete clusters hold at Jaccard 0.60 to 0.67 while aligned cluster shares change, so the report quotes topic-level shares and uses the partition to describe word-content groups.</p>
+</blockquote>
+
+</div></section><section id="report-section-10" class="section-padding section--editorial" data-section-num="10"><div class="section-header"><h2 class="section-title">8 The pain point and the review-behavior trend</h2></div><div class="report-block" id="report-10-1">
+<p>The following descriptive results use the final full-corpus modeling matrix.</p>
+<ul>
+<li><strong>Three concrete themes carry the signal, but generic praise still owns about half the corpus.</strong> Timekeeping/battery, band/sizing, and gifting recur in both models; the other clusters are praise graded by adjective.</li>
+<li><strong>One topic averages 2.37 stars, yet it holds 52.9% of modeled one-star reviews.</strong> The malfunction/returns topic sits about 1.4 stars below the next-lowest and owns the bad tail of the distribution.</li>
+<li><strong>Mean topic weights change across 2008 to 2015; value praise is nearly flat in the long-review subset.</strong> Held to reviews of 20 or more content stems, the apparent rise in value praise flattens from 7.0% to 7.1%.</li>
+<li><strong>The concrete clusters hold at Jaccard 0.60 to 0.67, yet the partition is only weakly separated.</strong> Concrete clusters retain overlapping terms across settings, while silhouettes near 0.01 and changing cluster shares limit claims about partition stability.</li>
+</ul>
+<h3>One sharp pain point</h3>
+<p>Among the ten full-corpus topics, the malfunction/returns topic (top terms time, work, one, battery, back, day) is the outlier that matters: a mean rating of <strong>2.37 stars</strong>, about 1.4 points below the next-lowest topic (band/strap at 3.80), on an 11.1% share. The malfunction/returns topic has the lowest mean rating, supporting priority review of those descriptions. This comparison cannot rule out price or appearance concerns. Two smaller reads sit alongside it: the ordering and fulfillment topic averages 4.64 stars, but a topic mean does not measure the delivery complaint rate, and the lowest verified shares belong to the picture-versus-price topic (79.8%) and the long-term durability topic (78.9%). These marker shares do not establish time elapsed between purchase and review.</p>
+<p><strong>Full-corpus-model topic IDs and tentative labels</strong></p>
+<p>Topic names summarize the meaning of the model’s high-weight terms. Sample and full-corpus topics have separate IDs and are compared through term alignment.</p>
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">ID</th>
+<th scope="col">Tentative label and saved stems</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>Setting/readability: time, set, light, read, use, easi</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Gifting: love, bought, one, gift, year, got</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Malfunction/returns: time, work, one, batteri, back, day</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Ordering/fulfillment: product, amazon, purchas, item, thank, arriv</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Appearance: look, love, face, color, wear, beauti</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Sizing: wrist, big, like, small, size, littl</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Picture versus price: look, like, pictur, price, one, qualiti</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Long-term durability: year, time, wear, water, work, one</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Band/strap: band, strap, link, remov, use, pin</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Value-for-money praise: great, look, good, price, qualiti, nice</td>
+</tr>
+</tbody>
+</table></div>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Mean star and verified share by topic (full corpus)" class="figure-zoom" type="button"><img alt="Mean star and verified share by topic (full corpus)" decoding="async" height="614" loading="lazy" src="figures/full_topic_star_rating.png" width="1936"/></button><figcaption><em>Figure 12. Full-corpus mean star by topic (red below the mean) and verified share by topic. The malfunction/returns topic stands alone at the bottom at 2.37 stars.</em></figcaption></figure>
+
+<p>Top terms can mislabel a topic, and the check is the reviews themselves. The five selected high-weight excerpts for this topic (each at weight 0.99, deduplicated by the first 60 body characters and displayed up to 200 characters) read as breakage-and-return stories: hands falling off, watches that stop or arrive dead, repeated warranty replacements.</p>
+<blockquote>
+<p>"The needle did not move. Replace a new battery did not even move the needle. For the first time to buy Invicta watches, but this does not move the needle..." (weight 0.99, 1 star)</p>
+</blockquote>
+<blockquote>
+<p>"I purchased this watch. At about 1 year after purchase one of the hands fell off, the case was in tact. I returned the watch to Victorinox..." (weight 0.99, 1 star)</p>
+</blockquote>
+<h3>Where the one-star mass sits</h3>
+<p>The pain point is not just low-rated on average; it owns the bad tail. Of the <strong>80,553</strong> one-star reviews in the modeling corpus (9.4% of it), <strong>52.9%</strong> have the malfunction/returns topic as their dominant topic, against its 11.1% corpus-wide share, and the top two topics together cover 63.9% of the one-star mass. This share can inform review-triage priorities, but it does not estimate the proportion of poor ratings that an intervention would eliminate.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Dominant-topic mix: one-star reviews versus the corpus" class="figure-zoom" type="button"><img alt="Dominant-topic mix: one-star reviews versus the corpus" decoding="async" height="614" loading="lazy" src="figures/full_one_star_topic_mix.png" width="1337"/></button><figcaption><em>Figure 13. Dominant-topic share among one-star reviews (red) against all reviews (gray). One topic towers over the rest in the one-star mix while sitting mid-pack in the corpus as a whole.</em></figcaption></figure>
+
+<h3>Which products it lands on</h3>
+<p>A topic-level pain point becomes actionable when it lands on specific products. Among the <strong>202</strong> products with at least 300 modeled reviews, the ten with the highest malfunction-topic share sit at <strong>24.6% to 39.9%</strong>, two to four times the 11.1% baseline, with mean ratings of 2.9 to 3.7. Groups are defined by product_title and include LED, silicone, and rhinestone titles as well as a watch tool. These are dominant-topic shares among reviews, not product failure rates; low-price positioning and product identity remain unverified.</p>
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">Product (truncated)</th>
+<th scope="col" style="text-align:right">Reviews</th>
+<th scope="col" style="text-align:right">Malfunction share</th>
+<th scope="col" style="text-align:right">Mean star</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OrangeTag LED Watch Futuristic Japanese Style Multicolor</td>
+<td style="text-align:right">303</td>
+<td style="text-align:right"><strong>39.9%</strong></td>
+<td style="text-align:right">2.91</td>
+</tr>
+<tr>
+<td>RPM Turbo Blue &amp; White Flash LED Watch</td>
+<td style="text-align:right">323</td>
+<td style="text-align:right">34.7%</td>
+<td style="text-align:right">3.02</td>
+</tr>
+<tr>
+<td>Touch Screen Led Watch Ultra-thin Plastic Candy</td>
+<td style="text-align:right">393</td>
+<td style="text-align:right">28.2%</td>
+<td style="text-align:right">2.92</td>
+</tr>
+<tr>
+<td>PromiseU Leather Bracelet Woman Rhinestone Rivet Chain</td>
+<td style="text-align:right">747</td>
+<td style="text-align:right">27.2%</td>
+<td style="text-align:right">2.96</td>
+</tr>
+<tr>
+<td>Chocolate Geneva Crystal Rhinestone Chronograph</td>
+<td style="text-align:right">472</td>
+<td style="text-align:right">25.2%</td>
+<td style="text-align:right"><strong>2.90</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p><em>Top products by malfunction-topic share, minimum 300 modeled reviews. The corpus-wide share on this topic is 11.1%.</em></p>
+<h3>Topic trends and review length</h3>
+<p>The analysis compares mean topic weights for years from 2008 with at least 200 modeled reviews. The raw trend cannot distinguish review composition from changing buyer preferences. Across 2008 to 2015 the short "set and read the watch" topic falls from about 15% to 9% while generic value praise rises from about 10% to 16%, crossing around 2012 as review volume explodes into 2013 to 2015. No distinct smartwatch topic appears in the results through August 2015, though a fixed 10-topic model may miss a small emerging theme, so this reads as "none visible" instead of "none exists".</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Topic prevalence across 2008 to 2015" class="figure-zoom" type="button"><img alt="Topic prevalence across 2008 to 2015" decoding="async" height="885" loading="lazy" src="figures/full_topic_trend_by_year.png" width="1789"/></button><figcaption><em>Figure 14. Mean topic weight by year. Two lines carry the movement: setting/readability down, generic value praise up, crossing near 2012. Other topics also change; these two have the largest endpoint changes.</em></figcaption></figure>
+
+<p>The length check provides a descriptive comparison. Median review length falls from 26 content stems in 2008 to 10 in 2015, and the share of long reviews (20 or more stems) falls from 64.6% to 26.2%. Within long reviews, mean value-praise weight is nearly flat (7.0% to 7.1%), while setting/readability still falls (17.2% to 13.6%). This shows sensitivity to length selection, but does not quantify a composition contribution or rule out preference changes. Length, reviewer, and product mix within long reviews are not held fixed, and neither significance nor equivalence is tested.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Length check on the trend" class="figure-zoom" type="button"><img alt="Length check on the trend" decoding="async" height="645" loading="lazy" src="figures/full_length_composition_check.png" width="1938"/></button><figcaption><em>Figure 15. Median content stems per year (left), and the two moving topics recomputed on reviews of 20 or more stems (right). Value praise is nearly flat in the long-review subset; this minimum-length filter does not hold length, reviewer mix, or product mix fixed.</em></figcaption></figure>
+
+<blockquote>
+<p><strong>Interpretation.</strong> The raw and long-review trends differ, so monitoring should examine review-length composition. This comparison does not identify the mechanism of change; neither trend directly measures buyer preferences.</p>
+</blockquote>
+
+</div></section><section id="report-section-11" class="section-padding section--editorial" data-section-num="11"><div class="section-header"><h2 class="section-title">9 Themes and the actions they support</h2></div><div class="report-block" id="report-11-1">
+<p>The analysis supports four practical proposals: prioritize functional problems for review, improve product-fit and operating information, test gift-oriented merchandising, and monitor review themes alongside text length. Each proposal sets out its analytical basis, implementation steps and suggested evaluation measures.</p>
+<h3>Method choice: use each model for a specific task</h3>
+<p>K-Means provides groups of similar reviews for exploration, while LDA represents several topics within a review. Both reveal content about timekeeping and batteries, bands and sizing, and gifts, supporting the use of these themes to organize review analysis.</p>
+<p>Cosine silhouettes near 0.01 indicate weak separation, and sample-to-full topic-word overlap is limited. Short text, repeated praise words, and mixed topics are plausible explanations, although their individual contributions were not tested. An implementation should therefore use topic retrieval with human review instead of treating cluster IDs as stable customer types. The models provide useful leads for organizing content, with insufficient evidence for automatic customer segmentation.</p>
+<h3>Quality review: start with malfunction and return complaints</h3>
+<p>The full-corpus malfunction/returns topic averages 2.37 stars and accounts for 52.9% of modeled one-star reviews. Among product-title groups with at least 300 modeled reviews, the ten highest topic shares range from 24.6% to 39.9%. These findings establish a review order: start with title groups containing concentrated functional complaints, then inspect the individual reviews.</p>
+<p>A quality or support team could first match these titles to the product catalog and separate watches from tools. Review priorities should consider both topic share and the number of relevant reviews. Reviewers could classify the text into stopped watches, batteries, hands, arrival condition, and return experiences, then use those categories to examine inspection checks, instructions, and support procedures for the relevant products.</p>
+<p>A pilot could track the proportion of recommended reviews that contain the target problem, review time per useful finding, and agreement with support issue categories. With linked order and return data, a later evaluation could assess whether the response reduces recurring problems. Topic share itself is not a product failure rate.</p>
+<h3>Product information: address fit and operating questions</h3>
+<p>The sample band/sizing cluster averages 3.96 stars and the timekeeping/battery cluster 3.73. Relevant topic terms include wrists, links, buttons, and setting the time. This makes fit and function sensible areas to investigate through product information and operating guidance.</p>
+<p>A team could inspect these reviews to separate actual malfunction, poor fit, and operating difficulty. For confirmed information gaps, product pages could include supported wrist sizes, strap or link adjustment instructions, clear time-setting steps, and battery-care guidance consistent with the product specifications.</p>
+<p>A pilot on products receiving relevant inquiries could compare fit and operating inquiry shares, recurring negative-review content, and support handling time before and after the change. The proposal tests whether clearer information helps; it does not assume that instructions resolve every functional complaint.</p>
+<h3>Gift merchandising: test the purchase occasion</h3>
+<p>The sample gifting cluster averages 4.79 stars and contains language about buying for a husband or wife. This identifies a purchase occasion worth exploring alongside personal use.</p>
+<p>For suitable products, a team could test gift-oriented presentation organized by recipient and occasion, with clear sizing, packaging, and return-policy information. Comparing this presentation with the existing page on clicks, add-to-cart behavior, conversion, and returns would inform whether to expand it.</p>
+<p>The proposal draws on the association between gifting language and higher ratings. The cluster identifies an occasion for testing, rather than assigning a permanent identity to every buyer.</p>
+<h3>Review monitoring: track themes and text length together</h3>
+<p>Median review length falls from 26 content stems to 10. Among reviews with at least 20 stems, mean value-praise weight changes from 7.0% to 7.1%, without the marked increase seen in the full modeled corpus. Direct year-to-year topic comparisons can therefore incorporate changes in review length.</p>
+<p>A recurring review dashboard could show topic weights, ratings, review counts, and length distributions together. The complete modeled corpus and long-review subset should appear side by side, with representative reviews available for inspection. A model or vocabulary update should be compared in parallel before extending an existing trend series.</p>
+<p>A historical review of unusual months could record which alerts persist after length stratification and the proportion judged useful by reviewers. The model would flag changes for investigation, rather than treating topic share as a direct measure of changing preferences.</p>
+<blockquote>
+<p><strong>Interpretation.</strong> Start with human review of malfunction/return content, then improve product information based on confirmed issues. Test gift merchandising separately and use the review dashboard for ongoing monitoring. The deliverable is a set of identified problems, reasoned method choices, and implementation proposals with evaluation criteria.</p>
+</blockquote>
+
+</div></section><section id="report-section-12" class="section-padding section--editorial" data-section-num="12"><div class="section-header"><h2 class="section-title">10 Interpretation and further analysis</h2></div><div class="report-block" id="report-12-1">
+<p>This project analyzes historical watch reviews through topic terms, ratings and product metadata. The methodological considerations below guide further review, model comparison and product analysis.</p>
+<ul>
+<li><strong>The clusters are weakly separated.</strong> Cosine silhouettes near 0.01 mean the hard partition is fuzzy; the clusters have interpretable word content but lack verified segment labels and show both topic and sentiment differences, and the exact occupancy shifts at scale.</li>
+<li><strong>Topic boundaries are soft.</strong> Sample-to-full topic alignment is weak (mean Jaccard 0.33). Shared vocabulary may affect overlap, but the analysis does not isolate corpus, vocabulary, and fitting-setting effects.</li>
+<li><strong>Duplicates are kept and short reviews are dropped.</strong> 9.0% of bodies are exact duplicates (retained under the original-record policy) and 10.8% of the sample fall below the length threshold (dropped), compared with 10.7% of the full corpus; zero vectors are also removed, so shares describe only final modeled reviews.</li>
+<li><strong>English preprocessing and review-level analysis.</strong> The corpus is US Watches only and uses English text preprocessing without independent language validation. A review is not a verified defect record.</li>
+<li><strong>The trend has a residual.</strong> The setting topic still declines after length selection. This descriptive check does not decompose composition and preference contributions or test the significance or equivalence of trends.</li>
+<li><strong>No smartwatch signal, within a fixed topic count.</strong> A 10-topic model may miss a small emerging theme, and the absence of a smartwatch topic around 2015 is "none visible", which is not proof of none. The data also ends in August 2015 and does not describe today's smartwatch market.</li>
+</ul>
+
+</div></section><section id="report-section-13" class="section-padding section--editorial" data-section-num="13"><div class="section-header"><h2 class="section-title">11 Appendix: modeling parameters</h2></div><div class="report-block" id="report-13-1">
+<ul>
+<li><strong>Data:</strong> <code>watch_reviews.tsv</code>, Amazon Customer Reviews (US Watches), 960,872 raw rows, 960,713 after dropping empty bodies. Read with <code>quoting=QUOTE_NONE</code> and <code>dtype_backend="pyarrow"</code>.</li>
+<li><strong>Preprocessing:</strong> lowercase, strip HTML tags and entities, keep <code>[a-z']{3,}</code> tokens, drop NLTK English stopwords plus a short HTML-residue list, Snowball stem with an <code>lru_cache</code>. Modeling scope: at least three content stems.</li>
+<li><strong>Vectorizer (sample):</strong> <code>CountVectorizer(analyzer=str.split, min_df=20, max_df=0.5, max_features=5000)</code>, 2,800 terms; TF-IDF via <code>TfidfTransformer(sublinear_tf=True, norm="l2")</code>. Full corpus: <code>min_df=200</code>, 3,723 terms.</li>
+<li><strong>Clustering:</strong> K swept 2 to 15 with cosine silhouette on a 10k subsample; final <code>KMeans(n_clusters=7, n_init=20)</code>. Full corpus: <code>MiniBatchKMeans(n_clusters=7, batch_size=4096, n_init=10)</code>.</li>
+<li><strong>Topics:</strong> T swept over {4,6,8,10,12,15} with held-out perplexity (80/20) and gensim <code>c_v</code> coherence; final <code>LatentDirichletAllocation(n_components=10, learning_method="online")</code> on counts. Full corpus: online LDA, <code>batch_size=8192</code>.</li>
+<li><strong>Alignment:</strong> sample and full clusters/topics matched by top-20-term Jaccard with <code>scipy.optimize.linear_sum_assignment</code> (Hungarian algorithm). Cross-algorithm reference: full K-Means vs MiniBatchKMeans, ARI 0.286.</li>
+<li><strong>Random seed:</strong> 42.</li>
+</ul>
+<p>This report draws on two notebooks. The sample notebook settles every modeling choice on a 50,000-review draw, where K, T, and the vocabulary can be searched and argued for; the full-corpus notebook fixes K and T while changing vocabulary thresholds and fitting settings to produce descriptive results; reported values use the final modeling matrices.</p>
+
+</div></section></article>
+  </section>
+
+  <section id="related" class="section-padding"><div class="section-header"><h2 class="section-title">Related projects</h2></div><div class="grid md:grid-cols-2 gap-6"><a href="../youtube comment analysis/youtube comment analysis-en.html" class="related-project-card"><h3 class="related-project-title">YouTube comments: ownership signals and channel screening</h3><p class="related-project-description">Build weakly supervised classification and channel candidate rankings from 5,818,979 comments, using TF-IDF, behavioral features and SHAP to analyze pet-ownership language. Assistant review of 300 new comments yields 294 determinate labels and conditional weighted precision of 0.8982.</p><span class="related-project-link">Read case</span></a><a href="../ab testing/ab testing-en.html" class="related-project-card"><h3 class="related-project-title">A/B Testing: the Cookie Cats gate experiment</h3><p class="related-project-description">Compare retention and engagement across 90,189 players, combining allocation checks, bootstrap estimates and power analysis. Seven-day retention is 0.82 percentage points lower in the level-40 group than the level-30 group, with a 95% interval of [−1.33, −0.31], informing gate and return-experience recommendations.</p><span class="related-project-link">Read case</span></a></div></section>
+</main>
+<script src="../../assets/js/logo.js"></script>
+<script src="../../assets/js/common.js"></script>
+<script src="../../assets/js/project.js"></script>
+<script src="../../assets/js/language-switcher.js"></script>
+</body>
+</html>

@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>document.documentElement.classList.add('js');</script>
+  <title>Cookie Cats：把关卡门后移，能留住更多玩家吗？ - 数据诗学</title>
+  <meta name="description" content="比较 90,189 名玩家的留存与参与度，结合分流检验、自助法和统计功效评估关卡门位置。第 40 关组的 7 日留存比第 30 关组低 0.82 个百分点，95% 区间为 [−1.33, −0.31]，据此提出关卡与回访体验建议。">
+  <meta property="og:title" content="Cookie Cats：把关卡门后移，能留住更多玩家吗？">
+  <meta property="og:description" content="比较 90,189 名玩家的留存与参与度，结合分流检验、自助法和统计功效评估关卡门位置。第 40 关组的 7 日留存比第 30 关组低 0.82 个百分点，95% 区间为 [−1.33, −0.31]，据此提出关卡与回访体验建议。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://juyexiao.github.io/projects/ab%20testing/ab%20testing.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:description" content="比较 90,189 名玩家的留存与参与度，结合分流检验、自助法和统计功效评估关卡门位置。第 40 关组的 7 日留存比第 30 关组低 0.82 个百分点，95% 区间为 [−1.33, −0.31]，据此提出关卡与回访体验建议。">
+  <link rel="canonical" href="https://juyexiao.github.io/projects/ab%20testing/ab%20testing.html">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&amp;family=Inter:wght@200;300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;700&amp;family=Noto+Sans+SC:wght@400;500;600&amp;family=Noto+Serif+SC:wght@500&amp;display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="../../assets/css/index.css">
+  <link rel="stylesheet" href="../../assets/css/project.css">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Cookie Cats：把关卡门后移，能留住更多玩家吗？", "description": "比较 90,189 名玩家的留存与参与度，结合分流检验、自助法和统计功效评估关卡门位置。第 40 关组的 7 日留存比第 30 关组低 0.82 个百分点，95% 区间为 [−1.33, −0.31]，据此提出关卡与回访体验建议。", "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Juye Xiao"}}</script>
+</head>
+<body class="transition-colors duration-300 report-page">
+<div class="scroll-progress" id="scroll-progress"></div>
+<header class="navbar fixed top-0 left-0 right-0 z-50" id="navbar">
+<div class="container-main h-full flex items-center justify-between">
+<!-- Logo部分 -->
+<a class="navbar-logo" href="../../index.html#hero" id="navbar-logo">
+<!-- SVG Logo -->
+<svg class="logo-svg-nav" viewbox="0 0 40 40">
+<!-- 背景数据网格 -->
+<g class="grid-bg">
+<!-- 垂直线 -->
+<line class="grid-line-v" style="animation-delay: 0.1s, 0s" x1="8" x2="8" y1="0" y2="40"></line>
+<line class="grid-line-v" style="animation-delay: 0.2s, 0.5s" x1="16" x2="16" y1="0" y2="40"></line>
+<line class="grid-line-v" style="animation-delay: 0.3s, 1s" x1="24" x2="24" y1="0" y2="40"></line>
+<line class="grid-line-v" style="animation-delay: 0.4s, 1.5s" x1="32" x2="32" y1="0" y2="40"></line>
+<!-- 水平线 -->
+<line class="grid-line-h" style="animation-delay: 0.5s, 0s" x1="0" x2="40" y1="10" y2="10"></line>
+<line class="grid-line-h" style="animation-delay: 0.6s, 0.7s" x1="0" x2="40" y1="20" y2="20"></line>
+<line class="grid-line-h" style="animation-delay: 0.7s, 1.4s" x1="0" x2="40" y1="30" y2="30"></line>
+</g>
+<!-- 织梭动画线 -->
+<line class="weaver-line" id="weaverLine" x1="0" x2="40" y1="20" y2="20"></line>
+<!-- JX字母 -->
+<text class="logo-letters" id="logoLetters" text-anchor="middle" x="20" y="26">JX</text>
+</svg>
+<!-- 名字签名（悬停显示） -->
+<div class="logo-name">
+<div class="logo-name-text">Juye Xiao</div>
+<div class="logo-name-subtitle">Data Analyst</div>
+</div>
+</a>
+<nav class="hidden md:flex items-center space-x-8">
+<a class="nav-link" href="../../index.html#about">关于</a>
+<a class="nav-link" href="../../index.html#experience">经历</a>
+<a class="nav-link" href="../../index.html#education">教育</a>
+<a class="nav-link" href="../../index.html#projects">项目</a>
+<a class="nav-link" href="../../index.html#skills">技能</a>
+<a class="nav-link" href="../../index.html#contact">联系</a>
+</nav>
+<div class="flex items-center space-x-4">
+<button aria-label="切换主题" class="btn-secondary !p-2 !rounded-full" id="theme-toggle">
+<i class="block dark:hidden" data-lucide="sun"></i>
+<i class="hidden dark:block" data-lucide="moon"></i>
+</button>
+<button class="btn-secondary !p-2 !rounded-full" id="lang-toggle">
+<span class="font-bold text-sm">EN</span>
+</button>
+<button aria-controls="mobile-menu" aria-expanded="false" aria-label="打开菜单" class="btn-secondary !p-2 !rounded-full md:hidden" id="menu-toggle">
+<i class="menu-icon-open" data-lucide="menu"></i>
+<i class="menu-icon-close" data-lucide="x"></i>
+</button>
+</div>
+</div>
+<nav aria-label="移动端导航" class="mobile-menu md:hidden" id="mobile-menu">
+<a class="nav-link" href="../../index.html#about">关于</a>
+<a class="nav-link" href="../../index.html#experience">经历</a>
+<a class="nav-link" href="../../index.html#education">教育</a>
+<a class="nav-link" href="../../index.html#projects">项目</a>
+<a class="nav-link" href="../../index.html#skills">技能</a>
+<a class="nav-link" href="../../index.html#contact">联系</a>
+</nav>
+</header>
+<main class="container-main">
+  <section id="project-hero" class="section-padding report-hero">
+    <div class="section-eyebrow"><span class="section-kicker">实验分析</span></div>
+    <h1 class="hero-title">Cookie Cats：把关卡门后移，能留住更多玩家吗？</h1>
+    <p class="subtitle report-standfirst">比较 90,189 名玩家的留存与参与度，结合分流检验、自助法和统计功效评估关卡门位置。第 40 关组的 7 日留存比第 30 关组低 0.82 个百分点，95% 区间为 [−1.33, −0.31]，据此提出关卡与回访体验建议。</p>
+    <p class="reading-time">2026 · 分析更新</p>
+    <div class="hero-stats"><div class="hero-stat"><div class="hero-stat__num">90,189</div><div class="hero-stat__label">玩家记录</div></div><div class="hero-stat"><div class="hero-stat__num">−0.82 pp</div><div class="hero-stat__label">7 日留存差（40−30）；95% 区间 −1.33 至 −0.31 pp</div></div><div class="hero-stat"><div class="hero-stat__num">0.0086</div><div class="hero-stat__label">分流比例检验 p 值</div></div></div>
+    <div class="report-actions"><a class="btn btn-primary" href="#content">开始阅读</a><a class="btn btn-secondary" href="../../index.html#projects">返回项目概览</a></div>
+  </section>
+
+  <section id="content" class="section-padding report-layout">
+    <aside><nav class="project-toc" id="project-toc" aria-label="报告目录"><h3>目录</h3><ul id="toc-list"><li><a class="toc-link" href="#report-section-1">摘要</a></li><li><a class="toc-link" href="#report-section-2">概览</a></li><li><a class="toc-link" href="#report-section-3">1 关卡门后移实验及其设计</a></li><li><a class="toc-link" href="#report-section-4">2 分流完整性与数据</a></li><li><a class="toc-link" href="#report-section-5">3 留存效应及其量级</a></li><li><a class="toc-link" href="#report-section-6">4 多重比较与自助法下的稳健性</a></li><li><a class="toc-link" href="#report-section-7">5 统计功效与可检测效应</a></li><li><a class="toc-link" href="#report-section-8">6 参与度：次级读数</a></li><li><a class="toc-link" href="#report-section-9">7 这份数据的边界</a></li><li><a class="toc-link" href="#report-section-10">8 关卡门决策</a></li><li><a class="toc-link" href="#report-section-11">9 附录：检验背后的中心极限定理</a></li></ul></nav></aside>
+    <article class="content-area report-body" id="report-body"><div class="report-block" id="report-intro-1">
+<p>第 40 关组的 7 日留存低 0.82 个百分点，次日留存和游戏局数未显示明确改善。基于这组观察，建议优先保留第 30 关方案，把下一轮优化放在关卡门前后的等待与回访体验。</p>
+
+</div><section id="report-section-1" class="section-padding section--editorial" data-section-num="01"><div class="section-header"><h2 class="section-title">摘要</h2></div><div class="report-block" id="report-1-1">
+<p>这个项目回答一个产品问题：把进度门从第 30 关延后到第 40 关，是否值得推广？分析使用 90,189 条公开玩家记录，依次比较留存比例、结果稳健性和游戏局数。</p>
+<p>第 40 关组的 7 日留存为 18.20%，低于第 30 关组的 19.02%，差值为 −0.82 个百分点，95% 置信区间为 [−1.33, −0.31]，p = 0.0016。Holm 校正与 10,000 次 bootstrap 均支持负向统计差异。次日留存和游戏局数没有提供明确的改善证据，也未证明两组等效。</p>
+<p>据此，建议优先保留第 30 关方案，暂缓第 40 关全面推广；后续补充到达关卡门、等待和返回事件，再小范围测试等待提示、回访奖励或等待时长。第 7 节进一步说明分流检验与后续实验设计。</p>
+
+</div></section><section id="report-section-2" class="section-padding section--editorial" data-section-num="02"><div class="section-header"><h2 class="section-title">概览</h2></div><div class="report-block" id="report-2-1">
+<div aria-label="数据表（可横向滚动）" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col"></th>
+<th scope="col"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>参与随机化的安装</td>
+<td>90,189（对照 44,700 gate_30，实验 45,489 gate_40）</td>
+</tr>
+<tr>
+<td>主 / 次指标</td>
+<td><code>retention_7</code>（第 7 天回访）/ <code>retention_1</code>（第 1 天回访）</td>
+</tr>
+<tr>
+<td>7 日留存变化</td>
+<td>-0.82 个百分点（18.20% 对 19.02%），95% 置信区间 [-1.33, -0.31] 个百分点，p = 0.0016</td>
+</tr>
+<tr>
+<td>次日留存变化</td>
+<td>-0.59 个百分点，95% 置信区间 [-1.24, +0.06] 个百分点，p = 0.074，不显著</td>
+</tr>
+<tr>
+<td>最小可检测效应</td>
+<td>实际组间样本比例、约 19% 的 7 日基线、双侧 α = 0.05、80% 功效下约 0.74 个百分点</td>
+</tr>
+<tr>
+<td>SRM p 值</td>
+<td>0.0086，分流均衡性告警，须先核查</td>
+</tr>
+<tr>
+<td>数据来源</td>
+<td><code>cookie_cats.csv</code>，90,189 行，5 个字段，无缺失值</td>
+</tr>
+</tbody>
+</table></div>
+
+</div></section><section id="report-section-3" class="section-padding section--editorial" data-section-num="03"><div class="section-header"><h2 class="section-title">1 关卡门后移实验及其设计</h2></div><div class="report-block" id="report-3-1">
+<p>Cookie Cats 在游戏早期设了一道门：一段强制等待，玩家必须等它解除才能继续。这道门原本在第 30 关，本实验把它移到第 40 关，作用于随机抽取的一半新安装。</p>
+<p>门后移可能减少早期等待，也可能改变玩家返回游戏的动机。这些机制是待检验的解释，现有字段只能比较留存和局数，不能识别具体心理机制。</p>
+<ul>
+<li><strong>随机化单元</strong>：一次新安装，在安装时一次性分入对照（gate_30）或实验（gate_40）。</li>
+<li><strong>主指标</strong>：<code>retention_7</code>，安装后第 7 天是否回访。本分析用它评估较晚的回访情况。</li>
+<li><strong>次指标</strong>：<code>retention_1</code>，次日是否回访。用于补充较早的回访情况，不替代长期价值指标。</li>
+<li><strong>判定口径</strong>：双侧检验，α = 0.05。双侧检验同时关注改善与损害；这是本次公开数据重析的口径，不代表取得了原实验的预注册记录。</li>
+</ul>
+
+</div></section><section id="report-section-4" class="section-padding section--editorial" data-section-num="04"><div class="section-header"><h2 class="section-title">2 分流完整性与数据</h2></div><div class="report-block" id="report-4-1">
+<p>数据来自公开的 <a href="https://www.kaggle.com/datasets/mursideyarkin/mobile-games-ab-testing-cookie-cats">Mobile Games A/B Testing - Cookie Cats</a>，本地副本来源为 <a href="https://github.com/ryanschaub/Mobile-Games-A-B-Testing-with-Cookie-Cats">GitHub 镜像</a>。文件包含玩家 ID、版本、前 14 天游戏局数、次日与 7 日留存标记，共 90,189 行、5 列。</p>
+<p>质检确认用户 ID 唯一、没有缺失。局数中位数为 16、均值接近 52，分布严重右偏；最大值 49,854 是次高值 2,961 的 16.84 倍。因此，留存比较保留全部玩家，局数另做去极值敏感性分析。</p>
+<p>对照组与实验组分别为 44,700 和 45,489 人。以 50/50 为预期的卡方拟合优度检验得到 χ² = 6.90、p = 0.0086；手算与 SciPy 一致。该检查用于识别分组人数异常，后续处理及归因限制见第 7 节。</p>
+
+</div></section><section id="report-section-5" class="section-padding section--editorial" data-section-num="05"><div class="section-header"><h2 class="section-title">3 留存效应及其量级</h2></div><div class="report-block" id="report-5-1">
+<p>在观测相互独立的前提下，两组足够大的成功与失败计数支持正态近似。简单 Wald 差值区间是另一种近似，本分析使用 Newcombe 区间描述差值不确定性。</p>
+<p>对每个指标，原假设 H0 是两组的真实留存率相同，用合并方差的两比例 z 统计量做双侧检验。手写公式与 <code>statsmodels.proportions_ztest</code> 的结果吻合到小数点后六位，既防公式写错、也防库的用法用错。除 p 值外，另有三个量刻画效应大小：绝对差（配 95% Newcombe 区间）、相对变化、Cohen's h。</p>
+<p>Newcombe 区间由两组各自的 Wilson 区间构造，与原假设下合并比例的 z 检验承担不同作用。</p>
+<div aria-label="数据表（可横向滚动）" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">指标</th>
+<th scope="col" style="text-align:right">对照</th>
+<th scope="col" style="text-align:right">实验</th>
+<th scope="col" style="text-align:right">绝对差</th>
+<th scope="col" style="text-align:right">95% 置信区间</th>
+<th scope="col" style="text-align:right">相对变化</th>
+<th scope="col" style="text-align:right">z</th>
+<th scope="col" style="text-align:right">p</th>
+<th scope="col" style="text-align:right">Cohen's h</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>retention_1</td>
+<td style="text-align:right">44.82%</td>
+<td style="text-align:right">44.23%</td>
+<td style="text-align:right">-0.59 pp</td>
+<td style="text-align:right">[-1.24, +0.06]</td>
+<td style="text-align:right">-1.3%</td>
+<td style="text-align:right">-1.78</td>
+<td style="text-align:right">0.074</td>
+<td style="text-align:right">-0.012</td>
+</tr>
+<tr>
+<td><strong>retention_7</strong></td>
+<td style="text-align:right">19.02%</td>
+<td style="text-align:right">18.20%</td>
+<td style="text-align:right"><strong>-0.82 pp</strong></td>
+<td style="text-align:right"><strong>[-1.33, -0.31]</strong></td>
+<td style="text-align:right">-4.3%</td>
+<td style="text-align:right">-3.16</td>
+<td style="text-align:right"><strong>0.0016</strong></td>
+<td style="text-align:right">-0.021</td>
+</tr>
+</tbody>
+</table></div>
+<p>7 日留存的组间差为下降 0.82 个百分点，相对下降 4.3%，区间整体低于零。次日留存方向相同（-0.59 个百分点），但区间跨零，未检出显著差异。这也未证明无变化或等效。两项 Cohen's h 的绝对值都很小，约 0.02；商业影响还取决于安装规模和运营指标，不能仅由统计显著性确定。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：各组留存率及 95% 置信区间" class="figure-zoom" type="button"><img alt="各组留存率及 95% 置信区间" decoding="async" height="647" loading="lazy" src="figures/01_retention_by_group.png" width="1330"/></button><figcaption class="generated-alt-caption">各组留存率及 95% 置信区间</figcaption></figure>
+<p>这组结果提示，方案评估应覆盖完整的 7 日窗口；只看次日回访可能漏掉较晚窗口中的差异。它没有定位流失发生的具体时间，也没有证明玩家因等待而离开。</p>
+
+</div></section><section id="report-section-6" class="section-padding section--editorial" data-section-num="06"><div class="section-header"><h2 class="section-title">4 多重比较与自助法下的稳健性</h2></div><div class="report-block" id="report-6-1">
+<p>主、次指标及检验族是本分析的组织方式，检验族包含两个留存端点 <code>retention_1</code> 与 <code>retention_7</code>。第 6 节的参与度指标单独作为探索性结果，不进入这次校正，也不能作为额外的确认性成功。本分析采用双侧检验，同时评估改善与损害，避免单侧检验遗漏另一方向。</p>
+<p>同时检验两个指标会增加偶然越过 p &lt; 0.05 的机会。Holm 比不校正更严格，在这两个留存端点上控制族错误率。逐步向下校正后，<code>retention_7</code> 仍显著（校正后 p = 0.0031），<code>retention_1</code> 仍不显著（0.074），两个结论都不变。</p>
+<p>百分位自助法按各组观测样本分别重采样 10,000 次，其中 99.9% 的重采样差值为负。这是重采样比例，不是真实效应为负的后验概率。95% 百分位区间 [-1.34, -0.32] 个百分点与解析 Newcombe 区间方向相同、端点接近，并非舍入后完全一致。重采样避免了对差值分布直接采用正态近似，仍依赖观测样本和组内抽样假设。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：7 日留存差异的自助分布" class="figure-zoom" type="button"><img alt="7 日留存差异的自助分布" decoding="async" height="610" loading="lazy" src="figures/02_bootstrap_retention7.png" width="1180"/></button><figcaption class="generated-alt-caption">7 日留存差异的自助分布</figcaption></figure>
+
+</div></section><section id="report-section-7" class="section-padding section--editorial" data-section-num="07"><div class="section-header"><h2 class="section-title">5 统计功效与可检测效应</h2></div><div class="report-block" id="report-7-1">
+<p>按实际样本量及组间比例、约 19% 的 7 日留存基线、双侧 α = 0.05 和 80% 功效，MDE 约为 0.74 个百分点。这是指定条件下的功效计算，并非每次实验都能检出的硬边界。观测 7 日差值为 0.82 个百分点，次日差值为 0.59 个百分点；次日基线不同，不能将两个百分点差值与同一条 MDE 线直接比较，也不能据此认定次日存在真实小效应或把不显著归因于功效不足。下图曲线采用两组等样本量，正文单点采用实际组间比例。</p>
+<p>事后功效（observed power）刻意不报告：它只是 p 值的确定性重写，不带来新信息。这里的 MDE 使用已实现样本量和观察到的基线，是指定条件下的设计读数，不能据此证明事前规划或解释次日不显著。这条曲线也显示了分辨率的代价：把可检测效应减半，所需样本量大致翻两番。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：最小可检测效应随样本量的变化" class="figure-zoom" type="button"><img alt="最小可检测效应随样本量的变化" decoding="async" height="802" loading="lazy" src="figures/03_mde_curve.png" width="1223"/></button><figcaption class="generated-alt-caption">最小可检测效应随样本量的变化</figcaption></figure>
+
+</div></section><section id="report-section-8" class="section-padding section--editorial" data-section-num="08"><div class="section-header"><h2 class="section-title">6 参与度：次级读数</h2></div><div class="report-block" id="report-8-1">
+<p><code>sum_gamerounds</code> 是量的指标，严重右偏，且带着那个 49,854 局的离群账户。因为均值型检验与秩型检验在这里可能不一致，两者都跑，并都在剔除那个极端账户后复跑。</p>
+<p>两组分布形状几乎一致，实验组局数略少（中位数 16 对 17）。Welch t 检验 p = 0.3759，剔除离群账户后为 0.9495；该账户影响均值差和标准误，但两次均未检出显著差异。Mann-Whitney U 的 p 值分别为 0.0502 和 0.0509，按 α = 0.05 均未显著。全体样本的 rank-biserial 相关为 -0.0075，common-language effect 为 0.4962，定义为 P(实验组局数 &gt; 对照组局数) + 0.5 × P(两者相等)。这些检验和小观察效应未证明参与度等效，也不足以单独判定其业务价值。方向与留存结论一致，但量的证据较弱，决策由留存指标承担。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：游戏局数分布" class="figure-zoom" type="button"><img alt="游戏局数分布" decoding="async" height="640" loading="lazy" src="figures/04_gamerounds_distribution.png" width="1180"/></button><figcaption class="generated-alt-caption">游戏局数分布</figcaption></figure>
+<h3>方法比较与结果解释</h3>
+<div aria-label="数据表（可横向滚动）" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">比较</th>
+<th scope="col">回答的问题</th>
+<th scope="col">本项目得到什么</th>
+<th scope="col">对判断的作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>两比例 z 检验与 Newcombe 区间</td>
+<td>留存差异是否明确、大小有多不确定</td>
+<td>7 日差值区间低于零，次日区间跨零</td>
+<td>优先关注 7 日结果，避免只报 p 值</td>
+</tr>
+<tr>
+<td>原始 p 值与 Holm 校正</td>
+<td>同时检验两个留存指标是否改变判断</td>
+<td>7 日校正后 p = 0.0031，次日仍未显著</td>
+<td>主结果不依赖忽略多重比较</td>
+</tr>
+<tr>
+<td>解析区间与组内 bootstrap</td>
+<td>更换不确定性估计方式后方向是否一致</td>
+<td>两种 7 日区间均为负，端点接近</td>
+<td>支持结果对区间估计方式的稳定性，不等于独立数据验证</td>
+</tr>
+<tr>
+<td>Welch 与 Mann-Whitney U</td>
+<td>均值差与秩分布比较是否支持参与度改善</td>
+<td>两者均未在 0.05 下显著</td>
+<td>没有可靠的局数改善证据；MWU 并非一般的中位数检验</td>
+</tr>
+<tr>
+<td>全样本与去极值样本</td>
+<td>单个极端账户是否影响结论</td>
+<td>Welch 的 p 值从 0.3759 变为 0.9495，MWU 较稳定</td>
+<td>同时报告均值、分布与敏感性，不自动将极值当成错误记录</td>
+</tr>
+</tbody>
+</table></div>
+<p>这个项目展示的是实验分析与统计方法选择。不同方法比较的是不同对象，不能用哪个 p 值更小来评定方法好坏；核心是说明方法回答的问题，以及结果是否改变行动建议。</p>
+
+</div></section><section id="report-section-9" class="section-padding section--editorial" data-section-num="09"><div class="section-header"><h2 class="section-title">7 这份数据的边界</h2></div><div class="report-block" id="report-9-1">
+<p>本项目支持方案优先级判断和后续实验设计，以下限制决定了哪些问题还需要补充数据。</p>
+<ul>
+<li><strong>分流与归因。</strong> SRM p = 0.0086 在 0.01 阈值下告警，在 0.001 阈值下不告警。人数偏离本身不能证明分流错误；实验组人数较多且留存较低，差异性纳入是需要排查的解释。原始分流日志与预注册记录未取得，因果归因仍以有效分流为前提；Holm 和 bootstrap 不能修复系统偏差。实际实施时检查分配、曝光与数据过滤记录。</li>
+<li><strong>行为机制。</strong> 没有安装日期和关卡事件，不能判断差异何时出现，也不能确定等待机制是否导致退出。次日与 7 日结果不同，不等于已识别负面影响的起始时间。</li>
+<li><strong>分群比较。</strong> 缺少实验前业务属性。按分组后的游戏局数筛选玩家，可能引入选择偏差；因此当前留存比较沿用原分组，局数作为探索性结果。</li>
+<li><strong>业务收益。</strong> 没有收入、ARPU 或 LTV，人数换算只能作为规模示意。所提方案是下一步可测试的改动，不是已验证有效的产品功能。</li>
+</ul>
+
+</div></section><section id="report-section-10" class="section-padding section--editorial" data-section-num="10"><div class="section-header"><h2 class="section-title">8 关卡门决策</h2></div><div class="report-block" id="report-10-1">
+<p><strong>建议优先保留第 30 关方案，暂缓第 40 关全面推广。</strong> 第 40 关组的 7 日留存更低，次日留存和局数未显示明确改善。下一步的重点是识别玩家在关卡门前后的行为，并测试具体体验改动；适用限制见第 7 节。</p>
+<div aria-label="数据表（可横向滚动）" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">行动</th>
+<th scope="col">分析依据</th>
+<th scope="col">实施方式</th>
+<th scope="col">判断标准</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>保留第 30 关方案</td>
+<td>第 40 关组 7 日留存较低，没有明确的参与度收益</td>
+<td>维持现有设置，暂缓全面推广后移方案</td>
+<td>如需重启后移测试，应有明确的新假设和实验方案</td>
+</tr>
+<tr>
+<td>补齐关卡门行为记录</td>
+<td>聚合留存和局数无法定位退出环节</td>
+<td>记录安装、分组、首次到达门、等待开始与结束、会话结束及返回时间；区分曝光和分配</td>
+<td>能区分到达前离开、等待期间离开、等待后返回，并检查两组事件记录的完整性</td>
+</tr>
+<tr>
+<td>小范围测试等待体验</td>
+<td>后移位置没有显示明确收益，具体机制仍待调查</td>
+<td>保持门位置不变，选择等待提示、回访奖励或等待时长中的一项改动进行随机比较</td>
+<td>预先确定主要指标、可接受下降幅度、样本量和停止规则；建议以 7 日留存为主要结果</td>
+</tr>
+<tr>
+<td>覆盖完整观察窗口</td>
+<td>次日与 7 日提供的证据不同</td>
+<td>等各安装队列完成 7 日观察；若评价 14 天局数，还需等待该窗口完整</td>
+<td>次日作为早期监测，避免以次日不显著提前宣布方案等效或结束评估</td>
+</tr>
+</tbody>
+</table></div>
+<p>等待提示、奖励和时长调整属于候选方案，不预设哪一种有效。关卡事件用于定位问题；正式留存比较仍按原始分配组进行，避免只分析到达关卡门的玩家。涉及内购的方案还应补充收入与付费指标。</p>
+<p>未来样本规划应从业务能接受的最小差异出发，再结合目标指标的基线计算。当前约 0.74 个百分点的 MDE 只适用于第 5 节的样本和 7 日基线条件，不直接作为新实验的损失阈值。</p>
+<h3>安装规模换算（补充）</h3>
+<p>下表使用观测差值和假设日新增规模，说明亚个百分点差异可能对应多少玩家。假设分流有效且差异保持稳定；人数是各安装队列第 7 天回访差的累计，不是某天活跃人数或实际年度损失。</p>
+<div aria-label="数据表（可横向滚动）" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">日新增安装（假设）</th>
+<th scope="col" style="text-align:right">每日新增队列少回访人数</th>
+<th scope="col" style="text-align:right">365 天新增队列累计差</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10,000</td>
+<td style="text-align:right">82</td>
+<td style="text-align:right">29,935</td>
+</tr>
+<tr>
+<td>50,000</td>
+<td style="text-align:right">410</td>
+<td style="text-align:right">149,674</td>
+</tr>
+<tr>
+<td>100,000</td>
+<td style="text-align:right">820</td>
+<td style="text-align:right">299,347</td>
+</tr>
+</tbody>
+</table></div>
+<p>换算使用未舍入的比例差。本数据没有收入或生命周期价值，不能据此计算真实收益。</p>
+
+</div></section><section id="report-section-11" class="section-padding section--editorial" data-section-num="11"><div class="section-header"><h2 class="section-title">9 附录：检验背后的中心极限定理</h2></div><div class="report-block" id="report-11-1">
+<p>两比例 z 检验把样本比例近似当作正态处理，这正是中心极限定理在起作用。从 1 到 6 的离散均匀分布生成参考数组，再独立生成大小为 50 的样本。样本均值近似正态、中心约为 3.5，标准差与参考 σ / √n 的相对误差小于 1%。模拟只演示样本均值的正态近似。留存检验还依赖独立观测及足够的成功、失败计数；模拟不验证真实玩家的独立性或分流机制。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：中心极限定理演示" class="figure-zoom" type="button"><img alt="中心极限定理演示" decoding="async" height="647" loading="lazy" src="figures/05_clt_demo.png" width="1480"/></button><figcaption class="generated-alt-caption">中心极限定理演示</figcaption></figure>
+
+</div></section></article>
+  </section>
+
+  <section id="related" class="section-padding"><div class="section-header"><h2 class="section-title">相关项目</h2></div><div class="grid md:grid-cols-2 gap-6"><a href="../Bank Customer Churn Prediction/Bank Customer Churn Prediction.html" class="related-project-card"><h3 class="related-project-title">银行客户流失：模式、解释与服务容量</h3><p class="related-project-description">结合 10,000 名客户的分组分析、模型比较与 SHAP 解释，识别流失信号并设计服务优先级。冻结阈值 0.275 的测试召回率为 78.39%、精确率为 48.25%，进一步比较不同服务容量下的覆盖与成本。</p><span class="related-project-link">查看详情</span></a><a href="../youtube comment analysis/youtube comment analysis.html" class="related-project-card"><h3 class="related-project-title">YouTube 评论：养宠文本信号与频道筛选</h3><p class="related-project-description">对 5,818,979 条评论构建弱监督分类与频道候选排名，结合 TF-IDF、行为特征和 SHAP 分析养宠文本信号。300 条新评论经助手复核，294 条可判定，条件加权精确率为 0.8982。</p><span class="related-project-link">查看详情</span></a></div></section>
+</main>
+<script src="../../assets/js/logo.js"></script>
+<script src="../../assets/js/common.js"></script>
+<script src="../../assets/js/project.js"></script>
+<script src="../../assets/js/language-switcher.js"></script>
+</body>
+</html>

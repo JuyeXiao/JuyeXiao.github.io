@@ -12,7 +12,7 @@
 - **中英双语**：每个页面均有 `-en.html` 镜像版本，URL 路由切换，本地存储保留偏好
 - **米色设计系统**：温暖优雅的视觉风格（数据诗学 Data Poetics）
 - **动画效果**：Logo "Data Weaver" 动画、滚动渐现、数字计数
-- **项目展示**：3 个完整的数据分析项目，28 张专业图表
+- **项目展示**：8 个首页主项目，12 组中英文详情（24 页）；当前报告引用 96 个图表资源文件
 - **代码展示**：语法高亮的代码块
 - **SEO 优化**：完整的元数据和结构化数据
 
@@ -26,13 +26,16 @@ portfolio/
 │   ├── _template.html                     # 项目页模板 ✅
 │   ├── Bank Customer Churn Prediction/    # 银行客户流失预测 ✅
 │   │   ├── *.html / *-en.html             # 中英两版项目页
-│   │   └── figures/                       # 5 张数据可视化图表
+│   │   └── figures/                       # 当前报告引用图表及原有历史资源
 │   ├── e-commerce fraud detection/        # 电商欺诈检测 ✅
 │   │   ├── *.html / *-en.html             # 中英两版项目页
-│   │   └── figures/                       # 8 张数据可视化图表
-│   └── lendingclub loan prediction/       # 贷款违约预测 ✅
-│       ├── *.html / *-en.html             # 中英两版项目页
-│       └── figures/                       # 15 张数据可视化图表
+│   │   └── figures/                       # 时间评估图表及原有历史资源
+│   ├── lendingclub loan prediction/      # 9,004 笔样本与 full data 进阶案例
+│   ├── youtube comment analysis/         # 弱监督与助手复核
+│   ├── spglobal climate comparison/      # 综合报告 + 三个双语专题
+│   ├── ab testing/                       # Cookie Cats 实验分析
+│   ├── healthy home/                     # 嵌套空间评价与相对预测图
+│   └── amazon watch reviews/             # 手表评论聚类与主题建模
 ├── assets/
 │   ├── css/                                # 样式文件
 │   │   ├── index.css                      # 主样式 + 全局变量 ✅
@@ -59,7 +62,7 @@ portfolio/
 └── 设计风格文档米色.md                      # 设计系统文档 ✅
 ```
 
-> **关于双语**：站点采用 URL 路由式双语方案，每个页面有 `foo.html`（中文）和 `foo-en.html`（英文）两份手写副本，不存在运行时 i18n。修改内容时记得两份都改。
+> **关于双语**：站点采用 URL 路由式双语方案，每个页面有 `foo.html`（中文）和 `foo-en.html`（英文）两份静态文件，不存在运行时 i18n。修改内容时记得两份都改；本次报告内容由限定范围的维护脚本同步。
 
 
 ## 🛠️ 技术栈
@@ -97,37 +100,31 @@ portfolio/
 ### 字体系统
 - 正文 / UI：Inter（从 Google Fonts 加载）
 - 代码：JetBrains Mono（从 Google Fonts 加载，回退 Fira Code / Consolas）
-- 展示字体（标题装饰）：`--font-display` 声明为 `Fraunces, Noto Serif SC, Songti SC, Georgia`，但 Fraunces 当前**未引入**到 Google Fonts `<link>` 中，实际渲染会回退到 Songti SC / Georgia
+- 展示字体：Fraunces / Noto Serif SC；中英文主页与报告页通过 Google Fonts 加载，失败时回退到系统衬线字体
 - 中文回退：PingFang SC / Noto Sans SC
 
-> 实际生效的字体以 `index.html` 的 `<link rel="stylesheet" href="https://fonts.googleapis.com/css2?...">` 为准。如需启用 Fraunces，需把它追加到该 URL 的 `family=` 参数里。
+> 实际生效的字体以 `index.html` 的 `<link rel="stylesheet" href="https://fonts.googleapis.com/css2?...">` 为准。报告页使用同一套字体家族。
 
 ## 📊 项目展示
 
-### 已实现项目（3个）
+### 当前项目入口
 
-1. **银行客户流失预测** 
-   - 使用机器学习预测客户流失风险
-   - SHAP值分析和特征重要性
-   - 5张专业数据可视化图表
+| 首页主项目 | 详情范围 |
+|---|---|
+| S&P Global Capstone | 最新综合报告；模型比较、长序列预测、长期情景与空间暴露三个专题。各页互链，同一项目保留一个首页卡片 |
+| YouTube 评论 | 养宠文本信号、弱监督模型、新评论助手复核与频道候选排序 |
+| 银行客户流失 | 客户分组模式、模型比较、SHAP、选择集阈值 0.275 与服务容量取舍 |
+| 电商首单欺诈 | 回顾性时间评估；正式模型测试 AP=0.010121，既定成本情景选择全批准、测试欺诈零检出 |
+| LendingClub | 9,004 笔贷款样本，Random Forest 阈值 0.22；另附独立时间协议的全量进阶案例，净模拟成本降幅 −21.48% |
+| A/B Testing | Cookie Cats 留存比较、分流检验与关卡体验建议 |
+| Healthy Home | 奥克兰污染物嵌套空间评价、道路相对预测、分区误差诊断与补充观测方案 |
+| Amazon 手表评论 | 评论语料整理、聚类、主题解释与产品改进建议 |
 
-2. **电商欺诈检测**
-   - 实时欺诈交易识别系统
-   - 多维度特征工程
-   - 8张数据分析图表
+详情正文依据当前对应语言的正式 Markdown 报告，按个人作品集的阅读需要整理，展示分析问题、方法、结果和行动建议。图片为源报告当前引用的原始文件，未重绘。旧资源文件保留，不再作为当前报告引用。
 
-3. **贷款违约预测**
-   - 信贷风险评估模型
-   - LightGBM和随机森林对比
-   - 15张深度分析图表
+首页卡片、项目导语和相关项目文案维护于 `scripts/report_summaries.json`；正文展示调整维护于 `scripts/report_presentation.json`。页面不展示内部运行说明、材料访问声明或仅含内部文件入口的附录。生成时逐项核对原文，验证结果表格和图表引用，并保留公开来源与方法链接。
 
-每个项目都包含：
-- 业务背景和问题定义
-- 数据探索和可视化
-- 特征工程和模型构建
-- 代码展示（Python）
-- 结果分析和业务影响
-- SHAP解释性分析
+原始同步记录见 [内容同步交付说明](docs/content-sync-2026-10-13/DELIVERY.md)，当前展示调整及验证见 [作品集文案调整](docs/portfolio-presentation-2026-10-13/DELIVERY.md)。维护脚本 `scripts/sync_reports.py` 的 `render` 和 `verify` 使用原始来源清单核对输入，并将当前记录写入展示调整目录。网页本身仍无需构建；脚本不执行 notebook、不训练模型。
 
 ## 🔧 开发指南
 
@@ -144,7 +141,7 @@ portfolio/
 ### ✅ 已完成
 - 基础架构和设计系统
 - 主页所有功能模块（Hero、关于、经历、教育、项目、技能、联系）
-- 3 个完整的项目详情页（28 张数据可视化图表）
+- 8 个首页主项目、24 个中英文详情页（包括 Capstone 专题与 LendingClub 全量进阶案例）
 - Logo "Data Weaver" 动画 + 滚动渐现 + 数字计数
 - 深色/浅色主题切换（`localStorage.theme` 持久化）
 - 联系页面与表单

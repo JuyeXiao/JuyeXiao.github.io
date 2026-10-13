@@ -1,0 +1,14 @@
+{
+  "checked_on": "2026-10-13",
+  "repositories": [
+    {
+      "isPrivate": true,
+      "nameWithOwner": "JuyeXiao/data-analysis-projects"
+    },
+    {
+      "isPrivate": true,
+      "nameWithOwner": "JuyeXiao/sp-global-climate-capstone"
+    }
+  ],
+  "method": "authenticated owner metadata only; public link checks used anonymous contexts"
+}

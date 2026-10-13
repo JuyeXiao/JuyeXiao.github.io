@@ -8,6 +8,7 @@
     initToc();
     initScrollProgress();
     initReadingTime();
+    initFigureViewer();
   });
 
   // 内容入场动画
@@ -37,8 +38,10 @@
         const targetId = this.getAttribute('href').slice(1);
         const target = document.getElementById(targetId);
         if (!target) return;
-        const top = target.offsetTop - 96;
-        window.scrollTo({ top, behavior: 'smooth' });
+        const top = target.getBoundingClientRect().top + window.scrollY - 96;
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        window.scrollTo({ top, behavior: reducedMotion ? 'instant' : 'smooth' });
+        history.replaceState(null, '', `#${targetId}`);
       });
     });
 
@@ -86,7 +89,65 @@
     const wordsZh = text.replace(/\s+/g, '').length;
     const wordsEn = text.split(/\s+/).filter(Boolean).length;
     const minutes = Math.max(1, Math.round(Math.max(wordsZh / 380, wordsEn / 220)));
-    node.textContent = `约 ${minutes} 分钟阅读`;
+    node.textContent = document.documentElement.lang.startsWith('en')
+      ? `${minutes} min read` : `约 ${minutes} 分钟阅读`;
+  }
+
+  // Source figures are shared by both languages; the viewer preserves reading position.
+  function initFigureViewer() {
+    const triggers = document.querySelectorAll('.figure-zoom');
+    if (!triggers.length) return;
+    const english = document.documentElement.lang.startsWith('en');
+    const dialog = document.createElement('dialog');
+    dialog.className = 'figure-viewer';
+    dialog.setAttribute('aria-label', english ? 'Figure viewer' : '图片查看器');
+    dialog.innerHTML = `<div class="figure-viewer__toolbar">
+      <button type="button" class="btn-secondary" data-size>${english ? 'Original size' : '原始尺寸'}</button>
+      <button type="button" class="btn-secondary" data-close>${english ? 'Close' : '关闭'}</button>
+      </div><div class="figure-viewer__canvas"><img alt=""></div><p class="figure-viewer__caption"></p>`;
+    document.body.append(dialog);
+    const image = dialog.querySelector('img');
+    const toggle = dialog.querySelector('[data-size]');
+    const close = dialog.querySelector('[data-close]');
+    let opener;
+    let scrollY = 0;
+    let previousOverflow;
+    let previousPadding;
+    triggers.forEach((trigger) => {
+      trigger.addEventListener('click', () => {
+        opener = trigger;
+        scrollY = window.scrollY;
+        const original = trigger.querySelector('img');
+        image.src = original.currentSrc || original.src;
+        image.alt = original.alt;
+        dialog.querySelector('.figure-viewer__caption').textContent = original.alt;
+        dialog.classList.remove('is-original');
+        toggle.textContent = english ? 'Original size' : '原始尺寸';
+        toggle.setAttribute('aria-pressed', 'false');
+        previousOverflow = document.body.style.overflow;
+        previousPadding = document.body.style.paddingRight;
+        const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+        document.body.style.paddingRight = `${scrollbarWidth}px`;
+        document.body.style.overflow = 'hidden';
+        dialog.showModal();
+        close.focus();
+      });
+    });
+    toggle.addEventListener('click', () => {
+      const original = dialog.classList.toggle('is-original');
+      toggle.textContent = original ? (english ? 'Fit window' : '适应窗口') : (english ? 'Original size' : '原始尺寸');
+      toggle.setAttribute('aria-pressed', String(original));
+    });
+    close.addEventListener('click', () => dialog.close());
+    dialog.addEventListener('click', (event) => {
+      if (event.target === dialog) dialog.close();
+    });
+    dialog.addEventListener('close', () => {
+      document.body.style.overflow = previousOverflow;
+      document.body.style.paddingRight = previousPadding;
+      opener?.focus({ preventScroll: true });
+      window.scrollTo({ top: scrollY, behavior: 'instant' });
+    });
   }
 
   function scrollToTop() {

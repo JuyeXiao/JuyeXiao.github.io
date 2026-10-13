@@ -1,0 +1,167 @@
+{
+  "status": "pass",
+  "numeric_token_audit": [
+    {
+      "page": "projects/Bank Customer Churn Prediction/Bank Customer Churn Prediction.html",
+      "missing_numeric_tokens": {}
+    },
+    {
+      "page": "projects/e-commerce fraud detection/e-commerce fraud detection.html",
+      "missing_numeric_tokens": {
+        "20260921": "internal output directory date",
+        "7200": "private notebook command timeout"
+      }
+    },
+    {
+      "page": "projects/lendingclub loan prediction/lendingclub loan prediction.html",
+      "missing_numeric_tokens": {
+        "9004": "private CSV filename; formatted sample size 9,004 is retained"
+      }
+    },
+    {
+      "page": "projects/youtube comment analysis/youtube comment analysis.html",
+      "missing_numeric_tokens": {}
+    },
+    {
+      "page": "projects/ab testing/ab testing.html",
+      "missing_numeric_tokens": {}
+    },
+    {
+      "page": "projects/healthy home/healthy home.html",
+      "missing_numeric_tokens": {}
+    },
+    {
+      "page": "projects/amazon watch reviews/amazon watch reviews.html",
+      "missing_numeric_tokens": {
+        "7200": "private notebook command timeout"
+      }
+    },
+    {
+      "page": "projects/lendingclub loan prediction/full data.html",
+      "missing_numeric_tokens": {
+        "29": "current sample CSV header verifies 30 columns; user instructed current-source alignment"
+      }
+    },
+    {
+      "page": "projects/spglobal climate comparison/spglobal climate comparison.html",
+      "missing_numeric_tokens": {}
+    },
+    {
+      "page": "projects/spglobal climate comparison/model comparison.html",
+      "missing_numeric_tokens": {}
+    },
+    {
+      "page": "projects/spglobal climate comparison/long series.html",
+      "missing_numeric_tokens": {}
+    },
+    {
+      "page": "projects/spglobal climate comparison/projection overlay.html",
+      "missing_numeric_tokens": {}
+    },
+    {
+      "page": "projects/Bank Customer Churn Prediction/Bank Customer Churn Prediction-en.html",
+      "missing_numeric_tokens": {}
+    },
+    {
+      "page": "projects/e-commerce fraud detection/e-commerce fraud detection-en.html",
+      "missing_numeric_tokens": {
+        "20260921": "internal output directory date",
+        "7200": "private notebook command timeout"
+      }
+    },
+    {
+      "page": "projects/lendingclub loan prediction/lendingclub loan prediction-en.html",
+      "missing_numeric_tokens": {
+        "9004": "private CSV filename; formatted sample size 9,004 is retained"
+      }
+    },
+    {
+      "page": "projects/youtube comment analysis/youtube comment analysis-en.html",
+      "missing_numeric_tokens": {}
+    },
+    {
+      "page": "projects/ab testing/ab testing-en.html",
+      "missing_numeric_tokens": {}
+    },
+    {
+      "page": "projects/healthy home/healthy home-en.html",
+      "missing_numeric_tokens": {}
+    },
+    {
+      "page": "projects/amazon watch reviews/amazon watch reviews-en.html",
+      "missing_numeric_tokens": {
+        "7200": "private notebook command timeout"
+      }
+    },
+    {
+      "page": "projects/lendingclub loan prediction/full data-en.html",
+      "missing_numeric_tokens": {
+        "29": "current sample CSV header verifies 30 columns; user instructed current-source alignment"
+      }
+    },
+    {
+      "page": "projects/spglobal climate comparison/spglobal climate comparison-en.html",
+      "missing_numeric_tokens": {}
+    },
+    {
+      "page": "projects/spglobal climate comparison/model comparison-en.html",
+      "missing_numeric_tokens": {}
+    },
+    {
+      "page": "projects/spglobal climate comparison/long series-en.html",
+      "missing_numeric_tokens": {}
+    },
+    {
+      "page": "projects/spglobal climate comparison/projection overlay-en.html",
+      "missing_numeric_tokens": {}
+    }
+  ],
+  "home_scope": [
+    {
+      "page": "index.html",
+      "outside_project_grid_byte_identical": true
+    },
+    {
+      "page": "index-en.html",
+      "outside_project_grid_byte_identical": true
+    }
+  ],
+  "loan_column_evidence": {
+    "source": "D:\\data projects\\LendingClub loan prediction\\loan-full-source-9004.csv",
+    "columns": 30,
+    "fields": [
+      "id",
+      "loan_amnt",
+      "funded_amnt",
+      "funded_amnt_inv",
+      "term",
+      "int_rate",
+      "installment",
+      "grade",
+      "emp_length",
+      "home_ownership",
+      "annual_inc",
+      "verification_status",
+      "issue_d",
+      "loan_status",
+      "purpose",
+      "addr_state",
+      "dti",
+      "earliest_cr_line",
+      "inq_last_6mths",
+      "open_acc",
+      "pub_rec",
+      "revol_bal",
+      "revol_util",
+      "total_acc",
+      "out_prncp",
+      "out_prncp_inv",
+      "total_pymnt",
+      "total_pymnt_inv",
+      "total_rec_prncp",
+      "total_rec_int"
+    ],
+    "fico_field_present": false
+  },
+  "failures": []
+}

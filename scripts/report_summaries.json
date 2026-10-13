@@ -1,0 +1,482 @@
+{
+  "bank": {
+    "zh": {
+      "title": "银行客户流失：模式、解释与服务容量",
+      "tag": "客户分析",
+      "description": "结合 10,000 名客户的分组分析、模型比较与 SHAP 解释，识别流失信号并设计服务优先级。冻结阈值 0.275 的测试召回率为 78.39%、精确率为 48.25%，进一步比较不同服务容量下的覆盖与成本。",
+      "stats": [
+        [
+          "10,000",
+          "客户记录"
+        ],
+        [
+          "0.275",
+          "选择集冻结阈值"
+        ],
+        [
+          "78.39%",
+          "测试召回率；95% 区间 74.8%–81.8%"
+        ]
+      ]
+    },
+    "en": {
+      "title": "Bank churn: patterns, explanations and service capacity",
+      "tag": "Customer Analytics",
+      "description": "Group analysis, model comparison and SHAP across 10,000 customers identify churn signals and inform service priorities. At the frozen threshold of 0.275, test recall is 78.39% and precision is 48.25%; capacity and cost comparisons guide follow-up planning.",
+      "stats": [
+        [
+          "10,000",
+          "Customer records"
+        ],
+        [
+          "0.275",
+          "Frozen selection threshold"
+        ],
+        [
+          "78.39%",
+          "Test recall; 95% interval 74.8%–81.8%"
+        ]
+      ]
+    }
+  },
+  "fraud": {
+    "zh": {
+      "title": "电商首单欺诈：时间评估与审核建议",
+      "tag": "风险分析",
+      "description": "围绕 138,376 笔首单交易，分析购买时序、设备与 IP 行为，比较不平衡处理方法。通过前向验证和成本情景评估，提出按模型分数与交易线索分级的人工审核方案。",
+      "stats": [
+        [
+          "138,376",
+          "历史交易"
+        ],
+        [
+          "0.010121",
+          "正式模型测试 AP"
+        ],
+        [
+          "0 / 131",
+          "冻结决策检出 / 欺诈标签"
+        ]
+      ]
+    },
+    "en": {
+      "title": "First-order fraud: temporal evaluation and review proposals",
+      "tag": "Risk Analytics",
+      "description": "Analyze purchase timing, device and IP behavior across 138,376 first-order transactions, and compare class-imbalance methods. Forward validation and cost scenarios inform a tiered manual-review proposal using model scores and transaction signals.",
+      "stats": [
+        [
+          "138,376",
+          "Historical transactions"
+        ],
+        [
+          "0.010121",
+          "Selected model test AP"
+        ],
+        [
+          "0 / 131",
+          "Detected / test fraud labels"
+        ]
+      ]
+    }
+  },
+  "loan": {
+    "zh": {
+      "title": "LendingClub：9,004 笔贷款样本",
+      "tag": "金融分析",
+      "description": "从 9,004 笔历史贷款中分析违约分布，比较模型与期限规则，设计不对称成本下的筛查策略。Random Forest 冻结阈值 0.22，测试召回率 70.45%，净模拟成本降幅 4.68%。",
+      "stats": [
+        [
+          "9,004",
+          "历史贷款样本"
+        ],
+        [
+          "0.22",
+          "Random Forest 冻结阈值"
+        ],
+        [
+          "4.68%",
+          "净模拟成本降幅"
+        ]
+      ]
+    },
+    "en": {
+      "title": "LendingClub: the 9,004-loan sample",
+      "tag": "Financial Analytics",
+      "description": "Analyze default patterns in 9,004 historical loans, compare models with a loan-term rule, and design screening policies under asymmetric costs. Random Forest at the frozen threshold of 0.22 achieves 70.45% test recall and a 4.68% net simulated cost reduction.",
+      "stats": [
+        [
+          "9,004",
+          "Historical sample loans"
+        ],
+        [
+          "0.22",
+          "Frozen Random Forest threshold"
+        ],
+        [
+          "4.68%",
+          "Net simulated cost reduction"
+        ]
+      ]
+    }
+  },
+  "youtube": {
+    "zh": {
+      "title": "YouTube 评论：养宠文本信号与频道筛选",
+      "tag": "NLP · 弱监督",
+      "description": "对 5,818,979 条评论构建弱监督分类与频道候选排名，结合 TF-IDF、行为特征和 SHAP 分析养宠文本信号。300 条新评论经助手复核，294 条可判定，条件加权精确率为 0.8982。",
+      "stats": [
+        [
+          "5,818,979",
+          "非空评论"
+        ],
+        [
+          "294 / 300",
+          "新样本可判定 / 助手复核"
+        ],
+        [
+          "0.8982",
+          "助手复核条件加权精确率"
+        ]
+      ]
+    },
+    "en": {
+      "title": "YouTube comments: ownership signals and channel screening",
+      "tag": "NLP · Weak Supervision",
+      "description": "Build weakly supervised classification and channel candidate rankings from 5,818,979 comments, using TF-IDF, behavioral features and SHAP to analyze pet-ownership language. Assistant review of 300 new comments yields 294 determinate labels and conditional weighted precision of 0.8982.",
+      "stats": [
+        [
+          "5,818,979",
+          "Nonempty comments"
+        ],
+        [
+          "294 / 300",
+          "Determinate / assistant-reviewed new comments"
+        ],
+        [
+          "0.8982",
+          "Conditional weighted precision from assistant review"
+        ]
+      ]
+    }
+  },
+  "ab": {
+    "zh": {
+      "title": "A/B Testing：Cookie Cats 关卡门实验",
+      "tag": "实验分析",
+      "description": "比较 90,189 名玩家的留存与参与度，结合分流检验、自助法和统计功效评估关卡门位置。第 40 关组的 7 日留存比第 30 关组低 0.82 个百分点，95% 区间为 [−1.33, −0.31]，据此提出关卡与回访体验建议。",
+      "stats": [
+        [
+          "90,189",
+          "玩家记录"
+        ],
+        [
+          "−0.82 pp",
+          "7 日留存差（40−30）；95% 区间 −1.33 至 −0.31 pp"
+        ],
+        [
+          "0.0086",
+          "分流比例检验 p 值"
+        ]
+      ]
+    },
+    "en": {
+      "title": "A/B Testing: the Cookie Cats gate experiment",
+      "tag": "Experiment Analysis",
+      "description": "Compare retention and engagement across 90,189 players, combining allocation checks, bootstrap estimates and power analysis. Seven-day retention is 0.82 percentage points lower in the level-40 group than the level-30 group, with a 95% interval of [−1.33, −0.31], informing gate and return-experience recommendations.",
+      "stats": [
+        [
+          "90,189",
+          "Player records"
+        ],
+        [
+          "−0.82 pp",
+          "7-day retention (40−30); 95% interval −1.33 to −0.31 pp"
+        ],
+        [
+          "0.0086",
+          "Sample-ratio check p-value"
+        ]
+      ]
+    }
+  },
+  "healthy": {
+    "zh": {
+      "title": "Healthy Home：奥克兰空间预测与道路地图",
+      "tag": "空间数据分析",
+      "description": "结合 18,219 个观测点、道路网络与嵌套空间评价，分析奥克兰污染物分布。随机森林在区域分块评价中的 NO₂ 合并 R² 为 0.576017，道路相对预测图覆盖 628.74 km，并通过分区误差诊断提出补充观测方案。",
+      "stats": [
+        [
+          "18,219",
+          "清洗后课程观测点"
+        ],
+        [
+          "0.576017",
+          "区域分块 RF NO₂ 合并 R²"
+        ],
+        [
+          "628.74 km",
+          "道路相对预测覆盖"
+        ]
+      ]
+    },
+    "en": {
+      "title": "Healthy Home: spatial prediction and road mapping in Oakland",
+      "tag": "Spatial Analytics",
+      "description": "Combine 18,219 observations, road networks and nested spatial evaluation to analyze pollutant patterns in Oakland. Random Forest achieves pooled NO₂ R² of 0.576017 under spatial-block evaluation. Relative prediction maps cover 628.74 km of roads, with area-level error analysis informing further sampling.",
+      "stats": [
+        [
+          "18,219",
+          "Cleaned course observations"
+        ],
+        [
+          "0.576017",
+          "Spatial-block RF pooled NO₂ R²"
+        ],
+        [
+          "628.74 km",
+          "Relative road prediction coverage"
+        ]
+      ]
+    }
+  },
+  "amazon": {
+    "zh": {
+      "title": "Amazon 手表评论：聚类、主题与改进建议",
+      "tag": "NLP · 主题建模",
+      "description": "从 960,872 条原始记录中整理评论语料，使用 K-Means 与 LDA 分析 858,037 条建模评论。故障／退货主题均分 2.37 星，覆盖建模一星评论的 52.9%，为产品排查、说明优化与评论监测提供线索。",
+      "stats": [
+        [
+          "960,713",
+          "非空评论；原始记录 960,872"
+        ],
+        [
+          "858,037",
+          "最终建模评论"
+        ],
+        [
+          "2.37",
+          "故障/退货主题平均星级"
+        ]
+      ]
+    },
+    "en": {
+      "title": "Amazon watch reviews: clustering, topics and recommendations",
+      "tag": "NLP · Topic Modeling",
+      "description": "Prepare the review corpus from 960,872 raw records and analyze 858,037 modeled reviews with K-Means and LDA. The malfunction/returns topic averages 2.37 stars and covers 52.9% of modeled one-star reviews, informing product checks, clearer instructions and review monitoring.",
+      "stats": [
+        [
+          "960,713",
+          "Nonempty reviews; 960,872 raw records"
+        ],
+        [
+          "858,037",
+          "Final modeling reviews"
+        ],
+        [
+          "2.37",
+          "Mean stars for malfunction/returns topic"
+        ]
+      ]
+    }
+  },
+  "loan-full": {
+    "zh": {
+      "title": "LendingClub 全量分析：时间评估与容量取舍",
+      "tag": "LendingClub · 进阶案例",
+      "description": "对 800,634 笔到期终态贷款进行时间切分，比较模型排序、阈值与费用情景。在固定 10% 复核容量下，LightGBM 命中率为 37.88%，等级规则为 32.38%；结合 SHAP 解释与成本分析提出人工复核方案。",
+      "stats": [
+        [
+          "800,634",
+          "到期终态贷款"
+        ],
+        [
+          "10%",
+          "固定复核容量"
+        ],
+        [
+          "37.88%",
+          "LightGBM 容量内命中率"
+        ]
+      ]
+    },
+    "en": {
+      "title": "Full-data LendingClub: temporal evaluation and capacity trade-offs",
+      "tag": "LendingClub · Advanced Case",
+      "description": "Use temporal splits of 800,634 mature terminal loans to compare ranking, thresholds and cost scenarios. At a fixed 10% review capacity, LightGBM achieves a 37.88% hit rate versus 32.38% for the grade rule. SHAP and cost analysis inform a manual-review proposal.",
+      "stats": [
+        [
+          "800,634",
+          "Mature terminal loans"
+        ],
+        [
+          "10%",
+          "Fixed review capacity"
+        ],
+        [
+          "37.88%",
+          "LightGBM hit rate within capacity"
+        ]
+      ]
+    }
+  },
+  "climate": {
+    "zh": {
+      "title": "S&P Global Capstone：气候模型、预测与空间暴露",
+      "tag": "气候与空间分析",
+      "description": "在 2022 年 Capstone 基础上完成 2026 年重建分析，覆盖四个研究框、1,020 个格子，串联气候模型比较、短期预测、长期情景与空间暴露。2035–2044 年 ssp585 情景下，204 个格子×暴露层条目满足拟议优先核查规则。",
+      "stats": [
+        [
+          "1,020",
+          "研究格子"
+        ],
+        [
+          "14",
+          "主模型集合；敏感性分析含 15 个"
+        ],
+        [
+          "204 / 268",
+          "拟优先核查 / 基准格子×层条目"
+        ]
+      ]
+    },
+    "en": {
+      "title": "S&P Global Capstone: climate models, forecasts and spatial exposure",
+      "tag": "Climate & Spatial Analytics",
+      "description": "A 2026 reconstruction of the 2022 capstone covers four study boxes and 1,020 cells, connecting climate-model comparison, short-term forecasting, long-term scenarios and spatial exposure. Under ssp585 for 2035–2044, 204 cell–layer entries meet a proposed priority-check rule.",
+      "stats": [
+        [
+          "1,020",
+          "Study cells"
+        ],
+        [
+          "14",
+          "Main ensemble; 15 in sensitivity analysis"
+        ],
+        [
+          "204 / 268",
+          "Proposed priority / baseline cell–layer entries"
+        ]
+      ]
+    }
+  },
+  "comparison": {
+    "zh": {
+      "title": "Capstone 专题：模型比较",
+      "tag": "Capstone · 模型比较",
+      "description": "比较四个研究框中 MODIS LST 与 NEX-GDDP-CMIP6 tas 的历史表现，分析变量、日历和采样差异。以 15 个模型开展误差诊断，并在 14 个模型的主集合上评价排名不确定性，为后续模型选择与订正提供依据。",
+      "stats": [
+        [
+          "2015–2020",
+          "比较时段"
+        ],
+        [
+          "15",
+          "误差诊断模型"
+        ],
+        [
+          "14",
+          "排名不确定性主集合"
+        ]
+      ]
+    },
+    "en": {
+      "title": "Capstone study: model comparison",
+      "tag": "Capstone · Model Comparison",
+      "description": "Compare historical MODIS LST and NEX-GDDP-CMIP6 tas across four study boxes, accounting for variables, calendars and sampling. Diagnose errors across 15 models and assess rank uncertainty in the 14-model main ensemble to inform model selection and bias correction.",
+      "stats": [
+        [
+          "2015–2020",
+          "Comparison period"
+        ],
+        [
+          "15",
+          "Diagnostic models"
+        ],
+        [
+          "14",
+          "Rank-uncertainty ensemble"
+        ]
+      ]
+    }
+  },
+  "long-series": {
+    "zh": {
+      "title": "Capstone 专题：长序列与短期预测",
+      "tag": "Capstone · 长序列",
+      "description": "基于 2000–2024 年共 299 个月的观测记录，使用五个测试窗口比较 12 与 24 个月预测。按区域选择月气候态基线，并识别 TK 的 Prophet 与 AU 24 个月 SARIMA 候选方法，结合趋势和校准诊断安排后续检验。",
+      "stats": [
+        [
+          "299",
+          "观测记录月份"
+        ],
+        [
+          "5",
+          "测试结束年"
+        ],
+        [
+          "12 / 24",
+          "预测长度（月）"
+        ]
+      ]
+    },
+    "en": {
+      "title": "Capstone study: long records and short-term forecasts",
+      "tag": "Capstone · Long Series",
+      "description": "Use 299 months of observations from 2000–2024 and five test windows to compare 12- and 24-month forecasts. Regional comparisons retain climatology baselines and identify TK Prophet and AU 24-month SARIMA as candidate methods, with trend and calibration diagnostics guiding further evaluation.",
+      "stats": [
+        [
+          "299",
+          "Months in the observation record"
+        ],
+        [
+          "5",
+          "Test end years"
+        ],
+        [
+          "12 / 24",
+          "Forecast horizons (months)"
+        ]
+      ]
+    }
+  },
+  "projection": {
+    "zh": {
+      "title": "长期配对情景与空间暴露",
+      "tag": "Capstone · 情景与暴露",
+      "description": "以 14 个模型比较两种长期情景的配对温差与超阈月数，结合人口、建成区和耕地分布分析空间暴露。通过校准敏感性和成员影响分析，将情景差异转化为候选地点核查顺序。",
+      "stats": [
+        [
+          "14",
+          "主模型集合"
+        ],
+        [
+          "2",
+          "长期情景"
+        ],
+        [
+          "204 / 268",
+          "近窗 ssp585：优先核查 / 基准条目"
+        ]
+      ]
+    },
+    "en": {
+      "title": "Paired long-term scenarios and spatial exposure",
+      "tag": "Capstone · Scenarios & Exposure",
+      "description": "Compare paired temperature differences and exceedance months across two long-term scenarios using 14 models, then combine population, built surface and cropland to assess spatial exposure. Calibration sensitivity and member-influence analysis inform the order of candidate-site checks.",
+      "stats": [
+        [
+          "14",
+          "Main model ensemble"
+        ],
+        [
+          "2",
+          "Long-term scenarios"
+        ],
+        [
+          "204 / 268",
+          "Near-window ssp585: priority / baseline entries"
+        ]
+      ]
+    }
+  }
+}

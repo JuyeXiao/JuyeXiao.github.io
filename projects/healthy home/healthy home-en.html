@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>document.documentElement.classList.add('js');</script>
+  <title>Nested spatial evaluation and relative pollutant mapping in Oakland - Data Poetics</title>
+  <meta name="description" content="Combine 18,219 observations, road networks and nested spatial evaluation to analyze pollutant patterns in Oakland. Random Forest achieves pooled NO₂ R² of 0.576017 under spatial-block evaluation. Relative prediction maps cover 628.74 km of roads, with area-level error analysis informing further sampling.">
+  <meta property="og:title" content="Nested spatial evaluation and relative pollutant mapping in Oakland">
+  <meta property="og:description" content="Combine 18,219 observations, road networks and nested spatial evaluation to analyze pollutant patterns in Oakland. Random Forest achieves pooled NO₂ R² of 0.576017 under spatial-block evaluation. Relative prediction maps cover 628.74 km of roads, with area-level error analysis informing further sampling.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://juyexiao.github.io/projects/healthy%20home/healthy%20home-en.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:description" content="Combine 18,219 observations, road networks and nested spatial evaluation to analyze pollutant patterns in Oakland. Random Forest achieves pooled NO₂ R² of 0.576017 under spatial-block evaluation. Relative prediction maps cover 628.74 km of roads, with area-level error analysis informing further sampling.">
+  <link rel="canonical" href="https://juyexiao.github.io/projects/healthy%20home/healthy%20home-en.html">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&amp;family=Inter:wght@200;300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;700&amp;family=Noto+Sans+SC:wght@400;500;600&amp;family=Noto+Serif+SC:wght@500&amp;display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="../../assets/css/index.css">
+  <link rel="stylesheet" href="../../assets/css/project.css">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Nested spatial evaluation and relative pollutant mapping in Oakland", "description": "Combine 18,219 observations, road networks and nested spatial evaluation to analyze pollutant patterns in Oakland. Random Forest achieves pooled NO₂ R² of 0.576017 under spatial-block evaluation. Relative prediction maps cover 628.74 km of roads, with area-level error analysis informing further sampling.", "inLanguage": "en", "author": {"@type": "Person", "name": "Juye Xiao"}}</script>
+</head>
+<body class="transition-colors duration-300 report-page">
+<div class="scroll-progress" id="scroll-progress"></div>
+<header class="navbar fixed top-0 left-0 right-0 z-50" id="navbar">
+<div class="container-main h-full flex items-center justify-between">
+<!-- Logo Section -->
+<a class="navbar-logo" href="../../index-en.html#hero" id="navbar-logo">
+<!-- SVG Logo -->
+<svg class="logo-svg-nav" viewbox="0 0 40 40">
+<!-- Data Grid Background -->
+<g class="grid-bg">
+<!-- Vertical Lines -->
+<line class="grid-line-v" style="animation-delay: 0.1s, 0s" x1="8" x2="8" y1="0" y2="40"></line>
+<line class="grid-line-v" style="animation-delay: 0.2s, 0.5s" x1="16" x2="16" y1="0" y2="40"></line>
+<line class="grid-line-v" style="animation-delay: 0.3s, 1s" x1="24" x2="24" y1="0" y2="40"></line>
+<line class="grid-line-v" style="animation-delay: 0.4s, 1.5s" x1="32" x2="32" y1="0" y2="40"></line>
+<!-- Horizontal Lines -->
+<line class="grid-line-h" style="animation-delay: 0.5s, 0s" x1="0" x2="40" y1="10" y2="10"></line>
+<line class="grid-line-h" style="animation-delay: 0.6s, 0.7s" x1="0" x2="40" y1="20" y2="20"></line>
+<line class="grid-line-h" style="animation-delay: 0.7s, 1.4s" x1="0" x2="40" y1="30" y2="30"></line>
+</g>
+<!-- Weaver Animation Line -->
+<line class="weaver-line" id="weaverLine" x1="0" x2="40" y1="20" y2="20"></line>
+<!-- JX Letters -->
+<text class="logo-letters" id="logoLetters" text-anchor="middle" x="20" y="26">JX</text>
+</svg>
+<!-- Name Signature (Hover Display) -->
+<div class="logo-name">
+<div class="logo-name-text">Juye Xiao</div>
+<div class="logo-name-subtitle">Data Analyst</div>
+</div>
+</a>
+<nav class="hidden md:flex items-center space-x-8">
+<a class="nav-link" href="../../index-en.html#about">About</a>
+<a class="nav-link" href="../../index-en.html#experience">Experience</a>
+<a class="nav-link" href="../../index-en.html#education">Education</a>
+<a class="nav-link" href="../../index-en.html#projects">Projects</a>
+<a class="nav-link" href="../../index-en.html#skills">Skills</a>
+<a class="nav-link" href="../../index-en.html#contact">Contact</a>
+</nav>
+<div class="flex items-center space-x-4">
+<button aria-label="Toggle theme" class="btn-secondary !p-2 !rounded-full" id="theme-toggle">
+<i class="block dark:hidden" data-lucide="sun"></i>
+<i class="hidden dark:block" data-lucide="moon"></i>
+</button>
+<button class="btn-secondary !p-2 !rounded-full" id="lang-toggle">
+<span class="font-bold text-sm">中</span>
+</button>
+<button aria-controls="mobile-menu" aria-expanded="false" aria-label="Open menu" class="btn-secondary !p-2 !rounded-full md:hidden" id="menu-toggle">
+<i class="menu-icon-open" data-lucide="menu"></i>
+<i class="menu-icon-close" data-lucide="x"></i>
+</button>
+</div>
+</div>
+<nav aria-label="Mobile navigation" class="mobile-menu md:hidden" id="mobile-menu">
+<a class="nav-link" href="../../index-en.html#about">About</a>
+<a class="nav-link" href="../../index-en.html#experience">Experience</a>
+<a class="nav-link" href="../../index-en.html#education">Education</a>
+<a class="nav-link" href="../../index-en.html#projects">Projects</a>
+<a class="nav-link" href="../../index-en.html#skills">Skills</a>
+<a class="nav-link" href="../../index-en.html#contact">Contact</a>
+</nav>
+</header>
+<main class="container-main">
+  <section id="project-hero" class="section-padding report-hero">
+    <div class="section-eyebrow"><span class="section-kicker">Spatial Analytics</span></div>
+    <h1 class="hero-title">Nested spatial evaluation and relative pollutant mapping in Oakland</h1>
+    <p class="subtitle report-standfirst">Combine 18,219 observations, road networks and nested spatial evaluation to analyze pollutant patterns in Oakland. Random Forest achieves pooled NO₂ R² of 0.576017 under spatial-block evaluation. Relative prediction maps cover 628.74 km of roads, with area-level error analysis informing further sampling.</p>
+    <p class="reading-time">Analysis updated in 2026</p>
+    <div class="hero-stats"><div class="hero-stat"><div class="hero-stat__num">18,219</div><div class="hero-stat__label">Cleaned course observations</div></div><div class="hero-stat"><div class="hero-stat__num">0.576017</div><div class="hero-stat__label">Spatial-block RF pooled NO₂ R²</div></div><div class="hero-stat"><div class="hero-stat__num">628.74 km</div><div class="hero-stat__label">Relative road prediction coverage</div></div></div>
+    <div class="report-actions"><a class="btn btn-primary" href="#content">Read report</a><a class="btn btn-secondary" href="../../index-en.html#projects">All projects</a></div>
+  </section>
+
+  <section id="content" class="section-padding report-layout">
+    <aside><nav class="project-toc" id="project-toc" aria-label="Report contents"><h3>Contents</h3><ul id="toc-list"><li><a class="toc-link" href="#report-section-1">At a glance</a></li><li><a class="toc-link" href="#report-section-2">Executive summary</a></li><li><a class="toc-link" href="#report-section-3">Spatial prediction tasks</a></li><li><a class="toc-link" href="#report-section-4">Observation data and road network</a></li><li><a class="toc-link" href="#report-section-5">Road distances and context features</a></li><li><a class="toc-link" href="#report-section-6">Nested spatial evaluation</a></li><li><a class="toc-link" href="#report-section-7">Pollutant prediction results</a></li><li><a class="toc-link" href="#report-section-8">Road distance and pollutant distributions</a></li><li><a class="toc-link" href="#report-section-9">Prediction coverage and relative grades</a></li><li><a class="toc-link" href="#report-section-10">Tract associations with the health field</a></li><li><a class="toc-link" href="#report-section-11">Zone errors and spatial diagnostics</a></li><li><a class="toc-link" href="#report-section-12">Project findings and next steps</a></li></ul></nav></aside>
+    <article class="content-area report-body" id="report-body"><div class="report-block" id="report-intro-1">
+<p>Pollutant values are higher near motorways, while prediction is harder across regions. Model comparisons, tract associations and error diagnostics inform a proposed road-investigation and sampling plan.</p>
+
+</div><section id="report-section-1" class="section-padding section--editorial" data-section-num="01"><div class="section-header"><h2 class="section-title">At a glance</h2></div><div class="report-block" id="report-1-1">
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col"></th>
+<th scope="col"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tract RF pooled R²</td>
+<td>0.762083</td>
+</tr>
+<tr>
+<td>block RF pooled R²</td>
+<td>0.576017</td>
+</tr>
+<tr>
+<td>clipped prediction surface</td>
+<td>628.74 km</td>
+</tr>
+<tr>
+<td>prediction points</td>
+<td>25,746</td>
+</tr>
+</tbody>
+</table></div>
+
+</div></section><section id="report-section-2" class="section-padding section--editorial" data-section-num="02"><div class="section-header"><h2 class="section-title">Executive summary</h2></div><div class="report-block" id="report-2-1">
+<p>The course analysis uses 18,219 Oakland observations to identify pollutant patterns by road distance and land use. Median NO₂ is 23.8 within 0–50 m of a motorway and 7.5 beyond 1 km, both reported on the course file’s original numerical scale. This relative difference supports road-distance features and distance-stratified sampling.</p>
+<p>Within the tested candidates and selection procedure, random forest outperforms histogram gradient boosting on tract hold-outs, with pooled NO₂ R² of 0.762083 and 0.730200. Random-forest scores are 0.942353, 0.762083 and 0.576017 for random-point, census-tract and coordinate-region hold-outs. Predicting new regions is therefore harder than filling gaps within the sampled area. Industrial-zone NO₂ MAE is 4.283, compared with 2.219 in residential zones, making industrial errors a priority for diagnosis.</p>
+<p>The relative prediction map covers 628.74 km, or 36.79% of the centerline network, across 25,746 segments. Across 70 tracts, predicted NO₂ and the respiratory-hazard category have a rank correlation of 0.707. These findings inform a proposed plan to screen investigation candidates using grades and model agreement, inspect industrial errors, and sample uncovered areas.</p>
+
+</div></section><section id="report-section-3" class="section-padding section--editorial" data-section-num="03"><div class="section-header"><h2 class="section-title">Spatial prediction tasks</h2></div><div class="report-block" id="report-3-1">
+<p>The project asks three questions: how much predictive information comes from road distances and surrounding context, how well models perform at held-out locations, and how their predictions can be presented as comparable road maps.</p>
+<p>NO₂, NO and PM₂.₅ are modeled separately using the course dataset. Random-point hold-outs evaluate new points within the sampled area; census-tract hold-outs evaluate unseen tracts; coordinate-region hold-outs test transfer across larger contiguous areas. Evaluation, mapping and error analysis demonstrate a spatial data-analysis workflow.</p>
+
+</div></section><section id="report-section-4" class="section-padding section--editorial" data-section-num="04"><div class="section-header"><h2 class="section-title">Observation data and road network</h2></div><div class="report-block" id="report-4-1">
+<p>The supplied course dataset contains 18,286 rows and 17 columns describing pollutants, coordinates, road classes, land-use zones and environmental context. Removing rows with missing zone, wind or temperature leaves 18,222 rows; deduplication retains 18,219 observations across 70 census tracts.</p>
+<p>NO (nitric oxide) has a long right tail. Large values are retained rather than removed solely for their magnitude, so their influence remains visible in distribution plots and prediction errors.</p>
+<p>The local OpenStreetMap network contains 22,137 directed edges. A projected centerline union avoids counting reversed and overlapping roads twice, producing 1,709.21 km of roads. The network within 50 m of observation points totals 591.19 km (34.59%), describing the spatial coverage of the observations.</p>
+<p>Road data come from <a href="https://www.openstreetmap.org/">OpenStreetMap</a>, under ODbL, © OpenStreetMap contributors. Pollutants are analyzed on the original numerical scale of the course file.</p>
+
+</div></section><section id="report-section-5" class="section-padding section--editorial" data-section-num="05"><div class="section-header"><h2 class="section-title">Road distances and context features</h2></div><div class="report-block" id="report-5-1">
+<p>Six features measure distance to the nearest motorway, primary road, secondary road, tertiary road, traffic signal and stop sign. A metric projection and <code>sjoin_nearest</code> support the queries. Observations and prediction midpoints share <code>build_features()</code> so the definitions agree. Across 100 sampled points, all six distances match individual geometry calculations, with maximum absolute disagreement of 0.00e+00 m.</p>
+<p>Road class and zone use one-hot encoding. Distances, wind, temperature and population density remain continuous. Training and prediction matrices share the same column names and order.</p>
+<p>The nearest OpenStreetMap road class agrees with the file's <code>road_type</code> at 95.3% of observations. For 370 points, the file records secondary roads while the nearest network road is primary. Prediction segments use their centerline class; conflicting classes remain ungraded. This comparison illustrates attribute checks after spatial joins.</p>
+
+</div></section><section id="report-section-6" class="section-padding section--editorial" data-section-num="06"><div class="section-header"><h2 class="section-title">Nested spatial evaluation</h2></div><div class="report-block" id="report-6-1">
+<p>Random-point, GEOID-tract and coordinate-region protocols each use five outer folds with five inner folds. Fifteen outer and 75 inner splits trace the same 18,219 rows, excluding outer test rows from parameter choices, ablation and fold refits. Tract and region protocols keep each spatial group entirely in training or testing.</p>
+<p>Selection searches six RF and four HGB parameter settings using mean inner-fold NO₂ R² on all 18 features, then compares four feature sets using RF pooled inner R². NO₂ choices transfer to other targets; HGB uses the RF-selected feature set. This limits experiment size but does not independently optimize features for HGB or the other targets. Parameter and sequential feature choices are nested, totaling 1,096 real fits including final map selection/fitting. The protocols define different spatial prediction tasks, so their results are reported separately.</p>
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">NO₂ protocol/model</th>
+<th scope="col" style="text-align:right">Pooled R²</th>
+<th scope="col" style="text-align:right">Pooled RMSE</th>
+<th scope="col" style="text-align:right">Mean fold R²</th>
+<th scope="col" style="text-align:right">Mean fold RMSE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>random RF</td>
+<td style="text-align:right">0.942353</td>
+<td style="text-align:right">2.172108</td>
+<td style="text-align:right">0.942351</td>
+<td style="text-align:right">2.171479</td>
+</tr>
+<tr>
+<td>random HGB</td>
+<td style="text-align:right">0.929712</td>
+<td style="text-align:right">2.398471</td>
+<td style="text-align:right">0.929712</td>
+<td style="text-align:right">2.398005</td>
+</tr>
+<tr>
+<td>tract RF</td>
+<td style="text-align:right">0.762083</td>
+<td style="text-align:right">4.412728</td>
+<td style="text-align:right">0.732917</td>
+<td style="text-align:right">4.363567</td>
+</tr>
+<tr>
+<td>tract HGB</td>
+<td style="text-align:right">0.730200</td>
+<td style="text-align:right">4.699105</td>
+<td style="text-align:right">0.675602</td>
+<td style="text-align:right">4.607487</td>
+</tr>
+<tr>
+<td>block RF</td>
+<td style="text-align:right">0.576017</td>
+<td style="text-align:right">5.890723</td>
+<td style="text-align:right">0.325321</td>
+<td style="text-align:right">5.817358</td>
+</tr>
+<tr>
+<td>block HGB</td>
+<td style="text-align:right">0.571771</td>
+<td style="text-align:right">5.920147</td>
+<td style="text-align:right">0.287463</td>
+<td style="text-align:right">5.834552</td>
+</tr>
+</tbody>
+</table></div>
+<p>Pooled metrics combine all outer OOF rows; fold means weight folds equally. They are not interchangeable. Both summaries are shown to distinguish overall performance from variation across folds.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Current nested protocol and model comparison." class="figure-zoom" type="button"><img alt="Current nested protocol and model comparison." decoding="async" height="556" loading="lazy" src="figures/current/06_leakage_by_model.png" width="1044"/></button><figcaption class="generated-alt-caption">Current nested protocol and model comparison.</figcaption></figure>
+
+</div></section><section id="report-section-7" class="section-padding section--editorial" data-section-num="07"><div class="section-header"><h2 class="section-title">Pollutant prediction results</h2></div><div class="report-block" id="report-7-1">
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">Tract outer evaluation</th>
+<th scope="col" style="text-align:right">Pooled R²</th>
+<th scope="col" style="text-align:right">Pooled RMSE</th>
+<th scope="col" style="text-align:right">Mean fold R²</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RF NO₂</td>
+<td style="text-align:right">0.762083</td>
+<td style="text-align:right">4.412728</td>
+<td style="text-align:right">0.732917</td>
+</tr>
+<tr>
+<td>RF NO</td>
+<td style="text-align:right">0.641059</td>
+<td style="text-align:right">12.695212</td>
+<td style="text-align:right">0.573470</td>
+</tr>
+<tr>
+<td>RF PM₂.₅</td>
+<td style="text-align:right">0.636052</td>
+<td style="text-align:right">2.091718</td>
+<td style="text-align:right">0.617723</td>
+</tr>
+<tr>
+<td>HGB NO₂</td>
+<td style="text-align:right">0.730200</td>
+<td style="text-align:right">4.699105</td>
+<td style="text-align:right">0.675602</td>
+</tr>
+<tr>
+<td>HGB NO</td>
+<td style="text-align:right">0.597631</td>
+<td style="text-align:right">13.441268</td>
+<td style="text-align:right">0.493323</td>
+</tr>
+<tr>
+<td>HGB PM₂.₅</td>
+<td style="text-align:right">0.606935</td>
+<td style="text-align:right">2.173781</td>
+<td style="text-align:right">0.567108</td>
+</tr>
+</tbody>
+</table></div>
+<p>Within each pollutant, RF achieves a higher pooled R² than HGB. RMSE is compared within a target because pollutant scales differ. Evaluation results are reported as point estimates.</p>
+<p>The map separately selects on all observations, dropping pop_den. RF uses 300 trees, max_features=0.3 and min_samples_leaf=5; HGB uses max_iter=300, learning_rate=0.1 and max_leaf_nodes=15. Full-data map fitting is not OOF, and OOF scores are not per-segment accuracy guarantees.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Current tract OOF predictions and observations." class="figure-zoom" type="button"><img alt="Current tract OOF predictions and observations." decoding="async" height="719" loading="lazy" src="figures/current/09_pred_vs_observed.png" width="1844"/></button><figcaption class="generated-alt-caption">Current tract OOF predictions and observations.</figcaption></figure>
+<p>HGB predicts a minimum NO value of −4.023089 on the surface, without a nonnegative constraint. A useful follow-up is to compare nonnegative target transformations or constrained models for low-value locations.</p>
+
+</div></section><section id="report-section-8" class="section-padding section--editorial" data-section-num="08"><div class="section-header"><h2 class="section-title">Road distance and pollutant distributions</h2></div><div class="report-block" id="report-8-1">
+<p>Grouping observations by distance to the nearest motorway reveals how pollutant distributions vary with distance. Median NO₂ is 23.8 at 0–50 m, 15.1 at 50–100 m, 13.3 at 250–300 m and 7.5 beyond 1 km. Higher values in nearby groups support including road distance as a candidate predictive feature.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Observed pollutant distributions against motorway distance. Black lines show medians within distance bins." class="figure-zoom" type="button"><img alt="Observed pollutant distributions against motorway distance. Black lines show medians within distance bins." decoding="async" height="665" loading="lazy" src="figures/current/03_distance_decay.png" width="1841"/></button><figcaption class="generated-alt-caption">Observed pollutant distributions against motorway distance. Black lines show medians within distance bins.</figcaption></figure>
+<p>The binned comparison preserves the observation distribution, showing both trend and spread. Road classes and surrounding conditions also differ across distance groups, so this comparison describes sample associations and informs stratified sampling.</p>
+
+</div></section><section id="report-section-9" class="section-padding section--editorial" data-section-num="09"><div class="section-header"><h2 class="section-title">Prediction coverage and relative grades</h2></div><div class="report-block" id="report-9-1">
+<p>The surface construction first intersects projected centerline unions with the 300 m polygon-buffer union, then segments and takes midpoints. Buffers use 32 segments per quadrant and overlay tolerance 1e-6 m. HTML and static maps use the same 25,746 clipped geometries, each at most 50 m long. The 300 m limit controls spatial extrapolation.</p>
+<p>The same six final models predict at each midpoint. Each pollutant's prediction-point quintiles define grades, then the worst grade is retained. A–E rank relative predictions from low to high for road comparisons. Context fields including zone/wind/temp/pop_den/GEOID are borrowed from the nearest observation as a nearest-observation approximation; pop_den is excluded from selected final models.</p>
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">RF grade</th>
+<th scope="col" style="text-align:right">Length km</th>
+<th scope="col" style="text-align:right">Share of surface length</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td style="text-align:right">67.070822</td>
+<td style="text-align:right">10.6675%</td>
+</tr>
+<tr>
+<td>B</td>
+<td style="text-align:right">102.663963</td>
+<td style="text-align:right">16.3286%</td>
+</tr>
+<tr>
+<td>C</td>
+<td style="text-align:right">120.732140</td>
+<td style="text-align:right">19.2023%</td>
+</tr>
+<tr>
+<td>D</td>
+<td style="text-align:right">157.425536</td>
+<td style="text-align:right">25.0384%</td>
+</tr>
+<tr>
+<td>E</td>
+<td style="text-align:right">180.844492</td>
+<td style="text-align:right">28.7631%</td>
+</tr>
+</tbody>
+</table></div>
+<p>Lengths sum to 628.74 km. RF/HGB agree exactly on 69.92% and within one grade on 96.44%, over 25,746 prediction points rather than kilometers. This comparison measures grade stability when the model family changes.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Current length distribution across grades." class="figure-zoom" type="button"><img alt="Current length distribution across grades." decoding="async" height="584" loading="lazy" src="figures/current/10_grade_distribution.png" width="922"/></button><figcaption class="generated-alt-caption">Current length distribution across grades.</figcaption></figure>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Observed points and current relative predictions on exact clipped segments." class="figure-zoom" type="button"><img alt="Observed points and current relative predictions on exact clipped segments." decoding="async" height="666" loading="lazy" src="figures/current/12_maps_static.png" width="1773"/></button><figcaption class="generated-alt-caption">Observed points and current relative predictions on exact clipped segments.</figcaption></figure>
+
+</div></section><section id="report-section-10" class="section-padding section--editorial" data-section-num="10"><div class="section-header"><h2 class="section-title">Tract associations with the health field</h2></div><div class="report-block" id="report-10-1">
+<p>Respiratory_HI is treated as the course dataset's respiratory-hazard category for an exploratory comparison with pollutant predictions. It is excluded from the pollutant models. Each census tract contributes one row: its category is the mode across observations, and low, moderate and high are ranked 1, 2 and 3 for a Spearman comparison.</p>
+<p>The surface follows the course aggregation: take the arithmetic mean of NO₂ prediction points grouped by the tract identifier borrowed from their nearest observation. Across 70 tracts, the rank correlation is <strong>0.707</strong>. The low, moderate and high groups contain 10, 16 and 44 tracts, with median tract mean predictions of <strong>7.547, 10.908 and 14.644</strong>.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Tract mean predictions by respiratory-hazard category. Each dot represents one census tract." class="figure-zoom" type="button"><img alt="Tract mean predictions by respiratory-hazard category. Each dot represents one census tract." decoding="async" height="626" loading="lazy" src="figures/current/14_tract_association_en.png" width="976"/></button><figcaption class="generated-alt-caption">Tract mean predictions by respiratory-hazard category. Each dot represents one census tract.</figcaption></figure>
+<p>Using tract means of observed NO₂ gives a rank correlation of 0.839; using tract means of held-out predictions at those observation locations gives 0.823. The consistent ordering demonstrates aggregation, ordinal coding and rank association within the dataset. The surface correlation is lower, and its comparison locations also change from observations to road midpoints.</p>
+<p>Tract associations use fields within the dataset and tract IDs assigned from the nearest observation. A follow-up comparison can clip roads to actual tract boundaries and evaluate the two spatial aggregation methods.</p>
+
+</div></section><section id="report-section-11" class="section-padding section--editorial" data-section-num="11"><div class="section-header"><h2 class="section-title">Zone errors and spatial diagnostics</h2></div><div class="report-block" id="report-11-1">
+<p>Error diagnostics use RF NO₂ predictions from tract hold-outs. Residuals are observed minus predicted values: positive means underprediction and negative means overprediction. The overall mean residual is −0.381155, its standard deviation is 4.396357, and MAE is 2.969.</p>
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">Zone</th>
+<th scope="col" style="text-align:right">Observations</th>
+<th scope="col" style="text-align:right">Mean residual</th>
+<th scope="col" style="text-align:right">MAE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>industrial</td>
+<td style="text-align:right">1,419</td>
+<td style="text-align:right">0.022</td>
+<td style="text-align:right">4.283</td>
+</tr>
+<tr>
+<td>mixed</td>
+<td style="text-align:right">3,485</td>
+<td style="text-align:right">-0.271</td>
+<td style="text-align:right">3.954</td>
+</tr>
+<tr>
+<td>commercial</td>
+<td style="text-align:right">3,218</td>
+<td style="text-align:right">-0.696</td>
+<td style="text-align:right">3.624</td>
+</tr>
+<tr>
+<td>open space</td>
+<td style="text-align:right">224</td>
+<td style="text-align:right">-1.982</td>
+<td style="text-align:right">3.008</td>
+</tr>
+<tr>
+<td>residential</td>
+<td style="text-align:right">9,873</td>
+<td style="text-align:right">-0.339</td>
+<td style="text-align:right">2.219</td>
+</tr>
+</tbody>
+</table></div>
+<p>Industrial zones have nearly zero mean residual but the largest MAE, showing how overprediction and underprediction can cancel. Residential zones have lower MAE. Open-space predictions are high on average, though that group contains only 224 observations.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Error magnitude and direction by land-use zone: MAE on the left and mean residual on the right." class="figure-zoom" type="button"><img alt="Error magnitude and direction by land-use zone: MAE on the left and mean residual on the right." decoding="async" height="624" loading="lazy" src="figures/current/15_zone_errors_en.png" width="1635"/></button><figcaption class="generated-alt-caption">Error magnitude and direction by land-use zone: MAE on the left and mean residual on the right.</figcaption></figure>
+<p>The spatial residual display uses a fixed random sample of 5,000 observations. The group table and metrics use all 18,219 points. A useful next step is to inspect high-error industrial roads, comparing road classes, distances and observed-value distributions before adding features or changing the model.</p>
+
+</div></section><section id="report-section-12" class="section-padding section--editorial" data-section-num="12"><div class="section-header"><h2 class="section-title">Project findings and next steps</h2></div><div class="report-block" id="report-12-1">
+<p>Road distance helps identify spatial pollutant patterns, while model suitability depends on where predictions are needed. Higher median NO₂ near motorways indicates that distance carries prediction-relevant information. Under the tested selection procedure, RF performs better than HGB on tract hold-outs, supporting RF as the main mapping model and HGB as a check on grade stability. The comparison supports this choice without isolating an algorithmic mechanism behind the advantage.</p>
+<p>RF pooled NO₂ R² falls from 0.942353 for random-point hold-outs to 0.576017 for coordinate-region hold-outs, showing that transfer across regions is harder. Spatial proximity and changing feature distributions are explanations to investigate; their separate contributions have not been quantified. Industrial MAE of 4.283 versus residential MAE of 2.219 identifies where improvement is needed. The near-zero industrial mean residual reflects cancellation between positive and negative errors and cannot replace absolute-error diagnostics.</p>
+<p>The following plan translates these findings into investigation and model-improvement actions.</p>
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">Action</th>
+<th scope="col">Analytical basis</th>
+<th scope="col">Implementation and intended deliverable</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Screen roads for investigation</td>
+<td>RF/HGB give the same grade at 69.92% of prediction points and differ by at most one grade at 96.44%; relative road grades are available</td>
+<td>Flag roads graded relatively high by both models, then consider observation coverage when ordering visits. Put larger disagreements on a model-review list. Deliver a candidate table with locations, both grades and coverage information.</td>
+</tr>
+<tr>
+<td>Diagnose industrial errors first</td>
+<td>Industrial MAE exceeds residential MAE, while mean residuals conceal local errors</td>
+<td>Rank existing observations by absolute residual and inspect road classes, distances and high values. If feature gaps emerge, assess traffic or industrial-activity information. Deliver hypotheses about errors and targeted feature proposals.</td>
+</tr>
+<tr>
+<td>Stratify additional sampling</td>
+<td>Values are higher near motorways, region-hold-out scores fall, and predictions cover only part of the road network</td>
+<td>Account for motorway distance, land use and existing coverage, prioritizing industrial and uncovered areas. Reserve entire new regions for testing. Deliver proposed sampling locations and a spatial evaluation design.</td>
+</tr>
+<tr>
+<td>Combine tract information for investigation planning</td>
+<td>Predicted NO₂ and the respiratory-hazard category have a rank correlation of 0.707 across 70 tracts</td>
+<td>Flag tracts high on both measures, then consider coverage and error diagnostics. Check nearest-observation assignments against actual tract boundaries before selecting sites. Deliver proposed tract investigation priorities.</td>
+</tr>
+<tr>
+<td>Examine low predictions and compare remedies</td>
+<td>HGB produces a minimum NO prediction of −4.023089</td>
+<td>Compare nonnegative target transformations or constrained models under the same spatial hold-outs, checking both overall error and low-value bias. Deliver a comparison of the original and revised methods.</td>
+</tr>
+</tbody>
+</table></div>
+<p>The project delivers pollutant-pattern analysis, nested model comparisons, error diagnosis and relative road prediction maps. A–E grades, model agreement and tract-level field associations inform proposals for road investigations and additional sampling.</p>
+
+</div></section></article>
+  </section>
+
+  <section id="related" class="section-padding"><div class="section-header"><h2 class="section-title">Related projects</h2></div><div class="grid md:grid-cols-2 gap-6"><a href="../spglobal climate comparison/spglobal climate comparison-en.html" class="related-project-card"><h3 class="related-project-title">S&amp;P Global Capstone: climate models, forecasts and spatial exposure</h3><p class="related-project-description">A 2026 reconstruction of the 2022 capstone covers four study boxes and 1,020 cells, connecting climate-model comparison, short-term forecasting, long-term scenarios and spatial exposure. Under ssp585 for 2035–2044, 204 cell–layer entries meet a proposed priority-check rule.</p><span class="related-project-link">Read case</span></a><a href="../spglobal climate comparison/model comparison-en.html" class="related-project-card"><h3 class="related-project-title">Capstone study: model comparison</h3><p class="related-project-description">Compare historical MODIS LST and NEX-GDDP-CMIP6 tas across four study boxes, accounting for variables, calendars and sampling. Diagnose errors across 15 models and assess rank uncertainty in the 14-model main ensemble to inform model selection and bias correction.</p><span class="related-project-link">Read case</span></a></div></section>
+</main>
+<script src="../../assets/js/logo.js"></script>
+<script src="../../assets/js/common.js"></script>
+<script src="../../assets/js/project.js"></script>
+<script src="../../assets/js/language-switcher.js"></script>
+</body>
+</html>

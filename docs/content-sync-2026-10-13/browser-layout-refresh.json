@@ -1,0 +1,1123 @@
+{
+  "browser": "155.0.4283.45",
+  "pages": [
+    {
+      "path": "projects/Bank Customer Churn Prediction/Bank Customer Churn Prediction.html",
+      "key": "bank",
+      "language": "zh",
+      "sections": 11,
+      "views": [
+        {
+          "width": 1440,
+          "theme": "light",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\bank-zh-1440-light-hero.png",
+          "equations_checked": 0
+        },
+        {
+          "width": 1440,
+          "theme": "dark",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\bank-zh-1440-dark-hero.png",
+          "equations_checked": 0
+        },
+        {
+          "width": 390,
+          "theme": "light",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\bank-zh-390-light-hero.png",
+          "equations_checked": 0
+        },
+        {
+          "width": 390,
+          "theme": "dark",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\bank-zh-390-dark-hero.png",
+          "equations_checked": 0
+        }
+      ],
+      "interactions": {},
+      "page_errors": [],
+      "resource_failures": [],
+      "status": "pass"
+    },
+    {
+      "path": "projects/e-commerce fraud detection/e-commerce fraud detection.html",
+      "key": "fraud",
+      "language": "zh",
+      "sections": 16,
+      "views": [
+        {
+          "width": 1440,
+          "theme": "light",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\fraud-zh-1440-light-hero.png",
+          "equations_checked": 0
+        },
+        {
+          "width": 1440,
+          "theme": "dark",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\fraud-zh-1440-dark-hero.png",
+          "equations_checked": 0
+        },
+        {
+          "width": 390,
+          "theme": "light",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\fraud-zh-390-light-hero.png",
+          "equations_checked": 0
+        },
+        {
+          "width": 390,
+          "theme": "dark",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\fraud-zh-390-dark-hero.png",
+          "equations_checked": 0
+        }
+      ],
+      "interactions": {},
+      "page_errors": [],
+      "resource_failures": [],
+      "status": "pass"
+    },
+    {
+      "path": "projects/lendingclub loan prediction/lendingclub loan prediction.html",
+      "key": "loan",
+      "language": "zh",
+      "sections": 13,
+      "views": [
+        {
+          "width": 1440,
+          "theme": "light",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\loan-zh-1440-light-hero.png",
+          "equations_checked": 0
+        },
+        {
+          "width": 1440,
+          "theme": "dark",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\loan-zh-1440-dark-hero.png",
+          "equations_checked": 0
+        },
+        {
+          "width": 390,
+          "theme": "light",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\loan-zh-390-light-hero.png",
+          "equations_checked": 0
+        },
+        {
+          "width": 390,
+          "theme": "dark",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\loan-zh-390-dark-hero.png",
+          "equations_checked": 0
+        }
+      ],
+      "interactions": {},
+      "page_errors": [],
+      "resource_failures": [],
+      "status": "pass"
+    },
+    {
+      "path": "projects/ab testing/ab testing.html",
+      "key": "ab",
+      "language": "zh",
+      "sections": 11,
+      "views": [
+        {
+          "width": 1440,
+          "theme": "light",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\ab-zh-1440-light-hero.png",
+          "equations_checked": 0
+        },
+        {
+          "width": 1440,
+          "theme": "dark",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\ab-zh-1440-dark-hero.png",
+          "equations_checked": 0
+        },
+        {
+          "width": 390,
+          "theme": "light",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\ab-zh-390-light-hero.png",
+          "equations_checked": 0
+        },
+        {
+          "width": 390,
+          "theme": "dark",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\ab-zh-390-dark-hero.png",
+          "equations_checked": 0
+        }
+      ],
+      "interactions": {},
+      "page_errors": [],
+      "resource_failures": [],
+      "status": "pass"
+    },
+    {
+      "path": "projects/lendingclub loan prediction/full data.html",
+      "key": "loan-full",
+      "language": "zh",
+      "sections": 12,
+      "views": [
+        {
+          "width": 1440,
+          "theme": "light",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\loan-full-zh-1440-light-hero.png",
+          "equations_checked": 0
+        },
+        {
+          "width": 1440,
+          "theme": "dark",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\loan-full-zh-1440-dark-hero.png",
+          "equations_checked": 0
+        },
+        {
+          "width": 390,
+          "theme": "light",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\loan-full-zh-390-light-hero.png",
+          "equations_checked": 0
+        },
+        {
+          "width": 390,
+          "theme": "dark",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\loan-full-zh-390-dark-hero.png",
+          "equations_checked": 0
+        }
+      ],
+      "interactions": {},
+      "page_errors": [],
+      "resource_failures": [],
+      "status": "pass"
+    },
+    {
+      "path": "projects/spglobal climate comparison/spglobal climate comparison.html",
+      "key": "climate",
+      "language": "zh",
+      "sections": 9,
+      "views": [
+        {
+          "width": 1440,
+          "theme": "light",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\climate-zh-1440-light-hero.png",
+          "equations_checked": 2
+        },
+        {
+          "width": 1440,
+          "theme": "dark",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\climate-zh-1440-dark-hero.png",
+          "equations_checked": 2
+        },
+        {
+          "width": 390,
+          "theme": "light",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\climate-zh-390-light-hero.png",
+          "equations_checked": 2
+        },
+        {
+          "width": 390,
+          "theme": "dark",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\climate-zh-390-dark-hero.png",
+          "equations_checked": 2
+        }
+      ],
+      "interactions": {},
+      "page_errors": [],
+      "resource_failures": [],
+      "status": "pass"
+    },
+    {
+      "path": "projects/spglobal climate comparison/model comparison.html",
+      "key": "comparison",
+      "language": "zh",
+      "sections": 11,
+      "views": [
+        {
+          "width": 1440,
+          "theme": "light",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\comparison-zh-1440-light-hero.png",
+          "equations_checked": 0
+        },
+        {
+          "width": 1440,
+          "theme": "dark",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\comparison-zh-1440-dark-hero.png",
+          "equations_checked": 0
+        },
+        {
+          "width": 390,
+          "theme": "light",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\comparison-zh-390-light-hero.png",
+          "equations_checked": 0
+        },
+        {
+          "width": 390,
+          "theme": "dark",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\comparison-zh-390-dark-hero.png",
+          "equations_checked": 0
+        }
+      ],
+      "interactions": {},
+      "page_errors": [],
+      "resource_failures": [],
+      "status": "pass"
+    },
+    {
+      "path": "projects/spglobal climate comparison/long series.html",
+      "key": "long-series",
+      "language": "zh",
+      "sections": 9,
+      "views": [
+        {
+          "width": 1440,
+          "theme": "light",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\long-series-zh-1440-light-hero.png",
+          "equations_checked": 0
+        },
+        {
+          "width": 1440,
+          "theme": "dark",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\long-series-zh-1440-dark-hero.png",
+          "equations_checked": 0
+        },
+        {
+          "width": 390,
+          "theme": "light",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\long-series-zh-390-light-hero.png",
+          "equations_checked": 0
+        },
+        {
+          "width": 390,
+          "theme": "dark",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\long-series-zh-390-dark-hero.png",
+          "equations_checked": 0
+        }
+      ],
+      "interactions": {},
+      "page_errors": [],
+      "resource_failures": [],
+      "status": "pass"
+    },
+    {
+      "path": "projects/spglobal climate comparison/projection overlay.html",
+      "key": "projection",
+      "language": "zh",
+      "sections": 13,
+      "views": [
+        {
+          "width": 1440,
+          "theme": "light",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\projection-zh-1440-light-hero.png",
+          "equations_checked": 2
+        },
+        {
+          "width": 1440,
+          "theme": "dark",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\projection-zh-1440-dark-hero.png",
+          "equations_checked": 2
+        },
+        {
+          "width": 390,
+          "theme": "light",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\projection-zh-390-light-hero.png",
+          "equations_checked": 2
+        },
+        {
+          "width": 390,
+          "theme": "dark",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\projection-zh-390-dark-hero.png",
+          "equations_checked": 2
+        }
+      ],
+      "interactions": {},
+      "page_errors": [],
+      "resource_failures": [],
+      "status": "pass"
+    },
+    {
+      "path": "projects/Bank Customer Churn Prediction/Bank Customer Churn Prediction-en.html",
+      "key": "bank",
+      "language": "en",
+      "sections": 11,
+      "views": [
+        {
+          "width": 1440,
+          "theme": "light",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\bank-en-1440-light-hero.png",
+          "equations_checked": 0
+        },
+        {
+          "width": 1440,
+          "theme": "dark",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\bank-en-1440-dark-hero.png",
+          "equations_checked": 0
+        },
+        {
+          "width": 390,
+          "theme": "light",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\bank-en-390-light-hero.png",
+          "equations_checked": 0
+        },
+        {
+          "width": 390,
+          "theme": "dark",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\bank-en-390-dark-hero.png",
+          "equations_checked": 0
+        }
+      ],
+      "interactions": {},
+      "page_errors": [],
+      "resource_failures": [],
+      "status": "pass"
+    },
+    {
+      "path": "projects/e-commerce fraud detection/e-commerce fraud detection-en.html",
+      "key": "fraud",
+      "language": "en",
+      "sections": 16,
+      "views": [
+        {
+          "width": 1440,
+          "theme": "light",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\fraud-en-1440-light-hero.png",
+          "equations_checked": 0
+        },
+        {
+          "width": 1440,
+          "theme": "dark",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\fraud-en-1440-dark-hero.png",
+          "equations_checked": 0
+        },
+        {
+          "width": 390,
+          "theme": "light",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\fraud-en-390-light-hero.png",
+          "equations_checked": 0
+        },
+        {
+          "width": 390,
+          "theme": "dark",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\fraud-en-390-dark-hero.png",
+          "equations_checked": 0
+        }
+      ],
+      "interactions": {},
+      "page_errors": [],
+      "resource_failures": [],
+      "status": "pass"
+    },
+    {
+      "path": "projects/lendingclub loan prediction/lendingclub loan prediction-en.html",
+      "key": "loan",
+      "language": "en",
+      "sections": 13,
+      "views": [
+        {
+          "width": 1440,
+          "theme": "light",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\loan-en-1440-light-hero.png",
+          "equations_checked": 0
+        },
+        {
+          "width": 1440,
+          "theme": "dark",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\loan-en-1440-dark-hero.png",
+          "equations_checked": 0
+        },
+        {
+          "width": 390,
+          "theme": "light",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\loan-en-390-light-hero.png",
+          "equations_checked": 0
+        },
+        {
+          "width": 390,
+          "theme": "dark",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\loan-en-390-dark-hero.png",
+          "equations_checked": 0
+        }
+      ],
+      "interactions": {},
+      "page_errors": [],
+      "resource_failures": [],
+      "status": "pass"
+    },
+    {
+      "path": "projects/ab testing/ab testing-en.html",
+      "key": "ab",
+      "language": "en",
+      "sections": 11,
+      "views": [
+        {
+          "width": 1440,
+          "theme": "light",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\ab-en-1440-light-hero.png",
+          "equations_checked": 0
+        },
+        {
+          "width": 1440,
+          "theme": "dark",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\ab-en-1440-dark-hero.png",
+          "equations_checked": 0
+        },
+        {
+          "width": 390,
+          "theme": "light",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\ab-en-390-light-hero.png",
+          "equations_checked": 0
+        },
+        {
+          "width": 390,
+          "theme": "dark",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\ab-en-390-dark-hero.png",
+          "equations_checked": 0
+        }
+      ],
+      "interactions": {},
+      "page_errors": [],
+      "resource_failures": [],
+      "status": "pass"
+    },
+    {
+      "path": "projects/lendingclub loan prediction/full data-en.html",
+      "key": "loan-full",
+      "language": "en",
+      "sections": 12,
+      "views": [
+        {
+          "width": 1440,
+          "theme": "light",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\loan-full-en-1440-light-hero.png",
+          "equations_checked": 0
+        },
+        {
+          "width": 1440,
+          "theme": "dark",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\loan-full-en-1440-dark-hero.png",
+          "equations_checked": 0
+        },
+        {
+          "width": 390,
+          "theme": "light",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\loan-full-en-390-light-hero.png",
+          "equations_checked": 0
+        },
+        {
+          "width": 390,
+          "theme": "dark",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\loan-full-en-390-dark-hero.png",
+          "equations_checked": 0
+        }
+      ],
+      "interactions": {},
+      "page_errors": [],
+      "resource_failures": [],
+      "status": "pass"
+    },
+    {
+      "path": "projects/spglobal climate comparison/spglobal climate comparison-en.html",
+      "key": "climate",
+      "language": "en",
+      "sections": 9,
+      "views": [
+        {
+          "width": 1440,
+          "theme": "light",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\climate-en-1440-light-hero.png",
+          "equations_checked": 2
+        },
+        {
+          "width": 1440,
+          "theme": "dark",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\climate-en-1440-dark-hero.png",
+          "equations_checked": 2
+        },
+        {
+          "width": 390,
+          "theme": "light",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\climate-en-390-light-hero.png",
+          "equations_checked": 2
+        },
+        {
+          "width": 390,
+          "theme": "dark",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\climate-en-390-dark-hero.png",
+          "equations_checked": 2
+        }
+      ],
+      "interactions": {},
+      "page_errors": [],
+      "resource_failures": [],
+      "status": "pass"
+    },
+    {
+      "path": "projects/spglobal climate comparison/model comparison-en.html",
+      "key": "comparison",
+      "language": "en",
+      "sections": 11,
+      "views": [
+        {
+          "width": 1440,
+          "theme": "light",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\comparison-en-1440-light-hero.png",
+          "equations_checked": 0
+        },
+        {
+          "width": 1440,
+          "theme": "dark",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\comparison-en-1440-dark-hero.png",
+          "equations_checked": 0
+        },
+        {
+          "width": 390,
+          "theme": "light",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\comparison-en-390-light-hero.png",
+          "equations_checked": 0
+        },
+        {
+          "width": 390,
+          "theme": "dark",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\comparison-en-390-dark-hero.png",
+          "equations_checked": 0
+        }
+      ],
+      "interactions": {},
+      "page_errors": [],
+      "resource_failures": [],
+      "status": "pass"
+    },
+    {
+      "path": "projects/spglobal climate comparison/long series-en.html",
+      "key": "long-series",
+      "language": "en",
+      "sections": 9,
+      "views": [
+        {
+          "width": 1440,
+          "theme": "light",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\long-series-en-1440-light-hero.png",
+          "equations_checked": 0
+        },
+        {
+          "width": 1440,
+          "theme": "dark",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\long-series-en-1440-dark-hero.png",
+          "equations_checked": 0
+        },
+        {
+          "width": 390,
+          "theme": "light",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\long-series-en-390-light-hero.png",
+          "equations_checked": 0
+        },
+        {
+          "width": 390,
+          "theme": "dark",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\long-series-en-390-dark-hero.png",
+          "equations_checked": 0
+        }
+      ],
+      "interactions": {},
+      "page_errors": [],
+      "resource_failures": [],
+      "status": "pass"
+    },
+    {
+      "path": "projects/spglobal climate comparison/projection overlay-en.html",
+      "key": "projection",
+      "language": "en",
+      "sections": 13,
+      "views": [
+        {
+          "width": 1440,
+          "theme": "light",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\projection-en-1440-light-hero.png",
+          "equations_checked": 2
+        },
+        {
+          "width": 1440,
+          "theme": "dark",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\projection-en-1440-dark-hero.png",
+          "equations_checked": 2
+        },
+        {
+          "width": 390,
+          "theme": "light",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\projection-en-390-light-hero.png",
+          "equations_checked": 2
+        },
+        {
+          "width": 390,
+          "theme": "dark",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\projection-en-390-dark-hero.png",
+          "equations_checked": 2
+        }
+      ],
+      "interactions": {},
+      "page_errors": [],
+      "resource_failures": [],
+      "status": "pass"
+    },
+    {
+      "path": "index.html",
+      "key": "home",
+      "language": "zh",
+      "views": [
+        {
+          "width": 1440,
+          "theme": "light",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\home-zh-1440-light-hero.png",
+          "equations_checked": 0
+        },
+        {
+          "width": 1440,
+          "theme": "dark",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\home-zh-1440-dark-hero.png",
+          "equations_checked": 0
+        },
+        {
+          "width": 390,
+          "theme": "light",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\home-zh-390-light-hero.png",
+          "equations_checked": 0
+        },
+        {
+          "width": 390,
+          "theme": "dark",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\home-zh-390-dark-hero.png",
+          "equations_checked": 0
+        }
+      ],
+      "interactions": {},
+      "page_errors": [],
+      "resource_failures": [],
+      "status": "pass"
+    },
+    {
+      "path": "index-en.html",
+      "key": "home",
+      "language": "en",
+      "views": [
+        {
+          "width": 1440,
+          "theme": "light",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\home-en-1440-light-hero.png",
+          "equations_checked": 0
+        },
+        {
+          "width": 1440,
+          "theme": "dark",
+          "layout": {
+            "viewport": 1440,
+            "scrollWidth": 1440,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\home-en-1440-dark-hero.png",
+          "equations_checked": 0
+        },
+        {
+          "width": 390,
+          "theme": "light",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\home-en-390-light-hero.png",
+          "equations_checked": 0
+        },
+        {
+          "width": 390,
+          "theme": "dark",
+          "layout": {
+            "viewport": 390,
+            "scrollWidth": 390,
+            "overflow": []
+          },
+          "hero_screenshot": "C:\\Users\\xjy19\\.codex\\visualizations\\2026\\10\\13\\01a132f8-9350-7cd1-9816-e09673a8a800\\browser\\home-en-390-dark-hero.png",
+          "equations_checked": 0
+        }
+      ],
+      "interactions": {},
+      "page_errors": [],
+      "resource_failures": [],
+      "status": "pass"
+    }
+  ]
+}

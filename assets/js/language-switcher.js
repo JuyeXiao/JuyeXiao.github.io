@@ -268,9 +268,9 @@
                 const href = logoLink.getAttribute('href');
                 if (href && (href.includes('index.html') || href.includes('index-en.html'))) {
                     if (this.currentLang === 'en') {
-                        logoLink.setAttribute('href', 'index-en.html');
+                        logoLink.setAttribute('href', href.replace('index.html', 'index-en.html'));
                     } else {
-                        logoLink.setAttribute('href', 'index.html');
+                        logoLink.setAttribute('href', href.replace('index-en.html', 'index.html'));
                     }
                 }
             }

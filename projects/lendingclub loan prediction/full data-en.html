@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>document.documentElement.classList.add('js');</script>
+  <title>From loan risk patterns to review policy: a full-data LendingClub analysis - Data Poetics</title>
+  <meta name="description" content="Use temporal splits of 800,634 mature terminal loans to compare ranking, thresholds and cost scenarios. At a fixed 10% review capacity, LightGBM achieves a 37.88% hit rate versus 32.38% for the grade rule. SHAP and cost analysis inform a manual-review proposal.">
+  <meta property="og:title" content="From loan risk patterns to review policy: a full-data LendingClub analysis">
+  <meta property="og:description" content="Use temporal splits of 800,634 mature terminal loans to compare ranking, thresholds and cost scenarios. At a fixed 10% review capacity, LightGBM achieves a 37.88% hit rate versus 32.38% for the grade rule. SHAP and cost analysis inform a manual-review proposal.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://juyexiao.github.io/projects/lendingclub%20loan%20prediction/full%20data-en.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:description" content="Use temporal splits of 800,634 mature terminal loans to compare ranking, thresholds and cost scenarios. At a fixed 10% review capacity, LightGBM achieves a 37.88% hit rate versus 32.38% for the grade rule. SHAP and cost analysis inform a manual-review proposal.">
+  <link rel="canonical" href="https://juyexiao.github.io/projects/lendingclub%20loan%20prediction/full%20data-en.html">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&amp;family=Inter:wght@200;300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;700&amp;family=Noto+Sans+SC:wght@400;500;600&amp;family=Noto+Serif+SC:wght@500&amp;display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="../../assets/css/index.css">
+  <link rel="stylesheet" href="../../assets/css/project.css">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "From loan risk patterns to review policy: a full-data LendingClub analysis", "description": "Use temporal splits of 800,634 mature terminal loans to compare ranking, thresholds and cost scenarios. At a fixed 10% review capacity, LightGBM achieves a 37.88% hit rate versus 32.38% for the grade rule. SHAP and cost analysis inform a manual-review proposal.", "inLanguage": "en", "author": {"@type": "Person", "name": "Juye Xiao"}}</script>
+</head>
+<body class="transition-colors duration-300 report-page">
+<div class="scroll-progress" id="scroll-progress"></div>
+<header class="navbar fixed top-0 left-0 right-0 z-50" id="navbar">
+<div class="container-main h-full flex items-center justify-between">
+<!-- Logo Section -->
+<a class="navbar-logo" href="../../index-en.html#hero" id="navbar-logo">
+<!-- SVG Logo -->
+<svg class="logo-svg-nav" viewbox="0 0 40 40">
+<!-- Data Grid Background -->
+<g class="grid-bg">
+<!-- Vertical Lines -->
+<line class="grid-line-v" style="animation-delay: 0.1s, 0s" x1="8" x2="8" y1="0" y2="40"></line>
+<line class="grid-line-v" style="animation-delay: 0.2s, 0.5s" x1="16" x2="16" y1="0" y2="40"></line>
+<line class="grid-line-v" style="animation-delay: 0.3s, 1s" x1="24" x2="24" y1="0" y2="40"></line>
+<line class="grid-line-v" style="animation-delay: 0.4s, 1.5s" x1="32" x2="32" y1="0" y2="40"></line>
+<!-- Horizontal Lines -->
+<line class="grid-line-h" style="animation-delay: 0.5s, 0s" x1="0" x2="40" y1="10" y2="10"></line>
+<line class="grid-line-h" style="animation-delay: 0.6s, 0.7s" x1="0" x2="40" y1="20" y2="20"></line>
+<line class="grid-line-h" style="animation-delay: 0.7s, 1.4s" x1="0" x2="40" y1="30" y2="30"></line>
+</g>
+<!-- Weaver Animation Line -->
+<line class="weaver-line" id="weaverLine" x1="0" x2="40" y1="20" y2="20"></line>
+<!-- JX Letters -->
+<text class="logo-letters" id="logoLetters" text-anchor="middle" x="20" y="26">JX</text>
+</svg>
+<!-- Name Signature (Hover Display) -->
+<div class="logo-name">
+<div class="logo-name-text">Juye Xiao</div>
+<div class="logo-name-subtitle">Data Analyst</div>
+</div>
+</a>
+<nav class="hidden md:flex items-center space-x-8">
+<a class="nav-link" href="../../index-en.html#about">About</a>
+<a class="nav-link" href="../../index-en.html#experience">Experience</a>
+<a class="nav-link" href="../../index-en.html#education">Education</a>
+<a class="nav-link" href="../../index-en.html#projects">Projects</a>
+<a class="nav-link" href="../../index-en.html#skills">Skills</a>
+<a class="nav-link" href="../../index-en.html#contact">Contact</a>
+</nav>
+<div class="flex items-center space-x-4">
+<button aria-label="Toggle theme" class="btn-secondary !p-2 !rounded-full" id="theme-toggle">
+<i class="block dark:hidden" data-lucide="sun"></i>
+<i class="hidden dark:block" data-lucide="moon"></i>
+</button>
+<button class="btn-secondary !p-2 !rounded-full" id="lang-toggle">
+<span class="font-bold text-sm">中</span>
+</button>
+<button aria-controls="mobile-menu" aria-expanded="false" aria-label="Open menu" class="btn-secondary !p-2 !rounded-full md:hidden" id="menu-toggle">
+<i class="menu-icon-open" data-lucide="menu"></i>
+<i class="menu-icon-close" data-lucide="x"></i>
+</button>
+</div>
+</div>
+<nav aria-label="Mobile navigation" class="mobile-menu md:hidden" id="mobile-menu">
+<a class="nav-link" href="../../index-en.html#about">About</a>
+<a class="nav-link" href="../../index-en.html#experience">Experience</a>
+<a class="nav-link" href="../../index-en.html#education">Education</a>
+<a class="nav-link" href="../../index-en.html#projects">Projects</a>
+<a class="nav-link" href="../../index-en.html#skills">Skills</a>
+<a class="nav-link" href="../../index-en.html#contact">Contact</a>
+</nav>
+</header>
+<main class="container-main">
+  <section id="project-hero" class="section-padding report-hero">
+    <div class="section-eyebrow"><span class="section-kicker">LendingClub · Advanced Case</span></div>
+    <h1 class="hero-title">From loan risk patterns to review policy: a full-data LendingClub analysis</h1>
+    <p class="subtitle report-standfirst">Use temporal splits of 800,634 mature terminal loans to compare ranking, thresholds and cost scenarios. At a fixed 10% review capacity, LightGBM achieves a 37.88% hit rate versus 32.38% for the grade rule. SHAP and cost analysis inform a manual-review proposal.</p>
+    <p class="reading-time">Analysis updated in 2026</p>
+    <div class="hero-stats"><div class="hero-stat"><div class="hero-stat__num">800,634</div><div class="hero-stat__label">Mature terminal loans</div></div><div class="hero-stat"><div class="hero-stat__num">10%</div><div class="hero-stat__label">Fixed review capacity</div></div><div class="hero-stat"><div class="hero-stat__num">37.88%</div><div class="hero-stat__label">LightGBM hit rate within capacity</div></div></div>
+    <div class="report-actions"><a class="btn btn-primary" href="#content">Read report</a><a class="btn btn-secondary" href="../../index-en.html#projects">All projects</a></div>
+  </section>
+<nav class="report-series" aria-label="Series navigation"><a class="report-series__link" href="lendingclub loan prediction-en.html">LendingClub: the 9,004-loan sample</a><a class="report-series__link is-current" href="full data-en.html">Full-data LendingClub: temporal evaluation and capacity trade-offs</a></nav>
+  <section id="content" class="section-padding report-layout">
+    <aside><nav class="project-toc" id="project-toc" aria-label="Report contents"><h3>Contents</h3><ul id="toc-list"><li><a class="toc-link" href="#report-section-1">At a glance</a></li><li><a class="toc-link" href="#report-section-2">Executive summary</a></li><li><a class="toc-link" href="#report-section-3">1 Loan risk and review decisions</a></li><li><a class="toc-link" href="#report-section-4">2 Analysis sample and loan outcomes</a></li><li><a class="toc-link" href="#report-section-5">3 Loan risk patterns and group differences</a></li><li><a class="toc-link" href="#report-section-6">4 Predictor selection and feature processing</a></li><li><a class="toc-link" href="#report-section-7">5 Temporal splitting and model comparison</a></li><li><a class="toc-link" href="#report-section-8">6 Cost assumptions and threshold selection</a></li><li><a class="toc-link" href="#report-section-9">7 Risk ranking, false-positive costs and model explanations</a></li><li><a class="toc-link" href="#report-section-10">8 Model performance across temporal splits</a></li><li><a class="toc-link" href="#report-section-11">9 Implementation recommendations</a></li></ul></nav></aside>
+    <article class="content-area report-body" id="report-body"><div class="report-block" id="report-intro-1">
+<p>Matured loans show clear risk differences by grade, term and credit burden. LightGBM concentrates risk in a prioritized group, but false flags offset net cost benefits under a high-recall policy. The analysis proposes segmented review, capacity constraints and cost-sensitive thresholds.</p>
+
+</div><section id="report-section-1" class="section-padding section--editorial" data-section-num="01"><div class="section-header"><h2 class="section-title">At a glance</h2></div><div class="report-block" id="report-1-1">
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col"></th>
+<th scope="col"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>mature terminal loans</td>
+<td>800,634</td>
+</tr>
+<tr>
+<td>selection threshold</td>
+<td>0.46</td>
+</tr>
+<tr>
+<td>gross reduction</td>
+<td>7.63%</td>
+</tr>
+<tr>
+<td>net reduction</td>
+<td>−21.48%</td>
+</tr>
+</tbody>
+</table></div>
+
+</div></section><section id="report-section-2" class="section-padding section--editorial" data-section-num="02"><div class="section-header"><h2 class="section-title">Executive summary</h2></div><div class="report-block" id="report-2-1">
+<p>This study asks which groups in public loan data face greater default risk and whether prediction models can help allocate limited review capacity. It selects 800,634 loans with elapsed terms and terminal outcomes, examines grouped default rates, effect sizes, binned trends and correlations, then excludes post-origination information and compares logistic regression, random forest and LightGBM using a temporal split. A separate selection set determines the model and threshold; policy costs are evaluated under alternative accounting assumptions. Equal-capacity rule comparisons, paired bootstrap intervals and SHAP explanations assess incremental ranking value and model behavior.</p>
+<p>Default rates rise from 5.6% for grade A to 39.8% for grade G, while 60-month loans show 25.7% versus 14.4% for 36-month loans. LightGBM achieves the highest test AP, 0.315991. Its flagged group has a 25.17% default rate, approximately 1.60 times the overall test rate. However, the selected threshold flags 44.34% of loans: false positives leave gross simulated costs 7.63% lower but net costs 21.48% higher. At a fixed 10% capacity, LightGBM precision is 37.88%, versus 32.38% for the grade rule, with a 95% difference interval of 4.97–6.08 percentage points. SHAP identifies subgrade, recent account openings and repayment-burden features as major contributors. The resulting recommendation is to prioritize capacity-limited manual review, use grade, term and credit burden to guide checks, and select thresholds against missed defaults, false flags and review costs.</p>
+
+</div></section><section id="report-section-3" class="section-padding section--editorial" data-section-num="03"><div class="section-header"><h2 class="section-title">1 Loan risk and review decisions</h2></div><div class="report-block" id="report-3-1">
+<p>This analysis uses 800,634 matured terminal-status loans to evaluate default ranking and threshold policies under fixed error prices. The <a href="lendingclub loan prediction-en.html">9,004-loan sample project</a> uses a different population, with its own splits, prices and model evaluation.</p>
+<p>The local parquet contains 2,260,668 loans and 151 columns, covering originations in 2007–2018. Fields describe loan terms, borrowers, credit records and repayment outcomes. The registered source is <a href="https://www.kaggle.com/datasets/wordsforthewise/lending-club">Kaggle: All Lending Club loan data</a>.</p>
+
+</div></section><section id="report-section-4" class="section-padding section--editorial" data-section-num="04"><div class="section-header"><h2 class="section-title">2 Analysis sample and loan outcomes</h2></div><div class="report-block" id="report-4-1">
+<p>Closed-loan comparisons by vintage require the share of loans without observed terminal outcomes.</p>
+<p>The closed 2018 subset has 15.7% default versus 23.1% in 2017. At the April 2019 snapshot, recent loans mainly enter this subset through early repayment or charge-off; open_share rises from 32.5% in 2016 to 88.6% in 2018. Outcome-observation selection limits the comparison: it neither establishes improving risk nor quantitatively excludes real risk changes.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Matured terminal-cohort default rate by origination vintage" class="figure-zoom" type="button"><img alt="Matured terminal-cohort default rate by origination vintage" decoding="async" height="431" loading="lazy" src="figures/full-data/current-v1/cohort_default_by_vintage.png" width="948"/></button><figcaption class="generated-alt-caption">Matured terminal-cohort default rate by origination vintage</figcaption></figure>
+<p>The code requires elapsed months to cover the full term: 36-month loans through April 2016 and 60-month loans through April 2014, followed by Fully Paid/Charged Off filtering. The 800,634-loan cohort has 15.4% default, with vintage rates of 12.6%–17.9%. This limits recent-vintage censoring without guaranteeing unbiased selection. Later loans are excluded from model evaluation.</p>
+<p>Exclusions comprise 1,440,841 loans with unelapsed terms, 2,749 credit-policy labels and 16,444 matured non-final loans. The last group represents 12.1% of matured 2016 loans and at most 0.7% elsewhere. This affects outcome availability and does not establish negligible aggregate selection effects.</p>
+<p>The cohort defaults at 15.4%, a class imbalance near 5.5:1. By term, 36-month loans default at 14.4% (727,819 loans) and 60-month loans at 25.7% (72,815 loans), nearly twice as high. Joint applications are 0.2% of the cohort (1,884 loans); they keep their individual-level income and DTI fields and are retained as ordinary rows.</p>
+<p>Prices are estimated from fit outcomes; Section 6 explains gross and net accounting and the cost calculation.</p>
+
+</div></section><section id="report-section-5" class="section-padding section--editorial" data-section-num="05"><div class="section-header"><h2 class="section-title">3 Loan risk patterns and group differences</h2></div><div class="report-block" id="report-5-1">
+<p>The risk signals below describe the full matured terminal cohort. The <a href="lendingclub loan prediction-en.html">9,004-loan sample analysis</a> provides distribution and model comparisons for a separate population, using its own evaluation protocol.</p>
+<p>EDA describes observed outcomes in the matured terminal-status cohort, subject to its exclusions. FICO and grouped associations characterize cohort risk but do not directly measure predictive increments.</p>
+<p>Default rises from grade A at 5.6% to G at 39.8%; small_business is 24.6%, versus about 12%–13% for weddings, cars and credit-card purposes. Employment-length groups span 15.2%–15.7% for one to nine years and 14.3% for ten-plus. A narrow group range does not establish absence of signal or equivalence.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Final default rate by categorical attribute" class="figure-zoom" type="button"><img alt="Final default rate by categorical attribute" decoding="async" height="885" loading="lazy" src="figures/full-data/current-v1/eda_categorical_default_rates.png" width="1747"/></button><figcaption class="generated-alt-caption">Final default rate by categorical attribute</figcaption></figure>
+<p>Across about 800,000 rows, Welch p-values display as 0.000 after three-decimal rounding; they are neither exact zero nor devoid of information. Effect sizes include interest rate 0.598, FICO −0.363, accounts opened in 24 months 0.273 and mortgage accounts −0.181. FICO is absent from the current sample project’s 30 columns. These mean differences do not establish predictive increments, causal effects or pricing mechanisms.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Distributions of the four largest numeric effects" class="figure-zoom" type="button"><img alt="Distributions of the four largest numeric effects" decoding="async" height="373" loading="lazy" src="figures/full-data/current-v1/eda_numeric_top_effects.png" width="1747"/></button><figcaption class="generated-alt-caption">Distributions of the four largest numeric effects</figcaption></figure>
+<p>Bin-order versus bin-default-rate Spearman correlations have magnitude 1.00 for interest rate, FICO, utilization and DTI, with FICO decreasing. qcut targets deciles and merges duplicate boundaries. These group trends do not establish individual monotonicity or exclude protective effects within particular ranges. Keeping continuous inputs does not prove binning unhelpful.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Default rate across deciles of the continuous drivers" class="figure-zoom" type="button"><img alt="Default rate across deciles of the continuous drivers" decoding="async" height="409" loading="lazy" src="figures/full-data/current-v1/eda_banded_risk_curves.png" width="1748"/></button><figcaption class="generated-alt-caption">Default rate across deciles of the continuous drivers</figcaption></figure>
+<p>Three pairs exceed |r|&gt;0.5: amount/installment 0.98, open/total accounts 0.69 and public/bankruptcy records 0.63. Installment is calculated from amount, rate and term, and section 4 drops some related columns. Lower remaining pairwise correlations do not guarantee stable logistic coefficients or absence of multivariate collinearity.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Correlation heatmap of origination-time numeric features" class="figure-zoom" type="button"><img alt="Correlation heatmap of origination-time numeric features" decoding="async" height="868" loading="lazy" src="figures/full-data/current-v1/eda_correlation_heatmap.png" width="977"/></button><figcaption class="generated-alt-caption">Correlation heatmap of origination-time numeric features</figcaption></figure>
+<p>Grades E–G account for 6.7% of loans and 14.1% of default counts, a share ratio near 2.1, versus 9.4%/22.0% in the parent. These are not monetary-loss or recoverable-loss shares. State default rates of 10.0% (DC) to 19.2% (MS) describe this cohort without isolating geographic mechanisms.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Loan share and default-count share by grade, and default rate by state" class="figure-zoom" type="button"><img alt="Loan share and default-count share by grade, and default rate by state" decoding="async" height="538" loading="lazy" src="figures/full-data/current-v1/eda_concentration.png" width="1748"/></button><figcaption class="generated-alt-caption">Loan share and default-count share by grade, and default rate by state</figcaption></figure>
+<h3>Risk patterns compared with the smaller sample project</h3>
+<p>The analysis sample is approximately 89 times the size of the 9,004-loan sample project. The comparison describes the direction and magnitude of risk patterns, rather than replication on the same population.</p>
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">Dimension</th>
+<th scope="col">Full-data analysis</th>
+<th scope="col">Sample comparison or interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Loan term</td>
+<td>Default rates are 25.7% for 60-month loans and 14.4% for 36-month loans, a ratio near 1.8</td>
+<td>The smaller sample has a ratio near 2.9; neither comparison identifies the causal effect of extending a term</td>
+</tr>
+<tr>
+<td>Credit grade</td>
+<td>Default rates increase from A to G, spanning 5.6%–39.8%</td>
+<td>The smaller sample spans 7.4%–52.9%, with the same direction and a different magnitude</td>
+</tr>
+<tr>
+<td>Interest rate and utilization</td>
+<td>Interest-rate correlation with default is 0.213; utilization correlation is 0.050, with increasing binned default rates</td>
+<td>The sample interest-rate correlation is 0.265; differences in correlation do not directly establish flatter slopes</td>
+</tr>
+<tr>
+<td>Income verification</td>
+<td>Default rates are 11.9% for Not Verified, 15.8% for Source Verified and 18.5% for Verified</td>
+<td>More frequent verification of higher-risk applicants is an untested explanation; the association does not show that verification increases default risk</td>
+</tr>
+</tbody>
+</table></div>
+<p>Time windows, loan composition and processing differ. Changes cannot be attributed solely to sample size or period, nor do they establish independent sources or replicated risk mechanisms.</p>
+
+</div></section><section id="report-section-6" class="section-padding section--editorial" data-section-num="06"><div class="section-header"><h2 class="section-title">4 Predictor selection and feature processing</h2></div><div class="report-block" id="report-6-1">
+<p>A default predictor must use information available when a decision is made. This step checks the original 151 columns, excludes subsequent repayment and outcome information, and then handles missing values, categories and engineered features. Using later information is called data leakage: it can inflate offline performance while being unavailable for new-loan predictions. The issue here is the timing of predictive information, not a disclosure of personal data.</p>
+<p>Missingness and near-constant screening fit within each training fold. Median imputation, encoding, LR scaling, TargetEncoder and class weights follow the same role boundaries, preventing selection/test distributions or labels from entering fitting. The final fit selects 57 candidate fields; each fold determines its own count.</p>
+<p>Field exclusions limit post-origination information; quality screening does not independently establish approval-time availability. Credit-history, loan-to-income and installment-to-income features use fixed definitions. Class weights address imbalance; this cohort has no SMOTE ablation establishing which approach is better.</p>
+
+</div></section><section id="report-section-7" class="section-padding section--editorial" data-section-num="07"><div class="section-header"><h2 class="section-title">5 Temporal splitting and model comparison</h2></div><div class="report-block" id="report-7-1">
+<p>A July-2015 boundary holds out later loans, while earlier training is split into fit and selection. Parameters are selected by three-fold average precision on a stratified sample of at most 200,000 fit rows. Logistic regression, random forest and LightGBM compare linear and tree-based approaches. Selection chooses model and threshold under the recall constraint, without merging selection into a refit. The separate selection role reduces final training size; stratified inner folds are not forward-chaining validation. The previously inspected test supports conditional retrospective evaluation.</p>
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">Model</th>
+<th scope="col" style="text-align:right">Frozen threshold</th>
+<th scope="col" style="text-align:right">Test ROC-AUC</th>
+<th scope="col" style="text-align:right">Test AP</th>
+<th scope="col" style="text-align:right">Recall</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Logistic</td>
+<td style="text-align:right">0.44</td>
+<td style="text-align:right">0.705346</td>
+<td style="text-align:right">0.299581</td>
+<td style="text-align:right">70.85%</td>
+</tr>
+<tr>
+<td>Random Forest</td>
+<td style="text-align:right">0.43</td>
+<td style="text-align:right">0.709180</td>
+<td style="text-align:right">0.304748</td>
+<td style="text-align:right">69.25%</td>
+</tr>
+<tr>
+<td>LightGBM</td>
+<td style="text-align:right">0.46</td>
+<td style="text-align:right">0.717803</td>
+<td style="text-align:right">0.315991</td>
+<td style="text-align:right">70.90%</td>
+</tr>
+</tbody>
+</table></div>
+<p>AP means average precision. Test point estimates establish neither significant model differences nor deployment readiness.</p>
+<p>LightGBM improves test AP by approximately 0.0164 over Logistic and 0.0112 over Random Forest. Recall is similar across the three models, so the visible advantage is ranking quality rather than substantially greater coverage at the selected thresholds. Trees can represent nonlinearities and interactions, a plausible methodological explanation, Section 7 uses SHAP to explain model outputs, while the source of ranking gains remains untested by ablation. LightGBM is a candidate ranking model, with Logistic retained to compare ranking benefits against maintenance costs.</p>
+<h3>Rules and models at equal review capacity</h3>
+<p>The primary comparison fixes review volume at 10% of each batch, with 5% and 20% capacity references. Candidate rules rank by worse grade, lower FICO or higher DTI; selection precision at 10% chooses the grade rule. A fixed, label-independent hash ordering breaks ties. Logistic and LightGBM use frozen model scores. Every method flags the same number of loans in the same test set, comparing detection at equal workload.</p>
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">Method</th>
+<th scope="col" style="text-align:right">Flagged loans</th>
+<th scope="col" style="text-align:right">Defaults found</th>
+<th scope="col" style="text-align:right">Precision</th>
+<th scope="col" style="text-align:right">Recall</th>
+<th scope="col" style="text-align:right">Net simulated cost reduction</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Grade rule</td>
+<td style="text-align:right">27,147</td>
+<td style="text-align:right">8,790</td>
+<td style="text-align:right">32.38%</td>
+<td style="text-align:right">20.57%</td>
+<td style="text-align:right">1.74%</td>
+</tr>
+<tr>
+<td>Logistic</td>
+<td style="text-align:right">27,147</td>
+<td style="text-align:right">9,813</td>
+<td style="text-align:right">36.15%</td>
+<td style="text-align:right">22.96%</td>
+<td style="text-align:right">5.18%</td>
+</tr>
+<tr>
+<td>LightGBM</td>
+<td style="text-align:right">27,147</td>
+<td style="text-align:right">10,282</td>
+<td style="text-align:right">37.88%</td>
+<td style="text-align:right">24.06%</td>
+<td style="text-align:right">6.76%</td>
+</tr>
+</tbody>
+</table></div>
+<p>Within the same 27,147-loan queue, LightGBM identifies 1,492 more defaults than the grade rule and 469 more than Logistic. It has higher precision and net simulated cost reduction at all three evaluated capacities, supporting it as a review-ranking candidate. At 10% capacity, roughly 76% of defaults remain outside the queue: this is a resource-constrained prioritization policy, not a high-recall policy.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Rules and models at three fixed review capacities" class="figure-zoom" type="button"><img alt="Rules and models at three fixed review capacities" decoding="async" height="655" loading="lazy" src="figures/full-data/additional-v1/capacity_comparison.png" width="2223"/></button><figcaption class="generated-alt-caption">Rules and models at three fixed review capacities</figcaption></figure>
+<p>Fixed-volume ranking produces a threshold that varies with each batch's score distribution. It differs from the main fixed 0.46 threshold and its high-recall objective. The 10% capacity was specified before evaluation, not optimized on test outcomes. Simulated costs use fit-derived average prices to compare policies at fixed capacity.</p>
+<h3>Paired bootstrap: conditional uncertainty in differences</h3>
+<p>Labels and the three methods' fixed flags for the same loans are jointly resampled 2,000 times. The 2.5th and 97.5th percentiles of each difference form a 95% interval. Multinomial sampling over joint label-and-flag categories is exactly equivalent to paired row resampling for these count-based metrics and preserves correspondence across methods.</p>
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">LightGBM versus</th>
+<th scope="col" style="text-align:right">Precision difference (pp)</th>
+<th scope="col" style="text-align:right">95% interval</th>
+<th scope="col" style="text-align:right">Net cost reduction difference (pp)</th>
+<th scope="col" style="text-align:right">95% interval</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Grade rule</td>
+<td style="text-align:right">5.50</td>
+<td style="text-align:right">4.97–6.08</td>
+<td style="text-align:right">5.02</td>
+<td style="text-align:right">4.55–5.56</td>
+</tr>
+<tr>
+<td>Logistic</td>
+<td style="text-align:right">1.73</td>
+<td style="text-align:right">1.34–2.14</td>
+<td style="text-align:right">1.58</td>
+<td style="text-align:right">1.23–1.95</td>
+</tr>
+</tbody>
+</table></div>
+<p>At the primary capacity, these intervals lie above zero, supporting LightGBM's advantage in this fixed-prediction comparison. Intervals assume IID loans and condition on models, prices, rule selection and original queue membership. Each replicate neither reranks loans nor retrains models; tuning uncertainty and temporal dependence are excluded, and multiple intervals are not adjusted for simultaneous inference.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Paired bootstrap differences at 10% review capacity" class="figure-zoom" type="button"><img alt="Paired bootstrap differences at 10% review capacity" decoding="async" height="623" loading="lazy" src="figures/full-data/additional-v1/paired_bootstrap.png" width="1577"/></button><figcaption class="generated-alt-caption">Paired bootstrap differences at 10% review capacity</figcaption></figure>
+
+</div></section><section id="report-section-8" class="section-padding section--editorial" data-section-num="08"><div class="section-header"><h2 class="section-title">6 Cost assumptions and threshold selection</h2></div><div class="report-block" id="report-8-1">
+<p>Fit outcomes estimate the cost of each missed default at approximately <strong>$8,550 gross</strong> or <strong>$5,856 net</strong>. Each falsely flagged repaid loan carries an estimated cost of approximately <strong>$2,567</strong>.</p>
+<blockquote>
+<p><strong>Total simulated cost = Missed defaults × Cost per missed default + False flags × Cost per false flag</strong></p>
+</blockquote>
+<p>Substituting the gross or net missed-default prices estimated from fit data yields the corresponding simulated costs, showing how price assumptions affect policy trade-offs.</p>
+<p>With the LightGBM threshold set to <strong>0.46</strong>, the policy flags <strong>44.34%</strong> of test loans. It reduces simulated costs under gross accounting but increases them under net accounting.</p>
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">Evaluation item</th>
+<th scope="col">Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Correctly flagged defaults (TP)</td>
+<td>30,304 loans</td>
+</tr>
+<tr>
+<td>Missed defaults (FN)</td>
+<td>12,435 loans</td>
+</tr>
+<tr>
+<td>Falsely flagged repaid loans (FP)</td>
+<td>90,070 loans</td>
+</tr>
+<tr>
+<td>Total flagged loans</td>
+<td>120,374 loans, or 44.34% of test loans</td>
+</tr>
+<tr>
+<td>Gross simulated cost</td>
+<td>Approximately $338 million, 7.63% below approving all loans</td>
+</tr>
+<tr>
+<td>Net simulated cost</td>
+<td>Approximately $304 million, 21.48% above approving all loans</td>
+</tr>
+</tbody>
+</table></div>
+<p>Amounts are rounded for readability; percentage changes use unrounded amounts. Results condition on fixed models, thresholds and prices. No interval covering refitting, parameter selection and price estimation was calculated.</p>
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">Selection-frozen scenario</th>
+<th scope="col" style="text-align:right">Threshold</th>
+<th scope="col" style="text-align:right">Test reduction</th>
+<th scope="col" style="text-align:right">Test recall</th>
+<th scope="col" style="text-align:right">Flag share</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Gross, recall floor 0.75</td>
+<td style="text-align:right">0.46</td>
+<td style="text-align:right">7.63%</td>
+<td style="text-align:right">70.90%</td>
+<td style="text-align:right">44.34%</td>
+</tr>
+<tr>
+<td>Gross, no recall floor</td>
+<td style="text-align:right">0.63</td>
+<td style="text-align:right">14.40%</td>
+<td style="text-align:right">32.12%</td>
+<td style="text-align:right">14.35%</td>
+</tr>
+<tr>
+<td>Net, recall floor 0.75</td>
+<td style="text-align:right">0.46</td>
+<td style="text-align:right">−21.48%</td>
+<td style="text-align:right">70.90%</td>
+<td style="text-align:right">44.34%</td>
+</tr>
+<tr>
+<td>Net, no recall floor</td>
+<td style="text-align:right">0.70</td>
+<td style="text-align:right">5.68%</td>
+<td style="text-align:right">14.87%</td>
+<td style="text-align:right">5.64%</td>
+</tr>
+</tbody>
+</table></div>
+<p>The 2:1 through 6:1 price scenarios are also selected and frozen separately on selection, then evaluated on test.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Frozen-policy ROC, PR and gross/net simulated cost reductions" class="figure-zoom" type="button"><img alt="Frozen-policy ROC, PR and gross/net simulated cost reductions" decoding="async" height="450" loading="lazy" src="figures/full-data/current-v1/threshold_final_evaluation.png" width="1749"/></button><figcaption class="generated-alt-caption">Frozen-policy ROC, PR and gross/net simulated cost reductions</figcaption></figure>
+<p>The same flagged set reduces simulated loss under gross prices and increases it under net prices. The accounting definition changes the policy assessment.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Potential review burden and recall in the temporal test window" class="figure-zoom" type="button"><img alt="Potential review burden and recall in the temporal test window" decoding="async" height="431" loading="lazy" src="figures/full-data/current-v1/review_queue_burden.png" width="656"/></button><figcaption class="generated-alt-caption">Potential review burden and recall in the temporal test window</figcaption></figure>
+<p>The frozen threshold flags 44.34% of test loans. This curve describes potential workload; actual review efficiency and returns were not measured.</p>
+
+</div></section><section id="report-section-9" class="section-padding section--editorial" data-section-num="09"><div class="section-header"><h2 class="section-title">7 Risk ranking, false-positive costs and model explanations</h2></div><div class="report-block" id="report-9-1">
+<p><strong>The model concentrates higher-risk loans.</strong> The test set contains 271,471 loans, of which 42,739 defaulted. The overall default rate is <strong>15.74%</strong>.</p>
+<p>The model flags 120,374 loans, including 30,304 defaults. The flagged group has a <strong>25.17%</strong> default rate, approximately <strong>1.60 times</strong> the overall rate. This supports review prioritization, although roughly three quarters of flagged loans ultimately repaid normally.</p>
+<p><strong>False flags explain the policy cost.</strong> Each detected default comes with approximately <strong>2.97 normally repaid loans falsely flagged</strong>. Under the fixed-price model, improvement relative to approving all loans is:</p>
+<blockquote>
+<p><strong>Cost improvement = Correctly flagged defaults × Avoided cost per default − False flags × Cost per false flag</strong></p>
+</blockquote>
+<p>Under gross prices, each detected default can offset approximately 3.33 false flags; under net prices, only 2.28. The observed ratio of 2.97 lies between them, explaining why the same policy helps under gross accounting and hurts under net accounting. This explains the simulation; it does not assume manual review can actually prevent every associated loss.</p>
+<p><strong>Thresholds must reflect the objective.</strong> A threshold of 0.46 offers greater coverage and workload. The frozen net-cost scenario without a recall floor uses 0.70, flags 5.64%, and recalls only 14.87%. These scenarios show trade-offs, not a future optimal threshold selected from test performance.</p>
+<h3>SHAP: how the model forms its predictions</h3>
+<p>The frozen LightGBM is explained using 128 fit loans as background and 1,024 test loans chosen by fixed hash ordering. TreeExplainer uses interventional feature perturbation and raw log-odds output. Home-ownership one-hot contributions are summed per loan before mean absolute aggregation. The maximum difference between reconstructed and model raw outputs is 1.25×10⁻⁷, passing the additivity check. Scores are not probability-calibrated.</p>
+<p>The largest mean absolute contributions come from subgrade, accounts opened in the past 24 months, DTI, loan-to-income and home ownership. The model therefore uses recent credit expansion and repayment-burden information alongside existing credit ratings. SHAP explains score construction; separate predictive gains from each input would still require ablation.</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: Global SHAP contributions for the frozen LightGBM" class="figure-zoom" type="button"><img alt="Global SHAP contributions for the frozen LightGBM" decoding="async" height="783" loading="lazy" src="figures/full-data/additional-v1/shap_global.png" width="1255"/></button><figcaption class="generated-alt-caption">Global SHAP contributions for the frozen LightGBM</figcaption></figure>
+<p>Four cases use the existing 0.46 threshold to define TP, FP, FN and TN. Within the fixed explanation sample, each case is the loan closest to its group's median score, avoiding a selection of only narratively convenient extremes. Red contributions raise raw output and blue contributions lower it. Units are log-odds, not default-probability percentage points.</p>
+<ul>
+<li><strong>Correctly flagged default (TP, score 0.617):</strong> DTI, subgrade and FICO raise the score, partially offset by other inputs.</li>
+<li><strong>Falsely flagged repaid loan (FP, score 0.565):</strong> subgrade, months since the most recent bankcard account and FICO raise the score, but the loan ultimately repaid normally. Risk attributes do not determine individual outcomes.</li>
+<li><strong>Missed default (FN, score 0.386):</strong> recent account openings and months since the most recent bankcard account contribute negatively; positive contributions do not lift the score above the threshold.</li>
+<li><strong>Correctly unflagged repaid loan (TN, score 0.292):</strong> recent openings, loan-to-income, subgrade and DTI contribute to a lower score.</li>
+</ul>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="Enlarge figure: SHAP explanations for four prediction outcomes at the original threshold" class="figure-zoom" type="button"><img alt="SHAP explanations for four prediction outcomes at the original threshold" decoding="async" height="1263" loading="lazy" src="figures/full-data/additional-v1/shap_cases.png" width="2215"/></button><figcaption class="generated-alt-caption">SHAP explanations for four prediction outcomes at the original threshold</figcaption></figure>
+<p>Correlated inputs such as grade and subgrade may share attribution; target encoding also affects interpretation. Every temporal test loan has a 36-month term, but the background contains other terms, so term can still contribute relative to that background. This does not mean term differentiates loans within the test window. Attribution explains the model rather than causal effects or automatic rejection reasons.</p>
+
+</div></section><section id="report-section-10" class="section-padding section--editorial" data-section-num="10"><div class="section-header"><h2 class="section-title">8 Model performance across temporal splits</h2></div><div class="report-block" id="report-10-1">
+<p>The random reference has its own fit/selection/test and selection process, without inheriting temporal hyperparameters. Its test ROC-AUC=0.709826, AP=0.303814 and threshold=0.45. Its 68,271 post-July-2015 test rows give ROC-AUC=0.719401 and AP=0.322362. Temporal ROC-AUC=0.717803 covers 271,471 rows, so these are not paired comparisons on identical loans.</p>
+<p>Training sizes, composition, periods and test rows change together. Differences cannot price drift or establish its absence. A single later test window cannot certify generalization to other years, regions or rejected applicants.</p>
+
+</div></section><section id="report-section-11" class="section-padding section--editorial" data-section-num="11"><div class="section-header"><h2 class="section-title">9 Implementation recommendations</h2></div><div class="report-block" id="report-11-1">
+<div aria-label="Data table (scroll horizontally)" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">Finding</th>
+<th scope="col">Proposed implementation</th>
+<th scope="col">What to observe next</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Grade, term and credit burden show risk differences; employment-length differences are narrower</td>
+<td>Display grade, term, DTI, utilization, FICO and recent account openings in review; check repayment burden and credit expansion without treating any single field as an automatic rejection rule</td>
+<td>Review hit rates, group sizes and normally repaid loans flagged</td>
+</tr>
+<tr>
+<td>E–G represent 6.7% of loans and 14.1% of default counts</td>
+<td>Monitor higher-risk grades closely and rank within groups using model scores; retain checks in other grades to avoid missing defaults elsewhere</td>
+<td>Default-count contribution, coverage and review volume by group</td>
+</tr>
+<tr>
+<td>The flagged group has approximately 1.60 times overall risk, but 0.46 flags 44.34%</td>
+<td>Start with shadow scoring or assisted manual review; size the queue to daily capacity and record reviewer outcomes, keeping flags distinct from rejection</td>
+<td>Hit rate at fixed volume, handling time and effects on normally repaid loans</td>
+</tr>
+<tr>
+<td>Gross and net costs disagree; smaller queues reduce recall</td>
+<td>Include recoveries, interest, lost lending opportunity and review labor in policy costs; compare capacity, recall and cost jointly on selection data before freezing a proposal</td>
+<td>Cost sensitivity, missed defaults and queue capacity</td>
+</tr>
+<tr>
+<td>At 10% volume, LightGBM precision is 37.88% versus 32.38% for the grade rule</td>
+<td>Use LightGBM as a capacity-limited ranking candidate; retain the grade rule and Logistic as ongoing comparators, and display main contributing factors during review</td>
+<td>Equal-volume hit rates in later batches, review costs and false flags; the current gain is an offline result</td>
+</tr>
+</tbody>
+</table></div>
+<p>These recommendations inform the design of a risk-review pilot. Start with risk segmentation and queue display, record review outcomes, and assess default coverage and costs as loan outcomes mature. Monitor origination vintages so that incomplete outcomes are not mistaken for declining risk.</p>
+<p>The analysis covers historical approved loans with matured terminal outcomes; the temporal test window contains only 36-month loans. Group associations, fixed-price simulations and a single later window limit transferability. The proposals can guide a pilot; business effects remain to be observed.</p>
+
+</div></section></article>
+  </section>
+<nav class="report-series" aria-label="Series navigation"><a class="report-series__link" href="lendingclub loan prediction-en.html">LendingClub: the 9,004-loan sample</a><a class="report-series__link is-current" href="full data-en.html">Full-data LendingClub: temporal evaluation and capacity trade-offs</a></nav>
+  <section id="related" class="section-padding"><div class="section-header"><h2 class="section-title">Related projects</h2></div><div class="grid md:grid-cols-2 gap-6"><a href="lendingclub loan prediction-en.html" class="related-project-card"><h3 class="related-project-title">LendingClub: the 9,004-loan sample</h3><p class="related-project-description">Analyze default patterns in 9,004 historical loans, compare models with a loan-term rule, and design screening policies under asymmetric costs. Random Forest at the frozen threshold of 0.22 achieves 70.45% test recall and a 4.68% net simulated cost reduction.</p><span class="related-project-link">Read case</span></a><a href="../e-commerce fraud detection/e-commerce fraud detection-en.html" class="related-project-card"><h3 class="related-project-title">First-order fraud: temporal evaluation and review proposals</h3><p class="related-project-description">Analyze purchase timing, device and IP behavior across 138,376 first-order transactions, and compare class-imbalance methods. Forward validation and cost scenarios inform a tiered manual-review proposal using model scores and transaction signals.</p><span class="related-project-link">Read case</span></a></div></section>
+</main>
+<script src="../../assets/js/logo.js"></script>
+<script src="../../assets/js/common.js"></script>
+<script src="../../assets/js/project.js"></script>
+<script src="../../assets/js/language-switcher.js"></script>
+</body>
+</html>

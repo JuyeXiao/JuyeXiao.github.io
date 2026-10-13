@@ -1,0 +1,56 @@
+{
+  "website_head": "cc90bef2faafd6ef1c723b8d1e2bce12c0b1a80e",
+  "branch": "master",
+  "staged_files": "",
+  "checks": [
+    {
+      "command": [
+        "node",
+        "--check",
+        "assets/js/project.js"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "node",
+        "--check",
+        "assets/js/language-switcher.js"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "-c",
+        "core.whitespace=cr-at-eol",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "warning: in the working copy of 'assets/css/project.css', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'assets/js/project.js', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'index.html', LF will be replaced by CRLF the next time Git touches it\n"
+    }
+  ],
+  "protected_files": {
+    "AGENTS.md": "60f019f08eac249cb56f9226eeb316c9e35a35bc5230af93fef2e3aaf190602f",
+    ".frontend-dispatch\\判读单-数据分析作品集网站.md": "9228d8ced3ca6ce4062941783d253777b259c45f59a85c552988ad8841a232db"
+  },
+  "source_repositories": [
+    {
+      "path": "D:\\data projects",
+      "head": "065268a93b1241b0294c7d9aad1776a8dd3327fa",
+      "status": ""
+    },
+    {
+      "path": "D:\\S&P global climate consulting solution",
+      "head": "386e55ee7e02103935280d32ddff6cdb09aeef24",
+      "status": ""
+    }
+  ],
+  "no_commit_push_deploy": true
+}

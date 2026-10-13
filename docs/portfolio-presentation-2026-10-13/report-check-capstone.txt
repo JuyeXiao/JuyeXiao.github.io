@@ -1,0 +1,288 @@
+# report_check 结果
+
+文件: 8 份 | 硬项违规: 0 | advisory: 115 | 退出码: 0
+coverage: complete for declared scope; strict=False；C7/C8 仅结构，不验证数字语义或事实。
+
+| group | file-or-pair | check | status | reason |
+|---|---|---|---|---|
+| climate | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\spglobal climate comparison.html | INPUT | pass | accepted; lang=zh; format=html |
+| climate | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\spglobal climate comparison.html | C1 | pass | executed; hard=0; advisory=0 |
+| climate | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\spglobal climate comparison.html | C2 | pass | executed; hard=0; advisory=0 |
+| climate | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\spglobal climate comparison.html | C3 | pass | executed; hard=0; advisory=1; 待语境复核 |
+| climate | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\spglobal climate comparison.html | C4 | not_applicable | 语言范围: zh |
+| climate | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\spglobal climate comparison.html | C5 | pass | executed; hard=0; advisory=4; 待语境复核 |
+| climate | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\spglobal climate comparison.html | C6 | pass | executed; hard=0; advisory=0 |
+| climate | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\spglobal climate comparison.html | C9 | pass | executed; hard=0; advisory=0 |
+| climate | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\spglobal climate comparison.html | C10 | pass | executed; hard=0; advisory=14; 待语境复核 |
+| climate | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\spglobal climate comparison.html | C11 | not_applicable | 语言范围: zh |
+| climate | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\spglobal climate comparison.html | C12 | not_applicable | 语言范围: zh |
+| climate | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\spglobal climate comparison.html | C7.nav | pass | executed; hard=0; advisory=0 |
+| climate | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\spglobal climate comparison-en.html | INPUT | pass | accepted; lang=en; format=html |
+| climate | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\spglobal climate comparison-en.html | C1 | not_applicable | 语言范围: en |
+| climate | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\spglobal climate comparison-en.html | C2 | pass | executed; hard=0; advisory=0 |
+| climate | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\spglobal climate comparison-en.html | C3 | pass | executed; hard=0; advisory=0 |
+| climate | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\spglobal climate comparison-en.html | C4 | pass | executed; hard=0; advisory=0 |
+| climate | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\spglobal climate comparison-en.html | C5 | not_applicable | 语言范围: en |
+| climate | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\spglobal climate comparison-en.html | C6 | pass | executed; hard=0; advisory=1; 待语境复核 |
+| climate | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\spglobal climate comparison-en.html | C9 | pass | executed; hard=0; advisory=0 |
+| climate | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\spglobal climate comparison-en.html | C10 | pass | executed; hard=0; advisory=4; 待语境复核 |
+| climate | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\spglobal climate comparison-en.html | C11 | pass | executed; hard=0; advisory=0 |
+| climate | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\spglobal climate comparison-en.html | C12 | pass | executed; hard=0; advisory=0 |
+| climate | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\spglobal climate comparison-en.html | C7.nav | pass | executed; hard=0; advisory=0 |
+| climate | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\spglobal climate comparison-en.html <-> (en/md missing) | C7 | not_applicable | 单文件/单语或未要求该配对；缺 en/md |
+| climate | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\spglobal climate comparison.html <-> (zh/md missing) | C7 | not_applicable | 单文件/单语或未要求该配对；缺 zh/md |
+| climate | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\spglobal climate comparison-en.html <-> C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\spglobal climate comparison.html | C8 | pass | executed; hard=0; advisory=0 |
+| comparison | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\model comparison.html | INPUT | pass | accepted; lang=zh; format=html |
+| comparison | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\model comparison.html | C1 | pass | executed; hard=0; advisory=0 |
+| comparison | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\model comparison.html | C2 | pass | executed; hard=0; advisory=1; 待语境复核 |
+| comparison | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\model comparison.html | C3 | pass | executed; hard=0; advisory=0 |
+| comparison | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\model comparison.html | C4 | not_applicable | 语言范围: zh |
+| comparison | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\model comparison.html | C5 | pass | executed; hard=0; advisory=1; 待语境复核 |
+| comparison | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\model comparison.html | C6 | pass | executed; hard=0; advisory=0 |
+| comparison | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\model comparison.html | C9 | pass | executed; hard=0; advisory=0 |
+| comparison | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\model comparison.html | C10 | pass | executed; hard=0; advisory=11; 待语境复核 |
+| comparison | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\model comparison.html | C11 | not_applicable | 语言范围: zh |
+| comparison | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\model comparison.html | C12 | not_applicable | 语言范围: zh |
+| comparison | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\model comparison.html | C7.nav | pass | executed; hard=0; advisory=0 |
+| comparison | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\model comparison-en.html | INPUT | pass | accepted; lang=en; format=html |
+| comparison | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\model comparison-en.html | C1 | not_applicable | 语言范围: en |
+| comparison | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\model comparison-en.html | C2 | pass | executed; hard=0; advisory=0 |
+| comparison | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\model comparison-en.html | C3 | pass | executed; hard=0; advisory=0 |
+| comparison | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\model comparison-en.html | C4 | pass | executed; hard=0; advisory=0 |
+| comparison | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\model comparison-en.html | C5 | not_applicable | 语言范围: en |
+| comparison | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\model comparison-en.html | C6 | pass | executed; hard=0; advisory=2; 待语境复核 |
+| comparison | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\model comparison-en.html | C9 | pass | executed; hard=0; advisory=0 |
+| comparison | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\model comparison-en.html | C10 | pass | executed; hard=0; advisory=0 |
+| comparison | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\model comparison-en.html | C11 | pass | executed; hard=0; advisory=1; 待语境复核 |
+| comparison | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\model comparison-en.html | C12 | pass | executed; hard=0; advisory=0 |
+| comparison | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\model comparison-en.html | C7.nav | pass | executed; hard=0; advisory=0 |
+| comparison | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\model comparison-en.html <-> (en/md missing) | C7 | not_applicable | 单文件/单语或未要求该配对；缺 en/md |
+| comparison | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\model comparison.html <-> (zh/md missing) | C7 | not_applicable | 单文件/单语或未要求该配对；缺 zh/md |
+| comparison | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\model comparison-en.html <-> C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\model comparison.html | C8 | pass | executed; hard=0; advisory=0 |
+| long-series | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\long series.html | INPUT | pass | accepted; lang=zh; format=html |
+| long-series | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\long series.html | C1 | pass | executed; hard=0; advisory=0 |
+| long-series | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\long series.html | C2 | pass | executed; hard=0; advisory=0 |
+| long-series | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\long series.html | C3 | pass | executed; hard=0; advisory=0 |
+| long-series | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\long series.html | C4 | not_applicable | 语言范围: zh |
+| long-series | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\long series.html | C5 | pass | executed; hard=0; advisory=3; 待语境复核 |
+| long-series | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\long series.html | C6 | pass | executed; hard=0; advisory=0 |
+| long-series | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\long series.html | C9 | pass | executed; hard=0; advisory=0 |
+| long-series | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\long series.html | C10 | pass | executed; hard=0; advisory=15; 待语境复核 |
+| long-series | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\long series.html | C11 | not_applicable | 语言范围: zh |
+| long-series | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\long series.html | C12 | not_applicable | 语言范围: zh |
+| long-series | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\long series.html | C7.nav | pass | executed; hard=0; advisory=0 |
+| long-series | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\long series-en.html | INPUT | pass | accepted; lang=en; format=html |
+| long-series | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\long series-en.html | C1 | not_applicable | 语言范围: en |
+| long-series | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\long series-en.html | C2 | pass | executed; hard=0; advisory=0 |
+| long-series | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\long series-en.html | C3 | pass | executed; hard=0; advisory=0 |
+| long-series | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\long series-en.html | C4 | pass | executed; hard=0; advisory=0 |
+| long-series | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\long series-en.html | C5 | not_applicable | 语言范围: en |
+| long-series | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\long series-en.html | C6 | pass | executed; hard=0; advisory=1; 待语境复核 |
+| long-series | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\long series-en.html | C9 | pass | executed; hard=0; advisory=0 |
+| long-series | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\long series-en.html | C10 | pass | executed; hard=0; advisory=1; 待语境复核 |
+| long-series | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\long series-en.html | C11 | pass | executed; hard=0; advisory=0 |
+| long-series | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\long series-en.html | C12 | pass | executed; hard=0; advisory=0 |
+| long-series | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\long series-en.html | C7.nav | pass | executed; hard=0; advisory=0 |
+| long-series | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\long series-en.html <-> (en/md missing) | C7 | not_applicable | 单文件/单语或未要求该配对；缺 en/md |
+| long-series | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\long series.html <-> (zh/md missing) | C7 | not_applicable | 单文件/单语或未要求该配对；缺 zh/md |
+| long-series | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\long series-en.html <-> C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\long series.html | C8 | pass | executed; hard=0; advisory=0 |
+| projection | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\projection overlay.html | INPUT | pass | accepted; lang=zh; format=html |
+| projection | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\projection overlay.html | C1 | pass | executed; hard=0; advisory=0 |
+| projection | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\projection overlay.html | C2 | pass | executed; hard=0; advisory=0 |
+| projection | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\projection overlay.html | C3 | pass | executed; hard=0; advisory=1; 待语境复核 |
+| projection | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\projection overlay.html | C4 | not_applicable | 语言范围: zh |
+| projection | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\projection overlay.html | C5 | pass | executed; hard=0; advisory=3; 待语境复核 |
+| projection | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\projection overlay.html | C6 | pass | executed; hard=0; advisory=0 |
+| projection | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\projection overlay.html | C9 | pass | executed; hard=0; advisory=0 |
+| projection | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\projection overlay.html | C10 | pass | executed; hard=0; advisory=16; 待语境复核 |
+| projection | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\projection overlay.html | C11 | not_applicable | 语言范围: zh |
+| projection | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\projection overlay.html | C12 | not_applicable | 语言范围: zh |
+| projection | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\projection overlay.html | C7.nav | pass | executed; hard=0; advisory=0 |
+| projection | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\projection overlay-en.html | INPUT | pass | accepted; lang=en; format=html |
+| projection | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\projection overlay-en.html | C1 | not_applicable | 语言范围: en |
+| projection | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\projection overlay-en.html | C2 | pass | executed; hard=0; advisory=0 |
+| projection | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\projection overlay-en.html | C3 | pass | executed; hard=0; advisory=0 |
+| projection | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\projection overlay-en.html | C4 | pass | executed; hard=0; advisory=0 |
+| projection | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\projection overlay-en.html | C5 | not_applicable | 语言范围: en |
+| projection | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\projection overlay-en.html | C6 | pass | executed; hard=0; advisory=0 |
+| projection | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\projection overlay-en.html | C9 | pass | executed; hard=0; advisory=7; 待语境复核 |
+| projection | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\projection overlay-en.html | C10 | pass | executed; hard=0; advisory=16; 待语境复核 |
+| projection | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\projection overlay-en.html | C11 | pass | executed; hard=0; advisory=0 |
+| projection | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\projection overlay-en.html | C12 | pass | executed; hard=0; advisory=0 |
+| projection | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\projection overlay-en.html | C7.nav | pass | executed; hard=0; advisory=0 |
+| projection | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\projection overlay-en.html <-> (en/md missing) | C7 | not_applicable | 单文件/单语或未要求该配对；缺 en/md |
+| projection | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\projection overlay.html <-> (zh/md missing) | C7 | not_applicable | 单文件/单语或未要求该配对；缺 zh/md |
+| projection | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\projection overlay-en.html <-> C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\projection overlay.html | C8 | pass | executed; hard=0; advisory=0 |
+| climate | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\spglobal climate comparison.html | C13 | pass | executed image references; hard=0; advisory=0 |
+| climate | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\spglobal climate comparison-en.html | C13 | pass | executed image references; hard=0; advisory=0 |
+| comparison | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\model comparison.html | C13 | pass | executed image references; hard=0; advisory=0 |
+| comparison | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\model comparison-en.html | C13 | pass | executed image references; hard=0; advisory=0 |
+| long-series | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\long series.html | C13 | pass | executed image references; hard=0; advisory=0 |
+| long-series | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\long series-en.html | C13 | pass | executed image references; hard=0; advisory=0 |
+| projection | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\projection overlay.html | C13 | pass | executed image references; hard=0; advisory=0 |
+| projection | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\projection overlay-en.html | C13 | pass | executed image references; hard=0; advisory=0 |
+| * | C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison | C13.orphans | pass | executed across accepted files; hard=0; advisory=12 |
+
+覆盖计数: pass=89, fail=0, skipped=0, not_applicable=28
+pass 表示该项已执行且无 hard；reason 中 advisory 数量仍需语境判断，strict 会计入退出码。
+
+## climate / C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\spglobal climate comparison.html（zh/html）
+
+| 检查 | 行 | 片段 | 说明 |
+|---|---|---|---|
+| C3 | 214 | 两种订正方法使用相同的 2000–2013 训练期、2014–2024 留出期及有效观测月份。一种方法在每个格子估计订… | 术语「量纲」→ 尺度/口径/单位（按语义选）；severity=advisory; source=global; 被误当尺度/口径/单位使用，fraud zh 曾 5+ 处（2026-07，data projects 仓库）；适用范围：科学上的量纲/无量纲可合法使用；仅在把量纲误作尺度、统计口径或单位的项目语境下建议改写。 |
+| C5 | 156 | 先估计各日历月的超阈概率，再将十二个月的概率相加，得到该格子的年均超阈月数，记作 cᵢ，单位为月/年 | 句内 4 个全角逗号（≥3），建议拆句 |
+| C5 | 162 | 人口加权频度与面积加权频度之比，以及这一比值的倒数，都先在每个模型内计算，再取模型中位数 | 句内 3 个全角逗号（≥3），建议拆句 |
+| C5 | 380 | TK 的 Prophet 在两种预测长度下都有最低的平均 RMSE，但在 5 个窗口中，12 个月预测只有 3 个窗口… | 句内 3 个全角逗号（≥3），建议拆句 |
+| C5 | 410 | 下表均为面积加权，方括号为模型 P10–P90，描述模型间的分布，不是置信区间 | 句内 3 个全角逗号（≥3），建议拆句 |
+| C10 | 162 | 与面积加权频度之 | 出现 3 次（行 162, 494, 593），跨节重述改回指 |
+| C10 | 162 | 面积加权频度之比 | 出现 3 次（行 162, 494, 593），跨节重述改回指 |
+| C10 | 379 | 个月预测中降低约 | 出现 2 次（行 379, 379），跨节重述改回指 |
+| C10 | 489 | 个模型温差均为正 | 出现 2 次（行 489, 489），跨节重述改回指 |
+| C10 | 494 | 人口与面积加权频 | 出现 2 次（行 494, 593），跨节重述改回指 |
+| C10 | 166 | 共同时间重抽样范 | 出现 2 次（行 166, 594），跨节重述改回指 |
+| C10 | 494 | 口与面积加权频度 | 出现 2 次（行 494, 593），跨节重述改回指 |
+| C10 | 166 | 同时间重抽样范围 | 出现 2 次（行 166, 594），跨节重述改回指 |
+| C10 | 102 | 四区人口加权格点 | 出现 2 次（行 102, 284），跨节重述改回指 |
+| C10 | 7 | 模型比较预测方法 | 出现 2 次（行 7, 101），跨节重述改回指 |
+| C10 | 107 | 模型采用NEXG | 出现 2 次（行 107, 782），跨节重述改回指 |
+| C10 | 284 | 计算范围主集合的 | 出现 2 次（行 284, 531），跨节重述改回指 |
+| C10 | 594 | 重估阈值与订正量 | 出现 2 次（行 594, 652），跨节重述改回指 |
+| C10 | 531 | 频度的次序为TK | 出现 2 次（行 531, 531），跨节重述改回指 |
+
+## climate / C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\spglobal climate comparison-en.html（en/html）
+
+| 检查 | 行 | 片段 | 说明 |
+|---|---|---|---|
+| C6 | 403 | 句长 [11, 11, 12, 13, 13] | 连续 5 句长度相近，节奏单调 |
+| C10 | 157 | are calculated within each model before | 出现 2 次（行 157, 162），跨节重述改回指 |
+| C10 | 7 | model comparison forecasting and spatial exposure | 出现 2 次（行 7, 101），跨节重述改回指 |
+| C10 | 158 | months year i w i c | 出现 2 次（行 158, 160），跨节重述改回指 |
+| C10 | 158 | year i w i c i | 出现 2 次（行 158, 160），跨节重述改回指 |
+
+## comparison / C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\model comparison.html（zh/html）
+
+| 检查 | 行 | 片段 | 说明 |
+|---|---|---|---|
+| C2 | 172 | 伊朗—土库曼斯坦跨境研究框 | 可见文本含 em-dash（—），请结合语境审阅；合法连接符不必替换 |
+| C5 | 465 | TK 的 Prophet 在两种预测长度下都有最低的平均 RMSE，但在 5 个窗口中，12 个月预测只有 3 个窗口… | 句内 3 个全角逗号（≥3），建议拆句 |
+| C10 | 358 | RMSE中位数为 | 出现 2 次（行 358, 532），跨节重述改回指 |
+| C10 | 246 | 与区域均值的相关 | 出现 2 次（行 246, 247），跨节重述改回指 |
+| C10 | 464 | 个月预测中降低约 | 出现 2 次（行 464, 464），跨节重述改回指 |
+| C10 | 226 | 原始有效观测月份 | 出现 2 次（行 226, 374），跨节重述改回指 |
+| C10 | 226 | 同的原始有效观测 | 出现 2 次（行 226, 374），跨节重述改回指 |
+| C10 | 102 | 和采样差异再比较 | 出现 2 次（行 102, 582），跨节重述改回指 |
+| C10 | 256 | 满足这一关系白天 | 出现 2 次（行 256, 496），跨节重述改回指 |
+| C10 | 226 | 的原始有效观测月 | 出现 2 次（行 226, 374），跨节重述改回指 |
+| C10 | 256 | 足这一关系白天一 | 出现 2 次（行 256, 496），跨节重述改回指 |
+| C10 | 256 | 这一关系白天一侧 | 出现 2 次（行 256, 496），跨节重述改回指 |
+| C10 | 92 | 量日历和采样差异 | 出现 2 次（行 92, 582），跨节重述改回指 |
+
+## comparison / C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\model comparison-en.html（en/html）
+
+| 检查 | 行 | 片段 | 说明 |
+|---|---|---|---|
+| C6 | 348 | 句长 [15, 17, 15, 17, 16] | 连续 5 句长度相近，节奏单调 |
+| C6 | 487 | 句长 [11, 11, 12, 13, 13] | 连续 5 句长度相近，节奏单调 |
+| C11 | 219 | 连续 3 句以 “the” 开头 | 同型开头连排 |
+
+## long-series / C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\long series.html（zh/html）
+
+| 检查 | 行 | 片段 | 说明 |
+|---|---|---|---|
+| C5 | 150 | 两次提取的最大绝对差为 0.0000 °C，相关系数为 1.000000，屏蔽月数也逐区相同，支持在重叠时段使用一致的… | 句内 3 个全角逗号（≥3），建议拆句 |
+| C5 | 154 | 黑色那条是 CMCC-CM2-SR5，它整体高于其余模型，在接缝处并未跳变，第 8 节给出这条的解释 | 句内 3 个全角逗号（≥3），建议拆句 |
+| C5 | 273 | TK 的 Prophet 在两种预测长度下都有最低的平均 RMSE，但在 5 个窗口中，12 个月预测只有 3 个窗口… | 句内 3 个全角逗号（≥3），建议拆句 |
+| C10 | 314 | Aqua同位置同 | 出现 2 次（行 314, 465），跨节重述改回指 |
+| C10 | 314 | qua同位置同季 | 出现 2 次（行 314, 465），跨节重述改回指 |
+| C10 | 314 | ua同位置同季节 | 出现 2 次（行 314, 465），跨节重述改回指 |
+| C10 | 177 | 两个十年分别拟合 | 出现 2 次（行 177, 403），跨节重述改回指 |
+| C10 | 177 | 个十年分别拟合同 | 出现 2 次（行 177, 403），跨节重述改回指 |
+| C10 | 272 | 个月预测中降低约 | 出现 2 次（行 272, 272），跨节重述改回指 |
+| C10 | 177 | 十年分别拟合同一 | 出现 2 次（行 177, 403），跨节重述改回指 |
+| C10 | 153 | 合成员标签与文件 | 出现 2 次（行 153, 164），跨节重述改回指 |
+| C10 | 153 | 员标签与文件版本 | 出现 2 次（行 153, 164），跨节重述改回指 |
+| C10 | 177 | 年分别拟合同一组 | 出现 2 次（行 177, 403），跨节重述改回指 |
+| C10 | 153 | 成员标签与文件版 | 出现 2 次（行 153, 164），跨节重述改回指 |
+| C10 | 177 | 用两个十年分别拟 | 出现 2 次（行 177, 403），跨节重述改回指 |
+| C10 | 361 | 订正在四个区域都 | 出现 2 次（行 361, 401），跨节重述改回指 |
+| C10 | 409 | 重估阈值与订正量 | 出现 2 次（行 409, 467），跨节重述改回指 |
+| C10 | 153 | 集合成员标签与文 | 出现 2 次（行 153, 164），跨节重述改回指 |
+
+## long-series / C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\long series-en.html（en/html）
+
+| 检查 | 行 | 片段 | 说明 |
+|---|---|---|---|
+| C6 | 296 | 句长 [11, 11, 12, 13, 13] | 连续 5 句长度相近，节奏单调 |
+| C10 | 314 | aqua matched locations and seasons and | 出现 2 次（行 314, 465），跨节重述改回指 |
+
+## projection / C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\projection overlay.html（zh/html）
+
+| 检查 | 行 | 片段 | 说明 |
+|---|---|---|---|
+| C3 | 389 | 两种订正方法使用相同的 2000–2013 训练期、2014–2024 留出期及有效观测月份。一种方法在每个格子估计订… | 术语「量纲」→ 尺度/口径/单位（按语义选）；severity=advisory; source=global; 被误当尺度/口径/单位使用，fraud zh 曾 5+ 处（2026-07，data projects 仓库）；适用范围：科学上的量纲/无量纲可合法使用；仅在把量纲误作尺度、统计口径或单位的项目语境下建议改写。 |
+| C5 | 164 | 先估计各日历月的超阈概率，再将十二个月的概率相加，得到该格子的年均超阈月数，记作 cᵢ，单位为月/年 | 句内 4 个全角逗号（≥3），建议拆句 |
+| C5 | 170 | 人口加权频度与面积加权频度之比，以及这一比值的倒数，都先在每个模型内计算，再取模型中位数 | 句内 3 个全角逗号（≥3），建议拆句 |
+| C5 | 178 | 下表均为面积加权，方括号为模型 P10–P90，描述模型间的分布，不是置信区间 | 句内 3 个全角逗号（≥3），建议拆句 |
+| C10 | 170 | 与面积加权频度之 | 出现 3 次（行 170, 266, 463），跨节重述改回指 |
+| C10 | 92 | 人口建成区和耕地 | 出现 3 次（行 92, 106, 566），跨节重述改回指 |
+| C10 | 170 | 面积加权频度之比 | 出现 3 次（行 170, 266, 463），跨节重述改回指 |
+| C10 | 324 | C只是压力设定这 | 出现 2 次（行 324, 329），跨节重述改回指 |
+| C10 | 102 | 不外推到这些年份 | 出现 2 次（行 102, 263），跨节重述改回指 |
+| C10 | 324 | 不表示完整未来预 | 出现 2 次（行 324, 329），跨节重述改回指 |
+| C10 | 324 | 与成员影响分别列 | 出现 2 次（行 324, 329），跨节重述改回指 |
+| C10 | 102 | 且存在版本相关的 | 出现 2 次（行 102, 263），跨节重述改回指 |
+| C10 | 299 | 两个时间窗口两种 | 出现 2 次（行 299, 332），跨节重述改回指 |
+| C10 | 299 | 两种情景和五种权 | 出现 2 次（行 299, 332），跨节重述改回指 |
+| C10 | 299 | 个时间窗口两种情 | 出现 2 次（行 299, 332），跨节重述改回指 |
+| C10 | 257 | 个模型温差均为正 | 出现 2 次（行 257, 257），跨节重述改回指 |
+| C10 | 102 | 个模型的敏感性分 | 出现 2 次（行 102, 263），跨节重述改回指 |
+| C10 | 324 | 于识别敏感候选不 | 出现 2 次（行 324, 329），跨节重述改回指 |
+| C10 | 102 | 些年份主集合包含 | 出现 2 次（行 102, 263），跨节重述改回指 |
+| C10 | - | （另有 138 条未列出） | C10 每份只列命中最多的前 15 条；计数封顶，不可直接当降噪读数 |
+
+## projection / C:\Users\xjy19\Desktop\JuyeXiao.github.io\projects\spglobal climate comparison\projection overlay-en.html（en/html）
+
+| 检查 | 行 | 片段 | 说明 |
+|---|---|---|---|
+| C9 | 171 | One cell–calendar-month combination in each of TK and AU ha… | 对偶句式共 7 处（配额 ≤6），削到只留关键对比 |
+| C9 | 178 | Calculate ssp585−ssp126 within each model before summarizin… | 对偶句式共 7 处（配额 ≤6），削到只留关键对比 |
+| C9 | 324 | Models share some structures, so their members cannot be tr… | 对偶句式共 7 处（配额 ≤6），削到只留关键对比 |
+| C9 | 329 | Record calibration windows, population sources and member i… | 对偶句式共 7 处（配额 ≤6），削到只留关键对比 |
+| C9 | 388 | Calculation scope: 2015–2020, ssp585, main 14-model ensembl… | 对偶句式共 7 处（配额 ≤6），削到只留关键对比 |
+| C9 | 563 | The TK study box crosses borders. About 93.4546% of its GHS… | 对偶句式共 7 处（配额 ≤6），削到只留关键对比 |
+| C9 | 690 | Near-window ssp585 baseline candidates by layer; color show… | 对偶句式共 7 处（配额 ≤6），削到只留关键对比 |
+| C10 | 102 | a short-term time-series trend. the main | 出现 2 次（行 102, 263），跨节重述改回指 |
+| C10 | 102 | a version-related temperature-offset anomaly. its influence | 出现 2 次（行 102, 263），跨节重述改回指 |
+| C10 | 299 | across four regions two windows two | 出现 2 次（行 299, 332），跨节重述改回指 |
+| C10 | 102 | and has a version-related temperature-offset anomaly. | 出现 2 次（行 102, 263），跨节重述改回指 |
+| C10 | 324 | and member influence separately. whole-year resampling | 出现 2 次（行 324, 329），跨节重述改回指 |
+| C10 | 166 | annual exceedance frequency describes the average | 出现 2 次（行 166, 175），跨节重述改回指 |
+| C10 | 102 | anomaly. its influence is tested separately | 出现 2 次（行 102, 263），跨节重述改回指 |
+| C10 | 165 | are calculated within each model before | 出现 2 次（行 165, 170），跨节重述改回指 |
+| C10 | 324 | are stress settings. these ranges identify | 出现 2 次（行 324, 329），跨节重述改回指 |
+| C10 | 102 | assessments use climate-model scenarios without extrapolati… | 出现 2 次（行 102, 263），跨节重述改回指 |
+| C10 | 324 | c shifts are stress settings. these | 出现 2 次（行 324, 329），跨节重述改回指 |
+| C10 | 165 | calculated within each model before summarizing | 出现 2 次（行 165, 175），跨节重述改回指 |
+| C10 | 324 | calibration windows population sources and member | 出现 2 次（行 324, 329），跨节重述改回指 |
+| C10 | 324 | candidates rather than provide complete future | 出现 2 次（行 324, 329），跨节重述改回指 |
+| C10 | 102 | climate-model scenarios without extrapolating a short-term | 出现 2 次（行 102, 263），跨节重述改回指 |
+| C10 | - | （另有 47 条未列出） | C10 每份只列命中最多的前 15 条；计数封顶，不可直接当降噪读数 |
+
+## 项目级（跨输入组）
+
+| 检查 | 行 | 片段 | 说明 |
+|---|---|---|---|
+| C13 | - | figures/ALL_bias_vs_crmse.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/ALL_daynight_bracket.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/ALL_rank_heatmap.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/ALL_region_metric_boxplots.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/ALL_scenario_divergence.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/CA_bias_share.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/CA_ensemble_envelope.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/CA_missingness_monthly.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/CA_qc_sensitivity.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/CA_sarima_holdout_24m.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/CA_spatial_variability.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+| C13 | - | figures/XJ_rank_slope.png | figures/ 下的图未被任何交付物引用（孤儿图，人工确认是否历史探索图） |
+

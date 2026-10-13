@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>document.documentElement.classList.add('js');</script>
+  <title>亚马逊手表评论分析：从聚类与主题建模到改进建议 - 数据诗学</title>
+  <meta name="description" content="从 960,872 条原始记录中整理评论语料，使用 K-Means 与 LDA 分析 858,037 条建模评论。故障／退货主题均分 2.37 星，覆盖建模一星评论的 52.9%，为产品排查、说明优化与评论监测提供线索。">
+  <meta property="og:title" content="亚马逊手表评论分析：从聚类与主题建模到改进建议">
+  <meta property="og:description" content="从 960,872 条原始记录中整理评论语料，使用 K-Means 与 LDA 分析 858,037 条建模评论。故障／退货主题均分 2.37 星，覆盖建模一星评论的 52.9%，为产品排查、说明优化与评论监测提供线索。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://juyexiao.github.io/projects/amazon%20watch%20reviews/amazon%20watch%20reviews.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:description" content="从 960,872 条原始记录中整理评论语料，使用 K-Means 与 LDA 分析 858,037 条建模评论。故障／退货主题均分 2.37 星，覆盖建模一星评论的 52.9%，为产品排查、说明优化与评论监测提供线索。">
+  <link rel="canonical" href="https://juyexiao.github.io/projects/amazon%20watch%20reviews/amazon%20watch%20reviews.html">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&amp;family=Inter:wght@200;300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;700&amp;family=Noto+Sans+SC:wght@400;500;600&amp;family=Noto+Serif+SC:wght@500&amp;display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="../../assets/css/index.css">
+  <link rel="stylesheet" href="../../assets/css/project.css">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "亚马逊手表评论分析：从聚类与主题建模到改进建议", "description": "从 960,872 条原始记录中整理评论语料，使用 K-Means 与 LDA 分析 858,037 条建模评论。故障／退货主题均分 2.37 星，覆盖建模一星评论的 52.9%，为产品排查、说明优化与评论监测提供线索。", "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Juye Xiao"}}</script>
+</head>
+<body class="transition-colors duration-300 report-page">
+<div class="scroll-progress" id="scroll-progress"></div>
+<header class="navbar fixed top-0 left-0 right-0 z-50" id="navbar">
+<div class="container-main h-full flex items-center justify-between">
+<!-- Logo部分 -->
+<a class="navbar-logo" href="../../index.html#hero" id="navbar-logo">
+<!-- SVG Logo -->
+<svg class="logo-svg-nav" viewbox="0 0 40 40">
+<!-- 背景数据网格 -->
+<g class="grid-bg">
+<!-- 垂直线 -->
+<line class="grid-line-v" style="animation-delay: 0.1s, 0s" x1="8" x2="8" y1="0" y2="40"></line>
+<line class="grid-line-v" style="animation-delay: 0.2s, 0.5s" x1="16" x2="16" y1="0" y2="40"></line>
+<line class="grid-line-v" style="animation-delay: 0.3s, 1s" x1="24" x2="24" y1="0" y2="40"></line>
+<line class="grid-line-v" style="animation-delay: 0.4s, 1.5s" x1="32" x2="32" y1="0" y2="40"></line>
+<!-- 水平线 -->
+<line class="grid-line-h" style="animation-delay: 0.5s, 0s" x1="0" x2="40" y1="10" y2="10"></line>
+<line class="grid-line-h" style="animation-delay: 0.6s, 0.7s" x1="0" x2="40" y1="20" y2="20"></line>
+<line class="grid-line-h" style="animation-delay: 0.7s, 1.4s" x1="0" x2="40" y1="30" y2="30"></line>
+</g>
+<!-- 织梭动画线 -->
+<line class="weaver-line" id="weaverLine" x1="0" x2="40" y1="20" y2="20"></line>
+<!-- JX字母 -->
+<text class="logo-letters" id="logoLetters" text-anchor="middle" x="20" y="26">JX</text>
+</svg>
+<!-- 名字签名（悬停显示） -->
+<div class="logo-name">
+<div class="logo-name-text">Juye Xiao</div>
+<div class="logo-name-subtitle">Data Analyst</div>
+</div>
+</a>
+<nav class="hidden md:flex items-center space-x-8">
+<a class="nav-link" href="../../index.html#about">关于</a>
+<a class="nav-link" href="../../index.html#experience">经历</a>
+<a class="nav-link" href="../../index.html#education">教育</a>
+<a class="nav-link" href="../../index.html#projects">项目</a>
+<a class="nav-link" href="../../index.html#skills">技能</a>
+<a class="nav-link" href="../../index.html#contact">联系</a>
+</nav>
+<div class="flex items-center space-x-4">
+<button aria-label="切换主题" class="btn-secondary !p-2 !rounded-full" id="theme-toggle">
+<i class="block dark:hidden" data-lucide="sun"></i>
+<i class="hidden dark:block" data-lucide="moon"></i>
+</button>
+<button class="btn-secondary !p-2 !rounded-full" id="lang-toggle">
+<span class="font-bold text-sm">EN</span>
+</button>
+<button aria-controls="mobile-menu" aria-expanded="false" aria-label="打开菜单" class="btn-secondary !p-2 !rounded-full md:hidden" id="menu-toggle">
+<i class="menu-icon-open" data-lucide="menu"></i>
+<i class="menu-icon-close" data-lucide="x"></i>
+</button>
+</div>
+</div>
+<nav aria-label="移动端导航" class="mobile-menu md:hidden" id="mobile-menu">
+<a class="nav-link" href="../../index.html#about">关于</a>
+<a class="nav-link" href="../../index.html#experience">经历</a>
+<a class="nav-link" href="../../index.html#education">教育</a>
+<a class="nav-link" href="../../index.html#projects">项目</a>
+<a class="nav-link" href="../../index.html#skills">技能</a>
+<a class="nav-link" href="../../index.html#contact">联系</a>
+</nav>
+</header>
+<main class="container-main">
+  <section id="project-hero" class="section-padding report-hero">
+    <div class="section-eyebrow"><span class="section-kicker">NLP · 主题建模</span></div>
+    <h1 class="hero-title">亚马逊手表评论分析：从聚类与主题建模到改进建议</h1>
+    <p class="subtitle report-standfirst">从 960,872 条原始记录中整理评论语料，使用 K-Means 与 LDA 分析 858,037 条建模评论。故障／退货主题均分 2.37 星，覆盖建模一星评论的 52.9%，为产品排查、说明优化与评论监测提供线索。</p>
+    <p class="reading-time">2026 · 分析更新</p>
+    <div class="hero-stats"><div class="hero-stat"><div class="hero-stat__num">960,713</div><div class="hero-stat__label">非空评论；原始记录 960,872</div></div><div class="hero-stat"><div class="hero-stat__num">858,037</div><div class="hero-stat__label">最终建模评论</div></div><div class="hero-stat"><div class="hero-stat__num">2.37</div><div class="hero-stat__label">故障/退货主题平均星级</div></div></div>
+    <div class="report-actions"><a class="btn btn-primary" href="#content">开始阅读</a><a class="btn btn-secondary" href="../../index.html#projects">返回项目概览</a></div>
+  </section>
+
+  <section id="content" class="section-padding report-layout">
+    <aside><nav class="project-toc" id="project-toc" aria-label="报告目录"><h3>目录</h3><ul id="toc-list"><li><a class="toc-link" href="#report-section-1">概览</a></li><li><a class="toc-link" href="#report-section-2">摘要</a></li><li><a class="toc-link" href="#report-section-3">1 业务问题与数据</a></li><li><a class="toc-link" href="#report-section-4">2 语料画像与匹配总体的样本</a></li><li><a class="toc-link" href="#report-section-5">3 预处理与共享词表</a></li><li><a class="toc-link" href="#report-section-6">4 簇数与 K-Means 分区</a></li><li><a class="toc-link" href="#report-section-7">5 主题数与 LDA 主题</a></li><li><a class="toc-link" href="#report-section-8">6 两种无监督视图及其一致性</a></li><li><a class="toc-link" href="#report-section-9">7 全量规模上的稳定性与占比</a></li><li><a class="toc-link" href="#report-section-10">8 痛点与评论行为趋势</a></li><li><a class="toc-link" href="#report-section-11">9 主题与它们支持的行动</a></li><li><a class="toc-link" href="#report-section-12">10 结果解读与后续分析</a></li><li><a class="toc-link" href="#report-section-13">11 附录：建模参数</a></li></ul></nav></aside>
+    <article class="content-area report-body" id="report-body"><div class="report-block" id="report-intro-1">
+<p>基于 960,713 条有正文的美国手表评论，本项目比较 K-Means 聚类与 LDA 主题模型，识别功能与适配问题、送礼场景及评论内容的变化。全量建模结果中，故障/退货主题均分为 2.37 星，覆盖建模一星评论的 52.9%。结合主题、评分和趋势分析，提出质量排查、商品说明完善、礼品展示测试与评论监测的实施建议。</p>
+<p><strong>方法</strong>：K-Means 在 TF-IDF 上、LDA 在词频计数上 · 5 万条固定种子样本选方法，85.8 万条作规模对照 · 轮廓系数与肘部未给出明确最优 K，结合簇内容取 K=7；T=10 取 c_v coherence 连贯性平台的较小端，held-out perplexity 未支持增加主题数 · 样本与全量的簇/主题用 Hungarian algorithm（匈牙利算法）按 top-term Jaccard 对齐 · 星级、已验证购买、年份的元数据交叉。
+<strong>技术栈</strong>：Python · pandas · scikit-learn · gensim · NLTK · matplotlib。</p>
+
+</div><section id="report-section-1" class="section-padding section--editorial" data-section-num="01"><div class="section-header"><h2 class="section-title">概览</h2></div><div class="report-block" id="report-1-1">
+<div aria-label="数据表（可横向滚动）" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">指标</th>
+<th scope="col">数值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>有正文的美国手表评论（2001 至 2015 年）</td>
+<td>960,713</td>
+</tr>
+<tr>
+<td>长度筛选并删除零向量后的最终建模语料</td>
+<td>858,037</td>
+</tr>
+<tr>
+<td>故障/退货主题的均星</td>
+<td>2.37</td>
+</tr>
+<tr>
+<td>落在该主题上的一星评论占比</td>
+<td>52.9%</td>
+</tr>
+<tr>
+<td>样本与全量簇的平均 top-term Jaccard</td>
+<td>0.52</td>
+</tr>
+<tr>
+<td>余弦轮廓系数（簇弱分离）</td>
+<td>~0.01</td>
+</tr>
+</tbody>
+</table></div>
+
+</div></section><section id="report-section-2" class="section-padding section--editorial" data-section-num="02"><div class="section-header"><h2 class="section-title">摘要</h2></div><div class="report-block" id="report-2-1">
+<p>这是对 960,713 条美国手表评论（2001 至 2015 年）的无监督分析，用两个互补模型：K-Means 根据 TF-IDF 将每条评论分配到一个簇，LDA 根据词频计数估计每条评论的多个主题权重。方法先在一份 5 万条的固定种子随机样本上选择；全量语料中 858,170 条通过长度门槛，删除零向量后用 858,037 条拟合并作规模对照。</p>
+<p>样本上，余弦轮廓系数和肘部都选不出簇数（轮廓系数在 0.01 附近，inertia 无明显肘部）。K*=7 按簇内容解释选择，T*=10 则取连贯性平台上的较小主题数；困惑度未支持增加主题数。在一大团泛化好评底下，三个具体主题在两个模型里都复现，并与文本模型从未见过的星级对齐：走时/电池、表带/尺寸、礼品。</p>
+<p>全量结果中，均星最低的主题提供评论复核线索：故障/退货主题均分 2.37 星，比次低主题低约 1.4 星，占建模语料一星评论的 52.9%。LED、硅胶、水钻款产品标题组有较高主题份额，低价定位尚未核实。时间趋势对评论长度筛选敏感；长评论子集中的性价比好评趋势较平，但这项描述性检查不能排除偏好变化。结论上信任主题多于信任硬分区：具体簇跨样本与全量以 top-term Jaccard 0.60 至 0.67 复现，而分区本身弱分离，因此后文分别标明样本簇、全量主导主题占比和平均主题权重，避免混用。</p>
+<p>这些发现可用于安排功能问题排查、完善尺寸与操作说明、测试礼品场景展示，并改进评论趋势监测。</p>
+
+</div></section><section id="report-section-3" class="section-padding section--editorial" data-section-num="03"><div class="section-header"><h2 class="section-title">1 业务问题与数据</h2></div><div class="report-block" id="report-3-1">
+<p>面对一份评论语料，卖家或品类经理想知道买家到底在写什么，好把质量改进和营销对准真实关切，而不是靠猜。手表评论在一个特定意义上让这件事变难：评论很短，约六成是五星，所以这里没有干净可分的消费者分群等着被挖出来。真正有用的问题更窄，分三部分。文本里实际存在什么结构？其中多少是真信号，而不是几个高频虚词造出的假象？这个结构又和哪些元数据对得上：星级、已验证购买、评论年份？</p>
+<p>数据里没有任何主题标签或分群标签，全程因此是无监督的。两个模型从不同角度看同一份语料，二者都能恢复的结构，比只有一个模型报告的结构更可信。</p>
+<h3>数据</h3>
+<p>语料是 Amazon Customer Reviews 数据集的「手表」品类切片：15 列，960,872 条原始记录，全部 <code>marketplace = US</code>、<code>product_category = Watches</code>，跨 2001 年 4 月至 2015 年 8 月。去掉 159 条空正文后剩 <strong>960,713 条</strong>。评论正文在 <code>review_body</code>，<code>star_rating</code>、<code>verified_purchase</code>、<code>review_date</code>、<code>product_title</code> 提供分析用来与文本交叉的元数据。数据来源为 Amazon Customer Reviews；<a href="https://aws.amazon.com/blogs/big-data/discovering-metadata-with-aws-lake-formation-part-1/">AWS 数据集说明</a>介绍了原始数据分发渠道。</p>
+
+</div></section><section id="report-section-4" class="section-padding section--editorial" data-section-num="04"><div class="section-header"><h2 class="section-title">2 语料画像与匹配总体的样本</h2></div><div class="report-block" id="report-4-1">
+<p>语料的四个事实决定了后面的一切。星级呈 J 形：<strong>59.5%</strong> 是五星，一星处有 <strong>8.9%</strong> 的次级凸起。<strong>86.5%</strong> 是已验证购买。正文长度中位数为 149 个字符；随机样本清洗后的长度中位数约为 14 个内容词干。另有 <strong>9.0%</strong> 的正文完全重复，多是「Love it」式的短好评，按保留原始记录的分析假设处理，评论真实性未独立核实。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：星级分布" class="figure-zoom" type="button"><img alt="星级分布" decoding="async" height="614" loading="lazy" src="figures/sample_star_rating_distribution.png" width="1037"/></button><figcaption><em>图 1。分布呈 J 形：五星一根高柱、中段低、一星处再抬一下。均分会盖住这个形状，分析改用星级构成而非平均值。</em></figcaption></figure>
+
+<h3>为什么样本必须随机</h3>
+<p>文件按日期降序排列，前 1000 行因此来自单一天（2015-08-31），并非跨语料。头部切片只覆盖一天，因此方法选择使用 5 万条固定种子的随机样本，且图中星级、已验证购买和年份三个边际分布与语料总体接近。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：样本与总体的边际对照" class="figure-zoom" type="button"><img alt="样本与总体的边际对照" decoding="async" height="594" loading="lazy" src="figures/sample_vs_population_marginals.png" width="1927"/></button><figcaption><em>图 2。星级、已验证占比、年份，5 万条样本对全量总体。三个边际分布接近，是抽样的描述性检查；不能据此证明联合分布或主题估计无偏，也不能外推到全部买家。</em></figcaption></figure>
+
+<blockquote>
+<p><strong>解读：</strong> 值得找的结构，是好评底下那几个具体抱怨，并非好评本身。一大块泛化五星文本会主导任何无监督分组，分析正是为读它底下的东西而搭的。</p>
+</blockquote>
+
+</div></section><section id="report-section-5" class="section-padding section--editorial" data-section-num="05"><div class="section-header"><h2 class="section-title">3 预处理与共享词表</h2></div><div class="report-block" id="report-5-1">
+<h3>目标</h3>
+<p>把原始评论文本变成一份两个模型都能读的矩阵，且不重复付两次分词的代价，也不让两个模型看到不同的词。</p>
+<h3>清洗与建模范围</h3>
+<p>一个预处理函数，在全量 notebook 里逐字复用以保证两次运行可比：它把每条正文转小写，剥掉 HTML 残留（<strong>13.7%</strong> 的样本正文含 HTML 标签或字符实体，例如换行标签与数字字符引用），保留长度至少 3 的字母词，去掉 NLTK 英文停用词，再做 Snowball 词干化。一条评论只有在含 <strong>至少 3 个内容词干</strong> 时才进入建模语料；这是本分析选择的长度门槛，不表示更短文本完全没有信息。这个范围剔掉了样本的 <strong>10.8%</strong>，而被剔的是最短、最满意的文本：被剔评论均分 4.53 星，保留的是 4.09 星。模型还删除词表裁剪后的零向量；样本最终矩阵为 44,592 条，后文全量结果另按其最终矩阵口径解释。</p>
+<h3>计数先行，TF-IDF 派生</h3>
+<p><code>CountVectorizer(min_df=20, max_df=0.5)</code> 一次拟合出 <strong>2,800 词</strong> 的词表。<code>max_df=0.5</code> 的截断剔掉了文档频率超过阈值的词「watch」，因此本分析没有另设领域停用词表。TF-IDF 再由这同一份计数矩阵用 <code>TfidfTransformer(sublinear_tf=True, norm="l2")</code> 派生。词频计数保留了 LDA 中词项出现次数的解释，而代码将普通 K-Means 应用于 L2 归一化 TF-IDF；该流程没有额外的质心归一化步骤，不能直接称为球面 K-Means。计数先行、TF-IDF 派生，让两个模型共享一份词表，这才让第 6 节里它们的一致有意义。</p>
+<blockquote>
+<p><strong>解读：</strong> 两个模型共享词表。因为计数矩阵和 TF-IDF 矩阵建自同一批词，二者的相近主题提供内部一致性证据，但共享的词袋表示也带来共同限制，不能替代主题标签核实。</p>
+</blockquote>
+<h3>代价</h3>
+<p>3 词干的下限拿覆盖换信号。它丢掉 10.8% 的评论，而这些评论不是随机的：它们里偏多的是短五星好评。所以下文的礼品与性价比主题，是在一份排除了部分高评分短评的语料上度量的。</p>
+
+</div></section><section id="report-section-6" class="section-padding section--editorial" data-section-num="06"><div class="section-header"><h2 class="section-title">4 簇数与 K-Means 分区</h2></div><div class="report-block" id="report-6-1">
+<h3>目标</h3>
+<p>把评论切成一组组相似文本的硬分组，且从证据而非从规定去决定切几组。</p>
+<h3>选 K</h3>
+<p>扫描让 K 从 2 走到 15，看两样东西：inertia（肘部）和 10,000 条子样本上的余弦轮廓系数。两者都给不出干净的答案。轮廓系数从 0.0106 走到 0.0164，总体上升但有局部波动，没有明确最优点；inertia 全程降幅不足 4%，没有拐点。短而正面的评论文本切不出分离良好的球，K 因此只能是一个建模选择。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：簇数指标" class="figure-zoom" type="button"><img alt="簇数指标" decoding="async" height="656" loading="lazy" src="figures/sample_kmeans_elbow_silhouette.png" width="1790"/></button><figcaption><em>图 3。inertia（左）平滑弯曲、无拐点；轮廓系数（右）在 0.01 附近、总体上升但有局部波动。扫描范围内的得分差异较小，分离度较弱，两条曲线都没有提供明确最优点。</em></figcaption></figure>
+
+<p>轮廓系数和肘部曲线没有给出明确的最优簇数，因此本分析根据簇内容的可解释性选用 K*=7。较小 K 下具体主题与泛化好评混合的判断仍属探索性解释，尚未通过独立标签验证。</p>
+<h3>七个簇</h3>
+<p>K=7 下，其中四个簇（约占建模语料 53%）是按形容词和长度而非按主语切分的泛化好评：一个「good」领头的簇、一个「great」领头的簇、一个「nice」领头的簇，以及一个长叙事簇（30.1%），后者同时触及价格、外观与保留意见。另外三个有真实主语：<strong>走时/电池</strong>（22.0%）、<strong>表带/尺寸</strong>（13.8%）、<strong>礼品</strong>（11.1%）。这三个是后续分析跟踪的对象。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：各簇 top 词" class="figure-zoom" type="button"><img alt="各簇 top 词" decoding="async" height="925" loading="lazy" src="figures/sample_cluster_top_terms.png" width="2385"/></button><figcaption><em>图 4。各簇按质心权重的 top 词。簇 4、5、6 读作表带/尺寸、礼品、走时/电池；其余是按形容词分层的好评。</em></figcaption></figure>
+
+<h3>这些簇有意义吗</h3>
+<p>聚类模型只使用评论文本，没有使用星级。比较各簇的星级分布，可以检查文本分组是否也对应评分差异。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：各簇的星级构成与均星" class="figure-zoom" type="button"><img alt="各簇的星级构成与均星" decoding="async" height="614" loading="lazy" src="figures/sample_cluster_star_heatmap.png" width="1927"/></button><figcaption><em>图 5。各簇内的星级构成（左）与各簇均星（右）。礼品是最快乐的簇，4.79 星；走时/电池最不快乐，3.73 星；表带/尺寸也在语料均值之下，3.96 星。</em></figcaption></figure>
+
+<blockquote>
+<p><strong>解读：</strong> 把簇区分开的是主语和情感，不是干净的几何。纯文本的分组按它从未见过的星级把自己排了序，从礼品的 4.79 星到走时/电池的 3.73 星，这个对齐是分组带有超出词共现之含义的第一证据。</p>
+</blockquote>
+
+</div></section><section id="report-section-7" class="section-padding section--editorial" data-section-num="07"><div class="section-header"><h2 class="section-title">5 主题数与 LDA 主题</h2></div><div class="report-block" id="report-7-1">
+<h3>目标</h3>
+<p>估计每条评论的主题权重，允许一条评论同时涉及多个主题。主题数的选择沿用选 K 的思路：扫描候选值并比较评价指标。</p>
+<h3>选 T</h3>
+<p>两个指标，因为它们以一种有启发的方式相互矛盾。held-out perplexity（留出集上的困惑度）在 80% 的文档上拟合、在另 20% 上打分，奖励原始预测拟合，而这里它随主题数增加持续变差（T=4 时 839，T=15 时 983）。单靠它会把选择推向很少、很泛的主题。c_v coherence（主题连贯性）是一个在真实文本上滑动窗口统计词共现的分数，它通过词共现提供主题可解释性的代理指标，随主题数爬升到 T=10 至 12 的 0.5226 至 0.5266 平台，再在 T=15 回落。T*=10 取平台的便宜端。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：主题数选择" class="figure-zoom" type="button"><img alt="主题数选择" decoding="async" height="645" loading="lazy" src="figures/sample_lda_topic_selection.png" width="1192"/></button><figcaption><em>图 6。困惑度（灰，越低拟合越好）与 c_v coherence（红，越高表示测得的连贯性越高）。二者方向相反；连贯性在 T=10 至 12 达峰，此处主题仍可命名。</em></figcaption></figure>
+
+<h3>十个主题</h3>
+<p>LDA 拟合在 <code>Xc</code>（计数矩阵）上，以保留模型对词项出现次数的解释。T=10 下十个主题全可命名：性价比好评（13.8% 主导）、表带与电池的耐用性（15.9%）、礼品与合手（13.1%）、日常佩戴与他人称赞（11.8%）、订购/物流/退货（10.6%），加上外观工艺、数字功能、颜色、表盘与指针、调时。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：LDA 主题 top 词" class="figure-zoom" type="button"><img alt="LDA 主题 top 词" decoding="async" height="916" loading="lazy" src="figures/sample_topic_top_words.png" width="2685"/></button><figcaption><em>图 7。每个主题的 top 词，拟合在词频计数上。高权重词用于暂定主题名称，连贯性指标不能认证标签真实性。</em></figcaption></figure>
+
+<p><strong>样本模型主题编号与暂定名称</strong></p>
+<p>主题名称依据模型高权重词及其语义归纳。样本与全量主题分别编号，通过词项对齐比较。</p>
+<div aria-label="数据表（可横向滚动）" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">编号</th>
+<th scope="col">暂定名称与保存词干</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>外观工艺：look, case, like, wrist, band, movement, one, make, strap, face, size, feel</td>
+</tr>
+<tr>
+<td>1</td>
+<td>数字功能：easi, read, time, light, use, featur, water, great, like, function, digit, casio</td>
+</tr>
+<tr>
+<td>2</td>
+<td>颜色：color, like, gold, look, face, pictur, realli, band, love, silver, white, one</td>
+</tr>
+<tr>
+<td>3</td>
+<td>订购/物流/退货：amazon, order, purchas, return, ship, receiv, product, arriv, time, work, buy, one</td>
+</tr>
+<tr>
+<td>4</td>
+<td>性价比好评：look, good, price, great, qualiti, nice, like, recommend, product, well, would, realli</td>
+</tr>
+<tr>
+<td>5</td>
+<td>表带与电池的耐用性：band, one, year, replac, use, get, strap, work, last, batteri, time, wear</td>
+</tr>
+<tr>
+<td>6</td>
+<td>礼品与合手：love, wrist, gift, big, size, bought, look, small, like, fit, perfect, nice</td>
+</tr>
+<tr>
+<td>7</td>
+<td>表盘与指针：hand, time, day, second, light, look, see, dial, date, read, hour, dark</td>
+</tr>
+<tr>
+<td>8</td>
+<td>调时：time, set, one, work, clock, get, day, use, instruct, button, batteri, keep</td>
+</tr>
+<tr>
+<td>9</td>
+<td>日常佩戴与他人称赞：love, great, wear, look, one, get, compliment, time, price, mani, lot, casual</td>
+</tr>
+</tbody>
+</table></div>
+<h3>主题对照星级</h3>
+<p>同样可以比较各主题的平均星级。关切主题的均星低于语料均值，满意主题的均星高于语料均值。耐用性、订购与退货、表盘与指针、调时主题的均星较低（3.45 至 3.65 星）；「日常佩戴与他人称赞」主题的均星最高（4.83 星）。各主题的已验证购买占比差异较小，外观工艺主题最低，约为 76%。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：各主题的均星与已验证占比" class="figure-zoom" type="button"><img alt="各主题的均星与已验证占比" decoding="async" height="614" loading="lazy" src="figures/sample_topic_star_rating.png" width="1936"/></button><figcaption><em>图 8。各主题均星（红色为低于语料均值）与各主题已验证占比。关切主题聚在均值之下，满意主题在其之上。</em></figcaption></figure>
+
+<blockquote>
+<p><strong>解读：</strong> 样本中耐用性和调时主题均星较低，可优先复核功能相关描述。颜色和外观主题并非评分最高的一组；主题均星差异也不能证明外观问题无关或功能改进有效。</p>
+</blockquote>
+
+</div></section><section id="report-section-8" class="section-padding section--editorial" data-section-num="08"><div class="section-header"><h2 class="section-title">6 两种无监督视图及其一致性</h2></div><div class="report-block" id="report-8-1">
+<p>K-Means 根据 TF-IDF 向量的距离，将每条评论分到一个簇（硬分配）；LDA 根据词频计数，为每条评论估计多个主题的权重（软分配）。两种模型得到相近的内容分组，可作为内部一致性证据。交叉表按行归一化，展示各簇内评论的主导 LDA 主题分布，用于观察两种结果的对应关系。这里的主导主题是每条评论中权重最高的主题，用于汇总展示；LDA 本身仍保留完整的主题权重。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：簇与主题的一致性" class="figure-zoom" type="button"><img alt="簇与主题的一致性" decoding="async" height="734" loading="lazy" src="figures/sample_cluster_topic_crosstab.png" width="1245"/></button><figcaption><em>图 9。纵轴每行是一个 K-Means 簇，横轴每列是一个主导 LDA 主题，两轴均按各自编号排列。格内数字是该簇评论的占比（四舍五入为整数百分比），红色越深，占比越高。同一行看簇内主题集中在哪里，不同行比较这种分布的差别：簇 0 的 54% 集中于主题 4；簇 5 则分别有 43% 和 28% 落在主题 6、9。局部对应可作为内部一致性线索，不代表簇与主题一一匹配，也不构成独立的聚类质量验证。</em></figcaption></figure>
+
+<p>「good」好评簇把 54% 的评论放在性价比主题；礼品簇中，43% 的评论以「礼品/合手」为主导主题，28% 以「日常佩戴与他人称赞」为主导主题；表带/尺寸集中在耐用性（41%）加礼品/合手里尺寸的那一半（20%）；走时/电池散在调时（25%）与耐用性（21%）上。</p>
+<blockquote>
+<p><strong>解读：</strong> 这份一致是两种不同几何之间的一致，并非一个模型在自我核对。K-Means 的硬分配结果与 LDA 的主题权重分布出现相近内容，是内部一致性证据；它不能排除共享表示或算法选择的影响。</p>
+</blockquote>
+
+</div></section><section id="report-section-9" class="section-padding section--editorial" data-section-num="09"><div class="section-header"><h2 class="section-title">7 全量规模上的稳定性与占比</h2></div><div class="report-block" id="report-9-1">
+<h3>目标</h3>
+<p>检验 5 万条的方法在全量上是否成立，并读出报告该引用的数字，而不重新搜索 K 或 T。</p>
+<h3>方法可迁移</h3>
+<p>全量 960k 条里，89.3% 越过 3 词干的门槛，留下 <strong>858,170</strong> 条；删除零向量后，最终建模矩阵为 858,037 条。把 <code>min_df</code> 从 20 提到 200 以匹配大 20 倍的语料后，词表落在 3,723 词，其中 <strong>75.2%</strong> 已出现在样本词表里，<code>watch</code> 仍被 <code>max_df</code> 剔除。K=5、7、9 的 sanity 检查让余弦轮廓系数保持在 0.0099 至 0.0142，与样本呈现的同样是一片平地，所以 K*=7 仍是可辩护的工作点，并非指标选出的点。</p>
+<p>拟合设定并不完全相同：样本终拟合 LDA 使用 batch_size=2048、max_iter=20，全量使用 batch_size=8192、max_iter=5；聚类也从 KMeans 改为 MiniBatchKMeans。选 T 时词表先在全部样本建模文本上拟合，80/20 切分用于 LDA 拟合与 perplexity，c_v coherence 使用全部样本文本；这不是独立留出的整条流程验证。</p>
+<h3>簇与主题重新对齐</h3>
+<p>轮廓系数在 0.01 附近，提示分离度弱（样本上 full K-Means 与 MiniBatchKMeans 只在 ARI 0.286 上一致），验证用 Hungarian algorithm（匈牙利算法）按 top-term Jaccard 把每个全量簇对齐到它的样本对应簇，并非期待一个相同的分区。簇以平均 Jaccard <strong>0.522</strong> 匹配：三个具体簇的 top 词有较高重叠（表带/尺寸 0.67、礼品 0.60、走时 0.60），而最弱的两个匹配（0.25 与 0.33）都是边界本来就模糊的泛化好评簇。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：簇的稳定性与占比" class="figure-zoom" type="button"><img alt="簇的稳定性与占比" decoding="async" height="674" loading="lazy" src="figures/full_cluster_sizes_vs_sample.png" width="1934"/></button><figcaption><em>图 10。各簇对齐后的 top-term Jaccard（左）与簇占比样本对全量的对照（右）。具体簇的 top 词有较高重叠；两个关切簇的占比变化（走时 22% 到 14%，表带/尺寸 14% 到 19%）。</em></figcaption></figure>
+
+<p>具体簇占比也有变化。此处比较对齐后的组占比，没有逐条追踪评论归属；不能认定变化来自边界评论翻转，也没有分离语料、词表与算法变化的贡献。主题对齐的平均 Jaccard 为 <strong>0.333</strong>，表明跨设定的词内容重叠有限。算法为每个主题指定配对，并不证明每个主题语义稳定。最弱的匹配（0.14）对应全量故障/退货主题，其高权重评论支持该标签；但不能由此认定 960k 语料比 5 万样本改善了主题质量。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：主题稳定性，样本对全量" class="figure-zoom" type="button"><img alt="主题稳定性，样本对全量" decoding="async" height="885" loading="lazy" src="figures/full_stability_jaccard.png" width="1141"/></button><figcaption><em>图 11。十个主题对齐后的 top-term Jaccard。重叠程度低于簇对齐；算法生成的配对不等于每个主题均已稳定复现。</em></figcaption></figure>
+
+<blockquote>
+<p><strong>解读：</strong> 部分具体簇保留了相近的高权重词，全部主题的稳定性仍未确立。具体簇以 Jaccard 0.60 至 0.67 保住，而对齐后的簇占比存在变化，所以报告引用主题级份额，用分区描述词内容相近的评论组。</p>
+</blockquote>
+
+</div></section><section id="report-section-10" class="section-padding section--editorial" data-section-num="10"><div class="section-header"><h2 class="section-title">8 痛点与评论行为趋势</h2></div><div class="report-block" id="report-10-1">
+<p>以下描述性结果使用全量语料的最终建模矩阵。</p>
+<ul>
+<li><strong>三个具体主题撑起了信号，但泛化好评仍占据约一半语料。</strong> 走时/电池、表带/尺寸、礼品在两个模型里都复现；其余的簇是按形容词分层的好评。</li>
+<li><strong>一个主题均分 2.37 星，占建模语料一星评论的 52.9%。</strong> 故障/退货主题比次低主题低约 1.4 星，占据了评分分布的负面长尾。</li>
+<li><strong>平均主题权重在 2008 至 2015 年间变化，长评论子集的性价比好评趋势较平。</strong> 限定在 20 个及以上内容词干的评论里，性价比好评的看似上升变平（7.0% 到 7.1%）。</li>
+<li><strong>具体簇以 Jaccard 0.60 至 0.67 保住，但分区本身只是弱分离。</strong> 具体簇词内容在跨设定比较中有重叠，轮廓系数在 0.01 附近，硬分配的稳定性仍有限。</li>
+</ul>
+<h3>一个尖锐的痛点</h3>
+<p>在全量的十个主题里，故障/退货主题（top 词 time、work、one、battery、back、day）是那个要紧的离群：均分 <strong>2.37 星</strong>，比次低主题（表带/表链 3.80）低约 1.4 星，份额 11.1%。故障/退货主题的平均评分最低，可优先复核相关描述；该比较不能排除价格或外观问题。两个更小的读数与之并列：订购与履约主题均分 4.64 星，但主题均星不能衡量配送投诉率；而已验证占比最低的是图片对价格主题（79.8%）与长期耐用主题（78.9%），这些标记比例不能推断购买至评论的时间间隔。</p>
+<p><strong>全量模型主题编号与暂定名称</strong></p>
+<p>主题名称依据模型高权重词及其语义归纳。样本与全量主题分别编号，通过词项对齐比较。</p>
+<div aria-label="数据表（可横向滚动）" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">编号</th>
+<th scope="col">暂定名称与保存词干</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>设置/读表：time, set, light, read, use, easi</td>
+</tr>
+<tr>
+<td>1</td>
+<td>礼品：love, bought, one, gift, year, got</td>
+</tr>
+<tr>
+<td>2</td>
+<td>故障/退货：time, work, one, batteri, back, day</td>
+</tr>
+<tr>
+<td>3</td>
+<td>订购/履约：product, amazon, purchas, item, thank, arriv</td>
+</tr>
+<tr>
+<td>4</td>
+<td>外观：look, love, face, color, wear, beauti</td>
+</tr>
+<tr>
+<td>5</td>
+<td>尺寸：wrist, big, like, small, size, littl</td>
+</tr>
+<tr>
+<td>6</td>
+<td>外观与价格：look, like, pictur, price, one, qualiti</td>
+</tr>
+<tr>
+<td>7</td>
+<td>长期耐用性：year, time, wear, water, work, one</td>
+</tr>
+<tr>
+<td>8</td>
+<td>表带/表链：band, strap, link, remov, use, pin</td>
+</tr>
+<tr>
+<td>9</td>
+<td>性价比好评：great, look, good, price, qualiti, nice</td>
+</tr>
+</tbody>
+</table></div>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：各主题的均星与已验证占比（全量）" class="figure-zoom" type="button"><img alt="各主题的均星与已验证占比（全量）" decoding="async" height="614" loading="lazy" src="figures/full_topic_star_rating.png" width="1936"/></button><figcaption><em>图 12。全量各主题均星（红色为低于均值）与各主题已验证占比。故障/退货主题在底部独自一档，2.37 星。</em></figcaption></figure>
+
+<p>top 词可能给主题贴错标签，检验因此是评论本身。该主题选取的五条高权重评论节选（各为 0.99 权重，按正文前 60 字符排除重复并展示前 200 字符）读起来都是断裂与退货的故事：指针脱落、手表停走或到货即坏、反复的保修更换。</p>
+<blockquote>
+<p>「指针不动。换了新电池指针还是不动。第一次买 Invicta 手表，可这块不动指针，很糟糕……」（权重 0.99，1 星）</p>
+</blockquote>
+<blockquote>
+<p>「我买了这块表。约购买一年后一根指针脱落，表壳完好。我把表退回 Victorinox……」（权重 0.99，1 星）</p>
+</blockquote>
+<h3>一星评论落在哪</h3>
+<p>这个痛点不只是平均评分低；它占据了负面长尾。在建模语料的 <strong>80,553</strong> 条一星评论（占语料 9.4%）里，<strong>52.9%</strong> 以故障/退货主题为主导主题，而该主题的全语料份额只有 11.1%，top 2 主题合起来覆盖一星评论的 63.9%。这个占比可用于安排评论复核优先级，不能换算成可消除的差评比例。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：主导主题构成：一星评论对全语料" class="figure-zoom" type="button"><img alt="主导主题构成：一星评论对全语料" decoding="async" height="614" loading="lazy" src="figures/full_one_star_topic_mix.png" width="1337"/></button><figcaption><em>图 13。一星评论（红）对全部评论（灰）的主导主题份额。一个主题在一星构成里高耸于其余之上，而它在整个语料里只居中游。</em></figcaption></figure>
+
+<h3>它落在哪些产品上</h3>
+<p>一个主题级的痛点，落到具体产品上才可行动。在 <strong>202</strong> 个至少有 300 条建模评论的产品里，故障主题份额最高的十个坐在 <strong>24.6% 至 39.9%</strong>，是 11.1% 基线的两到四倍，均分 2.9 至 3.7 星。清单按 product_title 分组，包含 LED、硅胶、水钻款标题，也含手表工具。这里测量的是评论的主导主题占比，不是真实故障率；低价定位及商品身份仍待核实。</p>
+<div aria-label="数据表（可横向滚动）" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">产品（截断）</th>
+<th scope="col" style="text-align:right">评论数</th>
+<th scope="col" style="text-align:right">故障主题占比</th>
+<th scope="col" style="text-align:right">均星</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OrangeTag LED Watch Futuristic Japanese Style Multicolor</td>
+<td style="text-align:right">303</td>
+<td style="text-align:right"><strong>39.9%</strong></td>
+<td style="text-align:right">2.91</td>
+</tr>
+<tr>
+<td>RPM Turbo Blue &amp; White Flash LED Watch</td>
+<td style="text-align:right">323</td>
+<td style="text-align:right">34.7%</td>
+<td style="text-align:right">3.02</td>
+</tr>
+<tr>
+<td>Touch Screen Led Watch Ultra-thin Plastic Candy</td>
+<td style="text-align:right">393</td>
+<td style="text-align:right">28.2%</td>
+<td style="text-align:right">2.92</td>
+</tr>
+<tr>
+<td>PromiseU Leather Bracelet Woman Rhinestone Rivet Chain</td>
+<td style="text-align:right">747</td>
+<td style="text-align:right">27.2%</td>
+<td style="text-align:right">2.96</td>
+</tr>
+<tr>
+<td>Chocolate Geneva Crystal Rhinestone Chronograph</td>
+<td style="text-align:right">472</td>
+<td style="text-align:right">25.2%</td>
+<td style="text-align:right"><strong>2.90</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p><em>按故障主题占比排的 top 产品，至少 300 条建模评论。该主题的全语料份额是 11.1%。</em></p>
+<h3>主题趋势与评论长度</h3>
+<p>以下比较逐年平均主题权重，纳入 2008 年起、每年至少 200 条建模评论的年份；原始趋势本身不能区分评论组成与买家偏好变化。2008 至 2015 年间，短的「设置与读表」主题从约 15% 降到 9%，泛化性价比好评从约 10% 升到 16%，约在 2012 年交叉，正当评论量在 2013 至 2015 年爆发。截至 2015 年 8 月，模型没有识别出独立的智能表主题。由于主题数固定为 10，模型可能未能分离出规模较小的新兴主题，因此不能据此判断语料中没有智能表相关讨论。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：2008 至 2015 年的主题流行度" class="figure-zoom" type="button"><img alt="2008 至 2015 年的主题流行度" decoding="async" height="885" loading="lazy" src="figures/full_topic_trend_by_year.png" width="1789"/></button><figcaption><em>图 14。逐年的平均主题权重。两条线承载了变动：设置/读表下行，泛化性价比好评上行，约在 2012 年交叉。其他主题也有变化；这两个主题的端点变化最大。</em></figcaption></figure>
+
+<p>长度检查提供了一个描述性对照。评论中位数从 2008 年的 26 个内容词干降到 2015 年的 10 个，长评论（20 词干及以上）的占比从 64.6% 降到 26.2%。只看长评论，性价比好评的平均主题权重较平（7.0% 到 7.1%），设置/读表仍下降（17.2% 到 13.6%）。这说明趋势对长度筛选敏感，但没有量化组成效应的贡献，也没有排除偏好变化。长评论内部的长度、作者和商品构成未固定，且未检验差异显著性或等效性。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：对趋势的长度检验" class="figure-zoom" type="button"><img alt="对趋势的长度检验" decoding="async" height="645" loading="lazy" src="figures/full_length_composition_check.png" width="1938"/></button><figcaption><em>图 15。逐年的中位内容词干数（左），以及两个移动主题只在 20 词干及以上评论上重算（右）。筛选长评论后，性价比好评趋势较平；长度下限筛选没有固定组内长度、作者或商品构成。</em></figcaption></figure>
+
+<blockquote>
+<p><strong>解读：</strong> 原始主题趋势和长评论子集的趋势不同，提示监测时需要检查评论长度组成。该对照未识别变化机制，不能把任一条趋势直接解释为买家偏好。</p>
+</blockquote>
+
+</div></section><section id="report-section-11" class="section-padding section--editorial" data-section-num="11"><div class="section-header"><h2 class="section-title">9 主题与它们支持的行动</h2></div><div class="report-block" id="report-11-1">
+<p>本项目把评论中的内容模式转化为四类可执行方案：优先排查功能问题、完善商品使用与适配说明、测试礼品场景展示，以及建立按文本长度分层的评论监测。以下方案同时列出分析依据、实施方法和建议的评估指标。</p>
+<h3>方法选择：按任务使用聚类与主题模型</h3>
+<p>K-Means 用于浏览相似评论组，LDA 用于描述一条评论同时涉及的多个话题。两者都呈现走时/电池、表带/尺寸和礼品相关内容，这支持用这些主题组织评论分析。</p>
+<p>轮廓系数约为 0.01，说明硬分组的分离度弱；样本到全量的主题词重叠也有限。短文本、重复的好评词和话题混合是可能的解释，但本项目未单独检验各因素的贡献。因此，实施时采用“主题检索与人工复核”，不把簇编号直接当作稳定的客户类型。模型在归纳评论内容方面提供了可用线索，在自动划定稳定人群方面证据不足。</p>
+<h3>质量排查：从故障与退货相关评论开始</h3>
+<p>全量故障/退货主题均星为 2.37，占建模一星评论的 52.9%。在至少有 300 条建模评论的产品标题组中，占比最高的十组为 24.6% 至 39.9%。这些结果提供了排查顺序：先看功能问题集中的标题组，再进入具体评论。</p>
+<p>建议质量或售后团队先将这些标题匹配到商品目录，区分手表与工具类商品；按主题占比和相关评论数量共同安排复核顺序。人工把评论细分为停走、电池、指针、到货状态和退换经历，再据此检查对应商品的质检项目、使用说明及售后处理流程。</p>
+<p>试点可记录模型推荐评论中实际包含目标问题的比例、每条有效问题的复核耗时，以及复核结果与售后问题分类的对应情况。若后续能关联订单和退换货数据，再评估处理方案是否降低同类问题；主题占比本身不等于商品故障率。</p>
+<h3>商品说明：优先补充尺寸与操作信息</h3>
+<p>样本的表带/尺寸簇均星为 3.96，走时/电池簇为 3.73；相关主题词涉及腕围、表链、按钮和调时。这说明功能与适配问题值得从商品信息和使用引导两个环节排查。</p>
+<p>建议抽查这两类评论，区分实际功能故障、尺寸不适配和操作困难。针对确认的信息缺口，在详情页补充适用腕围、表带或表链调整方式、清晰的调时步骤及电池维护说明；具体内容应与商品规格一致。</p>
+<p>优先在相关咨询较多的商品上试点，对比修改前后的尺寸与操作咨询占比、同类差评内容及售后处理耗时。该方案检验的是信息补充是否有帮助，不预设所有功能抱怨都能由说明文档解决。</p>
+<h3>礼品展示：测试购买场景而非固化人群标签</h3>
+<p>样本礼品簇均星为 4.79，评论中出现为丈夫或妻子购买的表达。它揭示了值得利用的购买场景：买家关注的不只是自用，也包括送礼。</p>
+<p>建议选取适合送礼的商品，试做按收礼对象和场合组织的展示，并清楚说明尺寸选择、包装和退换政策。可将礼品导向页面与现有页面进行对照，观察点击、加购、转化和退货情况，再决定是否扩大使用。</p>
+<p>这里的建议来自送礼场景和较高评分之间的联系；礼品簇用于发现场景，不用于给所有买家打上固定身份标签。</p>
+<h3>评论监测：同时跟踪主题与文本长度</h3>
+<p>评论中位长度从 26 个内容词干降到 10 个；限制到至少 20 个词干的评论后，性价比好评的平均主题权重由 7.0% 变为 7.1%，没有呈现整体语料中的明显上升。这说明直接比较年度主题占比，容易混入评论长度变化的影响。</p>
+<p>建议建立定期评论看板，同时展示主题权重、评分、评论数量和长度分布；整体语料与长评论子集并列查看，并抽查引起变化的代表评论。模型或词表更新时先做并行对照，再衔接趋势。</p>
+<p>可先回看历史异常月份，记录按长度分层后哪些提醒仍然成立，以及人工复核认为有业务意义的提醒比例。这样把主题模型用于发现待调查的变化，而不直接把主题比例当作偏好变化的结论。</p>
+<blockquote>
+<p><strong>解读：</strong> 实施顺序上，优先从故障/退货主题的人工复核入手，再根据确认的问题完善商品信息；礼品展示另设试点，评论看板持续跟踪内容变化。项目交付的是问题发现、方法选择依据和可评估的实施方案。</p>
+</blockquote>
+
+</div></section><section id="report-section-12" class="section-padding section--editorial" data-section-num="12"><div class="section-header"><h2 class="section-title">10 结果解读与后续分析</h2></div><div class="report-block" id="report-12-1">
+<p>本项目分析历史手表评论，通过主题词、评分及产品元数据解释建模语料中的内容模式。以下方法特点用于指导后续评论复核、模型比较和产品分析。</p>
+<ul>
+<li><strong>簇弱分离。</strong> 0.01 附近的余弦轮廓系数意味着硬分区是模糊的；簇有可解释的词内容，但真实分群标签未核实，同时呈现主题与情感差异，确切占比也随设定变化。</li>
+<li><strong>主题边界软。</strong> 样本到全量的主题对齐较弱（平均 Jaccard 0.33）；共享词汇可能影响重叠，但本分析没有分离语料、词表与拟合设定的影响。</li>
+<li><strong>重复保留、短评剔除。</strong> 9.0% 的正文完全重复（按保留原始记录的假设处理），样本中 10.8% 低于长度门槛（剔除），全量相应比例为 10.7%；模型还剔除零向量，份额数字仅描述最终建模评论。</li>
+<li><strong>英文预处理、评论级分析。</strong> 语料只是美国「手表」品类，采用英文文本预处理，未独立验证全部记录的语言。一条评论并非一条经核实的缺陷记录。</li>
+<li><strong>趋势有一段残余。</strong> 长度筛选后设置主题仍下降；这项描述性检查未分解组成与偏好各自的贡献，也未检验趋势差异的显著性或等效性。</li>
+<li><strong>固定主题数限制主题识别。</strong> 固定为 10 个主题的模型可能遗漏规模较小的新兴主题。2015 年前后的模型结果没有单独呈现智能表主题，但不能据此排除语料中有相关讨论。数据也止于 2015 年 8 月，不描述当今的智能表市场。</li>
+</ul>
+
+</div></section><section id="report-section-13" class="section-padding section--editorial" data-section-num="13"><div class="section-header"><h2 class="section-title">11 附录：建模参数</h2></div><div class="report-block" id="report-13-1">
+<ul>
+<li><strong>数据：</strong> <code>watch_reviews.tsv</code>，Amazon Customer Reviews（US Watches），960,872 原始行，去空正文后 960,713 行。用 <code>quoting=QUOTE_NONE</code> 与 <code>dtype_backend="pyarrow"</code> 读入。</li>
+<li><strong>预处理：</strong> 小写、剥 HTML 标签与实体、保留 <code>[a-z']{3,}</code> 词、去 NLTK 英文停用词加一份短 HTML 残留表、Snowball 词干化并带 <code>lru_cache</code>。建模范围：至少 3 个内容词干。</li>
+<li><strong>向量器（样本）：</strong> <code>CountVectorizer(analyzer=str.split, min_df=20, max_df=0.5, max_features=5000)</code>，2,800 词；TF-IDF 经 <code>TfidfTransformer(sublinear_tf=True, norm="l2")</code>。全量：<code>min_df=200</code>，3,723 词。</li>
+<li><strong>聚类：</strong> K 从 2 到 15 扫描，10k 子样本上算余弦轮廓系数；终拟合 <code>KMeans(n_clusters=7, n_init=20)</code>。全量：<code>MiniBatchKMeans(n_clusters=7, batch_size=4096, n_init=10)</code>。</li>
+<li><strong>主题：</strong> T 在 {4,6,8,10,12,15} 上扫描，用 held-out perplexity（80/20）与 gensim <code>c_v</code> coherence；终拟合 <code>LatentDirichletAllocation(n_components=10, learning_method="online")</code> 在计数上。全量：online LDA，<code>batch_size=8192</code>。</li>
+<li><strong>对齐：</strong> 样本与全量的簇/主题按 top-20 词 Jaccard 用 <code>scipy.optimize.linear_sum_assignment</code>（Hungarian algorithm）匹配。跨算法参照：full K-Means 对 MiniBatchKMeans，ARI 0.286。</li>
+<li><strong>随机种子：</strong> 42。</li>
+</ul>
+<p>本报告依托两个 notebook。样本 notebook 在一份 5 万条的抽样上定下每一个建模选择，K、T 与词表在那里搜索并论证；全量 notebook 固定 K 与 T，调整词表门槛和拟合设定后产生描述性结果；报告数字按最终建模矩阵口径解释。</p>
+
+</div></section></article>
+  </section>
+
+  <section id="related" class="section-padding"><div class="section-header"><h2 class="section-title">相关项目</h2></div><div class="grid md:grid-cols-2 gap-6"><a href="../youtube comment analysis/youtube comment analysis.html" class="related-project-card"><h3 class="related-project-title">YouTube 评论：养宠文本信号与频道筛选</h3><p class="related-project-description">对 5,818,979 条评论构建弱监督分类与频道候选排名，结合 TF-IDF、行为特征和 SHAP 分析养宠文本信号。300 条新评论经助手复核，294 条可判定，条件加权精确率为 0.8982。</p><span class="related-project-link">查看详情</span></a><a href="../ab testing/ab testing.html" class="related-project-card"><h3 class="related-project-title">A/B Testing：Cookie Cats 关卡门实验</h3><p class="related-project-description">比较 90,189 名玩家的留存与参与度，结合分流检验、自助法和统计功效评估关卡门位置。第 40 关组的 7 日留存比第 30 关组低 0.82 个百分点，95% 区间为 [−1.33, −0.31]，据此提出关卡与回访体验建议。</p><span class="related-project-link">查看详情</span></a></div></section>
+</main>
+<script src="../../assets/js/logo.js"></script>
+<script src="../../assets/js/common.js"></script>
+<script src="../../assets/js/project.js"></script>
+<script src="../../assets/js/language-switcher.js"></script>
+</body>
+</html>

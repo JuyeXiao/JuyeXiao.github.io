@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>document.documentElement.classList.add('js');</script>
+  <title>从贷款风险模式到复核策略：LendingClub 全量分析 - 数据诗学</title>
+  <meta name="description" content="对 800,634 笔到期终态贷款进行时间切分，比较模型排序、阈值与费用情景。在固定 10% 复核容量下，LightGBM 命中率为 37.88%，等级规则为 32.38%；结合 SHAP 解释与成本分析提出人工复核方案。">
+  <meta property="og:title" content="从贷款风险模式到复核策略：LendingClub 全量分析">
+  <meta property="og:description" content="对 800,634 笔到期终态贷款进行时间切分，比较模型排序、阈值与费用情景。在固定 10% 复核容量下，LightGBM 命中率为 37.88%，等级规则为 32.38%；结合 SHAP 解释与成本分析提出人工复核方案。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://juyexiao.github.io/projects/lendingclub%20loan%20prediction/full%20data.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:description" content="对 800,634 笔到期终态贷款进行时间切分，比较模型排序、阈值与费用情景。在固定 10% 复核容量下，LightGBM 命中率为 37.88%，等级规则为 32.38%；结合 SHAP 解释与成本分析提出人工复核方案。">
+  <link rel="canonical" href="https://juyexiao.github.io/projects/lendingclub%20loan%20prediction/full%20data.html">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&amp;family=Inter:wght@200;300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;700&amp;family=Noto+Sans+SC:wght@400;500;600&amp;family=Noto+Serif+SC:wght@500&amp;display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="../../assets/css/index.css">
+  <link rel="stylesheet" href="../../assets/css/project.css">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "从贷款风险模式到复核策略：LendingClub 全量分析", "description": "对 800,634 笔到期终态贷款进行时间切分，比较模型排序、阈值与费用情景。在固定 10% 复核容量下，LightGBM 命中率为 37.88%，等级规则为 32.38%；结合 SHAP 解释与成本分析提出人工复核方案。", "inLanguage": "zh-CN", "author": {"@type": "Person", "name": "Juye Xiao"}}</script>
+</head>
+<body class="transition-colors duration-300 report-page">
+<div class="scroll-progress" id="scroll-progress"></div>
+<header class="navbar fixed top-0 left-0 right-0 z-50" id="navbar">
+<div class="container-main h-full flex items-center justify-between">
+<!-- Logo部分 -->
+<a class="navbar-logo" href="../../index.html#hero" id="navbar-logo">
+<!-- SVG Logo -->
+<svg class="logo-svg-nav" viewbox="0 0 40 40">
+<!-- 背景数据网格 -->
+<g class="grid-bg">
+<!-- 垂直线 -->
+<line class="grid-line-v" style="animation-delay: 0.1s, 0s" x1="8" x2="8" y1="0" y2="40"></line>
+<line class="grid-line-v" style="animation-delay: 0.2s, 0.5s" x1="16" x2="16" y1="0" y2="40"></line>
+<line class="grid-line-v" style="animation-delay: 0.3s, 1s" x1="24" x2="24" y1="0" y2="40"></line>
+<line class="grid-line-v" style="animation-delay: 0.4s, 1.5s" x1="32" x2="32" y1="0" y2="40"></line>
+<!-- 水平线 -->
+<line class="grid-line-h" style="animation-delay: 0.5s, 0s" x1="0" x2="40" y1="10" y2="10"></line>
+<line class="grid-line-h" style="animation-delay: 0.6s, 0.7s" x1="0" x2="40" y1="20" y2="20"></line>
+<line class="grid-line-h" style="animation-delay: 0.7s, 1.4s" x1="0" x2="40" y1="30" y2="30"></line>
+</g>
+<!-- 织梭动画线 -->
+<line class="weaver-line" id="weaverLine" x1="0" x2="40" y1="20" y2="20"></line>
+<!-- JX字母 -->
+<text class="logo-letters" id="logoLetters" text-anchor="middle" x="20" y="26">JX</text>
+</svg>
+<!-- 名字签名（悬停显示） -->
+<div class="logo-name">
+<div class="logo-name-text">Juye Xiao</div>
+<div class="logo-name-subtitle">Data Analyst</div>
+</div>
+</a>
+<nav class="hidden md:flex items-center space-x-8">
+<a class="nav-link" href="../../index.html#about">关于</a>
+<a class="nav-link" href="../../index.html#experience">经历</a>
+<a class="nav-link" href="../../index.html#education">教育</a>
+<a class="nav-link" href="../../index.html#projects">项目</a>
+<a class="nav-link" href="../../index.html#skills">技能</a>
+<a class="nav-link" href="../../index.html#contact">联系</a>
+</nav>
+<div class="flex items-center space-x-4">
+<button aria-label="切换主题" class="btn-secondary !p-2 !rounded-full" id="theme-toggle">
+<i class="block dark:hidden" data-lucide="sun"></i>
+<i class="hidden dark:block" data-lucide="moon"></i>
+</button>
+<button class="btn-secondary !p-2 !rounded-full" id="lang-toggle">
+<span class="font-bold text-sm">EN</span>
+</button>
+<button aria-controls="mobile-menu" aria-expanded="false" aria-label="打开菜单" class="btn-secondary !p-2 !rounded-full md:hidden" id="menu-toggle">
+<i class="menu-icon-open" data-lucide="menu"></i>
+<i class="menu-icon-close" data-lucide="x"></i>
+</button>
+</div>
+</div>
+<nav aria-label="移动端导航" class="mobile-menu md:hidden" id="mobile-menu">
+<a class="nav-link" href="../../index.html#about">关于</a>
+<a class="nav-link" href="../../index.html#experience">经历</a>
+<a class="nav-link" href="../../index.html#education">教育</a>
+<a class="nav-link" href="../../index.html#projects">项目</a>
+<a class="nav-link" href="../../index.html#skills">技能</a>
+<a class="nav-link" href="../../index.html#contact">联系</a>
+</nav>
+</header>
+<main class="container-main">
+  <section id="project-hero" class="section-padding report-hero">
+    <div class="section-eyebrow"><span class="section-kicker">LendingClub · 进阶案例</span></div>
+    <h1 class="hero-title">从贷款风险模式到复核策略：LendingClub 全量分析</h1>
+    <p class="subtitle report-standfirst">对 800,634 笔到期终态贷款进行时间切分，比较模型排序、阈值与费用情景。在固定 10% 复核容量下，LightGBM 命中率为 37.88%，等级规则为 32.38%；结合 SHAP 解释与成本分析提出人工复核方案。</p>
+    <p class="reading-time">2026 · 分析更新</p>
+    <div class="hero-stats"><div class="hero-stat"><div class="hero-stat__num">800,634</div><div class="hero-stat__label">到期终态贷款</div></div><div class="hero-stat"><div class="hero-stat__num">10%</div><div class="hero-stat__label">固定复核容量</div></div><div class="hero-stat"><div class="hero-stat__num">37.88%</div><div class="hero-stat__label">LightGBM 容量内命中率</div></div></div>
+    <div class="report-actions"><a class="btn btn-primary" href="#content">开始阅读</a><a class="btn btn-secondary" href="../../index.html#projects">返回项目概览</a></div>
+  </section>
+<nav class="report-series" aria-label="系列阅读"><a class="report-series__link" href="lendingclub loan prediction.html">LendingClub：9,004 笔贷款样本</a><a class="report-series__link is-current" href="full data.html">LendingClub 全量分析：时间评估与容量取舍</a></nav>
+  <section id="content" class="section-padding report-layout">
+    <aside><nav class="project-toc" id="project-toc" aria-label="报告目录"><h3>目录</h3><ul id="toc-list"><li><a class="toc-link" href="#report-section-1">概览</a></li><li><a class="toc-link" href="#report-section-2">摘要</a></li><li><a class="toc-link" href="#report-section-3">1 贷款风险识别与复核决策问题</a></li><li><a class="toc-link" href="#report-section-4">2 分析样本与贷款结局</a></li><li><a class="toc-link" href="#report-section-5">3 贷款风险分布与群体差异</a></li><li><a class="toc-link" href="#report-section-6">4 预测字段选择与特征处理</a></li><li><a class="toc-link" href="#report-section-7">5 时间划分与模型比较</a></li><li><a class="toc-link" href="#report-section-8">6 费用假设与阈值选择</a></li><li><a class="toc-link" href="#report-section-9">7 风险排序、误标代价与模型解释</a></li><li><a class="toc-link" href="#report-section-10">8 不同时间划分下的模型表现</a></li><li><a class="toc-link" href="#report-section-11">9 从分析到实施建议</a></li></ul></nav></aside>
+    <article class="content-area report-body" id="report-body"><div class="report-block" id="report-intro-1">
+<p>80 万笔成熟贷款显示清晰的等级、期限与信用负担风险差异。LightGBM 能把风险集中到优先标记人群，但高召回带来的误标代价抵消了净成本收益。分析据此提出分层复核、容量约束和费用敏感的阈值实施方案。</p>
+
+</div><section id="report-section-1" class="section-padding section--editorial" data-section-num="01"><div class="section-header"><h2 class="section-title">概览</h2></div><div class="report-block" id="report-1-1">
+<div aria-label="数据表（可横向滚动）" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col"></th>
+<th scope="col"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>到期终态贷款</td>
+<td>800,634</td>
+</tr>
+<tr>
+<td>选择集确定的阈值</td>
+<td>0.46</td>
+</tr>
+<tr>
+<td>毛模拟成本降幅</td>
+<td>7.63%</td>
+</tr>
+<tr>
+<td>净模拟成本降幅</td>
+<td>−21.48%</td>
+</tr>
+</tbody>
+</table></div>
+
+</div></section><section id="report-section-2" class="section-padding section--editorial" data-section-num="02"><div class="section-header"><h2 class="section-title">摘要</h2></div><div class="report-block" id="report-2-1">
+<p>本研究考察公开贷款数据中哪些群体更容易违约，以及预测模型能否帮助安排有限的复核资源。分析从全量数据中筛选 800,634 笔期限已满、结局明确的贷款，通过分组违约率、效应量、连续变量分桶和相关性分析识别风险模式；随后排除放款后信息，在按时间划分的数据上比较逻辑回归、随机森林和 LightGBM，并用独立选择集确定模型与阈值。分析还在相同复核容量下比较简单规则与模型，用配对 bootstrap 估计差异区间，并用 SHAP 解释模型输出。</p>
+<p>结果显示，等级 A 至 G 的违约率从 5.6% 升至 39.8%，60 个月贷款的违约率为 25.7%，高于 36 个月贷款的 14.4%。LightGBM 的测试 AP 为 0.315991，高于另外两种模型；所标记人群的违约率为 25.17%，约为测试集整体的 1.60 倍。不过，当前阈值会标记 44.34% 的贷款，较大的误标量使策略在毛费用下节省 7.63% 的模拟成本，在净费用下却增加 21.48%。在固定 10% 容量下，LightGBM 的命中率为 37.88%，高于等级规则的 32.38%，差异的 95% 区间为 4.97–6.08 个百分点。SHAP 显示细分等级、近期开户数和偿付负担相关特征是主要贡献来源。据此，建议先将模型用于容量受限的人工复核排序，结合等级、期限与信用负担设置检查重点，再根据漏判、误标和人工成本选择阈值。</p>
+
+</div></section><section id="report-section-3" class="section-padding section--editorial" data-section-num="03"><div class="section-header"><h2 class="section-title">1 贷款风险识别与复核决策问题</h2></div><div class="report-block" id="report-3-1">
+<p>本分析使用全量来源中 800,634 笔到期终态贷款，研究违约排序与固定错误费用下的阈值策略。它与 <a href="lendingclub loan prediction.html">9,004 笔贷款样本项目</a> 的数据范围不同，各自独立划分样本、估计费用和评价模型。</p>
+<p>本地 parquet 含 2,260,668 笔贷款、151 列，放款时间覆盖 2007–2018 年，包含贷款条件、借款人属性、征信信息和还款结局。来源登记为 <a href="https://www.kaggle.com/datasets/wordsforthewise/lending-club">Kaggle: All Lending Club loan data</a>。</p>
+
+</div></section><section id="report-section-4" class="section-padding section--editorial" data-section-num="04"><div class="section-header"><h2 class="section-title">2 分析样本与贷款结局</h2></div><div class="report-block" id="report-4-1">
+<p>按年份比较已结清贷款时，需要同时查看尚未观察到最终结局的比例。</p>
+<p>2018年已结清子集违约率15.7%，低于2017年的23.1%。到2019年4月快照时，近期贷款主要只有提前还清或早期核销才进入该子集；open_share从2016年32.5%升到2018年88.6%。这些读数受结局可观察性选择影响，不能直接解释为风险改善，也未定量排除真实风险变化。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：按放款年份统计的成熟终态队列违约率" class="figure-zoom" type="button"><img alt="按放款年份统计的成熟终态队列违约率" decoding="async" height="431" loading="lazy" src="figures/full-data/current-v1/cohort_default_by_vintage.png" width="948"/></button><figcaption class="generated-alt-caption">按放款年份统计的成熟终态队列违约率</figcaption></figure>
+<p>代码先要求月份差达到完整期限：36个月期放款不晚于2016年4月、60个月期不晚于2014年4月，再筛选Fully Paid/Charged Off。800,634笔队列违约率15.4%，按年为12.6%–17.9%；这限制了近期删失问题，但不保证无偏或完全消除选择。2016年4月后的贷款及2014年4月后的60个月期不进入模型评估。</p>
+<p>排除 1,440,841 笔期限未满、2,749 笔 credit-policy 标签及 16,444 笔到期非终态贷款。最后一组在 2016 年占当年成熟贷款 12.1%，其余年份至多 0.7%，会影响该年结局可观察性；不能据此认定整体选择影响可以忽略。</p>
+<p>队列违约率 15.4%，类别不平衡约 5.5:1。分期限看，36 个月期违约率 14.4%（727,819 笔）、60 个月期 25.7%（72,815 笔），后者是前者的近两倍。联合申请只占队列 0.2%（1,884 笔），保留其个人层面的收入与 DTI 字段，当作普通行处理。</p>
+<p>费用按训练数据估计，毛、净口径和计算方法见第 6 节。</p>
+
+</div></section><section id="report-section-5" class="section-padding section--editorial" data-section-num="05"><div class="section-header"><h2 class="section-title">3 贷款风险分布与群体差异</h2></div><div class="report-block" id="report-5-1">
+<p>以下风险信号来自全量成熟终态队列。<a href="lendingclub loan prediction.html">9,004 笔贷款样本分析</a>提供另一组样本的分布与模型比较，两项分析分别采用各自的数据范围和评价协议。</p>
+<p>EDA 描述成熟且已终态队列中的观测结局，仍受排除机制限制。FICO 和分组关联有助于描述队列风险，但不能直接归因为模型的预测增益。</p>
+<p>等级违约率从A的5.6%递增至G的39.8%；用途small_business为24.6%，wedding、car、credit_card约12%–13%。就业年限1至9年为15.2%–15.7%，10年以上14.3%，组间范围较窄；未检验无效或等效，不能称为无信号。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：各分类特征的最终违约率" class="figure-zoom" type="button"><img alt="各分类特征的最终违约率" decoding="async" height="885" loading="lazy" src="figures/full-data/current-v1/eda_categorical_default_rates.png" width="1747"/></button><figcaption class="generated-alt-caption">各分类特征的最终违约率</figcaption></figure>
+<p>80万行比较中Welch p值显示为三位小数的0.000，不能读成精确零或“没有信息”。按|Cohen’s d|，利率0.598、FICO −0.363、近24个月开户0.273、按揭账户−0.181。FICO不在当前样本项目的30列中；效应量描述组均值差异，不证明单特征预测增益、因果作用或定价机制。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：效应量最大的四个数值特征分布" class="figure-zoom" type="button"><img alt="效应量最大的四个数值特征分布" decoding="async" height="373" loading="lazy" src="figures/full-data/current-v1/eda_numeric_top_effects.png" width="1747"/></button><figcaption class="generated-alt-caption">效应量最大的四个数值特征分布</figcaption></figure>
+<p>利率、FICO、利用率和 DTI 的分桶序号与桶违约率之间，Spearman 相关系数的绝对值均为 1.00，FICO 方向相反。qcut 按十分位分桶，并允许合并重复边界。桶均值反映分组趋势，不能证明个体层面处处单调，也不能排除特定范围的保护效应；保留连续输入不意味着分桶必然无益。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：各连续驱动因素的分带违约率" class="figure-zoom" type="button"><img alt="各连续驱动因素的分带违约率" decoding="async" height="409" loading="lazy" src="figures/full-data/current-v1/eda_banded_risk_curves.png" width="1748"/></button><figcaption class="generated-alt-caption">各连续驱动因素的分带违约率</figcaption></figure>
+<p>相关矩阵中三对超过|r|&gt;0.5：贷款额/分期额0.98、开户数/总账户数0.69、公共记录/破产记录0.63。分期额由金额、利率和期限计算；第4节剔除部分相关列。其余成对相关较小不能保证逻辑回归系数稳定或无多变量共线性。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：放款时数值特征的相关热图" class="figure-zoom" type="button"><img alt="放款时数值特征的相关热图" decoding="async" height="868" loading="lazy" src="figures/full-data/current-v1/eda_correlation_heatmap.png" width="977"/></button><figcaption class="generated-alt-caption">放款时数值特征的相关热图</figcaption></figure>
+<p>E–G占贷款6.7%、违约计数14.1%，占比之比约2.1，对照父项目9.4%/22.0%。这不是金额损失或可追回损失的贡献率。州域违约率10.0%（DC）至19.2%（MS）只描述该队列，未隔离地区机制。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：各等级的贷款占比与违约计数占比，以及分州违约率" class="figure-zoom" type="button"><img alt="各等级的贷款占比与违约计数占比，以及分州违约率" decoding="async" height="538" loading="lazy" src="figures/full-data/current-v1/eda_concentration.png" width="1748"/></button><figcaption class="generated-alt-caption">各等级的贷款占比与违约计数占比，以及分州违约率</figcaption></figure>
+<h3>与小样本项目的风险模式对照</h3>
+<p>与 9,004 笔贷款的样本项目相比，本项目的分析样本约为其 89 倍。以下对照用于说明风险模式的方向和幅度，不是同一人群上的重复实验。</p>
+<div aria-label="数据表（可横向滚动）" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">比较维度</th>
+<th scope="col">全量分析结果</th>
+<th scope="col">小样本参照或解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>贷款期限</td>
+<td>60 个月与 36 个月贷款的违约率分别为 25.7% 和 14.4%，比率约 1.8</td>
+<td>小样本比率约 2.9；两组比较均不等于延长期限的因果效果</td>
+</tr>
+<tr>
+<td>信用等级</td>
+<td>从 A 到 G，违约率逐级上升，范围为 5.6%–39.8%</td>
+<td>小样本范围为 7.4%–52.9%，方向相同，幅度不同</td>
+</tr>
+<tr>
+<td>利率与信用利用率</td>
+<td>利率与违约的相关系数为 0.213；利用率为 0.050，且分桶违约率递增</td>
+<td>小样本的利率相关系数为 0.265；相关系数差异不能直接解释为斜率变平</td>
+</tr>
+<tr>
+<td>收入验证状态</td>
+<td>未验证、来源验证、已验证的违约率分别为 11.9%、15.8%、18.5%</td>
+<td>高风险申请人更常被要求验证是一种待检验解释，不能据此认为验证提高了违约风险</td>
+</tr>
+</tbody>
+</table></div>
+<p>样本时间范围、贷款组成和处理方式均有差异，因此不能把变化单独归因于样本扩大或时期变化，也不能据此证明来源独立或风险机制得到复现。</p>
+
+</div></section><section id="report-section-6" class="section-padding section--editorial" data-section-num="06"><div class="section-header"><h2 class="section-title">4 预测字段选择与特征处理</h2></div><div class="report-block" id="report-6-1">
+<p>贷款违约预测只能使用作出决策时已经知道的信息。因此，这一步先检查原始 151 列，排除包含后续还款和贷款结局的信息，再处理缺失值、类别变量和衍生特征。机器学习中把误用后续信息称为“数据泄漏”：它会让离线成绩看起来很好，却无法用于预测新贷款。这里讨论的是预测信息的时间边界，不是个人数据泄露。</p>
+<p>候选字段的缺失率和近常量筛选在各自训练折内拟合；中位数插补、编码、LR 缩放、TargetEncoder 和类权重也遵守相同角色边界，避免用 selection/test 分布或标签拟合。最终 fit 选出 57 个候选字段，各折的数量由本折数据决定。</p>
+<p>字段排除用于限制放款后信息入模；质量筛选不能替代字段在真实审批时可得性的独立证据。信用历史、贷款收入比与月供收入比按固定定义构造。类别权重用于不平衡处理，本队列没有 SMOTE 消融，不能判断两者孰优。</p>
+
+</div></section><section id="report-section-7" class="section-padding section--editorial" data-section-num="07"><div class="section-header"><h2 class="section-title">5 时间划分与模型比较</h2></div><div class="report-block" id="report-7-1">
+<p>以 2015 年 7 月为时间边界，早期训练窗内另划 selection，保留后期贷款作为测试。参数在 fit 内最多 200,000 笔分层子样本上按三折 average precision 选择；LR、RF 和 LightGBM 提供线性与树模型比较。selection 再决定满足召回约束的模型和阈值，最终不合并 selection 重新拟合。独立 selection 减少了用于最终训练的样本；内层分层交叉验证并非时间前推。测试集此前已被查看，因此评价仍属于条件回顾性重评。</p>
+<div aria-label="数据表（可横向滚动）" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">模型</th>
+<th scope="col" style="text-align:right">冻结阈值</th>
+<th scope="col" style="text-align:right">测试 ROC-AUC</th>
+<th scope="col" style="text-align:right">测试 AP</th>
+<th scope="col" style="text-align:right">召回率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Logistic</td>
+<td style="text-align:right">0.44</td>
+<td style="text-align:right">0.705346</td>
+<td style="text-align:right">0.299581</td>
+<td style="text-align:right">70.85%</td>
+</tr>
+<tr>
+<td>Random Forest</td>
+<td style="text-align:right">0.43</td>
+<td style="text-align:right">0.709180</td>
+<td style="text-align:right">0.304748</td>
+<td style="text-align:right">69.25%</td>
+</tr>
+<tr>
+<td>LightGBM</td>
+<td style="text-align:right">0.46</td>
+<td style="text-align:right">0.717803</td>
+<td style="text-align:right">0.315991</td>
+<td style="text-align:right">70.90%</td>
+</tr>
+</tbody>
+</table></div>
+<p>AP 为 average precision。测试点估计不证明模型差异显著或已具部署能力。</p>
+<p>LightGBM 的测试 AP 比 Logistic 高约 0.0164，比 Random Forest 高约 0.0112；三者召回接近，因此主要可见优势是排序质量，而非显著提高当前阈值下的覆盖率。树模型可表达非线性与交互，这是合理的方法解释，第 7 节用 SHAP 解释模型输出，但尚未通过消融确定排序增益具体来自哪里。实施时可将 LightGBM 作为候选排序模型，同时保留 Logistic 比较维护成本与排序收益。</p>
+<h3>相同复核容量下的规则与模型比较</h3>
+<p>为判断复杂模型是否优于简单规则，主比较预先固定为每批贷款标记 10%，另列 5% 和 20% 容量对照。简单规则候选为等级较差、FICO 较低、DTI 较高，按选择集在 10% 容量下的命中率选出等级规则；同分贷款用固定、与标签无关的哈希顺序打破并列。Logistic 和 LightGBM 直接使用冻结模型分数排序。每种方法在同一测试集标记相同数量，因而比较的是同等工作量下的识别能力。</p>
+<div aria-label="数据表（可横向滚动）" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">方法</th>
+<th scope="col" style="text-align:right">标记贷款</th>
+<th scope="col" style="text-align:right">识别违约</th>
+<th scope="col" style="text-align:right">命中率</th>
+<th scope="col" style="text-align:right">违约召回率</th>
+<th scope="col" style="text-align:right">净模拟成本降幅</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>等级规则</td>
+<td style="text-align:right">27,147</td>
+<td style="text-align:right">8,790</td>
+<td style="text-align:right">32.38%</td>
+<td style="text-align:right">20.57%</td>
+<td style="text-align:right">1.74%</td>
+</tr>
+<tr>
+<td>Logistic</td>
+<td style="text-align:right">27,147</td>
+<td style="text-align:right">9,813</td>
+<td style="text-align:right">36.15%</td>
+<td style="text-align:right">22.96%</td>
+<td style="text-align:right">5.18%</td>
+</tr>
+<tr>
+<td>LightGBM</td>
+<td style="text-align:right">27,147</td>
+<td style="text-align:right">10,282</td>
+<td style="text-align:right">37.88%</td>
+<td style="text-align:right">24.06%</td>
+<td style="text-align:right">6.76%</td>
+</tr>
+</tbody>
+</table></div>
+<p>在 27,147 笔的相同队列中，LightGBM 比等级规则多识别 1,492 笔违约，比 Logistic 多识别 469 笔。其命中率和净模拟成本降幅在所比较的三种容量下均较高，支持将其作为复核排序候选。10% 容量下仍有约 76% 的违约未被覆盖，所以这是资源约束下的优先级方案，不是高召回方案。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：三种固定复核容量下的规则与模型比较" class="figure-zoom" type="button"><img alt="三种固定复核容量下的规则与模型比较" decoding="async" height="655" loading="lazy" src="figures/full-data/additional-v1/capacity_comparison.png" width="2223"/></button><figcaption class="generated-alt-caption">三种固定复核容量下的规则与模型比较</figcaption></figure>
+<p>本比较按批次分数排名取固定数量，阈值会随批次分布变化；它与主协议固定 0.46 阈值、追求较高召回的策略不同。10% 是分析前指定的容量情景，不是从测试结果中找出的最优容量。模拟费用沿用 fit 的均价，用于比较固定容量下的策略取舍。</p>
+<h3>配对 bootstrap：差异的条件不确定性</h3>
+<p>对同一测试贷款的标签及三种方法的固定标记结果进行 2,000 次配对重采样，取差异分布的 2.5% 与 97.5% 分位数形成 95% 区间。计算按标签与三组标记组成的联合类别进行多项式抽样；对这些计数型指标，它与逐行配对重采样等价，并保留方法间的对应关系。</p>
+<div aria-label="数据表（可横向滚动）" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">LightGBM 相对方法</th>
+<th scope="col" style="text-align:right">命中率差异（百分点）</th>
+<th scope="col" style="text-align:right">95% 区间</th>
+<th scope="col" style="text-align:right">净模拟成本降幅差异（百分点）</th>
+<th scope="col" style="text-align:right">95% 区间</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>等级规则</td>
+<td style="text-align:right">5.50</td>
+<td style="text-align:right">4.97–6.08</td>
+<td style="text-align:right">5.02</td>
+<td style="text-align:right">4.55–5.56</td>
+</tr>
+<tr>
+<td>Logistic</td>
+<td style="text-align:right">1.73</td>
+<td style="text-align:right">1.34–2.14</td>
+<td style="text-align:right">1.58</td>
+<td style="text-align:right">1.23–1.95</td>
+</tr>
+</tbody>
+</table></div>
+<p>主容量下，上述差异区间均在零以上，支持 LightGBM 在当前固定预测比较中的优势。区间以贷款独立同分布为条件，固定了模型、费用、规则选择和原队列成员；不在每次重采样后重新排序，也不包含重训、选参或跨期变化，多个区间未作同时推断校正。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：10% 复核容量下的配对 bootstrap 差异区间" class="figure-zoom" type="button"><img alt="10% 复核容量下的配对 bootstrap 差异区间" decoding="async" height="623" loading="lazy" src="figures/full-data/additional-v1/paired_bootstrap.png" width="1577"/></button><figcaption class="generated-alt-caption">10% 复核容量下的配对 bootstrap 差异区间</figcaption></figure>
+
+</div></section><section id="report-section-8" class="section-padding section--editorial" data-section-num="08"><div class="section-header"><h2 class="section-title">6 费用假设与阈值选择</h2></div><div class="report-block" id="report-8-1">
+<p>根据训练数据估计，每笔漏判违约的毛费用约为 <strong>8,550 美元</strong>，净费用约为 <strong>5,856 美元</strong>；每笔误标正常贷款的费用约为 <strong>2,567 美元</strong>。</p>
+<blockquote>
+<p><strong>总模拟成本 = 漏判违约笔数 × 每笔漏判费用 + 误标正常贷款笔数 × 每笔误标费用</strong></p>
+</blockquote>
+<p>分别代入训练数据估计的毛、净漏判均价，得到两种口径的模拟成本，用于比较费用假设对策略取舍的影响。</p>
+<p>当 LightGBM 的标记阈值设为 <strong>0.46</strong> 时，模型标记了 <strong>44.34%</strong> 的测试贷款。该策略在毛费用口径下减少模拟成本，在净费用口径下则增加模拟成本。</p>
+<div aria-label="数据表（可横向滚动）" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">评价项目</th>
+<th scope="col">结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>正确标记的违约贷款（TP）</td>
+<td>30,304 笔</td>
+</tr>
+<tr>
+<td>未标记出的违约贷款（FN）</td>
+<td>12,435 笔</td>
+</tr>
+<tr>
+<td>误标的正常贷款（FP）</td>
+<td>90,070 笔</td>
+</tr>
+<tr>
+<td>标记贷款总数</td>
+<td>120,374 笔，占测试贷款的 44.34%</td>
+</tr>
+<tr>
+<td>毛模拟成本</td>
+<td>约 3.38 亿美元，较全部批准下降 7.63%</td>
+</tr>
+<tr>
+<td>净模拟成本</td>
+<td>约 3.04 亿美元，较全部批准增加 21.48%</td>
+</tr>
+</tbody>
+</table></div>
+<p>表中的金额经过取整，变化比例按未取整金额计算。结果以固定模型、阈值和费用为条件，未计算覆盖重新拟合、选参及费用估计的区间。</p>
+<div aria-label="数据表（可横向滚动）" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">选择集确定的情景</th>
+<th scope="col" style="text-align:right">阈值</th>
+<th scope="col" style="text-align:right">测试降幅</th>
+<th scope="col" style="text-align:right">测试召回率</th>
+<th scope="col" style="text-align:right">标记比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>毛费用，召回下限 0.75</td>
+<td style="text-align:right">0.46</td>
+<td style="text-align:right">7.63%</td>
+<td style="text-align:right">70.90%</td>
+<td style="text-align:right">44.34%</td>
+</tr>
+<tr>
+<td>毛费用，无召回下限</td>
+<td style="text-align:right">0.63</td>
+<td style="text-align:right">14.40%</td>
+<td style="text-align:right">32.12%</td>
+<td style="text-align:right">14.35%</td>
+</tr>
+<tr>
+<td>净费用，召回下限 0.75</td>
+<td style="text-align:right">0.46</td>
+<td style="text-align:right">−21.48%</td>
+<td style="text-align:right">70.90%</td>
+<td style="text-align:right">44.34%</td>
+</tr>
+<tr>
+<td>净费用，无召回下限</td>
+<td style="text-align:right">0.70</td>
+<td style="text-align:right">5.68%</td>
+<td style="text-align:right">14.87%</td>
+<td style="text-align:right">5.64%</td>
+</tr>
+</tbody>
+</table></div>
+<p>2:1 至 6:1 的费用情景也分别在 selection 上确定并冻结，再用测试结果评价各项策略。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：冻结策略的 ROC、PR 与毛净模拟成本降幅" class="figure-zoom" type="button"><img alt="冻结策略的 ROC、PR 与毛净模拟成本降幅" decoding="async" height="450" loading="lazy" src="figures/full-data/current-v1/threshold_final_evaluation.png" width="1749"/></button><figcaption class="generated-alt-caption">冻结策略的 ROC、PR 与毛净模拟成本降幅</figcaption></figure>
+<p>同一标记策略在毛费用下减少模拟损失，在净费用下增加模拟损失，说明费用定义会改变策略评价。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：时间测试窗内的潜在复核量与召回率" class="figure-zoom" type="button"><img alt="时间测试窗内的潜在复核量与召回率" decoding="async" height="431" loading="lazy" src="figures/full-data/current-v1/review_queue_burden.png" width="656"/></button><figcaption class="generated-alt-caption">时间测试窗内的潜在复核量与召回率</figcaption></figure>
+<p>冻结阈值下需标记 44.34% 的测试贷款。曲线描述潜在工作量，没有测量人工复核效率或实际收益。</p>
+
+</div></section><section id="report-section-9" class="section-padding section--editorial" data-section-num="09"><div class="section-header"><h2 class="section-title">7 风险排序、误标代价与模型解释</h2></div><div class="report-block" id="report-9-1">
+<p><strong>模型能把风险较高的贷款集中起来。</strong> 测试集共有 271,471 笔贷款，其中 42,739 笔最终违约，整体违约率为 <strong>15.74%</strong>。</p>
+<p>模型标记了 120,374 笔贷款，其中 30,304 笔最终违约，标记人群的违约率为 <strong>25.17%</strong>，约为整体的 <strong>1.60 倍</strong>。这支持用模型安排复核优先级；同时，标记人群中仍有约四分之三最终正常还款。</p>
+<p><strong>策略的问题在于误标代价。</strong> 每识别一笔违约，约同时误标 <strong>2.97 笔正常贷款</strong>。在当前固定费用模型中，相对全批准的成本改善为：</p>
+<blockquote>
+<p><strong>成本改善 = 正确标记的违约笔数 × 每笔避免漏判的费用 − 误标正常贷款笔数 × 每笔误标费用</strong></p>
+</blockquote>
+<p>毛费用下，每识别一笔违约的模拟价值约能覆盖 3.33 笔误标；净费用下只能覆盖 2.28 笔。实际误标比 2.97 介于两者之间，因此同一策略在毛口径有利、净口径不利。这里解释的是费用模型内的结果，并不假定人工复核能够实际避免全部损失。</p>
+<p><strong>阈值必须服务于具体目标。</strong> 0.46 对应较高覆盖和较大工作量；净费用无召回下限情景的 0.70 只标记 5.64%，但召回也降至 14.87%。这些已冻结情景展示了取舍，不能直接把测试表现较好的阈值当成未来业务最优值。</p>
+<h3>SHAP：模型依据哪些信息形成预测</h3>
+<p>使用当前冻结 LightGBM，从 fit 抽取 128 笔背景贷款，从测试集按固定哈希顺序抽取 1,024 笔贷款。TreeExplainer 采用 interventional 设置，解释原始对数几率输出；房屋持有状态的独热编码贡献先按贷款相加，再计算平均绝对贡献。贡献之和与模型原始输出的最大偏差为 1.25×10⁻⁷，通过加和核对。模型分数未做概率校准。</p>
+<p>平均绝对贡献最大的特征依次为细分信用等级、近 24 个月开户数、DTI、贷款收入比和房屋持有状态。这表明当前模型除了既有评级，也利用了近期信用扩张和偿付负担相关信息。SHAP 说明模型如何形成分数；这些特征是否分别带来预测增益，仍需消融才能判断。</p>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：冻结 LightGBM 的全局 SHAP 贡献" class="figure-zoom" type="button"><img alt="冻结 LightGBM 的全局 SHAP 贡献" decoding="async" height="783" loading="lazy" src="figures/full-data/additional-v1/shap_global.png" width="1255"/></button><figcaption class="generated-alt-caption">冻结 LightGBM 的全局 SHAP 贡献</figcaption></figure>
+<p>以下四个样本按原阈值 0.46 分为 TP、FP、FN、TN，在固定抽样中各取接近本组分数中位数的一笔，避免只挑符合叙述的极端案例。红色推高模型原始输出，蓝色压低输出；贡献单位为对数几率，不是违约概率百分点。</p>
+<ul>
+<li><strong>正确标记的违约贷款（TP，分数 0.617）</strong>：DTI、细分等级和 FICO 的贡献推高分数，部分其他特征抵消了这一方向。</li>
+<li><strong>误标的正常贷款（FP，分数 0.565）</strong>：细分等级、近期银行卡开户间隔和 FICO 推高分数，但该笔贷款最终正常还款，说明风险特征不能确定个体结局。</li>
+<li><strong>漏判的违约贷款（FN，分数 0.386）</strong>：近 24 个月开户数、近期银行卡开户间隔等贡献压低分数，尽管仍有部分正向贡献，最终没有超过阈值。</li>
+<li><strong>正确保留的正常贷款（TN，分数 0.292）</strong>：近期开户数、贷款收入比、细分等级和 DTI 等贡献共同压低分数。</li>
+</ul>
+<figure class="figure-editorial"><button aria-haspopup="dialog" aria-label="放大图片：原阈值下四类典型预测的 SHAP 解释" class="figure-zoom" type="button"><img alt="原阈值下四类典型预测的 SHAP 解释" decoding="async" height="1263" loading="lazy" src="figures/full-data/additional-v1/shap_cases.png" width="2215"/></button><figcaption class="generated-alt-caption">原阈值下四类典型预测的 SHAP 解释</figcaption></figure>
+<p>等级与细分等级等相关字段可能分摊贡献，类别目标编码也会影响解释口径。测试窗全部为 36 个月贷款，但背景样本含其他期限，所以期限仍可能相对背景具有非零贡献；这不表示期限区分了测试窗内的贷款。归因结果用于理解模型，不是因果效应或自动拒贷理由。</p>
+
+</div></section><section id="report-section-10" class="section-padding section--editorial" data-section-num="10"><div class="section-header"><h2 class="section-title">8 不同时间划分下的模型表现</h2></div><div class="report-block" id="report-10-1">
+<p>随机参照有自己的 fit/selection/test 和选择过程，不复用时间协议的超参数。其测试 ROC-AUC=0.709826、AP=0.303814、阈值=0.45。随机测试中 July-2015 后的 68,271 行 ROC-AUC=0.719401、AP=0.322362。时间测试 ROC-AUC=0.717803 使用 271,471 行；这些不是相同贷款上的配对比较。</p>
+<p>训练规模、组成、时期和测试行同时不同，差额不能量化漂移代价或证明没有未来漂移。单一后期窗口也不足以认证模型在其他年份、地区或被拒贷人群中的泛化表现。</p>
+
+</div></section><section id="report-section-11" class="section-padding section--editorial" data-section-num="11"><div class="section-header"><h2 class="section-title">9 从分析到实施建议</h2></div><div class="report-block" id="report-11-1">
+<div aria-label="数据表（可横向滚动）" class="report-table-wrap" role="region" tabindex="0"><table class="report-table">
+<thead>
+<tr>
+<th scope="col">分析发现</th>
+<th scope="col">建议如何实施</th>
+<th scope="col">后续观察什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>等级、期限和信用负担呈现风险差异；就业年限组间差异较窄</td>
+<td>在复核界面展示等级、期限、DTI、利用率、FICO 和近期开户信息，检查偿付负担与信用扩张；不把单一字段直接设成拒绝规则</td>
+<td>各风险组的复核命中率、样本量与正常贷款误标情况</td>
+</tr>
+<tr>
+<td>E–G 占 6.7% 贷款、14.1% 违约计数</td>
+<td>将高风险等级作为重点观察层，同时用模型分数在各层内排序；保留其他等级抽查，避免遗漏其他等级中的违约</td>
+<td>各层贡献的违约计数、覆盖率与复核量</td>
+</tr>
+<tr>
+<td>模型标记集合风险约为整体 1.60 倍，但 0.46 会标记 44.34%</td>
+<td>先开展影子评分或人工辅助复核试点；按每日可处理量确定队列长度，记录审核结论，暂不把标记等同于拒贷</td>
+<td>固定复核量下的命中率、处理时间与正常贷款影响</td>
+</tr>
+<tr>
+<td>毛、净费用结论相反；收紧队列会降低召回</td>
+<td>把回收、利息、误拒机会成本和人工成本纳入策略费用；在选择数据上联合比较容量、召回和费用，再冻结待评估方案</td>
+<td>成本情景敏感性、漏判量和队列是否超出容量</td>
+</tr>
+<tr>
+<td>同样标记 10%，LightGBM 命中率 37.88%，等级规则 32.38%</td>
+<td>以 LightGBM 作为有限容量的复核排序候选，并保留等级规则与 Logistic 作持续比较；复核界面展示主要贡献因素</td>
+<td>后续批次的同量命中率、人工复核成本与误标影响；当前增益来自离线比较</td>
+</tr>
+</tbody>
+</table></div>
+<p>这些建议用于设计风险复核试点。可先安排风险分层与队列展示，再记录人工复核结果，待贷款结局逐步成熟后评价违约覆盖和费用。按放款月份持续观察，避免把尚未到期贷款的较低已观察违约率误判为风险下降。</p>
+<p>本分析覆盖历史已获批且到期终态贷款，时间测试窗全部为 36 个月期限。群组关联、固定费用模拟和单一后期窗口限制了推广范围；报告中的实施建议可作为试点方案，经营效果需要后续观察。</p>
+
+</div></section></article>
+  </section>
+<nav class="report-series" aria-label="系列阅读"><a class="report-series__link" href="lendingclub loan prediction.html">LendingClub：9,004 笔贷款样本</a><a class="report-series__link is-current" href="full data.html">LendingClub 全量分析：时间评估与容量取舍</a></nav>
+  <section id="related" class="section-padding"><div class="section-header"><h2 class="section-title">相关项目</h2></div><div class="grid md:grid-cols-2 gap-6"><a href="lendingclub loan prediction.html" class="related-project-card"><h3 class="related-project-title">LendingClub：9,004 笔贷款样本</h3><p class="related-project-description">从 9,004 笔历史贷款中分析违约分布，比较模型与期限规则，设计不对称成本下的筛查策略。Random Forest 冻结阈值 0.22，测试召回率 70.45%，净模拟成本降幅 4.68%。</p><span class="related-project-link">查看详情</span></a><a href="../e-commerce fraud detection/e-commerce fraud detection.html" class="related-project-card"><h3 class="related-project-title">电商首单欺诈：时间评估与审核建议</h3><p class="related-project-description">围绕 138,376 笔首单交易，分析购买时序、设备与 IP 行为，比较不平衡处理方法。通过前向验证和成本情景评估，提出按模型分数与交易线索分级的人工审核方案。</p><span class="related-project-link">查看详情</span></a></div></section>
+</main>
+<script src="../../assets/js/logo.js"></script>
+<script src="../../assets/js/common.js"></script>
+<script src="../../assets/js/project.js"></script>
+<script src="../../assets/js/language-switcher.js"></script>
+</body>
+</html>
